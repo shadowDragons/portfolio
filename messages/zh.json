@@ -31,7 +31,7 @@
       "description": "一个现代的图片生成工具，支持多种模板和样式。采用 Next.js 15 和 TypeScript 构建，支持暗模式和 i18n。"
     },
     "text2image": {
-      "title": "字节在线文转图",
+      "title": "字节文字图片生成器",
       "description": "一款具有多种模板和样式的现代文本到图片生成。采用 Next.js 14 和 TypeScript 构建，支持暗模式和 i18n。"
     },
     "tool-site": {

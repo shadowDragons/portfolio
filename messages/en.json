@@ -31,7 +31,7 @@
       "description": "A modern image generation tool with multiple templates and styles. Built using Next.js 15 and TypeScript, supporting dark mode and i18n."
     },
     "text2image": {
-      "title": "Byte Text2Image Online",
+      "title": "Byte Text Image Generator",
       "description": "A modern text-to-image generation tool with multiple templates and styles. Built using Next.js 14 and TypeScript, supporting dark mode and i18n."
     },
     "tool-site": {
