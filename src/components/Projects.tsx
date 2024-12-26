@@ -19,13 +19,6 @@ const Projects = () => {
       description: t('text2image.description'),
       image: 'https://text-image.tool.vin/og.png',
       tags: ['Nextjs', 'Tailwindcss', 'Shadcn Ui'],
-      link: 'https://text-image.tool.vin',
-    },
-    {
-      title: t('text2image.title'),
-      description: t('text2image.description'),
-      image: 'https://text-image.tool.vin/og.png',
-      tags: ['Nextjs', 'Tailwindcss', 'Shadcn Ui'],
       link: 'https://github.com/shadowDragons/text2image',
     },
     {
