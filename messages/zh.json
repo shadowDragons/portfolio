@@ -1,0 +1,50 @@
+{
+  "HomePage": {
+    "title": "你好世界!",
+    "about": "Go to the about page"
+  },
+  "Hero": {
+    "greeting": "你好👋 我是",
+    "name": "Junexus ."
+  },
+  "Navbar": {
+    "logo": "Junexus",
+    "home": "首页",
+    "about": "关于",
+    "projects": "项目",
+    "contact": "联系",
+    "greeting": "你好👋",
+    "language": {
+      "en": "English",
+      "zh": "中文 (Chinese)"
+    }
+  },
+  "TextRotator": {
+    "intro": "我是一个全栈开发者",
+    "rotatingTitles": ["独立开发者", "社区贡献者", "开源贡献者", "效率达人", "爱好分享", "AI践行者"]
+  },
+  "Projects": {
+    "heading": "项目展示",
+    "visit": "访问项目",
+    "image-generator": {
+      "title": "字节图片生成器",
+      "description": "一个现代的图片生成工具，支持多种模板和样式。采用 Next.js 15 和 TypeScript 构建，支持暗模式和 i18n。"
+    },
+    "text2image": {
+      "title": "字节在线文转图",
+      "description": "一款具有多种模板和样式的现代文本到图片生成。采用 Next.js 14 和 TypeScript 构建，支持暗模式和 i18n。"
+    },
+    "tool-site": {
+      "title": "字节工具导航站",
+      "description": "字节工具导航站收录了国内外数百个实用工具，该导航网站包括效率工具、AI工具、学习工具、开发工具、音频资源、视频资源、设计工具、创意工具。"
+    },
+    "online-tool": {
+      "title": "字节在线工具站",
+      "description": "一个专门为开发者搭建的在线工具站，包含多种实用工具，如代码格式化、在线翻译、时间转换等。"
+    }
+  },
+  "Sponsor": {
+    "heading": "支持我的工作",
+    "description": "衷心感谢支持我开源工作的朋友们。您的支持将帮助我继续创作和维护开源项目。"
+  }
+}

@@ -1,0 +1,50 @@
+{
+  "HomePage": {
+    "title": "Hello world!",
+    "about": "Go to the about page"
+  },
+  "Hero": {
+    "greeting": "Hi👋 I am",
+    "name": "Junexus ."
+  },
+  "Navbar": {
+    "logo": "Junexus",
+    "home": "Home",
+    "about": "About",
+    "projects": "Projects",
+    "contact": "Contact",
+    "greeting": "Hi👋",
+    "language": {
+      "en": "English",
+      "zh": "中文 (Chinese)"
+    }
+  },
+  "TextRotator": {
+    "intro": "I am a full-stack",
+    "rotatingTitles": ["Creator", "Developer", "Contributor", "Engineer", "Builder", "Innovator"]
+  },
+  "Projects": {
+    "heading": "Projects",
+    "visit": "Visit Project",
+    "image-generator": {
+      "title": "Byte Image Generator",
+      "description": "A modern image generation tool with multiple templates and styles. Built using Next.js 15 and TypeScript, supporting dark mode and i18n."
+    },
+    "text2image": {
+      "title": "Byte Text2Image Online",
+      "description": "A modern text-to-image generation tool with multiple templates and styles. Built using Next.js 14 and TypeScript, supporting dark mode and i18n."
+    },
+    "tool-site": {
+      "title": "Byte Tools Navigation Site",
+      "description": "A navigation website featuring hundreds of practical tools from China and abroad, including efficiency tools, AI tools, learning tools, development tools, audio resources, video resources, design tools, and creative tools."
+    },
+    "online-tool": {
+      "title": "Byte Online Tools Site",
+      "description": "An online tool site specifically built for developers, containing various practical tools such as code formatting, online translation, time conversion, and more."
+    }
+  },
+  "Sponsor": {
+    "heading": "Support My Work",
+    "description": "I sincerely thank the wonderful people who support my open source work. Your support helps me continue creating and maintaining open source projects."
+  }
+}
