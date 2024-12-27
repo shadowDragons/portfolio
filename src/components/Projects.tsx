@@ -19,7 +19,7 @@ const Projects = () => {
       description: t('text2image.description'),
       image: 'https://text-image.tool.vin/og.png',
       tags: ['Nextjs', 'Tailwindcss', 'Shadcn Ui'],
-      link: 'https://github.com/shadowDragons/text2image',
+      link: 'https://text-image.tool.vin',
     },
     {
       title: t('tool-site.title'),
