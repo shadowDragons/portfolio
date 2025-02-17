@@ -13,6 +13,11 @@ const Sponsor = () => {
       image: '/sponsors/paypal.png',
       link: 'https://paypal.me/Junexus007',
     },
+    {
+      name: 'Kofi',
+      image: '/sponsors/kofi.png',
+      link: 'https://ko-fi.com/junexus',
+    },
   ]
 
   return (
@@ -30,20 +35,21 @@ const Sponsor = () => {
                 href={sponsor.link}
                 target='_blank'
                 rel='noopener noreferrer'
-                className='flex items-center justify-center p-6 rounded-lg border border-gray-200 dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-600 transition-colors'
+                className='flex flex-col items-center justify-center p-6 rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 hover:border-gray-300 dark:hover:border-gray-600 transition-colors shadow-lg'
               >
-                <Image src={sponsor.image} alt={sponsor.name} width={200} height={60} className='h-12 object-contain' />
+                <Image src={sponsor.image} alt={sponsor.name} width={200} height={60} className='h-12 object-contain mb-4' />
+                <span className='text-lg font-semibold text-gray-800 dark:text-gray-200'>{sponsor.name}</span>
               </Link>
             ))}
           </div>
 
           <div className='mt-8 grid grid-cols-1 sm:grid-cols-2 gap-6'>
-            <div className='p-6 rounded-lg border border-gray-200 dark:border-gray-700'>
-              <h3 className='text-lg font-medium mb-4'>支付宝</h3>
+            <div className='p-6 rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 shadow-lg'>
+              <h3 className='text-lg font-medium mb-4 text-gray-800 dark:text-gray-200'>支付宝</h3>
               <Image src='/sponsors/alipay-qr.png' alt='Alipay QR Code' width={200} height={200} className='mx-auto' />
             </div>
-            <div className='p-6 rounded-lg border border-gray-200 dark:border-gray-700'>
-              <h3 className='text-lg font-medium mb-4'>微信支付</h3>
+            <div className='p-6 rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 shadow-lg'>
+              <h3 className='text-lg font-medium mb-4 text-gray-800 dark:text-gray-200'>微信支付</h3>
               <Image src='/sponsors/wechat-qr.png' alt='WeChat Pay QR Code' width={200} height={200} className='mx-auto' />
             </div>
           </div>
