@@ -26,6 +26,10 @@
   "Projects": {
     "heading": "Projects",
     "visit": "Visit Project",
+    "asst-ai": {
+      "title": "Asst AI",
+      "description": "A smart assistant focused on single AI text generation. Multi-model support and built-in prompt management, making your AI workflow smoother."
+    },
     "image-generator": {
       "title": "Byte Image Generator",
       "description": "A modern image generation tool with multiple templates and styles. Built using Next.js 15 and TypeScript, supporting dark mode and i18n."

@@ -8,6 +8,13 @@ const Projects = () => {
 
   const projects = [
     {
+      title: t('asst-ai.title'),
+      description: t('asst-ai.description'),
+      image: 'https://asstai.app/opengraph-image.png',
+      tags: ['Nextjs', 'Tailwindcss', 'Shadcn Ui'],
+      link: 'https://asstai.app',
+    },
+    {
       title: t('image-generator.title'),
       description: t('image-generator.description'),
       image: 'https://image-generator.tool.vin/opengraph-image.png',

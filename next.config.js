@@ -17,6 +17,10 @@ const nextConfig = {
         protocol: 'https',
         hostname: 'image-generator.tool.vin',
       },
+      {
+        protocol: 'https',
+        hostname: 'asstai.app',
+      },
     ],
   },
 }
