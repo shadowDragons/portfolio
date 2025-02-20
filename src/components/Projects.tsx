@@ -40,6 +40,13 @@ const Projects = () => {
       image: '/online-tool-og-image.png',
       link: 'https://online.tool.vin',
     },
+    {
+      title: t('spongebob-meme.title'),
+      description: t('spongebob-meme.description'),
+      image: 'https://spongebob.meme.vin/opengraph-image.png',
+      tags: ['Nextjs', 'Tailwindcss', 'Canvas'],
+      link: 'https://spongebob.meme.vin',
+    },
   ]
 
   return (

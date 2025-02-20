@@ -45,6 +45,10 @@
     "online-tool": {
       "title": "Byte Online Tools Site",
       "description": "An online tool site specifically built for developers, containing various practical tools such as code formatting, online translation, time conversion, and more."
+    },
+    "spongebob-meme": {
+      "title": "Spongebob Meme Generator",
+      "description": "A fun and easy-to-use meme generator featuring Spongebob templates. Create and customize your own Spongebob memes with various templates and text options."
     }
   },
   "Sponsor": {
