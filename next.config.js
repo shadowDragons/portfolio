@@ -25,6 +25,10 @@ const nextConfig = {
         protocol: 'https',
         hostname: 'spongebob.meme.vin',
       },
+      {
+        protocol: 'https',
+        hostname: 'githubseek.xyz',
+      },
     ],
   },
 }

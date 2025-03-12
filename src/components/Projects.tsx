@@ -8,6 +8,13 @@ const Projects = () => {
 
   const projects = [
     {
+      title: t('githubseek.title'),
+      description: t('githubseek.description'),
+      image: 'https://githubseek.xyz/og.png',
+      tags: ['Nextjs', 'Tailwindcss', 'Shadcn Ui'],
+      link: 'https://githubseek.xyz',
+    },
+    {
       title: t('asst-ai.title'),
       description: t('asst-ai.description'),
       image: 'https://asstai.app/opengraph-image.png',

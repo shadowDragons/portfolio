@@ -26,6 +26,10 @@
   "Projects": {
     "heading": "项目展示",
     "visit": "访问项目",
+    "githubseek": {
+      "title": "Github Seek",
+      "description": "几秒钟内智能定位您已收藏的GitHub项目，AI驱动让个人Star管理如此简单。"
+    },
     "asst-ai": {
       "title": "Asst AI",
       "description": "专注于单次AI文本生成的智能助手。多模型支持和内置prompt管理，让您的AI工作流程更顺畅。"

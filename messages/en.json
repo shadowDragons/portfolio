@@ -26,6 +26,10 @@
   "Projects": {
     "heading": "Projects",
     "visit": "Visit Project",
+    "githubseek": {
+      "title": "Github Seek",
+      "description": "Locate massive GitHub collections in seconds, AI-powered search made effortlessly simple."
+    },
     "asst-ai": {
       "title": "Asst AI",
       "description": "A smart assistant focused on single AI text generation. Multi-model support and built-in prompt management, making your AI workflow smoother."
