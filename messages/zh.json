@@ -34,10 +34,6 @@
       "title": "Asst AI",
       "description": "专注于单次AI文本生成的智能助手。多模型支持和内置prompt管理，让您的AI工作流程更顺畅。"
     },
-    "image-generator": {
-      "title": "字节图片生成器",
-      "description": "一个现代的图片生成工具，支持多种模板和样式。采用 Next.js 15 和 TypeScript 构建，支持暗模式和 i18n。"
-    },
     "text2image": {
       "title": "字节文字图片生成器",
       "description": "一款具有多种模板和样式的现代文本到图片生成。采用 Next.js 14 和 TypeScript 构建，支持暗模式和 i18n。"
@@ -45,14 +41,6 @@
     "tool-site": {
       "title": "字节工具导航站",
       "description": "字节工具导航站收录了国内外数百个实用工具，该导航网站包括效率工具、AI工具、学习工具、开发工具、音频资源、视频资源、设计工具、创意工具。"
-    },
-    "online-tool": {
-      "title": "字节在线工具站",
-      "description": "一个专门为开发者搭建的在线工具站，包含多种实用工具，如代码格式化、在线翻译、时间转换等。"
-    },
-    "spongebob-meme": {
-      "title": "海绵宝宝表情包生成器",
-      "description": "一个有趣且易用的海绵宝宝表情包生成器。提供多种经典海绵宝宝模板，支持自定义文字和样式，让您轻松制作独特的表情包。"
     }
   },
   "Sponsor": {

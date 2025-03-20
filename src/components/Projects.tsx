@@ -22,13 +22,6 @@ const Projects = () => {
       link: 'https://asstai.app',
     },
     {
-      title: t('image-generator.title'),
-      description: t('image-generator.description'),
-      image: 'https://image-generator.tool.vin/opengraph-image.png',
-      tags: ['Nextjs', 'Tailwindcss', 'Shadcn Ui'],
-      link: 'https://image-generator.tool.vin/',
-    },
-    {
       title: t('text2image.title'),
       description: t('text2image.description'),
       image: 'https://text-image.tool.vin/og.png',
@@ -40,19 +33,6 @@ const Projects = () => {
       description: t('tool-site.description'),
       image: '/tool-site-og-image.png',
       link: 'https://tool.directory.cab/',
-    },
-    {
-      title: t('online-tool.title'),
-      description: t('online-tool.description'),
-      image: '/online-tool-og-image.png',
-      link: 'https://online.tool.vin',
-    },
-    {
-      title: t('spongebob-meme.title'),
-      description: t('spongebob-meme.description'),
-      image: 'https://spongebob.meme.vin/opengraph-image.png',
-      tags: ['Nextjs', 'Tailwindcss', 'Canvas'],
-      link: 'https://spongebob.meme.vin',
     },
   ]
 

@@ -34,10 +34,6 @@
       "title": "Asst AI",
       "description": "A smart assistant focused on single AI text generation. Multi-model support and built-in prompt management, making your AI workflow smoother."
     },
-    "image-generator": {
-      "title": "Byte Image Generator",
-      "description": "A modern image generation tool with multiple templates and styles. Built using Next.js 15 and TypeScript, supporting dark mode and i18n."
-    },
     "text2image": {
       "title": "Byte Text Image Generator",
       "description": "A modern text-to-image generation tool with multiple templates and styles. Built using Next.js 14 and TypeScript, supporting dark mode and i18n."
@@ -45,14 +41,6 @@
     "tool-site": {
       "title": "Byte Tools Navigation Site",
       "description": "A navigation website featuring hundreds of practical tools from China and abroad, including efficiency tools, AI tools, learning tools, development tools, audio resources, video resources, design tools, and creative tools."
-    },
-    "online-tool": {
-      "title": "Byte Online Tools Site",
-      "description": "An online tool site specifically built for developers, containing various practical tools such as code formatting, online translation, time conversion, and more."
-    },
-    "spongebob-meme": {
-      "title": "Spongebob Meme Generator",
-      "description": "A fun and easy-to-use meme generator featuring Spongebob templates. Create and customize your own Spongebob memes with various templates and text options."
     }
   },
   "Sponsor": {
