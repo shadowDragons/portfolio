@@ -19,10 +19,6 @@ const nextConfig = {
       },
       {
         protocol: 'https',
-        hostname: 'asstai.app',
-      },
-      {
-        protocol: 'https',
         hostname: 'spongebob.meme.vin',
       },
       {

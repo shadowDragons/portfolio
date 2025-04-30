@@ -15,13 +15,6 @@ const Projects = () => {
       link: 'https://githubseek.xyz',
     },
     {
-      title: t('asst-ai.title'),
-      description: t('asst-ai.description'),
-      image: 'https://asstai.app/opengraph-image.png',
-      tags: ['Nextjs', 'Tailwindcss', 'Shadcn Ui'],
-      link: 'https://asstai.app',
-    },
-    {
       title: t('text2image.title'),
       description: t('text2image.description'),
       image: 'https://text-image.tool.vin/og.png',
