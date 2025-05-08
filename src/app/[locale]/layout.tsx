@@ -23,12 +23,12 @@ const rubik = Rubik({
 const siteConfig = {
   name: 'Junexus',
   description: 'I am a Full Stack Developer',
-  ogImage: 'https://byte.ink/og-image.png',
-  url: 'https://byte.ink',
+  ogImage: 'https://sphrag.com/og-image.png',
+  url: 'https://sphrag.com',
 }
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://www.byte.ink'),
+  metadataBase: new URL('https://www.sphrag.com'),
   title: {
     default: siteConfig.name,
     template: `%s - Software Engineer`,

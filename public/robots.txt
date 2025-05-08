@@ -3,7 +3,7 @@ User-agent: *
 Allow: /
 
 # Host
-Host: https://byte.ink
+Host: https://sphrag.com
 
 # Sitemaps
-Sitemap: https://byte.ink/sitemap.xml
+Sitemap: https://sphrag.com/sitemap.xml

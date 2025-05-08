@@ -20,7 +20,7 @@ A modern portfolio showcasing projects and skills, built with Next.js 14+ and Ty
 
 ## Demo
 
-Visit [https://byte.ink](https://byte.ink) to see the live demo.
+Visit [https://sphrag.com](https://sphrag.com) to see the live demo.
 
 ## Quick Start
 
@@ -104,7 +104,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## Author
 
-Junexus ([https://byte.ink](https://byte.ink))
+Junexus ([https://sphrag.com](https://sphrag.com))
 
 ## Roadmap
 
@@ -120,7 +120,7 @@ Junexus ([https://byte.ink](https://byte.ink))
 
 If you find my work helpful and would like to support me, you can:
 
-<a href="https://byte.ink/en/sponsor" target="_blank">
+<a href="https://sphrag.com/en/sponsor" target="_blank">
   <img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 217px !important;">
 </a>
 
