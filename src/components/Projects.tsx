@@ -8,6 +8,13 @@ const Projects = () => {
 
   const projects = [
     {
+      title: t('promptpal.title'),
+      description: t('githubseek.description'),
+      image: 'https://promptpal.tool.vin/og.png',
+      tags: ['Plasmo', 'React', 'Tailwindcss'],
+      link: 'https://promptpal.tool.vin',
+    },
+    {
       title: t('githubseek.title'),
       description: t('githubseek.description'),
       image: 'https://githubseek.xyz/og.png',

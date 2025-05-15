@@ -26,6 +26,10 @@
   "Projects": {
     "heading": "项目展示",
     "visit": "访问项目",
+    "PromptPal": {
+      "title": "PromptPal",
+      "description": "随时随地保存、组织和访问您的AI提示词。AI生产力工作流程的完美伴侣。"
+    },
     "githubseek": {
       "title": "Github Seek",
       "description": "几秒钟内智能定位您已收藏的GitHub项目，AI驱动让个人Star管理如此简单。"

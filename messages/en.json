@@ -26,6 +26,10 @@
   "Projects": {
     "heading": "Projects",
     "visit": "Visit Project",
+    "promptpal": {
+      "title": "PromptPal",
+      "description": "Save, organize, and access your AI prompts anywhere. The perfect companion for your AI productivity workflow."
+    },
     "githubseek": {
       "title": "Github Seek",
       "description": "Locate massive GitHub collections in seconds, AI-powered search made effortlessly simple."
