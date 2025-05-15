@@ -25,6 +25,10 @@ const nextConfig = {
         protocol: 'https',
         hostname: 'githubseek.xyz',
       },
+      {
+        protocol: 'https',
+        hostname: 'promptpal.tool.vin',
+      },
     ],
   },
 }
