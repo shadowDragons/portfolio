@@ -8,10 +8,17 @@ const Projects = () => {
 
   const projects = [
     {
+      title: t('oneshotai.title'),
+      description: t('oneshotai.description'),
+      image: 'https://oneshotai.tool.vin/og.png',
+      tags: ['React Native', 'Expo', 'Tailwindcss'],
+      link: 'https://oneshotai.tool.vin',
+    },
+    {
       title: t('promptpal.title'),
       description: t('githubseek.description'),
       image: 'https://promptpal.tool.vin/og.png',
-      tags: ['Plasmo', 'React', 'Tailwindcss'],
+      tags: ['Plasmo', 'React', 'Tailwindcss', 'Nextjs'],
       link: 'https://promptpal.tool.vin',
     },
     {

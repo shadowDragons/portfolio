@@ -26,6 +26,10 @@
   "Projects": {
     "heading": "Projects",
     "visit": "Visit Project",
+    "oneshotai": {
+      "title": "OneShotAI",
+      "description": "Take a Photo, Smart Analysis, Instant Understanding."
+    },
     "promptpal": {
       "title": "PromptPal",
       "description": "Save, organize, and access your AI prompts anywhere. The perfect companion for your AI productivity workflow."

@@ -29,6 +29,10 @@ const nextConfig = {
         protocol: 'https',
         hostname: 'promptpal.tool.vin',
       },
+      {
+        protocol: 'https',
+        hostname: 'oneshotai.tool.vin',
+      },
     ],
   },
 }
