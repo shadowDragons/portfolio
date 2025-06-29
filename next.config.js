@@ -33,6 +33,10 @@ const nextConfig = {
         protocol: 'https',
         hostname: 'oneshotai.tool.vin',
       },
+      {
+        protocol: 'https',
+        hostname: 'n8n.directory.cab',
+      },
     ],
   },
 }

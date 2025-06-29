@@ -15,6 +15,13 @@ const Projects = () => {
       link: 'https://oneshotai.tool.vin',
     },
     {
+      title: t('n8n-workflow-directory.title'),
+      description: t('n8n-workflow-directory.description'),
+      image: 'https://n8n.directory.cab/og.png',
+      tags: ['React', 'Tailwindcss', 'Nextjs'],
+      link: 'https://n8n.directory.cab',
+    },
+    {
       title: t('promptpal.title'),
       description: t('githubseek.description'),
       image: 'https://promptpal.tool.vin/og.png',
