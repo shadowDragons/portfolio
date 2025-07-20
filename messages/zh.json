@@ -30,6 +30,10 @@
       "title": "AI一拍通",
       "description": "拍照识别，AI智能分析，一拍即懂。"
     },
+    "rapidle": {
+      "title": "Rapidle",
+      "description": "一个简约的桌面效率工具，支持记忆片段、快速访问链接、第三方 API 请求和快速启动系统应用"
+    },
     "n8n-workflow-directory": {
       "title": "n8n-workflow-directory",
       "description": "发现、分享和下载由社区创建的强大 n8n 工作流。使用经过验证的解决方案自动化您的业务流程。"

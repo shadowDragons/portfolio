@@ -15,6 +15,13 @@ const Projects = () => {
       link: 'https://oneshotai.tool.vin',
     },
     {
+      title: t('rapidle.title'),
+      description: t('rapidle.description'),
+      image: '/rapidle.png',
+      tags: ['Electron', 'Typescript'],
+      link: 'https://github.com/shadowDragons/rapidle',
+    },
+    {
       title: t('n8n-workflow-directory.title'),
       description: t('n8n-workflow-directory.description'),
       image: 'https://n8n.directory.cab/og.png',
