@@ -17,16 +17,16 @@ const Projects = () => {
     {
       title: t('rapidle.title'),
       description: t('rapidle.description'),
-      image: 'https://idea.tool.vin/og.png',
+      image: '/rapidle.png',
       tags: ['Electron', 'Typescript'],
-      link: 'https://idea.tool.vin',
+      link: 'https://github.com/shadowDragons/rapidle',
     },
     {
       title: t('nextIdea.title'),
       description: t('nextIdea.description'),
-      image: '/rapidle.png',
-      tags: ['Electron', 'Typescript'],
-      link: 'https://github.com/shadowDragons/rapidle',
+      image: 'https://idea.tool.vin/og.png',
+      tags: ['React', 'Nextjs', 'Typescript', 'n8n'],
+      link: 'https://idea.tool.vin',
     },
     {
       title: t('n8n-workflow-directory.title'),
