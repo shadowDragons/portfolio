@@ -3,14 +3,14 @@ import { buttonVariants } from './ui/button'
 import Link from 'next/link'
 import FramerWrapper from './animation/FramerWrapper'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faSquareBluesky, faSquareTwitter, faSquareGithub, faSquareInstagram } from '@fortawesome/free-brands-svg-icons'
+import { faSquareTwitter, faSquareGithub } from '@fortawesome/free-brands-svg-icons'
+import { faEnvelope } from '@fortawesome/free-solid-svg-icons'
 
 const SocialLinks = () => {
   const links = [
     { name: 'Twitter', link: 'https://x.com/Junexus_indie', icon: <FontAwesomeIcon icon={faSquareTwitter} /> },
     { name: 'Github', link: 'https://github.com/shadowDragons', icon: <FontAwesomeIcon icon={faSquareGithub} /> },
-    { name: 'BlueSky', link: 'https://bsky.app/profile/junexus.bsky.social', icon: <FontAwesomeIcon icon={faSquareBluesky} /> },
-    { name: 'Instagram', link: 'https://www.instagram.com/indiejunexus', icon: <FontAwesomeIcon icon={faSquareInstagram} /> },
+    { name: 'Email', link: 'mailto:contact@sphrag.com', icon: <FontAwesomeIcon icon={faEnvelope} /> },
   ]
   return (
     <>
