@@ -17,6 +17,13 @@ const Projects = () => {
     {
       title: t('rapidle.title'),
       description: t('rapidle.description'),
+      image: 'https://idea.tool.vin/og.png',
+      tags: ['Electron', 'Typescript'],
+      link: 'https://idea.tool.vin',
+    },
+    {
+      title: t('nextIdea.title'),
+      description: t('nextIdea.description'),
       image: '/rapidle.png',
       tags: ['Electron', 'Typescript'],
       link: 'https://github.com/shadowDragons/rapidle',

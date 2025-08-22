@@ -37,6 +37,10 @@ const nextConfig = {
         protocol: 'https',
         hostname: 'n8n.directory.cab',
       },
+      {
+        protocol: 'https',
+        hostname: 'idea.tool.vin',
+      },
     ],
   },
 }

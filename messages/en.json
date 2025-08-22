@@ -34,6 +34,10 @@
       "title": "Rapidle",
       "description": "A fast and efficient AI image editing tool, built with Next.js 14 and TypeScript."
     },
+    "nextIdea": {
+      "title": "NextIdea",
+      "description": "Discover your next independent development project idea."
+    },
     "n8n-workflow-directory": {
       "title": "n8n Workflow Directory",
       "description": "Discover, share, and download powerful n8n workflows created by the community. Automate your business processes with proven solutions."
