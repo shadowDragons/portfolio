@@ -48,20 +48,7 @@ const Projects = () => {
       image: 'https://githubseek.xyz/og.png',
       tags: ['Nextjs', 'Tailwindcss', 'Shadcn Ui'],
       link: 'https://githubseek.xyz',
-    },
-    {
-      title: t('text2image.title'),
-      description: t('text2image.description'),
-      image: 'https://text-image.tool.vin/og.png',
-      tags: ['Nextjs', 'Tailwindcss', 'Shadcn Ui'],
-      link: 'https://text-image.tool.vin',
-    },
-    {
-      title: t('tool-site.title'),
-      description: t('tool-site.description'),
-      image: '/tool-site-og-image.png',
-      link: 'https://tool.directory.cab/',
-    },
+    }
   ]
 
   return (
