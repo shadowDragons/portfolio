@@ -46,14 +46,6 @@
       "title": "Github Seek",
       "description": "几秒钟内智能定位您已收藏的GitHub项目，AI驱动让个人Star管理如此简单。"
     },
-    "asst-ai": {
-      "title": "Asst AI",
-      "description": "专注于单次AI文本生成的智能助手。多模型支持和内置prompt管理，让您的AI工作流程更顺畅。"
-    },
-    "text2image": {
-      "title": "字节文字图片生成器",
-      "description": "一款具有多种模板和样式的现代文本到图片生成。采用 Next.js 14 和 TypeScript 构建，支持暗模式和 i18n。"
-    },
     "tool-site": {
       "title": "字节工具导航站",
       "description": "字节工具导航站收录了国内外数百个实用工具，该导航网站包括效率工具、AI工具、学习工具、开发工具、音频资源、视频资源、设计工具、创意工具。"
