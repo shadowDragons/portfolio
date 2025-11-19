@@ -26,6 +26,10 @@
   "Projects": {
     "heading": "项目展示",
     "visit": "访问项目",
+    "course": {
+      "title": "ShipSaas课程",
+      "description": "ShipSaas課程"
+    },
     "oneshotai": {
       "title": "AI一拍通",
       "description": "拍照识别，AI智能分析，一拍即懂。"
@@ -45,10 +49,6 @@
     "githubseek": {
       "title": "Github Seek",
       "description": "几秒钟内智能定位您已收藏的GitHub项目，AI驱动让个人Star管理如此简单。"
-    },
-    "tool-site": {
-      "title": "字节工具导航站",
-      "description": "字节工具导航站收录了国内外数百个实用工具，该导航网站包括效率工具、AI工具、学习工具、开发工具、音频资源、视频资源、设计工具、创意工具。"
     }
   },
   "Sponsor": {

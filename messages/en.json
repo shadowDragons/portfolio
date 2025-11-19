@@ -26,6 +26,10 @@
   "Projects": {
     "heading": "Projects",
     "visit": "Visit Project",
+    "course": {
+      "title": "ShipSaas Course",
+      "description": "ShipSaas Course"
+    },
     "oneshotai": {
       "title": "OneShotAI",
       "description": "Take a Photo, Smart Analysis, Instant Understanding."
@@ -53,10 +57,6 @@
     "text2image": {
       "title": "Byte Text Image Generator",
       "description": "A modern text-to-image generation tool with multiple templates and styles. Built using Next.js 14 and TypeScript, supporting dark mode and i18n."
-    },
-    "tool-site": {
-      "title": "Byte Tools Navigation Site",
-      "description": "A navigation website featuring hundreds of practical tools from China and abroad, including efficiency tools, AI tools, learning tools, development tools, audio resources, video resources, design tools, and creative tools."
     }
   },
   "Sponsor": {

@@ -8,6 +8,13 @@ const Projects = () => {
 
   const projects = [
     {
+      title: t('course.title'),
+      description: t('course.description'),
+      image: 'https://course.shipsaas.xyz/og.png',
+      tags: ['ReactJS', 'Laravel', 'Tailwindcss', 'TanStack'],
+      link: 'https://course.shipsaas.xyz',
+    },
+    {
       title: t('oneshotai.title'),
       description: t('oneshotai.description'),
       image: 'https://oneshotai.tool.vin/og.png',
@@ -41,7 +48,7 @@ const Projects = () => {
       image: 'https://githubseek.xyz/og.png',
       tags: ['Nextjs', 'Tailwindcss', 'Shadcn Ui'],
       link: 'https://githubseek.xyz',
-    }
+    },
   ]
 
   return (
