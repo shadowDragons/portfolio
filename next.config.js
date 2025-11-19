@@ -31,6 +31,10 @@ const nextConfig = {
       },
       {
         protocol: 'https',
+        hostname: 'course.shipsaas.xyz',
+      },
+      {
+        protocol: 'https',
         hostname: 'oneshotai.tool.vin',
       },
       {
