@@ -23,7 +23,7 @@ const nextConfig = {
       },
       {
         protocol: 'https',
-        hostname: 'sphrag.com',
+        hostname: 'githubseek.sphrag.com',
       },
       {
         protocol: 'https',
