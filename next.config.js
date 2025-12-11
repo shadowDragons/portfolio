@@ -39,7 +39,7 @@ const nextConfig = {
       },
       {
         protocol: 'https',
-        hostname: 'idea.tool.vin',
+        hostname: 'idea.sphrag.com',
       },
     ],
   },
