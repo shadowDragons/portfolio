@@ -47,7 +47,7 @@ const Projects = () => {
       description: t('githubseek.description'),
       image: 'https://githubseek.xyz/og.png',
       tags: ['Nextjs', 'Tailwindcss', 'Shadcn Ui'],
-      link: 'https://githubseek.xyz',
+      link: 'https://githubseek.sphrag.com',
     },
   ]
 
