@@ -31,9 +31,9 @@ const Projects = () => {
     {
       title: t('nextIdea.title'),
       description: t('nextIdea.description'),
-      image: 'https://idea.tool.vin/og.png',
+      image: 'https://idea.sphrag.com/og.png',
       tags: ['React', 'Nextjs', 'Typescript', 'n8n'],
-      link: 'https://idea.tool.vin',
+      link: 'https://idea.sphrag.com',
     },
     {
       title: t('promptpal.title'),
