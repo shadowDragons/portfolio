@@ -21,11 +21,22 @@
   },
   "TextRotator": {
     "intro": "I am a full-stack",
-    "rotatingTitles": ["Creator", "Developer", "Contributor", "Engineer", "Builder", "Innovator"]
+    "rotatingTitles": [
+      "Creator",
+      "Developer",
+      "Contributor",
+      "Engineer",
+      "Builder",
+      "Innovator"
+    ]
   },
   "Projects": {
     "heading": "Projects",
     "visit": "Visit Project",
+    "shipsaas": {
+      "title": "ShipSaas",
+      "description": "The Ultimate Boilerplate for Modern SaaS"
+    },
     "course": {
       "title": "ShipSaas Course",
       "description": "ShipSaas Course"
@@ -50,14 +61,6 @@
       "title": "Github Seek",
       "description": "Locate massive GitHub collections in seconds, AI-powered search made effortlessly simple."
     },
-    "asst-ai": {
-      "title": "Asst AI",
-      "description": "A smart assistant focused on single AI text generation. Multi-model support and built-in prompt management, making your AI workflow smoother."
-    },
-    "text2image": {
-      "title": "Byte Text Image Generator",
-      "description": "A modern text-to-image generation tool with multiple templates and styles. Built using Next.js 14 and TypeScript, supporting dark mode and i18n."
-    }
   },
   "Sponsor": {
     "heading": "Support My Work",

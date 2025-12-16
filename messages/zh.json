@@ -21,11 +21,22 @@
   },
   "TextRotator": {
     "intro": "我是一个全栈开发者",
-    "rotatingTitles": ["独立开发者", "社区贡献者", "开源贡献者", "效率达人", "爱好分享", "AI践行者"]
+    "rotatingTitles": [
+      "独立开发者",
+      "社区贡献者",
+      "开源贡献者",
+      "效率达人",
+      "爱好分享",
+      "AI践行者"
+    ]
   },
   "Projects": {
     "heading": "项目展示",
     "visit": "访问项目",
+    "shipsaas": {
+      "title": "ShipSaas",
+      "description": "现代 SaaS 的 终极开发脚手架"
+    },
     "course": {
       "title": "ShipSaas课程",
       "description": "ShipSaas課程"

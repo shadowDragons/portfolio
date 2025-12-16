@@ -8,6 +8,13 @@ const Projects = () => {
 
   const projects = [
     {
+      title: t('shipsaas.title'),
+      description: t('shipsaas.description'),
+      image: 'https://shipsaas.xyz/dist/image/og.png',
+      tags: ['ReactJS', 'Laravel', 'Tailwindcss', 'TanStack'],
+      link: 'https://shipsaas.xyz',
+    },
+    {
       title: t('course.title'),
       description: t('course.description'),
       image: 'https://course.shipsaas.xyz/og.png',
@@ -37,7 +44,7 @@ const Projects = () => {
     },
     {
       title: t('promptpal.title'),
-      description: t('githubseek.description'),
+      description: t('promptpal.description'),
       image: 'https://promptpal.tool.vin/og.png',
       tags: ['Plasmo', 'React', 'Tailwindcss', 'Nextjs'],
       link: 'https://promptpal.tool.vin',
