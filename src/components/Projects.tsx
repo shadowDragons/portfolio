@@ -24,9 +24,9 @@ const Projects = () => {
     {
       title: t('oneshotai.title'),
       description: t('oneshotai.description'),
-      image: 'https://oneshotai.tool.vin/og.png',
+      image: 'https://oneshotai.sphrag.com/og.png',
       tags: ['React Native', 'Expo', 'Tailwindcss'],
-      link: 'https://oneshotai.tool.vin',
+      link: 'https://oneshotai.sphrag.com',
     },
     {
       title: t('rapidle.title'),
@@ -45,9 +45,9 @@ const Projects = () => {
     {
       title: t('promptpal.title'),
       description: t('promptpal.description'),
-      image: 'https://promptpal.tool.vin/og.png',
+      image: 'https://promptpal.sphrag.com/og.png',
       tags: ['Plasmo', 'React', 'Tailwindcss', 'Nextjs'],
-      link: 'https://promptpal.tool.vin',
+      link: 'https://promptpal.sphrag.com',
     },
     {
       title: t('githubseek.title'),

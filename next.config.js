@@ -11,11 +11,11 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'text-image.tool.vin',
+        hostname: 'text-image.sphrag.com',
       },
       {
         protocol: 'https',
-        hostname: 'image-generator.tool.vin',
+        hostname: 'image-generator.sphrag.com',
       },
       {
         protocol: 'https',
@@ -27,7 +27,7 @@ const nextConfig = {
       },
       {
         protocol: 'https',
-        hostname: 'promptpal.tool.vin',
+        hostname: 'promptpal.sphrag.com',
       },
       {
         protocol: 'https',
@@ -39,7 +39,7 @@ const nextConfig = {
       },
       {
         protocol: 'https',
-        hostname: 'oneshotai.tool.vin',
+        hostname: 'oneshotai.sphrag.com',
       },
       {
         protocol: 'https',
