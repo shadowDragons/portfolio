@@ -21,13 +21,13 @@
       "titlePrefix": "个人工作室，专做",
       "titleHighlight": "企业系统 / 官网 / AI 应用",
       "titleSuffix": "定制开发",
-      "description": "原 4399 技术部门技术主管，主导过多个企业级系统，带过 20 人技术团队。现在以个人工作室形式直接接单，不分包转包，更适合重视质量、效率和长期维护的客户。",
+      "description": "原大型互联网公司技术部门技术主管，主导过多个企业级系统，带过 20 人技术团队。现在以个人工作室形式直接接单，不分包转包，更适合重视质量、效率和长期维护的客户。",
       "primaryCta": "添加微信聊项目",
       "secondaryCta": "查看作品方向",
       "highlights": {
         "background": {
           "title": "技术背景",
-          "description": "原 4399 技术部门技术主管，主导多个企业级系统，也带过 20 人技术团队。"
+          "description": "原大型互联网公司技术部门技术主管，主导多个企业级系统，也带过 20 人技术团队。"
         },
         "availability": {
           "title": "开发时间",
@@ -144,8 +144,8 @@
     "projects": {
       "eyebrow": "Projects",
       "title": "项目",
-      "description": "这里改成了作品展示区，支持自动横向滚动、查看多图和可选链接跳转，更接近真实案例页的浏览体验。",
-      "helper": "悬停可暂停滚动，点击图片可放大查看；支持上一张 / 下一张切换，有链接的作品可直接跳转。",
+      "description": "这里改成了双行作品展示区，支持自动横向滚动、查看多图和可选链接跳转，更接近真实案例页的浏览体验。",
+      "helper": "悬停可暂停双行滚动，点击图片可放大查看；支持上一张 / 下一张切换，有链接的作品可直接跳转。",
       "stackLabel": "技术栈",
       "viewImages": "查看",
       "loadingImage": "图片加载中...",
@@ -209,9 +209,9 @@
       }
     },
     "notice": {
-      "eyebrow": "Boundary",
-      "title": "这些项目不做，也希望合作前把预算和需求说清楚",
-      "description": "边界提前讲清楚，反而更省时间，也能减少后面不必要的扯皮和误解。",
+      "eyebrow": "Notice",
+      "title": "合作须知",
+      "description": "",
       "reminderTitle": "合作方式",
       "reminders": {
         "direct": "只做远程直接合作，不支持驻场，也不接二手或 N 手外包。",
@@ -245,12 +245,12 @@
     },
     "contact": {
       "eyebrow": "Contact",
-      "title": "预算、需求和方向合适的话，可以直接来聊",
-      "description": "优先发我项目背景、核心功能、预算范围和期望工期。我会结合当前档期尽快判断是否适合合作。",
+      "title": "联系",
+      "description": "",
       "wechatLabel": "微信",
       "phoneLabel": "电话",
-      "availabilityTitle": "开发时间",
-      "availabilityDescription": "常规开发时间为工作日 8:00 - 16:00、22:00 - 24:00；周末 22:00 - 24:00，不等于全时在线即时回复。",
+      "availabilityTitle": "沟通时间",
+      "availabilityDescription": "全天 24 小时都可以联系，看到就回。工作日基本在线，周末带娃，不会一直看手机。",
       "briefTitle": "首次沟通建议",
       "briefDescription": "带上预算、目标和关键需求，会比只问“多少钱能做”高效很多。"
     }

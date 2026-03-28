@@ -596,6 +596,12 @@ export default function BusinessHome() {
     link: workAssets[key].link,
   }))
 
+  const showcaseRowMidpoint = Math.ceil(showcaseWorks.length / 2)
+  const showcaseRows = [
+    showcaseWorks.slice(0, showcaseRowMidpoint).map((work, index) => ({ work, workIndex: index })),
+    showcaseWorks.slice(showcaseRowMidpoint).map((work, index) => ({ work, workIndex: showcaseRowMidpoint + index })),
+  ].filter(row => row.length > 0)
+
   const activeWork = lightbox ? showcaseWorks[lightbox.workIndex] : null
   const activeImageCount = activeWork?.images.length ?? 0
 
@@ -805,22 +811,31 @@ export default function BusinessHome() {
               <div className='pointer-events-none absolute inset-y-0 left-0 z-20 w-20 bg-gradient-to-r from-[#f7f3ee] via-[#f7f3ee]/86 to-transparent sm:w-28' />
               <div className='pointer-events-none absolute inset-y-0 right-0 z-20 w-20 bg-gradient-to-l from-[#f7f3ee] via-[#f7f3ee]/86 to-transparent sm:w-28' />
 
-              <div className='showcase-marquee-track flex w-max' style={{ animationDuration: `${Math.max(36, showcaseWorks.length * 3.6)}s` }}>
-                {[0, 1].map(copyIndex => (
-                  <div key={copyIndex} className='flex shrink-0 gap-5 pr-5 pl-5 sm:gap-6 sm:pr-6 sm:pl-6'>
-                    {showcaseWorks.map((work, workIndex) => (
-                      <WorkCard
-                        key={`${copyIndex}-${work.key}`}
-                        work={work}
-                        orderLabel={String(workIndex + 1).padStart(2, '0')}
-                        imageCountLabel={t('projects.imageCount', { count: work.images.length })}
-                        stackLabel={t('projects.stackLabel')}
-                        viewImagesLabel={t('projects.viewImages')}
-                        openLinkLabel={t('projects.openLink')}
-                        noLinkLabel={t('projects.noLink')}
-                        onOpenImage={() => openLightbox(workIndex, 0)}
-                      />
-                    ))}
+              <div className='flex flex-col gap-5 sm:gap-6'>
+                {showcaseRows.map((row, rowIndex) => (
+                  <div key={`showcase-row-${rowIndex}`} className='overflow-hidden'>
+                    <div
+                      className={cn('showcase-marquee-track flex w-max', rowIndex % 2 === 1 && 'showcase-marquee-track-reverse')}
+                      style={{ animationDuration: `${Math.max(28, row.length * (rowIndex % 2 === 0 ? 5.2 : 5.8))}s` }}
+                    >
+                      {[0, 1].map(copyIndex => (
+                        <div key={copyIndex} className='flex shrink-0 gap-5 pr-5 pl-5 sm:gap-6 sm:pr-6 sm:pl-6'>
+                          {row.map(({ work, workIndex }) => (
+                            <WorkCard
+                              key={`${copyIndex}-${work.key}`}
+                              work={work}
+                              orderLabel={String(workIndex + 1).padStart(2, '0')}
+                              imageCountLabel={t('projects.imageCount', { count: work.images.length })}
+                              stackLabel={t('projects.stackLabel')}
+                              viewImagesLabel={t('projects.viewImages')}
+                              openLinkLabel={t('projects.openLink')}
+                              noLinkLabel={t('projects.noLink')}
+                              onOpenImage={() => openLightbox(workIndex, 0)}
+                            />
+                          ))}
+                        </div>
+                      ))}
+                    </div>
                   </div>
                 ))}
               </div>
@@ -829,26 +844,44 @@ export default function BusinessHome() {
         </section>
 
         <section id='notice' className='overflow-hidden rounded-[30px] bg-[#111] p-7 text-white sm:p-10'>
-          <div className='grid gap-6 xl:grid-cols-[0.96fr_1.04fr]'>
-            <FramerWrapper y={18}>
+          <div className='grid gap-6'>
+            <FramerWrapper y={18} className='max-w-3xl'>
               <p className='text-xs font-semibold uppercase tracking-[0.22em] text-[#d4944e]'>{t('notice.eyebrow')}</p>
-              <h2 className='mt-4 max-w-3xl font-rubik text-[28px] leading-snug sm:text-4xl'>{t('notice.title')}</h2>
-              <p className='mt-3 max-w-3xl text-[15px] leading-8 text-white/55'>{t('notice.description')}</p>
-
-              <div className='mt-6 rounded-2xl border border-white/[0.08] bg-white/[0.04] p-6'>
-                <p className='text-xs font-semibold uppercase tracking-[0.2em] text-[#d4944e]'>{t('notice.reminderTitle')}</p>
-                <div className='mt-4 space-y-3'>
-                  {['direct', 'quality', 'timeline'].map(key => (
-                    <div key={key} className='flex items-start gap-3'>
-                      <CheckCircle2 className='mt-0.5 h-4 w-4 shrink-0 text-[#d4944e]' />
-                      <p className='text-sm leading-6 text-white/72'>{t(`notice.reminders.${key}`)}</p>
-                    </div>
-                  ))}
-                </div>
-              </div>
+              <h2 className='mt-4 max-w-2xl font-rubik text-[30px] leading-[1.15] sm:text-[42px]'>{t('notice.title')}</h2>
+              {t('notice.description') ? <p className='mt-3 max-w-3xl text-[15px] leading-8 text-white/55'>{t('notice.description')}</p> : null}
             </FramerWrapper>
 
-            <div className='grid gap-4'>
+            <div className='grid gap-4 xl:grid-cols-[0.88fr_1.12fr] xl:items-start'>
+              <div className='grid gap-4'>
+                <FramerWrapper y={24} delay={0.08}>
+                  <div className='rounded-[26px] border border-white/[0.08] bg-white/[0.04] p-6'>
+                    <p className='text-xs font-semibold uppercase tracking-[0.2em] text-[#d4944e]'>{t('notice.reminderTitle')}</p>
+                    <div className='mt-4 space-y-3'>
+                      {['direct', 'quality', 'timeline'].map(key => (
+                        <div key={key} className='flex items-start gap-3 rounded-2xl border border-white/[0.06] bg-black/10 px-4 py-3'>
+                          <CheckCircle2 className='mt-0.5 h-4 w-4 shrink-0 text-[#d4944e]' />
+                          <p className='text-sm leading-6 text-white/78'>{t(`notice.reminders.${key}`)}</p>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </FramerWrapper>
+
+                <FramerWrapper y={24} delay={0.14}>
+                  <div className='rounded-[26px] border border-white/[0.08] bg-white/[0.04] p-6'>
+                    <p className='text-xs font-semibold uppercase tracking-[0.2em] text-[#d4944e]'>{t('notice.expectationsTitle')}</p>
+                    <div className='mt-4 grid gap-3 md:grid-cols-3 xl:grid-cols-1'>
+                      {expectationKeys.map(key => (
+                        <div key={key} className='rounded-2xl border border-white/[0.06] bg-black/10 p-4'>
+                          <p className='font-rubik text-lg text-white/92'>{t(`notice.expectations.${key}.title`)}</p>
+                          <p className='mt-2 text-sm leading-6 text-white/68'>{t(`notice.expectations.${key}.description`)}</p>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </FramerWrapper>
+              </div>
+
               <FramerWrapper y={24} delay={0.1}>
                 <div className='rounded-2xl border border-white/[0.08] bg-white/[0.04] p-6'>
                   <p className='text-xs font-semibold uppercase tracking-[0.2em] text-[#d4944e]'>{t('notice.noGoTitle')}</p>
@@ -856,20 +889,6 @@ export default function BusinessHome() {
                     {noGoKeys.map(key => (
                       <div key={key} className='rounded-2xl border border-white/[0.06] bg-black/10 px-4 py-3'>
                         <p className='text-sm leading-6 text-white/80'>{t(`notice.noGo.${key}`)}</p>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </FramerWrapper>
-
-              <FramerWrapper y={24} delay={0.16}>
-                <div className='rounded-2xl border border-white/[0.08] bg-white/[0.04] p-6'>
-                  <p className='text-xs font-semibold uppercase tracking-[0.2em] text-[#d4944e]'>{t('notice.expectationsTitle')}</p>
-                  <div className='mt-4 space-y-4'>
-                    {expectationKeys.map(key => (
-                      <div key={key} className='rounded-2xl border border-white/[0.06] bg-black/10 p-4'>
-                        <p className='font-rubik text-lg text-white/92'>{t(`notice.expectations.${key}.title`)}</p>
-                        <p className='mt-2 text-sm leading-6 text-white/68'>{t(`notice.expectations.${key}.description`)}</p>
                       </div>
                     ))}
                   </div>
@@ -885,7 +904,9 @@ export default function BusinessHome() {
               <div>
                 <p className='text-xs font-semibold uppercase tracking-[0.22em] text-[#b86128]'>{t('contact.eyebrow')}</p>
                 <h2 className='mx-auto mt-4 max-w-2xl font-rubik text-[28px] leading-snug text-[#111] sm:text-4xl'>{t('contact.title')}</h2>
-                <p className='mx-auto mt-4 max-w-2xl text-[15px] leading-8 text-[#666]'>{t('contact.description')}</p>
+                {t('contact.description') ? (
+                  <p className='mx-auto mt-4 max-w-2xl text-[15px] leading-8 text-[#666]'>{t('contact.description')}</p>
+                ) : null}
               </div>
 
               <div className='mx-auto mt-10 grid w-full max-w-xl gap-4 sm:grid-cols-2'>

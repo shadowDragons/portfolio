@@ -152,6 +152,10 @@ html {
   will-change: transform;
 }
 
+.showcase-marquee-track-reverse {
+  animation-direction: reverse;
+}
+
 .marquee-group:hover .showcase-marquee-track {
   animation-play-state: paused;
 }

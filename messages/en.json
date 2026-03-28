@@ -21,13 +21,13 @@
       "titlePrefix": "Direct custom development for",
       "titleHighlight": "business systems, websites, and AI apps",
       "titleSuffix": "with owner-level accountability",
-      "description": "Former technical lead in the 4399 technology department. I led multiple enterprise systems and managed a 20-person engineering team. Now I take projects directly as a solo studio without subcontracting, which fits clients who care about quality, speed, and long-term support.",
+      "description": "Former technical lead in the technology department of a large internet company. I led multiple enterprise systems and managed a 20-person engineering team. Now I take projects directly as a solo studio without subcontracting, which fits clients who care about quality, speed, and long-term support.",
       "primaryCta": "Add WeChat to Discuss",
       "secondaryCta": "View Work",
       "highlights": {
         "background": {
           "title": "Background",
-          "description": "Former technical lead at 4399, with multiple enterprise systems delivered and a 20-person engineering team led."
+          "description": "Former technical lead in the technology department of a large internet company, with multiple enterprise systems delivered and a 20-person engineering team led."
         },
         "availability": {
           "title": "Development Hours",
@@ -144,8 +144,8 @@
     "projects": {
       "eyebrow": "Projects",
       "title": "Projects",
-      "description": "This section is now a real showcase strip with automatic horizontal scrolling, multi-image preview, and optional link jump for each case.",
-      "helper": "Hover to pause the marquee. Click any preview to enlarge it. Arrow keys support previous and next images. Works with links can open directly.",
+      "description": "This section is now a two-row showcase strip with automatic horizontal scrolling, multi-image preview, and optional link jump for each case.",
+      "helper": "Hover to pause the two-row marquee. Click any preview to enlarge it. Arrow keys support previous and next images. Works with links can open directly.",
       "stackLabel": "Tech Stack",
       "viewImages": "View",
       "loadingImage": "Loading image...",
@@ -209,9 +209,9 @@
       }
     },
     "notice": {
-      "eyebrow": "Boundaries",
-      "title": "These projects are not a fit, and I also need budget and scope to be clear early",
-      "description": "Clear boundaries save both sides time and reduce unnecessary back-and-forth later.",
+      "eyebrow": "Notice",
+      "title": "Working Together",
+      "description": "",
       "reminderTitle": "How I work",
       "reminders": {
         "direct": "Remote and direct collaboration only. No on-site work and no second-hand or multi-layer subcontracting.",
@@ -245,12 +245,12 @@
     },
     "contact": {
       "eyebrow": "Contact",
-      "title": "If the budget, scope, and direction fit, we can talk directly",
-      "description": "Send the project background, core functions, budget range, and expected timeline first. I will assess fit quickly based on the current schedule.",
+      "title": "Contact",
+      "description": "",
       "wechatLabel": "WeChat",
       "phoneLabel": "Phone",
-      "availabilityTitle": "Development Hours",
-      "availabilityDescription": "Regular development hours are 8:00 - 16:00 and 22:00 - 24:00 on weekdays, and 22:00 - 24:00 on weekends. This does not mean instant online replies at all times.",
+      "availabilityTitle": "Response Time",
+      "availabilityDescription": "You can message me anytime, 24/7. I reply when I see it. I am usually online on weekdays, while weekends are more family time and I do not check my phone as often.",
       "briefTitle": "Best first message",
       "briefDescription": "Including budget, goals, and key requirements is much more effective than only asking “how much would it cost?”."
     }
