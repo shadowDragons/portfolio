@@ -62,39 +62,18 @@ type LightboxState = {
   imageIndex: number
 } | null
 
-function SectionHeader({
-  eyebrow,
-  title,
-  description,
-  center = false,
-}: {
-  eyebrow: string
-  title: string
-  description: string
-  center?: boolean
-}) {
+function SectionHeader({ eyebrow, title, description, center = false }: { eyebrow: string; title: string; description: string; center?: boolean }) {
   return (
     <FramerWrapper y={20} className={cn('max-w-3xl', center && 'mx-auto text-center')}>
       <div className='space-y-4'>
         <p className='text-xs font-semibold uppercase tracking-[0.22em] text-[#b86128]'>{eyebrow}</p>
         <h2 className='font-rubik text-[28px] leading-snug text-[#111] sm:text-4xl'>{title}</h2>
-        <p className='text-[15px] leading-7 text-[#666]'>{description}</p>
       </div>
     </FramerWrapper>
   )
 }
 
-function InfoCard({
-  icon: Icon,
-  title,
-  description,
-  delay,
-}: {
-  icon: LucideIcon
-  title: string
-  description: string
-  delay: number
-}) {
+function InfoCard({ icon: Icon, title, description, delay }: { icon: LucideIcon; title: string; description: string; delay: number }) {
   return (
     <FramerWrapper y={24} delay={delay} className='h-full'>
       <div className='flex h-full flex-col gap-4 rounded-2xl border border-[#ece3d8] bg-white/70 p-5 text-left shadow-[0_12px_32px_-18px_rgba(0,0,0,0.16)] backdrop-blur-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-[#dfd1c0] hover:bg-white'>
@@ -146,23 +125,11 @@ function FeatureCard({
   )
 }
 
-function ProcessCard({
-  step,
-  title,
-  description,
-  delay,
-}: {
-  step: string
-  title: string
-  description: string
-  delay: number
-}) {
+function ProcessCard({ step, title, description, delay }: { step: string; title: string; description: string; delay: number }) {
   return (
     <FramerWrapper y={24} delay={delay} className='h-full'>
       <div className='flex h-full flex-col gap-4 rounded-2xl border border-[#eee] bg-white p-6 transition-all duration-300 hover:border-[#ddd] hover:shadow-[0_8px_28px_-14px_rgba(0,0,0,0.12)]'>
-        <span className='inline-flex h-10 w-10 items-center justify-center rounded-full bg-[#111] font-rubik text-sm font-semibold text-white'>
-          {step}
-        </span>
+        <span className='inline-flex h-10 w-10 items-center justify-center rounded-full bg-[#111] font-rubik text-sm font-semibold text-white'>{step}</span>
         <div className='space-y-2'>
           <h3 className='font-rubik text-lg text-[#111]'>{title}</h3>
           <p className='text-sm leading-6 text-[#777]'>{description}</p>
@@ -172,13 +139,7 @@ function ProcessCard({
   )
 }
 
-function StackPanel({
-  label,
-  items,
-}: {
-  label: string
-  items: string[]
-}) {
+function StackPanel({ label, items }: { label: string; items: string[] }) {
   return (
     <div className='rounded-2xl border border-[#ece4da] bg-[#fcfaf7] p-5'>
       <p className='text-xs font-semibold uppercase tracking-[0.18em] text-[#aa6d33]'>{label}</p>
@@ -267,13 +228,9 @@ function WorkCard({
         <p className='text-sm leading-6 text-[#6d6a65]'>{work.description}</p>
 
         <div className='space-y-2'>
-          <p className='text-xs font-semibold uppercase tracking-[0.18em] text-[#a06a39]'>{stackLabel}</p>
           <div className='flex flex-wrap gap-2'>
             {work.stack.map(item => (
-              <span
-                key={`${work.key}-${item}`}
-                className='rounded-full border border-[#e5d8ca] bg-[#faf6f1] px-3 py-1 text-xs font-medium text-[#6c5946]'
-              >
+              <span key={`${work.key}-${item}`} className='rounded-full border border-[#e5d8ca] bg-[#faf6f1] px-3 py-1 text-xs font-medium text-[#6c5946]'>
                 {item}
               </span>
             ))}
@@ -290,7 +247,7 @@ function WorkCard({
             {viewImagesLabel}
           </button>
 
-          {work.link ? (
+          {/* {work.link ? (
             <a
               href={work.link}
               target='_blank'
@@ -301,10 +258,8 @@ function WorkCard({
               {openLinkLabel}
             </a>
           ) : (
-            <span className='inline-flex items-center rounded-full border border-dashed border-[#dfd3c7] px-4 py-2 text-sm text-[#98897a]'>
-              {noLinkLabel}
-            </span>
-          )}
+            <span className='inline-flex items-center rounded-full border border-dashed border-[#dfd3c7] px-4 py-2 text-sm text-[#98897a]'>{noLinkLabel}</span>
+          )} */}
         </div>
       </div>
     </article>
@@ -348,10 +303,7 @@ function WorkLightbox({
       className='fixed inset-0 z-[100] bg-black/92 p-4 backdrop-blur-sm sm:p-8'
       onClick={onClose}
     >
-      <div
-        className='relative flex h-full w-full flex-col items-center justify-center gap-4'
-        onClick={event => event.stopPropagation()}
-      >
+      <div className='relative flex h-full w-full flex-col items-center justify-center gap-4' onClick={event => event.stopPropagation()}>
         <div className='flex w-full max-w-6xl items-center justify-between gap-3'>
           <div className='min-w-0'>
             <p className='truncate font-rubik text-2xl text-white'>{work.title}</p>
@@ -464,19 +416,10 @@ function WorkLightbox({
                 onClick={() => onSelectImage(index)}
                 className={cn(
                   'relative h-16 w-24 overflow-hidden rounded-2xl border transition',
-                  imageIndex === index
-                    ? 'border-[#d4944e] ring-2 ring-[#d4944e]/40'
-                    : 'border-white/10 opacity-70 hover:opacity-100'
+                  imageIndex === index ? 'border-[#d4944e] ring-2 ring-[#d4944e]/40' : 'border-white/10 opacity-70 hover:opacity-100',
                 )}
               >
-                <Image
-                  src={image}
-                  alt={`${work.title} thumbnail ${index + 1}`}
-                  fill
-                  className='object-cover'
-                  quality={40}
-                  sizes='96px'
-                />
+                <Image src={image} alt={`${work.title} thumbnail ${index + 1}`} fill className='object-cover' quality={40} sizes='96px' />
               </button>
             ))}
           </div>
@@ -486,15 +429,7 @@ function WorkLightbox({
   )
 }
 
-function CopyableContact({
-  icon: Icon,
-  label,
-  value,
-}: {
-  icon: LucideIcon
-  label: string
-  value: string
-}) {
+function CopyableContact({ icon: Icon, label, value }: { icon: LucideIcon; label: string; value: string }) {
   const [copied, setCopied] = useState(false)
 
   const handleCopy = () => {
@@ -575,62 +510,64 @@ export default function BusinessHome() {
   const frontendStack = ['Vue', 'React', 'Next.js', 'TypeScript']
   const backendStack = ['Java', 'PHP', 'Python', 'Node.js']
 
-  const projectImages = (folder: string, count: number) =>
-    Array.from({ length: count }, (_, index) => `/projects/${folder}/${index + 1}.jpg`)
+  const projectImages = (folder: string, count: number) => Array.from({ length: count }, (_, index) => `/projects/${folder}/${index + 1}.jpg`)
 
   const workAssets: Record<WorkKey, { images: string[]; stack: string[]; link?: string }> = {
     asset: {
       images: projectImages('asset', 5),
-      stack: ['Vue', 'TypeScript', 'Java'],
+      stack: ['PHP', 'Yii', 'Vue', 'Typescript'],
     },
     hr: {
       images: projectImages('hr', 4),
-      stack: ['Vue', 'TypeScript', 'Java'],
+      stack: ['PHP', 'Yii', 'Vue', 'Typescript'],
     },
     finance: {
       images: projectImages('finance', 3),
-      stack: ['Vue', 'Java', 'TypeScript'],
+      stack: ['PHP', 'Yii', 'Vue', 'Typescript'],
     },
     attendance: {
       images: projectImages('attendance', 4),
-      stack: ['Vue', 'Java', 'Node.js'],
+      stack: ['Java', 'Springboot', 'Vue', 'Typescript'],
     },
     oa: {
       images: projectImages('oa', 4),
-      stack: ['Vue', 'Java', 'TypeScript'],
+      stack: ['PHP', 'Yii', 'Vue', 'Typescript'],
     },
     orders: {
       images: projectImages('orders', 4),
-      stack: ['Vue', 'React', 'Java'],
+      stack: ['Java', 'Springboot', 'Vue', 'Element', 'Typescript'],
     },
     workstation: {
       images: projectImages('workstation', 3),
-      stack: ['Vue', 'Java', 'TypeScript'],
+      stack: ['Java', 'Springboot', 'Vue', 'Element', 'Typescript'],
     },
     digitalHuman: {
       images: projectImages('digitalHuman', 2),
-      stack: ['React', 'Python', 'Node.js'],
+      stack: ['Node.js', 'TypeScript', 'Remotion', 'React'],
     },
     course: {
       images: projectImages('course', 3),
-      stack: ['Next.js', 'React', 'PHP'],
+      stack: ['Laravel', 'React', 'PHP', 'TanStack', 'Typescript'],
+      link: 'https://course.sphrag.com',
     },
     recruiting: {
       images: projectImages('recruiting', 4),
-      stack: ['Vue', 'Java', 'TypeScript'],
+      stack: ['PHP', 'Yii', 'Vue', 'Typescript'],
     },
     idea: {
       images: projectImages('idea', 3),
-      stack: ['Next.js', 'React', 'TypeScript'],
+      stack: ['Next.js', 'React', 'TypeScript', 'n8n'],
       link: 'https://idea.sphrag.com',
     },
     danduoduo: {
       images: projectImages('danduoduo', 2),
-      stack: ['Vue', 'PHP', 'TypeScript'],
+      stack: ['Next.js', 'React', 'TypeScript'],
+      link: 'https://51danduoduo.cn',
     },
     formart: {
       images: projectImages('formart', 1),
-      stack: ['Next.js', 'React', 'TypeScript'],
+      stack: ['Wordpress', 'PHP'],
+      link: 'https://fromart.com/',
     },
   }
 
@@ -673,10 +610,10 @@ export default function BusinessHome() {
     setLightbox(current =>
       current
         ? {
-          ...current,
-          imageIndex: (current.imageIndex - 1 + activeImageCount) % activeImageCount,
-        }
-        : current
+            ...current,
+            imageIndex: (current.imageIndex - 1 + activeImageCount) % activeImageCount,
+          }
+        : current,
     )
   }
 
@@ -685,10 +622,10 @@ export default function BusinessHome() {
     setLightbox(current =>
       current
         ? {
-          ...current,
-          imageIndex: (current.imageIndex + 1) % activeImageCount,
-        }
-        : current
+            ...current,
+            imageIndex: (current.imageIndex + 1) % activeImageCount,
+          }
+        : current,
     )
   }
 
@@ -708,10 +645,10 @@ export default function BusinessHome() {
         setLightbox(current =>
           current
             ? {
-              ...current,
-              imageIndex: (current.imageIndex - 1 + activeImageCount) % activeImageCount,
-            }
-            : current
+                ...current,
+                imageIndex: (current.imageIndex - 1 + activeImageCount) % activeImageCount,
+              }
+            : current,
         )
       }
 
@@ -719,10 +656,10 @@ export default function BusinessHome() {
         setLightbox(current =>
           current
             ? {
-              ...current,
-              imageIndex: (current.imageIndex + 1) % activeImageCount,
-            }
-            : current
+                ...current,
+                imageIndex: (current.imageIndex + 1) % activeImageCount,
+              }
+            : current,
         )
       }
     }
@@ -752,9 +689,7 @@ export default function BusinessHome() {
           <FramerWrapper y={24} delay={0.08}>
             <h1 className='mx-auto mt-8 max-w-5xl break-keep font-rubik text-[42px] leading-[1.15] text-[#111] sm:text-6xl lg:text-7xl'>
               {t('hero.titlePrefix')}{' '}
-              <span className='bg-gradient-to-r from-[#c46b2c] to-[#d4944e] bg-clip-text text-transparent'>
-                {t('hero.titleHighlight')}
-              </span>
+              <span className='bg-gradient-to-r from-[#c46b2c] to-[#d4944e] bg-clip-text text-transparent'>{t('hero.titleHighlight')}</span>
               {heroTitleSuffix ? ` ${heroTitleSuffix}` : null}
             </h1>
           </FramerWrapper>
@@ -769,7 +704,7 @@ export default function BusinessHome() {
                 href='#contact'
                 className={cn(
                   buttonVariants({ size: 'lg' }),
-                  'h-12 rounded-full border-0 bg-[#111] px-7 text-sm font-semibold text-white shadow-[0_8px_24px_-8px_rgba(0,0,0,0.3)] transition-all hover:bg-[#222] hover:shadow-[0_12px_32px_-8px_rgba(0,0,0,0.35)]'
+                  'h-12 rounded-full border-0 bg-[#111] px-7 text-sm font-semibold text-white shadow-[0_8px_24px_-8px_rgba(0,0,0,0.3)] transition-all hover:bg-[#222] hover:shadow-[0_12px_32px_-8px_rgba(0,0,0,0.35)]',
                 )}
               >
                 <MessageSquare className='mr-2 h-4 w-4' />
@@ -779,7 +714,7 @@ export default function BusinessHome() {
                 href='#projects'
                 className={cn(
                   buttonVariants({ variant: 'outline', size: 'lg' }),
-                  'h-12 rounded-full border-[#ddd] bg-white px-7 text-sm font-semibold text-[#333] hover:border-[#ccc] hover:bg-[#fafafa]'
+                  'h-12 rounded-full border-[#ddd] bg-white px-7 text-sm font-semibold text-[#333] hover:border-[#ccc] hover:bg-[#fafafa]',
                 )}
               >
                 {t('hero.secondaryCta')}
@@ -865,19 +800,12 @@ export default function BusinessHome() {
         <section id='projects'>
           <SectionHeader eyebrow={t('projects.eyebrow')} title={t('projects.title')} description={t('projects.description')} />
 
-          <FramerWrapper y={24} delay={0.1} className='mt-5'>
-            <p className='text-sm leading-7 text-[#8b7d70]'>{t('projects.helper')}</p>
-          </FramerWrapper>
-
           <FramerWrapper y={28} delay={0.16} className='mt-8'>
             <div className='marquee-group relative overflow-hidden rounded-[30px] border border-[#e9dfd4] bg-[linear-gradient(180deg,rgba(255,255,255,0.82),rgba(250,245,238,0.9))] py-6 shadow-[0_18px_56px_-38px_rgba(0,0,0,0.22)]'>
               <div className='pointer-events-none absolute inset-y-0 left-0 z-20 w-20 bg-gradient-to-r from-[#f7f3ee] via-[#f7f3ee]/86 to-transparent sm:w-28' />
               <div className='pointer-events-none absolute inset-y-0 right-0 z-20 w-20 bg-gradient-to-l from-[#f7f3ee] via-[#f7f3ee]/86 to-transparent sm:w-28' />
 
-              <div
-                className='showcase-marquee-track flex w-max'
-                style={{ animationDuration: `${Math.max(36, showcaseWorks.length * 3.6)}s` }}
-              >
+              <div className='showcase-marquee-track flex w-max' style={{ animationDuration: `${Math.max(36, showcaseWorks.length * 3.6)}s` }}>
                 {[0, 1].map(copyIndex => (
                   <div key={copyIndex} className='flex shrink-0 gap-5 pr-5 pl-5 sm:gap-6 sm:pr-6 sm:pl-6'>
                     {showcaseWorks.map((work, workIndex) => (

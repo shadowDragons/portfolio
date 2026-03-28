@@ -143,11 +143,11 @@
     },
     "projects": {
       "eyebrow": "Projects",
-      "title": "做过的项目方向",
+      "title": "项目",
       "description": "这里改成了作品展示区，支持自动横向滚动、查看多图和可选链接跳转，更接近真实案例页的浏览体验。",
       "helper": "悬停可暂停滚动，点击图片可放大查看；支持上一张 / 下一张切换，有链接的作品可直接跳转。",
       "stackLabel": "技术栈",
-      "viewImages": "查看图片",
+      "viewImages": "查看",
       "loadingImage": "图片加载中...",
       "openLink": "打开链接",
       "noLink": "暂无链接",
@@ -195,7 +195,7 @@
           "description": "覆盖职位展示、投递流程、后台管理和信息流转的招聘类项目。"
         },
         "idea": {
-          "title": "idea",
+          "title": "NextIdea",
           "description": "偏创意工具和产品化探索方向的项目，适合展示工具型产品能力。"
         },
         "danduoduo": {

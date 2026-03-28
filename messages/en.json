@@ -143,11 +143,11 @@
     },
     "projects": {
       "eyebrow": "Projects",
-      "title": "Kinds of work I have delivered",
+      "title": "Projects",
       "description": "This section is now a real showcase strip with automatic horizontal scrolling, multi-image preview, and optional link jump for each case.",
       "helper": "Hover to pause the marquee. Click any preview to enlarge it. Arrow keys support previous and next images. Works with links can open directly.",
       "stackLabel": "Tech Stack",
-      "viewImages": "View Images",
+      "viewImages": "View",
       "loadingImage": "Loading image...",
       "openLink": "Open Link",
       "noLink": "No Link Yet",
@@ -195,7 +195,7 @@
           "description": "A recruiting product covering job presentation, submission flow, admin management, and information routing."
         },
         "idea": {
-          "title": "idea",
+          "title": "NextIdea",
           "description": "A project in the direction of idea tooling and productized utility work, useful for showing product capability."
         },
         "danduoduo": {
