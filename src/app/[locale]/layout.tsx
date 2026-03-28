@@ -15,6 +15,8 @@ const siteConfig = {
   url: 'https://sphrag.com',
 }
 
+const GA_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA_ID || 'G-40820HPGL6'
+
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
   title: {
@@ -78,7 +80,7 @@ export default async function RootLayout({ children, params: { locale } }: { chi
           </main>
         </NextIntlClientProvider>
       </body>
-      {process.env.NODE_ENV === 'development' ? <></> : process.env.NEXT_PUBLIC_GA_ID ? <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID} /> : null}
+      {process.env.NODE_ENV === 'development' ? <></> : <GoogleAnalytics gaId={GA_MEASUREMENT_ID} />}
     </html>
   )
 }
