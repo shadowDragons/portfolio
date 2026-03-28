@@ -228,6 +228,7 @@ function WorkCard({
               alt={work.title}
               fill
               className='object-cover transition duration-700 group-hover:scale-[1.04]'
+              quality={60}
               sizes='(max-width: 640px) 286px, (max-width: 1024px) 320px, 348px'
             />
             <div className='absolute inset-0 bg-[linear-gradient(180deg,rgba(10,10,10,0.12)_0%,rgba(10,10,10,0.12)_28%,rgba(10,10,10,0.68)_100%)]' />
@@ -315,6 +316,7 @@ function WorkLightbox({
   imageIndex,
   hintLabel,
   stackLabel,
+  loadingLabel,
   openLinkLabel,
   onClose,
   onPrev,
@@ -325,12 +327,19 @@ function WorkLightbox({
   imageIndex: number
   hintLabel: string
   stackLabel: string
+  loadingLabel: string
   openLinkLabel: string
   onClose: () => void
   onPrev: () => void
   onNext: () => void
   onSelectImage: (nextIndex: number) => void
 }) {
+  const [isImageLoading, setIsImageLoading] = useState(true)
+
+  useEffect(() => {
+    setIsImageLoading(true)
+  }, [imageIndex, work.key])
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -415,13 +424,30 @@ function WorkLightbox({
               transition={{ duration: 0.24 }}
               className='relative h-full max-h-[72vh] w-full overflow-hidden rounded-[28px] border border-white/10 bg-black/25'
             >
+              <AnimatePresence>
+                {isImageLoading ? (
+                  <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    className='absolute inset-0 z-10 flex flex-col items-center justify-center gap-4 bg-[radial-gradient(circle_at_top,rgba(212,148,78,0.16),rgba(0,0,0,0.72)_42%,rgba(0,0,0,0.88))]'
+                  >
+                    <div className='h-12 w-12 rounded-full border-2 border-white/15 border-t-[#d4944e] animate-spin' />
+                    <p className='text-sm font-medium tracking-[0.06em] text-white/72'>{loadingLabel}</p>
+                  </motion.div>
+                ) : null}
+              </AnimatePresence>
+
               <Image
                 src={work.images[imageIndex]}
                 alt={`${work.title} ${imageIndex + 1}`}
                 fill
                 className='object-contain'
+                quality={76}
                 sizes='100vw'
                 priority
+                onLoad={() => setIsImageLoading(false)}
+                onError={() => setIsImageLoading(false)}
               />
             </motion.div>
           </AnimatePresence>
@@ -448,6 +474,7 @@ function WorkLightbox({
                   alt={`${work.title} thumbnail ${index + 1}`}
                   fill
                   className='object-cover'
+                  quality={40}
                   sizes='96px'
                 />
               </button>
@@ -549,7 +576,7 @@ export default function BusinessHome() {
   const backendStack = ['Java', 'PHP', 'Python', 'Node.js']
 
   const projectImages = (folder: string, count: number) =>
-    Array.from({ length: count }, (_, index) => `/projects/${folder}/${index + 1}.png`)
+    Array.from({ length: count }, (_, index) => `/projects/${folder}/${index + 1}.jpg`)
 
   const workAssets: Record<WorkKey, { images: string[]; stack: string[]; link?: string }> = {
     asset: {
@@ -966,6 +993,7 @@ export default function BusinessHome() {
             imageIndex={lightbox.imageIndex}
             hintLabel={t('projects.lightboxHint')}
             stackLabel={t('projects.stackLabel')}
+            loadingLabel={t('projects.loadingImage')}
             openLinkLabel={t('projects.openLink')}
             onClose={closeLightbox}
             onPrev={goPrevImage}
