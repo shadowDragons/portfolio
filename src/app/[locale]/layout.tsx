@@ -1,5 +1,4 @@
 import type { Metadata } from 'next'
-import { Poppins, Rubik } from 'next/font/google'
 import './globals.css'
 import { cn } from '@/lib/utils'
 import Navbar from '@/components/Navbar'
@@ -9,41 +8,29 @@ import { getMessages } from 'next-intl/server'
 import { notFound } from 'next/navigation'
 import { routing } from '@/i18n/routing'
 
-const poppins = Poppins({
-  subsets: ['latin'],
-  weight: '400',
-  variable: '--font-poppins',
-})
-const rubik = Rubik({
-  subsets: ['latin'],
-  weight: '600',
-  variable: '--font-rubik',
-})
-
 const siteConfig = {
-  name: 'Junexus',
-  description: 'I am a Full Stack Developer',
+  name: '致诚工作室',
+  description: '专注高端网站与小程序定制开发的远程研发工作室。提供企业官网、Web 应用及 AI 工具等数字产品的高标准交付服务。',
   ogImage: 'https://sphrag.com/og-image.png',
   url: 'https://sphrag.com',
 }
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://www.sphrag.com'),
+  metadataBase: new URL(siteConfig.url),
   title: {
     default: siteConfig.name,
-    template: `%s - Software Engineer`,
+    template: `%s - 远程研发工作室`,
   },
   description: siteConfig.description,
 
-  // added new keywords for seo
-  keywords: ['Junexus', 'portfolio', 'web developer', 'web', 'web dev', 'developer', 'PROGRAMMER ', 'programmer ', 'website'],
+  keywords: ['致诚工作室', 'Zhicheng Studio', '远程工作室', '网站开发', '小程序开发', '定制开发', 'Web应用', 'AI工具'],
   authors: [
     {
-      name: 'Junexus',
+      name: '致诚工作室',
       url: 'https://github.com/shadowDragons',
     },
   ],
-  creator: 'Junexus',
+  creator: '致诚工作室',
 
   openGraph: {
     type: 'website',
@@ -78,15 +65,13 @@ export default async function RootLayout({ children, params: { locale } }: { chi
 
   return (
     <html lang={locale}>
-      <body className={`${poppins.variable} ${rubik.variable}`}>
+      <body className='font-poppins'>
         <NextIntlClientProvider messages={messages}>
           <Navbar />
           <main
             className={cn(
-              'flex flex-col relative break-words min-h-screen',
-              'pt-20 pb-4 px-4 sm:px-8 md:px-12 lg:px-40',
-              'bg-[linear-gradient(to_right,#e5e7eb_1px,transparent_1px),linear-gradient(to_bottom,#e5e7eb_1px,transparent_1px)]',
-              'bg-[size:24px_24px]'
+              'relative flex min-h-screen flex-col break-words overflow-hidden',
+              'px-4 pb-16 pt-20 sm:px-6 md:px-8 lg:px-20 xl:px-24'
             )}
           >
             {children}

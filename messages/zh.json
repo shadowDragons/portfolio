@@ -1,65 +1,257 @@
 {
   "HomePage": {
-    "title": "你好世界!",
-    "about": "Go to the about page"
-  },
-  "Hero": {
-    "greeting": "你好👋 我是",
-    "name": "Junexus ."
+    "title": "致诚工作室",
+    "about": "远程研发工作室"
   },
   "Navbar": {
-    "logo": "Junexus",
-    "home": "首页",
-    "about": "关于",
-    "projects": "项目",
-    "contact": "联系",
-    "greeting": "你好👋",
+    "logo": "致诚工作室",
+    "services": "业务能力",
+    "process": "合作流程",
+    "projects": "作品方向",
+    "notice": "合作边界",
+    "contact": "联系我",
     "language": {
       "en": "English",
       "zh": "中文 (Chinese)"
     }
   },
-  "TextRotator": {
-    "intro": "我是一个全栈开发者",
-    "rotatingTitles": [
-      "独立开发者",
-      "社区贡献者",
-      "开源贡献者",
-      "效率达人",
-      "爱好分享",
-      "AI践行者"
-    ]
-  },
-  "Projects": {
-    "heading": "项目展示",
-    "visit": "访问项目",
-    "shipsaas": {
-      "title": "ShipSaas",
-      "description": "现代 SaaS 的 终极开发脚手架"
+  "Landing": {
+    "hero": {
+      "badge": "Direct Studio / 不分包",
+      "titlePrefix": "个人工作室，专做",
+      "titleHighlight": "企业系统 / 官网 / AI 应用",
+      "titleSuffix": "定制开发",
+      "description": "原 4399 技术部门技术主管，主导过多个企业级系统，带过 20 人技术团队。现在以个人工作室形式直接接单，不分包转包，更适合重视质量、效率和长期维护的客户。",
+      "primaryCta": "添加微信聊项目",
+      "secondaryCta": "查看作品方向",
+      "highlights": {
+        "background": {
+          "title": "技术背景",
+          "description": "原 4399 技术部门技术主管，主导多个企业级系统，也带过 20 人技术团队。"
+        },
+        "availability": {
+          "title": "开发时间",
+          "description": "开发时间为工作日 8:00 - 16:00、22:00 - 24:00；周末 22:00 - 24:00。"
+        },
+        "direct": {
+          "title": "协作方式",
+          "description": "本人直接沟通、直接开发，不分包不转包，响应和责任边界更清楚。"
+        },
+        "delivery": {
+          "title": "交付标准",
+          "description": "标准项目采用 4-4-2 付款方式，交付后提供 1 年免费维护。"
+        }
+      }
     },
-    "course": {
-      "title": "ShipSaas课程",
-      "description": "ShipSaas課程"
+    "services": {
+      "eyebrow": "Capabilities",
+      "title": "擅长的项目与技术栈",
+      "description": "从企业品牌展示到内部业务系统，再到小程序和 AI 应用，我更偏好那些真正重视交付质量、流程稳定性和后续维护的项目。",
+      "stackEyebrow": "Tech Stack",
+      "stackTitle": "前后端都能直接落地",
+      "stackDescription": "减少多人转述和跨团队协调的损耗，适合需要更高响应效率和更清晰责任边界的合作方式。",
+      "frontendLabel": "前端",
+      "backendLabel": "后端",
+      "items": {
+        "brandSites": {
+          "title": "企业官网与品牌站",
+          "description": "适合外贸公司、品牌公司、服务型企业和需要提升线上表达的业务。",
+          "bullet1": "企业官网、多语言网站、服务官网、营销落地页",
+          "bullet2": "兼顾 SEO、内容结构、表单转化和部署上线"
+        },
+        "webApps": {
+          "title": "企业业务系统",
+          "description": "适合流程重、权限多、数据复杂的企业内部系统和管理平台。",
+          "bullet1": "ERP、OA、CRM、财务、采购、库存、销售等系统",
+          "bullet2": "支持从 0 到 1 搭建，也适合旧系统升级与重构"
+        },
+        "aiAutomation": {
+          "title": "AI 智能应用",
+          "description": "不是只做演示级功能，而是把 AI 真正接到业务流程和产品场景里。",
+          "bullet1": "AI 工具、检索问答、自动化流程、数字人内容相关应用",
+          "bullet2": "能和企业现有系统、内容流和运营动作接起来"
+        },
+        "mvpDelivery": {
+          "title": "商城与小程序",
+          "description": "适合交易、预约、课程、招聘等需要业务闭环的小程序和平台项目。",
+          "bullet1": "电子商城、小程序、在线课程、招聘平台、订单体系",
+          "bullet2": "兼顾用户体验、后台管理和后续业务扩展"
+        }
+      }
     },
-    "oneshotai": {
-      "title": "AI一拍通",
-      "description": "拍照识别，AI智能分析，一拍即懂。"
+    "process": {
+      "eyebrow": "Process",
+      "title": "合作流程",
+      "description": "先把边界、付款节奏和工期说清楚，再推进开发，能避免中途反复拉扯。",
+      "items": {
+        "payment": {
+          "title": "4-4-2 付款方式",
+          "description": "先付 4 成订金开工，中期再付 4 成，项目上线再付 2 成尾款。"
+        },
+        "analysis": {
+          "title": "需求分析",
+          "description": "先把业务目标、范围和优先级聊清楚，避免后面边做边改。"
+        },
+        "timeline": {
+          "title": "确定工期",
+          "description": "结合需求复杂度和当前档期，给出更实际的开发排期。"
+        },
+        "sync": {
+          "title": "每周同步进度",
+          "description": "按阶段反馈当前完成度、风险点和下周计划，避免信息不透明。"
+        },
+        "delivery": {
+          "title": "系统部署 / 代码交付",
+          "description": "完成部署上线、账号配置、代码交接和必要说明。"
+        },
+        "maintenance": {
+          "title": "维护与支持",
+          "description": "标准交付包含 1 年免费维护，便于项目稳定运行和后续迭代。"
+        }
+      }
     },
-    "rapidle": {
-      "title": "Rapidle",
-      "description": "一个简约的桌面效率工具，支持记忆片段、快速访问链接、第三方 API 请求和快速启动系统应用"
+    "advantages": {
+      "eyebrow": "Positioning",
+      "title": "为什么不接低价单",
+      "description": "不是故意抬门槛，而是低价项目常常伴随范围不清、反复拉扯和维护压力。我也吃过这种亏，所以现在会把合作边界提前讲清楚。",
+      "items": {
+        "support": {
+          "title": "1 年免费维护本身就有成本",
+          "description": "交付后还要继续响应、修复和支持，低价单很难覆盖这部分真实成本。",
+          "bullet1": "不是上线就结束，而是还要对后续稳定性负责",
+          "bullet2": "价格太低时，这部分成本最终会压回交付质量"
+        },
+        "direct": {
+          "title": "亲自把控质量，不做分包转包",
+          "description": "分包转包后的质量和交付细节很难真正把控，也容易影响最终口碑，所以项目更倾向亲自推进和交付。",
+          "bullet1": "直接沟通、直接开发，减少信息损耗和责任模糊",
+          "bullet2": "宁可少接，也要把质量和口碑稳住"
+        },
+        "focus": {
+          "title": "优先把时间留给优质客户",
+          "description": "减少低质量项目对排期的挤压，保证响应速度、项目节奏和交付稳定性。",
+          "bullet1": "客户越重视合作质量，推进越顺",
+          "bullet2": "排期更干净，项目风险也更可控"
+        },
+        "standard": {
+          "title": "服务标准高于行业低价外包",
+          "description": "更看重需求理解、代码质量、可维护性和后续升级，而不是草草做完交差。",
+          "bullet1": "不是只把功能做出来，还要考虑后续维护和扩展",
+          "bullet2": "更适合重视结果而不是只看最低报价的客户"
+        }
+      }
     },
-    "nextIdea": {
-      "title": "NextIdea",
-      "description": "发现你的下一个独立开发项目想法，从灵感到实现的完整指南"
+    "projects": {
+      "eyebrow": "Projects",
+      "title": "做过的项目方向",
+      "description": "这里改成了作品展示区，支持自动横向滚动、查看多图和可选链接跳转，更接近真实案例页的浏览体验。",
+      "helper": "悬停可暂停滚动，点击图片可放大查看；支持上一张 / 下一张切换，有链接的作品可直接跳转。",
+      "stackLabel": "技术栈",
+      "viewImages": "查看图片",
+      "openLink": "打开链接",
+      "noLink": "暂无链接",
+      "imageCount": "{count} 张图",
+      "lightboxHint": "Esc 关闭，← / ↑ 上一张，→ / ↓ 下一张",
+      "items": {
+        "asset": {
+          "title": "企业管理系统（资产）",
+          "description": "围绕资产台账、领用归还、盘点和权限管理搭建的企业后台系统。"
+        },
+        "hr": {
+          "title": "企业管理系统（人事）",
+          "description": "覆盖组织架构、人事档案、流程审批和内部协同的人事管理系统。"
+        },
+        "finance": {
+          "title": "企业管理系统（财务）",
+          "description": "面向财务流程、报表、对账和业务数据流转的企业财务系统。"
+        },
+        "attendance": {
+          "title": "企业考勤系统",
+          "description": "支持排班、考勤规则、异常处理和统计分析的内部管理系统。"
+        },
+        "oa": {
+          "title": "OA 审批工作流",
+          "description": "可配置节点、审批流转、抄送通知和流程追踪的 OA 工作流系统。"
+        },
+        "orders": {
+          "title": "订单系统",
+          "description": "围绕订单流转、状态管理、售后处理和业务协同搭建的平台系统。"
+        },
+        "workstation": {
+          "title": "工位系统",
+          "description": "面向工位分配、资源占用和后台配置管理的业务支撑系统。"
+        },
+        "digitalHuman": {
+          "title": "数字人视频后期",
+          "description": "结合内容生产、后期处理和交付流程的数字人视频相关项目。"
+        },
+        "course": {
+          "title": "在线课程",
+          "description": "课程展示、内容管理、学习流程和后台运营一体化的在线课程项目。"
+        },
+        "recruiting": {
+          "title": "招聘",
+          "description": "覆盖职位展示、投递流程、后台管理和信息流转的招聘类项目。"
+        },
+        "idea": {
+          "title": "idea",
+          "description": "偏创意工具和产品化探索方向的项目，适合展示工具型产品能力。"
+        },
+        "danduoduo": {
+          "title": "外贸公司网站 单多多",
+          "description": "面向外贸业务展示、内容承载和品牌表达的企业官网项目。"
+        },
+        "formart": {
+          "title": "外贸公司网站 formart",
+          "description": "外贸官网方向项目，兼顾企业形象、信息表达和业务转化需求。"
+        }
+      }
     },
-    "promptpal": {
-      "title": "PromptPal",
-      "description": "随时随地保存、组织和访问您的AI提示词。AI生产力工作流程的完美伴侣。"
+    "notice": {
+      "eyebrow": "Boundary",
+      "title": "这些项目不做，也希望合作前把预算和需求说清楚",
+      "description": "边界提前讲清楚，反而更省时间，也能减少后面不必要的扯皮和误解。",
+      "reminderTitle": "合作方式",
+      "reminders": {
+        "direct": "只做远程直接合作，不支持驻场，也不接二手或 N 手外包。",
+        "quality": "不打价格战，也不做低劣廉价外包或众包项目。",
+        "timeline": "预算、目标、范围和期望工期越明确，评估和报价就越快。"
+      },
+      "noGoTitle": "明确不接",
+      "noGo": {
+        "thesis": "不接毕设。",
+        "illegal": "不承接任何涉及灰色或黑色产业的项目，比如 web3、博彩、黄色、暴力、VPN、诈骗、公网爬虫等。",
+        "onsite": "不支持驻场。",
+        "bidding": "不接一切竞标中的项目，以及二手或 N 手外包。",
+        "price": "不打价格战。",
+        "crowd": "不做低劣廉价外包以及众包。"
+      },
+      "expectationsTitle": "希望你先准备好",
+      "expectations": {
+        "budget": {
+          "title": "预算",
+          "description": "有明确预算会节省很多时间，避免需求聊了半天，最后才发现预算完全不匹配。"
+        },
+        "requirements": {
+          "title": "需求",
+          "description": "需求越明确，合作越顺，也更不容易出现反复拉扯和扯皮。"
+        },
+        "communication": {
+          "title": "沟通",
+          "description": "真诚、爽快、有话直说。不合适就直接说，比拖着不回更高效。"
+        }
+      }
     },
-    "githubseek": {
-      "title": "Github Seek",
-      "description": "几秒钟内智能定位您已收藏的GitHub项目，AI驱动让个人Star管理如此简单。"
+    "contact": {
+      "eyebrow": "Contact",
+      "title": "预算、需求和方向合适的话，可以直接来聊",
+      "description": "优先发我项目背景、核心功能、预算范围和期望工期。我会结合当前档期尽快判断是否适合合作。",
+      "wechatLabel": "微信",
+      "phoneLabel": "电话",
+      "availabilityTitle": "开发时间",
+      "availabilityDescription": "常规开发时间为工作日 8:00 - 16:00、22:00 - 24:00；周末 22:00 - 24:00，不等于全时在线即时回复。",
+      "briefTitle": "首次沟通建议",
+      "briefDescription": "带上预算、目标和关键需求，会比只问“多少钱能做”高效很多。"
     }
   },
   "Sponsor": {

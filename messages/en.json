@@ -1,65 +1,257 @@
 {
   "HomePage": {
-    "title": "Hello world!",
-    "about": "Go to the about page"
-  },
-  "Hero": {
-    "greeting": "Hi👋 I am",
-    "name": "Junexus ."
+    "title": "Zhicheng Studio",
+    "about": "Remote product studio"
   },
   "Navbar": {
-    "logo": "Junexus",
-    "home": "Home",
-    "about": "About",
-    "projects": "Projects",
+    "logo": "Zhicheng Studio",
+    "services": "Capabilities",
+    "process": "Process",
+    "projects": "Work",
+    "notice": "Boundaries",
     "contact": "Contact",
-    "greeting": "Hi👋",
     "language": {
       "en": "English",
       "zh": "中文 (Chinese)"
     }
   },
-  "TextRotator": {
-    "intro": "I am a full-stack",
-    "rotatingTitles": [
-      "Creator",
-      "Developer",
-      "Contributor",
-      "Engineer",
-      "Builder",
-      "Innovator"
-    ]
-  },
-  "Projects": {
-    "heading": "Projects",
-    "visit": "Visit Project",
-    "shipsaas": {
-      "title": "ShipSaas",
-      "description": "The Ultimate Boilerplate for Modern SaaS"
+  "Landing": {
+    "hero": {
+      "badge": "Direct Studio / No Subcontracting",
+      "titlePrefix": "Direct custom development for",
+      "titleHighlight": "business systems, websites, and AI apps",
+      "titleSuffix": "with owner-level accountability",
+      "description": "Former technical lead in the 4399 technology department. I led multiple enterprise systems and managed a 20-person engineering team. Now I take projects directly as a solo studio without subcontracting, which fits clients who care about quality, speed, and long-term support.",
+      "primaryCta": "Add WeChat to Discuss",
+      "secondaryCta": "View Work",
+      "highlights": {
+        "background": {
+          "title": "Background",
+          "description": "Former technical lead at 4399, with multiple enterprise systems delivered and a 20-person engineering team led."
+        },
+        "availability": {
+          "title": "Development Hours",
+          "description": "Development hours are 8:00 - 16:00 and 22:00 - 24:00 on weekdays, and 22:00 - 24:00 on weekends."
+        },
+        "direct": {
+          "title": "Working Style",
+          "description": "Direct communication and direct development by me, with no subcontracting or outsourcing layers."
+        },
+        "delivery": {
+          "title": "Delivery Standard",
+          "description": "Projects follow a 4-4-2 payment rhythm and include one year of free maintenance after launch."
+        }
+      }
     },
-    "course": {
-      "title": "ShipSaas Course",
-      "description": "ShipSaas Course"
+    "services": {
+      "eyebrow": "Capabilities",
+      "title": "What I build and the stack I use",
+      "description": "From public-facing sites to internal business systems, I prefer projects where product thinking, clean delivery, and long-term maintainability all matter.",
+      "stackEyebrow": "Tech Stack",
+      "stackTitle": "Frontend and backend can both be handled directly",
+      "stackDescription": "That means less coordination overhead, less information loss, and clearer accountability throughout the project.",
+      "frontendLabel": "Frontend",
+      "backendLabel": "Backend",
+      "items": {
+        "brandSites": {
+          "title": "Corporate websites & brand sites",
+          "description": "For foreign-trade companies, service businesses, brands, and teams that need a stronger online presence.",
+          "bullet1": "Corporate sites, multilingual websites, service pages, and landing pages",
+          "bullet2": "Handled with SEO, content structure, conversion forms, and deployment in mind"
+        },
+        "webApps": {
+          "title": "Business systems",
+          "description": "For internal systems where workflows, permissions, data, and operational logic are the core of the product.",
+          "bullet1": "ERP, OA, CRM, finance, procurement, inventory, and sales systems",
+          "bullet2": "Suitable for greenfield builds, upgrades, and legacy-system refactors"
+        },
+        "aiAutomation": {
+          "title": "AI applications",
+          "description": "Not just demo features, but AI connected to real workflows and actual business scenarios.",
+          "bullet1": "AI tools, retrieval Q&A, automation, and digital-human content workflows",
+          "bullet2": "Built to connect with existing systems, content pipelines, and operations"
+        },
+        "mvpDelivery": {
+          "title": "Commerce platforms & mini-programs",
+          "description": "For transaction, booking, course, and recruiting products that need a full business loop.",
+          "bullet1": "E-commerce sites, mini-programs, online courses, recruiting, and order systems",
+          "bullet2": "Balanced across user experience, admin workflows, and later business expansion"
+        }
+      }
     },
-    "oneshotai": {
-      "title": "OneShotAI",
-      "description": "Take a Photo, Smart Analysis, Instant Understanding."
+    "process": {
+      "eyebrow": "Process",
+      "title": "Process",
+      "description": "I prefer to lock boundaries, payment rhythm, and delivery timing early so the collaboration stays clean.",
+      "items": {
+        "payment": {
+          "title": "4-4-2 payment model",
+          "description": "40% deposit to start, 40% in the middle, and the last 20% after launch."
+        },
+        "analysis": {
+          "title": "Requirement analysis",
+          "description": "Business goals, scope, and priorities are clarified first so the project does not drift during delivery."
+        },
+        "timeline": {
+          "title": "Timeline confirmation",
+          "description": "A more realistic schedule is set based on complexity and my current project slots."
+        },
+        "sync": {
+          "title": "Weekly progress sync",
+          "description": "Progress, risks, and next steps are updated every week so nothing goes dark."
+        },
+        "delivery": {
+          "title": "Deployment / code handoff",
+          "description": "Launch, configuration, code delivery, and the practical handoff details are completed here."
+        },
+        "maintenance": {
+          "title": "Maintenance & support",
+          "description": "Standard delivery includes one year of free maintenance for stability and later iteration."
+        }
+      }
     },
-    "rapidle": {
-      "title": "Rapidle",
-      "description": "A fast and efficient AI image editing tool, built with Next.js 14 and TypeScript."
+    "advantages": {
+      "eyebrow": "Positioning",
+      "title": "Why I do not take low-price projects",
+      "description": "This is not about acting expensive. Low-price work usually comes with unclear scope, heavy back-and-forth, and support pressure later, and I have already paid for those lessons.",
+      "items": {
+        "support": {
+          "title": "One year of free maintenance is real work",
+          "description": "Support after launch is part of the commitment, so very low pricing rarely covers the real lifecycle cost.",
+          "bullet1": "Delivery does not stop the moment the site or system goes live",
+          "bullet2": "If the price is pushed too low, quality usually pays for it later"
+        },
+        "direct": {
+          "title": "Quality is controlled personally, not through subcontracting",
+          "description": "Once work is subcontracted or passed around, quality and delivery details become much harder to control, and that can damage reputation as well.",
+          "bullet1": "Direct communication and direct implementation reduce information loss and blurred ownership",
+          "bullet2": "It is better to take fewer projects than compromise quality or reputation"
+        },
+        "focus": {
+          "title": "Time is reserved for good clients",
+          "description": "I would rather take fewer projects than let poor-fit work squeeze the schedule and damage delivery quality.",
+          "bullet1": "Keeps response time and delivery rhythm more stable",
+          "bullet2": "Makes room for long-term, higher-match cooperation"
+        },
+        "standard": {
+          "title": "The service bar is above typical low-price outsourcing",
+          "description": "The goal is maintainable delivery with better requirement thinking, code quality, and post-launch stability.",
+          "bullet1": "Not just getting features done, but making them usable long term",
+          "bullet2": "A better fit if you care about results more than the lowest quote"
+        }
+      }
     },
-    "nextIdea": {
-      "title": "NextIdea",
-      "description": "Discover your next independent development project idea."
+    "projects": {
+      "eyebrow": "Projects",
+      "title": "Kinds of work I have delivered",
+      "description": "This section is now a real showcase strip with automatic horizontal scrolling, multi-image preview, and optional link jump for each case.",
+      "helper": "Hover to pause the marquee. Click any preview to enlarge it. Arrow keys support previous and next images. Works with links can open directly.",
+      "stackLabel": "Tech Stack",
+      "viewImages": "View Images",
+      "openLink": "Open Link",
+      "noLink": "No Link Yet",
+      "imageCount": "{count} images",
+      "lightboxHint": "Esc closes. Left / Up goes previous. Right / Down goes next.",
+      "items": {
+        "asset": {
+          "title": "Enterprise Management System (Assets)",
+          "description": "A business backend focused on asset records, allocation, inventory checks, and permission control."
+        },
+        "hr": {
+          "title": "Enterprise Management System (HR)",
+          "description": "An HR management system covering org structure, personnel files, approval flows, and internal collaboration."
+        },
+        "finance": {
+          "title": "Enterprise Management System (Finance)",
+          "description": "A finance-oriented enterprise system handling reports, reconciliation, and operational data flow."
+        },
+        "attendance": {
+          "title": "Attendance System",
+          "description": "An internal system for scheduling, attendance rules, exception handling, and reporting."
+        },
+        "oa": {
+          "title": "OA Approval Workflow",
+          "description": "An OA workflow system with configurable nodes, approval routing, notifications, and traceability."
+        },
+        "orders": {
+          "title": "Order System",
+          "description": "A platform built around order flow, status management, after-sales handling, and business coordination."
+        },
+        "workstation": {
+          "title": "Workstation System",
+          "description": "A supporting system for workstation allocation, resource occupancy, and backend configuration."
+        },
+        "digitalHuman": {
+          "title": "Digital Human Video Post-production",
+          "description": "A content-production project around digital human video editing, delivery, and workflow support."
+        },
+        "course": {
+          "title": "Online Courses",
+          "description": "An online course project combining course presentation, content management, learning flow, and operations."
+        },
+        "recruiting": {
+          "title": "Recruiting",
+          "description": "A recruiting product covering job presentation, submission flow, admin management, and information routing."
+        },
+        "idea": {
+          "title": "idea",
+          "description": "A project in the direction of idea tooling and productized utility work, useful for showing product capability."
+        },
+        "danduoduo": {
+          "title": "Foreign Trade Website Danduoduo",
+          "description": "A corporate website for foreign-trade business presentation, content structure, and brand communication."
+        },
+        "formart": {
+          "title": "Foreign Trade Website formart",
+          "description": "A foreign-trade website project balancing company image, information delivery, and business conversion."
+        }
+      }
     },
-    "promptpal": {
-      "title": "PromptPal",
-      "description": "Save, organize, and access your AI prompts anywhere. The perfect companion for your AI productivity workflow."
+    "notice": {
+      "eyebrow": "Boundaries",
+      "title": "These projects are not a fit, and I also need budget and scope to be clear early",
+      "description": "Clear boundaries save both sides time and reduce unnecessary back-and-forth later.",
+      "reminderTitle": "How I work",
+      "reminders": {
+        "direct": "Remote and direct collaboration only. No on-site work and no second-hand or multi-layer subcontracting.",
+        "quality": "I do not compete on price and I do not take low-quality crowd-sourced outsourcing work.",
+        "timeline": "The clearer your budget, goal, scope, and timeline, the faster I can evaluate and price the work."
+      },
+      "noGoTitle": "Definitely not taking",
+      "noGo": {
+        "thesis": "No graduation-project outsourcing.",
+        "illegal": "No gray or black-industry work such as web3, gambling, adult, violence, VPN, fraud, or public-web scraping.",
+        "onsite": "No on-site placement.",
+        "bidding": "No bidding projects, and no second-hand or multi-layer outsourcing.",
+        "price": "No price war.",
+        "crowd": "No low-quality cheap outsourcing or crowd-work."
+      },
+      "expectationsTitle": "What I hope you bring",
+      "expectations": {
+        "budget": {
+          "title": "Budget",
+          "description": "A clear budget saves a lot of time. I have had too many cases where scope was discussed for a long time and the budget turned out to be nowhere close."
+        },
+        "requirements": {
+          "title": "Requirements",
+          "description": "The clearer the requirements are, the smoother the cooperation is, and the less room there is for unnecessary friction."
+        },
+        "communication": {
+          "title": "Communication",
+          "description": "Be direct and sincere. If it is not a fit, saying so clearly is much better than disappearing."
+        }
+      }
     },
-    "githubseek": {
-      "title": "Github Seek",
-      "description": "Locate massive GitHub collections in seconds, AI-powered search made effortlessly simple."
+    "contact": {
+      "eyebrow": "Contact",
+      "title": "If the budget, scope, and direction fit, we can talk directly",
+      "description": "Send the project background, core functions, budget range, and expected timeline first. I will assess fit quickly based on the current schedule.",
+      "wechatLabel": "WeChat",
+      "phoneLabel": "Phone",
+      "availabilityTitle": "Development Hours",
+      "availabilityDescription": "Regular development hours are 8:00 - 16:00 and 22:00 - 24:00 on weekdays, and 22:00 - 24:00 on weekends. This does not mean instant online replies at all times.",
+      "briefTitle": "Best first message",
+      "briefDescription": "Including budget, goals, and key requirements is much more effective than only asking “how much would it cost?”."
     }
   },
   "Sponsor": {

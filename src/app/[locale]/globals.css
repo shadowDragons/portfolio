@@ -8,35 +8,38 @@ html {
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    --font-poppins: 'Avenir Next', 'PingFang SC', 'Hiragino Sans GB', 'Noto Sans SC', 'Microsoft YaHei', sans-serif;
+    --font-rubik: 'Avenir Next Demi Bold', 'Avenir Next', 'Segoe UI', 'PingFang SC', 'Noto Sans SC', sans-serif;
+
+    --background: 40 20% 97%;
+    --foreground: 220 20% 10%;
 
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card-foreground: 220 20% 10%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover-foreground: 220 20% 10%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    --primary: 24 68% 46%;
+    --primary-foreground: 40 33% 98%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 38 18% 93%;
+    --secondary-foreground: 220 20% 10%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --muted: 38 14% 94%;
+    --muted-foreground: 215 16% 42%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --accent: 34 30% 90%;
+    --accent-foreground: 220 20% 10%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --border: 36 16% 88%;
+    --input: 36 16% 88%;
+    --ring: 24 68% 46%;
 
-    --radius: 0.5rem;
+    --radius: 0.75rem;
   }
 
   .dark {
@@ -75,7 +78,12 @@ html {
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground antialiased;
+    background-image:
+      radial-gradient(circle at 15% 0%, rgba(196, 107, 44, 0.06), transparent 40%),
+      radial-gradient(circle at 85% 0%, rgba(15, 23, 42, 0.04), transparent 30%),
+      radial-gradient(circle, rgba(0, 0, 0, 0.018) 1px, transparent 1px);
+    background-size: auto, auto, 24px 24px;
   }
 }
 
@@ -85,7 +93,7 @@ html {
   display: block;
   width: 6rem;
   height: 0.6rem;
-  background-color: #2f7df4;
+  background-color: #c46b2c;
 }
 .icon_underline::after {
   content: '';
@@ -94,7 +102,7 @@ html {
   display: block;
   width: 2rem;
   height: 0.3rem;
-  background-color: #2f7df4;
+  background-color: #c46b2c;
   margin-bottom: 2rem;
 }
 .education_point::before {
@@ -106,9 +114,9 @@ html {
   width: 10px;
   height: 10px;
   border-radius: 50%;
-  background-color: #2f7df4;
+  background-color: #c46b2c;
   outline: 3px solid var(--primary);
-  box-shadow: 0 2px 5px 2px #2f7df4;
+  box-shadow: 0 2px 5px 2px #c46b2c;
 }
 /* TEXT ROTATOR STYLES  */
 .animate-text-slide {
@@ -134,5 +142,33 @@ html {
   }
   100% {
     transform: translateY(-400%);
+  }
+}
+
+.showcase-marquee-track {
+  animation-name: showcase-marquee;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  will-change: transform;
+}
+
+.marquee-group:hover .showcase-marquee-track {
+  animation-play-state: paused;
+}
+
+@keyframes showcase-marquee {
+  from {
+    transform: translateX(-50%);
+  }
+
+  to {
+    transform: translateX(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .showcase-marquee-track {
+    animation: none;
+    transform: translateX(0);
   }
 }
