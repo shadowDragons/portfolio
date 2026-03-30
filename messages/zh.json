@@ -17,9 +17,8 @@
   },
   "Landing": {
     "hero": {
-      "badge": "Direct Studio / 不分包",
       "titlePrefix": "个人工作室，专做",
-      "titleHighlight": "企业系统 / 官网 / AI 应用",
+      "titleHighlight": "网站开发 / 企业系统 / AI 应用",
       "titleSuffix": "定制开发",
       "description": "原大型互联网公司技术部门技术主管，主导过多个企业级系统，带过 20 人技术团队。现在以个人工作室形式直接接单，不分包转包，更适合重视质量、效率和长期维护的客户。",
       "primaryCta": "添加微信聊项目",
@@ -45,7 +44,7 @@
     },
     "services": {
       "eyebrow": "Capabilities",
-      "title": "擅长的项目与技术栈",
+      "title": "擅长的网站开发项目与技术栈",
       "description": "从企业品牌展示到内部业务系统，再到小程序和 AI 应用，我更偏好那些真正重视交付质量、流程稳定性和后续维护的项目。",
       "stackEyebrow": "Tech Stack",
       "stackTitle": "前后端都能直接落地",

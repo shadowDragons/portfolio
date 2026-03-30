@@ -68,6 +68,7 @@ function SectionHeader({ eyebrow, title, description, center = false }: { eyebro
       <div className='space-y-4'>
         <p className='text-xs font-semibold uppercase tracking-[0.22em] text-[#b86128]'>{eyebrow}</p>
         <h2 className='font-rubik text-[28px] leading-snug text-[#111] sm:text-4xl'>{title}</h2>
+        {description ? <p className='max-w-3xl text-[15px] leading-8 text-[#666]'>{description}</p> : null}
       </div>
     </FramerWrapper>
   )
@@ -686,14 +687,8 @@ export default function BusinessHome() {
         <div className='pointer-events-none absolute inset-x-0 top-[-8rem] -z-10 h-[40rem] bg-[radial-gradient(ellipse_60%_50%_at_50%_0%,rgba(196,107,44,0.10),transparent_60%)]' />
 
         <section className='flex flex-col items-center pt-8 text-center lg:pt-16'>
-          <FramerWrapper y={-20}>
-            <span className='inline-flex rounded-full border border-[#e4d6c5] bg-[#faf5ee] px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.18em] text-[#a0652a]'>
-              {t('hero.badge')}
-            </span>
-          </FramerWrapper>
-
           <FramerWrapper y={24} delay={0.08}>
-            <h1 className='mx-auto mt-8 max-w-5xl break-keep font-rubik text-[42px] leading-[1.15] text-[#111] sm:text-6xl lg:text-7xl'>
+            <h1 className='mx-auto max-w-5xl break-keep font-rubik text-[42px] leading-[1.15] text-[#111] sm:text-6xl lg:text-7xl'>
               {t('hero.titlePrefix')}{' '}
               <span className='bg-gradient-to-r from-[#c46b2c] to-[#d4944e] bg-clip-text text-transparent'>{t('hero.titleHighlight')}</span>
               {heroTitleSuffix ? ` ${heroTitleSuffix}` : null}
@@ -904,9 +899,7 @@ export default function BusinessHome() {
               <div>
                 <p className='text-xs font-semibold uppercase tracking-[0.22em] text-[#b86128]'>{t('contact.eyebrow')}</p>
                 <h2 className='mx-auto mt-4 max-w-2xl font-rubik text-[28px] leading-snug text-[#111] sm:text-4xl'>{t('contact.title')}</h2>
-                {t('contact.description') ? (
-                  <p className='mx-auto mt-4 max-w-2xl text-[15px] leading-8 text-[#666]'>{t('contact.description')}</p>
-                ) : null}
+                {t('contact.description') ? <p className='mx-auto mt-4 max-w-2xl text-[15px] leading-8 text-[#666]'>{t('contact.description')}</p> : null}
               </div>
 
               <div className='mx-auto mt-10 grid w-full max-w-xl gap-4 sm:grid-cols-2'>

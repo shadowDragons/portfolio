@@ -17,9 +17,8 @@
   },
   "Landing": {
     "hero": {
-      "badge": "Direct Studio / No Subcontracting",
       "titlePrefix": "Direct custom development for",
-      "titleHighlight": "business systems, websites, and AI apps",
+      "titleHighlight": "website development, business systems, and AI apps",
       "titleSuffix": "with owner-level accountability",
       "description": "Former technical lead in the technology department of a large internet company. I led multiple enterprise systems and managed a 20-person engineering team. Now I take projects directly as a solo studio without subcontracting, which fits clients who care about quality, speed, and long-term support.",
       "primaryCta": "Add WeChat to Discuss",
@@ -45,7 +44,7 @@
     },
     "services": {
       "eyebrow": "Capabilities",
-      "title": "What I build and the stack I use",
+      "title": "Website development work I build and the stack I use",
       "description": "From public-facing sites to internal business systems, I prefer projects where product thinking, clean delivery, and long-term maintainability all matter.",
       "stackEyebrow": "Tech Stack",
       "stackTitle": "Frontend and backend can both be handled directly",
