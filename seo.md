@@ -26,7 +26,7 @@ SEO 还没有“弄完”。
   - 5 个服务详情页
 - 文章内容体系已经搭好：
   - `/zh/blog`
-  - 15 篇文章详情页
+  - 24 篇文章详情页
 - 首页已经有指向服务页和文章页的入口
 
 当前暂缓的部分：
@@ -681,7 +681,7 @@ SEO 还没有“弄完”。
 - 技术 SEO 基础
 - 5 个核心服务页
 - 服务总览页
-- 15 篇文章
+- 24 篇文章
 - 首页到服务页 / 文章页的入口
 
 ### 暂缓
@@ -708,6 +708,46 @@ SEO 还没有“弄完”。
 - 检查 `/zh`、`/en`、`/services`、`/blog` 是否都能正常访问
 - 在 Google Search Console 提交 `sitemap.xml`
 - 记录当前核心页面是否已收录
+
+### 第 1 周执行清单
+
+这是现在就可以直接拿来用的一版周执行清单：
+
+#### A. 已在代码内完成
+
+这一栏不是待办，而是已经做完的代码项：
+
+- [x] 首页 SEO 基础
+- [x] 服务总览页
+- [x] 5 个服务详情页
+- [x] 博客总览页
+- [x] 24 篇文章
+- [x] 动态 `robots.txt`
+- [x] 动态 `sitemap.xml`
+- [x] canonical / `hreflang`
+- [x] 基础结构化数据
+
+#### B. 需要上线后执行
+
+这一栏才是当前真正还没完成的部分，主要是上线验证和 Google Search Console：
+
+- [ ] 确认 `https://sphrag.com/zh` 已上线为当前业务站
+- [ ] 确认 `https://sphrag.com/en` 能正常访问
+- [ ] 确认 `https://sphrag.com/zh/services` 能正常访问
+- [ ] 确认 `https://sphrag.com/zh/blog` 能正常访问
+- [ ] 在 Google Search Console 提交 `https://sphrag.com/sitemap.xml`
+- [ ] 用 URL Inspection 检查以下页面
+- [ ] `/zh`
+- [ ] `/zh/services/website-development`
+- [ ] `/zh/services/company-website-development`
+- [ ] `/zh/services/foreign-trade-website-development`
+- [ ] `/zh/blog/website-development-cost`
+
+#### C. 本周建议继续补的内容
+
+- [x] 再补 2 篇更贴近 `企业官网开发` 的文章
+- [x] 再补 2 篇更贴近 `外贸网站开发` 的文章
+- [ ] 把 Search Console 初始 impressions / coverage 记录进 `seo-log.md`
 
 ### 第 2 周
 

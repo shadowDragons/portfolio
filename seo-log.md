@@ -584,6 +584,44 @@
 - 补强 `网站改版 SEO 迁移`
 - 补强 `企业系统重构还是重做` 这类高价值决策型内容
 
+## 第四阶段第四批扩展记录
+
+### 2026-03-30 / 第四批文章补充
+
+本次新增的第四批文章更偏首页、FAQ、产品页和信任信息：
+
+1. `company-website-homepage-structure`
+2. `company-website-faq-planning`
+3. `foreign-trade-website-product-pages`
+4. `foreign-trade-website-trust-signals`
+
+这批内容的目的：
+
+- 补强 `企业官网首页怎么规划`
+- 补强 `企业官网 FAQ`
+- 补强 `外贸网站产品页怎么写`
+- 补强 `外贸网站信任信息` 和询盘前犹豫问题
+
+## 第四阶段第五批扩展记录
+
+### 2026-03-30 / 第五批文章补充
+
+本次新增的第五批文章更偏行业和客户类型：
+
+1. `manufacturing-company-website-planning`
+2. `service-business-website-lead-generation`
+3. `saas-website-page-structure`
+4. `foreign-trade-about-page-writing`
+5. `mini-program-and-website-relationship`
+
+这批内容的目的：
+
+- 补强制造业官网场景
+- 补强服务型公司官网获客场景
+- 补强 SaaS 官网结构问题
+- 补强外贸 About 页面写法
+- 补强官网和小程序如何协同这类组合型问题
+
 ## 下一步
 
 第四阶段完成后，建议继续做：

@@ -17,6 +17,15 @@ export const articleSlugs = [
   'foreign-trade-website-navigation-planning',
   'website-redesign-seo-migration',
   'internal-system-refactor-or-rebuild',
+  'company-website-homepage-structure',
+  'company-website-faq-planning',
+  'foreign-trade-website-product-pages',
+  'foreign-trade-website-trust-signals',
+  'manufacturing-company-website-planning',
+  'service-business-website-lead-generation',
+  'saas-website-page-structure',
+  'foreign-trade-about-page-writing',
+  'mini-program-and-website-relationship',
 ] as const
 
 export type ArticleSlug = (typeof articleSlugs)[number]
@@ -1836,6 +1845,998 @@ const articleDefinitions: Record<ArticleSlug, ArticleDefinition> = {
         ],
         ctaTitle: 'If you are evaluating a legacy system, clarify where the pain actually lives',
         ctaDescription: 'Separating local issues, structural issues, business timing, and iteration pressure usually makes the refactor-versus-rebuild choice much clearer.',
+      },
+    },
+  },
+  'company-website-homepage-structure': {
+    slug: 'company-website-homepage-structure',
+    priority: {
+      zh: 0.66,
+      en: 0.51,
+    },
+    publishedAt: '2026-03-30',
+    readingMinutes: 6,
+    relatedServices: ['company-website-development', 'website-development'],
+    content: {
+      zh: {
+        navLabel: '企业官网首页怎么规划，才不会只剩一张大海报',
+        categoryLabel: '企业官网',
+        metaTitle: '企业官网首页怎么规划？首页结构参考｜致诚工作室',
+        metaDescription:
+          '企业官网首页怎么规划，重点不只是视觉，而是品牌表达、服务说明、信任信息和联系路径的顺序。本文整理更稳的首页结构参考。',
+        keywords: ['企业官网首页怎么规划', '企业官网首页结构', '官网首页怎么做', '企业官网开发'],
+        eyebrow: 'Article',
+        heroTitle: '企业官网首页怎么规划，才不会最后只剩一张大海报',
+        heroDescription:
+          '很多企业官网首页的问题，不是设计不够漂亮，而是访客看完以后还是不知道你到底做什么、适合谁、为什么值得联系。首页最重要的任务，其实是把理解路径排顺，而不是只做一个好看的首屏。',
+        introTitle: '为什么首页最容易看起来高级、用起来却没什么用',
+        introParagraphs: [
+          '因为首页经常承担了太多“面子工作”，却没有把服务结构、差异化和联系入口真正说清楚。',
+          '结果就是页面视觉不错，但业务表达发散，访客要么继续找不到重点，要么直接离开。',
+        ],
+        sections: [
+          {
+            title: '首屏应该先回答三个问题',
+            paragraphs: [
+              '你是谁、你主要做什么、适合哪些客户，这三个问题如果首屏都没说清楚，后面的内容再多也很难救回来。',
+              '首页第一屏更像快速定调，而不是把全部内容都塞进去。',
+            ],
+          },
+          {
+            title: '服务和信任信息要尽早出现',
+            paragraphs: [
+              '服务范围、过往背景、合作方式、维护承诺这类信息，通常比“品牌故事”更先影响访客是否继续看下去。',
+              '首页如果能尽早给出这些答案，后面的服务页和联系页转化会顺很多。',
+            ],
+            bullets: [
+              '一句话讲清主要服务方向',
+              '尽早出现可信度信息和合作方式',
+              '在首页里提前埋服务页和联系页入口',
+            ],
+          },
+          {
+            title: '首页要像入口，不要像终点',
+            paragraphs: [
+              '首页最合适的角色是总入口，把访客导到更具体的服务页、文章页和联系动作。',
+              '如果首页试图把所有内容讲完，结构通常会越来越臃肿。',
+            ],
+          },
+        ],
+        takeawayTitle: '这篇文章的重点',
+        takeaways: [
+          '企业官网首页首先要解决理解问题，而不是只做视觉包装。',
+          '服务说明、信任信息和联系入口应该尽早出现。',
+          '首页更像总入口，细节应该分发到后续页面去承接。',
+        ],
+        ctaTitle: '如果你正在做企业官网首页，先把信息顺序排清楚',
+        ctaDescription: '只要首页先讲清楚是谁、做什么、适合谁，后面的服务页和联系路径就会顺很多。',
+      },
+      en: {
+        navLabel: 'How to Structure a Company Website Homepage',
+        categoryLabel: 'Company Website',
+        metaTitle: 'How to Structure a Company Website Homepage | Zhicheng Studio',
+        metaDescription:
+          'A strong company website homepage needs more than a polished hero. This article explains homepage structure around positioning, services, trust cues, and contact flow.',
+        keywords: ['company website homepage structure', 'corporate homepage planning', 'company website development'],
+        eyebrow: 'Article',
+        heroTitle: 'A company website homepage should do more than look polished',
+        heroDescription:
+          'Many company homepages look good but still leave visitors unsure about what the business actually does, who it is for, and why they should continue. The real job of a homepage is to organize understanding, not only appearance.',
+        introTitle: 'Why homepages often feel polished but weak',
+        introParagraphs: [
+          'A homepage often gets overloaded with visual ambition while staying vague on service direction, differentiation, and next-step clarity.',
+          'That is why a page can look impressive and still fail to move the conversation forward.',
+        ],
+        sections: [
+          {
+            title: 'The first screen should answer three questions',
+            paragraphs: [
+              'Who are you, what do you mainly do, and who is it for? If the first screen misses those, later sections struggle to recover clarity.',
+              'The hero should set direction fast instead of trying to contain every detail.',
+            ],
+          },
+          {
+            title: 'Service and trust cues should appear early',
+            paragraphs: [
+              'Core services, working style, credibility, and support promises often influence whether visitors keep reading more than a brand story alone.',
+              'When that information appears earlier, service pages and contact flow perform better later.',
+            ],
+            bullets: [
+              'Summarize the main service direction quickly',
+              'Show working style or credibility cues early',
+              'Guide visitors toward deeper service pages and contact actions',
+            ],
+          },
+          {
+            title: 'Treat the homepage as an entry point, not the whole destination',
+            paragraphs: [
+              'The homepage should distribute visitors into service pages, articles, and contact actions instead of trying to explain everything by itself.',
+              'When it tries to do too much alone, the page usually becomes bloated.',
+            ],
+          },
+        ],
+        takeawayTitle: 'Main takeaways',
+        takeaways: [
+          'The homepage should organize understanding before polish takes over.',
+          'Service scope, trust cues, and contact direction should appear early.',
+          'A homepage is strongest when it acts as a gateway into the rest of the site.',
+        ],
+        ctaTitle: 'If you are planning a company homepage, start with the information order',
+        ctaDescription: 'Once the page clearly answers who you are, what you do, and who it fits, the rest of the site usually becomes easier to structure.',
+      },
+    },
+  },
+  'company-website-faq-planning': {
+    slug: 'company-website-faq-planning',
+    priority: {
+      zh: 0.66,
+      en: 0.51,
+    },
+    publishedAt: '2026-03-30',
+    readingMinutes: 6,
+    relatedServices: ['company-website-development', 'website-development'],
+    content: {
+      zh: {
+        navLabel: '企业官网要不要单独做 FAQ 页面，什么时候值得做',
+        categoryLabel: '企业官网',
+        metaTitle: '企业官网要不要做 FAQ 页面？什么时候值得做｜致诚工作室',
+        metaDescription:
+          '企业官网要不要做 FAQ 页面，取决于业务复杂度、客户疑虑和后续 SEO 规划。本文拆解 FAQ 页面什么时候值得单独做。',
+        keywords: ['企业官网 FAQ', '官网 FAQ 页面', '企业官网开发', 'FAQ 页面有什么用'],
+        eyebrow: 'Article',
+        heroTitle: '企业官网要不要单独做 FAQ 页面，什么时候值得做',
+        heroDescription:
+          'FAQ 页面看起来像小补充，但它经常承担着两个重要角色：一是降低客户继续联系前的犹豫，二是帮网站承接一些更具体的搜索问题。所以值不值得做，不只是看页面数量，而是看业务复杂度和内容策略。',
+        introTitle: '为什么 FAQ 页面经常被低估',
+        introParagraphs: [
+          '很多企业官网会把常见问题随手塞到首页底部，但真正有价值的问题其实值得单独组织成一页。',
+          '特别是项目复杂、合作方式需要解释、客户疑虑多的业务，FAQ 页面会明显减轻前期沟通成本。',
+        ],
+        sections: [
+          {
+            title: 'FAQ 页面最适合回答什么问题',
+            paragraphs: [
+              '价格怎么评估、周期多久、流程怎么走、是否支持代码交付、上线后怎么维护，这些问题都很适合整理成 FAQ。',
+              '它解决的是访客“还没准备联系，但已经开始犹豫”的阶段。',
+            ],
+          },
+          {
+            title: '什么时候值得单独做一页',
+            paragraphs: [
+              '如果问题数量多、涉及多个服务方向，或者你本来就想持续补 SEO 内容，那 FAQ 单独成页通常更合适。',
+              '如果问题很少，也可以先放在服务页中，但后面一旦内容变多，最好尽快拆出来。',
+            ],
+            bullets: [
+              '业务复杂、疑虑多时更值得做',
+              '需要承接搜索问题时更值得做',
+              '多个服务方向共用问题时更值得做',
+            ],
+          },
+          {
+            title: 'FAQ 页面和服务页的关系',
+            paragraphs: [
+              'FAQ 不是替代服务页，而是补服务页里不适合展开太长的问题。',
+              '更好的结构通常是服务页讲主线，FAQ 讲疑虑点，两者互相回链。',
+            ],
+          },
+        ],
+        takeawayTitle: '这篇文章的重点',
+        takeaways: [
+          'FAQ 页面能同时降低犹豫和补充搜索问题。',
+          '业务复杂度越高，FAQ 单独成页的价值越大。',
+          'FAQ 更适合作为服务页的补充，而不是替代。',
+        ],
+        ctaTitle: '如果你的网站常被问到重复问题，可以考虑把 FAQ 单独整理出来',
+        ctaDescription: '把高频问题单独组织好，不仅能减少重复沟通，也更方便后续做内容沉淀。',
+      },
+      en: {
+        navLabel: 'Should a Company Website Have a Separate FAQ Page?',
+        categoryLabel: 'Company Website',
+        metaTitle: 'Should a Company Website Have a Separate FAQ Page? | Zhicheng Studio',
+        metaDescription:
+          'A separate FAQ page can reduce hesitation and support search intent when a company website deals with recurring client questions. This article explains when it is worth building.',
+        keywords: ['company website FAQ', 'FAQ page for website', 'corporate website FAQ'],
+        eyebrow: 'Article',
+        heroTitle: 'A separate FAQ page is often more useful than teams expect',
+        heroDescription:
+          'FAQ pages often look optional, but they can reduce hesitation before contact and help the site answer more specific search questions. The value depends on complexity, repeated objections, and content strategy.',
+        introTitle: 'Why FAQ pages are often underestimated',
+        introParagraphs: [
+          'Many company sites place a few questions at the bottom of the homepage and leave it there, even when the business has deeper recurring questions worth organizing clearly.',
+          'For more complex services, that FAQ layer can reduce friction before the first conversation even begins.',
+        ],
+        sections: [
+          {
+            title: 'What kinds of questions belong there',
+            paragraphs: [
+              'Pricing approach, timeline, workflow, code handoff, and post-launch support are all strong FAQ candidates.',
+              'These questions often appear in the stage where visitors are interested but not fully ready to contact yet.',
+            ],
+          },
+          {
+            title: 'When it is worth making FAQ a standalone page',
+            paragraphs: [
+              'If the question set is larger, shared across multiple service lines, or useful for SEO, a dedicated FAQ page often makes more sense.',
+              'If the list is still small, keeping it inside service pages can work temporarily, but it usually deserves its own space as the content grows.',
+            ],
+            bullets: [
+              'More valuable when services create repeated hesitation',
+              'More valuable when the site is trying to answer search intent',
+              'More valuable when multiple service lines share the same questions',
+            ],
+          },
+          {
+            title: 'How FAQ should work with service pages',
+            paragraphs: [
+              'A FAQ page should not replace service pages. It should support them by answering the doubts that do not fit neatly into the main narrative.',
+              'The stronger structure is usually service pages for the main story and FAQ for hesitation points, with links between them.',
+            ],
+          },
+        ],
+        takeawayTitle: 'Main takeaways',
+        takeaways: [
+          'FAQ pages reduce hesitation and answer more specific search questions.',
+          'They become more valuable as service complexity grows.',
+          'FAQ works best as a support layer to service pages rather than as a replacement.',
+        ],
+        ctaTitle: 'If your site keeps answering the same questions, a dedicated FAQ page may be worth it',
+        ctaDescription: 'Organizing repeated questions well can reduce pre-sale friction and strengthen long-term content structure.',
+      },
+    },
+  },
+  'foreign-trade-website-product-pages': {
+    slug: 'foreign-trade-website-product-pages',
+    priority: {
+      zh: 0.66,
+      en: 0.51,
+    },
+    publishedAt: '2026-03-30',
+    readingMinutes: 6,
+    relatedServices: ['foreign-trade-website-development', 'website-development'],
+    content: {
+      zh: {
+        navLabel: '外贸网站产品页怎么写，才更容易被看懂和继续询盘',
+        categoryLabel: '外贸网站',
+        metaTitle: '外贸网站产品页怎么写？更利于理解和询盘的写法｜致诚工作室',
+        metaDescription:
+          '外贸网站产品页怎么写，重点不只是把参数列全，而是让访客快速理解产品、场景、优势和下一步联系路径。本文拆解更有效的产品页结构。',
+        keywords: ['外贸网站产品页', '外贸网站怎么写产品页', '产品页询盘', '外贸网站开发'],
+        eyebrow: 'Article',
+        heroTitle: '外贸网站产品页怎么写，才更容易被看懂和继续询盘',
+        heroDescription:
+          '很多外贸网站产品页信息很多，但访客看完还是不确定这个产品适不适合自己。真正有用的产品页，不只是把参数放全，而是要让人更快理解用途、优势、适配场景和下一步怎么联系。',
+        introTitle: '为什么产品页经常写得很满，却还是不太好用',
+        introParagraphs: [
+          '因为很多产品页只站在“我要展示多少信息”的角度写，却没有站在“访客最先想知道什么”的角度组织内容。',
+          '一旦信息顺序不对，访客即使愿意看，也很难快速建立判断。',
+        ],
+        sections: [
+          {
+            title: '先讲产品是干什么的，再讲参数',
+            paragraphs: [
+              '访客最先要知道的是产品用途、适配场景和核心优势，而不是一上来就看一长串参数表。',
+              '参数当然重要，但通常更适合作为第二层信息，而不是第一屏重点。',
+            ],
+          },
+          {
+            title: '把场景和差异化讲得更具体',
+            paragraphs: [
+              '如果产品适合哪些行业、有什么常见应用方式、和替代方案相比差在哪，这些信息越具体，访客越容易形成判断。',
+              '尤其是 B2B 场景，抽象卖点通常不如具体应用场景更有说服力。',
+            ],
+          },
+          {
+            title: '产品页要有明确的下一步动作',
+            paragraphs: [
+              '如果访客已经看到了产品页，说明兴趣已经比首页更深，这时要给出更清楚的联系、询价或继续沟通入口。',
+              '产品页不是展示完就结束，而是要帮访客更顺地进入下一步。',
+            ],
+          },
+        ],
+        takeawayTitle: '这篇文章的重点',
+        takeaways: [
+          '产品页先解决理解问题，再补参数细节。',
+          '应用场景和差异化通常比抽象卖点更有说服力。',
+          '产品页应该明确给出下一步联系动作。',
+        ],
+        ctaTitle: '如果你正在做外贸网站产品页，先把信息顺序排清楚',
+        ctaDescription: '用途、场景、优势和联系入口一旦顺了，产品页的询盘效率通常会明显更高。',
+      },
+      en: {
+        navLabel: 'How to Write Foreign Trade Product Pages More Clearly',
+        categoryLabel: 'Foreign Trade Website',
+        metaTitle: 'How to Write Better Product Pages for a Foreign Trade Website | Zhicheng Studio',
+        metaDescription:
+          'Foreign trade product pages work better when they explain use, fit, advantage, and next-step action before overwhelming visitors with specs alone.',
+        keywords: ['foreign trade product pages', 'B2B product page writing', 'export website product page'],
+        eyebrow: 'Article',
+        heroTitle: 'A strong foreign trade product page should make the product easier to judge quickly',
+        heroDescription:
+          'Many product pages contain a lot of information and still leave visitors unsure whether the product fits them. A better product page explains use, fit, advantage, and next-step action before detail overwhelms the page.',
+        introTitle: 'Why product pages become dense but still weak',
+        introParagraphs: [
+          'They are often written from the perspective of “how much information should we display” instead of “what does the visitor need first to make a judgment.”',
+          'When the order is wrong, even useful information becomes harder to absorb.',
+        ],
+        sections: [
+          {
+            title: 'Explain what the product is for before listing specs',
+            paragraphs: [
+              'Visitors usually need to understand purpose, fit, and advantage before they are ready to care about detailed specification tables.',
+              'Specs are important, but they usually work better as second-layer information.',
+            ],
+          },
+          {
+            title: 'Make scenarios and differentiation concrete',
+            paragraphs: [
+              'If the page explains which industries or use cases the product fits, and what makes it different from alternatives, the visitor can judge much faster.',
+              'In B2B contexts, practical scenario clarity often persuades better than abstract claims.',
+            ],
+          },
+          {
+            title: 'Product pages should lead to a next step',
+            paragraphs: [
+              'Visitors on a product page are already deeper in intent than visitors on the homepage, so the path to inquiry or pricing should be easier from there.',
+              'A product page should not end at description. It should move the visitor toward the next business step.',
+            ],
+          },
+        ],
+        takeawayTitle: 'Main takeaways',
+        takeaways: [
+          'Product pages should solve understanding before detail overload.',
+          'Concrete use cases and differentiation are often stronger than abstract claims.',
+          'A product page should make the next inquiry step easy to find.',
+        ],
+        ctaTitle: 'If you are planning product pages, start with information order',
+        ctaDescription: 'Purpose, fit, advantages, and next-step action usually matter more early than a wall of specifications.',
+      },
+    },
+  },
+  'foreign-trade-website-trust-signals': {
+    slug: 'foreign-trade-website-trust-signals',
+    priority: {
+      zh: 0.66,
+      en: 0.51,
+    },
+    publishedAt: '2026-03-30',
+    readingMinutes: 6,
+    relatedServices: ['foreign-trade-website-development', 'company-website-development'],
+    content: {
+      zh: {
+        navLabel: '外贸网站该放哪些信任信息，才更容易让人继续联系',
+        categoryLabel: '外贸网站',
+        metaTitle: '外贸网站该放哪些信任信息？｜致诚工作室',
+        metaDescription:
+          '外贸网站该放哪些信任信息，取决于业务复杂度和询盘门槛。本文拆解公司信息、FAQ、合作流程、交付方式和联系方式的常见做法。',
+        keywords: ['外贸网站信任信息', '外贸网站FAQ', '外贸网站询盘', '外贸官网开发'],
+        eyebrow: 'Article',
+        heroTitle: '外贸网站该放哪些信任信息，才更容易让人继续联系',
+        heroDescription:
+          '很多外贸网站把重点全放在产品和首页视觉上，却忽略了访客真正担心的是“你靠不靠谱、合作顺不顺、后面怎么对接”。这些信任信息一旦缺位，询盘通常会卡在最后一步。',
+        introTitle: '为什么信任信息对外贸网站特别重要',
+        introParagraphs: [
+          '跨国沟通天然有信息差，访客无法像线下那样快速建立信任，所以网站上能不能把合作方式和基本判断信息讲清楚，会直接影响是否继续联系。',
+          '很多时候不是产品不够好，而是站点没有及时给出让人安心的答案。',
+        ],
+        sections: [
+          {
+            title: '最基本的公司与合作信息不能省',
+            paragraphs: [
+              '公司简介、服务范围、合作流程、联系方式、响应方式，这些看起来基础，但正是访客用来判断“是否值得继续沟通”的第一层信息。',
+              '如果这些都模糊，后面的产品信息再多也难补回信任。',
+            ],
+          },
+          {
+            title: 'FAQ 和交付说明能降低很多疑虑',
+            paragraphs: [
+              '是否支持定制、交期大概多久、怎么沟通、如何交付、后续维护怎么处理，这些问题如果提前回答，会让访客更容易往下走。',
+              'FAQ 并不是内容堆砌，它常常是降低疑虑成本最有效的一页。',
+            ],
+          },
+          {
+            title: '联系方式要明确，而且要低门槛',
+            paragraphs: [
+              '如果联系入口太少、太深或太复杂，访客即使有兴趣也可能先离开。',
+              '更好的做法通常是让联系动作足够清楚、低门槛，再在后续沟通中补更细信息。',
+            ],
+          },
+        ],
+        takeawayTitle: '这篇文章的重点',
+        takeaways: [
+          '信任信息不是陪衬，而是询盘路径的一部分。',
+          'FAQ 和合作方式说明通常能明显降低犹豫。',
+          '联系方式越清楚、门槛越低，继续联系的概率通常越高。',
+        ],
+        ctaTitle: '如果你的外贸网站询盘不顺，先看是不是信任信息没讲清楚',
+        ctaDescription: '公司信息、FAQ、合作流程和联系入口一旦补顺，很多转化问题都会更容易找到原因。',
+      },
+      en: {
+        navLabel: 'What Trust Signals Belong on a Foreign Trade Website?',
+        categoryLabel: 'Foreign Trade Website',
+        metaTitle: 'What Trust Signals Should a Foreign Trade Website Include? | Zhicheng Studio',
+        metaDescription:
+          'Trust signals on foreign trade websites often matter as much as product pages. This article explains what company, FAQ, process, and contact information helps visitors continue.',
+        keywords: ['foreign trade website trust signals', 'B2B website FAQ', 'export website inquiry trust'],
+        eyebrow: 'Article',
+        heroTitle: 'Trust signals often decide whether foreign trade visitors continue the conversation',
+        heroDescription:
+          'Foreign trade sites often focus heavily on products and visuals while under-explaining whether the business feels reliable, how cooperation works, and what happens after contact. That missing layer often hurts inquiry more than teams expect.',
+        introTitle: 'Why trust signals matter so much here',
+        introParagraphs: [
+          'International visitors usually have more information uncertainty, which makes trust-building through the site more important.',
+          'Sometimes the product is already strong enough, but the site never gives enough reassurance to move forward.',
+        ],
+        sections: [
+          {
+            title: 'Basic company and cooperation information should be clear',
+            paragraphs: [
+              'Company scope, service range, cooperation process, response style, and contact methods all help answer “is this business worth engaging with further?”',
+              'If those basics stay vague, deeper product information often cannot compensate for the trust gap.',
+            ],
+          },
+          {
+            title: 'FAQ and delivery explanation reduce hesitation',
+            paragraphs: [
+              'Customization, lead time, communication flow, delivery expectations, and maintenance are all strong FAQ topics.',
+              'They do not only add content. They lower uncertainty at exactly the stage where visitors hesitate most.',
+            ],
+          },
+          {
+            title: 'Contact options should stay clear and low-friction',
+            paragraphs: [
+              'If contact paths are too hidden or too demanding, interested visitors may still leave.',
+              'A clearer and lower-friction contact step usually works better than asking for too much too soon.',
+            ],
+          },
+        ],
+        takeawayTitle: 'Main takeaways',
+        takeaways: [
+          'Trust signals are part of the inquiry path, not decoration.',
+          'FAQ and process explanations often reduce hesitation significantly.',
+          'Clear, low-friction contact options usually improve continuation rate.',
+        ],
+        ctaTitle: 'If inquiry feels weak, check whether the trust layer is missing',
+        ctaDescription: 'Company clarity, FAQ, process explanation, and contact flow often explain more of the conversion problem than teams expect.',
+      },
+    },
+  },
+  'manufacturing-company-website-planning': {
+    slug: 'manufacturing-company-website-planning',
+    priority: {
+      zh: 0.64,
+      en: 0.5,
+    },
+    publishedAt: '2026-03-30',
+    readingMinutes: 6,
+    relatedServices: ['company-website-development', 'website-development'],
+    content: {
+      zh: {
+        navLabel: '制造业企业官网怎么规划，才不会只剩企业介绍和几张设备图',
+        categoryLabel: '行业场景',
+        metaTitle: '制造业企业官网怎么规划？结构与内容方向参考｜致诚工作室',
+        metaDescription:
+          '制造业企业官网怎么规划，重点在产品表达、产能能力、应用场景和询盘路径。本文拆解更适合制造业官网的结构思路。',
+        keywords: ['制造业企业官网', '制造业官网怎么做', '工厂官网规划', '企业官网开发'],
+        eyebrow: 'Article',
+        heroTitle: '制造业企业官网怎么规划，才不会最后只剩企业介绍和几张设备图',
+        heroDescription:
+          '制造业官网最常见的问题，不是页面少，而是信息全都停留在“我们是谁”。如果产品能力、应用场景、产线实力和合作方式都没有讲清楚，官网很难真正承担获客和对外表达的职责。',
+        introTitle: '为什么制造业官网常常看上去完整，实际上信息却不够用',
+        introParagraphs: [
+          '很多制造业官网会把重点放在公司简介、厂房图片和设备展示上，但客户真正关心的是你能做什么、适合什么场景、交付能力怎么样。',
+          '如果这些关键信息没有结构化承载，官网就很容易变成一份“企业介绍册”，而不是能支持询盘的业务入口。',
+        ],
+        sections: [
+          {
+            title: '产品能力和应用场景要优先于空泛介绍',
+            paragraphs: [
+              '客户更想快速知道你做哪些产品、能解决什么问题、适合哪些行业，而不是先看很长的企业背景。',
+              '所以产品页、行业页和应用场景说明，通常应该比长篇公司介绍更早进入页面结构。',
+            ],
+          },
+          {
+            title: '产能、交付和质量能力要讲清楚',
+            paragraphs: [
+              '制造业客户会天然关心产能、交期、质量控制、合作流程和定制能力，这些信息越清楚，越容易建立信任。',
+              '官网如果完全不讲这些，只展示图片和口号，询盘会明显受影响。',
+            ],
+          },
+          {
+            title: '联系路径不能只放在最底部',
+            paragraphs: [
+              '如果客户已经看到了产品和场景，就应该能更快进入询盘或继续沟通，而不是还要到很深的位置才能找到联系入口。',
+              '制造业官网更适合在产品页、场景页和首页中段都提前放好下一步动作。',
+            ],
+          },
+        ],
+        takeawayTitle: '这篇文章的重点',
+        takeaways: [
+          '制造业官网不能只讲企业介绍，还要讲产品、场景和交付能力。',
+          '产能、质量和合作方式是重要信任信息，不该被弱化。',
+          '联系入口应该跟着业务内容走，而不是只留在页面底部。',
+        ],
+        ctaTitle: '如果你在做制造业官网，先把产品、场景和交付能力排进结构里',
+        ctaDescription: '只要先把客户最关心的三层信息理清楚，官网的表达效率和询盘效率都会提升很多。',
+      },
+      en: {
+        navLabel: 'How to Structure a Manufacturing Company Website',
+        categoryLabel: 'Industry',
+        metaTitle: 'How to Structure a Manufacturing Company Website | Zhicheng Studio',
+        metaDescription:
+          'Manufacturing websites need more than company profiles and factory photos. This article explains how to structure products, capability, trust cues, and inquiry flow more effectively.',
+        keywords: ['manufacturing company website', 'factory website structure', 'company website planning'],
+        eyebrow: 'Article',
+        heroTitle: 'A manufacturing company website should explain products, capability, and fit more clearly',
+        heroDescription:
+          'Many manufacturing sites look complete on the surface but still fail to support inquiry because they focus too heavily on company introduction and not enough on product, application fit, and delivery capability.',
+        introTitle: 'Why many manufacturing websites feel complete but still weak',
+        introParagraphs: [
+          'Factory photos and company profiles matter, but buyers often care more about what you can produce, what industries you serve, and how cooperation works.',
+          'If those layers are missing or buried too deeply, the website feels more like a brochure than a useful business entry point.',
+        ],
+        sections: [
+          {
+            title: 'Product capability and use case fit should appear early',
+            paragraphs: [
+              'Visitors usually want to understand what products you offer, what problems they solve, and which industries or applications they fit.',
+              'That often makes product and scenario pages more important than long company background sections.',
+            ],
+          },
+          {
+            title: 'Production and delivery capability build trust',
+            paragraphs: [
+              'Capacity, lead time, quality process, customization ability, and cooperation method are all part of manufacturing credibility.',
+              'If the site avoids those topics, it leaves too much uncertainty for a buyer.',
+            ],
+          },
+          {
+            title: 'Inquiry paths should follow the business content',
+            paragraphs: [
+              'Once a visitor has understood the product and fit, the next step should be easy to find.',
+              'That usually means placing inquiry entry points inside homepage, product, and scenario layers instead of hiding them only at the bottom.',
+            ],
+          },
+        ],
+        takeawayTitle: 'Main takeaways',
+        takeaways: [
+          'Manufacturing sites need product, scenario, and delivery clarity, not only a company profile.',
+          'Capability and quality information are important trust cues.',
+          'Inquiry flow should appear where business interest deepens, not only at the very end.',
+        ],
+        ctaTitle: 'If you are planning a manufacturing website, start with product, fit, and delivery clarity',
+        ctaDescription: 'Once those three layers are structured well, both understanding and inquiry quality usually improve.',
+      },
+    },
+  },
+  'service-business-website-lead-generation': {
+    slug: 'service-business-website-lead-generation',
+    priority: {
+      zh: 0.64,
+      en: 0.5,
+    },
+    publishedAt: '2026-03-30',
+    readingMinutes: 6,
+    relatedServices: ['company-website-development', 'website-development'],
+    content: {
+      zh: {
+        navLabel: '服务型公司官网怎么做获客，不只是把联系方式放出来',
+        categoryLabel: '行业场景',
+        metaTitle: '服务型公司官网怎么做获客？官网转化结构参考｜致诚工作室',
+        metaDescription:
+          '服务型公司官网做获客，重点在服务表达、信任信息、FAQ 和联系路径，而不只是把电话微信挂上去。本文拆解更有效的官网结构。',
+        keywords: ['服务型公司官网获客', '官网转化', '服务公司网站', '企业官网开发'],
+        eyebrow: 'Article',
+        heroTitle: '服务型公司官网怎么做获客，不只是把联系方式放出来',
+        heroDescription:
+          '很多服务型公司的官网最大的问题不是没人看，而是看完以后还不够想联系。真正影响获客的，往往是服务讲得清不清楚、信任信息够不够、常见疑虑有没有提前回答，而不是按钮够不够多。',
+        introTitle: '为什么服务型公司官网经常只有展示，没有转化',
+        introParagraphs: [
+          '因为很多官网只是把“公司介绍、服务列表、联系方式”排了一遍，却没有真正围绕客户决策路径去组织内容。',
+          '客户在联系前通常会先判断：你是不是专业、是不是适合我、合作会不会麻烦。官网如果不能回答这些，就很难带来高质量询盘。',
+        ],
+        sections: [
+          {
+            title: '服务页要比首页更能承接决策',
+            paragraphs: [
+              '首页负责快速概览，真正承接客户判断的通常是服务页。服务页应该讲清适合谁、怎么做、能解决什么问题、合作流程是什么。',
+              '如果服务页只是重复一句服务名称，很难真正支持获客。',
+            ],
+          },
+          {
+            title: '信任信息和 FAQ 会明显影响联系意愿',
+            paragraphs: [
+              '背景经验、交付方式、维护承诺、常见问题和合作边界，都会直接影响客户是否愿意继续沟通。',
+              '很多时候不是客户没有兴趣，而是还没被说服到足够安心。',
+            ],
+          },
+          {
+            title: '联系入口要顺，不要打断理解路径',
+            paragraphs: [
+              '联系入口需要清楚，但更重要的是时机和位置。客户理解到一定程度之后，再进入联系动作，通常比一开始就疯狂催促更有效。',
+              '所以按钮不是越多越好，而是要跟着内容节奏出现。',
+            ],
+          },
+        ],
+        takeawayTitle: '这篇文章的重点',
+        takeaways: [
+          '服务型公司官网获客，关键在服务页、FAQ 和信任信息。',
+          '联系入口要顺着理解路径出现，而不是一味堆按钮。',
+          '客户是否联系，通常取决于是否被解释清楚和说服到足够安心。',
+        ],
+        ctaTitle: '如果你在做服务型公司官网，先把决策路径讲顺',
+        ctaDescription: '只要把服务说明、疑虑解答和联系动作衔接好，官网的获客效率通常会明显提升。',
+      },
+      en: {
+        navLabel: 'How a Service Business Website Supports Lead Generation',
+        categoryLabel: 'Industry',
+        metaTitle: 'How a Service Business Website Supports Lead Generation | Zhicheng Studio',
+        metaDescription:
+          'Service-business websites generate better leads when service explanation, trust cues, FAQ, and contact flow are structured clearly instead of relying on contact buttons alone.',
+        keywords: ['service business website leads', 'company website conversion', 'service website structure'],
+        eyebrow: 'Article',
+        heroTitle: 'A service business website should move visitors toward confidence before contact',
+        heroDescription:
+          'Many service websites are not failing because nobody visits them, but because the content never builds enough clarity and confidence to make contact feel worthwhile.',
+        introTitle: 'Why service websites often display well but convert weakly',
+        introParagraphs: [
+          'Many service companies arrange company intro, services, and contact information in a familiar way, but never truly align the site to the client decision path.',
+          'Before reaching out, clients are usually judging expertise, fit, and whether the cooperation process feels manageable.',
+        ],
+        sections: [
+          {
+            title: 'Service pages often carry the real decision-making weight',
+            paragraphs: [
+              'The homepage should give direction, but service pages usually do the real work of helping visitors judge fit, process, and relevance.',
+              'If service pages only repeat a service name without depth, lead quality tends to stay weak.',
+            ],
+          },
+          {
+            title: 'Trust cues and FAQ influence contact willingness strongly',
+            paragraphs: [
+              'Experience, delivery method, maintenance expectations, FAQ content, and cooperation boundaries all affect whether a visitor feels safe continuing.',
+              'Sometimes the problem is not lack of interest, but lack of reassurance.',
+            ],
+          },
+          {
+            title: 'Contact flow should support the understanding path',
+            paragraphs: [
+              'Contact options should be clear, but their timing and placement matter just as much as their visibility.',
+              'Calls to action usually work better when they follow growing understanding rather than interrupting it too early.',
+            ],
+          },
+        ],
+        takeawayTitle: 'Main takeaways',
+        takeaways: [
+          'Lead generation on service websites depends heavily on service depth, trust, and FAQ content.',
+          'Contact flow should support the visitor’s understanding path instead of forcing it too early.',
+          'Visitors reach out more readily when the site explains fit and reduces uncertainty first.',
+        ],
+        ctaTitle: 'If you are improving a service website, start by clarifying the decision path',
+        ctaDescription: 'Once services, objections, and contact flow work together, lead generation usually becomes much stronger.',
+      },
+    },
+  },
+  'saas-website-page-structure': {
+    slug: 'saas-website-page-structure',
+    priority: {
+      zh: 0.64,
+      en: 0.5,
+    },
+    publishedAt: '2026-03-30',
+    readingMinutes: 6,
+    relatedServices: ['website-development', 'company-website-development'],
+    content: {
+      zh: {
+        navLabel: 'SaaS 官网应该有哪些页面，才更适合产品说明和转化',
+        categoryLabel: '行业场景',
+        metaTitle: 'SaaS 官网应该有哪些页面？结构参考｜致诚工作室',
+        metaDescription:
+          'SaaS 官网应该有哪些页面，取决于产品复杂度、试用路径和客户决策逻辑。本文整理首页、功能页、定价页、FAQ 和文档入口的常见结构。',
+        keywords: ['SaaS 官网页面', 'SaaS 官网结构', '产品官网怎么做', '网站开发'],
+        eyebrow: 'Article',
+        heroTitle: 'SaaS 官网应该有哪些页面，才更适合产品说明和转化',
+        heroDescription:
+          'SaaS 官网和普通企业官网不太一样，它不仅要展示品牌，还要解释产品逻辑、功能价值、适合对象和试用路径。如果页面结构没搭对，产品看起来就会很难理解。',
+        introTitle: '为什么 SaaS 官网很容易讲不清产品',
+        introParagraphs: [
+          '因为 SaaS 产品通常带有一定抽象性，只靠首页和一句口号很难把价值讲清楚。',
+          '如果官网结构没有把功能、场景、FAQ、定价和试用入口拆出来，用户理解和转化都会受到影响。',
+        ],
+        sections: [
+          {
+            title: '首页负责定调，功能页负责解释产品',
+            paragraphs: [
+              '首页应该快速说明产品做什么、适合谁、核心价值是什么，但功能细节通常要拆到更具体的功能页或场景页里。',
+              '如果所有内容都压在首页，页面会又长又难读。',
+            ],
+          },
+          {
+            title: '定价、FAQ 和试用路径不能太晚出现',
+            paragraphs: [
+              'SaaS 用户往往很快就会关心价格、试用方式、集成能力和上手门槛，这些信息越晚出现，流失越早。',
+              '所以官网通常要在结构上尽早给出这些答案。',
+            ],
+          },
+          {
+            title: '文档、帮助和信任内容也是一部分',
+            paragraphs: [
+              '对于稍复杂一点的产品，帮助中心、文档入口、客户类型和安全合规信息，也都是很关键的信任层。',
+              '这些页面不一定一开始都做满，但结构上最好先留出来。',
+            ],
+          },
+        ],
+        takeawayTitle: '这篇文章的重点',
+        takeaways: [
+          'SaaS 官网通常需要比普通官网更细的页面分工。',
+          '功能页、定价页、FAQ 和试用路径都很关键。',
+          '复杂产品越需要把帮助和信任层一起规划进去。',
+        ],
+        ctaTitle: '如果你正在做 SaaS 官网，先把产品解释路径拆出来',
+        ctaDescription: '首页、功能页、FAQ、定价和试用入口一旦分工清楚，官网的理解和转化效率都会提升。',
+      },
+      en: {
+        navLabel: 'What Pages Should a SaaS Website Include?',
+        categoryLabel: 'Industry',
+        metaTitle: 'What Pages Should a SaaS Website Include? | Zhicheng Studio',
+        metaDescription:
+          'A SaaS website usually needs more page structure than a standard company site. This article covers homepage, feature pages, pricing, FAQ, and support layers.',
+        keywords: ['SaaS website pages', 'SaaS website structure', 'product website planning'],
+        eyebrow: 'Article',
+        heroTitle: 'A SaaS website usually needs a clearer page structure than a standard company site',
+        heroDescription:
+          'A SaaS website needs to do more than present a brand. It has to explain product logic, feature value, fit, pricing, and the next user step clearly enough that the product does not feel abstract.',
+        introTitle: 'Why SaaS websites often struggle to explain the product',
+        introParagraphs: [
+          'Many SaaS products carry a certain level of abstraction, which means a homepage and a slogan rarely explain enough on their own.',
+          'If feature, pricing, FAQ, and trial paths are not broken into clearer layers, understanding and conversion both suffer.',
+        ],
+        sections: [
+          {
+            title: 'The homepage sets direction, feature pages do the deeper explanation',
+            paragraphs: [
+              'The homepage should explain what the product is for, who it fits, and why it matters, but the deeper explanation often belongs on feature or scenario pages.',
+              'If everything is forced onto one page, the result often becomes long and difficult to digest.',
+            ],
+          },
+          {
+            title: 'Pricing, FAQ, and trial path should appear earlier',
+            paragraphs: [
+              'SaaS visitors quickly start asking about pricing, onboarding, integrations, and trial flow.',
+              'Those answers should not be buried too deeply or the site will lose momentum fast.',
+            ],
+          },
+          {
+            title: 'Documentation and trust layers matter too',
+            paragraphs: [
+              'For more complex products, help content, docs, customer-type proof, and security information are also important trust layers.',
+              'They do not all need to be perfect on day one, but the structure should leave room for them.',
+            ],
+          },
+        ],
+        takeawayTitle: 'Main takeaways',
+        takeaways: [
+          'SaaS websites usually need clearer page roles than standard company sites.',
+          'Feature, pricing, FAQ, and trial pages are often critical.',
+          'More complex products benefit from planned support and trust layers early.',
+        ],
+        ctaTitle: 'If you are planning a SaaS website, start by separating the product explanation path',
+        ctaDescription: 'Once homepage, feature pages, FAQ, pricing, and trial flow have clearer roles, both comprehension and conversion improve.',
+      },
+    },
+  },
+  'foreign-trade-about-page-writing': {
+    slug: 'foreign-trade-about-page-writing',
+    priority: {
+      zh: 0.64,
+      en: 0.5,
+    },
+    publishedAt: '2026-03-30',
+    readingMinutes: 6,
+    relatedServices: ['foreign-trade-website-development', 'company-website-development'],
+    content: {
+      zh: {
+        navLabel: '外贸网站 About 页面怎么写，才不会只剩空泛介绍',
+        categoryLabel: '外贸网站',
+        metaTitle: '外贸网站 About 页面怎么写？更有说服力的写法参考｜致诚工作室',
+        metaDescription:
+          '外贸网站 About 页面怎么写，重点不只是介绍公司，而是补信任、说明合作方式和让访客更愿意继续联系。本文拆解更稳的写法。',
+        keywords: ['外贸网站 About', '外贸官网公司介绍', '外贸网站怎么写', '外贸网站开发'],
+        eyebrow: 'Article',
+        heroTitle: '外贸网站 About 页面怎么写，才不会最后只剩空泛的公司介绍',
+        heroDescription:
+          '很多外贸网站 About 页面的问题，不是信息太少，而是讲了很多“我们是谁”，却没有真正回答访客最关心的“你靠不靠谱、合作会不会顺、为什么值得继续联系”。',
+        introTitle: '为什么 About 页面经常看起来完整，却没什么说服力',
+        introParagraphs: [
+          '因为很多 About 页面写法偏内部口径，像一份企业简介，而不是一页面向潜在客户的信任说明。',
+          '访客进入 About 页面，通常不是为了看一段历史，而是为了判断这个团队是否值得继续接触。',
+        ],
+        sections: [
+          {
+            title: '先讲和客户判断最相关的信息',
+            paragraphs: [
+              '主营业务、服务范围、主要市场、团队能力和合作方式，通常比很长的企业发展历程更优先。',
+              '如果顺序排对了，About 页面会更像一个信任入口，而不是一份流水账。',
+            ],
+          },
+          {
+            title: '让公司介绍和合作方式连起来',
+            paragraphs: [
+              '客户不是只想知道你是谁，还想知道跟你合作会是什么体验。这个时候响应方式、流程、维护、交付边界都很重要。',
+              '这些信息放在 About 页面里，往往能明显增加继续联系的意愿。',
+            ],
+          },
+          {
+            title: '适度加入证明，而不是只用形容词',
+            paragraphs: [
+              '比起一堆“专业、优质、领先”，更有说服力的通常是更具体的能力证明和合作背景。',
+              'About 页面真正要做的，是把抽象信任变成更容易判断的具体信息。',
+            ],
+          },
+        ],
+        takeawayTitle: '这篇文章的重点',
+        takeaways: [
+          'About 页面不是内部简介，而是面对客户的信任页面。',
+          '业务、能力和合作方式通常比时间线更重要。',
+          '具体信息和证明，比抽象形容词更有说服力。',
+        ],
+        ctaTitle: '如果你正在写 About 页面，先想清楚客户最想确认什么',
+        ctaDescription: '把公司介绍写成信任说明，而不是流水账，页面会更容易真正发挥作用。',
+      },
+      en: {
+        navLabel: 'How to Write an About Page for a Foreign Trade Website',
+        categoryLabel: 'Foreign Trade Website',
+        metaTitle: 'How to Write a Better About Page for a Foreign Trade Website | Zhicheng Studio',
+        metaDescription:
+          'A stronger About page for a foreign trade website should build trust, explain cooperation, and support contact willingness instead of acting like a generic company history page.',
+        keywords: ['foreign trade about page', 'B2B about page writing', 'export website trust page'],
+        eyebrow: 'Article',
+        heroTitle: 'A strong About page should help visitors trust the business, not only read a company intro',
+        heroDescription:
+          'Many About pages say a lot about who the company is, but not enough about why the visitor should trust it, how cooperation works, and whether it feels worth contacting.',
+        introTitle: 'Why many About pages feel complete but not persuasive',
+        introParagraphs: [
+          'They are often written like internal company summaries instead of trust pages for potential clients.',
+          'Visitors usually arrive on an About page not because they want a company timeline, but because they want reassurance.',
+        ],
+        sections: [
+          {
+            title: 'Lead with the information that supports judgment',
+            paragraphs: [
+              'Core business, service range, target market, delivery ability, and cooperation style are often more helpful than a long historical introduction.',
+              'When the order is right, the About page starts to function like a trust layer instead of a chronology.',
+            ],
+          },
+          {
+            title: 'Connect company identity with cooperation experience',
+            paragraphs: [
+              'Visitors are not only asking who you are. They are also asking what working with you will feel like.',
+              'That makes response style, process, support, and delivery boundaries relevant inside the About page too.',
+            ],
+          },
+          {
+            title: 'Use proof instead of adjectives whenever possible',
+            paragraphs: [
+              'Specific capability proof and concrete working context usually persuade better than strings of words like “professional”, “reliable”, or “leading”.',
+              'The About page works best when it turns abstract trust into clearer evidence.',
+            ],
+          },
+        ],
+        takeawayTitle: 'Main takeaways',
+        takeaways: [
+          'An About page should function as a trust page, not only as a company summary.',
+          'Business scope, capability, and working style often matter more than a timeline.',
+          'Specific proof persuades better than abstract adjectives.',
+        ],
+        ctaTitle: 'If you are writing an About page, start from what the visitor needs to trust',
+        ctaDescription: 'An About page becomes much more useful when it is written as reassurance instead of internal summary.',
+      },
+    },
+  },
+  'mini-program-and-website-relationship': {
+    slug: 'mini-program-and-website-relationship',
+    priority: {
+      zh: 0.64,
+      en: 0.5,
+    },
+    publishedAt: '2026-03-30',
+    readingMinutes: 6,
+    relatedServices: ['mini-program-development', 'website-development'],
+    content: {
+      zh: {
+        navLabel: '官网和小程序怎么配合，才不会两边各做各的',
+        categoryLabel: '小程序',
+        metaTitle: '官网和小程序怎么配合？分工与协同参考｜致诚工作室',
+        metaDescription:
+          '官网和小程序怎么配合，关键在于一个负责品牌与搜索，一个负责交易与高频动作。本文拆解两者更合适的分工方式。',
+        keywords: ['官网和小程序怎么配合', '小程序和官网分工', '小程序开发', '网站开发'],
+        eyebrow: 'Article',
+        heroTitle: '官网和小程序怎么配合，才不会最后两边各做各的',
+        heroDescription:
+          '官网和小程序同时做时，最容易出现的问题不是重复开发，而是职责混乱。用户该从哪一端进入、哪一端负责品牌表达、哪一端负责交易和高频动作，如果这些不清楚，两边很容易都做得不够好。',
+        introTitle: '为什么官网和小程序经常一起做，却没真正配合起来',
+        introParagraphs: [
+          '因为很多项目只是把两个载体都做出来，却没有先想清楚谁负责搜索和品牌，谁负责交易和高频使用。',
+          '如果分工不清，内容会重复、维护会增加、用户也更容易困惑。',
+        ],
+        sections: [
+          {
+            title: '官网更适合承接品牌和搜索',
+            paragraphs: [
+              '官网更适合放品牌表达、服务说明、文章内容、多语言页面和长期 SEO 结构。',
+              '它更像一个公开的内容和信任入口，适合第一次认识你的用户。',
+            ],
+          },
+          {
+            title: '小程序更适合承接高频动作',
+            paragraphs: [
+              '下单、预约、支付、查询、会员动作这类高频操作，通常更适合放在小程序里。',
+              '因为小程序更接近实际使用场景，用户操作成本也更低。',
+            ],
+          },
+          {
+            title: '两边最重要的是路径打通',
+            paragraphs: [
+              '官网要能自然把用户引导到小程序，小程序也要能承接官网带来的流量和信任。',
+              '真正有效的不是“两边都有”，而是两边之间有没有清晰的分工和跳转路径。',
+            ],
+          },
+        ],
+        takeawayTitle: '这篇文章的重点',
+        takeaways: [
+          '官网更适合品牌、内容和搜索，小程序更适合交易和高频动作。',
+          '两边最怕职责重叠、入口混乱。',
+          '真正有效的是分工清楚、路径打通，而不是简单“两边都做”。',
+        ],
+        ctaTitle: '如果你同时要做官网和小程序，先把职责分工定下来',
+        ctaDescription: '只要先明确谁负责品牌、谁负责动作、用户怎么来回走，两边的协同会顺很多。',
+      },
+      en: {
+        navLabel: 'How a Website and Mini-program Should Work Together',
+        categoryLabel: 'Mini-program',
+        metaTitle: 'How a Website and Mini-program Should Work Together | Zhicheng Studio',
+        metaDescription:
+          'A website and a mini-program should not duplicate each other. This article explains a clearer split between brand/search entry and transaction/high-frequency operations.',
+        keywords: ['website and mini-program', 'mini-program strategy', 'website mini-program split'],
+        eyebrow: 'Article',
+        heroTitle: 'A website and a mini-program work best when their roles are clearly separated',
+        heroDescription:
+          'When teams build both a website and a mini-program, the main risk is often unclear role overlap rather than technical duplication. If each side does not have a clear job, both end up weaker.',
+        introTitle: 'Why these two channels often fail to support each other',
+        introParagraphs: [
+          'Many projects launch both assets without defining which one owns brand and search, and which one owns repeated actions and transaction flow.',
+          'That usually creates duplicated content, higher maintenance cost, and weaker user clarity.',
+        ],
+        sections: [
+          {
+            title: 'Websites usually fit brand and search better',
+            paragraphs: [
+              'The website is usually the stronger place for brand expression, service explanation, multilingual content, articles, and long-term SEO structure.',
+              'It works more like a public-facing content and trust layer for first-time visitors.',
+            ],
+          },
+          {
+            title: 'Mini-programs usually fit high-frequency actions better',
+            paragraphs: [
+              'Ordering, booking, payment, account actions, and recurring interactions often fit better inside a mini-program.',
+              'The mini-program is usually closer to the actual usage context and lower-friction action flow.',
+            ],
+          },
+          {
+            title: 'The most important thing is the path between them',
+            paragraphs: [
+              'The website should be able to guide the right users into the mini-program naturally, while the mini-program should benefit from the trust the website built first.',
+              'The real win is not “having both”, but having a clear split and clean movement between them.',
+            ],
+          },
+        ],
+        takeawayTitle: 'Main takeaways',
+        takeaways: [
+          'Websites are usually better for brand, content, and search.',
+          'Mini-programs are usually better for transactions and repeated actions.',
+          'The strongest setup is clear role split plus a smooth path between the two.',
+        ],
+        ctaTitle: 'If you are building both, define the role split first',
+        ctaDescription: 'Once brand, action, and traffic flow are assigned clearly, the website and mini-program usually reinforce each other much better.',
       },
     },
   },
