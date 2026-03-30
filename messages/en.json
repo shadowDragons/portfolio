@@ -46,6 +46,10 @@
       "eyebrow": "Capabilities",
       "title": "Website development work I build and the stack I use",
       "description": "From public-facing sites to internal business systems, I prefer projects where product thinking, clean delivery, and long-term maintainability all matter.",
+      "directoryEyebrow": "Choose A Direction",
+      "directoryTitle": "If you already know the project direction, you can jump straight into the matching service page",
+      "directoryDescription": "Company sites, foreign trade websites, mini-programs, and internal systems each come with different priorities, so it helps to start with the closest fit.",
+      "directoryCta": "View All Service Pages",
       "stackEyebrow": "Tech Stack",
       "stackTitle": "Frontend and backend can both be handled directly",
       "stackDescription": "That means less coordination overhead, less information loss, and clearer accountability throughout the project.",
@@ -109,6 +113,26 @@
         }
       }
     },
+    "articles": {
+      "eyebrow": "Before You Start",
+      "title": "If you are still comparing options, start with these articles",
+      "description": "Pricing, process, comparison, and multilingual SEO are the questions that come up most often before a project starts, so these are a practical place to begin.",
+      "cta": "View Blog Hub",
+      "cards": {
+        "price": {
+          "label": "Pricing",
+          "description": "Answers questions like website cost, company-site budget, and how scope affects pricing."
+        },
+        "process": {
+          "label": "Process",
+          "description": "Answers workflow questions like how website projects move and how internal-system requirements should be clarified."
+        },
+        "seo": {
+          "label": "SEO / Scenario",
+          "description": "Answers decision questions like multilingual SEO basics and when custom work fits better than templates."
+        }
+      }
+    },
     "advantages": {
       "eyebrow": "Positioning",
       "title": "Why I do not take low-price projects",
@@ -143,8 +167,8 @@
     "projects": {
       "eyebrow": "Projects",
       "title": "Projects",
-      "description": "This section is now a two-row showcase strip with automatic horizontal scrolling, multi-image preview, and optional link jump for each case.",
-      "helper": "Hover to pause the two-row marquee. Click any preview to enlarge it. Arrow keys support previous and next images. Works with links can open directly.",
+      "description": "A quick selection of projects that shows the kinds of work I usually take on.",
+      "helper": "Click any image to enlarge it. Works with a live link can be opened directly.",
       "stackLabel": "Tech Stack",
       "viewImages": "View",
       "loadingImage": "Loading image...",
@@ -197,7 +221,7 @@
           "title": "NextIdea",
           "description": "A project in the direction of idea tooling and productized utility work, useful for showing product capability."
         },
-        "danduoduo": {
+        "foreignTradeA": {
           "title": "Foreign Trade Website",
           "description": "A corporate website for foreign-trade business presentation, content structure, and brand communication."
         },

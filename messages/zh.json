@@ -46,6 +46,10 @@
       "eyebrow": "Capabilities",
       "title": "擅长的网站开发项目与技术栈",
       "description": "从企业品牌展示到内部业务系统，再到小程序和 AI 应用，我更偏好那些真正重视交付质量、流程稳定性和后续维护的项目。",
+      "directoryEyebrow": "Choose A Direction",
+      "directoryTitle": "如果你已经明确项目方向，可以直接看对应服务",
+      "directoryDescription": "企业官网、外贸网站、小程序和企业系统这几类项目，合作重点不太一样，适合先按方向看说明。",
+      "directoryCta": "查看全部服务页",
       "stackEyebrow": "Tech Stack",
       "stackTitle": "前后端都能直接落地",
       "stackDescription": "减少多人转述和跨团队协调的损耗，适合需要更高响应效率和更清晰责任边界的合作方式。",
@@ -109,6 +113,26 @@
         }
       }
     },
+    "articles": {
+      "eyebrow": "Before You Start",
+      "title": "如果你还在做判断，可以先看这些文章",
+      "description": "报价、流程、对比和多语言 SEO 这些问题，往往会在立项前反复出现，适合先快速看一遍再继续往下聊。",
+      "cta": "查看文章目录",
+      "cards": {
+        "price": {
+          "label": "价格",
+          "description": "回答“网站开发多少钱”“企业官网预算怎么拆”这类高意图问题。"
+        },
+        "process": {
+          "label": "流程",
+          "description": "回答“网站开发流程怎么做”“系统需求怎么梳理”这类推进问题。"
+        },
+        "seo": {
+          "label": "SEO / 场景",
+          "description": "回答“多语言网站怎么做 SEO”“模板站和定制站怎么选”这类决策问题。"
+        }
+      }
+    },
     "advantages": {
       "eyebrow": "Positioning",
       "title": "为什么不接低价单",
@@ -143,8 +167,8 @@
     "projects": {
       "eyebrow": "Projects",
       "title": "项目",
-      "description": "这里改成了双行作品展示区，支持自动横向滚动、查看多图和可选链接跳转，更接近真实案例页的浏览体验。",
-      "helper": "悬停可暂停双行滚动，点击图片可放大查看；支持上一张 / 下一张切换，有链接的作品可直接跳转。",
+      "description": "挑一些更能代表项目方向的作品放在这里，方便你快速看我做过哪些类型的项目。",
+      "helper": "点击图片可放大查看；有链接的作品可以直接打开。",
       "stackLabel": "技术栈",
       "viewImages": "查看",
       "loadingImage": "图片加载中...",
@@ -197,7 +221,7 @@
           "title": "NextIdea",
           "description": "偏创意工具和产品化探索方向的项目，适合展示工具型产品能力。"
         },
-        "danduoduo": {
+        "foreignTradeA": {
           "title": "外贸公司网站",
           "description": "面向外贸业务展示、内容承载和品牌表达的企业官网项目。"
         },

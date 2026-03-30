@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 import Image from 'next/image'
 import { AnimatePresence, motion } from 'framer-motion'
 import { useTranslations } from 'next-intl'
+import { Link } from '@/i18n/routing'
 import { cn } from '@/lib/utils'
 import { buttonVariants } from '@/components/ui/button'
 import FramerWrapper from '@/components/animation/FramerWrapper'
@@ -45,7 +46,7 @@ type WorkKey =
   | 'course'
   | 'recruiting'
   | 'idea'
-  | 'danduoduo'
+  | 'foreignTradeA'
   | 'formart'
 
 type ShowcaseWork = {
@@ -560,13 +561,12 @@ export default function BusinessHome() {
       stack: ['Next.js', 'React', 'TypeScript', 'n8n'],
       link: 'https://idea.sphrag.com',
     },
-    danduoduo: {
-      images: projectImages('danduoduo', 2),
+    foreignTradeA: {
+      images: projectImages('foreignTradeA', 2),
       stack: ['Next.js', 'React', 'TypeScript'],
-      link: 'https://51danduoduo.cn',
     },
     formart: {
-      images: projectImages('formart', 1),
+      images: projectImages('fromart', 2),
       stack: ['Wordpress', 'PHP'],
       link: 'https://fromart.com/',
     },
@@ -584,7 +584,7 @@ export default function BusinessHome() {
     'course',
     'recruiting',
     'idea',
-    'danduoduo',
+    'foreignTradeA',
     'formart',
   ]
 
@@ -765,6 +765,23 @@ export default function BusinessHome() {
               </div>
             </div>
           </FramerWrapper>
+
+          <FramerWrapper y={24} delay={0.22} className='mt-6'>
+            <div className='flex flex-col gap-5 rounded-[28px] border border-[#111] bg-[#111] p-6 text-white shadow-[0_18px_56px_-34px_rgba(0,0,0,0.32)] sm:p-8 lg:flex-row lg:items-center lg:justify-between'>
+              <div className='max-w-3xl space-y-3'>
+                <p className='text-xs font-semibold uppercase tracking-[0.22em] text-[#d4944e]'>{t('services.directoryEyebrow')}</p>
+                <h3 className='font-rubik text-2xl leading-snug text-white sm:text-[32px]'>{t('services.directoryTitle')}</h3>
+                <p className='text-[15px] leading-7 text-white/70'>{t('services.directoryDescription')}</p>
+              </div>
+              <Link
+                href='/services'
+                className='inline-flex items-center justify-center rounded-full bg-white px-6 py-3 text-sm font-semibold text-[#111] transition hover:bg-[#f3ece2]'
+              >
+                {t('services.directoryCta')}
+                <ArrowRight className='ml-2 h-4 w-4' />
+              </Link>
+            </div>
+          </FramerWrapper>
         </section>
 
         <section>
@@ -796,6 +813,34 @@ export default function BusinessHome() {
               />
             ))}
           </div>
+        </section>
+
+        <section id='articles'>
+          <FramerWrapper y={24}>
+            <div className='grid gap-5 rounded-[30px] border border-[#eadfd2] bg-[linear-gradient(180deg,rgba(255,255,255,0.92),rgba(250,245,238,0.95))] p-7 shadow-[0_16px_48px_-34px_rgba(0,0,0,0.16)] sm:p-8 lg:grid-cols-[0.94fr_1.06fr] lg:items-center'>
+              <div className='space-y-4'>
+                <p className='text-xs font-semibold uppercase tracking-[0.22em] text-[#b86128]'>{t('articles.eyebrow')}</p>
+                <h2 className='font-rubik text-[30px] leading-[1.15] text-[#111] sm:text-[42px]'>{t('articles.title')}</h2>
+                <p className='text-[15px] leading-8 text-[#645c53]'>{t('articles.description')}</p>
+                <Link
+                  href='/blog'
+                  className='inline-flex items-center justify-center rounded-full bg-[#111] px-6 py-3 text-sm font-semibold text-white transition hover:bg-[#222]'
+                >
+                  {t('articles.cta')}
+                  <ArrowRight className='ml-2 h-4 w-4' />
+                </Link>
+              </div>
+
+              <div className='grid gap-3 sm:grid-cols-3 lg:grid-cols-1'>
+                {['price', 'process', 'seo'].map(key => (
+                  <div key={key} className='rounded-[22px] border border-[#eadfd2] bg-white/80 px-4 py-4'>
+                    <p className='text-xs font-semibold uppercase tracking-[0.18em] text-[#b86128]'>{t(`articles.cards.${key}.label`)}</p>
+                    <p className='mt-3 text-sm leading-7 text-[#5f564d]'>{t(`articles.cards.${key}.description`)}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </FramerWrapper>
         </section>
 
         <section id='projects'>
