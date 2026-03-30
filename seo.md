@@ -2,6 +2,53 @@
 
 执行日志：`seo-log.md`
 
+## 当前进度更新（截至 2026-03-30）
+
+先回答一个最直接的问题：
+
+SEO 还没有“弄完”。
+
+原因不是代码没做，而是 SEO 本来就不是一次性工作。它分成两类：
+
+1. 站内可落地的基础建设
+2. 上线后的收录、监控、内容持续更新和站外信号
+
+当前已经完成的部分：
+
+- SEO 基础配置已经补齐：
+  - 动态 `robots.txt`
+  - 动态 `sitemap.xml`
+  - canonical / `hreflang`
+  - 页面级 metadata
+  - 基础结构化数据
+- 服务页体系已经搭好：
+  - `/zh/services`
+  - 5 个服务详情页
+- 文章内容体系已经搭好：
+  - `/zh/blog`
+  - 15 篇文章详情页
+- 首页已经有指向服务页和文章页的入口
+
+当前暂缓的部分：
+
+- 案例页当前不继续上线
+- 原因不是技术问题，而是内容准确性还不够，继续挂出去反而会降低可信度
+
+当前还没完成、但对 SEO 结果依然关键的部分：
+
+- 确认线上主域名版本已经和当前业务站一致
+- 上线后在 Google Search Console 提交与验证
+- 看真实收录、展示、点击和关键词变化
+- 持续补长尾内容
+- 做站外品牌提及和自然外链
+
+所以更准确的判断是：
+
+- 站内基础建设已经做了不少
+- 但 SEO 结果还远没到“可以收工”的阶段
+
+---
+
 ## 一、目标先讲清楚
 
 目标关键词：`网站开发`
@@ -25,6 +72,12 @@
 ---
 
 ## 二、当前站点现状诊断（基于 2026-03-30 的代码和线上观察）
+
+说明：
+
+这一节主要是启动项目时的初始诊断。
+
+当前代码状态已经不是这里描述的“只有首页”的阶段了，以下问题中有一部分已经完成修复，主要保留为项目背景记录。
 
 ### 1. 当前站点更像单页名片站，不像 SEO 站
 
@@ -299,6 +352,20 @@
 
 让站点不只是“说自己会做”，而是“有具体项目证明自己会做”。
 
+### 当前状态
+
+这一阶段在代码上已经试做过一轮，但目前已暂停上线。
+
+暂停原因：
+
+- 现阶段可公开的案例材料还不够准确
+- 如果为了 SEO 先硬上案例页，反而可能让站点内容失真
+
+当前建议：
+
+- 先不把案例页作为必做项
+- 等有更真实、可公开、可匿名化的案例材料后，再重新推进
+
 ### 建议最少上线 6-10 个案例页
 
 优先做你最贴近商业词的案例：
@@ -469,7 +536,7 @@
 
 页面：
 
-- `/zh/website-development`
+- `/zh/services/website-development`
 
 主词：
 
@@ -479,7 +546,7 @@
 
 页面：
 
-- `/zh/company-website-development`
+- `/zh/services/company-website-development`
 
 主词：
 
@@ -489,7 +556,7 @@
 
 页面：
 
-- `/zh/foreign-trade-website-development`
+- `/zh/services/foreign-trade-website-development`
 
 主词：
 
@@ -499,7 +566,7 @@
 
 页面：
 
-- `/zh/mini-program-development`
+- `/zh/services/mini-program-development`
 
 主词：
 
@@ -509,7 +576,7 @@
 
 页面：
 
-- `/zh/web-app-development`
+- `/zh/services/web-app-development`
 
 主词：
 
@@ -518,9 +585,18 @@
 ### 文章页示例
 
 - `/zh/blog/website-development-cost`
-- `/zh/blog/how-to-plan-company-website`
 - `/zh/blog/website-development-process`
 - `/zh/blog/multilingual-website-seo`
+- `/zh/blog/company-website-pages-checklist`
+- `/zh/blog/company-website-redesign-mistakes`
+- `/zh/blog/foreign-trade-website-content-structure`
+- `/zh/blog/foreign-trade-website-inquiry-conversion`
+- `/zh/blog/mini-program-project-planning`
+- `/zh/blog/website-development-quote-checklist`
+- `/zh/blog/company-website-preparation-checklist`
+- `/zh/blog/foreign-trade-website-navigation-planning`
+- `/zh/blog/website-redesign-seo-migration`
+- `/zh/blog/internal-system-refactor-or-rebuild`
 
 ---
 
@@ -563,9 +639,9 @@
 1. 先统一线上站点版本
 2. 修复 sitemap / canonical / hreflang / metadata
 3. 新增 4-5 个服务页
-4. 新增 6-10 个案例页
-5. 连续 8 周输出文章
-6. 做站外品牌提及和自然外链
+4. 连续 8 周输出文章
+5. 做站外品牌提及和自然外链
+6. 有合适材料后，再重做案例页
 
 ---
 
@@ -587,18 +663,135 @@
 
 ## 十一、下一步建议
 
-下一步不要继续停留在抽象计划，直接进入执行。
+下一步不要继续停留在抽象计划，直接进入执行和上线监控。
 
 建议按下面顺序推进：
 
-1. 先修技术基础
-2. 再搭 5 个服务页
-3. 然后补案例页
-4. 最后进入文章内容节奏
+1. 先确认线上版本已经切到当前业务站
+2. 在 Google Search Console 提交 `sitemap.xml`
+3. 用 8 周持续补文章和观察 impressions
+4. 再根据数据决定优先扩服务页、文章，还是重做更准确的案例页
 
-如果要继续，我下一步可以直接帮你输出一版：
+---
 
-- 更细的 8 周执行排期
-- 页面结构清单
-- 第一批服务页和文章页选题表
-- 或者直接开始改站点的 SEO 基础代码
+## 十二、当前完成度
+
+### 已完成
+
+- 技术 SEO 基础
+- 5 个核心服务页
+- 服务总览页
+- 15 篇文章
+- 首页到服务页 / 文章页的入口
+
+### 暂缓
+
+- 案例页
+
+### 未完成
+
+- 线上版本统一确认
+- Search Console 实际提交与验证
+- GA4 / GSC 数据跟踪
+- 外链和品牌提及
+- 后续文章持续扩写
+
+---
+
+## 十三、接下来 8 周执行排期
+
+这是当前更适合的推进方式：
+
+### 第 1 周
+
+- 确认主域名线上版本就是现在这套业务站
+- 检查 `/zh`、`/en`、`/services`、`/blog` 是否都能正常访问
+- 在 Google Search Console 提交 `sitemap.xml`
+- 记录当前核心页面是否已收录
+
+### 第 2 周
+
+- 观察 Search Console 的抓取和覆盖率
+- 优先看：
+  - `/zh`
+  - `/zh/services/website-development`
+  - `/zh/services/company-website-development`
+  - `/zh/services/foreign-trade-website-development`
+  - `/zh/blog/website-development-cost`
+- 如果发现 URL 没收录，优先查页面可抓取性和 canonical
+
+### 第 3 周
+
+- 再补 2-3 篇更贴近 `企业官网开发` 的文章
+- 重点方向：
+  - 页面结构
+  - 改版
+  - 资料准备
+
+### 第 4 周
+
+- 再补 2-3 篇更贴近 `外贸网站开发` 的文章
+- 重点方向：
+  - 栏目规划
+  - 产品页表达
+  - 询盘转化
+
+### 第 5 周
+
+- 再补 2-3 篇更贴近 `网站开发报价 / 流程 / 周期` 的文章
+- 优先把已有服务页内链继续做密一点
+
+### 第 6 周
+
+- 再补 2-3 篇更贴近 `企业系统开发` 和 `小程序开发` 的文章
+- 重点方向：
+  - 立项前准备
+  - 分阶段开发
+  - 重构还是重做
+
+### 第 7 周
+
+- 开始做站外品牌提及
+- 优先：
+  - GitHub 个人主页
+  - X
+  - LinkedIn
+  - 知乎 / 掘金 / 即刻等内容平台
+- 这些平台的资料和文章都尽量指向主站相关服务页或文章页
+
+### 第 8 周
+
+- 汇总 8 周数据
+- 重点看：
+  - 收录页数
+  - impressions
+  - 哪些词开始出现
+  - 哪些服务页或文章页有点击
+- 根据数据决定下一阶段是：
+  - 继续扩文章
+  - 重做更真实的案例页
+  - 还是继续补更细的服务页
+
+---
+
+## 十四、现在的结论
+
+如果你现在问：
+
+“这个站的 SEO 都已经弄完了吗？”
+
+更准确的回答是：
+
+- 站内基础和内容骨架已经做了很多
+- 但 SEO 结果层面还远远没有结束
+- 真正接下来最重要的不是继续堆代码，而是：
+  - 上线验证
+  - Search Console
+  - 连续内容
+  - 数据反馈
+  - 站外信号
+
+也就是说：
+
+- 代码层的“第一段工程”已经完成得差不多了
+- 但 SEO 的“结果阶段”现在才真正开始

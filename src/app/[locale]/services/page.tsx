@@ -38,7 +38,7 @@ const servicesHubCopy: Record<
     metaDescription:
       '致诚工作室的网站开发服务页总览，覆盖网站开发、企业官网开发、外贸网站开发、小程序开发和企业系统开发，适合按具体需求快速进入对应服务页。',
     keywords: ['网站开发服务', '企业官网开发', '外贸网站开发', '小程序开发', '企业系统开发'],
-    eyebrow: 'Service Pages',
+    eyebrow: 'Services',
     cardCta: '查看服务页',
     contactCta: '联系我聊项目',
     viewWorkCta: '查看作品方向',
@@ -53,7 +53,7 @@ const servicesHubCopy: Record<
     metaDescription:
       'A service-page hub from Zhicheng Studio covering website development, company websites, foreign trade websites, mini-programs, and custom web application delivery.',
     keywords: ['website development services', 'company website development', 'foreign trade website development', 'mini-program development', 'web app development'],
-    eyebrow: 'Service Pages',
+    eyebrow: 'Services',
     cardCta: 'Open Service Page',
     contactCta: 'Discuss Your Project',
     viewWorkCta: 'View Sample Work',

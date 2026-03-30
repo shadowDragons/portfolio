@@ -43,10 +43,10 @@
       }
     },
     "services": {
-      "eyebrow": "Capabilities",
+      "eyebrow": "Services",
       "title": "Website development work I build and the stack I use",
       "description": "From public-facing sites to internal business systems, I prefer projects where product thinking, clean delivery, and long-term maintainability all matter.",
-      "directoryEyebrow": "Choose A Direction",
+      "directoryEyebrow": "Start Here",
       "directoryTitle": "If you already know the project direction, you can jump straight into the matching service page",
       "directoryDescription": "Company sites, foreign trade websites, mini-programs, and internal systems each come with different priorities, so it helps to start with the closest fit.",
       "directoryCta": "View All Service Pages",
@@ -114,7 +114,7 @@
       }
     },
     "articles": {
-      "eyebrow": "Before You Start",
+      "eyebrow": "Articles",
       "title": "If you are still comparing options, start with these articles",
       "description": "Pricing, process, comparison, and multilingual SEO are the questions that come up most often before a project starts, so these are a practical place to begin.",
       "cta": "View Blog Hub",
@@ -134,7 +134,7 @@
       }
     },
     "advantages": {
-      "eyebrow": "Positioning",
+      "eyebrow": "Fit",
       "title": "Why I do not take low-price projects",
       "description": "This is not about acting expensive. Low-price work usually comes with unclear scope, heavy back-and-forth, and support pressure later, and I have already paid for those lessons.",
       "items": {
@@ -165,7 +165,7 @@
       }
     },
     "projects": {
-      "eyebrow": "Projects",
+      "eyebrow": "Selected Work",
       "title": "Projects",
       "description": "A quick selection of projects that shows the kinds of work I usually take on.",
       "helper": "Click any image to enlarge it. Works with a live link can be opened directly.",
@@ -232,7 +232,7 @@
       }
     },
     "notice": {
-      "eyebrow": "Notice",
+      "eyebrow": "Boundaries",
       "title": "Working Together",
       "description": "",
       "reminderTitle": "How I work",
@@ -267,7 +267,7 @@
       }
     },
     "contact": {
-      "eyebrow": "Contact",
+      "eyebrow": "Get In Touch",
       "title": "Contact",
       "description": "",
       "wechatLabel": "WeChat",

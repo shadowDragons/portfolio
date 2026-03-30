@@ -37,7 +37,7 @@ const blogHubCopy: Record<
     metaDescription:
       '致诚工作室的文章内容目录，围绕网站开发、企业官网开发、外贸网站开发和企业系统开发，持续补价格、流程、对比和场景类长尾内容。',
     keywords: ['网站开发文章', '企业官网开发文章', '外贸网站SEO', '网站开发流程'],
-    eyebrow: 'Insights',
+    eyebrow: 'Articles',
     cardCta: '阅读文章',
     contactCta: '联系我聊项目',
     viewWorkCta: '查看作品方向',
@@ -51,7 +51,7 @@ const blogHubCopy: Record<
     metaDescription:
       'A content hub from Zhicheng Studio covering pricing, process, comparison, and scenario articles around website development, company sites, multilingual sites, and web applications.',
     keywords: ['website development blog', 'website SEO content', 'multilingual website SEO', 'internal system planning'],
-    eyebrow: 'Insights',
+    eyebrow: 'Articles',
     cardCta: 'Read Article',
     contactCta: 'Discuss Your Project',
     viewWorkCta: 'View Sample Work',

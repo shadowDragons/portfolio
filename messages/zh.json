@@ -43,14 +43,14 @@
       }
     },
     "services": {
-      "eyebrow": "Capabilities",
+      "eyebrow": "业务方向",
       "title": "擅长的网站开发项目与技术栈",
       "description": "从企业品牌展示到内部业务系统，再到小程序和 AI 应用，我更偏好那些真正重视交付质量、流程稳定性和后续维护的项目。",
-      "directoryEyebrow": "Choose A Direction",
+      "directoryEyebrow": "快速查看",
       "directoryTitle": "如果你已经明确项目方向，可以直接看对应服务",
       "directoryDescription": "企业官网、外贸网站、小程序和企业系统这几类项目，合作重点不太一样，适合先按方向看说明。",
       "directoryCta": "查看全部服务页",
-      "stackEyebrow": "Tech Stack",
+      "stackEyebrow": "技术栈",
       "stackTitle": "前后端都能直接落地",
       "stackDescription": "减少多人转述和跨团队协调的损耗，适合需要更高响应效率和更清晰责任边界的合作方式。",
       "frontendLabel": "前端",
@@ -83,7 +83,7 @@
       }
     },
     "process": {
-      "eyebrow": "Process",
+      "eyebrow": "合作流程",
       "title": "合作流程",
       "description": "先把边界、付款节奏和工期说清楚，再推进开发，能避免中途反复拉扯。",
       "items": {
@@ -114,7 +114,7 @@
       }
     },
     "articles": {
-      "eyebrow": "Before You Start",
+      "eyebrow": "立项前",
       "title": "如果你还在做判断，可以先看这些文章",
       "description": "报价、流程、对比和多语言 SEO 这些问题，往往会在立项前反复出现，适合先快速看一遍再继续往下聊。",
       "cta": "查看文章目录",
@@ -134,7 +134,7 @@
       }
     },
     "advantages": {
-      "eyebrow": "Positioning",
+      "eyebrow": "合作判断",
       "title": "为什么不接低价单",
       "description": "不是故意抬门槛，而是低价项目常常伴随范围不清、反复拉扯和维护压力。我也吃过这种亏，所以现在会把合作边界提前讲清楚。",
       "items": {
@@ -165,7 +165,7 @@
       }
     },
     "projects": {
-      "eyebrow": "Projects",
+      "eyebrow": "项目方向",
       "title": "项目",
       "description": "挑一些更能代表项目方向的作品放在这里，方便你快速看我做过哪些类型的项目。",
       "helper": "点击图片可放大查看；有链接的作品可以直接打开。",
@@ -232,7 +232,7 @@
       }
     },
     "notice": {
-      "eyebrow": "Notice",
+      "eyebrow": "合作边界",
       "title": "合作须知",
       "description": "",
       "reminderTitle": "合作方式",
@@ -267,7 +267,7 @@
       }
     },
     "contact": {
-      "eyebrow": "Contact",
+      "eyebrow": "联系我",
       "title": "联系",
       "description": "",
       "wechatLabel": "微信",
