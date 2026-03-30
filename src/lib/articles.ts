@@ -26,6 +26,21 @@ export const articleSlugs = [
   'saas-website-page-structure',
   'foreign-trade-about-page-writing',
   'mini-program-and-website-relationship',
+  'education-training-website-planning',
+  'consulting-company-website-copy',
+  'ai-product-website-messaging',
+  'b2b-industry-pages-planning',
+  'website-content-update-process',
+  'website-development-timeline-estimation',
+  'website-maintenance-scope',
+  'company-website-contact-page-planning',
+  'multilingual-website-launch-checklist',
+  'foreign-trade-website-language-priority',
+  'company-website-budget-estimation',
+  'foreign-trade-website-faq-writing',
+  'landing-page-vs-company-website',
+  'mini-program-admin-panel-planning',
+  'business-system-phase-one-scope',
 ] as const
 
 export type ArticleSlug = (typeof articleSlugs)[number]
@@ -2837,6 +2852,1650 @@ const articleDefinitions: Record<ArticleSlug, ArticleDefinition> = {
         ],
         ctaTitle: 'If you are building both, define the role split first',
         ctaDescription: 'Once brand, action, and traffic flow are assigned clearly, the website and mini-program usually reinforce each other much better.',
+      },
+    },
+  },
+  'education-training-website-planning': {
+    slug: 'education-training-website-planning',
+    priority: {
+      zh: 0.62,
+      en: 0.49,
+    },
+    publishedAt: '2026-03-30',
+    readingMinutes: 6,
+    relatedServices: ['company-website-development', 'mini-program-development', 'website-development'],
+    content: {
+      zh: {
+        navLabel: '教育培训类官网怎么规划，才不会只剩课程列表',
+        categoryLabel: '行业场景',
+        metaTitle: '教育培训类官网怎么规划？课程、信任与转化结构参考｜致诚工作室',
+        metaDescription:
+          '教育培训类官网怎么规划，重点不只是展示课程，还要讲清课程价值、适合对象、师资、流程和报名路径。本文拆解更稳的网站结构。',
+        keywords: ['教育培训官网', '培训网站怎么做', '课程官网结构', '教育网站开发'],
+        eyebrow: 'Article',
+        heroTitle: '教育培训类官网怎么规划，才不会最后只剩一堆课程列表',
+        heroDescription:
+          '教育培训类网站最常见的问题，不是没有内容，而是内容都堆成了列表。课程价值、适合对象、师资背景、学习流程和报名动作如果没有被结构化承接，访客很难形成清晰判断。',
+        introTitle: '为什么教育培训网站最容易看起来内容很多，却不够转化',
+        introParagraphs: [
+          '因为课程信息、老师信息、学习结果和报名动作经常被拆散，访客看完并没有被真正带着往下走。',
+          '一个更有效的培训类官网，应该先建立理解和信任，再推动咨询和报名，而不是一上来就只列课表。',
+        ],
+        sections: [
+          {
+            title: '课程页面要先解释价值和适合谁',
+            paragraphs: [
+              '课程名称和目录固然重要，但访客更在意的是这门课适合谁、能解决什么问题、学完能得到什么结果。',
+              '如果这些问题没有先回答，课程再多也很难形成报名动机。',
+            ],
+          },
+          {
+            title: '老师与学习流程要承担信任作用',
+            paragraphs: [
+              '教育培训项目里，师资背景、教学方式、学习节奏和服务支持会直接影响是否愿意继续咨询。',
+              '这些信息应该是结构中的重点，而不是放在很深的位置才出现。',
+            ],
+          },
+          {
+            title: '报名入口和沟通路径要更顺',
+            paragraphs: [
+              '如果课程看完还不知道该怎么报名、怎么试听、怎么继续问问题，转化会直接卡住。',
+              '教育培训官网通常要尽早把试听、咨询、报名入口和常见问题组织好。',
+            ],
+          },
+        ],
+        takeawayTitle: '这篇文章的重点',
+        takeaways: [
+          '培训类官网不能只堆课程列表，更要解释课程价值和适配对象。',
+          '师资、学习流程和服务支持是重要信任层。',
+          '报名路径越清楚，官网越容易真正支持转化。',
+        ],
+        ctaTitle: '如果你在做教育培训官网，先把课程价值和报名路径排顺',
+        ctaDescription: '课程、师资、FAQ 和报名入口一旦分工清楚，网站的转化效率通常会明显提升。',
+      },
+      en: {
+        navLabel: 'How to Structure an Education or Training Website',
+        categoryLabel: 'Industry',
+        metaTitle: 'How to Structure an Education or Training Website | Zhicheng Studio',
+        metaDescription:
+          'Education and training websites need more than course lists. This article explains how to structure course value, audience fit, teaching trust, and conversion flow more clearly.',
+        keywords: ['education website structure', 'training website planning', 'course website'],
+        eyebrow: 'Article',
+        heroTitle: 'An education website should explain value and trust, not only list courses',
+        heroDescription:
+          'Training websites often carry plenty of content and still convert weakly because the course value, fit, teaching trust, and next-step path are not structured clearly.',
+        introTitle: 'Why training websites often feel full but still weak',
+        introParagraphs: [
+          'Course lists, teacher info, outcomes, and signup steps are often disconnected from each other, so visitors are left to figure out the journey on their own.',
+          'A stronger education website builds understanding and trust first, then moves visitors toward inquiry or enrollment.',
+        ],
+        sections: [
+          {
+            title: 'Course pages should explain fit and value before detail overload',
+            paragraphs: [
+              'Visitors usually need to know who the course is for, what problem it solves, and what result it can create before they care about every lesson detail.',
+              'That explanation often drives motivation more than the syllabus alone.',
+            ],
+          },
+          {
+            title: 'Teaching trust and learning flow matter a lot',
+            paragraphs: [
+              'Teacher background, delivery method, support, and learning rhythm often influence whether visitors continue much more than many teams expect.',
+              'Those are not minor details. They are core trust layers for education products.',
+            ],
+          },
+          {
+            title: 'The sign-up and consultation path should stay obvious',
+            paragraphs: [
+              'If visitors finish reading and still do not know how to enroll, book a trial, or ask a question, conversion will stall immediately.',
+              'Training websites usually benefit from placing trial, inquiry, and FAQ paths much earlier and more clearly.',
+            ],
+          },
+        ],
+        takeawayTitle: 'Main takeaways',
+        takeaways: [
+          'Training websites need more than course lists.',
+          'Teaching trust, fit, and learning flow are major conversion factors.',
+          'A clearer enrollment path usually improves website effectiveness significantly.',
+        ],
+        ctaTitle: 'If you are planning a training website, structure course value and enrollment flow first',
+        ctaDescription: 'Once course fit, trust signals, FAQ, and the enrollment path are organized clearly, conversion usually improves a lot.',
+      },
+    },
+  },
+  'consulting-company-website-copy': {
+    slug: 'consulting-company-website-copy',
+    priority: {
+      zh: 0.62,
+      en: 0.49,
+    },
+    publishedAt: '2026-03-30',
+    readingMinutes: 6,
+    relatedServices: ['company-website-development', 'website-development'],
+    content: {
+      zh: {
+        navLabel: '咨询类公司官网怎么写，才不会看起来空又虚',
+        categoryLabel: '行业场景',
+        metaTitle: '咨询类公司官网怎么写？文案与结构参考｜致诚工作室',
+        metaDescription:
+          '咨询类公司官网怎么写，重点在于讲清服务对象、方法、案例逻辑和合作方式，而不是只堆很多抽象词。本文拆解更稳的官网写法。',
+        keywords: ['咨询公司官网', '咨询类官网怎么写', '服务型公司官网文案', '企业官网开发'],
+        eyebrow: 'Article',
+        heroTitle: '咨询类公司官网怎么写，才不会最后看起来空又虚',
+        heroDescription:
+          '咨询类网站最容易出现的问题，是满页都在说“专业、领先、战略、赋能”，但客户看完还是不知道到底服务谁、怎么做、有什么实际区别。文案和结构如果不具体，网站就很难建立信任。',
+        introTitle: '为什么咨询类官网特别容易写得抽象',
+        introParagraphs: [
+          '因为咨询服务本身偏抽象，团队很容易想用更高概念的表达去包装它。',
+          '但真正的潜在客户，更关心的是你解决什么问题、用什么方式、适合什么阶段、合作起来会是什么样子。',
+        ],
+        sections: [
+          {
+            title: '先讲服务对象和问题，再讲方法',
+            paragraphs: [
+              '客户通常会先判断“你是不是适合我”，所以服务对象、典型问题和适用阶段，通常应该比方法论更早出现。',
+              '如果一开始就全是抽象框架，访客很容易快速失焦。',
+            ],
+          },
+          {
+            title: '案例逻辑和合作方式能显著增加可信度',
+            paragraphs: [
+              '咨询服务很难只靠一句话证明自己，所以更需要把思路、合作流程和典型项目逻辑讲清楚。',
+              '只要案例不能公开客户名，也依然可以讲行业、问题类型、推进方式和结果变化。',
+            ],
+          },
+          {
+            title: '少用抽象口号，多用可判断的信息',
+            paragraphs: [
+              '抽象词可以作为辅助，但不能成为主体。更有效的内容通常是：服务边界、合作方式、工作节奏、典型结果和 FAQ。',
+              '咨询类官网越具体，越容易让客户继续往下聊。',
+            ],
+          },
+        ],
+        takeawayTitle: '这篇文章的重点',
+        takeaways: [
+          '咨询类官网最怕抽象词太多、可判断信息太少。',
+          '服务对象、问题类型和合作方式通常比口号更重要。',
+          '具体的信息和案例逻辑更容易建立信任。',
+        ],
+        ctaTitle: '如果你在做咨询类官网，先把“服务谁、怎么做”写具体',
+        ctaDescription: '只要把对象、问题和合作方式讲清楚，官网会比堆很多口号更有说服力。',
+      },
+      en: {
+        navLabel: 'How a Consulting Company Website Should Explain Itself',
+        categoryLabel: 'Industry',
+        metaTitle: 'How a Consulting Company Website Should Explain Itself | Zhicheng Studio',
+        metaDescription:
+          'Consulting websites work better when they explain audience fit, problem type, service logic, and cooperation flow instead of relying too heavily on abstract language.',
+        keywords: ['consulting company website', 'consulting website copy', 'service website messaging'],
+        eyebrow: 'Article',
+        heroTitle: 'A consulting website should sound specific enough to be trusted',
+        heroDescription:
+          'Consulting websites often become too abstract. They talk about strategy, growth, and transformation, but never explain clearly who they help, how they work, and what makes them a real fit.',
+        introTitle: 'Why consulting websites become vague so easily',
+        introParagraphs: [
+          'Consulting services are naturally abstract, which tempts teams to describe them with even more abstract language.',
+          'Potential clients, however, usually care much more about fit, problem type, process, and expected working rhythm.',
+        ],
+        sections: [
+          {
+            title: 'Start with audience fit and problem type',
+            paragraphs: [
+              'Visitors usually ask “is this for a business like mine?” before they care about frameworks or methodology.',
+              'That makes audience fit, problem type, and business stage more important early in the structure.',
+            ],
+          },
+          {
+            title: 'Case logic and cooperation flow build credibility',
+            paragraphs: [
+              'Consulting cannot rely on one-line claims alone. The site usually needs to explain how work is structured, how collaboration happens, and what kinds of results or changes occur.',
+              'Even when client names cannot be shown, the logic and shape of the work can still be explained clearly.',
+            ],
+          },
+          {
+            title: 'Replace slogan-heavy language with judgment-friendly information',
+            paragraphs: [
+              'Abstract positioning can support the page, but should not dominate it.',
+              'Service boundaries, process, FAQ, working rhythm, and realistic outcomes usually build trust much faster.',
+            ],
+          },
+        ],
+        takeawayTitle: 'Main takeaways',
+        takeaways: [
+          'Consulting websites often lose trust when they become too abstract.',
+          'Audience fit, problem type, and cooperation flow usually matter more than slogans.',
+          'Specific information is easier to trust than positioning language alone.',
+        ],
+        ctaTitle: 'If you are planning a consulting website, make the fit and process specific',
+        ctaDescription: 'Clearer audience fit, problem framing, and cooperation flow usually outperform abstract positioning language.',
+      },
+    },
+  },
+  'ai-product-website-messaging': {
+    slug: 'ai-product-website-messaging',
+    priority: {
+      zh: 0.62,
+      en: 0.49,
+    },
+    publishedAt: '2026-03-30',
+    readingMinutes: 6,
+    relatedServices: ['website-development', 'company-website-development'],
+    content: {
+      zh: {
+        navLabel: 'AI 产品官网怎么写，才不会只剩“智能”“高效”这些词',
+        categoryLabel: '行业场景',
+        metaTitle: 'AI 产品官网怎么写？AI 产品官网文案与结构参考｜致诚工作室',
+        metaDescription:
+          'AI 产品官网怎么写，重点是把产品用途、适用人群、工作方式和结果讲清楚，而不是反复堆“智能”“高效”。本文拆解更稳的写法。',
+        keywords: ['AI 产品官网', 'AI 官网文案', 'AI 产品网站', '产品官网开发'],
+        eyebrow: 'Article',
+        heroTitle: 'AI 产品官网怎么写，才不会最后只剩“智能”“高效”这些词',
+        heroDescription:
+          'AI 产品官网最容易掉进一个坑：所有页面都在强调“智能、自动化、效率提升”，却没有把到底怎么工作、适合谁、能替代什么步骤讲清楚。结果页面看上去很前沿，理解门槛却很高。',
+        introTitle: '为什么 AI 产品官网特别容易说得很热闹、却不够清楚',
+        introParagraphs: [
+          '因为 AI 本身容易让人先看概念，再看实际使用场景，团队也容易跟着强调能力名词而忽略用户理解路径。',
+          '真正更有效的官网，应该先讲产品如何使用、适合谁、能省掉什么动作，再讲技术亮点。',
+        ],
+        sections: [
+          {
+            title: '先讲用户动作，再讲 AI 能力',
+            paragraphs: [
+              '用户更容易理解“上传什么、输入什么、得到什么结果”，而不是一长串模型和能力描述。',
+              '所以官网更适合先从真实使用动作和输出结果切入。',
+            ],
+          },
+          {
+            title: '适用对象和边界一定要讲清楚',
+            paragraphs: [
+              'AI 产品常常不是所有人都适用。如果不讲清适合谁、不适合谁、边界在哪里，试用后的失望感会很强。',
+              '官网如果能提前讲明白这些，反而更容易筛到真正匹配的用户。',
+            ],
+          },
+          {
+            title: '功能页和 FAQ 可以降低理解门槛',
+            paragraphs: [
+              '对于稍复杂一点的 AI 产品，功能页、FAQ 和使用示例通常非常重要。',
+              '它们可以把抽象能力拆成更具体的问题和结果，帮助用户更快判断。',
+            ],
+          },
+        ],
+        takeawayTitle: '这篇文章的重点',
+        takeaways: [
+          'AI 官网不要只强调概念，要先讲使用动作和结果。',
+          '适用对象和产品边界需要提前讲清楚。',
+          '功能页、FAQ 和示例能显著降低理解门槛。',
+        ],
+        ctaTitle: '如果你在做 AI 产品官网，先把“怎么用、给谁用、能得到什么”讲顺',
+        ctaDescription: '只要用户理解路径先排顺，后面的功能和亮点反而更容易被看懂。',
+      },
+      en: {
+        navLabel: 'How an AI Product Website Should Explain the Product',
+        categoryLabel: 'Industry',
+        metaTitle: 'How to Write a Clearer AI Product Website | Zhicheng Studio',
+        metaDescription:
+          'AI product websites work better when they explain user flow, fit, and results clearly instead of leaning too heavily on broad terms like intelligent or efficient.',
+        keywords: ['AI product website', 'AI website messaging', 'AI product landing page'],
+        eyebrow: 'Article',
+        heroTitle: 'An AI product website should explain use and fit before hype',
+        heroDescription:
+          'AI product sites often overuse words like intelligent, automated, and efficient while under-explaining how the product works, who it is for, and what it really replaces or improves.',
+        introTitle: 'Why AI websites often sound exciting but stay unclear',
+        introParagraphs: [
+          'AI products naturally attract high-level language, which makes it easy to talk about capability before explaining user understanding.',
+          'A stronger website usually starts with use, fit, and output before technical promise.',
+        ],
+        sections: [
+          {
+            title: 'Explain user action before AI capability',
+            paragraphs: [
+              'Visitors usually understand “what do I input, what happens, and what result do I get” faster than a long list of capability claims.',
+              'That makes real interaction flow a better entry point than abstract capability wording.',
+            ],
+          },
+          {
+            title: 'Clarify fit and boundaries early',
+            paragraphs: [
+              'Many AI products are not equally suitable for everyone. If fit and limits stay unclear, disappointment rises after trial.',
+              'A clearer website filters better-fit users earlier and creates stronger expectations.',
+            ],
+          },
+          {
+            title: 'Feature pages and FAQ reduce the learning barrier',
+            paragraphs: [
+              'For more complex AI products, feature pages, FAQ, and example outputs are often essential.',
+              'They help turn abstract promise into clearer tasks, situations, and outcomes.',
+            ],
+          },
+        ],
+        takeawayTitle: 'Main takeaways',
+        takeaways: [
+          'AI websites should explain use and output before hype.',
+          'Fit and boundaries need to be clear early.',
+          'Feature pages, FAQ, and examples reduce understanding friction significantly.',
+        ],
+        ctaTitle: 'If you are planning an AI product website, explain how it is used first',
+        ctaDescription: 'Once use, fit, and output are easier to understand, the product’s stronger points become much easier to appreciate.',
+      },
+    },
+  },
+  'b2b-industry-pages-planning': {
+    slug: 'b2b-industry-pages-planning',
+    priority: {
+      zh: 0.62,
+      en: 0.49,
+    },
+    publishedAt: '2026-03-30',
+    readingMinutes: 6,
+    relatedServices: ['foreign-trade-website-development', 'company-website-development', 'website-development'],
+    content: {
+      zh: {
+        navLabel: 'B2B 网站为什么值得做行业页，而不是只做产品页',
+        categoryLabel: '行业场景',
+        metaTitle: 'B2B 网站为什么要做行业页？行业页结构参考｜致诚工作室',
+        metaDescription:
+          'B2B 网站为什么值得做行业页，关键在于客户会按行业和场景来判断你是否适合。本文拆解行业页对内容结构、SEO 和转化的价值。',
+        keywords: ['B2B 行业页', '行业页怎么做', 'B2B 网站结构', '外贸网站开发'],
+        eyebrow: 'Article',
+        heroTitle: 'B2B 网站为什么值得做行业页，而不是只做产品页',
+        heroDescription:
+          '很多 B2B 网站会把重点都放在产品页上，但客户做判断时往往不只是看产品，而是看你对他所在行业的理解够不够深。行业页正是承接这一层判断的内容入口。',
+        introTitle: '为什么产品页不一定能回答行业问题',
+        introParagraphs: [
+          '产品页适合讲功能、参数和适用范围，但它不一定能充分解释某个行业的具体痛点、应用方式和合作逻辑。',
+          '如果网站缺少行业页，这部分判断通常就只能留到销售沟通里再慢慢补。',
+        ],
+        sections: [
+          {
+            title: '行业页更适合讲场景和理解深度',
+            paragraphs: [
+              '客户往往更容易被“你理解我的行业问题”打动，而不只是“你有这个产品”。',
+              '行业页可以专门讲场景、流程、常见问题和适配方式，这会让网站更像解决方案入口。',
+            ],
+          },
+          {
+            title: '行业页也更适合承接搜索词',
+            paragraphs: [
+              '很多搜索行为本来就是“行业 + 产品 / 方案 / 服务”组合，行业页能更自然地覆盖这些词。',
+              '相比所有词都压在首页或产品页，行业页通常更适合承接长尾搜索。',
+            ],
+          },
+          {
+            title: '行业页和产品页应该互相配合',
+            paragraphs: [
+              '产品页讲产品本身，行业页讲行业问题和应用方式，这两种页面配合起来，网站结构会更完整。',
+              '两边有内链时，也更利于用户继续深入浏览。',
+            ],
+          },
+        ],
+        takeawayTitle: '这篇文章的重点',
+        takeaways: [
+          'B2B 客户判断时通常会关心行业理解，而不只是产品能力。',
+          '行业页更适合承接“行业 + 方案 / 服务”类搜索词。',
+          '产品页和行业页配合，会让网站结构更完整。',
+        ],
+        ctaTitle: '如果你的网站主要面对 B2B 客户，可以考虑尽早规划行业页',
+        ctaDescription: '行业页一旦搭起来，内容结构、搜索承接和销售沟通都会更顺。',
+      },
+      en: {
+        navLabel: 'Why B2B Websites Benefit from Industry Pages',
+        categoryLabel: 'Industry',
+        metaTitle: 'Why B2B Websites Benefit from Industry Pages | Zhicheng Studio',
+        metaDescription:
+          'B2B websites often benefit from industry pages because buyers evaluate fit through industry context, not product detail alone. This article explains how industry pages help.',
+        keywords: ['B2B industry pages', 'industry page planning', 'B2B website structure'],
+        eyebrow: 'Article',
+        heroTitle: 'B2B websites often need industry pages, not only product pages',
+        heroDescription:
+          'B2B buyers do not evaluate fit through products alone. They often look for evidence that the company understands their industry context, workflow, and specific challenges. Industry pages help support that judgment.',
+        introTitle: 'Why product pages alone often leave a gap',
+        introParagraphs: [
+          'Product pages are useful for capability and scope, but they often do not explain the specific shape of a buyer’s industry problem well enough.',
+          'Without industry pages, that context usually has to be rebuilt later in sales conversations.',
+        ],
+        sections: [
+          {
+            title: 'Industry pages carry scenario understanding better',
+            paragraphs: [
+              'Buyers are often persuaded more by “this company understands my workflow” than by “this company has a product.”',
+              'Industry pages make space for scenario, process, and fit in a way product pages often cannot.',
+            ],
+          },
+          {
+            title: 'They also support search better',
+            paragraphs: [
+              'Many relevant searches naturally combine industry plus product, solution, or service.',
+              'Industry pages usually cover those long-tail combinations more naturally than a homepage or generic product page.',
+            ],
+          },
+          {
+            title: 'Industry pages and product pages should reinforce each other',
+            paragraphs: [
+              'Product pages explain the product. Industry pages explain the context in which it matters.',
+              'Together they create a stronger information path and deeper browsing structure.',
+            ],
+          },
+        ],
+        takeawayTitle: 'Main takeaways',
+        takeaways: [
+          'B2B buyers often judge fit through industry understanding, not product detail alone.',
+          'Industry pages usually support long-tail search more naturally.',
+          'Product and industry pages work best as complementary layers.',
+        ],
+        ctaTitle: 'If your site mainly serves B2B clients, industry pages are often worth planning early',
+        ctaDescription: 'They usually strengthen structure, search coverage, and sales clarity at the same time.',
+      },
+    },
+  },
+  'website-content-update-process': {
+    slug: 'website-content-update-process',
+    priority: {
+      zh: 0.62,
+      en: 0.49,
+    },
+    publishedAt: '2026-03-30',
+    readingMinutes: 6,
+    relatedServices: ['website-development', 'company-website-development', 'foreign-trade-website-development'],
+    content: {
+      zh: {
+        navLabel: '网站上线后内容怎么持续更新，才不会很快停掉',
+        categoryLabel: '运营',
+        metaTitle: '网站上线后内容怎么持续更新？更容易执行的内容节奏参考｜致诚工作室',
+        metaDescription:
+          '网站上线后内容怎么持续更新，关键在于页面分工、素材来源和更新节奏。本文拆解更容易长期执行的网站内容更新方式。',
+        keywords: ['网站内容更新', '官网上线后怎么维护', '企业官网内容运营', '网站开发'],
+        eyebrow: 'Article',
+        heroTitle: '网站上线后内容怎么持续更新，才不会两周后就停掉',
+        heroDescription:
+          '很多网站上线时看起来内容完整，但真正难的是后续更新。不是没人想更新，而是内容来源、分工、节奏和页面结构一开始就没准备好，结果网站很快停在上线那一版。',
+        introTitle: '为什么网站内容更新最容易断在上线后',
+        introParagraphs: [
+          '因为很多项目把“上线”当成终点，没有提前规划谁更新、更新什么、从哪里来素材、哪些页面适合持续补内容。',
+          '如果没有这个机制，网站就会在很短时间里重新变旧。',
+        ],
+        sections: [
+          {
+            title: '先分清哪些页面适合持续更新',
+            paragraphs: [
+              '首页和基础介绍页不需要频繁改，但服务页、FAQ、文章页、行业页和产品页通常更适合持续补内容。',
+              '如果页面分工不清楚，后续更新会很容易陷入“什么都想改，最后什么都没改”。',
+            ],
+          },
+          {
+            title: '内容来源和负责方式要提前定',
+            paragraphs: [
+              '网站内容更新最怕“等有空再说”，所以更稳的做法是先明确素材来源、更新频率和谁负责初稿、谁负责审核。',
+              '即使更新频率不高，只要机制稳定，也比完全停更强很多。',
+            ],
+          },
+          {
+            title: '先用轻节奏跑起来，再考虑复杂运营',
+            paragraphs: [
+              '很多网站不是不适合更新，而是一开始给自己定得太复杂，最后完全执行不下去。',
+              '更现实的方式通常是先固定一周一篇或两周一篇，慢慢建立内容节奏。',
+            ],
+          },
+        ],
+        takeawayTitle: '这篇文章的重点',
+        takeaways: [
+          '网站上线后最怕没有更新机制，而不是更新频率不够高。',
+          '服务页、FAQ、文章页和行业页通常更适合持续补内容。',
+          '轻节奏但稳定执行，通常比复杂规划更有用。',
+        ],
+        ctaTitle: '如果你担心网站上线后很快停更，先把更新机制定下来',
+        ctaDescription: '页面分工、素材来源和更新节奏一旦理顺，网站更容易持续变强，而不是只停在上线那天。',
+      },
+      en: {
+        navLabel: 'How to Keep Website Content Updated After Launch',
+        categoryLabel: 'Operations',
+        metaTitle: 'How to Keep Website Content Updated After Launch | Zhicheng Studio',
+        metaDescription:
+          'A website stays useful after launch when content ownership, source material, page roles, and cadence are planned clearly. This article explains a more sustainable approach.',
+        keywords: ['website content updates', 'post-launch website maintenance', 'content workflow'],
+        eyebrow: 'Article',
+        heroTitle: 'Website content usually stops because there was no update system, not because nobody cared',
+        heroDescription:
+          'Many websites launch with enough content and then freeze quickly. The usual problem is not lack of intention, but lack of source material, role clarity, cadence, and page structure for continued updates.',
+        introTitle: 'Why website content often stalls right after launch',
+        introParagraphs: [
+          'Many teams treat launch as the end and never decide who updates what, where material comes from, or which pages are meant to keep growing.',
+          'Without that mechanism, even a strong first version becomes outdated surprisingly fast.',
+        ],
+        sections: [
+          {
+            title: 'Decide which pages should keep evolving',
+            paragraphs: [
+              'The homepage and basic company pages may change less often, while service pages, FAQ, blog posts, industry pages, and product pages are usually the stronger candidates for ongoing updates.',
+              'Without that distinction, updates tend to become unfocused and inconsistent.',
+            ],
+          },
+          {
+            title: 'Assign source material and ownership early',
+            paragraphs: [
+              'The update rhythm usually fails when everyone assumes content will be written “later when there is time.”',
+              'Even a modest cadence works much better when source material and ownership are clear.',
+            ],
+          },
+          {
+            title: 'Start with a lighter rhythm first',
+            paragraphs: [
+              'Many teams over-plan the content system and then never execute it.',
+              'A lighter but steady rhythm, such as one article a week or every two weeks, is often much more realistic and sustainable.',
+            ],
+          },
+        ],
+        takeawayTitle: 'Main takeaways',
+        takeaways: [
+          'Content usually stops because the update system was never defined.',
+          'Service, FAQ, article, industry, and product pages are often the best growth layers.',
+          'A lighter cadence that keeps moving is usually better than a complex plan that stalls.',
+        ],
+        ctaTitle: 'If you worry that the site will stop evolving after launch, define the update mechanism early',
+        ctaDescription: 'Page roles, source material, and cadence matter more to long-term content health than ambitious publishing plans alone.',
+      },
+    },
+  },
+  'website-development-timeline-estimation': {
+    slug: 'website-development-timeline-estimation',
+    priority: {
+      zh: 0.6,
+      en: 0.48,
+    },
+    publishedAt: '2026-03-30',
+    readingMinutes: 6,
+    relatedServices: ['website-development', 'company-website-development', 'foreign-trade-website-development'],
+    content: {
+      zh: {
+        navLabel: '网站开发周期一般多久，为什么有的项目两周有的两个月',
+        categoryLabel: '工期',
+        metaTitle: '网站开发周期一般多久？工期判断参考｜致诚工作室',
+        metaDescription:
+          '网站开发周期一般多久，取决于页面数量、内容准备、是否多语言、是否有后台和沟通效率。本文拆解更真实的工期判断方式。',
+        keywords: ['网站开发周期', '网站开发一般多久', '企业官网开发周期', '网站开发工期'],
+        eyebrow: 'Article',
+        heroTitle: '网站开发周期一般多久，为什么有的项目两周有的两个月',
+        heroDescription:
+          '很多人问工期时，希望得到一个统一答案，但网站项目之间差异很大。页面数量、内容准备程度、是否有后台、多语言和沟通效率，都会明显拉开实际开发周期。',
+        introTitle: '为什么工期问题最容易被低估',
+        introParagraphs: [
+          '网站项目不只是开发页面，还包括结构确定、内容准备、反馈修改、测试、上线和配置。只看编码时间，工期判断通常会失真。',
+          '越是中型以上项目，工期里越多的时间并不在写代码，而在前期确认和中间同步。',
+        ],
+        sections: [
+          {
+            title: '页面和功能复杂度是第一层影响因素',
+            paragraphs: [
+              '几页基础官网、多语言官网、带表单和后台的网站，复杂度不是一个量级，所以工期也不会一样。',
+              '如果一开始就把不同规模项目当成同一类，会很容易低估排期。',
+            ],
+          },
+          {
+            title: '内容准备程度会直接影响速度',
+            paragraphs: [
+              '资料越完整，页面推进越顺；如果内容长期边做边补，工期通常会明显被拉长。',
+              '图片、文案、服务描述、FAQ 和参考站，都会影响推进效率。',
+            ],
+          },
+          {
+            title: '反馈节奏和决策效率同样关键',
+            paragraphs: [
+              '有些项目技术不复杂，但因为反馈链路长、内部决策慢，工期照样会被拖长。',
+              '所以工期不是纯开发问题，也是协作问题。',
+            ],
+          },
+        ],
+        takeawayTitle: '这篇文章的重点',
+        takeaways: [
+          '网站工期不仅受开发量影响，也受内容准备和反馈效率影响。',
+          '页面规模、多语言和后台需求会明显拉开周期差异。',
+          '越早把范围和决策方式说清楚，工期越容易判断得准。',
+        ],
+        ctaTitle: '如果你在评估工期，先把页面、功能和内容准备情况说清楚',
+        ctaDescription: '只要范围和资料准备程度明确，工期判断通常会比单问“多久能做完”更靠谱。',
+      },
+      en: {
+        navLabel: 'How Long Does Website Development Usually Take?',
+        categoryLabel: 'Timeline',
+        metaTitle: 'How Long Does Website Development Usually Take? | Zhicheng Studio',
+        metaDescription:
+          'Website timelines depend on page depth, content readiness, multilingual scope, backend needs, and decision speed. This article explains a more realistic way to estimate timeline.',
+        keywords: ['website development timeline', 'how long does a website take', 'company website timeline'],
+        eyebrow: 'Article',
+        heroTitle: 'Website development timelines vary because project scope and collaboration vary',
+        heroDescription:
+          'Teams often want one simple answer on timing, but website projects differ too much for that to work. Page depth, content readiness, multilingual scope, backend needs, and decision speed all shape the real timeline.',
+        introTitle: 'Why timeline discussions are so often underestimated',
+        introParagraphs: [
+          'Website projects include more than implementation. Structure decisions, content preparation, review, testing, deployment, and configuration all take time too.',
+          'For anything beyond a tiny site, much of the timeline is shaped by alignment and review rather than code alone.',
+        ],
+        sections: [
+          {
+            title: 'Page and feature complexity shape the first layer',
+            paragraphs: [
+              'A small brochure site, a multilingual company site, and a site with admin support do not sit in the same workload band.',
+              'If they are treated like the same type of project, the timeline usually gets underestimated immediately.',
+            ],
+          },
+          {
+            title: 'Content readiness has a direct impact',
+            paragraphs: [
+              'The more complete the content and references are, the smoother the delivery usually becomes.',
+              'Images, service descriptions, FAQ material, and reference direction all affect momentum.',
+            ],
+          },
+          {
+            title: 'Feedback rhythm matters too',
+            paragraphs: [
+              'Some projects are not technically difficult, yet still move slowly because review and decision flow take too long.',
+              'That is why timeline is not only a development question, but also a collaboration question.',
+            ],
+          },
+        ],
+        takeawayTitle: 'Main takeaways',
+        takeaways: [
+          'Timeline depends on more than coding workload.',
+          'Page depth, multilingual scope, and backend needs change timing significantly.',
+          'Clearer scope and faster decisions usually make timeline estimates much more reliable.',
+        ],
+        ctaTitle: 'If you are evaluating timeline, clarify scope and content readiness first',
+        ctaDescription: 'A realistic timeline usually starts from clearer pages, features, and source material rather than from a single rough question.',
+      },
+    },
+  },
+  'website-maintenance-scope': {
+    slug: 'website-maintenance-scope',
+    priority: {
+      zh: 0.6,
+      en: 0.48,
+    },
+    publishedAt: '2026-03-30',
+    readingMinutes: 6,
+    relatedServices: ['website-development', 'company-website-development', 'web-app-development'],
+    content: {
+      zh: {
+        navLabel: '网站上线后的维护到底包括什么，不包括什么',
+        categoryLabel: '维护',
+        metaTitle: '网站上线后的维护包括什么？边界参考｜致诚工作室',
+        metaDescription:
+          '网站上线后的维护包括什么、不包括什么，通常影响合作边界和长期成本。本文拆解 Bug 修复、兼容性、内容更新和新增需求的区别。',
+        keywords: ['网站维护包括什么', '官网上线后维护', '网站开发维护', '网站交付后支持'],
+        eyebrow: 'Article',
+        heroTitle: '网站上线后的维护到底包括什么，不包括什么',
+        heroDescription:
+          '很多合作在上线后容易出现认知偏差，不是因为谁故意扯皮，而是“维护”这个词本身太宽了。Bug 修复、兼容性问题、内容更新、功能新增和运营支持，其实是不同层级的事情。',
+        introTitle: '为什么维护边界最容易在项目后期变模糊',
+        introParagraphs: [
+          '因为在项目刚开始时，大家更关注开发和上线，对上线后的支持常常只会笼统说一句“后面维护一下”。',
+          '但真到上线后，如果没有边界，双方对“这算维护还是新增”很容易理解不同。',
+        ],
+        sections: [
+          {
+            title: 'Bug 修复和功能新增不是一回事',
+            paragraphs: [
+              '网站本来就该有的功能出现异常、兼容问题或明显错误，通常属于维护范畴。',
+              '而新增页面、调整流程、增加后台能力或新业务模块，通常更接近新增需求。',
+            ],
+          },
+          {
+            title: '内容更新也需要单独看',
+            paragraphs: [
+              '少量帮助性的内容修改和必要说明，有时可以纳入支持，但长期高频更新通常更适合单独约定方式。',
+              '尤其是企业官网、产品页和文章更新，长期执行时最好有更明确的节奏和负责人。',
+            ],
+          },
+          {
+            title: '越早讲清边界，后面越顺',
+            paragraphs: [
+              '维护本身不是问题，边界模糊才是问题。',
+              '在项目开始时就讲清维护周期、响应范围和新增需求处理方式，后面的合作会轻松很多。',
+            ],
+          },
+        ],
+        takeawayTitle: '这篇文章的重点',
+        takeaways: [
+          'Bug 修复、内容更新和功能新增应该分开看。',
+          '维护边界越早讲清楚，后面越不容易扯皮。',
+          '网站上线后的支持本身也应该有明确范围和节奏。',
+        ],
+        ctaTitle: '如果你在谈网站项目，维护范围最好一开始就说清楚',
+        ctaDescription: '只要先把维护、更新和新增需求分开，后面的合作边界通常会清楚很多。',
+      },
+      en: {
+        navLabel: 'What Website Maintenance Usually Includes After Launch',
+        categoryLabel: 'Maintenance',
+        metaTitle: 'What Website Maintenance Usually Includes After Launch | Zhicheng Studio',
+        metaDescription:
+          'Website maintenance often becomes unclear after launch because bug fixes, content updates, compatibility issues, and new feature requests are treated as the same thing. This article separates them.',
+        keywords: ['website maintenance scope', 'post-launch website support', 'website maintenance after launch'],
+        eyebrow: 'Article',
+        heroTitle: 'Website maintenance becomes much easier when its boundaries are defined early',
+        heroDescription:
+          'Post-launch support often becomes messy not because anyone wants conflict, but because “maintenance” gets used as one broad label for several very different types of work.',
+        introTitle: 'Why maintenance becomes vague so easily',
+        introParagraphs: [
+          'At project start, most attention goes to launch itself, while post-launch support is often discussed too loosely.',
+          'Once the site is live, that vagueness turns into confusion around what counts as support versus what counts as new work.',
+        ],
+        sections: [
+          {
+            title: 'Bug fixes and new features are not the same category',
+            paragraphs: [
+              'Problems with intended functionality, compatibility, or clear errors usually fit support or maintenance.',
+              'New pages, process changes, backend growth, or new business modules usually belong to new scope.',
+            ],
+          },
+          {
+            title: 'Content updates should also be defined clearly',
+            paragraphs: [
+              'A small amount of helpful content support may fit inside a support window, but long-term recurring content work is often better handled as its own agreement.',
+              'That matters especially for service pages, product pages, and blog content.',
+            ],
+          },
+          {
+            title: 'The earlier the boundary is clarified, the smoother the collaboration',
+            paragraphs: [
+              'Maintenance itself is rarely the problem. Unclear scope is the problem.',
+              'If response range, duration, and how new work is handled are explained early, post-launch collaboration usually stays much cleaner.',
+            ],
+          },
+        ],
+        takeawayTitle: 'Main takeaways',
+        takeaways: [
+          'Bug fixes, content work, and new features should be treated separately.',
+          'Clear support boundaries reduce friction later.',
+          'Post-launch maintenance is easier when scope and rhythm are defined early.',
+        ],
+        ctaTitle: 'If you are discussing a website project, define maintenance boundaries early',
+        ctaDescription: 'Separating support, updates, and new requests early usually makes later collaboration much easier.',
+      },
+    },
+  },
+  'company-website-contact-page-planning': {
+    slug: 'company-website-contact-page-planning',
+    priority: {
+      zh: 0.6,
+      en: 0.48,
+    },
+    publishedAt: '2026-03-30',
+    readingMinutes: 6,
+    relatedServices: ['company-website-development', 'website-development'],
+    content: {
+      zh: {
+        navLabel: '企业官网联系页怎么做，才不会只是放个电话和微信',
+        categoryLabel: '联系页',
+        metaTitle: '企业官网联系页怎么做？联系页结构参考｜致诚工作室',
+        metaDescription:
+          '企业官网联系页不应该只放电话和微信，还应该承接首次沟通建议、联系路径和高频疑虑。本文拆解更有效的联系页结构。',
+        keywords: ['企业官网联系页', '联系页怎么做', '官网转化页面', '企业官网开发'],
+        eyebrow: 'Article',
+        heroTitle: '企业官网联系页怎么做，才不会最后只剩一个电话和微信',
+        heroDescription:
+          '联系页看起来像网站最后一页，但它其实是最接近转化的一页。如果这里只放联系方式，却没有帮助访客判断怎么联系、该带什么信息、预期会怎样，很多高意图访客还是会犹豫。',
+        introTitle: '为什么联系页最容易被做得太薄',
+        introParagraphs: [
+          '因为它经常被当成一个“补完整站结构”的页面，而不是被当成真正承接沟通动作的入口。',
+          '结果就是联系方式有了，但联系意愿没有被真正往前推。',
+        ],
+        sections: [
+          {
+            title: '联系页应该回答“怎么联系更有效”',
+            paragraphs: [
+              '除了放电话、微信和表单，联系页更适合补充首次沟通建议，比如预算、目标、关键需求和参考站。',
+              '这些信息会明显降低访客不知道该怎么开口的门槛。',
+            ],
+          },
+          {
+            title: '沟通时间和响应方式会影响行动意愿',
+            paragraphs: [
+              '如果访客不知道什么时候能收到回复、该走哪种联系路径，联系动作会被拖延。',
+              '所以响应时间、联系方式选择和基本沟通习惯都应该讲清楚。',
+            ],
+          },
+          {
+            title: '联系页也能承担一部分信任说明',
+            paragraphs: [
+              '合作方式、维护方式、项目边界和常见问题，如果能在联系页里适度补充，会更容易推动继续交流。',
+              '联系页不是只放联系方式，而是把最后一步走顺。',
+            ],
+          },
+        ],
+        takeawayTitle: '这篇文章的重点',
+        takeaways: [
+          '联系页应该帮助访客知道怎么联系更有效。',
+          '沟通时间、响应方式和首次沟通建议都很重要。',
+          '联系页也是转化页面，不只是一个信息页。',
+        ],
+        ctaTitle: '如果你在做企业官网联系页，先把“怎么联系更有效”写出来',
+        ctaDescription: '只要联系页能降低访客犹豫，网站最后一步的转化效率通常会明显变好。',
+      },
+      en: {
+        navLabel: 'How a Company Website Contact Page Should Work',
+        categoryLabel: 'Contact Page',
+        metaTitle: 'How to Structure a Company Website Contact Page | Zhicheng Studio',
+        metaDescription:
+          'A company website contact page should do more than list phone and email. It should also reduce hesitation and explain how to start the conversation more effectively.',
+        keywords: ['company website contact page', 'contact page structure', 'website conversion page'],
+        eyebrow: 'Article',
+        heroTitle: 'A contact page should help visitors move into conversation, not only show contact details',
+        heroDescription:
+          'The contact page looks like the last page, but it often carries the closest step to conversion. If it only lists channels without reducing hesitation, many strong-intent visitors still pause.',
+        introTitle: 'Why contact pages often stay too thin',
+        introParagraphs: [
+          'They are often treated as a structural placeholder instead of a conversion support page.',
+          'That leaves the contact options visible, but does not make the visitor any more ready to use them.',
+        ],
+        sections: [
+          {
+            title: 'The contact page should explain how to reach out effectively',
+            paragraphs: [
+              'Besides listing phone, email, or messaging options, the page can help by suggesting what to include in a first message.',
+              'Budget, goal, key requirements, and references often lower the barrier to starting the conversation.',
+            ],
+          },
+          {
+            title: 'Response expectations matter',
+            paragraphs: [
+              'If visitors do not know when to expect a reply or which channel makes the most sense, they often delay the action.',
+              'That makes response time and communication style part of the page’s conversion work too.',
+            ],
+          },
+          {
+            title: 'Contact pages can still support trust',
+            paragraphs: [
+              'Cooperation style, support terms, project boundaries, and common concerns can all be reinforced lightly on the contact page.',
+              'The goal is not only to show channels, but to make the final step feel easier and safer.',
+            ],
+          },
+        ],
+        takeawayTitle: 'Main takeaways',
+        takeaways: [
+          'A contact page should reduce hesitation, not only display channels.',
+          'First-message guidance and response expectations help conversion.',
+          'Contact pages can support trust as well as action.',
+        ],
+        ctaTitle: 'If you are shaping a contact page, explain how to reach out effectively',
+        ctaDescription: 'A contact page that lowers uncertainty usually improves conversion more than one that only lists channels.',
+      },
+    },
+  },
+  'multilingual-website-launch-checklist': {
+    slug: 'multilingual-website-launch-checklist',
+    priority: {
+      zh: 0.6,
+      en: 0.48,
+    },
+    publishedAt: '2026-03-30',
+    readingMinutes: 6,
+    relatedServices: ['foreign-trade-website-development', 'website-development'],
+    content: {
+      zh: {
+        navLabel: '多语言网站上线前要检查什么，才不容易上线后再返工',
+        categoryLabel: '多语言',
+        metaTitle: '多语言网站上线前要检查什么？上线清单参考｜致诚工作室',
+        metaDescription:
+          '多语言网站上线前要检查的重点包括路径、canonical、hreflang、切换逻辑、sitemap 和内容对应关系。本文整理上线前更稳的检查清单。',
+        keywords: ['多语言网站上线清单', 'hreflang 检查', '多语言网站开发', '外贸网站上线'],
+        eyebrow: 'Article',
+        heroTitle: '多语言网站上线前要检查什么，才不容易上线后再返工',
+        heroDescription:
+          '多语言网站最怕的是上线以后才发现路径不对、语言切换乱、canonical 错、`hreflang` 漏了，最后又回头返工。很多问题其实都适合在上线前一次检查掉。',
+        introTitle: '为什么多语言网站上线最容易补锅',
+        introParagraphs: [
+          '因为多语言站比普通站多了一层“页面对应关系”，一旦路径、语言切换或内容映射没处理好，问题不会只影响一个页面。',
+          '所以多语言站上线更需要提前用清单思维去检查。',
+        ],
+        sections: [
+          {
+            title: '先检查路径和页面对应关系',
+            paragraphs: [
+              '每个语言版本的路径是否清楚、是否有一一对应页面、默认语言逻辑是否明确，这些都应该先确认。',
+              '如果页面之间对应关系本身混乱，后面的 SEO 配置也很难完全补救。',
+            ],
+          },
+          {
+            title: 'canonical、hreflang 和 sitemap 要一起看',
+            paragraphs: [
+              '多语言网站最常见的上线问题就是这些基础项有的配了、有的漏了。',
+              '更稳的做法是把 canonical、`hreflang`、`robots`、`sitemap` 一起作为一组检查项。',
+            ],
+            bullets: [
+              '页面 canonical 是否指向正确语言版本',
+              '`hreflang` 是否互相对应',
+              'sitemap 是否包含全部语言版本',
+              '语言切换是否能正确跳到对应页',
+            ],
+          },
+          {
+            title: '最后检查内容和语言体验',
+            paragraphs: [
+              '不仅要看技术项，也要看页面标题、描述、按钮、导航和 FAQ 是否真的切到正确语言。',
+              '技术正确但内容层错位，用户体验照样会很差。',
+            ],
+          },
+        ],
+        takeawayTitle: '这篇文章的重点',
+        takeaways: [
+          '多语言站上线前，路径和页面映射关系必须先查清。',
+          'canonical、`hreflang` 和 `sitemap` 应该作为一组检查。',
+          '内容语言体验也要和技术项一起检查。',
+        ],
+        ctaTitle: '如果你正准备上线多语言站，先把这组检查项过一遍',
+        ctaDescription: '上线前把路径、语言映射和 SEO 基础一次查清，通常能省掉很多返工。',
+      },
+      en: {
+        navLabel: 'A Practical Launch Checklist for Multilingual Websites',
+        categoryLabel: 'Multilingual',
+        metaTitle: 'A Practical Launch Checklist for Multilingual Websites | Zhicheng Studio',
+        metaDescription:
+          'Before a multilingual site goes live, path mapping, canonical tags, hreflang, language switching, sitemap, and content consistency all need to be checked together.',
+        keywords: ['multilingual website launch checklist', 'hreflang checklist', 'international website launch'],
+        eyebrow: 'Article',
+        heroTitle: 'Multilingual websites benefit from a launch checklist more than most teams expect',
+        heroDescription:
+          'Multilingual sites often trigger avoidable rework after launch because path mapping, language switching, canonical tags, and hreflang were not all checked together before release.',
+        introTitle: 'Why multilingual launches create so much post-launch cleanup',
+        introParagraphs: [
+          'Multilingual sites do not only add more pages. They also add a second layer of mapping between page equivalents.',
+          'If that layer is weak, problems spread across the site much more easily than on a single-language launch.',
+        ],
+        sections: [
+          {
+            title: 'Check path and page mapping first',
+            paragraphs: [
+              'Each locale path should be clear, and each major page should have a well-defined equivalent in the other language versions.',
+              'If the mapping itself is unclear, SEO configuration alone will not fully rescue the launch.',
+            ],
+          },
+          {
+            title: 'Canonical, hreflang, and sitemap should be checked as one set',
+            paragraphs: [
+              'A common launch mistake is handling one of these pieces while missing another.',
+              'The steadier approach is to check canonical tags, hreflang, robots, sitemap, and switching logic together.',
+            ],
+            bullets: [
+              'Canonical points to the correct locale version',
+              'hreflang links the equivalents correctly',
+              'Sitemap includes all locale versions',
+              'Locale switching lands on the matching page',
+            ],
+          },
+          {
+            title: 'Finish with content and language UX review',
+            paragraphs: [
+              'Technical correctness is not enough if titles, buttons, nav labels, and FAQ content still feel inconsistent across locales.',
+              'Language experience should be reviewed alongside technical SEO checks.',
+            ],
+          },
+        ],
+        takeawayTitle: 'Main takeaways',
+        takeaways: [
+          'Path mapping should be validated before launch.',
+          'Canonical, hreflang, and sitemap should be reviewed together.',
+          'Language UX matters as much as technical correctness.',
+        ],
+        ctaTitle: 'If you are launching a multilingual site, run this checklist first',
+        ctaDescription: 'Checking mapping, SEO basics, and language experience before release usually saves a lot of avoidable rework.',
+      },
+    },
+  },
+  'foreign-trade-website-language-priority': {
+    slug: 'foreign-trade-website-language-priority',
+    priority: {
+      zh: 0.6,
+      en: 0.48,
+    },
+    publishedAt: '2026-03-30',
+    readingMinutes: 6,
+    relatedServices: ['foreign-trade-website-development', 'website-development'],
+    content: {
+      zh: {
+        navLabel: '外贸网站先做哪些语言版本，怎么排优先级更合理',
+        categoryLabel: '多语言',
+        metaTitle: '外贸网站先做哪些语言版本？语言优先级参考｜致诚工作室',
+        metaDescription:
+          '外贸网站先做哪些语言版本，不只是看“能翻多少语种”，更要看目标市场、业务重心和维护成本。本文拆解更现实的语言优先级判断。',
+        keywords: ['外贸网站语言版本', '多语言网站优先级', '外贸网站开发', '语言策略'],
+        eyebrow: 'Article',
+        heroTitle: '外贸网站先做哪些语言版本，怎么排优先级更合理',
+        heroDescription:
+          '多语言网站最常见的问题之一，不是语言不够多，而是一开始就铺太多语言，结果每个版本都维护不好。更现实的做法通常不是“越多越好”，而是先把最重要的语言版本做深、做准。',
+        introTitle: '为什么多语言站最怕一开始就铺太广',
+        introParagraphs: [
+          '因为语言越多，不只是翻译工作越多，路径、页面对应、SEO 配置、内容维护和体验校对的成本都会同步上升。',
+          '如果前期没有排优先级，多语言站往往会先在维护上失控。',
+        ],
+        sections: [
+          {
+            title: '先看目标市场和主要客户来源',
+            paragraphs: [
+              '如果当前业务主要面向英语市场，优先把英文版本做好通常比一开始铺 5 种语言更有价值。',
+              '语言优先级最好跟真实市场和获客路径绑定，而不是只是想“看起来国际化”。',
+            ],
+          },
+          {
+            title: '再看维护能力和内容产出能力',
+            paragraphs: [
+              '每增加一个语言版本，都意味着后续更多的内容同步和校对工作。',
+              '如果维护能力跟不上，先做 1 到 2 个关键语言版本通常更稳。',
+            ],
+          },
+          {
+            title: '语言越少越要做准',
+            paragraphs: [
+              '真正有效的多语言站，不一定是语种最多，而是最关键的语言版本足够完整、足够准确、足够好用。',
+              '先做深，再逐步扩展，通常比一开始铺很宽更可持续。',
+            ],
+          },
+        ],
+        takeawayTitle: '这篇文章的重点',
+        takeaways: [
+          '多语言版本优先级应该跟目标市场和客户来源绑定。',
+          '维护和内容产出能力会直接决定能不能铺更多语言。',
+          '先做深 1 到 2 个关键语言版本，通常比一开始铺太广更稳。',
+        ],
+        ctaTitle: '如果你在规划外贸网站语言版本，先把目标市场和维护能力想清楚',
+        ctaDescription: '语言优先级一旦排对，后面的 SEO、内容和维护成本都会更可控。',
+      },
+      en: {
+        navLabel: 'How to Prioritize Locales on a Foreign Trade Website',
+        categoryLabel: 'Multilingual',
+        metaTitle: 'How to Prioritize Locales on a Foreign Trade Website | Zhicheng Studio',
+        metaDescription:
+          'Foreign trade websites should prioritize locales based on market focus, customer source, and maintenance capacity rather than trying to launch too many languages at once.',
+        keywords: ['foreign trade website locales', 'multilingual priority', 'language strategy for export websites'],
+        eyebrow: 'Article',
+        heroTitle: 'Foreign trade websites usually benefit more from doing the key locales well than from launching too many',
+        heroDescription:
+          'A common mistake in multilingual strategy is assuming that more languages automatically creates more international reach. In practice, too many shallow locales often create a maintenance problem faster than a growth advantage.',
+        introTitle: 'Why launching too many locales too early causes problems',
+        introParagraphs: [
+          'Each new locale adds not only translation work, but also page mapping, SEO configuration, maintenance, and UX review overhead.',
+          'Without clear priority, multilingual expansion often becomes harder to sustain than teams expect.',
+        ],
+        sections: [
+          {
+            title: 'Start with market focus and customer source',
+            paragraphs: [
+              'If the current market focus is primarily English-speaking, doing English deeply is usually more valuable than launching five shallow locales.',
+              'Locale priority should follow real market and acquisition logic rather than only the desire to look global.',
+            ],
+          },
+          {
+            title: 'Then consider maintenance capacity',
+            paragraphs: [
+              'Every added locale creates ongoing synchronization and review work.',
+              'If the team cannot maintain many versions well, one or two strong locales is usually the steadier choice.',
+            ],
+          },
+          {
+            title: 'Fewer locales can still be much stronger',
+            paragraphs: [
+              'A multilingual site does not need the highest locale count to be effective. It usually needs the most important locales to be complete, accurate, and well maintained.',
+              'Depth first, width later is often the more sustainable path.',
+            ],
+          },
+        ],
+        takeawayTitle: 'Main takeaways',
+        takeaways: [
+          'Locale priority should follow market focus and customer source.',
+          'Maintenance capacity should shape how many locales launch first.',
+          'One or two strong locales often outperform many shallow ones.',
+        ],
+        ctaTitle: 'If you are planning locale strategy, start with market focus and maintenance reality',
+        ctaDescription: 'A realistic priority order usually makes multilingual SEO and content maintenance much more sustainable.',
+      },
+    },
+  },
+  'company-website-budget-estimation': {
+    slug: 'company-website-budget-estimation',
+    priority: {
+      zh: 0.6,
+      en: 0.48,
+    },
+    publishedAt: '2026-03-30',
+    readingMinutes: 6,
+    relatedServices: ['company-website-development', 'website-development'],
+    content: {
+      zh: {
+        navLabel: '企业官网开发多少钱，预算通常该怎么拆',
+        categoryLabel: '报价',
+        metaTitle: '企业官网开发多少钱？预算拆分参考｜致诚工作室',
+        metaDescription:
+          '企业官网开发多少钱，通常取决于页面层级、内容准备、视觉要求、是否多语言以及是否包含后台和后续维护。本文拆解更现实的预算判断方式。',
+        keywords: ['企业官网开发多少钱', '企业官网预算', '官网报价', '企业网站开发'],
+        eyebrow: 'Article',
+        heroTitle: '企业官网开发多少钱，预算通常该怎么拆，才不会一开始就问偏',
+        heroDescription:
+          '企业官网预算经常聊不拢，不是因为谁不愿意报，而是“企业官网”这四个字背后的范围差别太大。展示型官网、服务型官网、多语言官网、带后台的官网，本来就不是同一个工作量。',
+        introTitle: '为什么企业官网预算最容易被问得太笼统',
+        introParagraphs: [
+          '很多沟通一开始只有一句“想做个官网”，但没有说清楚页面范围、内容深度、视觉预期和后续维护方式。',
+          '如果这些前提不明确，预算只能按模糊范围估，结果要么偏低要么偏高。',
+        ],
+        sections: [
+          {
+            title: '页面层级和内容深度会明显影响预算',
+            paragraphs: [
+              '只有首页和联系页的官网、带服务页和 FAQ 的官网、再加文章和多语言的官网，预算不会在一个区间。',
+              '很多时候真正拉开差距的，不是技术难度，而是内容结构和信息承载深度。',
+            ],
+          },
+          {
+            title: '视觉要求和后台需求也会把范围拉开',
+            paragraphs: [
+              '如果更重视品牌感、动效和定制视觉，或者需要内容管理、线索表单、文章更新和权限控制，投入都会上一个层级。',
+              '所以预算问题不只是“多少页”，还包括“每页做到什么程度”。',
+            ],
+            bullets: [
+              '页面数量和模板复杂度',
+              '品牌视觉要求和交互动效',
+              '多语言、SEO 和内容结构规划',
+              '后台、表单、内容管理和维护支持',
+            ],
+          },
+          {
+            title: '更高效的问法是先给范围，再谈预算',
+            paragraphs: [
+              '如果你能先说清楚目标客户、必须页面、参考站和预算区间，报价通常会快很多。',
+              '企业官网项目最怕的是需求一直往里加，但预算预期始终没定清楚。',
+            ],
+          },
+        ],
+        takeawayTitle: '这篇文章的重点',
+        takeaways: [
+          '企业官网预算首先是范围问题，不是一个统一价格。',
+          '页面层级、内容深度、视觉要求和后台需求都会明显影响报价。',
+          '先讲清范围和预算区间，会比直接问价格更有效。',
+        ],
+        ctaTitle: '如果你在评估企业官网预算，先把范围和优先级列出来',
+        ctaDescription: '只要页面、内容和维护边界更清楚，预算判断通常会更快也更准。',
+      },
+      en: {
+        navLabel: 'How to Estimate Budget for a Company Website',
+        categoryLabel: 'Pricing',
+        metaTitle: 'How Much Does a Company Website Cost? A Practical Budget Breakdown | Zhicheng Studio',
+        metaDescription:
+          'Company website budgets vary based on page depth, brand requirements, multilingual scope, backend support, and maintenance expectations. This article explains a more realistic breakdown.',
+        keywords: ['company website cost', 'company website budget', 'corporate website pricing'],
+        eyebrow: 'Article',
+        heroTitle: 'A company website budget becomes much clearer once the scope stops being vague',
+        heroDescription:
+          'Budget conversations often stall not because nobody wants to quote, but because “company website” can mean a simple showcase, a service-oriented site, a multilingual site, or a site with backend support and ongoing updates.',
+        introTitle: 'Why this budget question gets asked too broadly',
+        introParagraphs: [
+          'Many projects begin with “we need a website” without clarifying page depth, content expectations, visual ambition, or post-launch needs.',
+          'Without those inputs, any quote is likely to sit on a blurry range rather than a dependable scope.',
+        ],
+        sections: [
+          {
+            title: 'Page depth and content scope change the range quickly',
+            paragraphs: [
+              'A homepage-only site, a service-led site with FAQ, and a multilingual site with articles do not belong in the same budget band.',
+              'The big difference is often content structure and depth rather than raw coding complexity alone.',
+            ],
+          },
+          {
+            title: 'Brand and backend needs also reshape the budget',
+            paragraphs: [
+              'Higher-end visual treatment, motion, content management, lead handling, article updates, and permissions all increase the scope.',
+              'That means the question is not only how many pages, but how much each page is expected to do.',
+            ],
+            bullets: [
+              'Page count and template complexity',
+              'Brand and visual ambition',
+              'Multilingual scope and SEO planning',
+              'Backend, forms, CMS, and support expectations',
+            ],
+          },
+          {
+            title: 'Better quoting starts with better scope framing',
+            paragraphs: [
+              'If the audience, must-have pages, references, and budget range are clearer, quoting becomes much more efficient.',
+              'Company website projects usually become painful when the scope keeps expanding while the budget expectation stays vague.',
+            ],
+          },
+        ],
+        takeawayTitle: 'Main takeaways',
+        takeaways: [
+          'Company website cost is mostly a scope question.',
+          'Content depth, visual ambition, and backend needs shift the budget significantly.',
+          'Clearer scope and budget range make quoting much more useful.',
+        ],
+        ctaTitle: 'If you are estimating a company website budget, list the scope first',
+        ctaDescription: 'Once page depth, content scope, and support boundaries are clearer, budget estimates usually become far more realistic.',
+      },
+    },
+  },
+  'foreign-trade-website-faq-writing': {
+    slug: 'foreign-trade-website-faq-writing',
+    priority: {
+      zh: 0.6,
+      en: 0.48,
+    },
+    publishedAt: '2026-03-30',
+    readingMinutes: 6,
+    relatedServices: ['foreign-trade-website-development', 'website-development'],
+    content: {
+      zh: {
+        navLabel: '外贸网站 FAQ 怎么写，才更容易降低询盘前犹豫',
+        categoryLabel: '外贸网站',
+        metaTitle: '外贸网站 FAQ 怎么写？更适合询盘转化的 FAQ 结构｜致诚工作室',
+        metaDescription:
+          '外贸网站 FAQ 怎么写，关键是围绕交期、定制、沟通、样品、售后和合作方式来降低犹豫，而不是堆很多无关问题。',
+        keywords: ['外贸网站 FAQ', '外贸官网 FAQ', '询盘转化 FAQ', '外贸网站开发'],
+        eyebrow: 'Article',
+        heroTitle: '外贸网站 FAQ 怎么写，才更容易降低询盘前的犹豫',
+        heroDescription:
+          '很多外贸网站 FAQ 的问题，不是写得太少，而是写得太泛。真正有价值的 FAQ，应该去回答访客在联系前最常犹豫的那些问题，而不是把一堆和决策无关的信息堆上去。',
+        introTitle: '为什么外贸网站 FAQ 特别值得认真做',
+        introParagraphs: [
+          '外贸访客和你之间天然有距离，沟通成本、信任门槛和信息差都更高。',
+          'FAQ 恰好适合在正式联系前，把最常见的犹豫点先回答掉，让询盘动作变得更顺。',
+        ],
+        sections: [
+          {
+            title: 'FAQ 最适合回答哪些问题',
+            paragraphs: [
+              '交期、起订量、是否支持定制、样品流程、付款方式、售后支持、沟通语言和响应方式，这些都是很典型的高频疑虑点。',
+              '它们之所以重要，不是因为问题多，而是因为会直接影响访客是否愿意继续沟通。',
+            ],
+          },
+          {
+            title: 'FAQ 要围绕决策，不要围绕堆字数',
+            paragraphs: [
+              '更好的 FAQ 写法不是越多越好，而是越贴近决策前的真实问题越好。',
+              '如果 FAQ 大量回答无关痛痒的问题，却没有碰到真正让人犹豫的地方，页面价值会很有限。',
+            ],
+          },
+          {
+            title: 'FAQ 应该和产品页、联系页配合',
+            paragraphs: [
+              '产品页解决理解问题，FAQ 解决犹豫问题，联系页承接下一步动作，这三者一起用时最有效。',
+              'FAQ 不是孤立内容，而是外贸网站转化链的一部分。',
+            ],
+          },
+        ],
+        takeawayTitle: '这篇文章的重点',
+        takeaways: [
+          '外贸 FAQ 最该回答的是联系前最常见的犹豫点。',
+          '交期、定制、沟通和售后通常都是关键问题。',
+          'FAQ 更适合作为产品页和联系页之间的决策补充层。',
+        ],
+        ctaTitle: '如果你的外贸网站已经有流量但询盘不顺，先看看 FAQ 是否太泛',
+        ctaDescription: '只要 FAQ 更贴近真实决策问题，很多访客的最后一步犹豫都会被明显降低。',
+      },
+      en: {
+        navLabel: 'How to Write FAQ for a Foreign Trade Website',
+        categoryLabel: 'Foreign Trade Website',
+        metaTitle: 'How to Write Better FAQ for a Foreign Trade Website | Zhicheng Studio',
+        metaDescription:
+          'A stronger foreign trade FAQ page answers lead time, customization, sample, communication, after-sales, and cooperation concerns that often block inquiry.',
+        keywords: ['foreign trade FAQ', 'B2B website FAQ', 'export website FAQ'],
+        eyebrow: 'Article',
+        heroTitle: 'A foreign trade FAQ page works best when it reduces hesitation before contact',
+        heroDescription:
+          'The problem with many foreign trade FAQ sections is not that they are too short, but that they answer generic questions while missing the concerns that actually block inquiry.',
+        introTitle: 'Why FAQ is especially useful in foreign trade sites',
+        introParagraphs: [
+          'International buyers usually face a bigger trust and communication gap, which means hesitation points show up earlier and more strongly.',
+          'A good FAQ layer can reduce that hesitation before the first conversation even starts.',
+        ],
+        sections: [
+          {
+            title: 'The strongest FAQ topics are the ones that block contact',
+            paragraphs: [
+              'Lead time, MOQ, customization, sample process, payment approach, after-sales support, language, and response expectations are all strong FAQ topics.',
+              'They matter because they sit directly inside the visitor’s contact decision path.',
+            ],
+          },
+          {
+            title: 'Write for decision support, not for volume',
+            paragraphs: [
+              'A useful FAQ page is not the longest one. It is the one that addresses the most important hesitation points clearly and directly.',
+              'If it avoids the real concerns, more questions do not create more value.',
+            ],
+          },
+          {
+            title: 'FAQ should support product and contact pages',
+            paragraphs: [
+              'Product pages explain fit. FAQ reduces hesitation. Contact pages convert the next step.',
+              'Those three layers are strongest when they support each other rather than acting like disconnected content.',
+            ],
+          },
+        ],
+        takeawayTitle: 'Main takeaways',
+        takeaways: [
+          'Foreign trade FAQ should answer the concerns that block contact.',
+          'Lead time, customization, communication, and after-sales are often key topics.',
+          'FAQ is strongest as a decision-support layer between product and contact pages.',
+        ],
+        ctaTitle: 'If your foreign trade site gets attention but weak inquiry, review the FAQ layer',
+        ctaDescription: 'FAQ that addresses real decision friction usually helps inquiry more than generic information blocks.',
+      },
+    },
+  },
+  'landing-page-vs-company-website': {
+    slug: 'landing-page-vs-company-website',
+    priority: {
+      zh: 0.6,
+      en: 0.48,
+    },
+    publishedAt: '2026-03-30',
+    readingMinutes: 6,
+    relatedServices: ['website-development', 'company-website-development'],
+    content: {
+      zh: {
+        navLabel: '营销落地页和企业官网有什么区别，什么时候该做哪一种',
+        categoryLabel: '对比',
+        metaTitle: '营销落地页和企业官网有什么区别？怎么选更合适｜致诚工作室',
+        metaDescription:
+          '营销落地页和企业官网的差别，在于目标、内容结构和使用场景。本文拆解什么时候更适合做落地页，什么时候更适合做官网。',
+        keywords: ['营销落地页和官网区别', '落地页怎么选', '企业官网开发', '网站开发'],
+        eyebrow: 'Article',
+        heroTitle: '营销落地页和企业官网有什么区别，什么时候该做哪一种',
+        heroDescription:
+          '很多项目一开始就把“官网”和“落地页”混在一起，但这两类页面承担的任务并不一样。官网更适合长期承接品牌和内容，落地页更适合围绕单一目标做更短路径的转化。',
+        introTitle: '为什么这个选择经常会影响后面整个网站结构',
+        introParagraphs: [
+          '如果一开始把落地页当官网做，后面会发现内容不够承接；如果把官网当落地页做，又会发现路径太散、转化不够聚焦。',
+          '所以它不是视觉风格选择，而是目标和结构选择。',
+        ],
+        sections: [
+          {
+            title: '落地页更适合单一目标转化',
+            paragraphs: [
+              '活动报名、广告投放、单一产品推广、特定服务转化，这些通常更适合落地页。',
+              '因为它更强调短路径、更少分散和更强行动引导。',
+            ],
+          },
+          {
+            title: '官网更适合长期内容和品牌承接',
+            paragraphs: [
+              '企业官网通常要承接服务说明、FAQ、文章、多语言、案例和长期 SEO 内容，所以结构会更完整。',
+              '官网更像一个长期资产，不只是单次转化页面。',
+            ],
+          },
+          {
+            title: '很多项目其实两者都需要',
+            paragraphs: [
+              '官网负责长期表达和搜索流量，落地页负责某个阶段的集中转化，这两者并不冲突。',
+              '更关键的是要先知道当前你最急需解决的是长期承接，还是短期转化。',
+            ],
+          },
+        ],
+        takeawayTitle: '这篇文章的重点',
+        takeaways: [
+          '落地页更适合单一目标和短路径转化。',
+          '官网更适合长期品牌和内容承接。',
+          '很多项目最终两者都需要，但优先级应该按当前目标来排。',
+        ],
+        ctaTitle: '如果你在纠结先做官网还是落地页，先看目标是长期承接还是短期转化',
+        ctaDescription: '只要目标先排清楚，页面结构和投入方向会好判断很多。',
+      },
+      en: {
+        navLabel: 'Landing Page vs Company Website',
+        categoryLabel: 'Comparison',
+        metaTitle: 'Landing Page vs Company Website: Which One Fits Better? | Zhicheng Studio',
+        metaDescription:
+          'Landing pages and company websites serve different jobs. This article explains when a focused landing page makes more sense and when a full website is the better fit.',
+        keywords: ['landing page vs website', 'company website vs landing page', 'website strategy'],
+        eyebrow: 'Article',
+        heroTitle: 'Landing pages and company websites solve different problems',
+        heroDescription:
+          'Many teams mix landing pages and websites together too early, but the two structures are built for different goals. One is better for a narrow conversion path, the other is better for long-term content and brand support.',
+        introTitle: 'Why this choice affects the whole site structure',
+        introParagraphs: [
+          'If a landing page is forced to act like a full website, it usually becomes too thin. If a company website is forced into a landing-page role, it often becomes too broad and less focused.',
+          'This is not only a design choice. It is a structure and objective choice.',
+        ],
+        sections: [
+          {
+            title: 'Landing pages fit focused conversion goals',
+            paragraphs: [
+              'Campaigns, ad traffic, one-off service conversion, and single-product pushes often fit landing pages well.',
+              'They work because the path is shorter, narrower, and more action-driven.',
+            ],
+          },
+          {
+            title: 'Company websites fit long-term brand and content support',
+            paragraphs: [
+              'A company website usually needs to carry services, FAQ, articles, multilingual support, and longer-term search growth.',
+              'It behaves more like a durable business asset than a single campaign surface.',
+            ],
+          },
+          {
+            title: 'Many businesses eventually need both',
+            paragraphs: [
+              'The website can support long-term content and search, while landing pages support focused campaigns or offers.',
+              'The key is deciding whether the current priority is durable structure or immediate conversion.',
+            ],
+          },
+        ],
+        takeawayTitle: 'Main takeaways',
+        takeaways: [
+          'Landing pages are usually stronger for focused conversion.',
+          'Company websites are usually stronger for long-term content and brand support.',
+          'Many businesses need both, but the priority should follow the current objective.',
+        ],
+        ctaTitle: 'If you are deciding between a website and a landing page, start with the objective',
+        ctaDescription: 'Once the priority is clear, the structure and investment level become much easier to judge.',
+      },
+    },
+  },
+  'mini-program-admin-panel-planning': {
+    slug: 'mini-program-admin-panel-planning',
+    priority: {
+      zh: 0.6,
+      en: 0.48,
+    },
+    publishedAt: '2026-03-30',
+    readingMinutes: 6,
+    relatedServices: ['mini-program-development', 'web-app-development'],
+    content: {
+      zh: {
+        navLabel: '小程序后台应该怎么规划，才不会前台上线后后台一团乱',
+        categoryLabel: '小程序',
+        metaTitle: '小程序后台怎么规划？后台结构参考｜致诚工作室',
+        metaDescription:
+          '小程序后台怎么规划，重点在于内容管理、订单处理、状态流转和权限边界，而不是等前台做好后再随手补。本文拆解更稳的后台规划方式。',
+        keywords: ['小程序后台怎么规划', '小程序后台管理', '小程序开发', '业务后台'],
+        eyebrow: 'Article',
+        heroTitle: '小程序后台应该怎么规划，才不会前台上线后后台一团乱',
+        heroDescription:
+          '很多小程序项目的问题，不在前台页面，而在后台完全是后补的。前台上线了，运营却发现内容不好改、订单不好处理、状态看不清、权限也不明。后台如果不跟着一起规划，项目很快就会卡住。',
+        introTitle: '为什么小程序后台最容易被低估',
+        introParagraphs: [
+          '因为很多人天然把小程序理解成“前端产品”，后台常常被当成上线后再补的东西。',
+          '但真正影响运营效率的，往往不是前台页面，而是后台能不能顺手地承接业务动作。',
+        ],
+        sections: [
+          {
+            title: '内容、订单和状态通常是第一批核心后台模块',
+            paragraphs: [
+              '很多小程序项目都会涉及内容管理、订单处理、状态追踪、消息和用户信息，这些通常应该在立项时就进入后台范围。',
+              '如果这些能力完全没有提前考虑，前台体验再顺，后面也会被运营问题拖住。',
+            ],
+          },
+          {
+            title: '权限和角色最好尽早拆清楚',
+            paragraphs: [
+              '谁能改内容、谁能看订单、谁能处理状态、谁能看报表，这些问题最好在后台设计时就分清楚。',
+              '如果后台角色边界模糊，越往后越容易出现误操作和沟通成本。',
+            ],
+          },
+          {
+            title: '后台不是附属，而是业务闭环的一半',
+            paragraphs: [
+              '小程序要真正跑起来，不只是用户能操作，更重要的是后台能接住这些操作。',
+              '所以后台不是附带补一下，而是业务闭环的一半。',
+            ],
+          },
+        ],
+        takeawayTitle: '这篇文章的重点',
+        takeaways: [
+          '小程序后台最好和前台一起规划，而不是上线后再补。',
+          '内容、订单、状态和权限通常是最先要考虑的后台模块。',
+          '后台能不能接住业务动作，直接影响项目能不能长期跑顺。',
+        ],
+        ctaTitle: '如果你在做小程序，别只盯前台，把后台一起拉进方案里',
+        ctaDescription: '后台结构越早理顺，后面的运营和迭代成本通常越低。',
+      },
+      en: {
+        navLabel: 'How to Plan the Admin Side of a Mini-program',
+        categoryLabel: 'Mini-program',
+        metaTitle: 'How to Plan the Admin Side of a Mini-program | Zhicheng Studio',
+        metaDescription:
+          'Mini-program admin planning should cover content, order flow, state handling, and permissions early instead of being added only after the frontend launches.',
+        keywords: ['mini-program admin planning', 'mini-program backend', 'mini-program admin panel'],
+        eyebrow: 'Article',
+        heroTitle: 'Mini-programs run much better when the admin side is planned early',
+        heroDescription:
+          'Many mini-program projects struggle not because of the user-facing screens, but because the admin side was treated as an afterthought. Once operations need to manage content, orders, states, and roles, the gap becomes obvious.',
+        introTitle: 'Why the admin side gets underestimated',
+        introParagraphs: [
+          'Mini-programs are often seen as frontend products first, so admin planning gets delayed too long.',
+          'But in practice, long-term operational efficiency often depends more on admin flow than on screens alone.',
+        ],
+        sections: [
+          {
+            title: 'Content, orders, and state usually form the first core modules',
+            paragraphs: [
+              'Many mini-program projects need content handling, order flow, status tracking, messaging, and user records from the beginning.',
+              'If those admin layers are absent, operations will hit friction very quickly even if the frontend looks smooth.',
+            ],
+          },
+          {
+            title: 'Roles and permissions should be clarified early',
+            paragraphs: [
+              'Who edits content, who sees orders, who manages state, and who reads reports should be separated deliberately.',
+              'Without that separation, the admin side becomes harder to use and more error-prone over time.',
+            ],
+          },
+          {
+            title: 'The admin side is half of the business loop',
+            paragraphs: [
+              'A mini-program only works well when the business can receive and handle the user actions the frontend creates.',
+              'That makes the admin side a core product layer rather than a support extra.',
+            ],
+          },
+        ],
+        takeawayTitle: 'Main takeaways',
+        takeaways: [
+          'The admin side should be planned alongside the frontend, not after it.',
+          'Content, order, state, and permission layers are usually core modules.',
+          'Admin flow strongly influences whether the business loop stays workable after launch.',
+        ],
+        ctaTitle: 'If you are planning a mini-program, bring the admin side into scope early',
+        ctaDescription: 'The earlier the admin structure is clarified, the easier operations and iteration usually become.',
+      },
+    },
+  },
+  'business-system-phase-one-scope': {
+    slug: 'business-system-phase-one-scope',
+    priority: {
+      zh: 0.6,
+      en: 0.48,
+    },
+    publishedAt: '2026-03-30',
+    readingMinutes: 6,
+    relatedServices: ['web-app-development'],
+    content: {
+      zh: {
+        navLabel: '企业系统一期应该先做哪些模块，才更容易上线和验证',
+        categoryLabel: '企业系统',
+        metaTitle: '企业系统一期先做哪些模块？一期范围参考｜致诚工作室',
+        metaDescription:
+          '企业系统一期应该先做哪些模块，关键在于先打通最核心流程，而不是一开始就想把所有模块做满。本文拆解一期范围更稳的判断方式。',
+        keywords: ['企业系统一期范围', '系统一期做什么', '管理系统开发', '企业系统开发'],
+        eyebrow: 'Article',
+        heroTitle: '企业系统一期应该先做哪些模块，才更容易上线和验证',
+        heroDescription:
+          '企业系统最常见的问题之一，是一开始就想把所有模块都做满。结果周期长、风险高、验收困难。更稳的一期范围，通常不是模块越多越好，而是先把最关键的一条业务链路打通。',
+        introTitle: '为什么一期范围最容易失控',
+        introParagraphs: [
+          '因为系统项目天然复杂，内部各角色也都会提出很多需求，最后很容易把“一期”做成一个几乎没有边界的大项目。',
+          '如果一开始不收范围，后面不仅难上线，也很难验证真正的业务价值。',
+        ],
+        sections: [
+          {
+            title: '一期最适合优先做核心链路',
+            paragraphs: [
+              '先看哪一条流程最重要、最影响日常效率、最值得先落地，再围绕它决定首批模块。',
+              '系统的一期不是要全，而是要先证明这套结构能真正承接业务。',
+            ],
+          },
+          {
+            title: '配置、报表和次级模块可以后置',
+            paragraphs: [
+              '很多项目一开始就想把报表、统计、配置中心和各种边缘流程一起做进去，这会明显增加复杂度。',
+              '如果一期先把主流程做稳，后面的配置和报表会更容易在真实使用中判断优先级。',
+            ],
+          },
+          {
+            title: '一期范围越清楚，验收越容易',
+            paragraphs: [
+              '只要知道一期到底要解决什么问题，验收标准就会更清楚，团队也更容易对齐预期。',
+              '很多系统项目之所以验收困难，本质上是因为“一期到底要做到哪”从头到尾都没真正说清楚。',
+            ],
+          },
+        ],
+        takeawayTitle: '这篇文章的重点',
+        takeaways: [
+          '企业系统一期最适合先打通核心业务链路。',
+          '报表、配置和次级模块通常更适合后置。',
+          '一期范围越清楚，越容易上线、验收和继续迭代。',
+        ],
+        ctaTitle: '如果你在规划企业系统一期，先把最关键的一条业务链路圈出来',
+        ctaDescription: '只要一期先收在最有价值的主流程上，系统上线和后续扩展都会更稳。',
+      },
+      en: {
+        navLabel: 'What Should an Internal System Build in Phase One?',
+        categoryLabel: 'Internal System',
+        metaTitle: 'What Should an Internal System Build in Phase One? | Zhicheng Studio',
+        metaDescription:
+          'Phase one of an internal system should usually focus on the most valuable workflow rather than trying to ship every module at once. This article explains a steadier scope approach.',
+        keywords: ['internal system phase one scope', 'business system MVP', 'admin system rollout'],
+        eyebrow: 'Article',
+        heroTitle: 'Phase one of an internal system is usually stronger when it focuses on the core workflow',
+        heroDescription:
+          'A common system-project mistake is trying to ship every module in phase one. That often creates longer cycles, higher risk, and harder acceptance. A steadier phase one usually proves the most important workflow first.',
+        introTitle: 'Why first-phase scope gets out of control so easily',
+        introParagraphs: [
+          'System projects naturally attract many requests from different roles, which makes phase one expand too quickly if the team never draws a hard boundary.',
+          'Without that boundary, launch and validation both become much harder.',
+        ],
+        sections: [
+          {
+            title: 'Phase one should prioritize the core workflow',
+            paragraphs: [
+              'Identify the workflow that matters most to daily operations or business efficiency and use that as the center of the first release.',
+              'Phase one does not need to be complete. It needs to prove the system can support the business in a meaningful way.',
+            ],
+          },
+          {
+            title: 'Reporting, settings, and secondary modules often fit later',
+            paragraphs: [
+              'Many teams try to add dashboards, configuration centers, and edge workflows too early.',
+              'If the core path is stable first, later configuration and reporting priorities become much easier to judge from real usage.',
+            ],
+          },
+          {
+            title: 'Clearer phase one scope makes acceptance easier',
+            paragraphs: [
+              'When the first release solves a clearly defined problem, acceptance criteria become much easier to align.',
+              'A lot of system projects become hard to sign off simply because nobody ever defined what phase one was meant to finish.',
+            ],
+          },
+        ],
+        takeawayTitle: 'Main takeaways',
+        takeaways: [
+          'Phase one should usually focus on the most valuable workflow.',
+          'Reporting, settings, and secondary modules often fit better later.',
+          'Clearer scope makes launch, acceptance, and later iteration much easier.',
+        ],
+        ctaTitle: 'If you are defining phase one, circle the most valuable business workflow first',
+        ctaDescription: 'A tighter first release usually makes launch and later expansion much more manageable.',
       },
     },
   },

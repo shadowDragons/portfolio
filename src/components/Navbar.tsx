@@ -2,14 +2,16 @@
 
 import { cn } from '@/lib/utils'
 import { buttonVariants } from './ui/button'
-import { useTranslations } from 'next-intl'
+import { useLocale, useTranslations } from 'next-intl'
 import { useState, useEffect } from 'react'
 import LanguageSwitcher from './LanguageSwitcher'
-import { Link } from '@/i18n/routing'
+import { Link, usePathname } from '@/i18n/routing'
 import { Menu, X } from 'lucide-react'
 
 const Navbar = () => {
   const t = useTranslations('Navbar')
+  const locale = useLocale()
+  const pathname = usePathname()
   const [isOpen, setIsOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
 
@@ -19,12 +21,14 @@ const Navbar = () => {
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
+  const isHomePage = pathname === '/'
+
   const links = [
-    { name: t('services'), link: '#services' },
-    { name: t('process'), link: '#process' },
-    { name: t('projects'), link: '#projects' },
-    { name: t('notice'), link: '#notice' },
-    { name: t('contact'), link: '#contact' },
+    { name: t('services'), href: '/services', kind: 'route' as const },
+    { name: t('articles'), href: '/blog', kind: 'route' as const },
+    { name: t('process'), href: '#process', kind: 'section' as const },
+    { name: t('projects'), href: '#projects', kind: 'section' as const },
+    { name: t('contact'), href: '#contact', kind: 'section' as const },
   ]
 
   const handleScroll = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
@@ -43,6 +47,8 @@ const Navbar = () => {
     setIsOpen(!isOpen)
   }
 
+  const getSectionHref = (hash: string) => (isHomePage ? hash : `/${locale}${hash}`)
+
   return (
     <nav
       className={cn(
@@ -58,19 +64,32 @@ const Navbar = () => {
         </Link>
 
         <div className='hidden items-center gap-0.5 lg:flex'>
-          {links.map((item, index) => (
-            <a
-              key={index}
-              href={item.link}
-              onClick={e => handleScroll(e, item.link)}
-              className={cn(
-                buttonVariants({ variant: 'ghost', size: 'sm' }),
-                'rounded-full px-4 text-[13px] font-medium text-[#555] transition-colors hover:bg-black/[0.04] hover:text-[#111]'
-              )}
-            >
-              {item.name}
-            </a>
-          ))}
+          {links.map((item, index) =>
+            item.kind === 'section' ? (
+              <a
+                key={index}
+                href={getSectionHref(item.href)}
+                onClick={isHomePage ? e => handleScroll(e, item.href) : undefined}
+                className={cn(
+                  buttonVariants({ variant: 'ghost', size: 'sm' }),
+                  'rounded-full px-4 text-[13px] font-medium text-[#555] transition-colors hover:bg-black/[0.04] hover:text-[#111]'
+                )}
+              >
+                {item.name}
+              </a>
+            ) : (
+              <Link
+                key={index}
+                href={item.href}
+                className={cn(
+                  buttonVariants({ variant: 'ghost', size: 'sm' }),
+                  'rounded-full px-4 text-[13px] font-medium text-[#555] transition-colors hover:bg-black/[0.04] hover:text-[#111]'
+                )}
+              >
+                {item.name}
+              </Link>
+            ),
+          )}
         </div>
 
         <div className='flex items-center gap-2'>
@@ -91,16 +110,27 @@ const Navbar = () => {
       {isOpen ? (
         <div className='border-t border-black/[0.06] bg-white/90 px-5 py-4 backdrop-blur-xl lg:hidden'>
           <div className='mx-auto flex max-w-[1280px] flex-col gap-1'>
-            {links.map((item, index) => (
-              <a
-                key={index}
-                href={item.link}
-                onClick={e => handleScroll(e, item.link)}
-                className='rounded-xl px-4 py-3 text-sm font-medium text-[#444] transition hover:bg-black/[0.04] hover:text-[#111]'
-              >
-                {item.name}
-              </a>
-            ))}
+            {links.map((item, index) =>
+              item.kind === 'section' ? (
+                <a
+                  key={index}
+                  href={getSectionHref(item.href)}
+                  onClick={isHomePage ? e => handleScroll(e, item.href) : () => setIsOpen(false)}
+                  className='rounded-xl px-4 py-3 text-sm font-medium text-[#444] transition hover:bg-black/[0.04] hover:text-[#111]'
+                >
+                  {item.name}
+                </a>
+              ) : (
+                <Link
+                  key={index}
+                  href={item.href}
+                  onClick={() => setIsOpen(false)}
+                  className='rounded-xl px-4 py-3 text-sm font-medium text-[#444] transition hover:bg-black/[0.04] hover:text-[#111]'
+                >
+                  {item.name}
+                </Link>
+              ),
+            )}
             <div className='pt-2 sm:hidden'>
               <LanguageSwitcher />
             </div>

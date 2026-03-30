@@ -622,6 +622,159 @@
 - 补强外贸 About 页面写法
 - 补强官网和小程序如何协同这类组合型问题
 
+## 第四阶段第六批扩展记录
+
+### 2026-03-30 / 第六批文章补充
+
+本次新增的第六批文章更偏教育、咨询、AI 产品与 B2B 内容层：
+
+1. `education-training-website-planning`
+2. `consulting-company-website-copy`
+3. `ai-product-website-messaging`
+4. `b2b-industry-pages-planning`
+5. `website-content-update-process`
+
+这批内容的目的：
+
+- 补强教育培训类官网场景
+- 补强咨询类官网表达问题
+- 补强 AI 产品官网文案和结构问题
+- 补强 B2B 行业页的价值判断
+- 补强网站上线后的内容更新机制
+
+## 第四阶段第七批扩展记录
+
+### 2026-03-30 / 第七批文章补充
+
+本次新增的第七批文章更偏工期、维护和多语言落地执行：
+
+1. `website-development-timeline-estimation`
+2. `website-maintenance-scope`
+3. `company-website-contact-page-planning`
+4. `multilingual-website-launch-checklist`
+5. `foreign-trade-website-language-priority`
+
+这批内容的目的：
+
+- 补强网站工期判断
+- 补强上线后的维护边界
+- 补强企业官网联系页转化问题
+- 补强多语言网站上线前检查
+- 补强外贸网站语言版本优先级判断
+
+## 第四阶段第八批扩展记录
+
+### 2026-03-30 / 第八批文章补充
+
+本次新增的第八批文章更偏成交前细节判断：
+
+1. `website-development-timeline-estimation`
+2. `website-maintenance-scope`
+3. `company-website-contact-page-planning`
+4. `multilingual-website-launch-checklist`
+5. `foreign-trade-website-language-priority`
+6. `foreign-trade-website-faq-writing`
+7. `landing-page-vs-company-website`
+8. `mini-program-admin-panel-planning`
+9. `business-system-phase-one-scope`
+
+这批内容的目的：
+
+- 补强工期判断
+- 补强维护边界
+- 补强联系页和 FAQ 转化问题
+- 补强多语言上线执行
+- 补强官网 / 落地页选择
+- 补强小程序后台与企业系统一期范围判断
+
+## 第四阶段站内结构补强
+
+### 2026-03-30 / 全站导航与 footer 内链增强
+
+本次补充：
+
+1. 把顶部导航改成更稳定的全站导航
+2. 新增 footer
+3. footer 中加入服务页与文章页入口
+
+这样做的原因：
+
+- 原先导航主要依赖首页锚点
+- 当用户进入服务页或文章页时，导航对跨页浏览和抓取帮助有限
+- 现在改成全站稳定路径后，服务页和文章页的内链会更强
+
+本次涉及文件：
+
+- `src/components/Navbar.tsx`
+- `src/components/Footer.tsx`
+- `src/app/[locale]/layout.tsx`
+- `messages/zh.json`
+- `messages/en.json`
+
+验证结果：
+
+- `npm run lint` 通过
+- `npm run build` 通过
+
+## 上线与 GSC 进展
+
+### 2026-03-30 / 线上版本与 sitemap 验收
+
+已确认：
+
+1. `https://sphrag.com/zh` 已上线当前业务站，而不是旧作品集
+2. `https://sphrag.com/zh/services` 可访问
+3. `https://sphrag.com/zh/blog` 可访问
+4. `https://sphrag.com/robots.txt` 可访问，且包含：
+   - `Sitemap: https://sphrag.com/sitemap.xml`
+5. `https://sphrag.com/sitemap.xml` 可访问，且包含首页、服务页和文章页
+
+来自用户提供的 Google Search Console 结果：
+
+1. sitemap 提交状态为“成功”
+2. 最近读取时间为 2026 年 3 月 30 日
+3. 当前“已发现的网页”为 64
+
+尚待继续确认：
+
+- `/en` 页面访问状态
+- URL Inspection 的单页索引结果
+- Search Console 中 impressions / clicks / coverage 的后续变化
+
+### 2026-03-30 / URL Inspection 抽样结果
+
+抽样页面：
+
+- `https://sphrag.com/zh/services/website-development`
+
+当前状态：
+
+- 状态：`网址尚未收录到 Google`
+- 编制索引：`已发现 - 尚未编入索引`
+- 发现来源：`sitemap.xml`
+- 当前没有实际抓取记录
+
+判断：
+
+- 这通常说明 Google 已经知道这个 URL 的存在
+- 但还没有正式抓取或还没有进入编入索引阶段
+- 这不是页面被屏蔽，也不是 canonical 错误导致的直接排除信号
+- 更像是新页面刚提交后常见的等待状态
+
+下一步建议：
+
+1. 直接对该 URL 点击“请求编入索引”
+2. 再对以下几个核心 URL 逐个做一次相同操作：
+   - `/zh`
+   - `/zh/services/company-website-development`
+   - `/zh/services/foreign-trade-website-development`
+   - `/zh/blog/website-development-cost`
+3. 提交后等待 3 到 14 天，再回看 URL Inspection 结果
+4. 如果 1 到 2 周后仍长期停留在“已发现 - 尚未编入索引”，再进一步排查：
+   - 内链强度是否不足
+   - 页面质量是否被 Google 认为还不够强
+   - 是否需要继续补内容和外部信号
+
 ## 下一步
 
 第四阶段完成后，建议继续做：

@@ -731,11 +731,11 @@ SEO 还没有“弄完”。
 
 这一栏才是当前真正还没完成的部分，主要是上线验证和 Google Search Console：
 
-- [ ] 确认 `https://sphrag.com/zh` 已上线为当前业务站
+- [x] 确认 `https://sphrag.com/zh` 已上线为当前业务站
 - [ ] 确认 `https://sphrag.com/en` 能正常访问
-- [ ] 确认 `https://sphrag.com/zh/services` 能正常访问
-- [ ] 确认 `https://sphrag.com/zh/blog` 能正常访问
-- [ ] 在 Google Search Console 提交 `https://sphrag.com/sitemap.xml`
+- [x] 确认 `https://sphrag.com/zh/services` 能正常访问
+- [x] 确认 `https://sphrag.com/zh/blog` 能正常访问
+- [x] 在 Google Search Console 提交 `https://sphrag.com/sitemap.xml`
 - [ ] 用 URL Inspection 检查以下页面
 - [ ] `/zh`
 - [ ] `/zh/services/website-development`
@@ -743,10 +743,78 @@ SEO 还没有“弄完”。
 - [ ] `/zh/services/foreign-trade-website-development`
 - [ ] `/zh/blog/website-development-cost`
 
+#### D. 上线与 GSC 逐步操作清单
+
+如果你现在就准备继续推进，建议严格按这个顺序做：
+
+##### 第一步：先确认线上版本
+
+- [x] 打开首页，确认线上展示的就是当前这套业务站，不是旧作品集
+- [ ] 检查以下页面是否都返回 `200`
+- [x] `https://sphrag.com/zh`
+- [ ] `https://sphrag.com/en`
+- [x] `https://sphrag.com/zh/services`
+- [x] `https://sphrag.com/zh/blog`
+- [x] `https://sphrag.com/robots.txt`
+- [x] `https://sphrag.com/sitemap.xml`
+
+##### 第二步：检查最关键的 SEO 基础输出
+
+- [x] `robots.txt` 里能看到 sitemap 地址
+- [x] `sitemap.xml` 里能看到：
+- [x] `/zh`
+- [x] `/zh/services/website-development`
+- [x] `/zh/services/company-website-development`
+- [x] `/zh/services/foreign-trade-website-development`
+- [x] `/zh/blog/website-development-cost`
+
+##### 第三步：Google Search Console 操作
+
+- [ ] 在 GSC 添加并验证 `sphrag.com`
+- [x] 提交 `https://sphrag.com/sitemap.xml`
+- [x] 等待 GSC 显示 sitemap 已读取
+
+##### 第四步：先检查这 5 个核心页面
+
+建议先用 URL Inspection 检查：
+
+- [ ] `https://sphrag.com/zh`
+- [ ] `https://sphrag.com/zh/services/website-development`
+- [ ] `https://sphrag.com/zh/services/company-website-development`
+- [ ] `https://sphrag.com/zh/services/foreign-trade-website-development`
+- [ ] `https://sphrag.com/zh/blog/website-development-cost`
+
+检查时重点看：
+
+- [ ] URL 是否可被抓取
+- [ ] canonical 是否正确
+- [ ] 是否被索引
+- [ ] 如果未索引，是否有明确原因
+
+##### 第五步：记录第一版基线数据
+
+把下面这些数字记到 `seo-log.md` 或你自己的表格里：
+
+- [ ] 已收录页面数
+- [ ] 总 impressions
+- [ ] 总点击数
+- [ ] 哪些服务页已经开始出现 impressions
+- [ ] 哪些文章页已经开始出现 impressions
+
+##### 第六步：提交后 7-14 天再回看
+
+重点看：
+
+- [ ] sitemap 是否持续正常读取
+- [ ] 覆盖率是否开始增长
+- [ ] 首页、服务页、文章页是否开始进入 impressions
+- [ ] 有没有页面被排除在索引之外
+
 #### C. 本周建议继续补的内容
 
 - [x] 再补 2 篇更贴近 `企业官网开发` 的文章
 - [x] 再补 2 篇更贴近 `外贸网站开发` 的文章
+- [x] 再补一轮更贴近行业 / 客户类型的文章
 - [ ] 把 Search Console 初始 impressions / coverage 记录进 `seo-log.md`
 
 ### 第 2 周
