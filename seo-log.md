@@ -687,6 +687,83 @@
 - 补强官网 / 落地页选择
 - 补强小程序后台与企业系统一期范围判断
 
+## 站外执行清单补充
+
+### 2026-03-30 / 站外品牌提及与外链执行清单
+
+已新增独立文档：
+
+- `offpage-seo-checklist.md`
+
+这份清单包含：
+
+- 平台优先级
+- 统一对外话术
+- 不同平台适合导流到哪个服务页或文章页
+- 平台资料页应该怎么填
+- 内容二次分发节奏
+- 自然外链来源
+- 第一轮建议优先发的文章
+
+### 2026-03-31 / 站外执行清单细化
+
+本次继续补强：
+
+1. 给 GitHub 个人主页补了可直接使用的 Bio 和 README 话术
+2. 给 X / Twitter 补了 Bio 版本、Website 建议和置顶帖模板
+3. 给 LinkedIn 补了 Headline、About 和 Featured 结构
+4. 新增第一梯队平台落地清单
+5. 新增前 14 天执行顺序
+6. 新增第一轮推荐链接分配
+7. 新增站外执行记录模板
+
+这样做的原因：
+
+- 原有清单已经有方向，但还偏策略层
+- 真正执行时最容易卡住的，不是“不知道要做”，而是不知道具体怎么写、先做哪一个、链接该放哪里
+- 现在补成可直接复制和逐项勾选的版本后，站外动作更容易真正开始
+
+### 2026-03-31 / 中文内容分发自动发帖 SOP
+
+本次新增独立文档：
+
+- `中文内容分发自动发帖SOP.md`
+
+包含内容：
+
+1. 知乎 / 掘金 / 即刻的平台分工
+2. AI 自动改写的底线和禁区
+3. 输入格式与输出格式
+4. 主提示词和平台提示词
+5. 首批 9 条自动发帖队列
+6. 发布前检查与发帖记录模板
+
+这样做的原因：
+
+- `offpage-seo-checklist.md` 更适合看全局策略
+- 真正要让 AI 去生成和分发内容时，需要一份更像操作手册的独立文档
+- 这样后面不管是手动半自动，还是接自动化流程，都更容易复用
+
+### 2026-03-31 / GitHub 个人主页文案草稿
+
+本次新增独立草稿文件：
+
+- `github-profile-readme-draft.md`
+
+包含内容：
+
+1. GitHub Bio 备选版本
+2. Website 设置建议
+3. 双语版 Profile README 草稿
+4. 偏中文版 README 草稿
+5. 偏英文版 README 草稿
+
+这样做的原因：
+
+- GitHub 个人主页是第一轮最稳的站外品牌入口之一
+- 先把文案写好，比只写原则更容易真正落地
+- 这一步完成后，后面可以继续复用同一套表达去写 X 和 LinkedIn
+
 ## 第四阶段站内结构补强
 
 ### 2026-03-30 / 全站导航与 footer 内链增强
@@ -737,9 +814,37 @@
 
 尚待继续确认：
 
-- `/en` 页面访问状态
-- URL Inspection 的单页索引结果
 - Search Console 中 impressions / clicks / coverage 的后续变化
+- 首轮 URL Inspection 之后的二次复查结果
+
+### 2026-03-31 / 第一轮访问与 URL Inspection 核对完成
+
+用户已确认以下事项完成：
+
+1. `https://sphrag.com/en` 可以正常访问
+2. 以下 5 个核心 URL 已完成第一轮 URL Inspection：
+   - `https://sphrag.com/zh`
+   - `https://sphrag.com/zh/services/website-development`
+   - `https://sphrag.com/zh/services/company-website-development`
+   - `https://sphrag.com/zh/services/foreign-trade-website-development`
+   - `https://sphrag.com/zh/blog/website-development-cost`
+
+这意味着：
+
+- 第一轮“页面是否可访问 + sitemap 是否已提交 + 核心 URL 是否已检查”的基础动作已经跑完
+- 当前阶段可以从“继续核对”切到“记录结果、等待抓取、7 到 14 天后二次复查”
+
+当前更适合的下一步：
+
+1. 把这 5 个 URL 的 Inspection 结果整理进日志或表格
+2. 记录第一版 Search Console 基线数据：
+   - 已收录页面数
+   - impressions
+   - clicks
+   - 首次出现 impressions 的页面
+   - 首次出现的查询词
+3. 对未收录页确认是否已经请求编入索引
+4. 启动第一轮站外资料页完善和下一批成交前文章扩写
 
 ### 2026-03-30 / URL Inspection 抽样结果
 
@@ -763,13 +868,9 @@
 
 下一步建议：
 
-1. 直接对该 URL 点击“请求编入索引”
-2. 再对以下几个核心 URL 逐个做一次相同操作：
-   - `/zh`
-   - `/zh/services/company-website-development`
-   - `/zh/services/foreign-trade-website-development`
-   - `/zh/blog/website-development-cost`
-3. 提交后等待 3 到 14 天，再回看 URL Inspection 结果
+1. 如果该 URL 还没有点击“请求编入索引”，补做这一步
+2. 其余核心 URL 的第一轮 URL Inspection 已经完成
+3. 接下来等待 3 到 14 天，再回看同一批 URL 的 Inspection 结果
 4. 如果 1 到 2 周后仍长期停留在“已发现 - 尚未编入索引”，再进一步排查：
    - 内链强度是否不足
    - 页面质量是否被 Google 认为还不够强
@@ -779,10 +880,12 @@
 
 第四阶段完成后，建议继续做：
 
-1. 再补 5 到 10 篇更具体的行业 / 场景文章
-2. 优先围绕 `企业官网开发`、`外贸网站开发`、`网站开发多少钱` 继续扩词
-3. 上线后在 Search Console 观察收录和 impressions
-4. 根据数据再决定先扩服务页、文章，还是重做更准确的案例页
+1. 把第一版 Search Console 基线数据记录进日志
+2. 7 到 14 天后二次复查 5 个核心 URL 的索引状态
+3. 再补 5 到 10 篇更具体的行业 / 场景文章
+4. 优先围绕 `企业官网开发`、`外贸网站开发`、`网站开发多少钱` 继续扩词
+5. 启动 GitHub、X、LinkedIn 这 3 个站外资料页
+6. 根据数据再决定先扩服务页、文章，还是重做更准确的案例页
 
 ## 备注
 

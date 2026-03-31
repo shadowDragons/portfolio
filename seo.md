@@ -1,8 +1,9 @@
 # Google SEO 计划：围绕“网站开发”冲击首页
 
 执行日志：`seo-log.md`
+站外执行清单：`offpage-seo-checklist.md`
 
-## 当前进度更新（截至 2026-03-30）
+## 当前进度更新（截至 2026-03-31）
 
 先回答一个最直接的问题：
 
@@ -26,8 +27,16 @@ SEO 还没有“弄完”。
   - 5 个服务详情页
 - 文章内容体系已经搭好：
   - `/zh/blog`
-  - 24 篇文章详情页
-- 首页已经有指向服务页和文章页的入口
+  - 39 篇文章详情页
+- 首页、导航和 footer 已经有指向服务页和文章页的入口
+- 线上首轮验收已经完成：
+  - `https://sphrag.com/zh`
+  - `https://sphrag.com/zh/services`
+  - `https://sphrag.com/zh/blog`
+  - `https://sphrag.com/robots.txt`
+  - `https://sphrag.com/sitemap.xml`
+- Google Search Console 已经提交 `sitemap.xml`
+  - 当前已发现网页：64
 
 当前暂缓的部分：
 
@@ -36,10 +45,11 @@ SEO 还没有“弄完”。
 
 当前还没完成、但对 SEO 结果依然关键的部分：
 
-- 确认线上主域名版本已经和当前业务站一致
-- 上线后在 Google Search Console 提交与验证
+- 把首轮 URL Inspection 的结果整理进 `seo-log.md`
+- 7 到 14 天后复查 5 个核心 URL 的索引状态
 - 看真实收录、展示、点击和关键词变化
-- 持续补长尾内容
+- 建立第一版 GSC 数据基线并开始每周复盘
+- 持续补更贴近成交前问题的长尾内容
 - 做站外品牌提及和自然外链
 
 所以更准确的判断是：
@@ -60,7 +70,8 @@ SEO 还没有“弄完”。
 - `网站开发` 是一个竞争强、搜索意图很泛的商业词。
 - 以当前站点体量和内容结构，短期内直接把首页做到第一页，难度很高。
 - 更现实的路径是：
-  - 先用技术修复 + 服务页 + 案例页 + 长尾内容，把站点做成 Google 能理解的“网站开发服务型站点”
+  - 先用技术修复 + 服务页 + 长尾内容，把站点做成 Google 能理解的“网站开发服务型站点”
+  - 案例页等有更准确材料后再补，不为了 SEO 先硬上
   - 先拿下长尾词和相关词
   - 再反向带动主词 `网站开发`
 
@@ -467,6 +478,10 @@ SEO 还没有“弄完”。
 - 争取行业合作站、客户站、朋友站的自然友情链接或案例提及
 - 把可公开项目做成可引用的案例内容
 
+更细的执行版本见：
+
+- `offpage-seo-checklist.md`
+
 ### 不建议做
 
 - 批量垃圾外链
@@ -667,9 +682,9 @@ SEO 还没有“弄完”。
 
 建议按下面顺序推进：
 
-1. 先确认线上版本已经切到当前业务站
-2. 在 Google Search Console 提交 `sitemap.xml`
-3. 用 8 周持续补文章和观察 impressions
+1. 先补完 `/en` 页面、`hreflang` 和核心 URL 的索引验证
+2. 在 Google Search Console 里对核心页面逐个做 URL Inspection
+3. 用 8 周持续观察 impressions，并补更贴近成交前问题的文章
 4. 再根据数据决定优先扩服务页、文章，还是重做更准确的案例页
 
 ---
@@ -681,8 +696,10 @@ SEO 还没有“弄完”。
 - 技术 SEO 基础
 - 5 个核心服务页
 - 服务总览页
-- 24 篇文章
+- 39 篇文章
 - 首页到服务页 / 文章页的入口
+- 全站导航和 footer 内链增强
+- `sitemap.xml` 已提交 Google Search Console
 
 ### 暂缓
 
@@ -690,9 +707,8 @@ SEO 还没有“弄完”。
 
 ### 未完成
 
-- 线上版本统一确认
-- Search Console 实际提交与验证
-- GA4 / GSC 数据跟踪
+- 首轮 URL Inspection 结果整理与二次复查
+- GA4 / GSC 数据基线记录与每周复盘
 - 外链和品牌提及
 - 后续文章持续扩写
 
@@ -706,7 +722,7 @@ SEO 还没有“弄完”。
 
 - 确认主域名线上版本就是现在这套业务站
 - 检查 `/zh`、`/en`、`/services`、`/blog` 是否都能正常访问
-- 在 Google Search Console 提交 `sitemap.xml`
+- 确认 Google Search Console 已成功读取 `sitemap.xml`
 - 记录当前核心页面是否已收录
 
 ### 第 1 周执行清单
@@ -721,7 +737,7 @@ SEO 还没有“弄完”。
 - [x] 服务总览页
 - [x] 5 个服务详情页
 - [x] 博客总览页
-- [x] 24 篇文章
+- [x] 39 篇文章
 - [x] 动态 `robots.txt`
 - [x] 动态 `sitemap.xml`
 - [x] canonical / `hreflang`
@@ -729,19 +745,19 @@ SEO 还没有“弄完”。
 
 #### B. 需要上线后执行
 
-这一栏才是当前真正还没完成的部分，主要是上线验证和 Google Search Console：
+这一栏是第一轮上线验证和 Google Search Console 核对项，目前已完成：
 
 - [x] 确认 `https://sphrag.com/zh` 已上线为当前业务站
-- [ ] 确认 `https://sphrag.com/en` 能正常访问
+- [x] 确认 `https://sphrag.com/en` 能正常访问
 - [x] 确认 `https://sphrag.com/zh/services` 能正常访问
 - [x] 确认 `https://sphrag.com/zh/blog` 能正常访问
 - [x] 在 Google Search Console 提交 `https://sphrag.com/sitemap.xml`
-- [ ] 用 URL Inspection 检查以下页面
-- [ ] `/zh`
-- [ ] `/zh/services/website-development`
-- [ ] `/zh/services/company-website-development`
-- [ ] `/zh/services/foreign-trade-website-development`
-- [ ] `/zh/blog/website-development-cost`
+- [x] 用 URL Inspection 检查以下页面
+- [x] `/zh`
+- [x] `/zh/services/website-development`
+- [x] `/zh/services/company-website-development`
+- [x] `/zh/services/foreign-trade-website-development`
+- [x] `/zh/blog/website-development-cost`
 
 #### D. 上线与 GSC 逐步操作清单
 
@@ -750,9 +766,9 @@ SEO 还没有“弄完”。
 ##### 第一步：先确认线上版本
 
 - [x] 打开首页，确认线上展示的就是当前这套业务站，不是旧作品集
-- [ ] 检查以下页面是否都返回 `200`
+- [x] 检查以下页面是否都返回 `200`
 - [x] `https://sphrag.com/zh`
-- [ ] `https://sphrag.com/en`
+- [x] `https://sphrag.com/en`
 - [x] `https://sphrag.com/zh/services`
 - [x] `https://sphrag.com/zh/blog`
 - [x] `https://sphrag.com/robots.txt`
@@ -778,18 +794,18 @@ SEO 还没有“弄完”。
 
 建议先用 URL Inspection 检查：
 
-- [ ] `https://sphrag.com/zh`
-- [ ] `https://sphrag.com/zh/services/website-development`
-- [ ] `https://sphrag.com/zh/services/company-website-development`
-- [ ] `https://sphrag.com/zh/services/foreign-trade-website-development`
-- [ ] `https://sphrag.com/zh/blog/website-development-cost`
+- [x] `https://sphrag.com/zh`
+- [x] `https://sphrag.com/zh/services/website-development`
+- [x] `https://sphrag.com/zh/services/company-website-development`
+- [x] `https://sphrag.com/zh/services/foreign-trade-website-development`
+- [x] `https://sphrag.com/zh/blog/website-development-cost`
 
 检查时重点看：
 
-- [ ] URL 是否可被抓取
-- [ ] canonical 是否正确
-- [ ] 是否被索引
-- [ ] 如果未索引，是否有明确原因
+- [x] URL 是否可被抓取
+- [x] canonical 是否正确
+- [x] 是否被索引
+- [x] 如果未索引，是否有明确原因
 
 ##### 第五步：记录第一版基线数据
 
@@ -819,14 +835,28 @@ SEO 还没有“弄完”。
 
 ### 第 2 周
 
-- 观察 Search Console 的抓取和覆盖率
-- 优先看：
+- 把这 5 个核心 URL 的 URL Inspection 结果整理进 `seo-log.md`
+- 记录第一版 Search Console 基线数据：
+  - 已收录页面数
+  - impressions
+  - clicks
+  - 首次出现 impressions 的页面
+  - 首次出现的查询词
+- 继续观察 Search Console 的抓取和覆盖率
+- 优先复查：
   - `/zh`
   - `/zh/services/website-development`
   - `/zh/services/company-website-development`
   - `/zh/services/foreign-trade-website-development`
   - `/zh/blog/website-development-cost`
-- 如果发现 URL 没收录，优先查页面可抓取性和 canonical
+- 如果当前仍有页面未收录：
+  - 先确认是否已经请求编入索引
+  - 7 到 14 天后再做第二次 URL Inspection
+  - 再判断是否需要继续补内链、补内容厚度或补外部信号
+- 启动第一轮站外资料页完善：
+  - GitHub
+  - X / Twitter
+  - LinkedIn
 
 ### 第 3 周
 
@@ -903,3 +933,160 @@ SEO 还没有“弄完”。
 
 - 代码层的“第一段工程”已经完成得差不多了
 - 但 SEO 的“结果阶段”现在才真正开始
+
+---
+
+## 十五、如何看待当前的 GSC 状态
+
+现在最值得正确理解的，不是“为什么还没排名”，而是“Google 当前到底走到了哪一步”。
+
+目前已经知道的状态是：
+
+- `sitemap.xml` 提交成功
+- GSC 已发现网页：64
+- 5 个核心 URL 已完成首轮 URL Inspection
+- 抽样服务页出现过 `已发现 - 尚未编入索引`
+
+这说明：
+
+- Google 已经知道这个站和这些 URL 的存在
+- 但还没有把核心页面稳定抓取并编入索引
+- 这更像新站或新内容提交后的等待阶段，不像被手动惩罚
+
+现阶段不要误判成：
+
+- “代码有大问题”
+- “canonical 写错了所以全站没戏”
+- “一定要继续狂补几十篇文章才会收录”
+
+更合理的判断方式是：
+
+- 如果 3 到 7 天内开始出现抓取和少量 impressions，说明流程在正常推进
+- 如果 1 到 2 周后核心页面仍长期停留在 `已发现 - 尚未编入索引`，再重点排查：
+  - 站内内链是否还不够强
+  - 核心页面内容是否还不够厚
+  - 中文页和英文页的替代关系是否让 Google 犹豫
+  - 首页和服务页是否还缺更明确的权重传递
+
+---
+
+## 十六、接下来 30 天最该做的 4 件事
+
+### 1. 进入“记录结果 + 二次复查”阶段
+
+这 5 个核心 URL 已经完成首轮 URL Inspection：
+
+- `/zh`
+- `/zh/services/website-development`
+- `/zh/services/company-website-development`
+- `/zh/services/foreign-trade-website-development`
+- `/zh/blog/website-development-cost`
+
+现在更重要的不是再去做一遍同样的检查，而是：
+
+- 把第一轮结果记进 `seo-log.md`
+- 对未收录页确认是否已经请求编入索引
+- 7 到 14 天后复查同一批 URL
+
+这一步的目标不是立刻拿排名，而是先让最关键页面进入稳定的“检查 -> 等待 -> 复查”节奏。
+
+### 2. 内容继续补，但从“多”改成“更准”
+
+下一轮文章不要再泛泛铺量，而要更贴近成交前判断：
+
+- 预算怎么估
+- 周期怎么判断
+- 什么情况该重做，什么情况该小改
+- 外贸网站哪些页面最影响询盘
+- 企业官网哪些页面最容易拖慢转化
+
+内容标准要继续保持：
+
+- 一篇只解决一个明确问题
+- 能回链到服务页
+- 有真实判断，不写空泛总结
+
+### 3. 站外动作先做资料页，不急着追外链数量
+
+第一轮只做最稳的 3 个入口：
+
+- GitHub 个人主页
+- X / Twitter
+- LinkedIn
+
+先把品牌名、业务说明、官网链接和重点服务页挂完整，再考虑内容分发和外链扩展。
+
+### 4. 每周固定看一次 GSC，不每天盯排名
+
+每周只关心这些指标：
+
+- 新增已收录页面数
+- impressions 是否开始增长
+- 哪些页面第一次拿到展示
+- 哪些查询词第一次出现
+
+如果开始有 impressions，即使点击还少，也说明主题正在被 Google 逐步识别。
+
+---
+
+## 十七、这个阶段暂时不要做的事
+
+- 不要为了“显得内容多”再批量发一堆低质量文章
+- 不要因为 1 个 URL 暂时没收录，就频繁改标题、description 或整页结构
+- 不要把案例页为了 SEO 硬编出来
+- 不要把所有外链都打到首页
+- 不要每天盯着 `网站开发` 这个主词的名次波动
+
+当前更重要的是：
+
+- 先让核心页稳定进入索引
+- 先让长尾词开始出现 impressions
+- 先让服务页和文章页形成真实的站内主题关系
+
+---
+
+## 十八、每周复盘模板
+
+下面这版可以直接作为 `seo-log.md` 后续更新格式：
+
+```md
+## YYYY-MM-DD / SEO 周复盘
+
+### 本周新增
+
+- 新增文章：
+- 新增服务页：
+- 新增站外资料页或分发：
+
+### GSC 数据
+
+- sitemap 状态：
+- 已发现网页数：
+- 已收录页面数：
+- impressions：
+- clicks：
+- 首次出现 impressions 的页面：
+- 首次出现的查询词：
+
+### URL Inspection 抽样
+
+- `/zh`：
+- `/zh/services/website-development`：
+- `/zh/services/company-website-development`：
+- `/zh/services/foreign-trade-website-development`：
+- `/zh/blog/website-development-cost`：
+
+### 本周判断
+
+- 哪些动作有效：
+- 哪些页面仍未收录：
+- 当前最大阻塞：
+
+### 下周动作
+
+- 1.
+- 2.
+- 3.
+```
+
+如果后面数据开始起来，这份文档就不需要再大改方向了，重点会从“继续规划”切到“持续观察数据并做小步优化”。
