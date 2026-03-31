@@ -42,6 +42,7 @@ export const articleSlugs = [
   'mini-program-admin-panel-planning',
   'business-system-phase-one-scope',
   'website-requirements-document-preparation',
+  'company-website-service-page-writing',
 ] as const
 
 export type ArticleSlug = (typeof articleSlugs)[number]
@@ -4608,6 +4609,119 @@ const articleDefinitions: Record<ArticleSlug, ArticleDefinition> = {
         ],
         ctaTitle: 'If you are about to start a website project, prepare one workable brief first',
         ctaDescription: 'Clearer goals, scope, and content input usually make planning, pricing, and scheduling much easier.',
+      },
+    },
+  },
+
+  'company-website-service-page-writing': {
+    slug: 'company-website-service-page-writing',
+    priority: {
+      zh: 0.64,
+      en: 0.5,
+    },
+    publishedAt: '2026-03-31',
+    readingMinutes: 6,
+    relatedServices: ['company-website-development', 'website-development'],
+    content: {
+      zh: {
+        navLabel: '企业官网服务页怎么写，才不会只剩空泛介绍',
+        categoryLabel: '企业官网',
+        metaTitle: '企业官网服务页怎么写？更有说服力的服务页结构参考｜致诚工作室',
+        metaDescription:
+          '企业官网服务页不该只是罗列业务名称，还要讲清适合谁、解决什么问题、怎么合作以及为什么值得联系。本文拆解更实用的服务页写法。',
+        keywords: ['企业官网服务页', '服务页怎么写', '官网文案结构', '企业官网开发'],
+        eyebrow: 'Article',
+        heroTitle: '企业官网服务页怎么写，才不会最后只剩几句空泛介绍',
+        heroDescription:
+          '很多企业官网有服务页，但内容往往只停留在“我们提供什么服务”。访客真正想知道的，其实是这项服务适不适合自己、能解决什么问题、合作会怎么推进，以及为什么值得继续联系。',
+        introTitle: '为什么很多服务页看起来完整，实际却不太能打动人',
+        introParagraphs: [
+          '服务页最常见的问题不是字数太少，而是信息顺序不对。页面一上来就在讲公司有多专业，却没有先回答客户最关心的“这项服务跟我有什么关系”。',
+          '如果服务页不能帮访客快速判断适配度、价值点和下一步动作，它就很容易变成一个存在感不高的说明页，而不是承接搜索和转化的核心页面。',
+        ],
+        sections: [
+          {
+            title: '先写清这项服务适合谁、解决什么问题',
+            paragraphs: [
+              '服务页开头最该回答的，不是企业自己的履历，而是客户处在什么阶段、常见痛点是什么、为什么会需要这项服务。只要这一步讲清楚，访客才更容易继续往下看。',
+              '尤其是企业官网场景，很多访客并不会耐心读完整页，所以前面几屏的信息应该优先帮助他们快速判断“这是不是我要找的东西”。',
+            ],
+            bullets: ['明确目标客户或适用场景', '点出常见问题或需求', '用客户能听懂的话讲服务价值'],
+          },
+          {
+            title: '再讲服务内容和合作方式，不要只堆抽象能力',
+            paragraphs: [
+              '很多服务页喜欢写“专业、高效、一站式”，但这些词如果没有具体内容支撑，访客很难建立真实判断。更有效的写法，是把服务包含什么、通常怎么推进、客户需要配合什么讲具体。',
+              '这样做不仅能减少空话，也能提前过滤掉不匹配的预期，让真正合适的客户更愿意继续沟通。',
+            ],
+            bullets: ['服务范围和交付内容', '大致合作流程或阶段', '客户需要准备的资料或配合事项'],
+          },
+          {
+            title: '最后补信任信息和下一步动作',
+            paragraphs: [
+              '服务页不是把内容讲完就结束，它还要回答“为什么值得联系你”。这时候 FAQ、过往项目经验、维护方式、响应节奏这类信息，都能明显降低联系前的犹豫。',
+              '同时，页面要给出明确但不过度催促的下一步动作，比如适合先沟通什么、联系前准备哪些信息。这样服务页才真正能承接转化。',
+            ],
+          },
+        ],
+        takeawayTitle: '这篇文章的重点',
+        takeaways: [
+          '服务页先回答适合谁、解决什么问题，再谈公司有多专业。',
+          '服务内容和合作方式要具体，抽象形容词只能做辅助。',
+          '信任信息和下一步动作补得清楚，服务页才更容易承接咨询。',
+        ],
+        ctaTitle: '如果你正在补企业官网服务页，先把客户判断路径写顺',
+        ctaDescription: '只要把适配对象、服务内容、合作方式和联系动作排清楚，服务页的说服力通常会明显提升。',
+      },
+      en: {
+        navLabel: 'How to Write a Company Website Service Page',
+        categoryLabel: 'Company Website',
+        metaTitle: 'How to Write a More Convincing Company Website Service Page | Zhicheng Studio',
+        metaDescription:
+          'A company website service page should do more than list a service name. It should explain fit, problems solved, working style, and why the visitor should continue.',
+        keywords: ['company website service page', 'service page writing', 'website copy structure', 'company website development'],
+        eyebrow: 'Article',
+        heroTitle: 'A company website service page should do more than make the service sound impressive',
+        heroDescription:
+          'Many service pages only say what the company offers. What visitors really want to know is whether the service fits their situation, what problem it solves, how the cooperation works, and whether it feels worth discussing further.',
+        introTitle: 'Why many service pages look finished but still feel weak',
+        introParagraphs: [
+          'The problem is often not a lack of words, but the wrong information order. Many pages start by praising the company instead of helping the visitor decide whether the service is relevant.',
+          'If a service page does not help with fit, value, and next-step clarity, it becomes a background page instead of a page that supports search and conversion.',
+        ],
+        sections: [
+          {
+            title: 'Start with who the service is for and what problem it solves',
+            paragraphs: [
+              'The opening of a service page should explain the situation the visitor may be in, the common problem they may be facing, and why this service exists in the first place.',
+              'That matters especially on company websites, because many visitors will scan quickly and decide within the first few sections whether the page is worth their time.',
+            ],
+            bullets: ['Clarify the target client or situation', 'Name the common problem clearly', 'Explain the value in practical language'],
+          },
+          {
+            title: 'Then explain the service scope and working style',
+            paragraphs: [
+              'Words like professional, efficient, or one-stop rarely mean much on their own. A stronger page explains what is included, how the work is usually structured, and what the client should expect during the process.',
+              'That kind of clarity reduces fluff, sets better expectations, and helps the right clients feel more confident about continuing.',
+            ],
+            bullets: ['What is included in the service', 'The rough delivery or cooperation process', 'What the client may need to prepare'],
+          },
+          {
+            title: 'Add trust signals and a clear next step at the end',
+            paragraphs: [
+              'A service page should not stop after the description. It should also answer why the visitor should trust the company enough to reach out. FAQ, project experience, maintenance approach, and response rhythm all help here.',
+              'The page should also make the next step feel simple: what to ask first, what information to prepare, and how to begin the conversation without unnecessary friction.',
+            ],
+          },
+        ],
+        takeawayTitle: 'Main takeaways',
+        takeaways: [
+          'A service page should explain fit and problem first, not company praise first.',
+          'Concrete scope and working style are stronger than abstract adjectives.',
+          'Trust signals and a clear next step make the page much more useful for conversion.',
+        ],
+        ctaTitle: 'If you are improving a service page, start with the visitor’s decision path',
+        ctaDescription: 'When fit, scope, working style, and next-step clarity are all in place, a service page usually becomes much more persuasive.',
       },
     },
   },
