@@ -41,6 +41,7 @@ export const articleSlugs = [
   'landing-page-vs-company-website',
   'mini-program-admin-panel-planning',
   'business-system-phase-one-scope',
+  'website-requirements-document-preparation',
 ] as const
 
 export type ArticleSlug = (typeof articleSlugs)[number]
@@ -4499,6 +4500,118 @@ const articleDefinitions: Record<ArticleSlug, ArticleDefinition> = {
       },
     },
   },
+
+  'website-requirements-document-preparation': {
+    slug: 'website-requirements-document-preparation',
+    priority: {
+      zh: 0.64,
+      en: 0.5,
+    },
+    publishedAt: '2026-03-31',
+    readingMinutes: 6,
+    relatedServices: ['website-development', 'company-website-development'],
+    content: {
+      zh: {
+        navLabel: '网站开发需求文档怎么准备，沟通效率会高很多',
+        categoryLabel: '流程',
+        metaTitle: '网站开发需求文档怎么准备？沟通效率更高的整理方法｜致诚工作室',
+        metaDescription:
+          '网站开发需求文档不一定要写得很正式，但目标、页面、功能边界和素材准备越清楚，沟通和报价就越高效。',
+        keywords: ['网站开发需求文档', '官网需求整理', '网站项目沟通', '网站开发准备'],
+        eyebrow: 'Article',
+        heroTitle: '网站开发需求文档怎么准备，沟通效率会高很多',
+        heroDescription:
+          '很多网站项目一开始反复沟通，不是因为执行慢，而是需求信息散、页面目标不清、素材准备不到位。需求文档准备得越清楚，后面的方案、报价和工期判断就越稳。',
+        introTitle: '为什么很多网站项目一开始就反复来回',
+        introParagraphs: [
+          '很多人以为“先找开发聊聊再说”就够了，但真正进入项目后，最耗时间的往往不是做页面，而是前期信息没整理清楚，只能反复确认。',
+          '所以网站开发需求文档不一定非要很复杂，但至少要把目标、页面、功能边界、素材准备这几件事先讲明白，沟通效率会明显提高。',
+        ],
+        sections: [
+          {
+            title: '先把这次做站的目标写清楚',
+            paragraphs: [
+              '先回答一个最基础的问题：这次做网站到底是为了品牌展示、获客转化、内容承载，还是业务配合。目标不同，页面结构和优先级都会变。',
+              '如果目标没写清楚，后面设计、开发、业务方理解的可能根本不是同一个项目，讨论越多越容易跑偏。',
+            ],
+          },
+          {
+            title: '把页面范围和功能边界先列出来',
+            paragraphs: [
+              '首页、服务页、案例页、FAQ、联系页这些页面哪些要做，哪些先不做，最好一开始就列清楚。功能上也一样，表单、后台、权限、内容发布能力要不要做，越早说清越省事。',
+              '这一步的重点不是把每个细节写满，而是先把项目边界划出来，避免做到一半又不断加项。',
+            ],
+            bullets: ['先列页面清单', '再列功能清单', '最后标出本期不做的部分'],
+          },
+          {
+            title: '把现有素材和缺失素材分开整理',
+            paragraphs: [
+              '很多官网项目拖延，不是因为代码没写完，而是公司介绍、服务说明、案例资料、图片素材一直没准备齐。开发团队等素材，业务方又以为开发还没开始。',
+              '所以需求文档里最好顺手标注：哪些内容已经有，哪些还缺，分别由谁提供。这样项目推进时会顺很多。',
+            ],
+          },
+        ],
+        takeawayTitle: '这篇文章的重点',
+        takeaways: [
+          '需求文档最先要写清的是项目目标，而不是视觉细节。',
+          '页面范围和功能边界越早确定，后面越不容易失控。',
+          '素材准备情况如果不提前整理，项目沟通成本会被不断放大。',
+        ],
+        ctaTitle: '如果你准备启动网站项目，先把需求整理成一版可沟通的文档',
+        ctaDescription: '目标、页面、功能和素材先理顺，后面的方案、报价和排期判断会高效很多。',
+      },
+      en: {
+        navLabel: 'How to Prepare a Website Requirements Document',
+        categoryLabel: 'Process',
+        metaTitle: 'How to Prepare a Website Requirements Document for Smoother Project Communication | Zhicheng Studio',
+        metaDescription:
+          'A website requirements document does not need to be formal, but clearer goals, page scope, feature boundaries, and content readiness make planning much smoother.',
+        keywords: ['website requirements document', 'website project brief', 'website planning', 'project communication'],
+        eyebrow: 'Article',
+        heroTitle: 'How to prepare a website requirements document that makes communication easier',
+        heroDescription:
+          'Many website projects slow down early not because of delivery speed, but because goals, page scope, and content readiness are still unclear. A better brief makes planning and estimation much easier.',
+        introTitle: 'Why website projects often feel messy from the start',
+        introParagraphs: [
+          'People often think it is enough to start by “talking with a developer first,” but the most time-consuming part is usually not design or coding. It is the repeated clarification caused by incomplete input.',
+          'That is why a website requirements document does not need to be complex, but it should at least define the goal, key pages, feature boundaries, and content preparation status.',
+        ],
+        sections: [
+          {
+            title: 'Start with the business goal',
+            paragraphs: [
+              'The first question should be simple: is this website mainly for brand presentation, lead generation, content delivery, or business support. The answer changes structure and priorities immediately.',
+              'If the goal stays vague, design, development, and stakeholders will often discuss different versions of the same project without realizing it.',
+            ],
+          },
+          {
+            title: 'List page scope and feature boundaries early',
+            paragraphs: [
+              'Define which pages belong in the first release, such as home, services, case studies, FAQ, and contact. Do the same for features like forms, admin access, permissions, or content publishing tools.',
+              'The point is not to over-specify every detail. It is to make the project boundary visible early so the scope does not keep drifting later.',
+            ],
+            bullets: ['List the planned pages', 'List the planned features', 'Mark what is intentionally out of scope'],
+          },
+          {
+            title: 'Separate ready content from missing content',
+            paragraphs: [
+              'Many company website projects stall because the code is waiting on missing service descriptions, case material, photos, or company copy. The team keeps waiting while everyone assumes someone else is still working.',
+              'A better requirements document marks what content already exists, what is missing, and who is responsible for each part. That alone improves project flow a lot.',
+            ],
+          },
+        ],
+        takeawayTitle: 'Key takeaways',
+        takeaways: [
+          'The first thing a website brief should clarify is the project goal, not visual details.',
+          'Clear page scope and feature boundaries reduce rework later.',
+          'Content readiness is part of project planning, not something to leave until the end.',
+        ],
+        ctaTitle: 'If you are about to start a website project, prepare one workable brief first',
+        ctaDescription: 'Clearer goals, scope, and content input usually make planning, pricing, and scheduling much easier.',
+      },
+    },
+  },
+
 }
 
 export function getArticlePath(slug: ArticleSlug): string {
