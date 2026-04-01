@@ -43,6 +43,7 @@ export const articleSlugs = [
   'business-system-phase-one-scope',
   'website-requirements-document-preparation',
   'company-website-service-page-writing',
+  'foreign-trade-website-homepage-mistakes',
 ] as const
 
 export type ArticleSlug = (typeof articleSlugs)[number]
@@ -4722,6 +4723,144 @@ const articleDefinitions: Record<ArticleSlug, ArticleDefinition> = {
         ],
         ctaTitle: 'If you are improving a service page, start with the visitor’s decision path',
         ctaDescription: 'When fit, scope, working style, and next-step clarity are all in place, a service page usually becomes much more persuasive.',
+      },
+    },
+  },
+  'foreign-trade-website-homepage-mistakes': {
+    slug: 'foreign-trade-website-homepage-mistakes',
+    priority: {
+      zh: 0.66,
+      en: 0.52,
+    },
+    publishedAt: '2026-04-01',
+    readingMinutes: 6,
+    relatedServices: ['foreign-trade-website-development', 'website-development'],
+    content: {
+      zh: {
+        navLabel: '外贸网站首页最容易影响询盘的几个问题',
+        categoryLabel: '外贸网站',
+        metaTitle: '外贸网站首页最容易影响询盘的几个问题｜致诚工作室',
+        metaDescription:
+          '外贸网站首页如果信息顺序混乱、信任信号不足、CTA 不清晰，往往会直接影响询盘转化。本文拆解最常见的问题和调整思路。',
+        keywords: ['外贸网站首页', '外贸网站询盘', '外贸网站转化', '外贸网站优化'],
+        eyebrow: 'Article',
+        heroTitle: '外贸网站首页最容易影响询盘的几个问题',
+        heroDescription:
+          '很多外贸网站不是没有流量，而是首页没有在几秒内说明你卖什么、服务谁、为什么值得信任，以及下一步该怎么联系。首页一旦失焦，后面的产品页和案例页就很难真正发挥作用。',
+        introTitle: '为什么首页会直接影响询盘',
+        introParagraphs: [
+          '对第一次访问的海外客户来说，首页通常不是用来慢慢研究品牌故事，而是快速判断这家公司是否靠谱、产品是否相关、是否值得继续点下去。信息判断一旦卡住，用户就会直接离开。',
+          '所以首页的核心任务不是“看起来完整”，而是先把价值表达、信任建立和行动路径讲清楚。很多询盘偏少的问题，根源就出在首页没有承担这个职责。',
+        ],
+        sections: [
+          {
+            title: '第一类问题：一上来没有讲清楚你是谁、卖什么、服务谁',
+            paragraphs: [
+              '不少外贸网站首页把大段口号、抽象愿景或过于宽泛的公司介绍放在最前面，但用户真正想先确认的是产品类别、服务对象、交付范围和典型应用场景。',
+              '如果首屏不能在几秒内回答这些问题，用户就只能自己猜。猜测成本一高，跳出率通常也会跟着上去。',
+            ],
+            bullets: [
+              '首屏标题是否明确写出产品或服务方向',
+              '副标题是否说明目标客户、地区或应用场景',
+              '首屏是否能快速进入产品页、案例页或联系页',
+            ],
+          },
+          {
+            title: '第二类问题：信任信号太弱，客户看完还是不放心',
+            paragraphs: [
+              '外贸网站首页不能只摆漂亮 Banner。对海外采购或合作方来说，他们会特别在意公司资质、服务年限、出口经验、合作区域、客户类型、认证和交付能力。',
+              '如果这些信息都藏得很深，或者只用一句“专业可靠”带过，首页就很难承担建立初步信任的作用。',
+            ],
+            bullets: [
+              '是否展示核心资质、认证、工厂/团队能力或服务年限',
+              '是否有典型客户类型、出口市场或合作流程说明',
+              '是否把 FAQ、About、Contact 等信任页入口放得足够明显',
+            ],
+          },
+          {
+            title: '第三类问题：CTA 太弱，用户不知道下一步该做什么',
+            paragraphs: [
+              '有些首页把大量内容都堆出来了，却没有明确引导用户去询价、提交需求、查看重点产品，或者联系销售。这样即使用户感兴趣，也容易停在“先看看”这一步。',
+              '更有效的做法是按用户决策路径设计 CTA：首屏给出主要动作，页面中段给补充动作，底部再给一次低阻力联系入口。',
+            ],
+            bullets: [
+              '首屏是否有清晰的询盘或联系按钮',
+              '中段是否引导查看重点产品、FAQ 或合作流程',
+              '底部是否提供表单、邮箱、WhatsApp 等低门槛联系路径',
+            ],
+          },
+        ],
+        takeawayTitle: '这篇文章的重点',
+        takeaways: [
+          '外贸网站首页首先要讲清楚产品、客户对象和应用场景，而不是先堆空泛品牌话术。',
+          '信任信号如果太弱，首页再好看也很难支撑询盘转化。',
+          'CTA 要按决策路径设计，让用户随时知道下一步能做什么。',
+        ],
+        ctaTitle: '如果你准备优化外贸网站首页，先检查信息顺序和转化路径',
+        ctaDescription: '首页不是展示素材合集，而是询盘路径的起点。先把首屏表达、信任信号和 CTA 排顺，效果通常比继续堆内容更直接。',
+      },
+      en: {
+        navLabel: 'Common Homepage Issues That Hurt B2B Inquiries',
+        categoryLabel: 'Foreign Trade Website',
+        metaTitle: 'Common Foreign Trade Website Homepage Issues That Reduce Inquiries | Zhicheng Studio',
+        metaDescription:
+          'If a foreign trade website homepage is vague, low-trust, or weak on calls to action, inquiry conversion usually suffers first. This article explains the most common problems and how to fix the page structure.',
+        keywords: ['foreign trade website homepage', 'b2b website inquiries', 'export website conversion', 'homepage optimization'],
+        eyebrow: 'Article',
+        heroTitle: 'Common homepage issues that quietly reduce foreign trade inquiries',
+        heroDescription:
+          'Many B2B export websites do get visits, but the homepage fails to explain fast enough what the company offers, who it serves, why it is credible, and what the visitor should do next. When that first page is weak, deeper pages rarely get a fair chance.',
+        introTitle: 'Why the homepage matters so much for inquiries',
+        introParagraphs: [
+          'For first-time overseas visitors, the homepage is usually where they decide whether the company looks relevant and trustworthy enough to keep exploring. If that decision takes too much effort, they leave.',
+          'That means the homepage is not mainly a visual summary. Its real job is to express value, build early trust, and guide the next action with as little friction as possible.',
+        ],
+        sections: [
+          {
+            title: 'Issue one: the page does not explain fast enough what you sell and who it is for',
+            paragraphs: [
+              'Many export websites open with broad slogans or generic company language, while buyers are really trying to confirm the product type, target market, delivery scope, and use case.',
+              'If the hero section cannot answer those basics in a few seconds, visitors are forced to guess. The more guessing required, the easier it is to lose them.',
+            ],
+            bullets: [
+              'Does the hero headline clearly state the product or service direction?',
+              'Does the supporting copy mention target buyers, regions, or application scenarios?',
+              'Can users quickly move to product, case, or contact pages from the first screen?',
+            ],
+          },
+          {
+            title: 'Issue two: trust signals are too weak to support buyer confidence',
+            paragraphs: [
+              'A polished banner is not enough. Overseas buyers often look for evidence such as certifications, export experience, production capability, market coverage, and client type before they take the next step.',
+              'If that information is hidden too deep or replaced by vague claims like “professional service,” the homepage does very little to reduce uncertainty.',
+            ],
+            bullets: [
+              'Show core certifications, operational experience, or delivery capability',
+              'Mention key markets, buyer types, or how cooperation usually works',
+              'Make About, FAQ, and Contact paths easy to find',
+            ],
+          },
+          {
+            title: 'Issue three: the CTA is too soft, so interested visitors stall out',
+            paragraphs: [
+              'Some homepages include plenty of information but never make the next action obvious. Visitors may be interested, yet still hesitate because there is no clear path toward inquiry, quote request, product review, or contact.',
+              'A better structure is to place calls to action along the decision path: a primary action in the hero section, supporting actions in the middle, and a low-friction contact option near the bottom.',
+            ],
+            bullets: [
+              'Add a clear inquiry or contact CTA in the hero section',
+              'Use mid-page CTAs to lead into products, FAQ, or process pages',
+              'Offer low-friction contact options such as forms, email, or WhatsApp at the bottom',
+            ],
+          },
+        ],
+        takeawayTitle: 'Main takeaways',
+        takeaways: [
+          'A B2B homepage should quickly explain what the company offers, who it serves, and where it fits.',
+          'Trust signals matter early because buyers are screening credibility before they inquire.',
+          'CTA placement should match the decision journey so visitors always know the next step.',
+        ],
+        ctaTitle: 'If you are improving a foreign trade homepage, start with message order and CTA flow',
+        ctaDescription: 'A homepage should do more than look complete. When value, trust, and action paths are clearer, inquiry quality usually improves with it.',
       },
     },
   },
