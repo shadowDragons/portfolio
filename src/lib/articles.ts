@@ -44,6 +44,7 @@ export const articleSlugs = [
   'website-requirements-document-preparation',
   'company-website-service-page-writing',
   'foreign-trade-website-homepage-mistakes',
+  'brand-vs-service-on-homepage',
 ] as const
 
 export type ArticleSlug = (typeof articleSlugs)[number]
@@ -4861,6 +4862,118 @@ const articleDefinitions: Record<ArticleSlug, ArticleDefinition> = {
         ],
         ctaTitle: 'If you are improving a foreign trade homepage, start with message order and CTA flow',
         ctaDescription: 'A homepage should do more than look complete. When value, trust, and action paths are clearer, inquiry quality usually improves with it.',
+      },
+    },
+  },
+  'brand-vs-service-on-homepage': {
+    slug: 'brand-vs-service-on-homepage',
+    priority: {
+      zh: 0.64,
+      en: 0.5,
+    },
+    publishedAt: '2026-04-02',
+    readingMinutes: 6,
+    relatedServices: ['company-website-development', 'website-development'],
+    content: {
+      zh: {
+        navLabel: '官网首页该先讲品牌还是先讲服务',
+        categoryLabel: '企业官网',
+        metaTitle: '官网首页该先讲品牌还是先讲服务？首页信息顺序参考｜致诚工作室',
+        metaDescription:
+          '官网首页该先讲品牌还是先讲服务，关键不在二选一，而在访客第一次进入时最需要先理解什么。本文拆解更适合转化和表达的首页信息顺序。',
+        keywords: ['官网首页先讲品牌还是服务', '企业官网首页结构', '官网信息顺序', '企业官网开发'],
+        eyebrow: 'Article',
+        heroTitle: '官网首页该先讲品牌还是先讲服务，很多网站其实卡在信息顺序上',
+        heroDescription:
+          '不少企业官网首页的问题，不是没有品牌感，也不是服务写得不够多，而是信息顺序不对。访客第一次进入网站时，通常不是先想感受调性，而是先判断你到底做什么、适不适合自己、值不值得继续看。',
+        introTitle: '为什么这个问题很容易被问偏',
+        introParagraphs: [
+          '很多团队会把首页理解成品牌门面，于是希望先讲理念、故事和视觉气质；也有些团队会反过来，把首页做成纯服务说明，第一页就开始堆业务条目。两边都不算完全错，但如果只押一边，首页往往会失衡。',
+          '更现实的判断方式是：访客第一次进来，最需要先完成什么认知。如果品牌还没人认识，通常要先让人快速理解服务方向；如果服务已经能看懂，再用品牌语言去放大信任和差异化。',
+        ],
+        sections: [
+          {
+            title: '首页前几屏，通常先解决“你做什么、适合谁”',
+            paragraphs: [
+              '对大多数企业官网来说，首页最先要解决的是理解问题，而不是情绪问题。访客通常会先看你提供什么服务、适合哪些客户、能解决什么问题，再决定要不要继续往下看。',
+              '这不代表品牌不重要，而是品牌表达需要建立在基础理解之上。连服务方向都没看懂时，单靠一句品牌口号很难真正打动人。',
+            ],
+            bullets: ['先讲核心服务方向', '再讲适合对象或典型场景', '尽快给出继续浏览的入口'],
+          },
+          {
+            title: '品牌不是不要讲，而是更适合承担“放大信任和差异”',
+            paragraphs: [
+              '当访客已经知道你是做什么的，品牌表达才更容易发挥作用。这个阶段的品牌，不只是 Logo、色调或一句口号，而是你的做事方式、审美判断、沟通风格和对项目的理解深度。',
+              '所以首页更稳的做法通常不是“品牌优先”或“服务优先”二选一，而是先用服务建立可理解性，再用品牌把信任感和辨识度拉起来。',
+            ],
+            bullets: ['品牌表达可以放在服务说明之后强化信任', '用案例、方法或风格体现品牌，而不是只写抽象口号', '品牌段落要服务于转化，而不是自我陶醉'],
+          },
+          {
+            title: '什么时候可以把品牌放得更靠前',
+            paragraphs: [
+              '如果你的品牌已经有一定认知，或者行业本身更吃设计感、审美判断和信任背书，比如咨询、创意、设计、个人工作室等，首页可以适度把品牌表达往前提。',
+              '但即使这样，也最好在首屏附近就让人知道你具体做什么，不然首页还是容易变成“看着不错，但不知道你卖什么”的经典事故现场。',
+            ],
+          },
+        ],
+        takeawayTitle: '这篇文章的重点',
+        takeaways: [
+          '官网首页通常应先帮访客理解你做什么、适合谁，再放大品牌表达。',
+          '品牌和服务不是二选一，更有效的是先建立理解，再建立信任和差异。',
+          '只有在品牌认知较强或行业特别吃品牌感时，品牌才更适合明显前置。',
+        ],
+        ctaTitle: '如果你正在改首页，先别纠结讲品牌还是讲服务，先排信息顺序',
+        ctaDescription: '把“做什么、适合谁、为什么值得信任、下一步做什么”这条路径排顺，首页通常会比单纯强化品牌或服务更有效。',
+      },
+      en: {
+        navLabel: 'Should a Homepage Lead with Brand or Services?',
+        categoryLabel: 'Company Website',
+        metaTitle: 'Should a Website Homepage Lead with Brand or Services? A Better Content Order | Zhicheng Studio',
+        metaDescription:
+          'A homepage does not always need to choose between brand and services. The better question is what first-time visitors need to understand before they trust or continue.',
+        keywords: ['homepage brand or services', 'company website homepage structure', 'homepage messaging order', 'company website development'],
+        eyebrow: 'Article',
+        heroTitle: 'Should a homepage talk about brand first or services first?',
+        heroDescription:
+          'Many company websites do not fail because brand is weak or because service content is missing. They fail because the message order is wrong. First-time visitors usually want to understand what you do, who it is for, and whether it is worth exploring further before they care about your positioning language.',
+        introTitle: 'Why this question is often framed too simply',
+        introParagraphs: [
+          'Some teams treat the homepage mainly as a brand statement, so they lead with story, tone, and visual identity. Others swing to the other extreme and turn the homepage into a dense service list. Both approaches can miss the real visitor need.',
+          'The more useful question is what a first-time visitor needs to understand first. If the business is not already familiar, service clarity usually needs to come before deeper brand expression. Once the offer is clear, brand can strengthen trust and differentiation.',
+        ],
+        sections: [
+          {
+            title: 'The first screens usually need to answer what you do and who it is for',
+            paragraphs: [
+              'For most company websites, the homepage should solve understanding before atmosphere. Visitors usually want to know the service direction, the kind of client or scenario it fits, and the problem it solves before they decide to keep reading.',
+              'That does not make brand unimportant. It means brand works better after the visitor can already place the business in their mind.',
+            ],
+            bullets: ['Clarify the core service direction early', 'Mention who the offer fits or what scenario it serves', 'Give the visitor an easy path into deeper pages'],
+          },
+          {
+            title: 'Brand works best when it amplifies trust and difference',
+            paragraphs: [
+              'Once the visitor understands the offer, brand becomes much more useful. At that point brand is not only logo, style, or slogan. It includes how the company thinks, communicates, designs, and delivers work.',
+              'That is why many stronger homepages do not choose brand or services as a strict either-or. They use services to create clarity first, then use brand to deepen confidence and memorability.',
+            ],
+            bullets: ['Use brand after service clarity to strengthen trust', 'Show brand through method, taste, and proof rather than slogans alone', 'Keep brand expression connected to conversion, not self-display'],
+          },
+          {
+            title: 'When brand can move closer to the front',
+            paragraphs: [
+              'If the brand already has some recognition, or the business depends heavily on taste, authority, or perceived style, such as consulting, creative work, design, or studio services, the homepage can give brand expression a stronger early role.',
+              'Even then, the page should still make the service direction understandable quickly. Otherwise the homepage risks looking polished while staying unclear about what the business actually offers.',
+            ],
+          },
+        ],
+        takeawayTitle: 'Main takeaways',
+        takeaways: [
+          'Most homepages should create service clarity before leaning too hard on brand expression.',
+          'Brand and services are not opposites. A strong homepage usually uses both in the right order.',
+          'Brand can move earlier only when recognition or industry context makes it genuinely useful that early.',
+        ],
+        ctaTitle: 'If you are reshaping a homepage, focus on message order before style debates',
+        ctaDescription: 'When the page clearly explains what you do, who it fits, why it is credible, and what the visitor should do next, both brand and conversion usually improve together.',
       },
     },
   },
