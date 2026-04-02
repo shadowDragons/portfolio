@@ -5,21 +5,23 @@
 - 知乎
 - 掘金
 - 即刻
+- Medium（英文）
 
 适用阶段：
 
 - 当前站点已经有服务页和文章页
-- 现在要把站内内容拆成适合中文平台传播的版本
+- 现在要把站内内容拆成适合中文平台传播的版本，必要时再扩展成适合 Medium 的英文版本
 - 希望让 AI 承担“选题、改写、生成标题、生成正文、生成结尾导流”的大部分工作
 
-这份文档的重点不是“平台理论”，而是给 AI 一套可以直接执行的中文分发工作流。
+这份文档的重点不是“平台理论”，而是给 AI 一套可以直接执行的分发工作流：默认中文平台，按需扩展到 Medium 英文发帖。
 
 如果你是负责发帖的 AI：
 
 - 默认按这份文档执行
 - 默认使用“随机选题”模式
 - 如果用户没有指定文章，就不要反问，直接从文章池里任选 1 篇
-- 如果用户没有指定平台，就在知乎、掘金、即刻里任选 1 个平台
+- 如果用户明确要求 `Medium`、`英文发帖`、`英文分发`，就走 Medium 英文流程
+- 如果用户没有指定平台和语言，默认仍在知乎、掘金、即刻里任选 1 个平台，不自动切到 Medium
 
 ---
 
@@ -55,10 +57,12 @@ AI 可以自动生成草稿，但不要让它做下面这些事：
 - 一篇内容里硬塞多个链接
 - 在不同平台直接复制同一段文案
 - 把技术博客硬搬到即刻或知乎问答里
+- 把中文稿直接机翻成生硬英文后发到 Medium
 
 更稳的做法是：
 
 - AI 自动生成
+- Medium 优先参考站内对应英文原文，不要从中文稿逐句直译
 - 你快速过一眼
 - 再发
 
@@ -131,37 +135,82 @@ AI 可以自动生成草稿，但不要让它做下面这些事：
 - 不要写成长文
 - 不要一上来贴链接
 
+### Medium（英文）
+
+更适合：
+
+- 英文长文
+- 判断型、经验型内容
+- 能完整讲清一个问题的 evergreen 文章
+
+推荐方向：
+
+- What actually drives website development cost
+- Why many company websites fail after the homepage
+- How foreign trade websites improve inquiry conversion
+- What should be planned before a multilingual website goes live
+
+内容风格：
+
+- 全文用自然英文，不要中式直译
+- 标题 + 副标题要先把问题说清楚
+- 正文至少讲完整一个判断，不要只写 teaser
+- 结尾可以自然导到 `/en` 文章页或服务页
+- 重点是 insight，不是 agency pitch
+
 ---
 
 ## 四、链接策略
 
 不要每条都只放首页，也不要每条都放服务页。
 
-按内容类型分：
+按语言和内容类型分：
 
-### 品牌介绍型
+### 中文品牌介绍型
 
 - 首选：`https://sphrag.com/zh`
 - 备选：`https://sphrag.com/zh/services`
 
-### 服务判断型
+### 中文服务判断型
 
 - `https://sphrag.com/zh/services/website-development`
 - `https://sphrag.com/zh/services/company-website-development`
 - `https://sphrag.com/zh/services/foreign-trade-website-development`
 
-### 决策问题型
+### 中文决策问题型
 
 - `https://sphrag.com/zh/blog/website-development-cost`
 - `https://sphrag.com/zh/blog/website-development-process`
 - `https://sphrag.com/zh/blog/company-website-pages-checklist`
 - `https://sphrag.com/zh/blog/foreign-trade-website-inquiry-conversion`
 
+### 英文品牌介绍型（Medium）
+
+- 首选：`https://sphrag.com/en`
+- 备选：`https://sphrag.com/en/services`
+
+### 英文服务判断型（Medium）
+
+- `https://sphrag.com/en/services/website-development`
+- `https://sphrag.com/en/services/company-website-development`
+- `https://sphrag.com/en/services/foreign-trade-website-development`
+
+### 英文决策问题型（Medium）
+
+- `https://sphrag.com/en/blog/website-development-cost`
+- `https://sphrag.com/en/blog/website-development-process`
+- `https://sphrag.com/en/blog/company-website-pages-checklist`
+- `https://sphrag.com/en/blog/foreign-trade-website-inquiry-conversion`
+
 链接规则：
 
-- 一条内容默认只放 1 个链接
+- 一条内容默认只放 1 个可见链接
 - 知乎和掘金可以放 1 个正文尾链
 - 即刻优先不放，或者只放 1 个最相关链接
+- Medium 正文默认只放 1 个 CTA 链接，而且链接一律用英文页
+- Medium 不要只发“摘要 + 点击原文”，正文本身要完整可读
+- 如果 Medium 文章和站内英文原文高度接近，优先补 canonical link
+- 如果是直接转载站内已发布英文原文，优先用 `Import a story`
 
 ---
 
@@ -193,6 +242,15 @@ AI 可以自动生成草稿，但不要让它做下面这些事：
 - `landing-page-vs-company-website`
 - `website-maintenance-scope`
 
+### 第五组：适合 Medium 英文长文
+
+- `website-development-cost`
+- `website-development-process`
+- `company-website-pages-checklist`
+- `company-website-homepage-structure`
+- `foreign-trade-website-content-structure`
+- `foreign-trade-website-inquiry-conversion`
+
 ---
 
 ## 六、AI 工作流
@@ -203,7 +261,8 @@ AI 可以自动生成草稿，但不要让它做下面这些事：
    - 知乎从知乎更适合的内容池里任选 1 篇
    - 掘金从掘金更适合的内容池里任选 1 篇
    - 即刻从适合短内容的内容池里任选 1 篇
-   - 如果平台也是自动，就先任选 1 个平台，再任选 1 篇文章
+   - Medium 从适合 Medium 英文长文的内容池里任选 1 篇
+   - 如果平台也是自动，但用户没有明确说英文，就先在中文平台里任选 1 个平台，再任选 1 篇文章
 1. 从对应文章池里选 1 篇最适合的平台原文
 2. 判断这条内容更适合导向首页、服务页还是文章页
 3. 提炼核心问题
@@ -221,6 +280,8 @@ AI 可以自动生成草稿，但不要让它做下面这些事：
 - 如果没有历史记录，直接任选即可，不需要追求真正随机
 - 一次任务默认输出 1 条
 - 只有用户明确要求批量时，才一次输出多条
+- 如果用户明确要求 `Medium` / `英文` / `English`，默认使用站内对应英文文章作为素材
+- Medium 不要把中文稿逐句翻译后直接发布，必须重写成自然英文
 
 ---
 
@@ -237,38 +298,64 @@ AI 可以自动生成草稿，但不要让它做下面这些事：
 每次给 AI 的输入尽量固定成这样：
 
 ```md
-平台：自动 / 知乎 / 掘金 / 即刻
+平台：自动 / 知乎 / 掘金 / 即刻 / Medium
+语言：自动 / 中文 / 英文
 模式：随机选题
 数量：1
 目标：品牌曝光 / 点击文章 / 导向服务页 / 自动
 语气：专业判断 / 个人口吻 / 决策建议 / 自动
 长度：短 / 中 / 长
 是否带链接：自动 / 是 / 否
+发布方式：自动 / 改写发布 / 导入原文
 ```
 
 示例：
 
 ```md
 平台：自动
+语言：自动
 模式：随机选题
 数量：1
 目标：自动
 语气：自动
 长度：中
 是否带链接：自动
+发布方式：自动
 ```
 
 如果你想指定平台，但仍让 AI 自己选文章，可以这样输入：
 
 ```md
 平台：知乎
+语言：中文
 模式：随机选题
 数量：1
 目标：点击文章
 语气：决策建议
 长度：中
 是否带链接：是
+发布方式：自动
 ```
+
+如果你想明确让 AI 产出一条 Medium 英文稿，可以这样输入：
+
+```md
+平台：Medium
+语言：英文
+模式：随机选题
+数量：1
+目标：点击文章
+语气：专业判断
+长度：中
+是否带链接：是
+发布方式：改写发布
+```
+
+补充规则：
+
+- `平台 = Medium` 时，`语言` 默认英文
+- `平台 = 自动` 且 `语言 = 自动` 时，默认只在中文平台里选
+- `发布方式` 主要给 Medium 用：`改写发布` 更适合平台原生内容，`导入原文` 更适合直接转载站内英文原文
 
 ---
 
@@ -293,6 +380,15 @@ AI 可以自动生成草稿，但不要让它做下面这些事：
 ```
 
 这样后面无论是你手动发，还是接自动化流程，都比较容易处理。
+
+如果平台是 Medium，再额外补 4 个字段：
+
+```md
+语言：英文
+建议副标题：
+Canonical Link：
+发布方式建议：
+```
 
 如果数量大于 1，就按下面格式重复输出：
 
@@ -351,6 +447,36 @@ AI 可以自动生成草稿，但不要让它做下面这些事：
 - 最近看了几个企业官网，发现一个很常见的问题……
 - 很多网站不是做得不漂亮，而是……
 
+### Medium 写作规则
+
+- 全文使用自然英文，不要逐句翻译中文原稿
+- 标题先提出判断，副标题补充对象、场景或核心矛盾
+- 正文尽量用 3 到 5 个小标题展开
+- 文章本身要完整，不要只写成给站内原文导流的摘要
+- 正文里默认只放 1 个 CTA 链接，链接使用 `/en/...`
+- 建议给 3 到 5 个 topics
+- 不要写成 clickbait、模板化 AI 文章，避免明显机器味
+- 不要发太短，优先用中长文，不要做成 150 词以内的 shortform
+
+可用标题模板：
+
+- What Actually Drives Website Development Cost?
+- Why Many Company Websites Fail After the Homepage
+- Foreign Trade Websites Usually Lose Inquiries Before the Contact Form
+
+可用副标题模板：
+
+- Most budget confusion comes from unclear scope, not from a single number.
+- The issue is usually missing structure beneath the homepage, not weak visuals.
+- More contact buttons do not fix a broken inquiry path.
+
+Medium 发布动作补充：
+
+- 如果站内英文原文已经发布，而且你准备直接转载，优先用 `Import a story` 导入原文 URL
+- 如果要做 Medium 原生改写，就手动新建 draft，再根据相似度决定是否补 canonical link
+- 发布时至少检查：标题、副标题、topics、Story preview、可见链接、canonical link
+- 如果正文和站内英文原文高度接近，就不要省略 canonical link
+
 ---
 
 ## 十、给 AI 的主提示词
@@ -358,21 +484,23 @@ AI 可以自动生成草稿，但不要让它做下面这些事：
 下面这段可以直接给另一个 AI 当系统提示或主任务提示：
 
 ```text
-你现在扮演中文内容分发执行 AI，不是 SEO 机器，也不是广告文案机器人。
+你现在扮演中英文内容分发执行 AI，不是 SEO 机器，也不是广告文案机器人。
 
-你的任务是把站内已有文章，改写成适合知乎、掘金、即刻的中文平台内容。
+你的任务是把站内已有文章，改写成适合知乎、掘金、即刻，以及 Medium 的平台内容。
 
 要求：
 1. 先理解原文在解决什么问题
 2. 如果用户没有指定文章，就从本文提供的文章池里任选 1 篇
-3. 如果用户没有指定平台，就在知乎、掘金、即刻里任选 1 个平台
+3. 如果用户没有指定平台和语言，默认在知乎、掘金、即刻里任选 1 个平台
 4. 输出的平台内容必须像原生内容，不像广告
 5. 保留核心判断，但不要逐字复述站内原文
 6. 一次只放 1 个最相关链接
 7. 不夸张承诺，不伪造案例，不堆砌关键词
-8. 即刻更像个人观察，知乎更像回答问题，掘金更像方法总结
-9. 如果有历史发布记录，优先避开最近 7 天已经发过的 slug
-10. 输出结果必须包含：平台、选中文章 slug、标题、开头、正文、结尾、链接、标签建议
+8. 即刻更像个人观察，知乎更像回答问题，掘金更像方法总结，Medium 更像英文判断型长文
+9. 如果用户明确要求 `Medium` / `英文` / `English`，默认用英文输出，并优先参考站内对应英文原文
+10. 如果有历史发布记录，优先避开最近 7 天已经发过的 slug
+11. 输出结果必须包含：平台、选中文章 slug、标题、开头、正文、结尾、链接、标签建议
+12. 如果平台是 Medium，再额外补：语言、建议副标题、Canonical Link、发布方式建议
 ```
 
 ---
@@ -418,9 +546,24 @@ AI 可以自动生成草稿，但不要让它做下面这些事：
 - 默认不放链接，除非确实需要
 ```
 
+### Medium 提示词
+
+```text
+请把这篇站内文章改写成一篇适合 Medium 发布的英文文章。
+
+要求：
+- 全文使用自然英文，不要逐句直译中文
+- 标题先给明确判断，再补一个适合 Medium 的英文副标题
+- 正文用 3 到 5 个小标题展开
+- 文章本身必须完整可读，不要只写导流摘要
+- 默认只保留 1 个正文 CTA 链接，且链接必须使用英文页面
+- 输出 3 到 5 个 topics 建议
+- 如果和站内英文原文高度接近，再补 1 个 canonical link 建议
+```
+
 ---
 
-## 十二、首批 9 条自动发帖队列
+## 十二、首批 12 条自动发帖队列
 
 ### 知乎 3 条
 
@@ -440,7 +583,13 @@ AI 可以自动生成草稿，但不要让它做下面这些事：
 2. `landing-page-vs-company-website`
 3. `website-maintenance-scope`
 
-如果用户没有指定文章，就优先从这 9 条里任选 1 条开始。
+### Medium 3 条
+
+1. `website-development-cost`
+2. `company-website-pages-checklist`
+3. `foreign-trade-website-inquiry-conversion`
+
+如果用户没有指定文章，就优先按平台从这 12 条里任选 1 条开始。
 
 ---
 
@@ -450,10 +599,14 @@ AI 输出后，发布前至少看这几件事：
 
 - 标题像不像真人会发的内容
 - 开头有没有太像广告
-- 是否只保留了 1 个链接
+- 是否只保留了 1 个可见链接
 - 链接是否真的匹配正文主题
 - 有没有夸张承诺
 - 有没有明显机器味
+- 如果是 Medium，副标题是否自然、topics 是否准确
+- 如果是 Medium，链接是否用了 `/en/...`
+- 如果是 Medium 且接近原文，canonical link 是否已经设置
+- 如果是 Medium，正文是否完整，而不是只截一段强行导流
 
 如果读起来像“营销号”，就不要发。
 
@@ -464,11 +617,11 @@ AI 输出后，发布前至少看这几件事：
 建议每次发完，顺手记一条：
 
 ```md
-## YYYY-MM-DD / 中文内容分发
+## YYYY-MM-DD / 中英文内容分发
 
 ### 平台
 
-- 知乎 / 掘金 / 即刻
+- 知乎 / 掘金 / 即刻 / Medium
 
 ### 来源文章
 
@@ -478,8 +631,10 @@ AI 输出后，发布前至少看这几件事：
 ### 发布内容
 
 - 发布标题：
+- 副标题：
 - 是否带链接：
 - 链接目标页：
+- Canonical Link：
 
 ### 初步结果
 
@@ -504,14 +659,15 @@ AI 输出后，发布前至少看这几件事：
 1. 先跑知乎 1 篇：`website-development-cost`
 2. 再跑掘金 1 篇：`website-development-process`
 3. 再跑即刻 1 条：`mini-program-and-website-relationship`
+4. 如果要试英文分发，再跑 Medium 1 篇：`company-website-pages-checklist`
 
-这 3 条跑完后，你就能很快看出来：
+这 3 条中文 + 1 条英文跑完后，你就能很快看出来：
 
 - 哪个平台最适合你现在的语气
 - 哪类文章最容易被改成自然内容
 - 链接放在哪里最不违和
 
-先跑通 3 条，再考虑全自动批量。
+先跑通 3 条中文；如果 Medium 也顺，再考虑中英文一起批量。
 
 ---
 
@@ -520,19 +676,22 @@ AI 输出后，发布前至少看这几件事：
 如果你要把整份任务直接丢给另一个 AI，优先用下面这一段：
 
 ```text
-你现在是“中文内容分发执行 AI”。
+你现在是“中英文内容分发执行 AI”。
 
-你的任务是为知乎、掘金、即刻生成可直接发布的中文内容。
+你的任务是为知乎、掘金、即刻生成可直接发布的中文内容，并为 Medium 生成可直接发布的英文内容。
 
 执行规则：
 1. 默认使用随机选题模式
 2. 如果我没有指定文章，你就从下面的文章池里任选 1 篇
-3. 如果我没有指定平台，你就从知乎、掘金、即刻里任选 1 个平台
+3. 如果我没有指定平台和语言，你就从知乎、掘金、即刻里任选 1 个平台
 4. 一次默认只输出 1 条内容
-5. 一条内容默认只放 1 个最相关链接
-6. 知乎更像回答问题，掘金更像方法总结，即刻更像个人观察
-7. 不要像广告，不要夸张承诺，不要伪造案例
-8. 如果有历史记录，优先避开最近 7 天已经发过的文章 slug
+5. 一条内容默认只放 1 个最相关的可见链接
+6. 如果我明确说 `Medium`、`英文发帖`、`英文分发` 或 `English`，你就切到 Medium 英文流程
+7. 知乎更像回答问题，掘金更像方法总结，即刻更像个人观察，Medium 更像英文判断型长文
+8. Medium 优先参考站内对应英文原文，不要把中文稿逐句直译后直接发布
+9. 如果是 Medium 且正文和站内英文原文高度接近，你要额外给出 canonical link 建议
+10. 不要像广告，不要夸张承诺，不要伪造案例
+11. 如果有历史记录，优先避开最近 7 天已经发过的文章 slug
 
 可选文章池：
 - website-development-cost
@@ -550,14 +709,23 @@ AI 输出后，发布前至少看这几件事：
 
 可用链接：
 - 首页：https://sphrag.com/zh
+- 英文首页：https://sphrag.com/en
 - 服务总览：https://sphrag.com/zh/services
+- 英文服务总览：https://sphrag.com/en/services
 - 网站开发服务：https://sphrag.com/zh/services/website-development
+- 英文网站开发服务：https://sphrag.com/en/services/website-development
 - 企业官网开发：https://sphrag.com/zh/services/company-website-development
+- 英文企业官网开发：https://sphrag.com/en/services/company-website-development
 - 外贸网站开发：https://sphrag.com/zh/services/foreign-trade-website-development
+- 英文外贸网站开发：https://sphrag.com/en/services/foreign-trade-website-development
 - 网站开发多少钱：https://sphrag.com/zh/blog/website-development-cost
+- 英文网站开发多少钱：https://sphrag.com/en/blog/website-development-cost
 - 网站开发流程：https://sphrag.com/zh/blog/website-development-process
+- 英文网站开发流程：https://sphrag.com/en/blog/website-development-process
 - 企业官网需要哪些页面：https://sphrag.com/zh/blog/company-website-pages-checklist
+- 英文企业官网需要哪些页面：https://sphrag.com/en/blog/company-website-pages-checklist
 - 外贸网站询盘转化：https://sphrag.com/zh/blog/foreign-trade-website-inquiry-conversion
+- 英文外贸网站询盘转化：https://sphrag.com/en/blog/foreign-trade-website-inquiry-conversion
 
 输出格式必须严格如下：
 
@@ -574,4 +742,11 @@ AI 输出后，发布前至少看这几件事：
 标签建议：
 为什么选这篇：
 为什么适合这个平台：
+
+如果平台是 Medium，再额外补：
+
+语言：
+建议副标题：
+Canonical Link：
+发布方式建议：
 ```
