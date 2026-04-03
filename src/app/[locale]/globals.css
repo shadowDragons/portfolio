@@ -176,3 +176,21 @@ html {
     transform: translateX(0);
   }
 }
+
+@layer utilities {
+  .text-accent-accessible {
+    color: #8e4b1f;
+  }
+
+  .text-muted-accessible {
+    color: #6f675d;
+  }
+
+  .text-muted-strong {
+    color: #7b7064;
+  }
+
+  .text-divider-accessible {
+    color: #9b7d62;
+  }
+}

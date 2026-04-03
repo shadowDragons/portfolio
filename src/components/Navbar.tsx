@@ -2,15 +2,29 @@
 
 import { cn } from '@/lib/utils'
 import { buttonVariants } from './ui/button'
-import { useLocale, useTranslations } from 'next-intl'
 import { useState, useEffect } from 'react'
 import LanguageSwitcher from './LanguageSwitcher'
 import { Link, usePathname } from '@/i18n/routing'
+import type { AppLocale } from '@/lib/site-config'
 import { Menu, X } from 'lucide-react'
 
-const Navbar = () => {
-  const t = useTranslations('Navbar')
-  const locale = useLocale()
+type NavbarProps = {
+  locale: AppLocale
+  labels: {
+    logo: string
+    services: string
+    articles: string
+    process: string
+    projects: string
+    contact: string
+    language: {
+      en: string
+      zh: string
+    }
+  }
+}
+
+const Navbar = ({ locale, labels }: NavbarProps) => {
   const pathname = usePathname()
   const [isOpen, setIsOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
@@ -24,11 +38,11 @@ const Navbar = () => {
   const isHomePage = pathname === '/'
 
   const links = [
-    { name: t('services'), href: '/services', kind: 'route' as const },
-    { name: t('articles'), href: '/blog', kind: 'route' as const },
-    { name: t('process'), href: '#process', kind: 'section' as const },
-    { name: t('projects'), href: '#projects', kind: 'section' as const },
-    { name: t('contact'), href: '#contact', kind: 'section' as const },
+    { name: labels.services, href: '/services', kind: 'route' as const },
+    { name: labels.articles, href: '/blog', kind: 'route' as const },
+    { name: labels.process, href: '#process', kind: 'section' as const },
+    { name: labels.projects, href: '#projects', kind: 'section' as const },
+    { name: labels.contact, href: '#contact', kind: 'section' as const },
   ]
 
   const handleScroll = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
@@ -57,10 +71,10 @@ const Navbar = () => {
           ? 'border-b border-black/[0.06] bg-white/70 shadow-[0_1px_3px_rgba(0,0,0,0.04)] backdrop-blur-xl'
           : 'bg-transparent'
       )}
-    >
+      >
       <div className='mx-auto flex h-16 w-full max-w-[1280px] items-center justify-between px-5 sm:px-8 lg:px-12'>
         <Link href='/' className='font-rubik text-lg tracking-[0.02em] text-[#111] sm:text-xl'>
-          {t('logo')}
+          {labels.logo}
         </Link>
 
         <div className='hidden items-center gap-0.5 lg:flex'>
@@ -94,7 +108,7 @@ const Navbar = () => {
 
         <div className='flex items-center gap-2'>
           <div className='hidden sm:block'>
-            <LanguageSwitcher />
+            <LanguageSwitcher locale={locale} labels={labels.language} />
           </div>
           <button
             type='button'
@@ -132,7 +146,7 @@ const Navbar = () => {
               ),
             )}
             <div className='pt-2 sm:hidden'>
-              <LanguageSwitcher />
+              <LanguageSwitcher locale={locale} labels={labels.language} />
             </div>
           </div>
         </div>

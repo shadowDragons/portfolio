@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import BusinessHome from '@/components/BusinessHome'
 import StructuredData from '@/components/StructuredData'
-import { buildPageMetadata, getAppLocale, getHomePageSeoCopy, getHomeStructuredData, isAppLocale } from '@/lib/site-config'
+import { appLocales, buildPageMetadata, getAppLocale, getHomePageSeoCopy, getHomeStructuredData, isAppLocale } from '@/lib/site-config'
 
 type HomePageProps = {
   params: {
@@ -22,6 +22,10 @@ export function generateMetadata({ params }: HomePageProps): Metadata {
   })
 }
 
+export function generateStaticParams() {
+  return appLocales.map(locale => ({ locale }))
+}
+
 export default function Home({ params }: HomePageProps) {
   if (!isAppLocale(params.locale)) {
     notFound()
@@ -32,7 +36,7 @@ export default function Home({ params }: HomePageProps) {
   return (
     <>
       <StructuredData data={getHomeStructuredData(locale)} />
-      <BusinessHome />
+      <BusinessHome locale={locale} />
     </>
   )
 }

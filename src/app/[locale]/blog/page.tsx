@@ -135,7 +135,7 @@ export default function BlogPage({ params }: BlogPageProps) {
         <div className='pointer-events-none absolute inset-x-0 top-[-8rem] -z-10 h-[34rem] bg-[radial-gradient(ellipse_58%_50%_at_50%_0%,rgba(196,107,44,0.12),transparent_62%)]' />
 
         <section className='pt-8 text-center lg:pt-14'>
-          <p className='text-xs font-semibold uppercase tracking-[0.22em] text-[#b86128]'>{copy.eyebrow}</p>
+          <p className='text-accent-accessible text-xs font-semibold uppercase tracking-[0.22em]'>{copy.eyebrow}</p>
           <h1 className='mx-auto mt-6 max-w-5xl break-keep font-rubik text-[42px] leading-[1.12] text-[#111] sm:text-6xl lg:text-7xl'>{copy.title}</h1>
           <p className='mx-auto mt-6 max-w-3xl text-[16px] leading-8 text-[#645c53] sm:text-[17px]'>{copy.description}</p>
 
@@ -172,10 +172,10 @@ export default function BlogPage({ params }: BlogPageProps) {
               href={article.path}
               className='group flex h-full flex-col rounded-[28px] border border-[#eadfd2] bg-[linear-gradient(180deg,rgba(255,255,255,0.92),rgba(250,245,238,0.96))] p-6 shadow-[0_16px_48px_-34px_rgba(0,0,0,0.16)] transition-all duration-300 hover:-translate-y-1 hover:border-[#d8c2aa] hover:bg-white hover:shadow-[0_18px_56px_-30px_rgba(0,0,0,0.18)]'
             >
-              <p className='text-xs font-semibold uppercase tracking-[0.18em] text-[#b86128]'>{article.categoryLabel}</p>
+              <p className='text-accent-accessible text-xs font-semibold uppercase tracking-[0.18em]'>{article.categoryLabel}</p>
               <h2 className='mt-4 font-rubik text-2xl leading-snug text-[#111]'>{article.navLabel}</h2>
               <p className='mt-4 flex-1 text-sm leading-7 text-[#645c53]'>{article.heroDescription}</p>
-              <div className='mt-5 flex flex-wrap gap-4 text-xs uppercase tracking-[0.14em] text-[#8a7d70]'>
+              <div className='text-muted-accessible mt-5 flex flex-wrap gap-4 text-xs uppercase tracking-[0.14em]'>
                 <span className='inline-flex items-center gap-2'>
                   <CalendarDays className='h-3.5 w-3.5' />
                   {formatArticleDate(locale, article.publishedAt)}
@@ -185,7 +185,7 @@ export default function BlogPage({ params }: BlogPageProps) {
                   {article.readingMinutes} {timeLabel}
                 </span>
               </div>
-              <div className='mt-6 inline-flex items-center gap-2 text-sm font-semibold text-[#b86128]'>
+              <div className='text-accent-accessible mt-6 inline-flex items-center gap-2 text-sm font-semibold'>
                 <span>{copy.cardCta}</span>
                 <ArrowRight className='h-4 w-4 transition-transform duration-300 group-hover:translate-x-1' />
               </div>

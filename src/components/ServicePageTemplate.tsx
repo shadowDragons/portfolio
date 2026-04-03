@@ -61,22 +61,22 @@ export default function ServicePageTemplate({ locale, page, relatedPages, relate
     <div className='relative mx-auto flex w-full max-w-[1200px] flex-col gap-24 pb-16 lg:gap-28'>
       <div className='pointer-events-none absolute inset-x-0 top-[-8rem] -z-10 h-[34rem] bg-[radial-gradient(ellipse_58%_50%_at_50%_0%,rgba(196,107,44,0.12),transparent_62%)]' />
 
-      <nav className='flex flex-wrap items-center gap-2 pt-8 text-sm text-[#8e7a65] lg:pt-12'>
-        <Link href='/' className='transition hover:text-[#b86128]'>
+      <nav className='text-muted-accessible flex flex-wrap items-center gap-2 pt-8 text-sm lg:pt-12'>
+        <Link href='/' className='transition hover:text-accent-accessible'>
           {labels.home}
         </Link>
-        <ChevronRight className='h-4 w-4 text-[#c2aa8f]' />
-        <Link href='/services' className='transition hover:text-[#b86128]'>
+        <ChevronRight className='text-divider-accessible h-4 w-4' />
+        <Link href='/services' className='transition hover:text-accent-accessible'>
           {labels.services}
         </Link>
-        <ChevronRight className='h-4 w-4 text-[#c2aa8f]' />
+        <ChevronRight className='text-divider-accessible h-4 w-4' />
         <span className='text-[#5e4d3b]'>{page.navLabel}</span>
       </nav>
 
       <section className='grid gap-8 lg:grid-cols-[1.04fr_0.96fr] lg:items-start'>
         <div className='space-y-7'>
           <div className='space-y-5'>
-            <p className='text-xs font-semibold uppercase tracking-[0.22em] text-[#b86128]'>{page.eyebrow}</p>
+            <p className='text-accent-accessible text-xs font-semibold uppercase tracking-[0.22em]'>{page.eyebrow}</p>
             <h1 className='max-w-4xl break-keep font-rubik text-[42px] leading-[1.12] text-[#111] sm:text-6xl lg:text-7xl'>{page.heroTitle}</h1>
             <p className='max-w-3xl text-[16px] leading-8 text-[#645c53] sm:text-[17px]'>{page.heroDescription}</p>
           </div>
@@ -107,7 +107,7 @@ export default function ServicePageTemplate({ locale, page, relatedPages, relate
           </div>
 
           <div className='rounded-[28px] border border-[#eadfd2] bg-white/70 p-6 shadow-[0_16px_48px_-32px_rgba(0,0,0,0.16)]'>
-            <p className='text-xs font-semibold uppercase tracking-[0.22em] text-[#aa6d33]'>{labels.keywords}</p>
+            <p className='text-accent-accessible text-xs font-semibold uppercase tracking-[0.22em]'>{labels.keywords}</p>
             <div className='mt-4 flex flex-wrap gap-2'>
               {page.keywords.map(keyword => (
                 <span key={keyword} className='rounded-full border border-[#e6dbcf] bg-[#faf6f1] px-3 py-1.5 text-sm font-medium text-[#5e4d3b]'>
@@ -248,10 +248,10 @@ export default function ServicePageTemplate({ locale, page, relatedPages, relate
                 href={article.path}
                 className='group rounded-[24px] border border-[#eadfd2] bg-white p-5 transition-all duration-300 hover:-translate-y-1 hover:border-[#d5bea6] hover:shadow-[0_14px_40px_-26px_rgba(0,0,0,0.18)]'
               >
-                <p className='text-xs font-semibold uppercase tracking-[0.18em] text-[#b86128]'>{article.categoryLabel}</p>
+                <p className='text-accent-accessible text-xs font-semibold uppercase tracking-[0.18em]'>{article.categoryLabel}</p>
                 <h3 className='mt-3 font-rubik text-2xl text-[#111]'>{article.navLabel}</h3>
                 <p className='mt-3 text-sm leading-7 text-[#645c53]'>{article.heroDescription}</p>
-                <div className='mt-5 inline-flex items-center gap-2 text-sm font-semibold text-[#b86128]'>
+                <div className='text-accent-accessible mt-5 inline-flex items-center gap-2 text-sm font-semibold'>
                   <span>{labels.articles}</span>
                   <ArrowRight className='h-4 w-4 transition-transform duration-300 group-hover:translate-x-1' />
                 </div>
@@ -274,10 +274,10 @@ export default function ServicePageTemplate({ locale, page, relatedPages, relate
               href={relatedPage.path}
               className='group rounded-[24px] border border-[#eadfd2] bg-[#fcfaf7] p-5 transition-all duration-300 hover:-translate-y-1 hover:border-[#d5bea6] hover:bg-white hover:shadow-[0_14px_40px_-26px_rgba(0,0,0,0.18)]'
             >
-              <p className='text-xs font-semibold uppercase tracking-[0.18em] text-[#b86128]'>{labels.services}</p>
+              <p className='text-accent-accessible text-xs font-semibold uppercase tracking-[0.18em]'>{labels.services}</p>
               <h3 className='mt-3 font-rubik text-2xl text-[#111]'>{relatedPage.navLabel}</h3>
               <p className='mt-3 text-sm leading-7 text-[#645c53]'>{relatedPage.heroDescription}</p>
-              <div className='mt-5 inline-flex items-center gap-2 text-sm font-semibold text-[#b86128]'>
+              <div className='text-accent-accessible mt-5 inline-flex items-center gap-2 text-sm font-semibold'>
                 <span>{relatedPage.navLabel}</span>
                 <ArrowRight className='h-4 w-4 transition-transform duration-300 group-hover:translate-x-1' />
               </div>

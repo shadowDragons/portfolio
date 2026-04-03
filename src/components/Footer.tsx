@@ -60,7 +60,7 @@ export default function Footer({ locale }: FooterProps) {
           </Link>
           <p className='max-w-md text-sm leading-7 text-[#655d54]'>{labels.summary}</p>
           <div className='space-y-2'>
-            <p className='text-xs font-semibold uppercase tracking-[0.18em] text-[#b86128]'>{labels.contact}</p>
+            <p className='text-accent-accessible text-xs font-semibold uppercase tracking-[0.18em]'>{labels.contact}</p>
             <div className='grid gap-2 text-sm text-[#4f463d]'>
               {contactItems.map(item => (
                 <a
@@ -68,39 +68,39 @@ export default function Footer({ locale }: FooterProps) {
                   href={item.href}
                   target={item.external ? '_blank' : undefined}
                   rel={item.external ? 'noreferrer' : undefined}
-                  className='break-all transition hover:text-[#b86128]'
+                  className='break-all transition hover:text-accent-accessible'
                 >
                   {item.label}: {item.value}
                 </a>
               ))}
             </div>
           </div>
-          <p className='text-sm text-[#8b7f72]'>{labels.copyright}</p>
+          <p className='text-muted-accessible text-sm'>{labels.copyright}</p>
         </div>
 
         <div className='space-y-4'>
-          <p className='text-xs font-semibold uppercase tracking-[0.18em] text-[#b86128]'>{labels.quick}</p>
+          <p className='text-accent-accessible text-xs font-semibold uppercase tracking-[0.18em]'>{labels.quick}</p>
           <div className='grid gap-2 text-sm text-[#4f463d]'>
-            <Link href='/' className='transition hover:text-[#b86128]'>
+            <Link href='/' className='transition hover:text-accent-accessible'>
               {labels.home}
             </Link>
-            <Link href='/services' className='transition hover:text-[#b86128]'>
+            <Link href='/services' className='transition hover:text-accent-accessible'>
               {labels.servicesHub}
             </Link>
-            <Link href='/blog' className='transition hover:text-[#b86128]'>
+            <Link href='/blog' className='transition hover:text-accent-accessible'>
               {labels.blog}
             </Link>
-            <a href={contactQuickHref} target={locale === 'en' ? '_blank' : undefined} rel={locale === 'en' ? 'noreferrer' : undefined} className='transition hover:text-[#b86128]'>
+            <a href={contactQuickHref} target={locale === 'en' ? '_blank' : undefined} rel={locale === 'en' ? 'noreferrer' : undefined} className='transition hover:text-accent-accessible'>
               {labels.contactLink}
             </a>
           </div>
         </div>
 
         <div className='space-y-4'>
-          <p className='text-xs font-semibold uppercase tracking-[0.18em] text-[#b86128]'>{labels.services}</p>
+          <p className='text-accent-accessible text-xs font-semibold uppercase tracking-[0.18em]'>{labels.services}</p>
           <div className='grid gap-2 text-sm text-[#4f463d]'>
             {serviceLinks.map(service => (
-              <Link key={service.slug} href={service.path} className='transition hover:text-[#b86128]'>
+              <Link key={service.slug} href={service.path} className='transition hover:text-accent-accessible'>
                 {service.navLabel}
               </Link>
             ))}
@@ -108,10 +108,10 @@ export default function Footer({ locale }: FooterProps) {
         </div>
 
         <div className='space-y-4'>
-          <p className='text-xs font-semibold uppercase tracking-[0.18em] text-[#b86128]'>{labels.articles}</p>
+          <p className='text-accent-accessible text-xs font-semibold uppercase tracking-[0.18em]'>{labels.articles}</p>
           <div className='grid gap-2 text-sm text-[#4f463d]'>
             {articleLinks.map(article => (
-              <Link key={article.slug} href={article.path} className='transition hover:text-[#b86128]'>
+              <Link key={article.slug} href={article.path} className='transition hover:text-accent-accessible'>
                 {article.navLabel}
               </Link>
             ))}
