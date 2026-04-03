@@ -18,6 +18,8 @@ export default function Footer({ locale }: FooterProps) {
           services: '服务页',
           articles: '文章',
           contact: '联系',
+          email: '邮箱',
+          x: 'X / Twitter',
           home: '首页',
           blog: '文章目录',
           servicesHub: '全部服务页',
@@ -30,14 +32,24 @@ export default function Footer({ locale }: FooterProps) {
           services: 'Services',
           articles: 'Articles',
           contact: 'Contact',
+          email: 'Email',
+          x: 'X / Twitter',
           home: 'Home',
           blog: 'Article Hub',
           servicesHub: 'All Services',
-          contactLink: 'Get In Touch',
+          contactLink: 'Contact on X',
           copyright: 'Website development / company sites / foreign trade / mini-programs / internal systems',
         }
 
   const homePath = getLocalizedPath(locale)
+  const contactQuickHref = locale === 'en' ? siteConfig.xUrl : `${homePath}#contact`
+  const contactItems =
+    locale === 'en'
+      ? [{ label: labels.x, value: siteConfig.xHandle, href: siteConfig.xUrl, external: true }]
+      : [
+          { label: labels.email, value: siteConfig.email, href: `mailto:${siteConfig.email}`, external: false },
+          { label: labels.x, value: siteConfig.xHandle, href: siteConfig.xUrl, external: true },
+        ]
 
   return (
     <footer className='border-t border-black/[0.06] bg-[#faf7f3]'>
@@ -47,6 +59,22 @@ export default function Footer({ locale }: FooterProps) {
             {siteConfig.brandName}
           </Link>
           <p className='max-w-md text-sm leading-7 text-[#655d54]'>{labels.summary}</p>
+          <div className='space-y-2'>
+            <p className='text-xs font-semibold uppercase tracking-[0.18em] text-[#b86128]'>{labels.contact}</p>
+            <div className='grid gap-2 text-sm text-[#4f463d]'>
+              {contactItems.map(item => (
+                <a
+                  key={`${item.label}-${item.value}`}
+                  href={item.href}
+                  target={item.external ? '_blank' : undefined}
+                  rel={item.external ? 'noreferrer' : undefined}
+                  className='break-all transition hover:text-[#b86128]'
+                >
+                  {item.label}: {item.value}
+                </a>
+              ))}
+            </div>
+          </div>
           <p className='text-sm text-[#8b7f72]'>{labels.copyright}</p>
         </div>
 
@@ -62,7 +90,7 @@ export default function Footer({ locale }: FooterProps) {
             <Link href='/blog' className='transition hover:text-[#b86128]'>
               {labels.blog}
             </Link>
-            <a href={`${homePath}#contact`} className='transition hover:text-[#b86128]'>
+            <a href={contactQuickHref} target={locale === 'en' ? '_blank' : undefined} rel={locale === 'en' ? 'noreferrer' : undefined} className='transition hover:text-[#b86128]'>
               {labels.contactLink}
             </a>
           </div>

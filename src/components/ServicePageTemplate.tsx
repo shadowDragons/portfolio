@@ -38,17 +38,24 @@ export default function ServicePageTemplate({ locale, page, relatedPages, relate
       : {
           home: 'Home',
           services: 'Services',
-          contact: 'Discuss Your Project',
+          contact: 'Contact on X',
           viewWork: 'View Sample Work',
           keywords: 'Keyword Focus',
           related: 'Related Service Pages',
           articles: 'Related Articles',
           ctaHint: 'Budget, goals, and the main problem you want solved are enough to start the conversation.',
-          wechat: 'WeChat',
-          phone: 'Phone',
+          x: 'X / Twitter',
           proofTitle: 'How the collaboration works',
           proofDescription: 'Communication and delivery stay direct without subcontracting, which is a better fit for teams that care about quality and long-term support.',
         }
+  const contactHref = locale === 'en' ? siteConfig.xUrl : `${homePath}#contact`
+  const proofContacts =
+    locale === 'en'
+      ? [{ label: labels.x, value: siteConfig.xHandle, href: siteConfig.xUrl }]
+      : [
+          { label: labels.wechat, value: siteConfig.wechat },
+          { label: labels.phone, value: siteConfig.displayPhone },
+        ]
 
   return (
     <div className='relative mx-auto flex w-full max-w-[1200px] flex-col gap-24 pb-16 lg:gap-28'>
@@ -76,7 +83,9 @@ export default function ServicePageTemplate({ locale, page, relatedPages, relate
 
           <div className='flex flex-col gap-3 sm:flex-row'>
             <a
-              href={`${homePath}#contact`}
+              href={contactHref}
+              target={locale === 'en' ? '_blank' : undefined}
+              rel={locale === 'en' ? 'noreferrer' : undefined}
               className={cn(
                 buttonVariants({ size: 'lg' }),
                 'h-12 rounded-full border-0 bg-[#111] px-7 text-sm font-semibold text-white shadow-[0_8px_24px_-8px_rgba(0,0,0,0.3)] transition-all hover:bg-[#222] hover:shadow-[0_12px_32px_-8px_rgba(0,0,0,0.35)]',
@@ -125,14 +134,25 @@ export default function ServicePageTemplate({ locale, page, relatedPages, relate
             <p className='text-xs font-semibold uppercase tracking-[0.22em] text-[#d4944e]'>{labels.proofTitle}</p>
             <p className='mt-3 text-sm leading-7 text-white/78'>{labels.proofDescription}</p>
             <div className='mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-1'>
-              <div className='rounded-2xl border border-white/[0.08] bg-white/[0.04] px-4 py-3'>
-                <p className='text-xs text-white/54'>{labels.wechat}</p>
-                <p className='mt-1 font-rubik text-lg text-white'>{siteConfig.wechat}</p>
-              </div>
-              <div className='rounded-2xl border border-white/[0.08] bg-white/[0.04] px-4 py-3'>
-                <p className='text-xs text-white/54'>{labels.phone}</p>
-                <p className='mt-1 font-rubik text-lg text-white'>{siteConfig.displayPhone}</p>
-              </div>
+              {proofContacts.map(item =>
+                'href' in item ? (
+                  <a
+                    key={`${item.label}-${item.value}`}
+                    href={item.href}
+                    target='_blank'
+                    rel='noreferrer'
+                    className='rounded-2xl border border-white/[0.08] bg-white/[0.04] px-4 py-3 transition hover:bg-white/[0.08]'
+                  >
+                    <p className='text-xs text-white/54'>{item.label}</p>
+                    <p className='mt-1 font-rubik text-lg text-white'>{item.value}</p>
+                  </a>
+                ) : (
+                  <div key={`${item.label}-${item.value}`} className='rounded-2xl border border-white/[0.08] bg-white/[0.04] px-4 py-3'>
+                    <p className='text-xs text-white/54'>{item.label}</p>
+                    <p className='mt-1 font-rubik text-lg text-white'>{item.value}</p>
+                  </div>
+                ),
+              )}
             </div>
           </div>
         </div>
@@ -275,7 +295,9 @@ export default function ServicePageTemplate({ locale, page, relatedPages, relate
           </div>
           <div className='grid gap-3 sm:min-w-[220px]'>
             <a
-              href={`${homePath}#contact`}
+              href={contactHref}
+              target={locale === 'en' ? '_blank' : undefined}
+              rel={locale === 'en' ? 'noreferrer' : undefined}
               className='inline-flex items-center justify-center rounded-full bg-white px-6 py-3 text-sm font-semibold text-[#111] transition hover:bg-[#f3ece2]'
             >
               <MessageSquare className='mr-2 h-4 w-4' />

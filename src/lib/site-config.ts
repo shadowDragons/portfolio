@@ -32,6 +32,8 @@ export const siteConfig = {
   url: 'https://sphrag.com',
   ogImagePath: '/og-image.png',
   email: 'contact@sphrag.com',
+  xUrl: 'https://x.com/Junexus_indie',
+  xHandle: '@Junexus_indie',
   phone: '+8613430279389',
   displayPhone: '13430279389',
   wechat: 'jandan1990',

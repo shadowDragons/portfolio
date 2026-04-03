@@ -4,7 +4,7 @@ import { Link } from '@/i18n/routing'
 import StructuredData from '@/components/StructuredData'
 import { buttonVariants } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
-import { buildPageMetadata, getAppLocale, getLocalizedPath, getLocalizedUrl, isAppLocale, type AppLocale } from '@/lib/site-config'
+import { buildPageMetadata, getAppLocale, getLocalizedPath, getLocalizedUrl, isAppLocale, siteConfig, type AppLocale } from '@/lib/site-config'
 import { getArticleSummaries } from '@/lib/articles'
 import { ArrowRight, CalendarDays, Clock3, MessageSquare } from 'lucide-react'
 
@@ -53,7 +53,7 @@ const blogHubCopy: Record<
     keywords: ['website development blog', 'website SEO content', 'multilingual website SEO', 'internal system planning'],
     eyebrow: 'Articles',
     cardCta: 'Read Article',
-    contactCta: 'Discuss Your Project',
+    contactCta: 'Contact on X',
     viewWorkCta: 'View Sample Work',
     servicesCta: 'View Services',
   },
@@ -126,6 +126,7 @@ export default function BlogPage({ params }: BlogPageProps) {
   const articles = getArticleSummaries(locale)
   const homePath = getLocalizedPath(locale)
   const timeLabel = locale === 'zh' ? '分钟' : 'min'
+  const contactHref = locale === 'en' ? siteConfig.xUrl : `${homePath}#contact`
 
   return (
     <>
@@ -140,7 +141,9 @@ export default function BlogPage({ params }: BlogPageProps) {
 
           <div className='mt-10 flex flex-col justify-center gap-3 sm:flex-row'>
             <a
-              href={`${homePath}#contact`}
+              href={contactHref}
+              target={locale === 'en' ? '_blank' : undefined}
+              rel={locale === 'en' ? 'noreferrer' : undefined}
               className={cn(
                 buttonVariants({ size: 'lg' }),
                 'h-12 rounded-full border-0 bg-[#111] px-7 text-sm font-semibold text-white shadow-[0_8px_24px_-8px_rgba(0,0,0,0.3)] transition-all hover:bg-[#222] hover:shadow-[0_12px_32px_-8px_rgba(0,0,0,0.35)]',

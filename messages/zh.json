@@ -273,6 +273,8 @@
       "description": "",
       "wechatLabel": "微信",
       "phoneLabel": "电话",
+      "emailLabel": "邮箱",
+      "xLabel": "X / Twitter",
       "availabilityTitle": "沟通时间",
       "availabilityDescription": "全天 24 小时都可以联系，看到就回。工作日基本在线，周末带娃，不会一直看手机。",
       "briefTitle": "首次沟通建议",

@@ -1,7 +1,7 @@
 import { Link } from '@/i18n/routing'
 import { buttonVariants } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
-import { getLocalizedPath, type AppLocale } from '@/lib/site-config'
+import { getLocalizedPath, siteConfig, type AppLocale } from '@/lib/site-config'
 import type { LocalizedArticle, LocalizedArticleSummary } from '@/lib/articles'
 import type { LocalizedServicePage } from '@/lib/service-pages'
 import { ArrowRight, CalendarDays, ChevronRight, Clock3, MessageSquare, ShieldCheck } from 'lucide-react'
@@ -47,12 +47,13 @@ export default function BlogPostTemplate({ locale, article, relatedServices, rel
           services: 'Related Services',
           relatedArticles: 'Related Articles',
           keyPoints: 'Key Takeaways',
-          contact: 'Discuss Your Project',
+          contact: 'Contact on X',
           viewWork: 'View Sample Work',
           published: 'Published',
           readTime: 'Reading Time',
           minuteUnit: 'min',
         }
+  const contactHref = locale === 'en' ? siteConfig.xUrl : `${homePath}#contact`
 
   return (
     <div className='relative mx-auto flex w-full max-w-[1200px] flex-col gap-24 pb-16 lg:gap-28'>
@@ -80,7 +81,9 @@ export default function BlogPostTemplate({ locale, article, relatedServices, rel
 
           <div className='flex flex-col gap-3 sm:flex-row'>
             <a
-              href={`${homePath}#contact`}
+              href={contactHref}
+              target={locale === 'en' ? '_blank' : undefined}
+              rel={locale === 'en' ? 'noreferrer' : undefined}
               className={cn(
                 buttonVariants({ size: 'lg' }),
                 'h-12 rounded-full border-0 bg-[#111] px-7 text-sm font-semibold text-white shadow-[0_8px_24px_-8px_rgba(0,0,0,0.3)] transition-all hover:bg-[#222] hover:shadow-[0_12px_32px_-8px_rgba(0,0,0,0.35)]',
@@ -232,7 +235,9 @@ export default function BlogPostTemplate({ locale, article, relatedServices, rel
           </div>
           <div className='grid gap-3 sm:min-w-[220px]'>
             <a
-              href={`${homePath}#contact`}
+              href={contactHref}
+              target={locale === 'en' ? '_blank' : undefined}
+              rel={locale === 'en' ? 'noreferrer' : undefined}
               className='inline-flex items-center justify-center rounded-full bg-white px-6 py-3 text-sm font-semibold text-[#111] transition hover:bg-[#f3ece2]'
             >
               <MessageSquare className='mr-2 h-4 w-4' />

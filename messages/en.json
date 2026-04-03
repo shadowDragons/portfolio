@@ -22,7 +22,7 @@
       "titleHighlight": "website development, business systems, and AI apps",
       "titleSuffix": "with owner-level accountability",
       "description": "Former technical lead in the technology department of a large internet company. I led multiple enterprise systems and managed a 20-person engineering team. Now I take projects directly as a solo studio without subcontracting, which fits clients who care about quality, speed, and long-term support.",
-      "primaryCta": "Add WeChat to Discuss",
+      "primaryCta": "Contact on X",
       "secondaryCta": "View Work",
       "highlights": {
         "background": {
@@ -270,9 +270,11 @@
     "contact": {
       "eyebrow": "Get In Touch",
       "title": "Contact",
-      "description": "",
+      "description": "For English inquiries, X is the fastest way to reach me.",
       "wechatLabel": "WeChat",
       "phoneLabel": "Phone",
+      "emailLabel": "Email",
+      "xLabel": "X / Twitter",
       "availabilityTitle": "Response Time",
       "availabilityDescription": "You can message me anytime, 24/7. I reply when I see it. I am usually online on weekdays, while weekends are more family time and I do not check my phone as often.",
       "briefTitle": "Best first message",

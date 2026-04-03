@@ -3,8 +3,9 @@
 import { useEffect, useState } from 'react'
 import Image from 'next/image'
 import { AnimatePresence, motion } from 'framer-motion'
-import { useTranslations } from 'next-intl'
+import { useLocale, useTranslations } from 'next-intl'
 import { Link } from '@/i18n/routing'
+import { siteConfig } from '@/lib/site-config'
 import { cn } from '@/lib/utils'
 import { buttonVariants } from '@/components/ui/button'
 import FramerWrapper from '@/components/animation/FramerWrapper'
@@ -22,6 +23,7 @@ import {
   Globe,
   ImageIcon,
   Layers3,
+  Mail,
   MessageSquare,
   MonitorSmartphone,
   Phone,
@@ -477,9 +479,37 @@ function CopyableContact({ icon: Icon, label, value }: { icon: LucideIcon; label
   )
 }
 
+function ContactLinkCard({ icon: Icon, label, value, href }: { icon: LucideIcon; label: string; value: string; href: string }) {
+  const isExternal = href.startsWith('http')
+
+  return (
+    <a
+      href={href}
+      target={isExternal ? '_blank' : undefined}
+      rel={isExternal ? 'noreferrer' : undefined}
+      className='group flex w-full items-center justify-between gap-4 rounded-2xl border border-[#eee] bg-white p-4 text-left transition-all duration-300 hover:border-[#e8ddd0] hover:shadow-[0_8px_20px_-8px_rgba(0,0,0,0.06)] sm:p-5'
+    >
+      <div className='flex items-center gap-4'>
+        <div className='flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-[#f5ede3] text-[#b86128] transition-colors group-hover:bg-[#f0e4d6]'>
+          <Icon className='h-5 w-5' />
+        </div>
+        <div>
+          <p className='text-xs text-[#999]'>{label}</p>
+          <p className='font-rubik text-[17px] text-[#111] transition-colors group-hover:text-[#b86128]'>{value}</p>
+        </div>
+      </div>
+      <div className='text-[#ccc] transition-colors group-hover:text-[#b86128]'>
+        <ExternalLink className='h-5 w-5' />
+      </div>
+    </a>
+  )
+}
+
 export default function BusinessHome() {
   const t = useTranslations('Landing')
+  const locale = useLocale()
   const [lightbox, setLightbox] = useState<LightboxState>(null)
+  const isEnglish = locale === 'en'
 
   const heroTitleSuffix = t('hero.titleSuffix')
 
@@ -511,6 +541,45 @@ export default function BusinessHome() {
 
   const frontendStack = ['Vue', 'React', 'Next.js', 'TypeScript']
   const backendStack = ['Java', 'PHP', 'Python', 'Node.js']
+  const primaryContactHref = isEnglish ? siteConfig.xUrl : '#contact'
+  const contactCards = isEnglish
+    ? [
+        {
+          type: 'link' as const,
+          icon: Globe,
+          label: t('contact.xLabel'),
+          value: siteConfig.xHandle,
+          href: siteConfig.xUrl,
+        },
+      ]
+    : [
+        {
+          type: 'copy' as const,
+          icon: MessageSquare,
+          label: t('contact.wechatLabel'),
+          value: siteConfig.wechat,
+        },
+        {
+          type: 'copy' as const,
+          icon: Phone,
+          label: t('contact.phoneLabel'),
+          value: siteConfig.displayPhone,
+        },
+        {
+          type: 'link' as const,
+          icon: Mail,
+          label: t('contact.emailLabel'),
+          value: siteConfig.email,
+          href: `mailto:${siteConfig.email}`,
+        },
+        {
+          type: 'link' as const,
+          icon: Globe,
+          label: t('contact.xLabel'),
+          value: siteConfig.xHandle,
+          href: siteConfig.xUrl,
+        },
+      ]
 
   const projectImages = (folder: string, count: number) => Array.from({ length: count }, (_, index) => `/projects/${folder}/${index + 1}.jpg`)
 
@@ -702,7 +771,9 @@ export default function BusinessHome() {
           <FramerWrapper y={16} delay={0.24}>
             <div className='mt-10 flex flex-col gap-3 sm:flex-row'>
               <a
-                href='#contact'
+                href={primaryContactHref}
+                target={isEnglish ? '_blank' : undefined}
+                rel={isEnglish ? 'noreferrer' : undefined}
                 className={cn(
                   buttonVariants({ size: 'lg' }),
                   'h-12 rounded-full border-0 bg-[#111] px-7 text-sm font-semibold text-white shadow-[0_8px_24px_-8px_rgba(0,0,0,0.3)] transition-all hover:bg-[#222] hover:shadow-[0_12px_32px_-8px_rgba(0,0,0,0.35)]',
@@ -947,9 +1018,14 @@ export default function BusinessHome() {
                 {t('contact.description') ? <p className='mx-auto mt-4 max-w-2xl text-[15px] leading-8 text-[#666]'>{t('contact.description')}</p> : null}
               </div>
 
-              <div className='mx-auto mt-10 grid w-full max-w-xl gap-4 sm:grid-cols-2'>
-                <CopyableContact icon={MessageSquare} label={t('contact.wechatLabel')} value='jandan1990' />
-                <CopyableContact icon={Phone} label={t('contact.phoneLabel')} value='13430279389' />
+              <div className={cn('mx-auto mt-10 grid w-full gap-4', isEnglish ? 'max-w-xl' : 'max-w-2xl sm:grid-cols-2')}>
+                {contactCards.map(card =>
+                  card.type === 'copy' ? (
+                    <CopyableContact key={`${card.label}-${card.value}`} icon={card.icon} label={card.label} value={card.value} />
+                  ) : (
+                    <ContactLinkCard key={`${card.label}-${card.value}`} icon={card.icon} label={card.label} value={card.value} href={card.href} />
+                  ),
+                )}
               </div>
 
               <div className='mx-auto mt-8 grid w-full max-w-2xl gap-3 text-left sm:grid-cols-2'>

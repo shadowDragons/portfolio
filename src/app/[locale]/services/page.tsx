@@ -4,7 +4,7 @@ import { Link } from '@/i18n/routing'
 import StructuredData from '@/components/StructuredData'
 import { buttonVariants } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
-import { buildPageMetadata, getAppLocale, getLocalizedPath, getLocalizedUrl, isAppLocale, type AppLocale } from '@/lib/site-config'
+import { buildPageMetadata, getAppLocale, getLocalizedPath, getLocalizedUrl, isAppLocale, siteConfig, type AppLocale } from '@/lib/site-config'
 import { getServicePageSummaries } from '@/lib/service-pages'
 import { ArrowRight, Building2, Globe, Languages, Layers3, MessageSquare, MonitorSmartphone } from 'lucide-react'
 
@@ -55,7 +55,7 @@ const servicesHubCopy: Record<
     keywords: ['website development services', 'company website development', 'foreign trade website development', 'mini-program development', 'web app development'],
     eyebrow: 'Services',
     cardCta: 'Open Service Page',
-    contactCta: 'Discuss Your Project',
+    contactCta: 'Contact on X',
     viewWorkCta: 'View Sample Work',
     closingTitle: 'If you are not sure where to start, begin with the general website development page',
     closingDescription: 'It works well as the parent entry before narrowing into company sites, foreign trade sites, mini-programs, or internal systems.',
@@ -139,6 +139,7 @@ export default function ServicesPage({ params }: ServicesPageProps) {
   const services = getServicePageSummaries(locale)
   const homePath = getLocalizedPath(locale)
   const defaultService = services.find(service => service.slug === 'website-development')
+  const contactHref = locale === 'en' ? siteConfig.xUrl : `${homePath}#contact`
 
   return (
     <>
@@ -153,7 +154,9 @@ export default function ServicesPage({ params }: ServicesPageProps) {
 
           <div className='mt-10 flex flex-col justify-center gap-3 sm:flex-row'>
             <a
-              href={`${homePath}#contact`}
+              href={contactHref}
+              target={locale === 'en' ? '_blank' : undefined}
+              rel={locale === 'en' ? 'noreferrer' : undefined}
               className={cn(
                 buttonVariants({ size: 'lg' }),
                 'h-12 rounded-full border-0 bg-[#111] px-7 text-sm font-semibold text-white shadow-[0_8px_24px_-8px_rgba(0,0,0,0.3)] transition-all hover:bg-[#222] hover:shadow-[0_12px_32px_-8px_rgba(0,0,0,0.35)]',
