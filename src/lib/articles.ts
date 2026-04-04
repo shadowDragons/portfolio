@@ -45,6 +45,7 @@ export const articleSlugs = [
   'company-website-service-page-writing',
   'foreign-trade-website-homepage-mistakes',
   'brand-vs-service-on-homepage',
+  'website-admin-mini-program-boundaries',
 ] as const
 
 export type ArticleSlug = (typeof articleSlugs)[number]
@@ -4974,6 +4975,119 @@ const articleDefinitions: Record<ArticleSlug, ArticleDefinition> = {
         ],
         ctaTitle: 'If you are reshaping a homepage, focus on message order before style debates',
         ctaDescription: 'When the page clearly explains what you do, who it fits, why it is credible, and what the visitor should do next, both brand and conversion usually improve together.',
+      },
+    },
+  },
+
+  'website-admin-mini-program-boundaries': {
+    slug: 'website-admin-mini-program-boundaries',
+    priority: {
+      zh: 0.64,
+      en: 0.5,
+    },
+    publishedAt: '2026-04-04',
+    readingMinutes: 7,
+    relatedServices: ['web-app-development', 'mini-program-development', 'website-development'],
+    content: {
+      zh: {
+        navLabel: '官网、后台、小程序一起做时，技术边界怎么拆',
+        categoryLabel: '企业系统',
+        metaTitle: '官网、后台、小程序一起做时，技术边界怎么拆更稳｜致诚工作室',
+        metaDescription:
+          '官网、后台、小程序一起做时，最容易出问题的不是技术选型，而是职责拆分不清。本文从真实交付视角拆解三端边界、数据归属和迭代顺序。',
+        keywords: ['官网 后台 小程序 边界', '企业系统规划', '小程序开发', 'Web应用开发'],
+        eyebrow: 'Article',
+        heroTitle: '官网、后台、小程序一起做时，真正难的不是技术，而是边界怎么拆',
+        heroDescription:
+          '一旦项目同时涉及官网、管理后台和小程序，团队很容易在中途开始互相借功能：官网想放更多操作，小程序想承接更多展示，后台又被临时塞进内容发布、订单处理、数据统计和权限控制。最后不是哪端都不能做，而是哪端都做得有点别扭。',
+        introTitle: '为什么这类项目特别容易越做越乱',
+        introParagraphs: [
+          '因为三端看起来都在服务同一套业务，很多人会下意识觉得功能放哪边都行。可一旦入口、角色、数据责任没提前拆开，后面每加一个需求，都会把结构再搅乱一点。',
+          '真实交付里，技术栈通常不是最先卡住项目的点。更常见的问题是：首页想兼顾交易，小程序想顺手做内容中心，后台既要给运营用又想让客户偶尔登录。方向一混，开发、测试和后续维护都会一起变重。',
+        ],
+        sections: [
+          {
+            title: '先按用户场景拆，不要先按页面形态拆',
+            paragraphs: [
+              '更稳的拆法通常不是“官网放展示，小程序放功能”这么粗，而是先看谁在什么场景下用。第一次了解公司、看案例、看服务边界，通常发生在公开访问场景；下单、预约、进度查询、会员动作，往往更适合高频轻操作场景；配置、审核、履约、报表，才是后台真正该承接的事。',
+              '也就是说，边界首先由使用者和操作频率决定，再落到载体。先把场景拆清楚，后面很多功能归属会自然得多。',
+            ],
+            bullets: ['官网优先承接公开信息、品牌表达、内容沉淀和线索入口', '小程序优先承接高频、轻量、面向终端用户的动作', '后台优先承接运营、管理、审核、配置和数据处理'],
+          },
+          {
+            title: '数据只有一套，但入口可以有多套',
+            paragraphs: [
+              '很多项目绕不清，是因为把“多个入口”误解成“多套数据”。官网、后台、小程序可以服务不同角色，但商品、预约、用户、订单、内容状态这些核心数据，最好始终有明确主归属。否则今天小程序能改，明天后台也能改，后天官网表单再写一套，数据很快就会互相打架。',
+              '我的经验是：先定义主数据来源，再决定其他端能看什么、改什么、通过什么接口同步。这样即使三端分阶段上线，结构也不容易散。',
+            ],
+            bullets: ['先定义哪一端负责创建主数据', '再定义哪些端只能读取、哪些端可以编辑', '把状态流转和通知规则单独写清，不要藏在页面备注里'],
+          },
+          {
+            title: '一期别追求三端都完整，先让最关键链路闭环',
+            paragraphs: [
+              '三端一起做时，最危险的想法就是“既然都要做，不如一次做完整”。结果通常是官网不够清楚，小程序不够顺手，后台也只做了半套，最后每一端都在补洞。',
+              '更实际的做法是先选一条最关键的业务链路，比如官网获客到小程序提交，再到后台跟进；或者小程序下单到后台处理，再回到官网做内容承接。先把一条链路跑通，剩下的模块才有真实使用反馈可参考。',
+            ],
+          },
+        ],
+        takeawayTitle: '这篇文章的重点',
+        takeaways: [
+          '官网、后台、小程序的边界，应该先按用户场景和操作频率来拆，不是按“哪个页面像什么”来拆。',
+          '三端可以有不同入口，但核心数据最好有单一主归属，否则后面一定会互相打架。',
+          '一期先跑通最关键的一条业务链路，比三端同时做满更稳。',
+        ],
+        ctaTitle: '如果你准备同时做官网、后台和小程序，先把边界图画出来',
+        ctaDescription: '把角色、入口、主数据归属和一期闭环链路先讲清楚，后面的开发节奏会比一上来谈页面和功能轻松很多。',
+      },
+      en: {
+        navLabel: 'How to Split Boundaries Across Website, Admin, and Mini-program',
+        categoryLabel: 'Internal System',
+        metaTitle: 'How to Split Boundaries Across a Website, Admin Panel, and Mini-program | Zhicheng Studio',
+        metaDescription:
+          'When a project includes a public website, an admin panel, and a mini-program, the main risk is usually not stack choice but unclear responsibility. This article explains a more practical way to draw the lines.',
+        keywords: ['website admin mini-program boundaries', 'internal system planning', 'mini-program architecture', 'web app scope'],
+        eyebrow: 'Article',
+        heroTitle: 'When a website, admin panel, and mini-program are built together, boundary design matters more than stack choice',
+        heroDescription:
+          'Once a project spans a public website, an operations backend, and a mini-program, teams often start borrowing features across all three surfaces. The website wants more actions, the mini-program starts carrying too much content, and the admin panel becomes a dumping ground for whatever was not planned clearly. The result is not that any one surface is impossible, but that all of them feel awkward.',
+        introTitle: 'Why these projects become messy so easily',
+        introParagraphs: [
+          'All three surfaces support the same business, so it is tempting to assume functionality can be placed anywhere. But once entry points, roles, and data ownership are not separated early, every additional request makes the structure less stable.',
+          'In real delivery work, technology is rarely the first thing that breaks the project. A more common problem is that the homepage also wants transaction logic, the mini-program tries to become a content hub, and the admin panel is expected to serve both operators and external users. Once that direction blurs, implementation, testing, and maintenance all become heavier.',
+        ],
+        sections: [
+          {
+            title: 'Start with user scenarios, not with page categories',
+            paragraphs: [
+              'A better split is not simply “website for content, mini-program for features.” Start by asking who uses each surface and in what context. Learning about the company, services, or case studies usually happens in a public browsing context. Booking, ordering, progress checks, and repeat lightweight actions fit a high-frequency user surface better. Configuration, approvals, fulfillment, and reporting belong much more naturally in the admin layer.',
+              'In other words, boundaries should first follow users and usage frequency, then follow interface type. Once the scenario split is clear, feature ownership becomes much easier to judge.',
+            ],
+            bullets: ['Let the website handle public information, brand communication, content depth, and lead entry', 'Let the mini-program handle frequent, lightweight actions for end users', 'Let the admin panel handle operations, approvals, configuration, and data processing'],
+          },
+          {
+            title: 'There may be multiple entry points, but core data should still have one home',
+            paragraphs: [
+              'Many teams get stuck because they confuse multiple interfaces with multiple systems of record. A website, admin panel, and mini-program can serve different roles, but product data, booking records, users, orders, and content states should still have a clear primary owner. Otherwise one surface edits the data today, another rewrites it tomorrow, and the public site adds a third path the day after that.',
+              'A practical approach is to define the primary source first, then decide which surfaces can read, which can edit, and how state changes are synchronized. That keeps the structure steadier even when the three surfaces launch in stages.',
+            ],
+            bullets: ['Define which surface creates the primary record', 'Define which surfaces are read-only and which can edit', 'Document status flow and notification rules separately instead of burying them in page notes'],
+          },
+          {
+            title: 'Do not try to complete all three surfaces in phase one',
+            paragraphs: [
+              'The most dangerous idea in a three-surface project is usually “since we need all of them, we may as well finish all of them now.” In practice that often leads to a vague website, an inconvenient mini-program, and an admin panel that is only half usable.',
+              'A safer move is to choose the most important business loop first. For example: website lead capture to mini-program submission to admin follow-up, or mini-program order placement to admin processing to website content support. Once one loop works end to end, later modules can be shaped by real usage instead of guesswork.',
+            ],
+          },
+        ],
+        takeawayTitle: 'Main takeaways',
+        takeaways: [
+          'Boundaries between a website, admin panel, and mini-program should be drawn from user scenario and usage frequency first.',
+          'The interfaces can differ, but core data should still have a single primary owner.',
+          'Phase one is safer when it closes one critical business loop instead of trying to finish all three surfaces completely.',
+        ],
+        ctaTitle: 'If you are planning all three surfaces together, draw the boundary map before the feature list',
+        ctaDescription: 'Once roles, entry points, data ownership, and the phase-one loop are clear, the actual implementation usually becomes much easier to control.',
       },
     },
   },
