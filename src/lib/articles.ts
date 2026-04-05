@@ -46,6 +46,7 @@ export const articleSlugs = [
   'foreign-trade-website-homepage-mistakes',
   'brand-vs-service-on-homepage',
   'website-admin-mini-program-boundaries',
+  'website-first-or-system-first',
 ] as const
 
 export type ArticleSlug = (typeof articleSlugs)[number]
@@ -5092,6 +5093,118 @@ const articleDefinitions: Record<ArticleSlug, ArticleDefinition> = {
     },
   },
 
+  'website-first-or-system-first': {
+    slug: 'website-first-or-system-first',
+    priority: {
+      zh: 0.64,
+      en: 0.5,
+    },
+    publishedAt: '2026-04-05',
+    readingMinutes: 7,
+    relatedServices: ['website-development', 'company-website-development', 'web-app-development'],
+    content: {
+      zh: {
+        navLabel: '什么时候该先做官网，什么时候该先做系统',
+        categoryLabel: '企业系统',
+        metaTitle: '什么时候该先做官网，什么时候该先做系统｜真实项目里的判断方法｜致诚工作室',
+        metaDescription:
+          '官网和企业系统并不是谁更高级谁就该先做，关键要看当前业务瓶颈在获客表达、流程承接还是内部协同。本文从真实项目判断、常见误区和分阶段方案拆解。',
+        keywords: ['官网还是系统先做', '企业数字化项目规划', '官网建设', '企业系统开发'],
+        eyebrow: 'Article',
+        heroTitle: '什么时候该先做官网，什么时候该先做系统',
+        heroDescription:
+          '很多项目一上来就问“我们是不是该做个系统”，但真正该先做什么，往往不取决于团队对技术的想象，而取决于当前最卡业务的环节。如果客户还看不懂你是谁、卖什么、怎么合作，先砸系统通常不会立刻带来结果；反过来，如果线索已经有了，内部还在靠表格和群聊硬撑，继续只补官网也救不了执行效率。',
+        introTitle: '这不是技术先后问题，而是业务瓶颈判断题',
+        introParagraphs: [
+          '我见过两类都很常见的误判：一类企业把系统当成“数字化升级”的象征，结果内部流程还没理顺，就先做了一套没人愿意用的后台；另一类企业明明内部已经靠人肉流转撑得很吃力，却还在反复改官网视觉，希望靠一个新首页解决交付和管理问题。',
+          '更稳的判断方式不是问“官网重要还是系统重要”，而是先看现在最影响结果的是外部表达、线索转化，还是内部履约、协同和数据一致性。先解决最堵的地方，项目顺序通常就清楚了。',
+        ],
+        sections: [
+          {
+            title: '如果你现在最缺的是被看见、被理解，通常先做官网',
+            paragraphs: [
+              '对于很多 To B 团队来说，官网不是门面工程，而是最基础的对外解释系统。客户第一次了解你，往往不是通过销售完整讲一遍，而是先看你做什么、做过什么、适合什么项目、怎么开始合作。这个阶段如果信息表达混乱，系统做得再完整，也没有足够的流量和线索去承接。',
+              '这类情况下，官网优先并不意味着只做漂亮页面，而是要把品牌定位、服务边界、案例表达、FAQ 和联系入口先整理清楚。它解决的是“客户为什么愿意继续往下聊”的问题。',
+            ],
+            bullets: ['还没有稳定线索来源，客户主要靠转介绍和临时解释', '销售或创始人每次都在重复回答同一批基础问题', '服务内容、项目类型、合作方式没有被清楚呈现'],
+          },
+          {
+            title: '如果你现在最卡的是交付、协作和反复返工，通常先做系统',
+            paragraphs: [
+              '也有一些团队，前端的获客和沟通已经跑起来了，问题反而出在签约之后：需求靠聊天记录追，进度靠人记，数据在多个表里来回拷，权限和责任边界没人说得清。这时候继续把钱花在官网改版上，改善通常很有限。',
+              '系统优先的前提是：你已经有相对明确的流程和角色分工，知道哪些动作值得沉淀成工具。系统不是为了“显得专业”，而是为了减少重复劳动、降低协作成本，让业务不再靠少数人硬撑。',
+            ],
+            bullets: ['项目一多就混乱，状态同步严重依赖群消息和口头确认', '同一份数据在销售、运营、交付之间重复录入', '流程已经相对固定，只是执行效率和可追踪性太差'],
+          },
+          {
+            title: '很多时候不是二选一，而是先定主战场，再做分阶段组合',
+            paragraphs: [
+              '真实项目里，官网和系统往往都会做，只是先后顺序不同。更稳的做法通常是先定本阶段主战场：如果今年重点是获客和品牌建立，就先把官网结构做对，同时只补最必要的后台能力；如果重点是把现有业务从混乱状态里拉出来，就先做内部流程最关键的一段，再保留一个够用的官网表达。',
+              '我更不建议“一次把官网、系统、小程序都做全”。听起来完整，实际最容易三边都做浅。先跑通一条最关键链路，再决定第二阶段加什么，通常比试图一次性规划全部要稳得多。',
+            ],
+          },
+        ],
+        takeawayTitle: '这篇文章的重点',
+        takeaways: [
+          '先做官网还是先做系统，不是技术偏好问题，而是当前业务瓶颈判断问题。',
+          '外部表达和线索承接薄弱时，官网优先通常更划算；内部协作和履约失控时，系统优先更有效。',
+          '大多数项目都适合分阶段推进，先解决主战场，再补另一端，而不是一口气全做满。',
+        ],
+        ctaTitle: '如果你在纠结先做官网还是系统，先把当前最堵的一段业务画出来',
+        ctaDescription: '当你能说清楚问题卡在获客、沟通、交付还是协同，项目优先级通常就不会再靠拍脑袋决定。',
+      },
+      en: {
+        navLabel: 'When to Build the Website First, and When to Build the System First',
+        categoryLabel: 'Internal System',
+        metaTitle: 'When Should a Company Build the Website First vs the Internal System First? | Zhicheng Studio',
+        metaDescription:
+          'A website and an internal system solve different bottlenecks. This article explains how to decide which one should come first based on sales clarity, delivery pressure, and operational maturity.',
+        keywords: ['website first or system first', 'digital project prioritization', 'company website planning', 'internal system development'],
+        eyebrow: 'Article',
+        heroTitle: 'When should you build the website first, and when should you build the system first?',
+        heroDescription:
+          'Many teams jump straight to “we probably need a system,” but the better question is where the real business friction sits today. If prospects still do not understand who you are, what you offer, or how to start working with you, a system will not fix that. On the other hand, if leads already exist and the team is collapsing under manual coordination, another website refresh will not solve the operational pain either.',
+        introTitle: 'This is less a tech question than a bottleneck diagnosis',
+        introParagraphs: [
+          'I keep seeing two opposite mistakes. Some companies treat an internal system as a symbol of digital maturity and build one before their process is even stable, which usually creates a tool nobody wants to use. Others keep polishing the public website while the actual business is choking on spreadsheet handoffs, chat-based approvals, and inconsistent data.',
+          'A steadier way to decide is to ask whether the bigger problem today is external clarity and lead capture, or internal delivery, coordination, and data control. Once the bottleneck is visible, the project order usually becomes much easier to judge.',
+        ],
+        sections: [
+          {
+            title: 'Build the website first when the business is still struggling to be understood',
+            paragraphs: [
+              'For many B2B teams, the website is not decoration. It is the basic external explanation layer: what the company does, what kind of projects it fits, what it has done before, and how a prospect should move forward. If that layer is weak, a strong internal system still has very little to support because the top of the funnel is unclear.',
+              'In that situation, “website first” does not mean chasing visuals only. It means clarifying positioning, service boundaries, case presentation, FAQ, and contact flow so prospects can understand why the conversation should continue.',
+            ],
+            bullets: ['Lead generation is unstable and relies too much on referrals or repeated manual explanation', 'Founders or sales keep answering the same basic questions again and again', 'Service scope, project fit, and collaboration model are still poorly expressed'],
+          },
+          {
+            title: 'Build the system first when delivery and coordination are already the real constraint',
+            paragraphs: [
+              'Some teams already have enough demand on the front end. Their real pain starts after a deal moves forward: requirements live in chat history, progress is tracked from memory, the same data is copied across multiple tables, and no one is fully sure who owns which step. In that case, another round of website work usually produces only marginal improvement.',
+              'System-first only makes sense when the underlying process is already visible enough to be structured. The goal is not to look advanced. The goal is to reduce repeat work, make responsibility traceable, and stop the business from depending on a few people carrying everything manually.',
+            ],
+            bullets: ['Project status becomes chaotic as volume increases', 'Sales, operations, and delivery teams repeatedly re-enter the same information', 'The workflow is stable enough to standardize, but execution is still too manual'],
+          },
+          {
+            title: 'Most of the time the answer is phased, not absolute',
+            paragraphs: [
+              'In real projects, companies often need both a stronger website and a stronger internal system. The real decision is which one should lead the current phase. If the near-term priority is market visibility and clearer positioning, start with the website and add only the minimum backend support required. If the main priority is controlling delivery and operations, start with the most critical internal workflow and keep the public site sufficient rather than overbuilt.',
+              'What I would avoid is trying to complete the website, the system, and the mini-program all at once. That sounds comprehensive, but it usually means all three are implemented too shallowly. A narrower first phase with one clear business loop is usually much safer.',
+            ],
+          },
+        ],
+        takeawayTitle: 'Main takeaways',
+        takeaways: [
+          'Choosing between website first and system first is really about identifying the current business bottleneck.',
+          'If external clarity and lead capture are weak, the website usually deserves priority; if operations are breaking under manual work, the system usually matters more.',
+          'Most teams are better served by phased sequencing than by trying to build every surface at once.',
+        ],
+        ctaTitle: 'If you are unsure which should come first, map the most blocked part of the business first',
+        ctaDescription: 'Once the team can name whether the real pain is lead capture, communication, delivery, or coordination, project priority becomes much easier to set with confidence.',
+      },
+    },
+  },
 }
 
 export function getArticlePath(slug: ArticleSlug): string {
