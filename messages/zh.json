@@ -19,9 +19,9 @@
   "Landing": {
     "hero": {
       "titlePrefix": "个人工作室，专做",
-      "titleHighlight": "网站开发 / 企业系统 / AI 应用",
+      "titleHighlight": "企业管理系统 /官网开发 / AI 智能体",
       "titleSuffix": "定制开发",
-      "description": "原大型互联网公司技术部门技术主管，主导过多个企业级系统，带过 20 人技术团队。现在以个人工作室形式直接接单，不分包转包，更适合重视质量、效率和长期维护的客户。",
+      "description": "原大型互联网公司研发主管，主导多个企业核心系统建设。现以独立工作室形式接单提供企业系统定制、企业官网外包与 AI 智能体应用开发服务，直接沟通交付，拒绝层层分包。",
       "primaryCta": "添加微信聊项目",
       "secondaryCta": "查看作品方向",
       "highlights": {
@@ -58,21 +58,21 @@
       "backendLabel": "后端",
       "items": {
         "brandSites": {
-          "title": "企业官网与品牌站",
-          "description": "适合外贸公司、品牌公司、服务型企业和需要提升线上表达的业务。",
+          "title": "企业官网定制与网站外包",
+          "description": "适合需要外包外贸公司、品牌公司官网以及需要高品质定制开发的客户。",
           "bullet1": "企业官网、多语言网站、服务官网、营销落地页",
           "bullet2": "兼顾 SEO、内容结构、表单转化和部署上线"
         },
         "webApps": {
-          "title": "企业业务系统",
-          "description": "适合流程重、权限多、数据复杂的企业内部系统和管理平台。",
-          "bullet1": "ERP、OA、CRM、财务、采购、库存、销售等系统",
+          "title": "企业管理系统 (ERP/OA/EMS)",
+          "description": "提供专业的企业系统开发、ERP/OA系统定制，适合流程严密、数据复杂的平台。",
+          "bullet1": "制造端EMS、企业内部ERP、OA、CRM数据中台等",
           "bullet2": "支持从 0 到 1 搭建，也适合旧系统升级与重构"
         },
         "aiAutomation": {
-          "title": "AI 智能应用",
-          "description": "不是只做演示级功能，而是把 AI 真正接到业务流程和产品场景里。",
-          "bullet1": "AI 工具、检索问答、自动化流程、数字人内容相关应用",
+          "title": "AI 应用与企业智能体定制",
+          "description": "提供落地的 AI 应用开发与企业智能体搭建，让大模型赋能内部生产力。",
+          "bullet1": "专属企业智能体(AI Agents)、大模型问答库、业务自动化流程",
           "bullet2": "能和企业现有系统、内容流和运营动作接起来"
         },
         "mvpDelivery": {

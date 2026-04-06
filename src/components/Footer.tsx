@@ -21,6 +21,8 @@ export default function Footer({ locale }: FooterProps) {
           contact: '联系',
           email: '邮箱',
           x: 'X / Twitter',
+          wechat: '微信',
+          phone: '电话',
           home: '首页',
           blog: '文章目录',
           servicesHub: '全部服务页',
@@ -35,6 +37,8 @@ export default function Footer({ locale }: FooterProps) {
           contact: 'Contact',
           email: 'Email',
           x: 'X / Twitter',
+          wechat: 'WeChat',
+          phone: 'Phone',
           home: 'Home',
           blog: 'Article Hub',
           servicesHub: 'All Services',
@@ -46,8 +50,11 @@ export default function Footer({ locale }: FooterProps) {
   const contactQuickHref = locale === 'en' ? siteConfig.xUrl : `${homePath}#contact`
   const contactItems =
     locale === 'en'
-      ? [{ label: labels.x, value: siteConfig.xHandle, href: siteConfig.xUrl, external: true }]
+      ? [{ label: labels.email, value: siteConfig.email, href: `mailto:${siteConfig.email}`, external: false }, 
+         { label: labels.x, value: siteConfig.xHandle, href: siteConfig.xUrl, external: true }]
       : [
+          { label: labels.wechat, value: siteConfig.wechat, href: `${homePath}#contact`, external: false },
+          { label: labels.phone, value: siteConfig.displayPhone, href: `tel:${siteConfig.phone}`, external: false },
           { label: labels.email, value: siteConfig.email, href: `mailto:${siteConfig.email}`, external: false },
           { label: labels.x, value: siteConfig.xHandle, href: siteConfig.xUrl, external: true },
         ]

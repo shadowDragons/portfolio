@@ -19,9 +19,9 @@
   "Landing": {
     "hero": {
       "titlePrefix": "Direct custom development for",
-      "titleHighlight": "website development, business systems, and AI apps",
+      "titleHighlight": "enterprise systems, corporate websites, and AI agents",
       "titleSuffix": "with owner-level accountability",
-      "description": "Former technical lead in the technology department of a large internet company. I led multiple enterprise systems and managed a 20-person engineering team. Now I take projects directly as a solo studio without subcontracting, which fits clients who care about quality, speed, and long-term support.",
+      "description": "Former technical lead who delivered large-scale enterprise systems. I now offer direct development services covering enterprise systems, corporate website outsourcing, and bespoke AI applications. Direct delivery without subcontracting, tailored for clients who prioritize product quality.",
       "primaryCta": "Contact on X",
       "secondaryCta": "View Work",
       "highlights": {
@@ -58,21 +58,21 @@
       "backendLabel": "Backend",
       "items": {
         "brandSites": {
-          "title": "Corporate websites & brand sites",
-          "description": "For foreign-trade companies, service businesses, brands, and teams that need a stronger online presence.",
+          "title": "Corporate Websites & Web Outsourcing",
+          "description": "Custom development and premium web outsourcing for foreign-trade companies, brands, and marketing sites.",
           "bullet1": "Corporate sites, multilingual websites, service pages, and landing pages",
           "bullet2": "Handled with SEO, content structure, conversion forms, and deployment in mind"
         },
         "webApps": {
-          "title": "Business systems",
-          "description": "For internal systems where workflows, permissions, data, and operational logic are the core of the product.",
-          "bullet1": "ERP, OA, CRM, finance, procurement, inventory, and sales systems",
+          "title": "Enterprise Management Systems",
+          "description": "Expert enterprise management system development, handling custom ERP, EMS, and OA flows for complex internal platforms.",
+          "bullet1": "Custom ERP, OA, EMS, CRM, and bespoke business control panels",
           "bullet2": "Suitable for greenfield builds, upgrades, and legacy-system refactors"
         },
         "aiAutomation": {
-          "title": "AI applications",
-          "description": "Not just demo features, but AI connected to real workflows and actual business scenarios.",
-          "bullet1": "AI tools, retrieval Q&A, automation, and digital-human content workflows",
+          "title": "AI Apps & Enterprise Agents",
+          "description": "Real AI application development integrating large language models into your business logic.",
+          "bullet1": "Bespoke enterprise AI agents, automated LLM workflows and custom copilots",
           "bullet2": "Built to connect with existing systems, content pipelines, and operations"
         },
         "mvpDelivery": {
