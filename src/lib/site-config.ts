@@ -30,6 +30,8 @@ export const siteConfig = {
   brandName: '致诚工作室',
   brandNameEn: 'Zhicheng Studio',
   url: 'https://sphrag.com',
+  logoPath: '/logo.png',
+  logoMarkPath: '/logo-mark.svg',
   ogImagePath: '/og-image.png',
   email: 'contact@sphrag.com',
   xUrl: 'https://x.com/Junexus_indie',
@@ -142,7 +144,9 @@ export function getSiteMetadata(): Metadata {
     publisher: siteConfig.brandName,
     referrer: 'origin-when-cross-origin',
     icons: {
-      icon: '/favicon.ico',
+      icon: siteConfig.logoMarkPath,
+      shortcut: siteConfig.logoMarkPath,
+      apple: siteConfig.logoMarkPath,
     },
   }
 }
@@ -214,6 +218,7 @@ export function getHomeStructuredData(locale: AppLocale) {
   const seoConfig = getLocaleSeoConfig(locale)
   const homeUrl = getLocalizedUrl(locale)
   const imageUrl = getAbsoluteAssetUrl(siteConfig.ogImagePath)
+  const logoUrl = getAbsoluteAssetUrl(siteConfig.logoPath)
   const organizationId = `${siteConfig.url}#organization`
   const websiteId = `${siteConfig.url}#website`
 
@@ -226,7 +231,7 @@ export function getHomeStructuredData(locale: AppLocale) {
         name: siteConfig.brandName,
         alternateName: siteConfig.brandNameEn,
         url: siteConfig.url,
-        logo: imageUrl,
+        logo: logoUrl,
         email: siteConfig.email,
         telephone: siteConfig.phone,
         founder: siteConfig.founder,

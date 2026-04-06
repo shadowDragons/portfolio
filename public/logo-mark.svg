@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-labelledby="markTitle markDesc">
+  <title id="markTitle">致诚开发图标</title>
+  <desc id="markDesc">A compact browser-window icon used as the site mark for 致诚开发.</desc>
+  <defs>
+    <linearGradient id="mark-accent" x1="0%" x2="100%" y1="100%" y2="100%">
+      <stop offset="0%" stop-color="#2291ea"/>
+      <stop offset="100%" stop-color="#17a2ff"/>
+    </linearGradient>
+  </defs>
+
+  <rect x="22" y="34" width="212" height="156" rx="26" fill="#ffffff" stroke="#16202c" stroke-width="10"/>
+  <rect x="34" y="46" width="188" height="34" rx="10" fill="#ffffff" stroke="#16202c" stroke-width="6"/>
+  <path d="M22 90H234" fill="none" stroke="#16202c" stroke-width="8"/>
+  <path d="M36 92V172C36 178.627 41.373 184 48 184H208C214.627 184 220 178.627 220 172V92" fill="none" stroke="url(#mark-accent)" stroke-width="8" stroke-linecap="round"/>
+
+  <circle cx="56" cy="63" r="5.5" fill="#16202c"/>
+  <circle cx="78" cy="63" r="5.5" fill="#16202c"/>
+  <circle cx="100" cy="63" r="5.5" fill="#16202c"/>
+
+  <text
+    x="128"
+    y="157"
+    fill="#000000"
+    font-family="'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Noto Sans SC', sans-serif"
+    font-size="76"
+    font-weight="900"
+    text-anchor="middle"
+  >
+    致
+  </text>
+</svg>

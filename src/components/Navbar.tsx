@@ -4,6 +4,7 @@ import { cn } from '@/lib/utils'
 import { buttonVariants } from './ui/button'
 import { useState, useEffect } from 'react'
 import LanguageSwitcher from './LanguageSwitcher'
+import BrandLogo from './BrandLogo'
 import { Link, usePathname } from '@/i18n/routing'
 import type { AppLocale } from '@/lib/site-config'
 import { Menu, X } from 'lucide-react'
@@ -73,8 +74,8 @@ const Navbar = ({ locale, labels }: NavbarProps) => {
       )}
       >
       <div className='mx-auto flex h-16 w-full max-w-[1280px] items-center justify-between px-5 sm:px-8 lg:px-12'>
-        <Link href='/' className='font-rubik text-lg tracking-[0.02em] text-[#111] sm:text-xl'>
-          {labels.logo}
+        <Link href='/' aria-label={labels.logo} className='flex items-center'>
+          <BrandLogo label={labels.logo} priority />
         </Link>
 
         <div className='hidden items-center gap-0.5 lg:flex'>

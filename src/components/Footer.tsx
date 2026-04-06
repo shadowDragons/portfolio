@@ -2,6 +2,7 @@ import { Link } from '@/i18n/routing'
 import { getArticleSummaries } from '@/lib/articles'
 import { getLocalizedPath, siteConfig, type AppLocale } from '@/lib/site-config'
 import { getServicePageSummaries } from '@/lib/service-pages'
+import BrandLogo from '@/components/BrandLogo'
 
 type FooterProps = {
   locale: AppLocale
@@ -55,8 +56,8 @@ export default function Footer({ locale }: FooterProps) {
     <footer className='border-t border-black/[0.06] bg-[#faf7f3]'>
       <div className='mx-auto grid w-full max-w-[1280px] gap-10 px-5 py-10 sm:px-8 lg:grid-cols-[1.1fr_0.9fr_0.9fr_0.8fr] lg:px-12'>
         <div className='space-y-4'>
-          <Link href='/' className='font-rubik text-xl text-[#111]'>
-            {siteConfig.brandName}
+          <Link href='/' aria-label={siteConfig.brandName} className='inline-flex items-center'>
+            <BrandLogo label={siteConfig.brandName} className='h-[56px] w-auto sm:h-[64px]' />
           </Link>
           <p className='max-w-md text-sm leading-7 text-[#655d54]'>{labels.summary}</p>
           <div className='space-y-2'>

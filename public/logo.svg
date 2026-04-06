@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 108" role="img" aria-labelledby="logoTitle logoDesc">
+  <title id="logoTitle">致诚开发</title>
+  <desc id="logoDesc">A compact browser-window logo with the Chinese text 致诚开发.</desc>
+  <defs>
+    <linearGradient id="logo-accent" x1="0%" x2="100%" y1="100%" y2="100%">
+      <stop offset="0%" stop-color="#2291ea"/>
+      <stop offset="100%" stop-color="#17a2ff"/>
+    </linearGradient>
+    <filter id="logo-shadow" x="-8%" y="-12%" width="116%" height="124%">
+      <feDropShadow dx="0" dy="3" stdDeviation="3.5" flood-color="#0b1722" flood-opacity="0.14"/>
+    </filter>
+  </defs>
+
+  <g filter="url(#logo-shadow)">
+    <rect x="10" y="10" width="400" height="82" rx="14" fill="#ffffff" stroke="#16202c" stroke-width="4"/>
+    <rect x="20" y="20" width="380" height="24" rx="7" fill="#ffffff" stroke="#16202c" stroke-width="3"/>
+    <path d="M10 48H410" fill="none" stroke="#16202c" stroke-width="4"/>
+    <path d="M22 49V81C22 85.418 25.582 89 30 89H390C394.418 89 398 85.418 398 81V49" fill="none" stroke="url(#logo-accent)" stroke-width="4" stroke-linecap="round"/>
+
+    <circle cx="40" cy="32" r="4.5" fill="#16202c"/>
+    <circle cx="58" cy="32" r="4.5" fill="#16202c"/>
+    <circle cx="76" cy="32" r="4.5" fill="#16202c"/>
+
+    <text
+      x="210"
+      y="75"
+      fill="#000000"
+      font-family="'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Noto Sans SC', sans-serif"
+      font-size="44"
+      font-weight="900"
+      letter-spacing="1"
+      text-anchor="middle"
+    >
+      致诚开发
+    </text>
+  </g>
+</svg>
