@@ -4,6 +4,7 @@ import { cn } from '@/lib/utils'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import { GoogleAnalytics } from '@next/third-parties/google'
+import Script from 'next/script'
 import { getTranslations } from 'next-intl/server'
 import { notFound } from 'next/navigation'
 import { routing } from '@/i18n/routing'
@@ -48,7 +49,24 @@ export default async function RootLayout({ children, params: { locale } }: { chi
         </main>
         <Footer locale={appLocale} />
       </body>
-      {process.env.NODE_ENV === 'development' ? <></> : <GoogleAnalytics gaId={GA_MEASUREMENT_ID} />}
+      {process.env.NODE_ENV === 'development' ? (
+        <></>
+      ) : (
+        <>
+          <GoogleAnalytics gaId={GA_MEASUREMENT_ID} />
+          <Script id="baidu-analytics">
+            {`
+              var _hmt = _hmt || [];
+              (function() {
+                var hm = document.createElement("script");
+                hm.src = "https://hm.baidu.com/hm.js?51729155eab9e49fb67a35eb932da3a5";
+                var s = document.getElementsByTagName("script")[0]; 
+                s.parentNode.insertBefore(hm, s);
+              })();
+            `}
+          </Script>
+        </>
+      )}
     </html>
   )
 }
