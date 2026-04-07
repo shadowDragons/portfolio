@@ -5,7 +5,8 @@
 - 知乎
 - 掘金
 - 即刻
-- Medium（英文）
+- 电鸭社区 (Eleduck)
+- 英文内容矩阵：Medium / Dev.to / Hashnode (长文), IndieHackers (复盘), X / Twitter (短动态)
 
 适用阶段：
 
@@ -135,30 +136,72 @@ AI 可以自动生成草稿，但不要让它做下面这些事：
 - 不要写成长文
 - 不要一上来贴链接
 
-### Medium（英文）
+### 电鸭社区 (Eleduck)
+
+更适合：
+
+- 纯接包求职贴（“高端定制合伙人”定位）
+- 围绕远程工作、外包踩坑的深度经验分享
+- 把官网包装为“独立产品”发布
+
+推荐方向：
+
+- 辞职做独立工作室，我用 Next.js 极简重写了自己的工作站
+- 帮 5 家企业重做 OA 系统后，我总结了外包的四大深坑
+- [接单] 原大厂研发出山，专抓企业核心系统(ERP/OA)与智能体落地
+
+内容风格：
+
+- 发“求职交友贴”时极客感要拉满，突出反向筛选、不比价烂单的高级定位。
+- 发“经验分享贴”时全程绝不写推销硬广，只在文末轻描淡写留一行官网链接供观摩交流。
+
+### Medium / Dev.to / Hashnode（英文长文）
 
 更适合：
 
 - 英文长文
-- 判断型、经验型内容
-- 能完整讲清一个问题的 evergreen 文章
+- 痛点拆解、技术方案、底层架构分享
+- **强烈推荐** Dev.to / Hashnode：它们官方支持 Canonical Link（对于 SEO 权重传递给你的官网效果极好，且无视 Duplicate Content 惩罚）
 
 推荐方向：
 
-- What actually drives website development cost
+- What actually drives custom enterprise software cost
+- How I built an Enterprise OA system with Next.js (Dev.to 适用)
 - Why many company websites fail after the homepage
-- How foreign trade websites improve inquiry conversion
-- What should be planned before a multilingual website goes live
 
 内容风格：
 
-- 全文用自然英文，不要中式直译
+- 纯粹提供技术干货和业务踩坑经验，不要写成广告短文
 - 标题 + 副标题要先把问题说清楚
-- 正文至少讲完整一个判断，不要只写 teaser
-- 结尾可以自然导到 `/en` 文章页或服务页
-- 重点是 insight，不是 agency pitch
+- 正文中可融入一点技术实现细节或代码思路
+- 结尾克制导流：“I run Zhicheng Studio, specializing in enterprise systems and AI agents...”
+- **最关键**：如果是 Dev.to，必须提醒发布时在后台填入指向站内 `/en/blog/...` 的 Canonical URL
 
----
+### IndieHackers（英文项目复盘）
+
+更适合：
+
+- 分享独立工作室接单流水、踩坑与反思、如何管理客户期望
+- 吸引海外正在寻找离岸或高水平技术合伙人的老板、其他同行推荐
+
+内容风格：
+
+- 用第一人称，非常真实、坦诚、透明（Build in Public 风格）
+- 少写干巴巴的技术名词，多讲决策逻辑和商业考量
+- 结尾自然导流到你的主营业务
+
+### X / Twitter（英文短动态）
+
+更适合：
+
+- #BuildInPublic 标签下的简短接单进度分享、代码片段分享
+- 抛出一个反直觉的行业洞察 (Hot takes)
+
+内容风格：
+
+- 最多 280 字内
+- 第一句话必须抓人眼球 (Hook)
+- 配合网站截图使用，自然引导大家去你的主页 (Link in bio 或文中)
 
 ## 四、链接策略
 
@@ -298,7 +341,7 @@ AI 可以自动生成草稿，但不要让它做下面这些事：
 每次给 AI 的输入尽量固定成这样：
 
 ```md
-平台：自动 / 知乎 / 掘金 / 即刻 / Medium
+平台：自动 / 知乎 / 掘金 / 即刻 / 电鸭 / Medium / Dev.to / IndieHackers / X
 语言：自动 / 中文 / 英文
 模式：随机选题
 数量：1
@@ -546,6 +589,17 @@ Medium 发布动作补充：
 - 默认不放链接，除非确实需要
 ```
 
+### 电鸭提示词
+
+```text
+请把这篇站内文章改写成适合发表在电鸭社区的中文分享长文。
+
+要求：
+- 极其侧重“自由职业”、“接单经验”或“外包排雷”的高维视角
+- 全文要像一个懂商业的高级技术专家在传授真知灼见，绝不可有自嗨的低级推销感
+- 正文中绝对不写推介广告，只在结尾用一句话轻巧引出工作室官网（如：“本文基于致诚工作室近年来项目经验总结，欢迎同行交流：`https://sphrag.com`”）
+```
+
 ### Medium 提示词
 
 ```text
@@ -559,6 +613,28 @@ Medium 发布动作补充：
 - 默认只保留 1 个正文 CTA 链接，且链接必须使用英文页面
 - 输出 3 到 5 个 topics 建议
 - 如果和站内英文原文高度接近，再补 1 个 canonical link 建议
+```
+
+### Dev.to 提示词
+
+```text
+请把这篇站内文章改写成一篇适合 Dev.to 发布的英文技术干货长文。
+
+要求：
+- 侧重于技术落地方案、架构设计或踩坑复盘，必须剥离自嗨式广告
+- 用第一人称（I, We）去讲真实的开发经历
+- 必须强制提醒操作者在发布平台高级设置中添加「Canonical URL」指向官网英文原文
+- 结尾只留一句克制且专业的工作室介绍（Zhicheng Studio - Enterprise Systems & AI Agents）
+```
+
+### IndieHackers / X 提示词
+
+```text
+请把这篇站内文章提炼成适合 IndieHackers 的经验复盘贴，或适合 X(Twitter) 的短推文格式内容。
+
+要求：
+- IndieHackers：侧重商业逻辑、接单体验、自由开发者思考，要极其坦诚（Build in Public）
+- X (Twitter)：极简、带上 #BuildInPublic #Nextjs 等标签，开头必须有极其吸引人的 Hook
 ```
 
 ---
@@ -678,20 +754,21 @@ AI 输出后，发布前至少看这几件事：
 ```text
 你现在是“中英文内容分发执行 AI”。
 
-你的任务是为知乎、掘金、即刻生成可直接发布的中文内容，并为 Medium 生成可直接发布的英文内容。
+你的任务是为知乎、掘金、即刻、电鸭生成可直接发布的中文内容，并为 Medium、Dev.to、IndieHackers 或 X 生成可直接发布的英文内容。
 
 执行规则：
 1. 默认使用随机选题模式
 2. 如果我没有指定文章，你就从下面的文章池里任选 1 篇
-3. 如果我没有指定平台和语言，你就从知乎、掘金、即刻里任选 1 个平台
+3. 如果我没有指定平台和语言，你就从知乎、掘金、即刻、电鸭里任选 1 个平台
 4. 一次默认只输出 1 条内容
 5. 一条内容默认只放 1 个最相关的可见链接
-6. 如果我明确说 `Medium`、`英文发帖`、`英文分发` 或 `English`，你就切到 Medium 英文流程
-7. 知乎更像回答问题，掘金更像方法总结，即刻更像个人观察，Medium 更像英文判断型长文
-8. Medium 优先参考站内对应英文原文，不要把中文稿逐句直译后直接发布
-9. 如果是 Medium 且正文和站内英文原文高度接近，你要额外给出 canonical link 建议
+6. 如果我明确说 `英文发帖` 或 `English`，你就切到英文平台（自动在 Medium/Dev.to/IndieHackers/X 之间选，并运用各自的专属文风）
+7. 中文：知乎像回答问题，掘金像方法总结，即刻像个人观察，电鸭侧重外包接单踩坑与高端工作室展示。
+8. 英文：Medium/Dev.to 必须提供 Canonical Link 建议并偏向技术/架构干货；IndieHackers 侧重独立开发复盘；X 则是短推文。
+9. 英文内容必须首选站内英文原文（`/en` 结尾路径的内容）去提炼，绝不能把中文稿逐句机械直译。
 10. 不要像广告，不要夸张承诺，不要伪造案例
 11. 如果有历史记录，优先避开最近 7 天已经发过的文章 slug
+
 
 可选文章池：
 - website-development-cost
