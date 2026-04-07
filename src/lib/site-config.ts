@@ -53,7 +53,17 @@ const localeSeoConfig: Record<AppLocale, LocaleSeoConfig> = {
     homeTitle: '企业软件与官网开发｜AI 应用与智能体定制｜致诚工作室',
     homeDescription:
       '提供专业的企业管理系统（ERP、OA等）、企业官网外包定制，以及 AI 应用和企业智能体开发服务。直属工作室亲自交付，高品质无分包，打造现代化企业数字生态。',
-    homeKeywords: ['企业管理系统开发', '企业官网开发', '外包网站开发', 'AI应用开发', '企业智能体开发', 'ERP/OA系统定制'],
+    homeKeywords: [
+      '外贸建站',
+      '跨境电商独立站制作',
+      '制造企业ERP定制',
+      '工厂OA系统开发',
+      '传统工厂数字化转型',
+      '老系统重构升级',
+      'Next.js高端建站',
+      'AI企业智能体定制开发',
+      '企业级管理系统开发'
+    ],
     serviceName: '企业数字化与智能化定制服务',
     serviceDescription: '覆盖企业核心业务系统(ERP/OA)、多语言企业官网建设，以及新兴的 AI 应用和专属企业智能体(AI Agents)开发落地方案。',
   },
@@ -67,7 +77,16 @@ const localeSeoConfig: Record<AppLocale, LocaleSeoConfig> = {
     homeTitle: 'Web Development & Enterprise AI Agents | Zhicheng Studio',
     homeDescription:
       'Expert custom development for enterprise management systems (ERP/OA), corporate websites, and cutting-edge AI applications and enterprise AI agents. Direct delivery, no subcontracting.',
-    homeKeywords: ['corporate website development', 'web development outsourcing', 'AI application development', 'enterprise AI agent', 'custom ERP/OA development', 'custom web apps'],
+    homeKeywords: [
+      'cross-border ecommerce web development',
+      'manufacturing ERP custom development',
+      'factory OA system',
+      'legacy system modernization',
+      'Next.js web development agency',
+      'enterprise AI agents developer',
+      'B2B independent site building',
+      'corporate website redesign'
+    ],
     serviceName: 'Enterprise Digital & AI Solution Development',
     serviceDescription: 'End-to-end development for corporate websites, enterprise management systems, and custom AI agents to empower business intelligence.',
   },
