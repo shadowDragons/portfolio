@@ -48,6 +48,7 @@ export const articleSlugs = [
   'website-admin-mini-program-boundaries',
   'website-first-or-system-first',
   'ai-chat-entry-vs-internal-workflow',
+  'company-website-case-page-without-cases',
 ] as const
 
 export type ArticleSlug = (typeof articleSlugs)[number]
@@ -5208,6 +5209,135 @@ const articleDefinitions: Record<ArticleSlug, ArticleDefinition> = {
       },
     },
   },
+  'company-website-case-page-without-cases': {
+    slug: 'company-website-case-page-without-cases',
+    priority: {
+      zh: 0.64,
+      en: 0.5,
+    },
+    publishedAt: '2026-04-07',
+    readingMinutes: 6,
+    relatedServices: ['company-website-development', 'website-development'],
+    content: {
+      zh: {
+        navLabel: '官网案例页没有真实案例时，应该怎么处理',
+        categoryLabel: '企业官网',
+        metaTitle: '官网案例页没有真实案例时怎么办？更稳的替代写法｜致诚工作室',
+        metaDescription:
+          '企业官网想做案例页，但暂时没有足够成熟的客户案例时，重点不是硬凑“成功案例”，而是换一种更诚实也更有说服力的展示方式。本文从真实交付视角拆解更稳的做法。',
+        keywords: ['官网案例页怎么写', '没有案例怎么做官网', '企业官网案例页', '官网内容规划'],
+        eyebrow: 'Article',
+        heroTitle: '企业官网案例页没有真实案例时，别硬编，换个展示思路更稳',
+        heroDescription:
+          '很多公司做官网时都会卡在案例页：知道它重要，也知道客户会看，但手上要么没有足够完整的项目，要么案例涉及保密，最后只能塞几张图、几句空话，反而把信任感做薄了。比起硬凑“成功案例”，更好的做法通常是换一种信息结构，把真正能证明能力的内容先讲清楚。',
+        introTitle: '案例页的核心，不是凑数量，而是建立信任',
+        introParagraphs: [
+          '真实项目交付里，并不是每家公司在做官网时都已经积累了大量可公开展示的案例。尤其是刚转型、业务长期靠熟人介绍、项目涉及甲方保密，或者过去做得多但资料留得少，这种情况其实非常常见。',
+          '问题不在于“没有案例就不能做案例页”，而在于很多团队会为了页面完整，硬把项目说成案例、把过程包装成成果，最后既不真诚，也经不起追问。案例页真正承担的是信任建立，不是页面凑数。',
+        ],
+        sections: [
+          {
+            title: '先判断你缺的到底是案例，还是可公开表达的材料',
+            paragraphs: [
+              '有些团队并不是真的没做过事，而是没有整理过能够公开展示的材料。项目背景不能写、客户名字不能写、界面截图不能放，不代表完全没有内容可讲。很多时候只是原本的交付过程没有被沉淀成适合官网表达的版本。',
+              '先把“完全没有项目经验”和“有经验但不方便公开”分开，后面的写法会差很多。如果是后者，页面重点就不必执着于客户 logo 和前后对比图，而可以改成问题类型、交付范围、典型流程和约束条件。',
+            ],
+            bullets: [
+              '能否公开客户名称、行业和合作时间',
+              '能否描述做过的问题类型与交付范围',
+              '能否沉淀出方法、流程、判断标准或阶段成果',
+            ],
+          },
+          {
+            title: '没有标准案例时，可以先用“项目类型 + 解决思路”替代',
+            paragraphs: [
+              '如果暂时没有适合公开的完整案例，比起伪造“某某客户成功案例”，更稳的做法是直接承认表达边界，然后把你常做的项目类型写清楚。比如官网改版、外贸站结构整理、后台一期梳理、内容体系重构，这些都可以按问题场景来写。',
+              '这种写法的重点不是夸成果，而是让潜在客户看懂：你接触过什么类型的问题，通常怎么判断优先级，交付里会处理哪些难点，哪些事情不会承诺得太满。对 To B 读者来说，这种信息往往比漂亮截图更有参考价值。',
+            ],
+            bullets: [
+              '按项目类型整理：官网、外贸站、后台、自动化等',
+              '每类写清常见起点、核心难点、典型交付边界',
+              '强调判断过程和取舍，而不是空泛写“效果显著”',
+            ],
+          },
+          {
+            title: '把能力证明拆散到更多页面，往往比硬塞一个案例页更自然',
+            paragraphs: [
+              '有些官网之所以案例页难写，是因为团队把“证明自己”这件事都压在一个页面上。其实能力证明完全可以拆到服务页、FAQ、关于页，甚至文章内容里。服务页可以写你怎么做，FAQ 可以回答合作顾虑，文章可以展示判断过程，这些拼起来一样能形成信任。',
+              '所以如果现阶段案例材料确实不足，与其勉强做一个很空的案例页，不如先做一个更诚实的“项目经验 / 典型场景 / 方法实践”页面，再逐步补充真实案例。页面不必假装完整，结构先对，比表面齐全更重要。',
+            ],
+          },
+        ],
+        takeawayTitle: '这篇文章的重点',
+        takeaways: [
+          '案例页的核心是建立信任，不是为了页面完整硬凑几个“成功案例”。',
+          '如果项目做过但不方便公开，可以改写成项目类型、问题场景和解决思路。',
+          '材料不足时，先把能力证明拆到服务页、FAQ 和文章里，通常比做一个空案例页更稳。',
+        ],
+        ctaTitle: '如果你也在卡官网案例页，先别急着编“案例”',
+        ctaDescription: '先把能公开的项目类型、常见问题和交付方法梳理清楚，官网的说服力往往会比硬做一页空案例更强。',
+      },
+      en: {
+        navLabel: 'What to Show When You Do Not Have Public Case Studies Yet',
+        categoryLabel: 'Company Website',
+        metaTitle: 'What to Do When a Company Website Has No Real Case Studies Yet | Zhicheng Studio',
+        metaDescription:
+          'If a company website needs a case study page but there are no mature public cases yet, the answer is not to fake one. This article explains more credible alternatives from a real delivery perspective.',
+        keywords: ['company website case study page', 'no case studies yet', 'website content planning', 'company website content'],
+        eyebrow: 'Article',
+        heroTitle: 'If your company website has no real case studies yet, do not force a fake case page',
+        heroDescription:
+          'Many teams know a case page matters because clients will look for proof, but the available material is often thin, confidential, or not organized well enough to publish. That is where many websites go wrong: they try to make the page look complete with vague claims and borrowed structure. A better approach is to present capability honestly in a different format.',
+        introTitle: 'The real purpose of a case page is trust, not page count',
+        introParagraphs: [
+          'In real delivery work, not every company building a website already has a stack of polished, publishable cases. This is especially common for teams that are newly repositioning, rely on referrals, work under client confidentiality, or simply never documented past work in a reusable way.',
+          'The issue is not that a website must avoid the topic until there are ten finished case studies. The issue is that many teams try to fill the gap by overstating outcomes or packaging ordinary work as a dramatic success story. That usually weakens trust rather than building it.',
+        ],
+        sections: [
+          {
+            title: 'First ask whether you truly lack experience or only lack publishable material',
+            paragraphs: [
+              'Some teams are not short on experience at all. What they lack is material that can be shown publicly. The client name may be confidential, screenshots may be restricted, and commercial details may be sensitive. That still does not mean there is nothing useful to present.',
+              'Separate “we have not done this before” from “we have done it, but cannot disclose it directly.” The second situation can still support a strong page if you shift the structure away from logos and before-after claims toward problem types, delivery scope, constraints, and working approach.',
+            ],
+            bullets: [
+              'Can you mention the client, industry, or timeline at all?',
+              'Can you describe the problem category and delivery scope?',
+              'Can you explain the method, decisions, or stage outputs without exposing private details?',
+            ],
+          },
+          {
+            title: 'Use project types and solution patterns when full case studies are not available',
+            paragraphs: [
+              'If complete public case studies are not ready, it is usually better to say less but say it honestly. Instead of inventing “success cases,” describe the kinds of work you actually handle: company website redesigns, foreign trade site structure cleanup, internal system phase-one planning, or content workflow rebuilding.',
+              'The value of this format is that it shows how you think. Prospective B2B clients often care less about polished screenshots than about whether you understand common starting conditions, real constraints, and the decisions needed to move a project forward.',
+            ],
+            bullets: [
+              'Group experience by project type: website, foreign trade site, admin system, automation, and so on',
+              'For each type, explain the usual starting point, key constraints, and delivery boundary',
+              'Focus on decisions and trade-offs instead of vague claims such as “excellent results”',
+            ],
+          },
+          {
+            title: 'Capability proof can be distributed across the site instead of forced into one page',
+            paragraphs: [
+              'A weak case page often appears because the whole burden of credibility is pushed onto one section of the website. In practice, proof can be distributed across service pages, FAQ, the About page, and even articles. Service pages can explain how the work is approached, FAQ can answer common concerns, and articles can show judgment in context.',
+              'So if case material is still limited, a more honest “project experience,” “typical scenarios,” or “working approach” page may be stronger than an empty case study page. The site does not need to pretend it is more mature than it is. A sound structure beats a fake sense of completeness.',
+            ],
+          },
+        ],
+        takeawayTitle: 'Main takeaways',
+        takeaways: [
+          'The purpose of a case page is to create trust, not to make the website look complete.',
+          'If experience exists but cannot be disclosed directly, present project types, scenarios, and solution patterns instead.',
+          'When material is still limited, distribute credibility across service pages, FAQ, and articles rather than forcing a thin case page.',
+        ],
+        ctaTitle: 'If your website is stuck on the case page, do not rush to manufacture “cases”',
+        ctaDescription: 'Start by clarifying what project types, recurring problems, and delivery methods you can explain honestly. That usually builds more trust than an empty case-study section.',
+      },
+    },
+  },
+
   'website-first-or-system-first': {
     slug: 'website-first-or-system-first',
     priority: {
