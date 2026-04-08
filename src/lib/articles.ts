@@ -49,6 +49,7 @@ export const articleSlugs = [
   'website-first-or-system-first',
   'ai-chat-entry-vs-internal-workflow',
   'company-website-case-page-without-cases',
+  'manufacturing-erp-budget-mistakes',
 ] as const
 
 export type ArticleSlug = (typeof articleSlugs)[number]
@@ -5447,6 +5448,135 @@ const articleDefinitions: Record<ArticleSlug, ArticleDefinition> = {
         ],
         ctaTitle: 'If you are unsure which should come first, map the most blocked part of the business first',
         ctaDescription: 'Once the team can name whether the real pain is lead capture, communication, delivery, or coordination, project priority becomes much easier to set with confidence.',
+      },
+    },
+  },
+
+  'manufacturing-erp-budget-mistakes': {
+    slug: 'manufacturing-erp-budget-mistakes',
+    priority: {
+      zh: 0.66,
+      en: 0.52,
+    },
+    publishedAt: '2026-04-08',
+    readingMinutes: 7,
+    relatedServices: ['web-app-development', 'mini-program-development'],
+    content: {
+      zh: {
+        navLabel: '重做 ERP 时，哪些预算本来可以省掉',
+        categoryLabel: '制造与工业',
+        metaTitle: '帮工厂重做 ERP 后，我发现哪些预算本来可以省掉｜制造业数字化复盘｜致诚工作室',
+        metaDescription:
+          '制造业 ERP 项目里，真正烧钱的往往不是代码量，而是边界没定清、旧流程照搬、主数据没人负责和一期范围过大。本文从真实交付视角拆解哪些预算最容易被浪费。',
+        keywords: ['制造业 ERP 复盘', 'ERP 项目预算', '工厂数字化改造', '企业系统开发经验'],
+        eyebrow: 'Article',
+        heroTitle: '帮几家工厂重做 ERP 后，我发现很多预算其实不用花',
+        heroDescription:
+          '制造业数字化项目里，最贵的部分常常不是开发本身，而是把混乱流程、模糊责任和临时决定一起系统化。表面上看是“需求很多”，本质上往往是一期做太多、旧逻辑不肯断、基础数据没人收口。项目一旦这样开场，预算很容易被吃掉，但效果并不会同步变好。',
+        introTitle: '预算失控，通常不是因为系统太复杂',
+        introParagraphs: [
+          '我这两年接触过几类工厂 ERP 重做项目，最典型的共性不是功能不够，而是老板一开始就想“一次性把问题全解决”。采购、销售、库存、生产、审批、报表全想一起上，结果项目推进到中段，团队才发现流程还没统一、旧系统数据对不上、每个部门口中的“必须功能”其实都不是同一件事。',
+          '这种情况下，预算不是花在真正提高效率的部分，而是花在反复确认、返工、兼容旧习惯和填历史坑上。很多钱不是不能花，而是没必要在第一阶段就花。',
+        ],
+        sections: [
+          {
+            title: '最容易浪费预算的，不是开发，而是把旧问题原样搬进新系统',
+            paragraphs: [
+              '很多工厂在重做 ERP 时，第一反应是“原来有什么功能，现在也都要保留”，甚至连那些已经没人愿意用、只能靠特定员工记住操作顺序的流程，也想一比一复刻。听起来像降低迁移风险，实际是在让新系统继承旧系统最贵的包袱。',
+              '如果一个流程本来就依赖口头补充、Excel 二次加工或跨部门人工兜底，那它大概率不是应该被完整保留，而是应该被拆开看：哪些是必须保留的业务约束，哪些只是过去软件能力不够时形成的临时补丁。把补丁一起开发进去，预算会很快失真。',
+            ],
+            bullets: [
+              '先区分“业务规则”与“历史习惯”，不要默认全部照搬',
+              '凡是必须靠人解释的流程，都值得先重画再开发',
+              '旧系统里的例外分支，通常不该在一期无条件保留',
+            ],
+          },
+          {
+            title: '第二个黑洞，是主数据没人拍板，却要求系统先跑起来',
+            paragraphs: [
+              '不少 ERP 项目卡住，不是页面没做完，而是物料、客户、供应商、价格、仓位、BOM 这些主数据根本没有统一口径。开发阶段大家会先说“系统先做，数据后面再整理”，但一到联调和上线，所有字段命名、编码规则、权限归属都会一起炸出来。',
+              '这类问题用开发时间硬扛最贵，因为每改一次数据口径，前端、接口、报表、导入逻辑都可能跟着变。更稳的做法反而很朴素：在立项早期就明确谁对哪类主数据负责，哪些编码规则必须先定，哪些历史脏数据只迁核心部分。这个动作不酷，但特别省钱。',
+            ],
+            bullets: [
+              '没有数据 owner，就不要高估上线节奏',
+              '历史数据迁移应先保关键字段，不要默认全量搬家',
+              '报表口径先统一，再谈自动化，否则后面都会返工',
+            ],
+          },
+          {
+            title: '真正划算的做法，通常是一期只打通一个闭环',
+            paragraphs: [
+              '我越来越倾向于把制造业系统项目做成“先跑通一条关键链路”的模式，比如先把销售下单到库存占用打通，或者先把采购申请到入库结算打通。只要这条链路能被真实使用，后面的扩展才有判断依据。相比一上来做全模块，这种方式更容易看清哪些功能真有价值，哪些只是会议里听起来重要。',
+              '一期范围收窄，并不等于做得小气，而是把预算用在验证组织是否真的愿意按新方式协作。系统项目最大的风险从来不是代码写不出来，而是上线后大家还是回到原来的表格和群聊。先把一个闭环做成，让团队愿意切换，后续预算反而更好花。',
+            ],
+          },
+        ],
+        takeawayTitle: '这篇文章的重点',
+        takeaways: [
+          'ERP 项目里最浪费预算的，通常是旧流程照搬、例外逻辑过度保留和一期范围失控。',
+          '主数据治理如果没人负责，开发越快，后期返工通常越贵。',
+          '先打通一个关键业务闭环，比一次性铺满所有模块更稳，也更容易看见真实回报。',
+        ],
+        ctaTitle: '如果你准备重做内部系统，先别急着列功能清单',
+        ctaDescription: '先把最卡的一条业务链路、相关角色和必须统一的数据口径定下来，很多不必要的预算自然就会消失。',
+      },
+      en: {
+        navLabel: 'Where ERP Rebuild Budgets Get Wasted',
+        categoryLabel: 'Manufacturing',
+        metaTitle: 'Where Manufacturing ERP Rebuild Budgets Get Wasted | Delivery Lessons from Real Projects | Zhicheng Studio',
+        metaDescription:
+          'In manufacturing ERP projects, budget is often wasted on unclear boundaries, copied legacy workflows, unmanaged master data, and oversized phase-one scope. This article breaks down where the money goes and what to cut first.',
+        keywords: ['manufacturing ERP rebuild', 'ERP project budget', 'digital transformation lessons', 'internal system delivery'],
+        eyebrow: 'Article',
+        heroTitle: 'After rebuilding ERP systems for factories, I realized how much budget did not need to be spent',
+        heroDescription:
+          'In manufacturing system projects, the expensive part is often not the coding itself. It is the decision to systemize confusion: unstable workflows, unclear ownership, and too many first-phase expectations. When a project starts that way, budget gets consumed quickly without creating matching operational value.',
+        introTitle: 'Budget overruns are usually not caused by technical complexity alone',
+        introParagraphs: [
+          'Across several factory ERP rebuild projects, the recurring problem was rarely “not enough features.” It was the belief that purchasing, sales, inventory, production, approval flow, and reporting should all be fixed in one move, even before the team agreed on process definitions or data ownership.',
+          'When that happens, money gets spent on clarification loops, rework, legacy compatibility, and historical cleanup rather than on the parts that actually improve execution. The issue is not that the budget should never be spent. It is that much of it should not be spent in phase one.',
+        ],
+        sections: [
+          {
+            title: 'The first budget trap is copying legacy problems into the new system',
+            paragraphs: [
+              'A common instinct in ERP rebuilds is to preserve every existing function because it feels safer. In practice, that often means carrying over the most expensive baggage from the old system: awkward branches, exception handling that only one employee understands, and process steps that survive purely out of habit.',
+              'If a workflow still depends on verbal explanation, spreadsheet patching, or manual rescue across departments, the goal should not be one-to-one reproduction. The better question is which parts are true business rules and which parts are old workaround logic created by earlier software limits. Rebuilding the workaround as if it were a requirement is where budget starts leaking fast.',
+            ],
+            bullets: [
+              'Separate business rules from inherited habits before scoping development',
+              'Any process that still needs manual explanation should be redesigned before it is rebuilt',
+              'Exception branches from the legacy system rarely deserve automatic inclusion in phase one',
+            ],
+          },
+          {
+            title: 'The second trap is unmanaged master data',
+            paragraphs: [
+              'Many ERP projects stall not because screens are unfinished but because material data, customer records, vendor definitions, pricing rules, warehouse locations, or BOM standards were never truly aligned. Teams often say “let the system be built first and we will clean the data later,” but the conflict always returns during integration and rollout.',
+              'This is expensive because every late change in data definition can cascade into forms, APIs, reports, and import logic. A much more cost-effective move is also a very unglamorous one: define data owners early, lock the coding rules that really matter, and decide which historical data should migrate and which should be left behind.',
+            ],
+            bullets: [
+              'Without clear data owners, rollout plans are almost always too optimistic',
+              'Migration should focus on critical fields first instead of defaulting to full historical transfer',
+              'Reporting definitions need to be aligned before automation, not after it',
+            ],
+          },
+          {
+            title: 'What saves money is usually a narrower first phase with one business loop',
+            paragraphs: [
+              'The most reliable projects I have seen were not the ones with the longest requirement lists. They were the ones that picked one critical workflow and made it usable first, such as sales order to inventory reservation, or purchase request to receiving and settlement. Once one loop works in daily operations, the next decisions become much easier to justify.',
+              'A smaller first phase is not a timid strategy. It is a way to test whether the organization is actually ready to collaborate in a new operating model. The largest risk in internal system projects is rarely that the software cannot be built. It is that the team goes back to spreadsheets and chat threads after launch. If one loop genuinely sticks, later budget is spent with much better judgment.',
+            ],
+          },
+        ],
+        takeawayTitle: 'Main takeaways',
+        takeaways: [
+          'ERP budgets are often wasted on copied legacy logic, oversized first-phase scope, and preserving too many exceptions.',
+          'If master data ownership is unclear, fast development usually leads to expensive rework later.',
+          'A narrower first phase that proves one critical workflow is usually the most cost-effective path.',
+        ],
+        ctaTitle: 'If you are preparing to rebuild an internal system, do not start with a giant feature list',
+        ctaDescription: 'Start by identifying the most blocked business loop, the roles around it, and the data definitions that must be unified. That alone removes a surprising amount of unnecessary budget.',
       },
     },
   },
