@@ -44,6 +44,10 @@
 - 网站开发
 - 企业官网开发
 - 外贸网站开发
+- 企业内部系统
+- 企业管理系统（ERP / OA / EMS）
+- 订单系统与业务流程系统
+- AI 应用与企业智能体
 - 网站开发多少钱
 - 网站开发流程
 - 外贸网站询盘转化
@@ -89,6 +93,8 @@ AI 可以自动生成草稿，但不要让它做下面这些事：
 - 网站开发多少钱
 - 企业官网需要哪些页面
 - 外贸网站为什么没询盘
+- 企业内部系统需求到底该怎么梳理
+- 老系统该继续修，还是该重构重做
 - 网站改版最容易踩哪些坑
 
 内容风格：
@@ -109,7 +115,9 @@ AI 可以自动生成草稿，但不要让它做下面这些事：
 
 - 网站结构怎么规划
 - 企业官网首页怎么做
-- 多语言网站上线前，最容易漏掉的内容和体验细节
+- 企业系统一期范围怎么定
+- 内部管理系统重构还是重做怎么判断
+- AI 应用应该先做聊天入口，还是先做内部流程
 - 系统重构还是重做怎么判断
 
 内容风格：
@@ -131,6 +139,8 @@ AI 可以自动生成草稿，但不要让它做下面这些事：
 - 做网站前最该先准备什么
 - 小程序和官网怎么分工
 - 外贸网站为什么询盘少
+- 企业里很多“想做系统”的需求，问题其实不在功能清单
+- 很多 AI 项目一开始就做偏了，不是模型问题，而是流程没定
 - 什么情况应该重做，不该继续修补
 
 内容风格：
@@ -152,6 +162,8 @@ AI 可以自动生成草稿，但不要让它做下面这些事：
 - 为什么很多品牌官网看起来高级，却几乎不转化
 - 每个品牌官网都值得重塑一遍吗
 - 企业官网首页最容易拉低品牌质感和服务感的 3 个地方
+- 管理系统不是功能越多越值钱，很多问题出在流程没收住
+- 很多企业要的不是“万能 AI”，而是先把一个内部环节做顺
 - 外贸网站为什么不是把产品堆上去就行
 
 内容风格：
@@ -175,6 +187,8 @@ AI 可以自动生成草稿，但不要让它做下面这些事：
 - 辞职做独立工作室，我用 Next.js 极简重写了自己的工作站
 - 帮 5 家企业重做 OA 系统后，我总结了外包的四大深坑
 - [接单] 原大厂研发出山，专抓企业核心系统(ERP/OA)与智能体落地
+- 做订单系统和内部管理系统时，我最怕客户一上来就要“大而全”
+- 企业 AI 项目最容易踩的坑，不是模型不够强，而是流程没设计
 
 内容风格：
 
@@ -194,6 +208,8 @@ AI 可以自动生成草稿，但不要让它做下面这些事：
 - 为什么有些外贸站页面不多，却更容易拿到高质量询盘？
 - 找外包做内部 OA 系统，这 3 种交付方式服务说得再好也别碰！
 - 企业定制开发真正值钱的，不是功能堆得多，而是交付质量和后续服务
+- 很多企业做 AI 应用迟迟落不了地，卡的不是模型，而是业务流程
+- 订单系统一开始就想做全，往往是项目失控的开始
 
 内容风格：
 
@@ -308,11 +324,21 @@ AI 可以自动生成草稿，但不要让它做下面这些事：
 
 第一批优先让 AI 从这些文章改写：
 
+不要长期只围绕官网和外贸站。
+
+更稳的做法是让内容线之间轮换：
+
+- 官网 / 外贸站
+- 企业内部系统 / 管理系统 / 订单系统
+- AI 应用 / 智能体 / 流程自动化
+
 ### 第一组：最接近询盘
 
 - `website-development-cost`
 - `website-development-process`
 - `website-development-quote-checklist`
+- `enterprise-system-requirements`
+- `business-system-phase-one-scope`
 
 ### 第二组：企业官网
 
@@ -326,21 +352,39 @@ AI 可以自动生成草稿，但不要让它做下面这些事：
 - `foreign-trade-website-inquiry-conversion`
 - `foreign-trade-website-product-pages`
 
-### 第四组：适合小红书 / 短内容
+### 第四组：企业系统 / 管理系统 / 订单系统
+
+- `enterprise-system-requirements`
+- `internal-system-refactor-or-rebuild`
+- `business-system-phase-one-scope`
+- `manufacturing-erp-budget-mistakes`
+- `factory-oa-shell-development`
+
+### 第五组：AI 应用 / 业务流程 / 系统边界
+
+- `ai-chat-entry-vs-internal-workflow`
+- `website-first-or-system-first`
+- `website-admin-mini-program-boundaries`
+- `mini-program-admin-panel-planning`
+- `ai-product-website-messaging`
+
+### 第六组：适合小红书 / 短内容
 
 - `company-website-homepage-structure`
 - `company-website-redesign-mistakes`
+- `website-first-or-system-first`
+- `ai-chat-entry-vs-internal-workflow`
 - `mini-program-and-website-relationship`
 - `landing-page-vs-company-website`
 - `website-maintenance-scope`
 
-### 第五组：适合 Medium 英文长文
+### 第七组：适合 Medium 英文长文
 
 - `website-development-cost`
-- `website-development-process`
+- `internal-system-refactor-or-rebuild`
+- `business-system-phase-one-scope`
+- `ai-chat-entry-vs-internal-workflow`
 - `company-website-pages-checklist`
-- `company-website-homepage-structure`
-- `foreign-trade-website-content-structure`
 - `foreign-trade-website-inquiry-conversion`
 
 ---
@@ -371,6 +415,7 @@ AI 可以自动生成草稿，但不要让它做下面这些事：
 
 - 如果有历史发布记录，优先避开最近 7 天已经发过的 slug
 - 如果没有历史记录，直接任选即可，不需要追求真正随机
+- 如果用户没有指定内容方向，优先在“官网 / 外贸站 / 企业系统 / AI 应用”之间轮换，不要连续多次只选官网类题目
 - 一次任务默认输出 1 条
 - 只有用户明确要求批量时，才一次输出多条
 - 如果用户明确要求 `Medium` / `英文` / `English`，默认使用站内对应英文文章作为素材
@@ -394,6 +439,7 @@ AI 可以自动生成草稿，但不要让它做下面这些事：
 平台：自动 / 知乎 / 掘金 / 即刻 / 小红书 / 电鸭 / 抖音 / Medium / Dev.to / IndieHackers / X
 语言：自动 / 中文 / 英文
 模式：随机选题
+内容线：自动 / 官网 / 外贸站 / 企业系统 / 管理系统 / 订单系统 / AI应用 / 混合
 数量：1
 目标：品牌曝光 / 点击文章 / 导向服务页 / 自动
 语气：专业判断 / 个人口吻 / 决策建议 / 自动
@@ -408,6 +454,7 @@ AI 可以自动生成草稿，但不要让它做下面这些事：
 平台：自动
 语言：自动
 模式：随机选题
+内容线：自动
 数量：1
 目标：自动
 语气：自动
@@ -422,6 +469,7 @@ AI 可以自动生成草稿，但不要让它做下面这些事：
 平台：知乎
 语言：中文
 模式：随机选题
+内容线：企业系统
 数量：1
 目标：点击文章
 语气：决策建议
@@ -436,6 +484,7 @@ AI 可以自动生成草稿，但不要让它做下面这些事：
 平台：Medium
 语言：英文
 模式：随机选题
+内容线：AI应用
 数量：1
 目标：点击文章
 语气：专业判断
@@ -448,6 +497,7 @@ AI 可以自动生成草稿，但不要让它做下面这些事：
 
 - `平台 = Medium` 时，`语言` 默认英文
 - `平台 = 自动` 且 `语言 = 自动` 时，默认只在中文平台里选
+- `内容线 = 自动` 时，默认允许 AI 在官网、外贸站、企业系统、管理系统、订单系统、AI 应用之间轮换
 - `发布方式` 主要给 Medium 用：`改写发布` 更适合平台原生内容，`导入原文` 更适合直接转载站内英文原文
 
 ---
@@ -519,6 +569,7 @@ AI 可以自动生成草稿，但不要让它做下面这些事：
 - 网站开发怎么判断报价，真正拉开差距的是哪些质量和服务项？
 - 企业官网一般需要哪些页面，为什么很多站一开始就做乱了？
 - 外贸网站没询盘，问题通常不只是“流量不够”
+- 企业内部系统需求怎么梳理，才不至于一开始就把项目做散？
 
 ### 掘金写作规则
 
@@ -532,6 +583,8 @@ AI 可以自动生成草稿，但不要让它做下面这些事：
 - 企业官网结构怎么规划，后面才不会越改越乱
 - 多语言网站上线前，最容易漏掉的内容和体验检查项
 - 系统重构还是重做，怎么判断更稳
+- 企业系统一期范围怎么定，后面才不会一路失控
+- AI 应用落地，为什么很多项目不该先做“万能助手”
 
 ### 即刻写作规则
 
@@ -552,7 +605,7 @@ AI 可以自动生成草稿，但不要让它做下面这些事：
 - 标题先给情绪钩子或反差判断，但正文必须接得住
 - 前 2 到 3 行就把价值落差、专业判断或共鸣说出来
 - 正文尽量拆成 3 到 5 个短段，每段都适合放在单独卡片里
-- 语言更像品牌观察或案例拆解，不要写成工程实现教程
+- 语言更像品牌、产品或流程观察，不要写成工程实现教程
 - 默认强调质量、服务体验和长期性价比，不要写成低价导向
 - 默认不放外链，结尾用“收藏一下 / 评论交流 / 看主页”式软 CTA
 
@@ -561,12 +614,15 @@ AI 可以自动生成草稿，但不要让它做下面这些事：
 - 很多品牌官网，其实都值得按更高标准重塑一遍
 - 很多企业官网的问题，不是丑，而是没有把专业度和服务感做出来
 - 官网不是做完就行，真正拉开差距的是质感、服务和转化链路
+- 很多管理系统越做越难用，不是因为员工抗拒，而是流程从一开始就没理顺
+- 很多企业现在要的不是一个大而全 AI，而是先把一个关键环节跑通
 
 可用开头模板：
 
 - 这两年我看企业官网，越来越强烈的一个感受是：
 - 真正让我在意的，不是很多品牌还没做官网，而是很多官网已经上线了，却没有把品牌质感和服务能力表达清楚。
 - 很多老板以为官网交付完成就结束了，但从线上营销角度看，那可能只是素材上传完了。
+- 很多管理系统的问题，表面上像是“员工不配合”，本质上其实是流程从一开始就没理顺。
 
 ### Medium 写作规则
 
@@ -584,12 +640,15 @@ AI 可以自动生成草稿，但不要让它做下面这些事：
 - What Actually Drives Website Development Cost?
 - Why Many Company Websites Fail After the Homepage
 - Foreign Trade Websites Usually Lose Inquiries Before the Contact Form
+- When Should a Company Rebuild an Internal System Instead of Patching It?
+- AI Projects Usually Need a Workflow Before They Need a Chat Interface
 
 可用副标题模板：
 
 - Most budget confusion comes from unclear scope, not from a single number.
 - The issue is usually missing structure beneath the homepage, not weak visuals.
 - More contact buttons do not fix a broken inquiry path.
+- Repeated manual work, unclear ownership, and scattered data usually point to process design first.
 
 Medium 发布动作补充：
 
@@ -611,17 +670,18 @@ Medium 发布动作补充：
 要求：
 1. 先理解原文在解决什么问题
 2. 如果用户没有指定文章，就从本文提供的文章池里任选 1 篇
-3. 如果用户没有指定平台和语言，默认在知乎、掘金、即刻、小红书里任选 1 个平台
-4. 输出的平台内容必须像原生内容，不像广告
-5. 保留核心判断，但不要逐字复述站内原文
-6. 一次只放 1 个最相关链接
-7. 不夸张承诺，不伪造案例，不堆砌营销词，也不要把品牌写成低价外包
-8. 即刻更像个人观察，知乎更像回答问题，掘金更像方法总结，小红书更像图文观点卡片，Medium 更像英文判断型长文
-9. 如果用户明确要求 `Medium` / `英文` / `English`，默认用英文输出，并优先参考站内对应英文原文
-10. 如果有历史发布记录，优先避开最近 7 天已经发过的 slug
-11. 输出结果必须包含：平台、选中文章 slug、标题、开头、正文、结尾、链接、标签建议
-12. 如果平台是小红书，再额外补：封面标题、配图页建议
-13. 如果平台是 Medium，再额外补：语言、建议副标题、发布方式建议
+3. 如果用户没有指定内容方向，不要长期只选官网和外贸站，要在企业系统、管理系统、订单系统、AI 应用之间轮换
+4. 如果用户没有指定平台和语言，默认在知乎、掘金、即刻、小红书里任选 1 个平台
+5. 输出的平台内容必须像原生内容，不像广告
+6. 保留核心判断，但不要逐字复述站内原文
+7. 一次只放 1 个最相关链接
+8. 不夸张承诺，不伪造案例，不堆砌营销词，也不要把品牌写成低价外包
+9. 即刻更像个人观察，知乎更像回答问题，掘金更像方法总结，小红书更像图文观点卡片，Medium 更像英文判断型长文
+10. 如果用户明确要求 `Medium` / `英文` / `English`，默认用英文输出，并优先参考站内对应英文原文
+11. 如果有历史发布记录，优先避开最近 7 天已经发过的 slug
+12. 输出结果必须包含：平台、选中文章 slug、标题、开头、正文、结尾、链接、标签建议
+13. 如果平台是小红书，再额外补：封面标题、配图页建议
+14. 如果平台是 Medium，再额外补：语言、建议副标题、发布方式建议
 ```
 
 ---
@@ -676,7 +736,7 @@ Medium 发布动作补充：
 - 标题先给一个带情绪或反差的判断，但不要做空洞标题党
 - 开头前 2 到 3 行先制造价值落差、专业判断或“原来问题在这里”的感觉
 - 正文拆成 3 到 5 个短段，每段都适合对应 1 页图文卡片
-- 语气像在做品牌官网 / 营销表达观察，不要写成技术教程
+- 语气像在做品牌、产品或流程观察，不要写成技术教程
 - 默认强调质量、服务体验和长期性价比，不要写成低价导向
 - 默认不放外链，结尾用“收藏一下 / 评论交流 / 看主页”式软 CTA
 - 额外输出：封面标题、配图页建议
@@ -747,33 +807,33 @@ Medium 发布动作补充：
 
 ### 知乎 3 条
 
-1. `website-development-cost`
-2. `company-website-pages-checklist`
+1. `enterprise-system-requirements`
+2. `website-first-or-system-first`
 3. `foreign-trade-website-inquiry-conversion`
 
 ### 掘金 3 条
 
-1. `website-development-process`
-2. `company-website-homepage-structure`
-3. `internal-system-refactor-or-rebuild`
+1. `internal-system-refactor-or-rebuild`
+2. `business-system-phase-one-scope`
+3. `ai-chat-entry-vs-internal-workflow`
 
 ### 即刻 3 条
 
-1. `mini-program-and-website-relationship`
-2. `landing-page-vs-company-website`
+1. `website-first-or-system-first`
+2. `ai-chat-entry-vs-internal-workflow`
 3. `website-maintenance-scope`
 
 ### 小红书 3 条
 
 1. `company-website-redesign-mistakes`
-2. `company-website-homepage-structure`
-3. `landing-page-vs-company-website`
+2. `website-first-or-system-first`
+3. `ai-chat-entry-vs-internal-workflow`
 
 ### Medium 3 条
 
-1. `website-development-cost`
-2. `company-website-pages-checklist`
-3. `foreign-trade-website-inquiry-conversion`
+1. `internal-system-refactor-or-rebuild`
+2. `ai-chat-entry-vs-internal-workflow`
+3. `company-website-pages-checklist`
 
 如果用户没有指定文章，就优先按平台从这 15 条里任选 1 条开始。
 
@@ -843,16 +903,17 @@ AI 输出后，发布前至少看这几件事：
 
 如果你现在就要让 AI 帮你跑，建议从这套开始：
 
-1. 先跑知乎 1 篇：`website-development-cost`
-2. 再跑掘金 1 篇：`website-development-process`
-3. 再跑即刻 1 条：`mini-program-and-website-relationship`
-4. 再跑小红书 1 条：`company-website-redesign-mistakes`
-5. 如果要试英文分发，再跑 Medium 1 篇：`company-website-pages-checklist`
+1. 先跑知乎 1 篇：`enterprise-system-requirements`
+2. 再跑掘金 1 篇：`internal-system-refactor-or-rebuild`
+3. 再跑即刻 1 条：`website-first-or-system-first`
+4. 再跑小红书 1 条：`ai-chat-entry-vs-internal-workflow`
+5. 如果要试英文分发，再跑 Medium 1 篇：`business-system-phase-one-scope`
 
 这 4 条中文 + 1 条英文跑完后，你就能很快看出来：
 
 - 哪个平台最适合你现在的语气
 - 哪类文章最容易被改成自然内容
+- 官网、系统、AI 这三条线里，哪条最容易形成稳定输出
 - 链接放在哪里最不违和
 
 先跑通 4 条中文；如果 Medium 也顺，再考虑中英文一起批量。
@@ -871,21 +932,23 @@ AI 输出后，发布前至少看这几件事：
 执行规则：
 1. 默认使用随机选题模式
 2. 如果我没有指定文章，你就从下面的文章池里任选 1 篇
-3. 如果我没有指定平台和语言，你就从知乎、掘金、即刻、小红书、电鸭、抖音里任选 1 个平台
-4. 一次默认只输出 1 条内容
-5. 一条内容默认只放 1 个最相关的可见链接（如果平台是抖音，则严禁放链接，改用口语CTA）
-6. 如果我明确说 `英文发帖` 或 `English`，你就切到英文平台（自动在 Medium/Dev.to/IndieHackers/X 之间选，并运用各自的专属文风）
-7. 中文各平台调性：知乎像回答问题，掘金像方法总结，即刻像个人观察，小红书像观点型图文卡片，电鸭侧重外包接单踩坑与工作室高端展示。默认强调质量、服务和长期性价比，不打低价牌。抖音必须严格采用短视频口播神级公式（反常识标题+趋势压迫感开场+3到5个收益点+数据背书+软CTA）。
-8. 英文：Medium/Dev.to 偏向技术与判断型长文；IndieHackers 侧重独立开发复盘；X 则是短推文。
-9. 英文内容必须首选站内英文原文（`/en` 结尾路径的内容）去提炼，绝不能把中文稿逐句机械直译。
-10. 不要像广告，不要夸张承诺，不要伪造案例，也不要写成低价外包叙事
-11. 如果有历史记录，优先避开最近 7 天已经发过的文章 slug
+3. 如果我没有指定内容方向，不要长期只选官网和外贸站，要在企业系统、管理系统、订单系统、AI 应用之间轮换
+4. 如果我没有指定平台和语言，你就从知乎、掘金、即刻、小红书、电鸭、抖音里任选 1 个平台
+5. 一次默认只输出 1 条内容
+6. 一条内容默认只放 1 个最相关的可见链接（如果平台是抖音，则严禁放链接，改用口语CTA）
+7. 如果我明确说 `英文发帖` 或 `English`，你就切到英文平台（自动在 Medium/Dev.to/IndieHackers/X 之间选，并运用各自的专属文风）
+8. 中文各平台调性：知乎像回答问题，掘金像方法总结，即刻像个人观察，小红书像观点型图文卡片，电鸭侧重外包接单踩坑与工作室高端展示。默认强调质量、服务和长期性价比，不打低价牌。抖音必须严格采用短视频口播神级公式（反常识标题+趋势压迫感开场+3到5个收益点+数据背书+软CTA）。
+9. 英文：Medium/Dev.to 偏向技术与判断型长文；IndieHackers 侧重独立开发复盘；X 则是短推文。
+10. 英文内容必须首选站内英文原文（`/en` 结尾路径的内容）去提炼，绝不能把中文稿逐句机械直译。
+11. 不要像广告，不要夸张承诺，不要伪造案例，也不要写成低价外包叙事
+12. 如果有历史记录，优先避开最近 7 天已经发过的文章 slug
 
 
 可选文章池：
 - website-development-cost
 - website-development-process
 - website-development-quote-checklist
+- enterprise-system-requirements
 - company-website-pages-checklist
 - company-website-homepage-structure
 - company-website-redesign-mistakes
@@ -893,6 +956,12 @@ AI 输出后，发布前至少看这几件事：
 - foreign-trade-website-inquiry-conversion
 - foreign-trade-website-product-pages
 - mini-program-and-website-relationship
+- internal-system-refactor-or-rebuild
+- business-system-phase-one-scope
+- website-first-or-system-first
+- ai-chat-entry-vs-internal-workflow
+- manufacturing-erp-budget-mistakes
+- factory-oa-shell-development
 - landing-page-vs-company-website
 - website-maintenance-scope
 
