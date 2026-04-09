@@ -50,6 +50,7 @@ export const articleSlugs = [
   'ai-chat-entry-vs-internal-workflow',
   'company-website-case-page-without-cases',
   'manufacturing-erp-budget-mistakes',
+  'factory-oa-shell-development',
 ] as const
 
 export type ArticleSlug = (typeof articleSlugs)[number]
@@ -5577,6 +5578,135 @@ const articleDefinitions: Record<ArticleSlug, ArticleDefinition> = {
         ],
         ctaTitle: 'If you are preparing to rebuild an internal system, do not start with a giant feature list',
         ctaDescription: 'Start by identifying the most blocked business loop, the roles around it, and the data definitions that must be unified. That alone removes a surprising amount of unnecessary budget.',
+      },
+    },
+  },
+
+  'factory-oa-shell-development': {
+    slug: 'factory-oa-shell-development',
+    priority: {
+      zh: 0.66,
+      en: 0.52,
+    },
+    publishedAt: '2026-04-09',
+    readingMinutes: 7,
+    relatedServices: ['web-app-development', 'mini-program-development'],
+    content: {
+      zh: {
+        navLabel: '工厂 OA 推不下去，常常不是员工抗拒',
+        categoryLabel: '企业系统',
+        metaTitle: '工厂 OA 为什么推不下去？很多问题出在“套壳开发”｜致诚工作室',
+        metaDescription:
+          '工厂 OA 上线后推不动，很多时候不是员工不配合，而是系统只是把纸面流程套进页面，没有真正处理例外、角色和跨部门协同。本文从真实交付视角拆解原因。',
+        keywords: ['工厂 OA 推不动', 'OA 套壳开发', '制造业数字化', '企业系统落地'],
+        eyebrow: 'Article',
+        heroTitle: '工厂 OA 为什么推不下去？很多时候不是员工抗拒，而是做成了“套壳开发”',
+        heroDescription:
+          '我见过几类工厂 OA 项目，表面上功能都齐：申请、审批、抄送、通知、报表，一个都不少。可一上线，车间不用、采购绕开、主管口头批、财务最后还是看 Excel。很多团队会把这归因于“员工习惯改不了”，但更常见的真相是：系统只是把流程图做成页面，却没有把真实工作里的例外、角色切换和补充动作接住。',
+        introTitle: 'OA 推不下去，往往不是人的问题先出错',
+        introParagraphs: [
+          '制造业里的 OA 不像互联网团队的请假审批那么单纯。请购、打样、异常放行、付款申请、外协确认、质量反馈，这些动作背后常常跨部门、跨班次，还夹着大量口头确认和临时判断。如果系统只照着一张理想流程图搭页面，落地时一定会撞墙。',
+          '我越来越不喜欢那种“先把 OA 上了再说”的做法。因为很多项目所谓的上线，本质只是把旧表单搬进了新界面，流程复杂度一点没减，反而多了一层系统操作负担。用户不是不想配合，而是在用脚投票：哪个工具更不妨碍把事情做完，就回到哪个工具。',
+        ],
+        sections: [
+          {
+            title: '第一类问题：系统画的是标准流，现场跑的是例外流',
+            paragraphs: [
+              '工厂里的很多审批表面看起来规则清楚，实际执行时却充满例外。比如同样是采购申请，标准物料和紧急补料就不是一套路径；同样是请款，预付款、尾款、补差价和售后赔付也常常不是同一种处理逻辑。系统如果只支持“理想主流程”，用户第一次遇到例外，就会立刻回到微信、电话和纸单。',
+              '这也是我说很多 OA 是“套壳开发”的原因：它把已有表单字段搬进网页，却没有真正重构流程。页面看着数字化了，组织运转方式却没变。结果不是系统替代人工，而是人工为了配合系统，再额外做一次解释和补录。',
+            ],
+            bullets: [
+              '先梳理高频例外，而不是只画最漂亮的主流程',
+              '任何需要频繁人工备注兜底的节点，都说明流程设计还没接住业务',
+              '流程数字化不是把审批搬上线，而是把例外处理一起设计进去',
+            ],
+          },
+          {
+            title: '第二类问题：角色边界没拆清，最后所有人都觉得麻烦',
+            paragraphs: [
+              '不少 OA 项目会把“谁发起、谁审批、谁知会、谁执行、谁归档”混成一锅。页面上看起来每个人都能看到流程，实际上每个人都得多点几步、多看几页、多补几句。对于办公室团队，这只是繁琐；对于车间、仓库和采购现场，这会直接变成绕开系统的理由。',
+              '更稳的设计不是让每个角色都进入同一套完整界面，而是按场景把动作拆轻。发起人关注提交是否完整，审批人关注判断所需信息，执行人只关心下一步动作和状态变化，管理层再看汇总报表。把所有信息一次性塞给所有角色，通常既不清晰，也不省时间。',
+            ],
+            bullets: [
+              '发起、审批、执行、归档最好拆成不同视图和操作负担',
+              '别把管理层报表需求直接压到一线操作界面里',
+              '对移动端和车间场景，少一步输入通常比多一个统计字段更重要',
+            ],
+          },
+          {
+            title: '第三类问题：项目目标其实不是 OA，而是想顺手治组织病',
+            paragraphs: [
+              '还有一种特别常见：老板嘴上说做 OA，心里真正想解决的是部门扯皮、责任不清、数据不统一、流程没人拍板。这些问题当然和系统有关，但它们不是靠上线一个审批平台就会自动痊愈。项目一旦带着这种“系统顺便帮我整顿组织”的期待开场，范围就会越做越重。',
+              '我更建议把目标收窄：先挑一条最痛、最能量化、最适合标准化的链路去做，比如请购审批、付款申请、异常反馈闭环。让系统先在一个场景里真正替代旧做法，而不是一开始就想统一全部协作。OA 能解决的是流程透明和动作留痕，不是替代管理者做所有判断。',
+            ],
+          },
+        ],
+        takeawayTitle: '这篇文章的重点',
+        takeaways: [
+          '工厂 OA 推不动，很多时候不是员工抗拒，而是系统只做了表单电子化，没有接住真实协作。',
+          '高频例外、角色分工和现场操作负担，决定了 OA 能不能被持续使用。',
+          '先跑通一条高价值流程，比一开始把所有审批都搬上去更容易落地。',
+        ],
+        ctaTitle: '如果你准备做制造业内部系统，先别急着上“大而全”的 OA',
+        ctaDescription: '先把一条最卡的审批或协同链路拆清，确认例外、角色和数据归属，再决定系统范围，落地成功率会高很多。',
+      },
+      en: {
+        navLabel: 'Why Factory OA Rollouts Often Stall',
+        categoryLabel: 'Internal System',
+        metaTitle: 'Why Factory OA Rollouts Stall: The Problem Is Often “Shell Development,” Not User Resistance | Zhicheng Studio',
+        metaDescription:
+          'Many factory OA projects fail not because staff resist change, but because the system only wraps paper workflows in screens without handling exceptions, role boundaries, and cross-team coordination. This article explains the delivery gap.',
+        keywords: ['factory OA rollout', 'OA shell development', 'manufacturing workflow system', 'internal system adoption'],
+        eyebrow: 'Article',
+        heroTitle: 'Why factory OA rollouts often stall: not because people resist, but because the system was built as a shell',
+        heroDescription:
+          'I have seen factory OA projects that looked complete on paper: requests, approvals, notifications, reports, all neatly listed. But once launched, the workshop avoided it, procurement bypassed it, supervisors approved verbally, and finance still reconciled everything in spreadsheets. That is often blamed on user habit. In reality, the system usually captured the diagram, not the work itself.',
+        introTitle: 'When OA adoption fails, the first problem is often not the people',
+        introParagraphs: [
+          'Manufacturing workflows are rarely as simple as office leave requests. Purchase requests, sample approvals, exception releases, payment applications, outsourcing confirmations, and quality feedback often cross teams, shifts, and informal coordination habits. If the system only follows an ideal flowchart, it will break on contact with daily operations.',
+          'That is why I do not like the “let’s launch OA first and optimize later” mindset. In many projects, launch only means old forms were copied into a new interface. The actual process complexity remains, but users now carry extra system friction on top of it. People are not rejecting digitalization. They are choosing the tool that gets the work finished with less obstruction.',
+        ],
+        sections: [
+          {
+            title: 'Problem one: the system models the standard path, while the real work runs on exception paths',
+            paragraphs: [
+              'Many factory approval flows look clean at a high level, but daily execution is full of exceptions. A normal material purchase and an urgent replenishment request do not follow the same path. Advance payment, final payment, reimbursement adjustment, and after-sales compensation often require different handling as well. If the system only supports the ideal “main path,” users return to chat, calls, and paper the moment an exception appears.',
+              'That is what I mean by shell development. The project copies form fields into a screen without truly redesigning the workflow. The interface looks digital, but the operating model has not changed. Instead of replacing manual coordination, the system creates another layer of explanation and re-entry work.',
+            ],
+            bullets: [
+              'Map frequent exceptions first instead of drawing only the cleanest main flow',
+              'If users constantly need manual notes to rescue a node, the workflow design is still incomplete',
+              'Digitalization means designing exception handling too, not only putting approvals online',
+            ],
+          },
+          {
+            title: 'Problem two: unclear role boundaries make the system feel heavy for everyone',
+            paragraphs: [
+              'Many OA projects mix together who initiates, who approves, who needs visibility, who executes, and who archives. On paper that sounds transparent. In practice it often means everyone clicks more, reads more, and explains more. For an office team that is annoying. For production, warehouse, or procurement staff, it becomes a direct reason to bypass the system.',
+              'A steadier design gives each role a lighter surface. Initiators care about complete submission, approvers care about enough context to decide, executors care about next actions and state change, and managers can look at summaries separately. If every role must open the same heavy interface, the product becomes both slower and less usable.',
+            ],
+            bullets: [
+              'Separate initiator, approver, executor, and archive responsibilities into lighter views',
+              'Do not push management reporting needs directly into frontline operating screens',
+              'In mobile and workshop contexts, removing one input step is often more valuable than adding another reporting field',
+            ],
+          },
+          {
+            title: 'Problem three: the real goal is not OA, but trying to heal organizational issues through software',
+            paragraphs: [
+              'Another common pattern is that management says they want OA, but what they really want is to fix unclear ownership, cross-team conflict, inconsistent data, and weak process decisions. Software can support those issues, but an approval platform cannot heal them by itself. If the project starts with the expectation that the system will also reorganize the company, the scope gets heavy very quickly.',
+              'A better move is to narrow the goal. Pick one painful, measurable, and standardizable loop first, such as purchase approval, payment request, or exception feedback handling. Let the system genuinely replace the old method in one scenario before trying to unify every collaboration path. OA is good at transparency and traceability. It is not a substitute for management judgment.',
+            ],
+          },
+        ],
+        takeawayTitle: 'Main takeaways',
+        takeaways: [
+          'Factory OA projects often stall because they only digitize forms instead of supporting real coordination work.',
+          'Frequent exceptions, role separation, and frontline operating burden determine whether the system will actually be used.',
+          'Getting one high-value workflow to stick is usually a better rollout strategy than moving every approval online at once.',
+        ],
+        ctaTitle: 'If you are planning an internal system for a factory, do not start with a giant all-in-one OA scope',
+        ctaDescription: 'Start by clarifying one blocked workflow, its exceptions, role boundaries, and data ownership. That usually improves the chance of real adoption far more than a larger feature list.',
       },
     },
   },
