@@ -34,6 +34,7 @@ export const siteConfig = {
   logoMarkPath: '/logo-mark.svg',
   ogImagePath: '/og-image.png',
   email: 'contact@sphrag.com',
+  displayPhone: '',
   xUrl: 'https://x.com/Junexus_indie',
   xHandle: '@Junexus_indie',
   wechat: 'jandan1990',

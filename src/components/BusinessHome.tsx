@@ -165,12 +165,16 @@ export default async function BusinessHome({ locale }: BusinessHomeProps) {
           label: t('contact.wechatLabel'),
           value: siteConfig.wechat,
         },
-        {
-          type: 'copy',
-          icon: 'phone',
-          label: t('contact.phoneLabel'),
-          value: siteConfig.displayPhone,
-        },
+        ...(siteConfig.displayPhone
+          ? [
+              {
+                type: 'copy' as const,
+                icon: 'phone' as const,
+                label: t('contact.phoneLabel'),
+                value: siteConfig.displayPhone,
+              },
+            ]
+          : []),
         {
           type: 'link',
           icon: 'mail',

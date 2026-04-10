@@ -54,7 +54,7 @@ export default function ServicePageTemplate({ locale, page, relatedPages, relate
       ? [{ label: labels.x, value: siteConfig.xHandle, href: siteConfig.xUrl }]
       : [
           { label: labels.wechat, value: siteConfig.wechat },
-          { label: labels.phone, value: siteConfig.displayPhone },
+          ...(siteConfig.displayPhone ? [{ label: labels.phone, value: siteConfig.displayPhone }] : []),
         ]
 
   return (

@@ -3,14 +3,16 @@ import './globals.css'
 import { cn } from '@/lib/utils'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
+import BaiduAnalytics from '@/components/BaiduAnalytics'
 import { GoogleAnalytics } from '@next/third-parties/google'
-import Script from 'next/script'
 import { getTranslations } from 'next-intl/server'
 import { notFound } from 'next/navigation'
 import { routing } from '@/i18n/routing'
 import { getAppLocale, getSiteMetadata } from '@/lib/site-config'
 
 const GA_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA_ID || 'G-40820HPGL6'
+const BAIDU_ANALYTICS_ID = process.env.NEXT_PUBLIC_BAIDU_ANALYTICS_ID || '51729155eab9e49fb67a35eb932da3a5'
+const BAIDU_ANALYTICS_MODE = (process.env.NEXT_PUBLIC_BAIDU_ANALYTICS_MODE || 'interaction') as 'off' | 'interaction' | 'immediate'
 
 export const metadata: Metadata = getSiteMetadata()
 
@@ -54,17 +56,7 @@ export default async function RootLayout({ children, params: { locale } }: { chi
       ) : (
         <>
           <GoogleAnalytics gaId={GA_MEASUREMENT_ID} />
-          <Script id="baidu-analytics">
-            {`
-              var _hmt = _hmt || [];
-              (function() {
-                var hm = document.createElement("script");
-                hm.src = "https://hm.baidu.com/hm.js?51729155eab9e49fb67a35eb932da3a5";
-                var s = document.getElementsByTagName("script")[0]; 
-                s.parentNode.insertBefore(hm, s);
-              })();
-            `}
-          </Script>
+          <BaiduAnalytics siteId={BAIDU_ANALYTICS_ID} mode={BAIDU_ANALYTICS_MODE} />
         </>
       )}
     </html>

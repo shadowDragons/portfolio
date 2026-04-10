@@ -49,4 +49,12 @@ const nextConfig = {
   },
 }
 
-module.exports = withNextIntl(nextConfig)
+const intlConfig = withNextIntl(nextConfig)
+
+module.exports = {
+  ...intlConfig,
+  env: {
+    ...intlConfig.env,
+    _next_intl_trailing_slash: intlConfig.trailingSlash ? 'true' : 'false',
+  },
+}
