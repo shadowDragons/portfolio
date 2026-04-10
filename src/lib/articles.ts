@@ -51,6 +51,7 @@ export const articleSlugs = [
   'company-website-case-page-without-cases',
   'manufacturing-erp-budget-mistakes',
   'factory-oa-shell-development',
+  'ai-writeback-boundaries-internal-systems',
 ] as const
 
 export type ArticleSlug = (typeof articleSlugs)[number]
@@ -5707,6 +5708,135 @@ const articleDefinitions: Record<ArticleSlug, ArticleDefinition> = {
         ],
         ctaTitle: 'If you are planning an internal system for a factory, do not start with a giant all-in-one OA scope',
         ctaDescription: 'Start by clarifying one blocked workflow, its exceptions, role boundaries, and data ownership. That usually improves the chance of real adoption far more than a larger feature list.',
+      },
+    },
+  },
+
+  'ai-writeback-boundaries-internal-systems': {
+    slug: 'ai-writeback-boundaries-internal-systems',
+    priority: {
+      zh: 0.67,
+      en: 0.52,
+    },
+    publishedAt: '2026-04-10',
+    readingMinutes: 7,
+    relatedServices: ['web-app-development'],
+    content: {
+      zh: {
+        navLabel: 'AI 接内部系统前，先定清写回边界',
+        categoryLabel: '企业系统',
+        metaTitle: 'AI 接内部系统时，哪些写回边界要先定清？｜致诚工作室',
+        metaDescription:
+          '企业想把 AI 接进内部系统，真正危险的常常不是模型效果，而是哪些动作允许 AI 写回、谁来兜底、失败怎么回滚。本文从真实交付角度拆解写回边界。',
+        keywords: ['AI 接内部系统', 'AI 写回边界', '企业系统自动化', 'AI 落地风险'],
+        eyebrow: 'Article',
+        heroTitle: 'AI 接内部系统时，哪些写回边界要先定清，后面才不会越接越难维护',
+        heroDescription:
+          '不少企业做 AI 项目，前半段都在聊模型、知识库、提示词，真正到上线前才发现最麻烦的不是“答得准不准”，而是 AI 到底能不能改数据、发通知、提单据、改状态、触发下一步流程。这个边界如果一开始没定清，后面系统会越来越像一个谁都不敢碰、谁也说不清责任的半自动黑箱。',
+        introTitle: 'AI 真正难落地的，往往不是接入，而是写回',
+        introParagraphs: [
+          '读知识、查资料、给建议，这类 AI 能力通常比较容易试点，因为错了最多是不采纳。但一旦它开始往内部系统写回内容，事情就完全变了：一条错误状态、一个错误审批建议、一次误发通知，都会直接影响业务流转。很多团队前期把注意力都放在“先接上模型”，等到要和 ERP、CRM、工单、审批流对接时，才发现风险控制根本没设计。',
+          '我现在更倾向于把 AI 项目分成两层：一层是“只读辅助”，另一层是“可执行动作”。前者重点是上下文质量和回答边界，后者重点则是权限、责任、可回滚和人工确认。两层不拆开，系统很容易在 demo 阶段看起来很聪明，到了正式运行阶段却没人敢真正放权。',
+        ],
+        sections: [
+          {
+            title: '第一条边界：先分清 AI 是“建议者”还是“执行者”',
+            paragraphs: [
+              '很多项目最容易犯的错，是把“AI 可以推荐下一步”直接滑成“AI 可以直接做下一步”。这中间差的不是一步技术实现，而是一整套责任设计。比如客服工单分类、采购异常判断、报价草稿生成，这些场景里 AI 给建议通常问题不大；但如果直接改工单优先级、直接发报价、直接把异常单转成处罚或补单，就已经进入执行层。',
+              '真正稳的做法，是把系统动作按风险分级。低风险动作可以半自动，中风险动作需要人工确认，高风险动作则只允许 AI 给建议不允许写回。先把这个分层写清楚，后面的接口设计、按钮文案、日志追踪和权限模型才不会一团乱。',
+            ],
+            bullets: [
+              '建议型输出和执行型输出必须分开设计',
+              '不要把“能调接口”误当成“适合自动执行”',
+              '风险分级先定，产品形态和交互才能稳',
+            ],
+          },
+          {
+            title: '第二条边界：所有写回动作，都要能追到“是谁批准的”',
+            paragraphs: [
+              '只要 AI 会往系统里写数据，就不能只记“模型返回了什么”，还要记“最后是谁让它生效的”。很多团队会做操作日志，但日志里只有一条“AI 已执行”，这其实不够。真正出问题时，业务方要问的是：这是系统自动执行的，还是某个角色确认后执行的？确认时看到了哪些上下文？为什么会通过？',
+              '这也是为什么我不建议一开始就追求全自动闭环。与其上线一个责任模糊的自动系统，不如先做成“AI 预填 + 人工确认 + 留痕执行”。这听起来没那么炫，但更适合企业环境。因为企业系统不是聊天窗口，很多动作最后要落到账务、库存、客户记录和审批责任上。',
+            ],
+            bullets: [
+              '日志里要区分 AI 建议、人工确认、系统落库三个时点',
+              '关键动作需要记录操作者、审批者和触发上下文',
+              '企业内部系统优先要的是责任清晰，不是自动化表演',
+            ],
+          },
+          {
+            title: '第三条边界：失败回滚和人工兜底，要在第一版就设计进去',
+            paragraphs: [
+              '很多 AI 项目一开始都默认“执行成功”是主路径，却很少认真设计“执行失败怎么办”。比如 AI 自动整理客户信息后写进 CRM，如果字段映射错了怎么办？AI 自动生成采购建议后推送给供应链，如果数据口径过期怎么办？AI 自动改工单状态后触发了别的流程，发现判断错了还能不能撤回？这些问题不在第二阶段，而在第一版就该想清楚。',
+              '我一般会要求团队至少回答三件事：写错了能不能撤，撤了之后谁补，系统怎么提示异常。如果这三件事回答不出来，那就说明这个动作还不适合交给 AI 直接写回。不是因为模型不够先进，而是系统还没有准备好承担错误成本。',
+            ],
+          },
+        ],
+        takeawayTitle: '这篇文章的重点',
+        takeaways: [
+          'AI 接内部系统时，最大风险往往不是回答效果，而是写回动作的责任和边界不清。',
+          '建议型与执行型动作必须分层，高风险动作不要一开始就放给 AI 自动执行。',
+          '日志、审批、回滚和人工兜底，应该和接口一起设计，而不是上线后再补。',
+        ],
+        ctaTitle: '如果你准备把 AI 接进企业系统，先别急着追求全自动',
+        ctaDescription: '先把建议、确认、执行、回滚四层边界拆清，再决定哪些动作适合写回，项目会比直接追求“智能闭环”稳得多。',
+      },
+      en: {
+        navLabel: 'Define AI Write-back Boundaries First',
+        categoryLabel: 'Internal System',
+        metaTitle: 'When AI Connects to Internal Systems, Define Write-back Boundaries First | Zhicheng Studio',
+        metaDescription:
+          'The risky part of putting AI into internal systems is often not model quality but deciding what AI may write back, who approves it, and how errors are rolled back. This article explains the practical boundaries.',
+        keywords: ['AI internal systems', 'AI write-back boundaries', 'enterprise automation', 'AI deployment risk'],
+        eyebrow: 'Article',
+        heroTitle: 'When AI connects to internal systems, define write-back boundaries first or maintenance gets harder fast',
+        heroDescription:
+          'Many teams spend the early part of an AI project talking about models, prompts, and knowledge bases. The real trouble appears later: can AI change records, send notifications, create tickets, update status, or trigger the next workflow step? If that boundary is unclear from the start, the system slowly becomes a half-automated black box that nobody fully trusts and nobody wants to own.',
+        introTitle: 'The harder part of AI adoption is often not access, but write-back',
+        introParagraphs: [
+          'Reading information, summarizing documents, and giving suggestions are usually easier pilot scenarios because a wrong answer can simply be ignored. The moment AI starts writing into internal systems, the risk changes completely. A wrong status update, a bad approval suggestion, or an accidental notification can directly affect business operations. Many teams focus on “connecting the model first” and only discover later that their ERP, CRM, ticketing, or approval flow has no real safety design around AI actions.',
+          'I now prefer splitting AI projects into two layers: read-only assistance and executable actions. The first layer depends on context quality and answer boundaries. The second depends on permissions, ownership, rollback, and human confirmation. If those layers are blurred together, the demo looks smart while the production system remains something no one is comfortable trusting.',
+        ],
+        sections: [
+          {
+            title: 'Boundary one: decide whether AI is an adviser or an executor',
+            paragraphs: [
+              'A common mistake is to slide from “AI can recommend the next step” into “AI can perform the next step.” That gap is not just a small technical step. It requires a whole responsibility model. In scenarios like ticket classification, purchase anomaly review, or quotation drafting, AI advice is often useful. But directly changing ticket priority, sending a quotation, or turning an anomaly into a downstream business action crosses into execution.',
+              'A steadier approach is to classify system actions by risk. Low-risk actions may be semi-automated. Medium-risk actions may require explicit human confirmation. High-risk actions should stay in recommendation mode only. Once that classification is written down, interface design, button language, logging, and permissions become much easier to keep consistent.',
+            ],
+            bullets: [
+              'Design recommendation output and execution output as separate layers',
+              'Do not confuse “the API can do it” with “the workflow should automate it”',
+              'Risk classification should come before interface and automation design',
+            ],
+          },
+          {
+            title: 'Boundary two: every write-back needs a clear approval trail',
+            paragraphs: [
+              'If AI writes into business systems, it is not enough to log only what the model returned. The system also needs to record who allowed that result to take effect. Many teams build operation logs, but the log simply says “AI executed.” That is too vague. When something goes wrong, the business team wants to know whether the action was automatic, which role confirmed it, what context they saw, and why the system allowed it to proceed.',
+              'That is also why I do not recommend chasing full automation too early. A workflow like “AI prefill + human confirmation + traceable execution” sounds less flashy, but it fits enterprise reality much better. Internal systems are not chat demos. Their actions land in accounting records, inventory state, customer history, and approval responsibility.',
+            ],
+            bullets: [
+              'Logs should distinguish AI recommendation, human confirmation, and database write-back as separate moments',
+              'Critical actions should record operator, approver, and triggering context',
+              'Enterprise systems need clear accountability before they need impressive automation',
+            ],
+          },
+          {
+            title: 'Boundary three: rollback and manual fallback should exist in version one',
+            paragraphs: [
+              'Many AI projects assume success as the main path and barely design for failure. But what happens if AI writes wrong customer data into CRM because a field mapping was off? What if an AI-generated purchase recommendation is pushed downstream using stale data definitions? What if an AI-updated ticket status triggers another process and later turns out to be wrong? Those questions do not belong to a later phase. They belong to the first release.',
+              'I usually ask teams to answer three things before allowing direct write-back: can the action be reversed, who repairs it after reversal, and how does the system surface the exception? If those answers are unclear, the action is not ready for direct AI execution yet. That is usually not a model problem. It is a systems design problem.',
+            ],
+          },
+        ],
+        takeawayTitle: 'Main takeaways',
+        takeaways: [
+          'In internal systems, the biggest AI risk is often unclear responsibility around write-back actions, not model quality alone.',
+          'Recommendation and execution should be separated, and high-risk actions should not be automated from day one.',
+          'Logging, approval, rollback, and manual fallback should be designed together with the integration, not patched in after launch.',
+        ],
+        ctaTitle: 'If you plan to connect AI into an enterprise system, do not rush into full automation',
+        ctaDescription: 'Split recommendation, confirmation, execution, and rollback into explicit layers first. That usually leads to a much steadier AI rollout than chasing an “intelligent closed loop” too early.',
       },
     },
   },
