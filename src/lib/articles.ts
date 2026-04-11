@@ -52,6 +52,7 @@ export const articleSlugs = [
   'manufacturing-erp-budget-mistakes',
   'factory-oa-shell-development',
   'ai-writeback-boundaries-internal-systems',
+  'legacy-system-data-migration-planning',
 ] as const
 
 export type ArticleSlug = (typeof articleSlugs)[number]
@@ -5837,6 +5838,134 @@ const articleDefinitions: Record<ArticleSlug, ArticleDefinition> = {
         ],
         ctaTitle: 'If you plan to connect AI into an enterprise system, do not rush into full automation',
         ctaDescription: 'Split recommendation, confirmation, execution, and rollback into explicit layers first. That usually leads to a much steadier AI rollout than chasing an “intelligent closed loop” too early.',
+      },
+    },
+  },
+  'legacy-system-data-migration-planning': {
+    slug: 'legacy-system-data-migration-planning',
+    priority: {
+      zh: 0.7,
+      en: 0.52,
+    },
+    publishedAt: '2026-04-11',
+    readingMinutes: 7,
+    relatedServices: ['web-app-development'],
+    content: {
+      zh: {
+        navLabel: '旧系统迁移数据前，最该先确认什么',
+        categoryLabel: '系统迁移',
+        metaTitle: '旧系统迁移数据前，最该先确认什么？更稳的数据迁移判断方法｜致诚工作室',
+        metaDescription:
+          '旧系统迁移最容易出问题的，往往不是脚本本身，而是口径、脏数据、回滚方案和切换节奏没先定清。本文从真实交付视角拆解更稳的数据迁移判断方法。',
+        keywords: ['旧系统数据迁移', '系统迁移方案', '数据迁移风险', '企业系统升级'],
+        eyebrow: 'Article',
+        heroTitle: '旧系统迁移数据前，最该先确认的，通常不是“怎么导”',
+        heroDescription:
+          '很多团队一提旧系统升级，就先开始讨论导表、写脚本、跑校验。可真正容易翻车的地方，往往不是迁移工具选得对不对，而是数据口径、脏数据边界、业务停机窗口和回滚方案没有先说清楚。',
+        introTitle: '为什么很多数据迁移不是技术难，而是前面判断没做好',
+        introParagraphs: [
+          '我这几年看过不少企业系统升级项目，最后最折腾人的环节，通常都不是新系统开发，而是旧数据迁移。因为开发阶段的问题大多还能在测试环境里暴露，但数据迁移一旦进入真实切换，面对的就是历史脏数据、业务连续性和责任边界。',
+          '所以数据迁移这件事，我一般不建议一上来就问“怎么迁最快”，而是先确认这次到底迁什么、哪些必须保留、哪些可以清洗、哪些需要人工兜底。前面这些判断没做，后面的脚本越快，风险反而越大。',
+        ],
+        sections: [
+          {
+            title: '先确认这次迁移的目标，不是所有旧数据都值得原样搬走',
+            paragraphs: [
+              '很多项目的问题，是默认“旧系统里有什么，新系统就全部搬过去”。但真实情况往往不是这样。有些数据只是历史痕迹，有些字段已经没人再用，有些结构本身就是旧流程遗留下来的产物。',
+              '如果不先分清核心业务数据、统计类数据、归档类数据和可放弃数据，迁移范围就会无限膨胀，最后项目时间大半都花在“把没必要的东西也迁过去”。',
+            ],
+            bullets: [
+              '先区分必须在线延续的数据和只需归档的数据',
+              '确认哪些字段要继续可编辑，哪些只做历史展示',
+              '不要默认旧表结构就是新系统的数据模型',
+            ],
+          },
+          {
+            title: '真正难的通常不是导出，而是口径和脏数据',
+            paragraphs: [
+              '旧系统跑了很多年之后，最常见的问题不是“导不出来”，而是同一个字段在不同部门理解不一样，或者历史上已经被手工修补过很多次。比如状态值含义变化、时间字段缺失、主键重复、联系人信息不完整，这些都很常见。',
+              '所以迁移前一定要先做一次数据体检。不是简单看行数，而是要抽样看异常值、空值、重复值、状态映射和跨表关联。如果这些问题没在迁移前暴露，等到上线当天才发现，基本就是一边救火一边背锅。',
+            ],
+          },
+          {
+            title: '迁移方案里必须提前设计回滚和人工兜底',
+            paragraphs: [
+              '很多人做迁移方案时，只写“怎么迁成功”，却不写“迁坏了怎么办”。但系统切换真正让人紧张的，从来不是理想路径，而是异常路径。',
+              '更稳的方案通常会提前约定：切换窗口多长、回滚条件是什么、哪些模块先切、哪些数据允许延后补录、哪些操作需要人工复核。这样即使上线当晚出现问题，也不会一下子把业务全部锁死。',
+            ],
+            bullets: [
+              '先定义回滚触发条件，而不是出问题后临时讨论',
+              '高风险模块分批切换，不要一次性全量替换',
+              '给业务团队预留人工核对和补录的缓冲方案',
+            ],
+          },
+        ],
+        takeawayTitle: '这篇文章的重点',
+        takeaways: [
+          '数据迁移前最重要的不是脚本速度，而是先把范围、口径和保留策略确认清楚。',
+          '旧系统最危险的问题通常是脏数据和历史口径不一致，不是“导不出来”。',
+          '回滚方案、人工兜底和切换节奏，应该和迁移脚本一起设计，而不是最后补。',
+        ],
+        ctaTitle: '如果你在做旧系统升级，别把数据迁移留到最后再想',
+        ctaDescription: '先把保留范围、异常数据、切换窗口和回滚边界说清楚，项目通常会比“开发完再统一迁”稳得多。',
+      },
+      en: {
+        navLabel: 'What to Confirm Before Legacy Data Migration',
+        categoryLabel: 'Migration',
+        metaTitle: 'What to Confirm Before Migrating Legacy System Data | Zhicheng Studio',
+        metaDescription:
+          'Legacy data migration fails more often because of unclear rules, dirty data, and weak rollback planning than because of scripting alone. This article explains a steadier migration approach.',
+        keywords: ['legacy data migration', 'system migration planning', 'data migration risk', 'enterprise system upgrade'],
+        eyebrow: 'Article',
+        heroTitle: 'Before migrating legacy data, the first question is usually not “how do we export it?”',
+        heroDescription:
+          'In many upgrade projects, migration risk comes less from the toolchain and more from unclear data scope, inconsistent business meaning, dirty records, and missing rollback preparation.',
+        introTitle: 'Why migration problems are often decision problems before they become technical problems',
+        introParagraphs: [
+          'In enterprise projects, building the new system is often easier than moving the old data into it safely. Development issues can usually be tested early, but migration touches real history, real operations, and real accountability.',
+          'That is why a stronger migration conversation starts with scope, retention rules, cleanup decisions, and fallback paths instead of jumping straight into scripts and import speed.',
+        ],
+        sections: [
+          {
+            title: 'Start by defining the real migration target',
+            paragraphs: [
+              'A common mistake is assuming that everything in the old system must be moved exactly as it is. In reality, some data is still operationally critical, some is only historical, and some exists because of old process baggage that should not survive into the new system.',
+              'If the target scope is not clarified first, the migration expands unnecessarily and the team spends too much effort preserving low-value history in production shape.',
+            ],
+            bullets: [
+              'Separate operational data from archive-only data',
+              'Decide which fields remain editable and which become read-only history',
+              'Do not assume the old table design should define the new system model',
+            ],
+          },
+          {
+            title: 'The hard part is often data meaning, not extraction',
+            paragraphs: [
+              'Older systems usually contain inconsistent field usage, patched states, missing timestamps, duplicate identifiers, and broken relationships accumulated over time. The export itself may be easy while the interpretation is messy.',
+              'That is why migration should include a real data audit: abnormal values, null patterns, duplicates, state mapping, and cross-table integrity. Without that work, the biggest surprises often appear on the cutover night itself.',
+            ],
+          },
+          {
+            title: 'Rollback and manual fallback should be designed early',
+            paragraphs: [
+              'Migration plans often describe only the happy path. A steadier plan also defines what happens if validation fails, key modules behave unexpectedly, or business teams find critical mismatches after cutover.',
+              'Rollback conditions, phased switching, temporary manual handling, and post-cutover verification should be part of the plan from the beginning. That reduces pressure and keeps one bad batch from turning into a full operational freeze.',
+            ],
+            bullets: [
+              'Define rollback triggers before launch day',
+              'Switch higher-risk modules in phases instead of all at once',
+              'Keep room for manual verification and corrective entry where needed',
+            ],
+          },
+        ],
+        takeawayTitle: 'Main takeaways',
+        takeaways: [
+          'Migration success depends heavily on scope, meaning, and retention rules, not only on tooling.',
+          'Dirty data and inconsistent business interpretation are often bigger risks than the export process itself.',
+          'Rollback, phased cutover, and manual fallback should be planned alongside the migration logic.',
+        ],
+        ctaTitle: 'If you are upgrading a legacy system, do not leave migration planning to the very end',
+        ctaDescription: 'Clarifying data scope, cleanup rules, cutover windows, and rollback boundaries early usually leads to a much steadier system upgrade.',
       },
     },
   },
