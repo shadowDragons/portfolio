@@ -72,3 +72,28 @@ Tracks Baidu URL submissions for `https://sphrag.com` Chinese pages.
 
 ### Failed
 - none
+
+## 2026-04-12 13:32 / Baidu URL push
+
+- batch target: 10
+- attempted: 10
+- success: 10
+- failed: 0
+- total submitted: 30
+- remaining: 27
+- stop reason: completed batch
+
+### Success
+- https://sphrag.com/zh/blog/foreign-trade-website-navigation-planning	200	{"remain":9,"success":1}
+- https://sphrag.com/zh/blog/website-redesign-seo-migration	200	{"remain":8,"success":1}
+- https://sphrag.com/zh/blog/internal-system-refactor-or-rebuild	200	{"remain":7,"success":1}
+- https://sphrag.com/zh/blog/company-website-homepage-structure	200	{"remain":6,"success":1}
+- https://sphrag.com/zh/blog/company-website-faq-planning	200	{"remain":5,"success":1}
+- https://sphrag.com/zh/blog/foreign-trade-website-product-pages	200	{"remain":4,"success":1}
+- https://sphrag.com/zh/blog/foreign-trade-website-trust-signals	200	{"remain":3,"success":1}
+- https://sphrag.com/zh/blog/manufacturing-company-website-planning	200	{"remain":2,"success":1}
+- https://sphrag.com/zh/blog/service-business-website-lead-generation	200	{"remain":1,"success":1}
+- https://sphrag.com/zh/blog/saas-website-page-structure	200	{"remain":0,"success":1}
+
+### Failed
+- none
