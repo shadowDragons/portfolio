@@ -51,6 +51,9 @@ export const articleSlugs = [
   'company-website-case-page-without-cases',
   'manufacturing-erp-budget-mistakes',
   'factory-oa-shell-development',
+  'ai-writeback-boundaries-internal-systems',
+  'legacy-system-data-migration-planning',
+  'ai-first-step-in-existing-systems',
 ] as const
 
 export type ArticleSlug = (typeof articleSlugs)[number]
@@ -5707,6 +5710,391 @@ const articleDefinitions: Record<ArticleSlug, ArticleDefinition> = {
         ],
         ctaTitle: 'If you are planning an internal system for a factory, do not start with a giant all-in-one OA scope',
         ctaDescription: 'Start by clarifying one blocked workflow, its exceptions, role boundaries, and data ownership. That usually improves the chance of real adoption far more than a larger feature list.',
+      },
+    },
+  },
+
+  'ai-writeback-boundaries-internal-systems': {
+    slug: 'ai-writeback-boundaries-internal-systems',
+    priority: {
+      zh: 0.67,
+      en: 0.52,
+    },
+    publishedAt: '2026-04-10',
+    readingMinutes: 7,
+    relatedServices: ['web-app-development'],
+    content: {
+      zh: {
+        navLabel: 'AI 接内部系统前，先定清写回边界',
+        categoryLabel: '企业系统',
+        metaTitle: 'AI 接内部系统时，哪些写回边界要先定清？｜致诚工作室',
+        metaDescription:
+          '企业想把 AI 接进内部系统，真正危险的常常不是模型效果，而是哪些动作允许 AI 写回、谁来兜底、失败怎么回滚。本文从真实交付角度拆解写回边界。',
+        keywords: ['AI 接内部系统', 'AI 写回边界', '企业系统自动化', 'AI 落地风险'],
+        eyebrow: 'Article',
+        heroTitle: 'AI 接内部系统时，哪些写回边界要先定清，后面才不会越接越难维护',
+        heroDescription:
+          '不少企业做 AI 项目，前半段都在聊模型、知识库、提示词，真正到上线前才发现最麻烦的不是“答得准不准”，而是 AI 到底能不能改数据、发通知、提单据、改状态、触发下一步流程。这个边界如果一开始没定清，后面系统会越来越像一个谁都不敢碰、谁也说不清责任的半自动黑箱。',
+        introTitle: 'AI 真正难落地的，往往不是接入，而是写回',
+        introParagraphs: [
+          '读知识、查资料、给建议，这类 AI 能力通常比较容易试点，因为错了最多是不采纳。但一旦它开始往内部系统写回内容，事情就完全变了：一条错误状态、一个错误审批建议、一次误发通知，都会直接影响业务流转。很多团队前期把注意力都放在“先接上模型”，等到要和 ERP、CRM、工单、审批流对接时，才发现风险控制根本没设计。',
+          '我现在更倾向于把 AI 项目分成两层：一层是“只读辅助”，另一层是“可执行动作”。前者重点是上下文质量和回答边界，后者重点则是权限、责任、可回滚和人工确认。两层不拆开，系统很容易在 demo 阶段看起来很聪明，到了正式运行阶段却没人敢真正放权。',
+        ],
+        sections: [
+          {
+            title: '第一条边界：先分清 AI 是“建议者”还是“执行者”',
+            paragraphs: [
+              '很多项目最容易犯的错，是把“AI 可以推荐下一步”直接滑成“AI 可以直接做下一步”。这中间差的不是一步技术实现，而是一整套责任设计。比如客服工单分类、采购异常判断、报价草稿生成，这些场景里 AI 给建议通常问题不大；但如果直接改工单优先级、直接发报价、直接把异常单转成处罚或补单，就已经进入执行层。',
+              '真正稳的做法，是把系统动作按风险分级。低风险动作可以半自动，中风险动作需要人工确认，高风险动作则只允许 AI 给建议不允许写回。先把这个分层写清楚，后面的接口设计、按钮文案、日志追踪和权限模型才不会一团乱。',
+            ],
+            bullets: [
+              '建议型输出和执行型输出必须分开设计',
+              '不要把“能调接口”误当成“适合自动执行”',
+              '风险分级先定，产品形态和交互才能稳',
+            ],
+          },
+          {
+            title: '第二条边界：所有写回动作，都要能追到“是谁批准的”',
+            paragraphs: [
+              '只要 AI 会往系统里写数据，就不能只记“模型返回了什么”，还要记“最后是谁让它生效的”。很多团队会做操作日志，但日志里只有一条“AI 已执行”，这其实不够。真正出问题时，业务方要问的是：这是系统自动执行的，还是某个角色确认后执行的？确认时看到了哪些上下文？为什么会通过？',
+              '这也是为什么我不建议一开始就追求全自动闭环。与其上线一个责任模糊的自动系统，不如先做成“AI 预填 + 人工确认 + 留痕执行”。这听起来没那么炫，但更适合企业环境。因为企业系统不是聊天窗口，很多动作最后要落到账务、库存、客户记录和审批责任上。',
+            ],
+            bullets: [
+              '日志里要区分 AI 建议、人工确认、系统落库三个时点',
+              '关键动作需要记录操作者、审批者和触发上下文',
+              '企业内部系统优先要的是责任清晰，不是自动化表演',
+            ],
+          },
+          {
+            title: '第三条边界：失败回滚和人工兜底，要在第一版就设计进去',
+            paragraphs: [
+              '很多 AI 项目一开始都默认“执行成功”是主路径，却很少认真设计“执行失败怎么办”。比如 AI 自动整理客户信息后写进 CRM，如果字段映射错了怎么办？AI 自动生成采购建议后推送给供应链，如果数据口径过期怎么办？AI 自动改工单状态后触发了别的流程，发现判断错了还能不能撤回？这些问题不在第二阶段，而在第一版就该想清楚。',
+              '我一般会要求团队至少回答三件事：写错了能不能撤，撤了之后谁补，系统怎么提示异常。如果这三件事回答不出来，那就说明这个动作还不适合交给 AI 直接写回。不是因为模型不够先进，而是系统还没有准备好承担错误成本。',
+            ],
+          },
+        ],
+        takeawayTitle: '这篇文章的重点',
+        takeaways: [
+          'AI 接内部系统时，最大风险往往不是回答效果，而是写回动作的责任和边界不清。',
+          '建议型与执行型动作必须分层，高风险动作不要一开始就放给 AI 自动执行。',
+          '日志、审批、回滚和人工兜底，应该和接口一起设计，而不是上线后再补。',
+        ],
+        ctaTitle: '如果你准备把 AI 接进企业系统，先别急着追求全自动',
+        ctaDescription: '先把建议、确认、执行、回滚四层边界拆清，再决定哪些动作适合写回，项目会比直接追求“智能闭环”稳得多。',
+      },
+      en: {
+        navLabel: 'Define AI Write-back Boundaries First',
+        categoryLabel: 'Internal System',
+        metaTitle: 'When AI Connects to Internal Systems, Define Write-back Boundaries First | Zhicheng Studio',
+        metaDescription:
+          'The risky part of putting AI into internal systems is often not model quality but deciding what AI may write back, who approves it, and how errors are rolled back. This article explains the practical boundaries.',
+        keywords: ['AI internal systems', 'AI write-back boundaries', 'enterprise automation', 'AI deployment risk'],
+        eyebrow: 'Article',
+        heroTitle: 'When AI connects to internal systems, define write-back boundaries first or maintenance gets harder fast',
+        heroDescription:
+          'Many teams spend the early part of an AI project talking about models, prompts, and knowledge bases. The real trouble appears later: can AI change records, send notifications, create tickets, update status, or trigger the next workflow step? If that boundary is unclear from the start, the system slowly becomes a half-automated black box that nobody fully trusts and nobody wants to own.',
+        introTitle: 'The harder part of AI adoption is often not access, but write-back',
+        introParagraphs: [
+          'Reading information, summarizing documents, and giving suggestions are usually easier pilot scenarios because a wrong answer can simply be ignored. The moment AI starts writing into internal systems, the risk changes completely. A wrong status update, a bad approval suggestion, or an accidental notification can directly affect business operations. Many teams focus on “connecting the model first” and only discover later that their ERP, CRM, ticketing, or approval flow has no real safety design around AI actions.',
+          'I now prefer splitting AI projects into two layers: read-only assistance and executable actions. The first layer depends on context quality and answer boundaries. The second depends on permissions, ownership, rollback, and human confirmation. If those layers are blurred together, the demo looks smart while the production system remains something no one is comfortable trusting.',
+        ],
+        sections: [
+          {
+            title: 'Boundary one: decide whether AI is an adviser or an executor',
+            paragraphs: [
+              'A common mistake is to slide from “AI can recommend the next step” into “AI can perform the next step.” That gap is not just a small technical step. It requires a whole responsibility model. In scenarios like ticket classification, purchase anomaly review, or quotation drafting, AI advice is often useful. But directly changing ticket priority, sending a quotation, or turning an anomaly into a downstream business action crosses into execution.',
+              'A steadier approach is to classify system actions by risk. Low-risk actions may be semi-automated. Medium-risk actions may require explicit human confirmation. High-risk actions should stay in recommendation mode only. Once that classification is written down, interface design, button language, logging, and permissions become much easier to keep consistent.',
+            ],
+            bullets: [
+              'Design recommendation output and execution output as separate layers',
+              'Do not confuse “the API can do it” with “the workflow should automate it”',
+              'Risk classification should come before interface and automation design',
+            ],
+          },
+          {
+            title: 'Boundary two: every write-back needs a clear approval trail',
+            paragraphs: [
+              'If AI writes into business systems, it is not enough to log only what the model returned. The system also needs to record who allowed that result to take effect. Many teams build operation logs, but the log simply says “AI executed.” That is too vague. When something goes wrong, the business team wants to know whether the action was automatic, which role confirmed it, what context they saw, and why the system allowed it to proceed.',
+              'That is also why I do not recommend chasing full automation too early. A workflow like “AI prefill + human confirmation + traceable execution” sounds less flashy, but it fits enterprise reality much better. Internal systems are not chat demos. Their actions land in accounting records, inventory state, customer history, and approval responsibility.',
+            ],
+            bullets: [
+              'Logs should distinguish AI recommendation, human confirmation, and database write-back as separate moments',
+              'Critical actions should record operator, approver, and triggering context',
+              'Enterprise systems need clear accountability before they need impressive automation',
+            ],
+          },
+          {
+            title: 'Boundary three: rollback and manual fallback should exist in version one',
+            paragraphs: [
+              'Many AI projects assume success as the main path and barely design for failure. But what happens if AI writes wrong customer data into CRM because a field mapping was off? What if an AI-generated purchase recommendation is pushed downstream using stale data definitions? What if an AI-updated ticket status triggers another process and later turns out to be wrong? Those questions do not belong to a later phase. They belong to the first release.',
+              'I usually ask teams to answer three things before allowing direct write-back: can the action be reversed, who repairs it after reversal, and how does the system surface the exception? If those answers are unclear, the action is not ready for direct AI execution yet. That is usually not a model problem. It is a systems design problem.',
+            ],
+          },
+        ],
+        takeawayTitle: 'Main takeaways',
+        takeaways: [
+          'In internal systems, the biggest AI risk is often unclear responsibility around write-back actions, not model quality alone.',
+          'Recommendation and execution should be separated, and high-risk actions should not be automated from day one.',
+          'Logging, approval, rollback, and manual fallback should be designed together with the integration, not patched in after launch.',
+        ],
+        ctaTitle: 'If you plan to connect AI into an enterprise system, do not rush into full automation',
+        ctaDescription: 'Split recommendation, confirmation, execution, and rollback into explicit layers first. That usually leads to a much steadier AI rollout than chasing an “intelligent closed loop” too early.',
+      },
+    },
+  },
+  'legacy-system-data-migration-planning': {
+    slug: 'legacy-system-data-migration-planning',
+    priority: {
+      zh: 0.7,
+      en: 0.52,
+    },
+    publishedAt: '2026-04-11',
+    readingMinutes: 7,
+    relatedServices: ['web-app-development'],
+    content: {
+      zh: {
+        navLabel: '旧系统迁移数据前，最该先确认什么',
+        categoryLabel: '系统迁移',
+        metaTitle: '旧系统迁移数据前，最该先确认什么？更稳的数据迁移判断方法｜致诚工作室',
+        metaDescription:
+          '旧系统迁移最容易出问题的，往往不是脚本本身，而是口径、脏数据、回滚方案和切换节奏没先定清。本文从真实交付视角拆解更稳的数据迁移判断方法。',
+        keywords: ['旧系统数据迁移', '系统迁移方案', '数据迁移风险', '企业系统升级'],
+        eyebrow: 'Article',
+        heroTitle: '旧系统迁移数据前，最该先确认的，通常不是“怎么导”',
+        heroDescription:
+          '很多团队一提旧系统升级，就先开始讨论导表、写脚本、跑校验。可真正容易翻车的地方，往往不是迁移工具选得对不对，而是数据口径、脏数据边界、业务停机窗口和回滚方案没有先说清楚。',
+        introTitle: '为什么很多数据迁移不是技术难，而是前面判断没做好',
+        introParagraphs: [
+          '我这几年看过不少企业系统升级项目，最后最折腾人的环节，通常都不是新系统开发，而是旧数据迁移。因为开发阶段的问题大多还能在测试环境里暴露，但数据迁移一旦进入真实切换，面对的就是历史脏数据、业务连续性和责任边界。',
+          '所以数据迁移这件事，我一般不建议一上来就问“怎么迁最快”，而是先确认这次到底迁什么、哪些必须保留、哪些可以清洗、哪些需要人工兜底。前面这些判断没做，后面的脚本越快，风险反而越大。',
+        ],
+        sections: [
+          {
+            title: '先确认这次迁移的目标，不是所有旧数据都值得原样搬走',
+            paragraphs: [
+              '很多项目的问题，是默认“旧系统里有什么，新系统就全部搬过去”。但真实情况往往不是这样。有些数据只是历史痕迹，有些字段已经没人再用，有些结构本身就是旧流程遗留下来的产物。',
+              '如果不先分清核心业务数据、统计类数据、归档类数据和可放弃数据，迁移范围就会无限膨胀，最后项目时间大半都花在“把没必要的东西也迁过去”。',
+            ],
+            bullets: [
+              '先区分必须在线延续的数据和只需归档的数据',
+              '确认哪些字段要继续可编辑，哪些只做历史展示',
+              '不要默认旧表结构就是新系统的数据模型',
+            ],
+          },
+          {
+            title: '真正难的通常不是导出，而是口径和脏数据',
+            paragraphs: [
+              '旧系统跑了很多年之后，最常见的问题不是“导不出来”，而是同一个字段在不同部门理解不一样，或者历史上已经被手工修补过很多次。比如状态值含义变化、时间字段缺失、主键重复、联系人信息不完整，这些都很常见。',
+              '所以迁移前一定要先做一次数据体检。不是简单看行数，而是要抽样看异常值、空值、重复值、状态映射和跨表关联。如果这些问题没在迁移前暴露，等到上线当天才发现，基本就是一边救火一边背锅。',
+            ],
+          },
+          {
+            title: '迁移方案里必须提前设计回滚和人工兜底',
+            paragraphs: [
+              '很多人做迁移方案时，只写“怎么迁成功”，却不写“迁坏了怎么办”。但系统切换真正让人紧张的，从来不是理想路径，而是异常路径。',
+              '更稳的方案通常会提前约定：切换窗口多长、回滚条件是什么、哪些模块先切、哪些数据允许延后补录、哪些操作需要人工复核。这样即使上线当晚出现问题，也不会一下子把业务全部锁死。',
+            ],
+            bullets: [
+              '先定义回滚触发条件，而不是出问题后临时讨论',
+              '高风险模块分批切换，不要一次性全量替换',
+              '给业务团队预留人工核对和补录的缓冲方案',
+            ],
+          },
+        ],
+        takeawayTitle: '这篇文章的重点',
+        takeaways: [
+          '数据迁移前最重要的不是脚本速度，而是先把范围、口径和保留策略确认清楚。',
+          '旧系统最危险的问题通常是脏数据和历史口径不一致，不是“导不出来”。',
+          '回滚方案、人工兜底和切换节奏，应该和迁移脚本一起设计，而不是最后补。',
+        ],
+        ctaTitle: '如果你在做旧系统升级，别把数据迁移留到最后再想',
+        ctaDescription: '先把保留范围、异常数据、切换窗口和回滚边界说清楚，项目通常会比“开发完再统一迁”稳得多。',
+      },
+      en: {
+        navLabel: 'What to Confirm Before Legacy Data Migration',
+        categoryLabel: 'Migration',
+        metaTitle: 'What to Confirm Before Migrating Legacy System Data | Zhicheng Studio',
+        metaDescription:
+          'Legacy data migration fails more often because of unclear rules, dirty data, and weak rollback planning than because of scripting alone. This article explains a steadier migration approach.',
+        keywords: ['legacy data migration', 'system migration planning', 'data migration risk', 'enterprise system upgrade'],
+        eyebrow: 'Article',
+        heroTitle: 'Before migrating legacy data, the first question is usually not “how do we export it?”',
+        heroDescription:
+          'In many upgrade projects, migration risk comes less from the toolchain and more from unclear data scope, inconsistent business meaning, dirty records, and missing rollback preparation.',
+        introTitle: 'Why migration problems are often decision problems before they become technical problems',
+        introParagraphs: [
+          'In enterprise projects, building the new system is often easier than moving the old data into it safely. Development issues can usually be tested early, but migration touches real history, real operations, and real accountability.',
+          'That is why a stronger migration conversation starts with scope, retention rules, cleanup decisions, and fallback paths instead of jumping straight into scripts and import speed.',
+        ],
+        sections: [
+          {
+            title: 'Start by defining the real migration target',
+            paragraphs: [
+              'A common mistake is assuming that everything in the old system must be moved exactly as it is. In reality, some data is still operationally critical, some is only historical, and some exists because of old process baggage that should not survive into the new system.',
+              'If the target scope is not clarified first, the migration expands unnecessarily and the team spends too much effort preserving low-value history in production shape.',
+            ],
+            bullets: [
+              'Separate operational data from archive-only data',
+              'Decide which fields remain editable and which become read-only history',
+              'Do not assume the old table design should define the new system model',
+            ],
+          },
+          {
+            title: 'The hard part is often data meaning, not extraction',
+            paragraphs: [
+              'Older systems usually contain inconsistent field usage, patched states, missing timestamps, duplicate identifiers, and broken relationships accumulated over time. The export itself may be easy while the interpretation is messy.',
+              'That is why migration should include a real data audit: abnormal values, null patterns, duplicates, state mapping, and cross-table integrity. Without that work, the biggest surprises often appear on the cutover night itself.',
+            ],
+          },
+          {
+            title: 'Rollback and manual fallback should be designed early',
+            paragraphs: [
+              'Migration plans often describe only the happy path. A steadier plan also defines what happens if validation fails, key modules behave unexpectedly, or business teams find critical mismatches after cutover.',
+              'Rollback conditions, phased switching, temporary manual handling, and post-cutover verification should be part of the plan from the beginning. That reduces pressure and keeps one bad batch from turning into a full operational freeze.',
+            ],
+            bullets: [
+              'Define rollback triggers before launch day',
+              'Switch higher-risk modules in phases instead of all at once',
+              'Keep room for manual verification and corrective entry where needed',
+            ],
+          },
+        ],
+        takeawayTitle: 'Main takeaways',
+        takeaways: [
+          'Migration success depends heavily on scope, meaning, and retention rules, not only on tooling.',
+          'Dirty data and inconsistent business interpretation are often bigger risks than the export process itself.',
+          'Rollback, phased cutover, and manual fallback should be planned alongside the migration logic.',
+        ],
+        ctaTitle: 'If you are upgrading a legacy system, do not leave migration planning to the very end',
+        ctaDescription: 'Clarifying data scope, cleanup rules, cutover windows, and rollback boundaries early usually leads to a much steadier system upgrade.',
+      },
+    },
+  },
+  'ai-first-step-in-existing-systems': {
+    slug: 'ai-first-step-in-existing-systems',
+    priority: {
+      zh: 0.66,
+      en: 0.52,
+    },
+    publishedAt: '2026-04-12',
+    readingMinutes: 7,
+    relatedServices: ['web-app-development'],
+    content: {
+      zh: {
+        navLabel: '已有内部系统时，AI 第一站该嵌在哪',
+        categoryLabel: '企业系统',
+        metaTitle: '企业已经有内部系统时，AI 第一站最适合嵌在哪个环节？｜致诚工作室',
+        metaDescription:
+          '企业想把 AI 接进已有系统，第一站选错很容易做成演示项目。本文从真实交付角度拆解，哪些环节更适合先试、哪些不该一开始就碰。',
+        keywords: ['企业 AI 落地', 'AI 接内部系统', 'AI 试点场景', '企业系统自动化'],
+        eyebrow: 'Article',
+        heroTitle: '企业内部已经有系统时，AI 第一站最适合嵌在哪个环节，才不容易花冤枉钱',
+        heroDescription:
+          '很多企业一说要做 AI，第一反应不是先看哪条流程最卡，而是想把 AI 塞进一个最显眼的位置：首页、客服入口、老板驾驶舱、全员助手。这样做不一定错，但在真实交付里，第一站选错，最常见的结局就是 demo 很亮眼，日常没人用，后续也接不进核心业务。AI 要落地，第一步通常不是找最酷的位置，而是找最容易被验证、最容易闭环、又不会把责任做糊的那一段工作。',
+        introTitle: 'AI 第一站选哪里，决定项目是验证价值，还是只验证气氛',
+        introParagraphs: [
+          '如果企业内部已经有 ERP、CRM、工单、审批流、客服后台或知识库，AI 理论上能嵌的地方很多。但不是每个入口都适合做第一站。越靠近高风险决策、跨部门协同和正式写回，前期治理成本越高；越靠近重复整理、信息检索和标准化判断，越容易快速看见效果。',
+          '我现在更倾向于把“AI 第一站”理解成一个试点选择题，而不是产品想象题。目标不是一开始就让 AI 看起来无所不能，而是先找到一个既能节省人工时间、又不至于把权限和责任搞乱的环节。第一站选对，后面才有机会继续往深处接；选错，团队很容易得出“AI 不实用”的错误结论。',
+        ],
+        sections: [
+          {
+            title: '优先选“高重复、低风险、规则相对稳定”的环节，而不是最显眼的入口',
+            paragraphs: [
+              '最适合作为第一站的，通常不是对外展示型入口，而是内部那些重复度高、规则相对稳定、人工处理时间长但业务风险没那么高的工作。比如工单初分、资料归类、知识检索、标准回复草稿、销售跟进摘要、会议纪要整理、报价前资料预填，这些场景都比“让 AI 直接替你判断复杂业务”稳得多。',
+              '原因很简单：这类场景更容易定义好输入、输出和验收标准。做完以后，团队能很快判断到底节省了多少时间、减少了多少遗漏，而不是只凭主观印象觉得“它好像挺聪明”。项目第一阶段最怕的不是效果一般，而是根本没法衡量效果。',
+            ],
+            bullets: [
+              '先挑重复劳动重、规则稳定、结果可对照的环节',
+              '优先让 AI 帮人省时间，不要一开始就替人拍板',
+              '如果效果无法量化，项目很容易沦为演示型建设',
+            ],
+          },
+          {
+            title: '别急着碰“责任重、例外多、跨系统联动深”的链路',
+            paragraphs: [
+              '很多老板最感兴趣的，往往恰恰不是最适合先做的。比如 AI 直接审批、自动改订单状态、自动生成采购动作、自动触发财务流程，这些场景听起来最像“真智能”，但它们通常同时带着责任归属、例外分支、权限模型和回滚机制。第一版就上这些，团队很容易把大量时间花在兜底和解释上。',
+              '我的经验是，只要一个环节同时满足“写回正式数据、跨多个角色、出错代价高”这三个条件，就不应该作为第一站。不是不能做，而是应该放到第二阶段以后，等上下文质量、日志追踪、人工确认和回滚能力都跑顺了，再决定要不要加自动执行。',
+            ],
+            bullets: [
+              '正式写回、高风险判断、跨部门联动，不适合做 AI 第一站',
+              '第一阶段先解决“辅助得准”，再考虑“自动做事”',
+              '越是例外多的链路，越需要先有人类把边界讲明白',
+            ],
+          },
+          {
+            title: '最好的第一站，往往能顺手暴露数据和流程里的旧问题',
+            paragraphs: [
+              '一个好的 AI 试点，不只是让团队省几小时人工，更重要的是它会逼你看清系统里原本就存在的问题。比如知识库文档太乱、工单标签不统一、客户资料字段没人维护、历史流程没有标准状态，这些都不是 AI 带来的新麻烦，而是过去一直被人工兜着没暴露出来。',
+              '这也是为什么我更喜欢从“辅助型节点”切入。因为一旦在这些节点上跑起来，你会同时得到两类收获：一类是效率提升，另一类是对数据治理和流程标准化的真实反馈。这样第二阶段要不要继续投、该投在哪，判断就会比一开始拍脑袋稳得多。',
+            ],
+          },
+        ],
+        takeawayTitle: '这篇文章的重点',
+        takeaways: [
+          '企业已有内部系统时，AI 第一站更适合放在高重复、低风险、规则稳定的辅助环节。',
+          '正式写回、责任重、例外多的链路，通常不该在第一阶段就交给 AI。',
+          '好的 AI 试点不仅验证效率，也能顺手暴露数据和流程里的旧问题。',
+        ],
+        ctaTitle: '如果你准备把 AI 接进已有系统，先别急着做一个“万能入口”',
+        ctaDescription: '先挑一个可量化、可回看、可控风险的辅助节点试点，验证价值后再往审批、写回和跨系统联动延伸，会稳很多。',
+      },
+      en: {
+        navLabel: 'Where AI Should Start in Existing Systems',
+        categoryLabel: 'Internal System',
+        metaTitle: 'Where Should AI Start Inside an Existing Business System? | Zhicheng Studio',
+        metaDescription:
+          'When a company already has internal systems, the first AI insertion point matters more than most teams expect. This article explains where AI pilots usually work best and which workflows should wait.',
+        keywords: ['AI in internal systems', 'enterprise AI pilot', 'AI workflow automation', 'business system upgrade'],
+        eyebrow: 'Article',
+        heroTitle: 'When internal systems already exist, where should AI go first if you want real value instead of an expensive demo?',
+        heroDescription:
+          'When companies decide to “add AI,” the first instinct is often to place it somewhere highly visible: the homepage, a support entry, an executive dashboard, or a universal assistant. That is not always wrong, but in delivery work, a poor first insertion point usually leads to the same ending: an impressive demo, weak daily usage, and no credible path into core operations. The first move is rarely about the flashiest location. It is about choosing a workflow that can be validated, closed, and governed without making ownership fuzzy.',
+        introTitle: 'The first AI insertion point decides whether the project validates value or only validates excitement',
+        introParagraphs: [
+          'If a company already runs ERP, CRM, ticketing, approval flows, service back-office tools, or internal knowledge bases, AI can theoretically be embedded almost anywhere. But not every location is a good first step. The closer a workflow is to high-risk decisions, cross-team coordination, or formal write-back, the higher the governance cost becomes. The closer it is to repetitive organization, retrieval, and standardized judgment, the easier it is to generate useful evidence quickly.',
+          'I now treat the “first AI step” as a pilot selection problem, not a product imagination problem. The goal is not to make AI look omnipotent on day one. The goal is to choose one stage where time can be saved without creating confused permissions, ownership, or rollback headaches. If the first step is chosen well, expansion becomes possible. If it is chosen badly, teams often leave with the wrong conclusion that AI is not practical.',
+        ],
+        sections: [
+          {
+            title: 'Start with high-repeat, low-risk, relatively stable tasks rather than the most visible entry point',
+            paragraphs: [
+              'The strongest first-step candidates are usually internal tasks with high repetition, stable rules, long manual handling time, and lower business risk. Think ticket triage, document classification, knowledge retrieval, reply drafting, sales follow-up summaries, meeting note structuring, or quotation pre-fill support. These scenarios are usually safer than asking AI to make complex business decisions from day one.',
+              'The reason is simple: these workflows are easier to define in terms of input, output, and evaluation. After launch, the team can judge whether time was saved or omissions were reduced instead of relying on a vague impression that “it feels smart.” In an early-stage AI project, the biggest problem is often not mediocre quality. It is not being able to measure the result at all.',
+            ],
+            bullets: [
+              'Choose tasks with repetitive manual effort, stable rules, and comparable outcomes',
+              'Use AI to save time first rather than to replace human judgment immediately',
+              'If the benefit cannot be measured, the project easily turns into presentation-only work',
+            ],
+          },
+          {
+            title: 'Do not rush into workflows with heavy accountability, many exceptions, and deep cross-system linkage',
+            paragraphs: [
+              'The workflows leadership finds most exciting are often the least suitable starting points. AI-driven approvals, automatic order status changes, purchase triggers, or finance-related actions sound like “real intelligence,” but they also bring ownership questions, exception branches, permission design, and rollback requirements. If those become the first implementation target, a large share of the team’s time gets spent on safety handling and explanation instead of value delivery.',
+              'My rule of thumb is that any workflow involving formal write-back, multiple operating roles, and high failure cost should not be the first AI step. That does not mean those scenarios should never be built. It means they belong later, after context quality, audit trails, human confirmation, and rollback patterns are already working reliably.',
+            ],
+            bullets: [
+              'Formal write-back, high-risk decisions, and cross-team automation are poor first-step choices',
+              'Solve “AI helps accurately” before chasing “AI acts automatically”',
+              'The more exception-heavy the workflow is, the more human boundary design is needed first',
+            ],
+          },
+          {
+            title: 'A good first AI step often exposes older data and process problems that were already there',
+            paragraphs: [
+              'A useful AI pilot does more than save a few hours of labor. It also forces the team to see what was already broken in the system: messy knowledge bases, inconsistent ticket labels, weak customer data ownership, or process states that were never standardized. Those are not new AI problems. They are old operational problems that humans were quietly compensating for.',
+              'That is another reason I like starting with assistance nodes. Once the pilot runs there, the team gains two kinds of feedback at the same time: measurable efficiency improvement and a much clearer picture of where data governance or process standardization is missing. That makes the second-stage investment decision far more grounded than a top-down guess.',
+            ],
+          },
+        ],
+        takeawayTitle: 'Main takeaways',
+        takeaways: [
+          'In existing internal systems, AI usually works best first in high-repeat, low-risk, assistance-oriented workflows.',
+          'Workflows with formal write-back, heavy accountability, and many exceptions usually should not be phase-one AI targets.',
+          'A strong pilot validates efficiency and reveals hidden data or process weaknesses at the same time.',
+        ],
+        ctaTitle: 'If you want to add AI to an existing system, do not start by building a “universal assistant”',
+        ctaDescription: 'Start with one measurable, reviewable, lower-risk assistance node. Once value is proven there, expanding into approvals, write-back, or cross-system actions becomes much safer.',
       },
     },
   },
