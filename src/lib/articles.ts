@@ -53,6 +53,7 @@ export const articleSlugs = [
   'factory-oa-shell-development',
   'ai-writeback-boundaries-internal-systems',
   'legacy-system-data-migration-planning',
+  'ai-first-step-in-existing-systems',
 ] as const
 
 export type ArticleSlug = (typeof articleSlugs)[number]
@@ -5966,6 +5967,134 @@ const articleDefinitions: Record<ArticleSlug, ArticleDefinition> = {
         ],
         ctaTitle: 'If you are upgrading a legacy system, do not leave migration planning to the very end',
         ctaDescription: 'Clarifying data scope, cleanup rules, cutover windows, and rollback boundaries early usually leads to a much steadier system upgrade.',
+      },
+    },
+  },
+  'ai-first-step-in-existing-systems': {
+    slug: 'ai-first-step-in-existing-systems',
+    priority: {
+      zh: 0.66,
+      en: 0.52,
+    },
+    publishedAt: '2026-04-12',
+    readingMinutes: 7,
+    relatedServices: ['web-app-development'],
+    content: {
+      zh: {
+        navLabel: '已有内部系统时，AI 第一站该嵌在哪',
+        categoryLabel: '企业系统',
+        metaTitle: '企业已经有内部系统时，AI 第一站最适合嵌在哪个环节？｜致诚工作室',
+        metaDescription:
+          '企业想把 AI 接进已有系统，第一站选错很容易做成演示项目。本文从真实交付角度拆解，哪些环节更适合先试、哪些不该一开始就碰。',
+        keywords: ['企业 AI 落地', 'AI 接内部系统', 'AI 试点场景', '企业系统自动化'],
+        eyebrow: 'Article',
+        heroTitle: '企业内部已经有系统时，AI 第一站最适合嵌在哪个环节，才不容易花冤枉钱',
+        heroDescription:
+          '很多企业一说要做 AI，第一反应不是先看哪条流程最卡，而是想把 AI 塞进一个最显眼的位置：首页、客服入口、老板驾驶舱、全员助手。这样做不一定错，但在真实交付里，第一站选错，最常见的结局就是 demo 很亮眼，日常没人用，后续也接不进核心业务。AI 要落地，第一步通常不是找最酷的位置，而是找最容易被验证、最容易闭环、又不会把责任做糊的那一段工作。',
+        introTitle: 'AI 第一站选哪里，决定项目是验证价值，还是只验证气氛',
+        introParagraphs: [
+          '如果企业内部已经有 ERP、CRM、工单、审批流、客服后台或知识库，AI 理论上能嵌的地方很多。但不是每个入口都适合做第一站。越靠近高风险决策、跨部门协同和正式写回，前期治理成本越高；越靠近重复整理、信息检索和标准化判断，越容易快速看见效果。',
+          '我现在更倾向于把“AI 第一站”理解成一个试点选择题，而不是产品想象题。目标不是一开始就让 AI 看起来无所不能，而是先找到一个既能节省人工时间、又不至于把权限和责任搞乱的环节。第一站选对，后面才有机会继续往深处接；选错，团队很容易得出“AI 不实用”的错误结论。',
+        ],
+        sections: [
+          {
+            title: '优先选“高重复、低风险、规则相对稳定”的环节，而不是最显眼的入口',
+            paragraphs: [
+              '最适合作为第一站的，通常不是对外展示型入口，而是内部那些重复度高、规则相对稳定、人工处理时间长但业务风险没那么高的工作。比如工单初分、资料归类、知识检索、标准回复草稿、销售跟进摘要、会议纪要整理、报价前资料预填，这些场景都比“让 AI 直接替你判断复杂业务”稳得多。',
+              '原因很简单：这类场景更容易定义好输入、输出和验收标准。做完以后，团队能很快判断到底节省了多少时间、减少了多少遗漏，而不是只凭主观印象觉得“它好像挺聪明”。项目第一阶段最怕的不是效果一般，而是根本没法衡量效果。',
+            ],
+            bullets: [
+              '先挑重复劳动重、规则稳定、结果可对照的环节',
+              '优先让 AI 帮人省时间，不要一开始就替人拍板',
+              '如果效果无法量化，项目很容易沦为演示型建设',
+            ],
+          },
+          {
+            title: '别急着碰“责任重、例外多、跨系统联动深”的链路',
+            paragraphs: [
+              '很多老板最感兴趣的，往往恰恰不是最适合先做的。比如 AI 直接审批、自动改订单状态、自动生成采购动作、自动触发财务流程，这些场景听起来最像“真智能”，但它们通常同时带着责任归属、例外分支、权限模型和回滚机制。第一版就上这些，团队很容易把大量时间花在兜底和解释上。',
+              '我的经验是，只要一个环节同时满足“写回正式数据、跨多个角色、出错代价高”这三个条件，就不应该作为第一站。不是不能做，而是应该放到第二阶段以后，等上下文质量、日志追踪、人工确认和回滚能力都跑顺了，再决定要不要加自动执行。',
+            ],
+            bullets: [
+              '正式写回、高风险判断、跨部门联动，不适合做 AI 第一站',
+              '第一阶段先解决“辅助得准”，再考虑“自动做事”',
+              '越是例外多的链路，越需要先有人类把边界讲明白',
+            ],
+          },
+          {
+            title: '最好的第一站，往往能顺手暴露数据和流程里的旧问题',
+            paragraphs: [
+              '一个好的 AI 试点，不只是让团队省几小时人工，更重要的是它会逼你看清系统里原本就存在的问题。比如知识库文档太乱、工单标签不统一、客户资料字段没人维护、历史流程没有标准状态，这些都不是 AI 带来的新麻烦，而是过去一直被人工兜着没暴露出来。',
+              '这也是为什么我更喜欢从“辅助型节点”切入。因为一旦在这些节点上跑起来，你会同时得到两类收获：一类是效率提升，另一类是对数据治理和流程标准化的真实反馈。这样第二阶段要不要继续投、该投在哪，判断就会比一开始拍脑袋稳得多。',
+            ],
+          },
+        ],
+        takeawayTitle: '这篇文章的重点',
+        takeaways: [
+          '企业已有内部系统时，AI 第一站更适合放在高重复、低风险、规则稳定的辅助环节。',
+          '正式写回、责任重、例外多的链路，通常不该在第一阶段就交给 AI。',
+          '好的 AI 试点不仅验证效率，也能顺手暴露数据和流程里的旧问题。',
+        ],
+        ctaTitle: '如果你准备把 AI 接进已有系统，先别急着做一个“万能入口”',
+        ctaDescription: '先挑一个可量化、可回看、可控风险的辅助节点试点，验证价值后再往审批、写回和跨系统联动延伸，会稳很多。',
+      },
+      en: {
+        navLabel: 'Where AI Should Start in Existing Systems',
+        categoryLabel: 'Internal System',
+        metaTitle: 'Where Should AI Start Inside an Existing Business System? | Zhicheng Studio',
+        metaDescription:
+          'When a company already has internal systems, the first AI insertion point matters more than most teams expect. This article explains where AI pilots usually work best and which workflows should wait.',
+        keywords: ['AI in internal systems', 'enterprise AI pilot', 'AI workflow automation', 'business system upgrade'],
+        eyebrow: 'Article',
+        heroTitle: 'When internal systems already exist, where should AI go first if you want real value instead of an expensive demo?',
+        heroDescription:
+          'When companies decide to “add AI,” the first instinct is often to place it somewhere highly visible: the homepage, a support entry, an executive dashboard, or a universal assistant. That is not always wrong, but in delivery work, a poor first insertion point usually leads to the same ending: an impressive demo, weak daily usage, and no credible path into core operations. The first move is rarely about the flashiest location. It is about choosing a workflow that can be validated, closed, and governed without making ownership fuzzy.',
+        introTitle: 'The first AI insertion point decides whether the project validates value or only validates excitement',
+        introParagraphs: [
+          'If a company already runs ERP, CRM, ticketing, approval flows, service back-office tools, or internal knowledge bases, AI can theoretically be embedded almost anywhere. But not every location is a good first step. The closer a workflow is to high-risk decisions, cross-team coordination, or formal write-back, the higher the governance cost becomes. The closer it is to repetitive organization, retrieval, and standardized judgment, the easier it is to generate useful evidence quickly.',
+          'I now treat the “first AI step” as a pilot selection problem, not a product imagination problem. The goal is not to make AI look omnipotent on day one. The goal is to choose one stage where time can be saved without creating confused permissions, ownership, or rollback headaches. If the first step is chosen well, expansion becomes possible. If it is chosen badly, teams often leave with the wrong conclusion that AI is not practical.',
+        ],
+        sections: [
+          {
+            title: 'Start with high-repeat, low-risk, relatively stable tasks rather than the most visible entry point',
+            paragraphs: [
+              'The strongest first-step candidates are usually internal tasks with high repetition, stable rules, long manual handling time, and lower business risk. Think ticket triage, document classification, knowledge retrieval, reply drafting, sales follow-up summaries, meeting note structuring, or quotation pre-fill support. These scenarios are usually safer than asking AI to make complex business decisions from day one.',
+              'The reason is simple: these workflows are easier to define in terms of input, output, and evaluation. After launch, the team can judge whether time was saved or omissions were reduced instead of relying on a vague impression that “it feels smart.” In an early-stage AI project, the biggest problem is often not mediocre quality. It is not being able to measure the result at all.',
+            ],
+            bullets: [
+              'Choose tasks with repetitive manual effort, stable rules, and comparable outcomes',
+              'Use AI to save time first rather than to replace human judgment immediately',
+              'If the benefit cannot be measured, the project easily turns into presentation-only work',
+            ],
+          },
+          {
+            title: 'Do not rush into workflows with heavy accountability, many exceptions, and deep cross-system linkage',
+            paragraphs: [
+              'The workflows leadership finds most exciting are often the least suitable starting points. AI-driven approvals, automatic order status changes, purchase triggers, or finance-related actions sound like “real intelligence,” but they also bring ownership questions, exception branches, permission design, and rollback requirements. If those become the first implementation target, a large share of the team’s time gets spent on safety handling and explanation instead of value delivery.',
+              'My rule of thumb is that any workflow involving formal write-back, multiple operating roles, and high failure cost should not be the first AI step. That does not mean those scenarios should never be built. It means they belong later, after context quality, audit trails, human confirmation, and rollback patterns are already working reliably.',
+            ],
+            bullets: [
+              'Formal write-back, high-risk decisions, and cross-team automation are poor first-step choices',
+              'Solve “AI helps accurately” before chasing “AI acts automatically”',
+              'The more exception-heavy the workflow is, the more human boundary design is needed first',
+            ],
+          },
+          {
+            title: 'A good first AI step often exposes older data and process problems that were already there',
+            paragraphs: [
+              'A useful AI pilot does more than save a few hours of labor. It also forces the team to see what was already broken in the system: messy knowledge bases, inconsistent ticket labels, weak customer data ownership, or process states that were never standardized. Those are not new AI problems. They are old operational problems that humans were quietly compensating for.',
+              'That is another reason I like starting with assistance nodes. Once the pilot runs there, the team gains two kinds of feedback at the same time: measurable efficiency improvement and a much clearer picture of where data governance or process standardization is missing. That makes the second-stage investment decision far more grounded than a top-down guess.',
+            ],
+          },
+        ],
+        takeawayTitle: 'Main takeaways',
+        takeaways: [
+          'In existing internal systems, AI usually works best first in high-repeat, low-risk, assistance-oriented workflows.',
+          'Workflows with formal write-back, heavy accountability, and many exceptions usually should not be phase-one AI targets.',
+          'A strong pilot validates efficiency and reveals hidden data or process weaknesses at the same time.',
+        ],
+        ctaTitle: 'If you want to add AI to an existing system, do not start by building a “universal assistant”',
+        ctaDescription: 'Start with one measurable, reviewable, lower-risk assistance node. Once value is proven there, expanding into approvals, write-back, or cross-system actions becomes much safer.',
       },
     },
   },
