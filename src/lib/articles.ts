@@ -54,6 +54,7 @@ export const articleSlugs = [
   'ai-writeback-boundaries-internal-systems',
   'legacy-system-data-migration-planning',
   'ai-first-step-in-existing-systems',
+  'factory-oa-adoption-process-permission',
 ] as const
 
 export type ArticleSlug = (typeof articleSlugs)[number]
@@ -6095,6 +6096,134 @@ const articleDefinitions: Record<ArticleSlug, ArticleDefinition> = {
         ],
         ctaTitle: 'If you want to add AI to an existing system, do not start by building a “universal assistant”',
         ctaDescription: 'Start with one measurable, reviewable, lower-risk assistance node. Once value is proven there, expanding into approvals, write-back, or cross-system actions becomes much safer.',
+      },
+    },
+  },
+  'factory-oa-adoption-process-permission': {
+    slug: 'factory-oa-adoption-process-permission',
+    priority: {
+      zh: 0.68,
+      en: 0.52,
+    },
+    publishedAt: '2026-04-13',
+    readingMinutes: 7,
+    relatedServices: ['web-app-development', 'mini-program-development'],
+    content: {
+      zh: {
+        navLabel: '工厂 OA 推不下去，通常不是员工不配合',
+        categoryLabel: '制造与工业',
+        metaTitle: '工厂 OA 系统为什么推行不下去？很多时候不是员工问题，而是流程和权限没拆对｜致诚工作室',
+        metaDescription:
+          '工厂 OA 推不下去，表面像是员工不用，实质往往是审批路径、角色权限和异常流程没有拆清。本文从真实交付角度讲清为什么很多 OA 一上线就别扭。',
+        keywords: ['工厂 OA 系统', 'OA 流程权限设计', '制造业数字化', '企业内部系统落地'],
+        eyebrow: 'Article',
+        heroTitle: '工厂 OA 系统为什么推行不下去？很多时候不是员工问题，而是流程和权限没拆对',
+        heroDescription:
+          '很多制造业老板在推 OA 时，第一反应是员工习惯改不过来、基层不愿意配合、管理要求执行不到位。但真进到系统里看，问题常常不是“人不肯用”，而是流程设计默认每一步都按理想状态发生，角色权限又照着组织架构生搬硬套。结果是一线嫌麻烦，主管嫌绕，行政和 IT 只能不断打补丁，系统最后像是上线了，实际上谁都不愿意把关键流程真的放进去。',
+        introTitle: 'OA 推不动，常见原因不是培训不够，而是系统把真实工作想简单了',
+        introParagraphs: [
+          '工厂环境和纯办公室场景不一样。班组、车间、仓库、采购、质检、设备、行政，很多流程并不是一条标准审批线，而是会夹着口头确认、临时替班、紧急插单、异常返工和跨部门协同。你如果把 OA 按“表单 + 审批树”硬套上去，看起来很规范，实际却很容易把一线工作越做越卡。',
+          '我见过不少项目，需求讨论时大家都说要“把流程线上化”，但真正到上线阶段，最先暴露的问题往往不是功能少，而是节点谁能发起、谁能代办、谁能退回、异常时谁有临时处理权没有说清。流程和权限一旦没拆明白，员工不用只是结果，不是原因。',
+        ],
+        sections: [
+          {
+            title: '很多 OA 不是流程少了，而是把“标准流程”错当成了“真实流程”',
+            paragraphs: [
+              '制造业现场最常见的问题不是没有制度，而是制度落地时会遇到很多例外。请假流程会碰到夜班交接，采购申请会碰到供应商临时缺货，设备报修会碰到维修负责人不在岗，质检异常会牵扯返工和补料。系统如果只允许用户沿着一条最整齐的主线往下走，大家很快就会发现线下沟通更快，于是 OA 只剩下“补录痕迹”的作用。',
+              '所以做工厂 OA，第一步不是把表单都搬上去，而是先把哪些环节真的是高频标准动作、哪些环节天然带例外、哪些节点需要保留人工协调空间讲清楚。不是所有线下动作都值得被系统替代，有些更适合被系统记录和追踪，而不是被系统强行指挥。',
+            ],
+            bullets: [
+              '先分清高频标准流程和高频异常流程',
+              '不要用一条审批树试图吃掉所有现场情况',
+              '系统该固化的是责任与状态，不一定是每一次沟通动作',
+            ],
+          },
+          {
+            title: '权限拆错，比流程拆错更容易让系统变成负担',
+            paragraphs: [
+              '很多 OA 项目喜欢直接照着组织架构配权限：主管能看本部门，经理能看全部，行政能发起某些申请。这样做在汇报链条上看着合理，但真实业务往往不是这么运转。比如设备维修可能按产线分工，质检处理可能按问题类型走，采购补单可能需要仓库和计划同时可见，临时代理班长又会在某个时段拥有部分审批权。组织结构不等于业务权限，直接照抄，系统很快就会出现“该看的人看不到，不该卡的节点被卡住”的问题。',
+              '更稳的做法是把权限拆成几个维度：谁能发起，谁能查看，谁能编辑，谁能审批，谁能处理异常，谁能在什么条件下临时接管。权限一旦按动作和场景拆，而不是只按部门头衔拆，后面很多推广阻力会小很多。',
+            ],
+            bullets: [
+              '组织架构只能提供参考，不能直接等于系统权限模型',
+              '权限要按动作、场景、时间段和例外条件去拆',
+              '代办、转交、临时接管这些能力，工厂场景往往不是可选项',
+            ],
+          },
+          {
+            title: 'OA 一期先跑通少数关键流程，比把所有行政流程一起搬上去更稳',
+            paragraphs: [
+              '很多工厂做 OA，容易一开始就列出一长串清单：请假、报销、采购、维修、入库、出库、质检、宿舍、用车、访客、印章……看起来很完整，实际上每多一条流程，就多一轮培训、例外处理和权限纠缠。如果基础模型还没跑顺，一次全上通常只会放大混乱。',
+              '我更建议先选 1 到 3 条最关键、最能体现协同价值、同时又有相对清晰责任链的流程。先把发起、审批、异常、催办、统计和移动端使用习惯跑顺，再决定下一批流程怎么扩。OA 推广真正需要的不是“功能表很长”，而是让一线觉得这套东西不会给他们添堵。',
+            ],
+          },
+        ],
+        takeawayTitle: '这篇文章的重点',
+        takeaways: [
+          '工厂 OA 推不下去，常见根因不是员工排斥系统，而是流程设计把真实现场想得过于理想化。',
+          '权限如果只按组织架构照抄，往往会比流程问题更早把系统拖成负担。',
+          '一期先跑通少数关键流程和异常处理机制，比一次搬上所有流程更容易真正落地。',
+        ],
+        ctaTitle: '如果你准备重做工厂 OA，先别急着画全流程图，先把例外和权限拆清楚',
+        ctaDescription: '当你能说清谁能发起、谁能代办、异常怎么转、哪些动作该固化、哪些动作只需要留痕，OA 才更像在帮现场，而不是在给现场加负担。',
+      },
+      en: {
+        navLabel: 'Why Factory OA Often Fails to Gain Adoption',
+        categoryLabel: 'Manufacturing',
+        metaTitle: 'Why Factory OA Systems Struggle in Real Use: The Problem Is Often Process and Permission Design | Zhicheng Studio',
+        metaDescription:
+          'When a factory OA rollout stalls, the issue is often not employee resistance but process paths, role permissions, and exception handling that were never designed properly. This article explains where the friction really comes from.',
+        keywords: ['factory OA system', 'OA permission design', 'manufacturing digitalization', 'internal workflow rollout'],
+        eyebrow: 'Article',
+        heroTitle: 'Why factory OA systems often fail to gain adoption: in many cases the real problem is poor process and permission design',
+        heroDescription:
+          'When manufacturing companies try to roll out an OA system, the first explanation is often that employees resist change or front-line teams do not cooperate. But once you look inside the workflow, the issue is usually different. The system assumes every step happens in an ideal sequence, while the permission model is copied mechanically from the org chart. The result is predictable: operators feel slowed down, supervisors feel trapped in unnecessary steps, and admins or IT teams spend their time patching exceptions. The system may be online, but nobody wants to trust it with critical work.',
+        introTitle: 'OA adoption often fails not because training was weak, but because the system simplified real work too aggressively',
+        introParagraphs: [
+          'Factory operations are not the same as a pure office environment. Teams across shifts, workshops, warehouses, procurement, quality control, equipment, and administration work through a mix of standard steps, verbal confirmation, temporary substitution, urgent orders, rework, and cross-department coordination. If OA is imposed as a rigid “form plus approval tree,” it may look tidy on paper while creating more friction on the floor.',
+          'I have seen many projects where everyone agreed on “moving the process online,” but the first real problem after launch was not missing features. It was that nobody had clearly decided who could initiate, delegate, reject, return, or take temporary control when the normal path broke. Once process and permission boundaries are unclear, people avoiding the system is only the result, not the cause.',
+        ],
+        sections: [
+          {
+            title: 'Many OA systems fail because they confuse the standard process with the real process',
+            paragraphs: [
+              'In manufacturing, the main problem is rarely the absence of rules. The real issue is that rules meet exceptions all the time. Leave requests collide with shift handover, purchasing requests collide with supplier shortages, maintenance requests collide with absent technicians, and quality incidents trigger rework and material replacement. If the system only allows users to move along one neat mainline, people quickly decide that offline communication is faster, and OA becomes nothing more than a place to backfill records.',
+              'That is why the first step in a factory OA project is not uploading every form into the system. It is deciding which workflows are truly high-frequency and standardized, which ones are exception-heavy by nature, and where human coordination must remain flexible. Not every offline action should be replaced by software. Some actions are better tracked by the system than dictated by it.',
+            ],
+            bullets: [
+              'Separate high-frequency standard workflows from high-frequency exception workflows',
+              'Do not expect one approval tree to absorb every factory-floor situation',
+              'The system should stabilize responsibility and status, not necessarily every communication action',
+            ],
+          },
+          {
+            title: 'Permission design is often an even bigger adoption risk than process design',
+            paragraphs: [
+              'Many OA projects map permissions directly from the org chart: supervisors can see their department, managers can see all, administration can initiate certain requests. That may look reasonable from a reporting perspective, but actual operations rarely work that way. Equipment maintenance may be split by production line, quality handling may depend on issue type, replenishment may need warehouse and planning teams to see the same case, and a temporary acting team leader may need partial approval power for one shift only. Organizational structure is not the same thing as operational permission. Copying one into the other creates the classic situation where the right people cannot act and the wrong bottlenecks appear everywhere.',
+              'A safer approach is to break permissions into action layers: who can initiate, who can view, who can edit, who can approve, who can handle exceptions, and who can temporarily take over under defined conditions. Once permissions are designed around actions and scenarios rather than titles alone, many rollout problems become much easier to control.',
+            ],
+            bullets: [
+              'The org chart is a reference, not a complete permission model',
+              'Permissions should follow action, scenario, time window, and exception condition',
+              'Delegation, transfer, and temporary takeover are often essential in factory settings, not optional extras',
+            ],
+          },
+          {
+            title: 'Phase one is safer when it proves a few critical workflows rather than digitizing every admin process at once',
+            paragraphs: [
+              'Many factories begin OA projects with a very long list: leave, reimbursement, purchasing, maintenance, inbound, outbound, quality, dormitory, vehicle use, visitors, seals, and more. It sounds complete, but every added workflow also adds another round of training, another permission tangle, and another layer of exception handling. If the core model is not stable yet, launching everything together usually magnifies the chaos.',
+              'I usually recommend choosing one to three workflows that matter most, show clear collaboration value, and still have a relatively understandable responsibility chain. Once initiation, approval, exceptions, reminders, reporting, and mobile usage are running smoothly there, the next wave of workflows can be expanded with much more confidence. Real OA adoption does not come from a long feature checklist. It comes from front-line teams feeling that the system is not getting in their way.',
+            ],
+          },
+        ],
+        takeawayTitle: 'Main takeaways',
+        takeaways: [
+          'When factory OA adoption fails, the root cause is often not employee resistance but a workflow model that is too idealized for real operations.',
+          'If permissions are copied directly from the org chart, they often turn the system into a burden even faster than weak process design does.',
+          'Phase one is usually more successful when it proves a few critical workflows and exception paths before expanding broadly.',
+        ],
+        ctaTitle: 'If you are rebuilding factory OA, do not start by drawing the perfect full-process map',
+        ctaDescription: 'Start by clarifying exceptions and permissions: who can initiate, who can delegate, how abnormal cases are rerouted, which actions should be enforced, and which only need traceability.',
       },
     },
   },
