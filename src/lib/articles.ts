@@ -55,6 +55,7 @@ export const articleSlugs = [
   'legacy-system-data-migration-planning',
   'ai-first-step-in-existing-systems',
   'factory-oa-adoption-process-permission',
+  'internal-order-system-web-app-vs-mini-program',
 ] as const
 
 export type ArticleSlug = (typeof articleSlugs)[number]
@@ -6224,6 +6225,135 @@ const articleDefinitions: Record<ArticleSlug, ArticleDefinition> = {
         ],
         ctaTitle: 'If you are rebuilding factory OA, do not start by drawing the perfect full-process map',
         ctaDescription: 'Start by clarifying exceptions and permissions: who can initiate, who can delegate, how abnormal cases are rerouted, which actions should be enforced, and which only need traceability.',
+      },
+    },
+  },
+
+  'internal-order-system-web-app-vs-mini-program': {
+    slug: 'internal-order-system-web-app-vs-mini-program',
+    priority: {
+      zh: 0.66,
+      en: 0.52,
+    },
+    publishedAt: '2026-04-15',
+    readingMinutes: 7,
+    relatedServices: ['web-app-development', 'mini-program-development'],
+    content: {
+      zh: {
+        navLabel: '企业内部订单系统，一期先做 Web App 还是小程序',
+        categoryLabel: '企业系统',
+        metaTitle: '企业内部订单系统一期先做 Web App 还是小程序？怎么选更稳｜致诚工作室',
+        metaDescription:
+          '企业内部订单系统一期到底先做 Web App 还是小程序，不该只看老板偏好，而要看使用场景、操作复杂度、角色分工和后续维护成本。本文从真实交付经验拆解更稳的判断方式。',
+        keywords: ['企业内部订单系统', 'Web App 还是小程序', '订单系统一期规划', '企业系统开发'],
+        eyebrow: 'Article',
+        heroTitle: '企业内部订单系统，一期先做 Web App 还是小程序，别先被“入口习惯”带偏',
+        heroDescription:
+          '这个问题表面上像是在选载体，实际上是在判断业务链路该先落在哪一端。很多团队一听到“内部系统”，就默认 Web App 更专业；一听到“员工都在微信里”，又觉得小程序更顺手。真做起来才发现，决定成败的通常不是入口，而是订单录入有多复杂、审批和跟单链路有多长、谁需要高频使用、谁只是偶尔查看。',
+        introTitle: '先别争技术栈，先看谁在什么场景下用这个系统',
+        introParagraphs: [
+          '我做过几类订单系统：有的是销售录单后交给内勤跟进，有的是工厂排产要持续回填状态，有的是老板只想随时看进度和异常。表面都叫“订单系统”，但对载体的要求完全不是一回事。',
+          '如果一期没把使用场景拆开，很容易做成一个两边都不讨好的东西：小程序里塞了太多复杂表格，录入体验很差；Web App 又承接了很多本该移动端完成的确认动作，最后谁都嫌麻烦。',
+        ],
+        sections: [
+          {
+            title: '什么时候应该优先做 Web App',
+            paragraphs: [
+              '如果一期的核心任务是订单录入、价格计算、批量编辑、状态筛选、权限管理、导出报表这类偏重操作，Web App 通常更稳。因为这类动作对表格密度、键盘输入、批量处理和多栏信息并排展示都有要求，小程序很容易在体验上先吃亏。',
+              '尤其是订单字段多、角色多、状态流转复杂的时候，Web App 更容易把主流程和后台能力放在同一套信息结构里。这样一期先把核心业务跑顺，后面再补移动端查看或轻操作，会比反过来更省返工。',
+            ],
+            bullets: [
+              '录单字段多，存在批量编辑或复制订单的需求',
+              '需要多角色协作、权限控制、筛选列表和报表导出',
+              '日常使用者是内勤、跟单、运营或管理人员，电脑办公时间更长',
+            ],
+          },
+          {
+            title: '什么时候小程序更适合作为一期入口',
+            paragraphs: [
+              '如果一期更强调移动场景，比如销售在外拜访客户时要快速提交订单、门店现场要录入简单信息、客户或代理要随时查状态，那么小程序会更贴近真实使用环境。它的优势不是“更轻”，而是更接近用户已经在用的入口。',
+              '但这里有个前提：一期要先把动作收窄。小程序更适合承接提交、确认、查询、拍照上传、消息提醒这类轻操作，不适合一上来就承担完整后台。只要你想让它同时做复杂录单、配置管理和深层报表，后面基本都会越做越别扭。',
+            ],
+            bullets: [
+              '高频动作发生在手机上，而不是固定工位电脑上',
+              '用户主要是销售、门店、客户或代理，不是后台运营团队',
+              '一期动作以提交、确认、查询、提醒为主，而不是复杂配置',
+            ],
+          },
+          {
+            title: '更实际的做法：先选主战场，再给另一端留接口',
+            paragraphs: [
+              '真实项目里，最怕的是一开始就说“官网、后台、小程序一起上，免得以后再做”。结果通常是一期范围失控，三端都做了，但核心链路没一条真正顺。订单系统尤其容易这样，因为每个角色都能提出自己那一端的需求。',
+              '更稳的做法通常是：先确定一期最关键的订单链路到底发生在哪。是内部录单和审批最重要，还是移动提交和状态回传最重要？先围绕这一条链路选主载体，再提前把数据结构、接口和角色权限设计清楚。这样后面补另一端时，至少不是推倒重来。',
+            ],
+          },
+        ],
+        takeawayTitle: '这篇文章的重点',
+        takeaways: [
+          'Web App 更适合复杂录单、批量处理、权限和报表这些重操作场景。',
+          '小程序更适合移动提交、确认、查询和提醒，但前提是一期范围要收窄。',
+          '企业内部订单系统一期先做哪一端，不该看“哪个更流行”，而该看核心业务链路先落在哪。',
+        ],
+        ctaTitle: '如果你在判断订单系统一期怎么做，先把主流程和主要使用者拆出来',
+        ctaDescription: '只要把谁录单、谁审批、谁跟进、谁查询说清楚，Web App 和小程序的优先级通常就不会再靠拍脑袋决定。',
+      },
+      en: {
+        navLabel: 'Should Phase One of an Internal Order System Start with a Web App or a Mini-Program?',
+        categoryLabel: 'Internal System',
+        metaTitle: 'Internal Order System: Start Phase One with a Web App or a Mini-Program? | Zhicheng Studio',
+        metaDescription:
+          'Choosing between a Web App and a mini-program for phase one of an internal order system should be based on workflow, operating complexity, user roles, and maintenance cost rather than habit or preference.',
+        keywords: ['internal order system', 'web app vs mini-program', 'phase one system planning', 'order workflow system'],
+        eyebrow: 'Article',
+        heroTitle: 'For an internal order system, phase one should follow the core workflow, not the familiar entry point',
+        heroDescription:
+          'This looks like a channel choice on the surface, but in real delivery work it is really a workflow decision. Some teams assume a Web App is more “serious” because it feels like a system. Others default to a mini-program because everyone already uses WeChat. Both instincts can be wrong if they ignore how orders are entered, reviewed, updated, and checked day to day.',
+        introTitle: 'Before debating the interface, look at who uses the system and where',
+        introParagraphs: [
+          'I have seen order systems where sales submits orders and internal staff takes over, others where factory teams keep updating production status, and others where leadership only wants quick visibility into progress and exceptions. All of them are “order systems,” but they do not need the same first interface.',
+          'If phase one skips that scenario split, the result is often awkward on both sides: too many dense forms inside a mini-program, or too many mobile-friendly actions forced into a Web App that users only open when they are back at a desk.',
+        ],
+        sections: [
+          {
+            title: 'When a Web App should usually come first',
+            paragraphs: [
+              'If the first release is centered on order entry, pricing logic, batch editing, status filtering, permission control, and exports, a Web App is usually the safer foundation. Those tasks benefit from denser tables, keyboard input, wider layouts, and easier multi-column comparison.',
+              'This matters even more when order fields are numerous, role coordination is heavy, and status flow is complex. In that case, getting the main operational workflow stable in a Web App first is often much cleaner than trying to stretch a mini-program into a full internal system too early.',
+            ],
+            bullets: [
+              'Order entry includes many fields or repeated editing actions',
+              'The system needs filters, permissions, reporting, or export capability',
+              'Core users are internal staff, coordinators, operations, or managers working mainly on desktop',
+            ],
+          },
+          {
+            title: 'When a mini-program is the better phase-one entry',
+            paragraphs: [
+              'If the most important early actions happen on the move, such as sales submitting orders while visiting customers, store staff entering lightweight records, or clients checking status from their phone, a mini-program can be the better first surface. Its strength is not that it is lighter in theory, but that it fits the real usage context.',
+              'The catch is scope. A mini-program works better for submission, confirmation, status lookup, photo upload, and reminders than for deep configuration or dense operational workflows. Once teams expect it to do heavy order management, settings, and reporting all at once, friction tends to rise quickly.',
+            ],
+            bullets: [
+              'The highest-frequency actions happen on mobile rather than at a desk',
+              'Primary users are sales staff, store teams, clients, or distributors',
+              'Phase one focuses on submit, confirm, check, and notify rather than full operations management',
+            ],
+          },
+          {
+            title: 'A more practical approach: choose the primary battlefield and leave room for the second one',
+            paragraphs: [
+              'The most common delivery mistake is trying to launch the website, admin side, and mini-program together “so we do not have to rebuild later.” In practice that often bloats phase one and leaves every surface half-finished. Order systems are especially vulnerable because every role can justify its own interface request.',
+              'A steadier path is to identify which order workflow matters most in the first release. Is the priority internal entry and approval, or mobile submission and status feedback? Pick the primary surface around that path, then define data structure, interfaces, and permission rules in a way that makes the second surface easier to add later.',
+            ],
+          },
+        ],
+        takeawayTitle: 'Main takeaways',
+        takeaways: [
+          'A Web App is usually better for dense order operations, permission handling, and reporting-heavy workflows.',
+          'A mini-program is often better for mobile submission, confirmation, lookup, and reminders, but only when the first scope stays narrow.',
+          'The right phase-one choice should follow the core workflow and user context, not whichever interface feels more familiar.',
+        ],
+        ctaTitle: 'If you are deciding phase one for an order system, map the main workflow before the interface',
+        ctaDescription: 'Once it is clear who enters orders, who approves them, who follows up, and who only checks progress, the priority between a Web App and a mini-program usually becomes much easier to judge.',
       },
     },
   },
