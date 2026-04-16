@@ -56,6 +56,7 @@ export const articleSlugs = [
   'ai-first-step-in-existing-systems',
   'factory-oa-adoption-process-permission',
   'internal-order-system-web-app-vs-mini-program',
+  'factory-erp-boundary-before-feature-list',
 ] as const
 
 export type ArticleSlug = (typeof articleSlugs)[number]
@@ -6354,6 +6355,134 @@ const articleDefinitions: Record<ArticleSlug, ArticleDefinition> = {
         ],
         ctaTitle: 'If you are deciding phase one for an order system, map the main workflow before the interface',
         ctaDescription: 'Once it is clear who enters orders, who approves them, who follows up, and who only checks progress, the priority between a Web App and a mini-program usually becomes much easier to judge.',
+      },
+    },
+  },
+  'factory-erp-boundary-before-feature-list': {
+    slug: 'factory-erp-boundary-before-feature-list',
+    priority: {
+      zh: 0.68,
+      en: 0.52,
+    },
+    publishedAt: '2026-04-16',
+    readingMinutes: 7,
+    relatedServices: ['web-app-development'],
+    content: {
+      zh: {
+        navLabel: '工厂重做 ERP，先定系统边界比先列功能更重要',
+        categoryLabel: '制造与工业',
+        metaTitle: '工厂重做 ERP 时，为什么先定系统边界比先列功能更重要？｜致诚工作室',
+        metaDescription:
+          '很多工厂重做 ERP，一开始就急着列功能清单，最后却在排产、仓库、采购、财务和数据口径上反复打架。本文从真实交付视角讲清，为什么先定系统边界比先堆功能更稳。',
+        keywords: ['工厂 ERP 重构', 'ERP 系统边界', '制造业数字化', '企业系统规划'],
+        eyebrow: 'Article',
+        heroTitle: '工厂重做 ERP 时，先定系统边界，通常比先列功能清单更重要',
+        heroDescription:
+          '很多制造企业一说要重做 ERP，会议很快就会变成“把所有想补的功能先列出来”。看起来很积极，实际却容易把项目带偏。因为 ERP 真正难的地方，往往不是少几个按钮，也不是报表样式不够全，而是排产、仓库、采购、财务、质检这些环节到底谁负责什么、哪一步以哪个系统为准、哪些动作必须在线闭环、哪些只需要留痕。系统边界没先定清，功能列得越多，后面越容易互相打架。',
+        introTitle: '很多 ERP 项目不是死在功能不够，而是死在边界先天混乱',
+        introParagraphs: [
+          '我接触过一些制造业数字化项目，前期讨论最热闹的时候，通常不是在讲流程责任，而是在疯狂补需求：生产要更多状态、仓库要更多打印、采购要更多提醒、老板要更多看板。每一项单看都合理，但只要没人先把系统边界讲清楚，这些需求最后很容易堆成一个谁都不满意的混合体。',
+          'ERP 不是把所有部门诉求都塞进同一个界面就算升级成功。更现实的做法，是先判断这次重做到底要解决哪几个核心矛盾：是订单到排产断链，还是库存口径不一致，还是采购、仓库和财务之间长期靠 Excel 对账。先把边界定住，功能才知道该往哪里长。',
+        ],
+        sections: [
+          {
+            title: '先回答“哪个系统说了算”，再讨论功能放在哪',
+            paragraphs: [
+              '工厂里最常见的混乱，不是没有流程，而是同一份业务事实被多个地方重复维护。订单在 ERP 一套状态，车间白板一套状态，仓库 Excel 又是一套状态，财务月底再手工调一次。等大家开始重做系统时，如果不先明确哪些数据以 ERP 为主、哪些由外围系统承接、哪些只做同步展示，后面每加一个功能都可能加出新的口径冲突。',
+              '所以我更建议在列功能前，先画一张很朴素的责任图：订单主数据归谁、库存变动谁确认、排产结果谁维护、财务凭证谁最终认定。只要“谁是主、谁是辅、谁只读”没定，项目很容易在评审时看起来完整，上线后却一直靠人工解释。',
+            ],
+            bullets: [
+              '先定义主数据归属，不要默认所有模块都能改同一份数据',
+              '区分主业务系统、协同系统和只读看板，别全部混成一个层级',
+              '功能放在哪个端口，应该服从责任归属，而不是谁声音大',
+            ],
+          },
+          {
+            title: '很多“必须做”的功能，本质上是在替边界不清背锅',
+            paragraphs: [
+              '项目里经常会出现一种需求：这个也想自动，那个也想补提醒，再加几个审批、几张报表、几种导出。表面上是在补能力，实质上常常是在试图用功能弥补边界混乱。比如库存口径不一致，于是每个部门都想多一张对账表；排产规则总在变，于是要求系统支持大量手工覆盖；采购和仓库责任没拆开，于是流程里到处都是重复确认。',
+              '这类需求不是完全不能做，但如果根因没处理，功能只会越补越厚，系统却越来越难解释。与其在一期里疯狂补例外，不如先追问一句：这个功能是在解决真实高频场景，还是在给原本就没理顺的责任关系打补丁？很多钱，就是这样在“看起来很必要”的补丁里花掉的。',
+            ],
+            bullets: [
+              '先区分高频核心场景和低频例外场景，再决定要不要系统化',
+              '如果一个需求主要服务于“事后解释”，通常要先回头看边界问题',
+              'ERP 一期更适合固化主流程，不适合吞掉所有管理焦虑',
+            ],
+          },
+          {
+            title: '更稳的一期范围，通常是先跑通一条责任清晰的主链路',
+            paragraphs: [
+              '制造业 ERP 重做最怕“大而全一期”。订单、排产、采购、库存、质检、设备、财务、老板看板一起推，听起来完整，实际每个模块都牵涉不同口径和旧习惯。如果底层边界还没理顺，一次全上通常只会把历史问题数字化，而不是解决问题。',
+              '我更倾向于先选一条责任清晰、能直接影响协同效率的主链路，比如订单到排产，或者采购到入库。先把状态定义、角色动作、异常处理和数据口径跑顺，再决定下一条链路怎么接。这样虽然一期看起来没那么“宏大”，但项目会更像在建立可持续的系统，而不是做一套新的复杂表单。',
+            ],
+          },
+        ],
+        takeawayTitle: '这篇文章的重点',
+        takeaways: [
+          '工厂重做 ERP 时，先定系统边界，往往比先列功能清单更关键。',
+          '很多看似必须补的功能，其实是在替责任不清和口径冲突背锅。',
+          '一期先跑通一条责任清晰的主链路，通常比追求“大而全”更稳。',
+        ],
+        ctaTitle: '如果你准备重做 ERP，先别急着开功能许愿池',
+        ctaDescription: '先把主数据归属、流程责任和一期主链路定清楚，再谈功能取舍，项目通常会少很多返工和扯皮。',
+      },
+      en: {
+        navLabel: 'Why ERP Boundary Decisions Matter More Than Feature Lists',
+        categoryLabel: 'Manufacturing',
+        metaTitle: 'When Rebuilding Factory ERP, Why System Boundaries Matter More Than Feature Lists | Zhicheng Studio',
+        metaDescription:
+          'Factory ERP rebuilds often go off track because teams rush into feature lists before clarifying ownership, data authority, and process boundaries. This article explains a steadier way to scope the work.',
+        keywords: ['factory ERP rebuild', 'ERP system boundary', 'manufacturing digitalization', 'internal system planning'],
+        eyebrow: 'Article',
+        heroTitle: 'When rebuilding factory ERP, system boundaries usually matter more than feature wish lists',
+        heroDescription:
+          'Many manufacturing teams start an ERP rebuild by collecting every missing function people can think of. That feels productive, but it often hides the real problem. The hard part is usually not another button or report. It is deciding who owns order status, where inventory truth lives, which steps must close inside the system, and which actions only need traceability. If those boundaries stay fuzzy, a bigger feature list usually creates a mess faster.',
+        introTitle: 'ERP projects often fail from boundary confusion before they fail from missing functionality',
+        introParagraphs: [
+          'In many factory projects, the most energetic early workshops are full of requests: more production statuses, more warehouse printing, more reminders, more dashboards. Each request can sound reasonable on its own. The problem is that without a shared boundary model, they pile into one oversized system that nobody fully trusts.',
+          'ERP should not be treated as a container for every department request. A steadier approach is to ask which operational conflicts the rebuild is actually meant to solve first. Is the break happening between orders and scheduling, between warehouse and purchasing, or between operations and finance? Once that boundary is clear, feature decisions become much easier and far less political.',
+        ],
+        sections: [
+          {
+            title: 'Clarify which system is authoritative before deciding where features belong',
+            paragraphs: [
+              'One common factory problem is that the same business fact is maintained in several places at once. ERP shows one order status, the workshop board shows another, warehouse spreadsheets show a third, and finance adjusts things again at month end. If a rebuild starts without naming which system is authoritative for which data, every new feature risks creating another layer of contradiction.',
+              'That is why I prefer a simple responsibility map before a feature matrix. Who owns order master data? Who confirms stock movement? Who maintains production scheduling? Who makes the final financial determination? If primary, secondary, and read-only roles are unclear, the project may look complete in review meetings while staying confusing in daily use.',
+            ],
+            bullets: [
+              'Define master data ownership before allowing multiple modules to edit the same records',
+              'Separate core systems, collaboration tools, and read-only dashboards instead of merging them into one layer',
+              'Feature placement should follow operational ownership, not internal politics',
+            ],
+          },
+          {
+            title: 'Many “must-have” features are actually compensating for unclear boundaries',
+            paragraphs: [
+              'Projects often produce long lists of urgent requests: more automation, more alerts, more approvals, more export formats. On the surface, these look like capability gaps. In reality, many of them are attempts to patch over unclear ownership. If inventory rules are inconsistent, every team asks for another reconciliation report. If scheduling rules keep shifting, people want heavy manual override logic. If warehouse and purchasing responsibilities overlap, the workflow fills with duplicate confirmation steps.',
+              'These features are not always wrong, but they are dangerous when used as substitutes for real decisions. Before adding them, it helps to ask whether the request solves a high-frequency business need or only helps people survive a process that was never properly defined. A lot of ERP budget disappears into patches that feel necessary only because the underlying boundary problem was left untouched.',
+            ],
+            bullets: [
+              'Separate high-frequency core scenarios from low-frequency exceptions before systemizing them',
+              'If a feature mainly exists to explain inconsistencies later, revisit the boundary model first',
+              'Phase one ERP should stabilize the core flow, not absorb every management anxiety',
+            ],
+          },
+          {
+            title: 'A steadier phase one usually means one clear operational chain, not a giant all-in rollout',
+            paragraphs: [
+              'Factory ERP rebuilds are especially vulnerable to oversized phase-one scope. Orders, scheduling, purchasing, inventory, quality, equipment, finance, and dashboards all sound important, and they are. But each area carries old habits, hidden exceptions, and different definitions. If boundaries are still unsettled, launching everything together usually digitizes the confusion instead of solving it.',
+              'A more reliable phase one starts with one operational chain that already has relatively clear ownership, such as order-to-scheduling or purchasing-to-receiving. Once status definitions, user actions, exception handling, and data rules are stable there, the next chain can be added on stronger foundations. It may look less ambitious at first, but it creates a system people can actually keep extending.',
+            ],
+          },
+        ],
+        takeawayTitle: 'Main takeaways',
+        takeaways: [
+          'In factory ERP rebuilds, system boundaries are often more important than long feature lists.',
+          'Many supposedly necessary features are really patches for unclear ownership and conflicting data rules.',
+          'Phase one is usually safer when it stabilizes one clear operational chain before expanding further.',
+        ],
+        ctaTitle: 'If you are planning an ERP rebuild, do not start with a feature wish list alone',
+        ctaDescription: 'Clarify data ownership, process responsibility, and the first operational chain before debating features. That usually leads to a calmer project and a system people can actually trust.',
       },
     },
   },
