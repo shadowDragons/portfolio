@@ -57,6 +57,7 @@ export const articleSlugs = [
   'factory-oa-adoption-process-permission',
   'internal-order-system-web-app-vs-mini-program',
   'factory-erp-boundary-before-feature-list',
+  'ai-writeback-risk-boundaries',
 ] as const
 
 export type ArticleSlug = (typeof articleSlugs)[number]
@@ -6483,6 +6484,263 @@ const articleDefinitions: Record<ArticleSlug, ArticleDefinition> = {
         ],
         ctaTitle: 'If you are planning an ERP rebuild, do not start with a feature wish list alone',
         ctaDescription: 'Clarify data ownership, process responsibility, and the first operational chain before debating features. That usually leads to a calmer project and a system people can actually trust.',
+      },
+    },
+  },
+  'ai-writeback-risk-boundaries': {
+    slug: 'ai-writeback-risk-boundaries',
+    priority: {
+      zh: 0.66,
+      en: 0.52,
+    },
+    publishedAt: '2026-04-18',
+    readingMinutes: 7,
+    relatedServices: ['web-app-development'],
+    content: {
+      zh: {
+        navLabel: 'AI 接内部系统时，哪些写回边界必须先定',
+        categoryLabel: '企业系统',
+        metaTitle: 'AI 接内部系统时，哪些写回边界必须先定清？｜致诚工作室',
+        metaDescription:
+          '很多 AI 项目不是卡在模型，而是卡在写回边界没先定清。本文从内部系统落地经验出发，拆解哪些动作适合只读、哪些动作允许建议、哪些动作必须人工确认，避免后面越来越难维护。',
+        keywords: ['AI 写回边界', 'AI 内部系统集成', '企业系统 AI 落地', 'AI 流程自动化'],
+        eyebrow: 'Article',
+        heroTitle: 'AI 接到内部系统时，哪些写回边界必须先定清，后面才不会越来越难维护？',
+        heroDescription:
+          '很多企业做 AI 应用时，最容易高估的不是模型能力，而是默认 AI 可以顺手把结果写回系统。前期看起来像是少点一步确认、少做一次人工录入，效率很高；但一旦写回动作碰到状态流转、审批责任、主数据、客户信息或跨系统联动，复杂度会迅速上升。边界不先定，后面不是更智能，而是更容易失控。',
+        introTitle: 'AI 真正难接的，往往不是“能不能读”，而是“能不能改”',
+        introParagraphs: [
+          '我这两年看过不少 AI 落地讨论，前半段都很顺：知识检索能做、摘要能做、分类能做、辅助填写也能做。真正开始变难，通常是在一句“那就让 AI 直接回写系统吧”之后。因为从这一刻开始，问题就不只是准确率，而是责任、审计、回滚、权限和例外处理。',
+          '所以我越来越倾向于把 AI 接内部系统这件事，先当成“写回分级设计”问题，而不是一个单纯的模型接入问题。哪些动作只能读，哪些动作可以生成建议，哪些动作允许半自动提交，哪些动作必须人工确认，这些边界越早讲清，后面越不容易把维护成本做高。',
+        ],
+        sections: [
+          {
+            title: '第一层边界：先区分只读、建议写回和直接写回，不要一上来就全自动',
+            paragraphs: [
+              '很多团队一提到 AI 提效，默认想象的是“识别完就自动填回去”。但真实项目里，更稳的顺序通常是三层：先只读，确认 AI 能稳定理解上下文；再做建议写回，让人看完后一键确认；最后才考虑少量明确场景下的直接写回。这个顺序看起来保守，但能明显降低前期事故成本。',
+              '因为 AI 的价值不一定非得体现在“自己改了什么”，很多时候先帮人把信息找齐、判断补全、建议生成，效率就已经提升了。如果一开始就让它直接改关键字段，前期任何一次误写都会迅速放大大家对整套方案的不信任。',
+            ],
+            bullets: [
+              '知识检索、摘要、归类更适合先做只读层',
+              '表单补全、回复草稿、字段建议更适合先做建议写回层',
+              '真正允许自动写回的，应该只限于规则稳定、责任清楚、可回滚的动作',
+            ],
+          },
+          {
+            title: '第二层边界：凡是涉及状态流转、审批责任和主数据的动作，都不要轻易全自动',
+            paragraphs: [
+              '内部系统里最危险的，不是 AI 帮你多写了一句说明，而是它改了一个会触发后续流程的状态。比如订单进入下一阶段、审批通过、库存扣减、客户级别调整、合同信息覆盖，这些动作一旦写回，就不只是数据变化，而是责任变化。很多后续问题不是“模型答错了”，而是谁来为这次错误负责。',
+              '所以只要写回动作会改变流程责任、影响多个角色、触发外部通知，或者牵涉主数据一致性，我都会建议默认加人工确认，至少在前几个阶段不要放开。AI 可以先把候选结果准备好，但最后一步最好交给有权限的人确认。这样做不是保守，而是在保护系统的可维护性。',
+            ],
+            bullets: [
+              '状态推进类动作默认人工确认',
+              '主数据修改类动作默认审批或双重确认',
+              '跨系统联动类动作必须先考虑失败补偿和回滚，而不是只看成功路径',
+            ],
+          },
+          {
+            title: '第三层边界：写回方案必须带审计、回滚和责任归属，否则越做越难收',
+            paragraphs: [
+              '很多 AI 写回方案前期演示都很好看，因为只演成功路径：识别了、填进去了、流转了。但真实上线以后，难点几乎都在例外里：填错了谁发现、发现后谁能撤回、撤回会不会影响下游、日志能不能看出是 AI 建议还是人工确认。没有这些兜底，系统维护压力会越来越大。',
+              '我更建议把写回动作当成一类特殊操作来设计：记录来源、保留原值、可追溯到触发上下文、支持回滚，必要时还能区分“AI 直接提交”和“AI 建议后人工确认”。这些机制前面看起来像多花工，实际上是在避免后面每次出错都靠人肉补锅。',
+            ],
+          },
+        ],
+        takeawayTitle: '这篇文章的重点',
+        takeaways: [
+          'AI 接内部系统时，最先要定的不是模型参数，而是写回分级边界。',
+          '凡是涉及状态流转、审批责任、主数据和跨系统联动的动作，都不适合一上来全自动。',
+          '写回方案必须从第一阶段就带上审计、回滚和责任归属设计，否则后面维护成本会快速上升。',
+        ],
+        ctaTitle: '如果你准备把 AI 接进内部系统，先把“能不能改”这件事拆清楚',
+        ctaDescription: '先画出哪些动作只读、哪些动作建议写回、哪些动作必须人工确认，再去谈模型和流程，项目通常会稳很多。',
+      },
+      en: {
+        navLabel: 'AI Write-Back Boundaries in Internal Systems',
+        categoryLabel: 'Internal System',
+        metaTitle: 'Which AI Write-Back Boundaries Should Be Defined Before Integrating with Internal Systems? | Zhicheng Studio',
+        metaDescription:
+          'Many AI projects break down not at model quality but at write-back boundaries. This article explains how to separate read-only, suggested updates, and confirmed write-backs when AI connects to internal systems.',
+        keywords: ['AI write-back boundaries', 'AI internal system integration', 'enterprise AI workflow', 'AI automation governance'],
+        eyebrow: 'Article',
+        heroTitle: 'When AI connects to internal systems, which write-back boundaries should be defined first?',
+        heroDescription:
+          'In many enterprise AI projects, the overestimated part is not the model itself but the assumption that AI can conveniently write results back into the system. Early demos make this look efficient: one less manual step, one less round of data entry. But once write-back actions touch status transitions, approval ownership, master data, customer records, or cross-system workflows, complexity rises fast. If the boundary is not defined early, the system does not become smarter. It becomes harder to control.',
+        introTitle: 'The harder question is usually not whether AI can read, but whether it should modify',
+        introParagraphs: [
+          'I have seen many AI implementation discussions follow the same pattern. The first half goes smoothly: retrieval works, summarization works, classification works, assisted drafting works. The real difficulty begins right after someone says, “Then let AI write it back into the system directly.” From that moment on, the problem is no longer just accuracy. It becomes a question of accountability, auditability, rollback, permissions, and exception handling.',
+          'That is why I increasingly treat AI integration into internal systems as a write-back governance problem rather than a model hookup problem. Which actions stay read-only, which can generate suggestions, which can be submitted semi-automatically, and which must always require human confirmation — the earlier those layers are defined, the lower the long-term maintenance cost tends to be.',
+        ],
+        sections: [
+          {
+            title: 'First boundary: separate read-only, suggested updates, and direct write-back instead of jumping to full automation',
+            paragraphs: [
+              'When teams talk about AI efficiency, the default picture is often “it understands the content and writes the answer back automatically.” In real delivery work, a safer sequence is usually three-layered. Start with read-only behavior so the team can verify that AI understands the context consistently. Then move to suggested write-back, where people can review and confirm with one click. Only after that should the team consider direct write-back in a narrow set of stable scenarios.',
+              'This sounds conservative, but it reduces the cost of early failures dramatically. AI does not need to prove value by directly changing production data. In many cases, it is already useful when it gathers information, fills gaps, proposes values, or drafts the next step. If it starts editing critical fields too early, a single wrong write can damage trust in the whole initiative.',
+            ],
+            bullets: [
+              'Retrieval, summarization, and classification fit naturally in a read-only layer first',
+              'Form completion, reply drafting, and field suggestions fit better in a suggested write-back layer',
+              'Automatic write-back should be reserved for stable, accountable, and reversible actions only',
+            ],
+          },
+          {
+            title: 'Second boundary: actions involving status transitions, approvals, and master data should rarely be fully automated early on',
+            paragraphs: [
+              'The dangerous part of internal systems is not that AI writes one extra sentence. The dangerous part is that it changes a state that triggers downstream consequences. An order moving to the next phase, an approval being marked complete, inventory being deducted, a customer tier being changed, or a contract record being overwritten — these are not just field edits. They are responsibility changes. The real question after an error is rarely “was the model imperfect?” It is “who owns the mistake now?”',
+              'For that reason, whenever a write-back affects responsibility, multiple roles, external notifications, or master data consistency, I recommend human confirmation by default, especially in early phases. AI can prepare the candidate result, but the final step should remain with an authorized person. That is not reluctance. It is maintainability protection.',
+            ],
+            bullets: [
+              'State-transition actions should default to human confirmation',
+              'Master data changes should usually require approval or dual confirmation',
+              'Cross-system write-backs must be designed with compensation and rollback, not only the happy path',
+            ],
+          },
+          {
+            title: 'Third boundary: every write-back plan needs audit, rollback, and ownership, or it will become harder to maintain over time',
+            paragraphs: [
+              'Many AI write-back demos look convincing because they show only the success path: AI extracted something, filled the field, and the workflow moved forward. Real production difficulty lives in the exceptions. Who notices a wrong write? Who is allowed to revert it? Will the revert break downstream processes? Can the logs show whether the change came from an AI suggestion or a human confirmation? Without these controls, maintenance pressure accumulates quickly.',
+              'A better design is to treat AI write-back as a special operational class. Record the source, preserve the original value, trace the triggering context, support rollback, and distinguish direct AI submission from AI suggestion plus human confirmation when needed. Those mechanisms may look like extra effort in the beginning, but they prevent the team from fighting every future mistake manually.',
+            ],
+          },
+        ],
+        takeawayTitle: 'Main takeaways',
+        takeaways: [
+          'When AI connects to internal systems, the first thing to define is not the model setting but the write-back boundary tiers.',
+          'Actions involving status transitions, approvals, master data, and cross-system effects should not be fully automated too early.',
+          'Audit, rollback, and ownership must be part of the design from the first phase, or maintenance cost will climb quickly later.',
+        ],
+        ctaTitle: 'If you are about to connect AI to an internal system, define the modification boundary before the workflow',
+        ctaDescription: 'Map which actions are read-only, which are suggested updates, and which always require human confirmation before discussing the model and orchestration details.',
+      },
+    },
+  },
+
+  'legacy-erp-refactor-database-api-permission': {
+    slug: 'legacy-erp-refactor-database-api-permission',
+    priority: {
+      zh: 0.68,
+      en: 0.52,
+    },
+    publishedAt: '2026-04-17',
+    readingMinutes: 7,
+    relatedServices: ['web-app-development'],
+    content: {
+      zh: {
+        navLabel: '老 ERP 想重构，数据库、接口、权限先动哪个更稳',
+        categoryLabel: '企业系统',
+        metaTitle: '老 ERP 想重构时，数据库、接口、权限三件事先动哪个更稳？｜致诚工作室',
+        metaDescription:
+          '老 ERP 重构最怕一上来全线开刀。本文从真实交付经验讲清，数据库、接口、权限三件事到底该先动哪一层，什么情况下优先级会变，怎样重构才更稳。',
+        keywords: ['老 ERP 重构', 'ERP 权限设计', 'ERP 接口改造', '企业系统重构'],
+        eyebrow: 'Article',
+        heroTitle: '老 ERP 想重构时，数据库、接口、权限三件事先动哪个更稳？',
+        heroDescription:
+          '很多企业一决定重构老 ERP，第一反应是“底层太乱了，数据库先重做”。这句话不一定错，但也经常把项目直接带进深水区。真实交付里，数据库、接口、权限并不是谁听起来更底层就该先动，而是要看当前最痛的风险到底卡在哪：是数据已经失真，还是外围系统接不住，还是角色边界混乱到谁都能改关键状态。顺序判断错了，重构很容易越做越重，还没解决最影响业务的那层问题。',
+        introTitle: '老 ERP 重构最怕的不是技术债多，而是三层一起动却没有主次',
+        introParagraphs: [
+          '我见过不少 ERP 项目，讨论一开始就陷入“数据库先规范”“接口先服务化”“权限先重做”的三选一争论。每个方向都能讲出道理，所以会议总显得很专业。但真正难的地方，是这三层常常互相咬合：数据库结构影响接口质量，接口边界又暴露权限漏洞，权限设计不清又会逼着人绕过系统直接改库。',
+          '所以更稳的做法，不是先选一个听起来最技术的层面狠狠干，而是先问一句：哪一层的问题已经在持续制造业务事故、返工和维护成本？重构顺序应该围着真实风险走，而不是围着技术洁癖走。',
+        ],
+        sections: [
+          {
+            title: '大多数情况下，应该先收接口边界，而不是先推翻数据库',
+            paragraphs: [
+              '如果老 ERP 还在跑，最现实的约束通常是业务不能停。这时候直接大改数据库，往往会把所有调用点、报表、同步脚本和外围系统一起卷进去，影响范围非常难控。相比之下，先把接口层收紧，先定义哪些动作能被外部调用、哪些字段允许写入、哪些状态只能走指定流程，通常更容易在不停机的前提下先建立秩序。',
+              '接口边界一旦清楚，很多隐藏问题会自己浮出来：哪些数据其实没人该直接改，哪些逻辑散落在前端或脚本里，哪些字段已经成了历史包袱。换句话说，接口层常常是最适合先做“止血”的地方。它不一定最底层，但往往最适合先把混乱圈住。',
+            ],
+            bullets: [
+              '先限制关键写操作入口，避免多个系统各自改状态',
+              '把高风险业务动作收敛到明确接口，而不是继续放任脚本直连数据库',
+              '先做可观测和可追踪的接口层，后面才更容易判断数据库怎么拆',
+            ],
+          },
+          {
+            title: '数据库该先动的情况，通常是数据口径已经烂到接口层也救不回来',
+            paragraphs: [
+              '当然也有反例。有些老 ERP 的数据库不是“丑一点”，而是主键混乱、冗余字段大量冲突、状态定义互相打架，甚至同一业务对象在多张表里没有稳定主线。这个时候你再怎么包接口，也只是在脏地基上刷墙。只要数据口径本身不成立，接口层很快就会变成一层更复杂的妥协。',
+              '但即使数据库要先动，也不建议全库一起翻。更稳的是先围绕一条主链路重整核心数据模型，比如订单主表、明细、状态流转、库存占用这些最容易传导错误的部分。把那一小块地基打稳，比喊一句“数据库全部重构”更接近可交付。',
+            ],
+            bullets: [
+              '只有当核心对象的数据口径已经失真时，数据库才值得前置优先',
+              '优先重整主链路相关表结构，不要一上来做全库大迁移',
+              '数据库改造要服务于业务事实一致，不是为了把 ER 图画得更漂亮',
+            ],
+          },
+          {
+            title: '权限往往不该最先大改，但必须尽早做成约束条件',
+            paragraphs: [
+              '权限设计在老 ERP 里非常容易被低估。很多系统表面上有角色表，实际关键动作全靠前端按钮隐藏，或者默认给管理员万能权限，最后所有脏操作都能发生。可问题在于，权限重构如果一上来做成一套大而全的 RBAC 工程，也很容易把项目拖进长周期抽象设计，业务反而迟迟止不了血。',
+              '更实际的做法，是先把权限当作重构过程中的硬约束：哪些角色能改关键状态、哪些字段只能审批后写入、哪些操作必须留痕。也就是说，权限不一定要最先作为独立模块大修，但它必须从第一阶段开始约束接口和数据改造。否则你前面刚把流程理顺，后面又会被越权操作重新打乱。',
+            ],
+          },
+        ],
+        takeawayTitle: '这篇文章的重点',
+        takeaways: [
+          '老 ERP 重构多数情况下更适合先收接口边界，再决定数据库怎么分步重整。',
+          '只有当核心数据口径已经失真时，数据库才值得被前置为第一优先级。',
+          '权限不一定最先单独大改，但必须从第一阶段就作为硬约束进入方案。',
+        ],
+        ctaTitle: '如果你正在评估老 ERP 重构，先别急着喊“全库重做”',
+        ctaDescription: '先把真实业务风险拆出来：哪类写操作最失控、哪条主链路最容易出事故、哪类越权最常见。顺序一旦判断对，重构才不容易做成长期战役。',
+      },
+      en: {
+        navLabel: 'What Should Come First in a Legacy ERP Refactor?',
+        categoryLabel: 'Internal System',
+        metaTitle: 'In a Legacy ERP Refactor, Should Database, APIs, or Permissions Come First? | Zhicheng Studio',
+        metaDescription:
+          'Legacy ERP refactoring becomes risky when database, API, and permission work all start at once. This article explains which layer usually deserves priority first and when that order should change.',
+        keywords: ['legacy ERP refactor', 'ERP API redesign', 'ERP permission model', 'internal system modernization'],
+        eyebrow: 'Article',
+        heroTitle: 'In a legacy ERP refactor, should database, APIs, or permissions come first?',
+        heroDescription:
+          'When companies decide to modernize an old ERP, the instinct is often to say the database must be rebuilt first because everything underneath is messy. Sometimes that is true. Just as often, it sends the project into deep water too early. In real delivery work, database, APIs, and permissions should not be prioritized by how low-level they sound. The better question is which layer is causing the most business damage right now: unreliable data, uncontrolled external writes, or role boundaries so loose that anyone can change critical states. If the order is wrong, the refactor gets heavier long before the real pain is reduced.',
+        introTitle: 'The real risk is not technical debt alone, but changing all three layers without a clear lead order',
+        introParagraphs: [
+          'I have seen many ERP discussions start with a familiar argument: standardize the database first, service-ize the interfaces first, or rebuild permissions first. Every option sounds defensible, which is why these meetings can feel productive for a while. The harder truth is that the three layers are tightly connected. Database structure affects interface quality, interface boundaries expose permission gaps, and weak permissions push people back into direct database edits or side-channel workarounds.',
+          'That is why the steadier path is not to pick the layer that feels most technical and go all in. It is to identify which layer is already generating the most incidents, rework, and maintenance cost in daily operations. Refactor order should follow operational risk, not technical purity.',
+        ],
+        sections: [
+          {
+            title: 'In most cases, tightening API boundaries is safer than rebuilding the database first',
+            paragraphs: [
+              'If the legacy ERP is still running, the usual constraint is that the business cannot stop. A direct database overhaul often drags in every integration point, report, sync script, and downstream tool at once. That blast radius is hard to control. In contrast, tightening the API layer first makes it easier to define which actions are allowed externally, which fields are writable, and which state changes must go through explicit workflows, all without forcing a full stop on operations.',
+              'Once API boundaries are clearer, many hidden problems reveal themselves. You can see which data should never have been edited from multiple places, which business logic is hiding in frontend code or scripts, and which fields survive only because of historical baggage. In that sense, the API layer is often the best place to stop the bleeding first. It is not the deepest layer, but it is often the fastest way to contain chaos.',
+            ],
+            bullets: [
+              'Restrict critical write paths before multiple systems keep changing the same states independently',
+              'Pull risky business actions into explicit interfaces instead of allowing more scripts to hit the database directly',
+              'Build observability and traceability at the API layer before deciding how the data model should evolve',
+            ],
+          },
+          {
+            title: 'The database should go first only when the data model is already too broken for the API layer to compensate',
+            paragraphs: [
+              'There are real exceptions. Some ERP databases are not merely ugly; they have unstable keys, conflicting duplicate fields, broken status definitions, and no reliable backbone for the same business object across tables. In that situation, wrapping more APIs around the system is mostly painting over a dirty foundation. If the underlying business truth is inconsistent, the API layer quickly becomes a more elaborate compromise instead of a cleaner boundary.',
+              'Even then, a full database rewrite is rarely the safest first move. A steadier option is to rebuild the core data model around one main chain first, such as orders, order lines, state transitions, and inventory reservation. Stabilizing that slice of the foundation is usually much more deliverable than declaring a total database reconstruction from day one.',
+            ],
+            bullets: [
+              'Database-first priority makes sense only when core business objects no longer hold consistent truth',
+              'Start with the tables that support the main operational chain, not a whole-database migration',
+              'Database work should serve business consistency, not architecture aesthetics alone',
+            ],
+          },
+          {
+            title: 'Permissions are rarely the first standalone rebuild, but they must become an early constraint',
+            paragraphs: [
+              'Permissions are one of the most underestimated problems in legacy ERP systems. Many products appear to have roles, but critical actions are really controlled by hidden buttons, vague admin defaults, or habits people developed outside the intended process. The danger is that if permission refactoring becomes a giant RBAC project too early, the team can get trapped in abstraction and still fail to stop immediate operational damage.',
+              'A more practical approach is to treat permissions as a hard constraint from the first stage of the refactor. Define which roles can change critical states, which fields require approval, and which actions must always leave an audit trail. In other words, permissions may not need to be rebuilt first as a standalone module, but they should shape API and data decisions from the beginning. Otherwise the refactor cleans one side of the system while uncontrolled actions break it again from the other side.',
+            ],
+          },
+        ],
+        takeawayTitle: 'Main takeaways',
+        takeaways: [
+          'In most legacy ERP refactors, tightening API boundaries is the safer first move before larger database restructuring.',
+          'Database-first priority is justified mainly when core data truth is already broken beyond what interface cleanup can contain.',
+          'Permissions may not be the first standalone rebuild, but they must act as an early constraint on the whole refactor.',
+        ],
+        ctaTitle: 'If you are evaluating a legacy ERP refactor, do not jump straight to a full database rewrite',
+        ctaDescription: 'First isolate the real operational risk: which write paths are out of control, which business chain fails most often, and where unauthorized actions keep breaking trust. Once that order is clear, the refactor becomes far more manageable.',
       },
     },
   },
