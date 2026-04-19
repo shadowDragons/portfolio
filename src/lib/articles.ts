@@ -58,6 +58,7 @@ export const articleSlugs = [
   'internal-order-system-web-app-vs-mini-program',
   'factory-erp-boundary-before-feature-list',
   'ai-writeback-risk-boundaries',
+  'erp-master-data-vs-report-calibration',
 ] as const
 
 export type ArticleSlug = (typeof articleSlugs)[number]
@@ -6741,6 +6742,148 @@ const articleDefinitions: Record<ArticleSlug, ArticleDefinition> = {
         ],
         ctaTitle: 'If you are evaluating a legacy ERP refactor, do not jump straight to a full database rewrite',
         ctaDescription: 'First isolate the real operational risk: which write paths are out of control, which business chain fails most often, and where unauthorized actions keep breaking trust. Once that order is clear, the refactor becomes far more manageable.',
+      },
+    },
+  },
+  'erp-master-data-vs-report-calibration': {
+    slug: 'erp-master-data-vs-report-calibration',
+    priority: {
+      zh: 0.66,
+      en: 0.52,
+    },
+    publishedAt: '2026-04-19',
+    readingMinutes: 7,
+    relatedServices: ['web-app-development'],
+    content: {
+      zh: {
+        navLabel: '老 ERP 重构时，先统一主数据还是先拉齐报表口径',
+        categoryLabel: '企业系统',
+        metaTitle: '老 ERP 重构时，先统一主数据还是先拉齐报表口径？｜致诚工作室',
+        metaDescription:
+          '老 ERP 重构里，主数据治理和报表口径统一经常同时被提上日程，但顺序选错会让项目越做越大。本文从交付风险、业务协同和改造阶段判断，解释什么情况下该先做哪一件事。',
+        keywords: ['老 ERP 重构', '主数据治理', '报表口径统一', '企业系统改造'],
+        eyebrow: 'Article',
+        heroTitle: '老 ERP 重构时，先统一主数据，还是先把报表口径拉齐？',
+        heroDescription:
+          '这两个动作听起来都对，但在真实项目里经常不能一起重做。主数据治理偏底层，报表口径统一偏经营视图；如果没有先后顺序，项目很容易从“解决管理混乱”变成“先开一个永远收不完的治理工程”。',
+        introTitle: '这不是技术先后问题，而是改造抓手问题',
+        introParagraphs: [
+          '很多制造和传统企业的老 ERP，一边是物料、客户、供应商、仓库这些主数据多年没统一，另一边是销售、财务、采购、生产各自看各自的报表，口径互相对不上。于是项目一启动，两个方向都会被同时提出来。',
+          '但真到交付现场，最怕的不是问题多，而是什么都想一起收。我的经验是：先看当前最影响经营判断的是“数据源失真”，还是“管理层看不见同一张表”，顺序要围着这个风险来定，而不是围着概念完整性来定。',
+        ],
+        sections: [
+          {
+            title: '什么时候应该先拉齐报表口径',
+            paragraphs: [
+              '如果当前最大的痛点是老板、部门负责人和一线团队对经营数据各说各话，那先统一报表口径通常更现实。因为管理动作要先建立在同一套解释框架上，否则系统还没重构完，内部判断已经先失真。',
+              '这里的“先拉齐”不等于立刻把所有底层数据都洗干净，而是先把几个关键指标定义清楚：订单额怎么算、出货额怎么算、在制怎么算、库存周转怎么算。先让关键会议上说的是同一回事，后面的主数据治理才更容易获得组织支持。',
+            ],
+            bullets: [
+              '经营会议里同一个指标被不同部门报出不同数字',
+              '管理层更痛的是无法判断，而不是暂时无法自动化',
+              '一期目标是先建立可用的经营看板和协同口径',
+            ],
+          },
+          {
+            title: '什么时候应该先动主数据',
+            paragraphs: [
+              '如果问题已经不是“看不懂报表”，而是同一物料、客户或供应商在系统里存在多套编码、多套命名，导致订单、库存、采购和财务根本串不起来，那主数据治理就不能再往后拖。',
+              '这类情况下，报表口径再怎么讨论，最后也只是给错误输入做格式化展示。先把关键主数据的唯一性、归属关系和维护责任定下来，系统才有机会往稳的方向走。',
+            ],
+            bullets: [
+              '同一对象多编码，跨部门无法可靠映射',
+              '库存、订单、财务之间经常对不上账',
+              '数据问题已经直接影响下单、结算或审计风险',
+            ],
+          },
+          {
+            title: '为什么很多项目两头一起抓，最后反而都做不好',
+            paragraphs: [
+              '因为这两件事背后的组织牵引完全不同。报表口径统一，本质上是在统一管理语言；主数据治理，本质上是在重做数据责任边界。一个偏业务共识，一个偏系统约束，同时大推往往意味着会议越来越多、规则越来越厚，但一线迟迟没有稳定的新操作方式。',
+              '更现实的推进法通常是：先抓一个能形成业务闭环的切口。比如先围绕订单到出货把口径统一出来，或者先围绕物料主数据把编码、命名和维护流程收住。先跑通一条，再扩到别的模块，项目的阻力会小很多。',
+            ],
+          },
+          {
+            title: '一个更稳的阶段划分方式',
+            paragraphs: [
+              '如果非要给顺序一个实操判断，我通常会这样分：先判断当前管理最缺的是“同一套经营视图”还是“可信的数据底座”；然后一期只解决最关键的一边，另一边只做最低限度配合。',
+              '比如先做报表口径统一时，主数据侧只先收关键字段和关键编码；如果先做主数据治理，报表侧就只先保留管理必须看的几个指标，不追求一次搭完所有分析模型。这样更像交付，而不像许愿。',
+            ],
+          },
+        ],
+        takeawayTitle: '这篇文章的重点',
+        takeaways: [
+          '先做报表口径还是主数据，不看概念完整性，要看当前最影响经营和交付的风险在哪。',
+          '如果问题是管理层看不到同一套数字，先统一关键指标口径通常更现实。',
+          '如果问题是对象编码和基础数据已经失真到影响业务正确性，主数据治理就应当前置。',
+        ],
+        ctaTitle: '如果你正在评估 ERP 重构，一期别同时背两座山',
+        ctaDescription: '先说清楚这次改造是要解决“看不清”还是“数据不真”，再决定是一期先抓报表口径，还是先抓主数据治理，项目会稳很多。',
+      },
+      en: {
+        navLabel: 'Legacy ERP Refactor: Master Data First or Reporting Alignment First?',
+        categoryLabel: 'Internal System',
+        metaTitle: 'Legacy ERP Refactor: Fix Master Data First or Align Reporting First? | Zhicheng Studio',
+        metaDescription:
+          'In legacy ERP modernization, master data governance and reporting alignment often compete for priority. This article explains which one should come first based on operational risk, management needs, and delivery control.',
+        keywords: ['legacy ERP refactor', 'master data governance', 'reporting alignment', 'internal system modernization'],
+        eyebrow: 'Article',
+        heroTitle: 'In a legacy ERP refactor, should you fix master data first or align reporting first?',
+        heroDescription:
+          'Both directions sound necessary, but trying to rebuild both at once is how many ERP projects become endless. Master data governance is a foundation problem, while reporting alignment is a management visibility problem. The better starting point depends on which risk is hurting the business right now.',
+        introTitle: 'This is less about architecture purity and more about choosing the right handle',
+        introParagraphs: [
+          'In many manufacturing and traditional business environments, legacy ERP pain shows up in two ways at the same time: master data is inconsistent across the system, and departments still read different numbers from different reports.',
+          'The mistake is to treat both as equal first-phase goals by default. A steadier decision starts by asking what is damaging operations more today: untrustworthy source data, or the fact that management cannot make decisions from a shared view of the business.',
+        ],
+        sections: [
+          {
+            title: 'When reporting alignment should come first',
+            paragraphs: [
+              'If leadership, finance, sales, production, and operations all use different definitions for the same business metrics, reporting alignment usually deserves first priority. Management cannot improve a system it cannot even read consistently.',
+              'This does not mean cleaning every source table first. It means defining a usable interpretation layer around a few critical metrics: order value, shipped value, work in progress, inventory turnover, and similar operational numbers. Once the business speaks the same language, larger governance work gains much stronger support.',
+            ],
+            bullets: [
+              'The same KPI is reported differently by different departments',
+              'The bigger pain is decision confusion rather than automation delay',
+              'Phase one is meant to build a usable management view, not a perfect system rewrite',
+            ],
+          },
+          {
+            title: 'When master data should move first',
+            paragraphs: [
+              'If the problem is no longer just conflicting reports, but duplicated item codes, inconsistent customer records, broken supplier identity, or unreliable warehouse mappings, then master data governance cannot stay as a later-phase issue.',
+              'In that situation, reporting alignment alone becomes cosmetic. You may standardize dashboards, but the inputs are still too distorted to support reliable operations. Key entities need clear ownership, uniqueness rules, and maintenance paths before the rest of the system can stabilize.',
+            ],
+            bullets: [
+              'The same entity exists under multiple codes or naming schemes',
+              'Inventory, order, and finance records frequently fail to reconcile',
+              'Data quality is already creating transaction or audit risk',
+            ],
+          },
+          {
+            title: 'Why doing both at once often fails',
+            paragraphs: [
+              'Because the organizational work behind them is different. Reporting alignment is about management language and operating consensus. Master data governance is about ownership, maintenance discipline, and system constraints. Pushing both as equal large-scale programs usually produces more meetings, more rules, and not enough stable daily behavior.',
+              'A better delivery pattern is to choose one business slice first. For example, align reporting around the order-to-shipment chain, or govern master data around item coding and warehouse control. Once one slice holds, expansion becomes much easier.',
+            ],
+          },
+          {
+            title: 'A more practical phase split',
+            paragraphs: [
+              'If I have to simplify the decision, I usually frame it this way: does the business currently lack a shared operating view, or a trustworthy data base? Phase one should solve only the more dangerous side, while the other side supports it at the minimum necessary level.',
+              'For example, if reporting alignment comes first, master data work may only tighten a few critical fields and coding rules. If master data comes first, reporting work may stay limited to the handful of metrics leadership truly needs. That looks less ambitious on paper, but it is far more deliverable.',
+            ],
+          },
+        ],
+        takeawayTitle: 'Main takeaways',
+        takeaways: [
+          'The right priority is not about conceptual completeness, but about which risk is hurting operations and delivery most right now.',
+          'If the biggest problem is that management cannot see the same business reality, align reporting definitions first.',
+          'If base entities and transaction truth are already unstable, master data governance needs to move earlier.',
+        ],
+        ctaTitle: 'If you are planning an ERP refactor, do not carry two mountains in phase one',
+        ctaDescription: 'First decide whether the urgent problem is “we cannot see clearly” or “our data is no longer trustworthy.” That usually tells you whether reporting alignment or master data governance should lead the first phase.',
       },
     },
   },
