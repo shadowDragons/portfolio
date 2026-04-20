@@ -1,6 +1,6 @@
 import type { MetadataRoute } from 'next'
 import { articleSlugs } from '@/lib/articles'
-import { appLocales, getLocalizedUrl, indexablePages } from '@/lib/site-config'
+import { appLocales, getLocalizedUrl, indexablePages, getLocaleSeoConfig, defaultAppLocale } from '@/lib/site-config'
 import { servicePageSlugs } from '@/lib/service-pages'
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -41,11 +41,21 @@ export default function sitemap(): MetadataRoute.Sitemap {
   ]
 
   return [...indexablePages, ...serviceRoutes].flatMap(page =>
-    appLocales.map(locale => ({
-      url: getLocalizedUrl(locale, page.pathname),
-      lastModified,
-      changeFrequency: page.changeFrequency,
-      priority: page.priorities[locale],
-    })),
+    appLocales.map(locale => {
+      const languages = Object.fromEntries(
+        appLocales.map(l => [getLocaleSeoConfig(l).languageTag, getLocalizedUrl(l, page.pathname)])
+      )
+      languages['x-default'] = getLocalizedUrl(defaultAppLocale, page.pathname)
+
+      return {
+        url: getLocalizedUrl(locale, page.pathname),
+        lastModified,
+        changeFrequency: page.changeFrequency,
+        priority: page.priorities[locale],
+        alternates: {
+          languages,
+        },
+      }
+    })
   )
 }

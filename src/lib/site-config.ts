@@ -120,11 +120,16 @@ function normalizePathname(pathname = ''): string {
 }
 
 export function getLocalizedPath(locale: AppLocale, pathname = ''): string {
-  return `/${locale}${normalizePathname(pathname)}`
+  const normalized = normalizePathname(pathname)
+  if (locale === defaultAppLocale) {
+    return normalized || '/'
+  }
+  return `/${locale}${normalized}`
 }
 
 export function getLocalizedUrl(locale: AppLocale, pathname = ''): string {
-  return `${siteConfig.url}${getLocalizedPath(locale, pathname)}`
+  const path = getLocalizedPath(locale, pathname)
+  return `${siteConfig.url}${path === '/' ? '' : path}`
 }
 
 export function getAbsoluteAssetUrl(pathname: string): string {
