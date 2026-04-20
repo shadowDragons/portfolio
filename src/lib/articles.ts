@@ -57,6 +57,7 @@ export const articleSlugs = [
   'factory-oa-adoption-process-permission',
   'internal-order-system-web-app-vs-mini-program',
   'factory-erp-boundary-before-feature-list',
+  'legacy-erp-refactor-database-api-permission',
   'ai-writeback-risk-boundaries',
   'erp-master-data-vs-report-calibration',
 ] as const

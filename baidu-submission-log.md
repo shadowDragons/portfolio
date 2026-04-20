@@ -97,3 +97,75 @@ Tracks Baidu URL submissions for `https://sphrag.com` Chinese pages.
 
 ### Failed
 - none
+
+## 2026-04-15 19:33 / Baidu URL push
+
+- batch target: 10
+- attempted: 10
+- success: 10
+- failed: 0
+- total submitted: 40
+- remaining: 17
+- stop reason: completed batch
+
+### Success
+- https://sphrag.com/zh/blog/foreign-trade-about-page-writing	200	{"remain":9,"success":1}
+- https://sphrag.com/zh/blog/mini-program-and-website-relationship	200	{"remain":8,"success":1}
+- https://sphrag.com/zh/blog/education-training-website-planning	200	{"remain":7,"success":1}
+- https://sphrag.com/zh/blog/consulting-company-website-copy	200	{"remain":6,"success":1}
+- https://sphrag.com/zh/blog/ai-product-website-messaging	200	{"remain":5,"success":1}
+- https://sphrag.com/zh/blog/b2b-industry-pages-planning	200	{"remain":4,"success":1}
+- https://sphrag.com/zh/blog/website-content-update-process	200	{"remain":3,"success":1}
+- https://sphrag.com/zh/blog/website-development-timeline-estimation	200	{"remain":2,"success":1}
+- https://sphrag.com/zh/blog/website-maintenance-scope	200	{"remain":1,"success":1}
+- https://sphrag.com/zh/blog/company-website-contact-page-planning	200	{"remain":0,"success":1}
+
+### Failed
+- none
+
+## 2026-04-16 11:35 / Baidu URL push
+
+- batch target: 10
+- attempted: 10
+- success: 10
+- failed: 0
+- total submitted: 50
+- remaining: 7
+- stop reason: completed batch
+
+### Success
+- https://sphrag.com/zh/blog/multilingual-website-launch-checklist	200	{"remain":9,"success":1}
+- https://sphrag.com/zh/blog/foreign-trade-website-language-priority	200	{"remain":8,"success":1}
+- https://sphrag.com/zh/blog/company-website-budget-estimation	200	{"remain":7,"success":1}
+- https://sphrag.com/zh/blog/foreign-trade-website-faq-writing	200	{"remain":6,"success":1}
+- https://sphrag.com/zh/blog/landing-page-vs-company-website	200	{"remain":5,"success":1}
+- https://sphrag.com/zh/blog/mini-program-admin-panel-planning	200	{"remain":4,"success":1}
+- https://sphrag.com/zh/blog/business-system-phase-one-scope	200	{"remain":3,"success":1}
+- https://sphrag.com/zh/blog/website-requirements-document-preparation	200	{"remain":2,"success":1}
+- https://sphrag.com/zh/blog/company-website-service-page-writing	200	{"remain":1,"success":1}
+- https://sphrag.com/zh/blog/foreign-trade-website-homepage-mistakes	200	{"remain":0,"success":1}
+
+### Failed
+- none
+
+## 2026-04-19 11:35 / Baidu URL push
+
+- batch target: 7
+- attempted: 7
+- success: 7
+- failed: 0
+- total submitted: 57
+- remaining: 0
+- stop reason: completed batch
+
+### Success
+- https://sphrag.com/zh/blog/brand-vs-service-on-homepage	200	{"remain":9,"success":1}
+- https://sphrag.com/zh/blog/website-admin-mini-program-boundaries	200	{"remain":8,"success":1}
+- https://sphrag.com/zh/blog/website-first-or-system-first	200	{"remain":7,"success":1}
+- https://sphrag.com/zh/blog/ai-chat-entry-vs-internal-workflow	200	{"remain":6,"success":1}
+- https://sphrag.com/zh/blog/company-website-case-page-without-cases	200	{"remain":5,"success":1}
+- https://sphrag.com/zh/blog/manufacturing-erp-budget-mistakes	200	{"remain":4,"success":1}
+- https://sphrag.com/zh/blog/factory-oa-shell-development	200	{"remain":3,"success":1}
+
+### Failed
+- none
