@@ -60,6 +60,7 @@ export const articleSlugs = [
   'legacy-erp-refactor-database-api-permission',
   'ai-writeback-risk-boundaries',
   'erp-master-data-vs-report-calibration',
+  'oa-mini-program-integration-maintenance-boundary',
 ] as const
 
 export type ArticleSlug = (typeof articleSlugs)[number]
@@ -6885,6 +6886,158 @@ const articleDefinitions: Record<ArticleSlug, ArticleDefinition> = {
         ],
         ctaTitle: 'If you are planning an ERP refactor, do not carry two mountains in phase one',
         ctaDescription: 'First decide whether the urgent problem is “we cannot see clearly” or “our data is no longer trustworthy.” That usually tells you whether reporting alignment or master data governance should lead the first phase.',
+      },
+    },
+  },
+  'oa-mini-program-integration-maintenance-boundary': {
+    slug: 'oa-mini-program-integration-maintenance-boundary',
+    priority: {
+      zh: 0.66,
+      en: 0.52,
+    },
+    publishedAt: '2026-04-24',
+    readingMinutes: 7,
+    relatedServices: ['web-app-development', 'mini-program-development'],
+    content: {
+      zh: {
+        navLabel: '审批 OA 对接微信小程序，怎么接才不把维护做重',
+        categoryLabel: '企业系统',
+        metaTitle: '企业内部审批 OA 对接微信小程序，技术上怎么打通数据又不把维护成本做高？｜致诚工作室',
+        metaDescription:
+          '很多企业想把内部审批 OA 接到微信小程序里，但真正容易失控的不是接口本身，而是流程状态、权限规则和双端写入边界。本文从真实交付角度讲清更稳的接法。',
+        keywords: ['审批 OA 对接微信小程序', 'OA 小程序集成', '企业内部系统集成', '流程权限边界'],
+        eyebrow: 'Article',
+        heroTitle: '企业内部审批 OA 对接微信小程序，真正要先拆清的不是接口，而是维护边界',
+        heroDescription:
+          '很多企业做内部审批系统时，都会提一个很自然的需求：电脑端 OA 继续保留，移动端希望放进微信小程序里，方便发起、催办、审批和查看进度。表面看像是加一个入口，实际一不小心就会变成两套前端、两套状态判断、两套消息逻辑一起长，最后接口越接越多，流程一改就要双端联动，维护成本很快高过最初想象。',
+        introTitle: '这个项目最容易低估的，不是开发量，而是“谁说了算”',
+        introParagraphs: [
+          '很多团队会把这类需求理解成“把 OA 接到小程序里”，于是讨论焦点很容易先落在登录、接口、消息通知、页面开发这些显性的工作上。但真实交付里，真正决定后面稳不稳的，往往是另外几个问题：流程状态到底由哪一端认定，权限规则写在哪一层，审批动作能不能在两个入口同时改同一份数据，异常退回和临时代办由谁兜底。',
+          '如果这些边界没先定清，小程序就很容易从“移动入口”慢慢长成“第二套 OA”。一开始大家觉得只是补几个页面，后面却会发现流程一改，电脑端、小程序端、消息模板、接口校验、权限判断都要跟着一起改。系统并不是不能接，而是不能在还没想清楚职责时就同时把两端都做成主系统。',
+        ],
+        sections: [
+          {
+            title: '先定流程和权限谁负责，不要先把双端都做成可独立判断',
+            paragraphs: [
+              '审批 OA 接小程序，最常见的问题不是接口连不上，而是两边都想自己判断流程。电脑端为了完整性维护流程配置、节点条件和权限模型，小程序端为了体验又开始加“当前节点是否可点”“哪些人可见”“退回后怎么显示”这类业务判断。短期看像是在补体验，长期看却是在复制规则。',
+              '更稳的做法通常是让一处系统承担流程真相。无论主流程引擎落在现有 OA 后台，还是单独的流程服务，只要状态流转、审批规则、权限判断和异常处理的权威来源是单点，另一端就更容易保持成“操作入口”而不是“规则入口”。这样后面流程改动时，不至于每次都在两个前端里找分叉逻辑。',
+            ],
+            bullets: [
+              '流程节点、条件分支和审批规则最好只在一处维护',
+              '小程序可以做界面判断，但不要成为新的规则源',
+              '代办、转交、退回、加签这些异常动作尤其要避免双端各写一套',
+            ],
+          },
+          {
+            title: '小程序更适合承接轻操作，复杂配置和治理能力应留在后台',
+            paragraphs: [
+              '从真实使用场景看，微信小程序最适合承接的是发起申请、查看待办、快速审批、补充图片或附件、接收提醒、查询进度这类轻操作。它的价值在于把高频移动动作放到离用户更近的入口，而不是把整套 OA 管理后台原样缩进手机里。',
+              '如果一开始就希望小程序同时承担流程设计、表单配置、组织和角色维护、报表筛选、权限排查、历史追溯这些后台能力，项目后面通常会越来越别扭。因为这些能力本来就依赖更复杂的信息密度和管理上下文，塞进移动端不仅体验差，还会逼着团队在技术上维护更多兼容层。',
+            ],
+            bullets: [
+              '小程序优先承接发起、审批、提醒、查询、上传这类移动动作',
+              '流程设计、组织权限、报表和排障更适合留在 Web 后台',
+              '入口可以多，但治理面最好收敛，不要每个端都变成“半套后台”',
+            ],
+          },
+          {
+            title: '接口打通不是越灵活越好，双向自由写入往往最难维护',
+            paragraphs: [
+              '很多系统一开始喜欢强调“前后台都能改、接口尽量通用、消息和状态实时同步”，听起来很先进，实际却容易把维护复杂度做高。因为一旦小程序和后台都能自由写入流程数据，后面就会不断遇到幂等、并发、重复提交、状态回滚、消息重复触发和审计追踪的问题。',
+              '我更倾向于把集成设计成少数清晰的动作接口。比如小程序只负责提交审批动作、补交材料、查看结果，真正的状态推进由统一流程服务落库；消息通知也尽量围绕统一事件触发，而不是每个端各自拼一套提醒逻辑。这样虽然看起来没有那么“全能”，但排障会简单很多，后面接企业微信、短信或别的入口时也不会重新打架。',
+            ],
+            bullets: [
+              '尽量避免两个入口同时直接改同一份流程状态',
+              '审批写入、附件补充、待办查询可以拆成少数明确接口',
+              '通知和审计最好围绕统一事件，而不是围绕页面行为散落触发',
+            ],
+          },
+          {
+            title: '一期先证明一个高频流程，比一口气铺满所有审批更现实',
+            paragraphs: [
+              '这类项目还有一个常见误区，就是一想到有小程序入口，就想把请假、报销、采购、合同、付款、用章、访客、维修、出差全部一起搬过去。结果往往不是用户更满意，而是项目范围迅速膨胀，每条流程都夹着自己的特殊字段、特殊权限和特殊通知方式。',
+              '更实际的方式通常是先选一条高频、规则相对清晰、移动审批价值又足够高的流程做通。比如先把请假或报销打顺，看登录、待办、审批、退回、消息提醒和附件补交这一整条链路能不能稳定跑，再决定第二批流程怎么扩。这样既能尽快验证移动入口价值，也不会让架构在一期就背上过重的历史包袱。',
+            ],
+          },
+        ],
+        takeawayTitle: '这篇文章的重点',
+        takeaways: [
+          '审批 OA 接微信小程序时，先定流程真相和权限真相归谁管，比先接多少接口更重要。',
+          '小程序更适合作为移动操作入口，不适合长成第二套流程治理后台。',
+          '双端自由写入看起来灵活，实际最容易把状态、消息和审计维护做重。',
+        ],
+        ctaTitle: '如果你在评估 OA 和小程序集成，先把“单点规则”和“一期流程”定住',
+        ctaDescription: '只要先说清流程引擎在哪、权限谁负责、小程序只承接哪些动作，再决定一期先做哪条审批链路，项目通常会稳很多。',
+      },
+      en: {
+        navLabel: 'How to Connect OA Approval Flows to a WeChat Mini-Program Without Creating a Maintenance Burden',
+        categoryLabel: 'Internal System',
+        metaTitle: 'Connecting Internal OA Approval Flows to a WeChat Mini-Program Without Inflating Maintenance Cost | Zhicheng Studio',
+        metaDescription:
+          'When companies connect internal OA approval workflows to a WeChat mini-program, the real risk is rarely the API itself. The harder problem is keeping process state, permission logic, and write boundaries from splitting across two fronts.',
+        keywords: ['OA mini-program integration', 'internal approval workflow', 'WeChat mini-program', 'permission boundary'],
+        eyebrow: 'Article',
+        heroTitle: 'When internal OA approval flows are extended into a mini-program, the harder job is defining the maintenance boundary',
+        heroDescription:
+          'Many companies naturally want to keep the desktop OA system while adding a WeChat mini-program for requests, reminders, approvals, and status checks. On the surface that sounds like one more entry point. In delivery work, though, it can easily become two frontends, two copies of process logic, and two layers of notification rules growing at the same time. Once that happens, every workflow change starts touching both sides and maintenance cost rises faster than expected.',
+        introTitle: 'The most underestimated part is usually not the build effort, but who owns the truth',
+        introParagraphs: [
+          'Teams often frame this work as “connecting OA to a mini-program,” so the first discussion stays around login, APIs, messaging, and page development. Those things matter, but they are rarely what makes the system hard to sustain. The real questions are harder: which side owns workflow state, where permission logic lives, whether both entry points can write to the same process record, and who handles abnormal paths such as rejection, delegation, or temporary takeover.',
+          'If those boundaries stay vague, the mini-program gradually stops being a mobile entry and starts becoming a second OA system. What looked like a few extra pages turns into duplicated workflow rules, duplicated message handling, and duplicated validation. The problem is not that the integration cannot be done. The problem is trying to let both fronts behave like primary systems before their responsibilities are defined.',
+        ],
+        sections: [
+          {
+            title: 'Assign ownership of workflow and permissions before letting both sides make decisions',
+            paragraphs: [
+              'The most common failure point is not connectivity, but duplicated judgment. The desktop OA keeps the full process model, node rules, and permission structure, while the mini-program starts adding its own business checks for what should be clickable, visible, or editable. That may improve short-term usability, but over time it creates a second rule source.',
+              'A safer pattern is to keep process truth in one place. Whether the authority sits in the existing OA backend or in a dedicated workflow service, state transitions, approval rules, permission checks, and exception handling should have one authoritative source. The mini-program can stay an action surface rather than a rules surface, which makes later workflow changes far easier to control.',
+            ],
+            bullets: [
+              'Node rules, branching conditions, and approval logic should ideally be maintained in one place',
+              'The mini-program can reflect decisions, but should not become a second source of policy',
+              'Delegation, rejection, countersign, and other exception actions are where duplicate logic becomes especially expensive',
+            ],
+          },
+          {
+            title: 'Mini-programs are better for lightweight actions, while governance belongs in the backend',
+            paragraphs: [
+              'In real usage, a mini-program is best at things like request submission, pending-item review, quick approvals, attachment uploads, reminders, and status lookup. Its value comes from making high-frequency mobile actions easier, not from compressing the entire OA administration layer into a phone-sized interface.',
+              'Once teams expect the mini-program to also handle flow design, form configuration, org and role management, report filtering, permission troubleshooting, and full historical tracing, the project usually becomes awkward fast. Those tasks depend on denser information and richer management context, so forcing them into mobile often makes both product design and engineering maintenance worse.',
+            ],
+            bullets: [
+              'Use the mini-program first for submit, approve, notify, check, and upload actions',
+              'Keep workflow design, role governance, reporting, and troubleshooting in the Web backend',
+              'Multiple entry points are fine, but the governance surface should stay concentrated',
+            ],
+          },
+          {
+            title: 'Integration gets harder when both ends can write too freely',
+            paragraphs: [
+              'Many teams describe the ideal integration as “fully flexible”: both fronts can update data, interfaces stay generic, and state plus messages sync everywhere in real time. That sounds advanced, but it is often how maintenance becomes fragile. Once both the mini-program and the backend can write workflow data independently, concurrency, idempotency, duplicate submission, rollback, repeated notifications, and audit tracing all become harder to control.',
+              'I prefer a smaller set of explicit action APIs. The mini-program can submit approval actions, upload additional materials, and request current status, while a unified workflow service remains responsible for state persistence. Notifications should also be triggered from shared events rather than from page-level behaviors on each side. That looks less “powerful” on paper, but it is much easier to troubleshoot and extend later.',
+            ],
+            bullets: [
+              'Avoid letting two entry points edit the same workflow state directly whenever possible',
+              'Separate actions such as approval writeback, attachment submission, and pending-item retrieval into clear interfaces',
+              'Base notification and audit logic on shared events rather than scattered frontend behavior',
+            ],
+          },
+          {
+            title: 'Phase one should prove one high-frequency workflow before expanding broadly',
+            paragraphs: [
+              'Another common mistake is treating the mini-program as the reason to move every approval flow at once: leave, reimbursement, procurement, contracts, payments, seal requests, visitors, maintenance, travel, and more. The result is usually not a better experience, but a rapidly expanding scope where each workflow brings its own fields, permissions, and message rules.',
+              'A steadier phase one usually chooses one workflow that is frequent, relatively clear in rules, and genuinely benefits from mobile approval. Leave requests or reimbursements are often better first candidates than a huge mixed rollout. Once login, pending items, approval actions, rejection paths, reminders, and attachment resubmission run reliably in one chain, the next wave of workflows can be added with far less structural risk.',
+            ],
+          },
+        ],
+        takeawayTitle: 'Main takeaways',
+        takeaways: [
+          'When OA approval workflows connect to a mini-program, defining ownership of process truth and permission truth matters more than adding more interfaces.',
+          'A mini-program works best as a mobile action surface, not as a second workflow governance backend.',
+          'Free write access on both sides may look flexible, but it is usually the fastest way to make state, notification, and audit maintenance heavy.',
+        ],
+        ctaTitle: 'If you are planning OA and mini-program integration, lock the single rule source and the phase-one workflow first',
+        ctaDescription: 'Once it is clear where the workflow engine lives, who owns permissions, and which actions belong in the mini-program, the project becomes much easier to deliver without creating a second system by accident.',
       },
     },
   },
