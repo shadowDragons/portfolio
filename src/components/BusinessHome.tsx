@@ -519,9 +519,12 @@ export default async function BusinessHome({ locale }: BusinessHomeProps) {
             </div>
           </div>
 
-          <div className='mt-8 flex justify-center'>
-            <a href='https://fwfw.app/item/zhchengstudio' target='_blank' rel='noopener'>
+          <div className='mt-8 flex flex-wrap items-center justify-center gap-4'>
+            <a href='https://fwfw.app/item/zhchengstudio' target='_blank' rel='noopener noreferrer'>
               <Image src='https://fwfw.app/badge-white.svg' width={250} height={54} alt='Featured on FWFW' />
+            </a>
+            <a href='https://toolfame.com/item/zhchengstudio' target='_blank' rel='noopener noreferrer'>
+              <Image src='https://toolfame.com/badge-light.svg' width={220} height={54} alt='Featured on toolfame.com' />
             </a>
           </div>
         </div>

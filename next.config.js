@@ -49,6 +49,10 @@ const nextConfig = {
         protocol: 'https',
         hostname: 'fwfw.app',
       },
+      {
+        protocol: 'https',
+        hostname: 'toolfame.com',
+      },
     ],
   },
 }
