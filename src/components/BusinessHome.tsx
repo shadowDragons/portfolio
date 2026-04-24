@@ -526,6 +526,9 @@ export default async function BusinessHome({ locale }: BusinessHomeProps) {
             <a href='https://toolfame.com/item/zhchengstudio' target='_blank' rel='noopener noreferrer'>
               <Image src='https://toolfame.com/badge-light.svg' width={220} height={54} alt='Featured on toolfame.com' />
             </a>
+            <a href='https://geoly.net/item/zhchengstudio' target='_blank' rel='noopener noreferrer'>
+              <Image src='https://geoly.net/badge-light.svg' width={200} height={54} alt='Featured on geoly.net' />
+            </a>
           </div>
         </div>
       </section>
