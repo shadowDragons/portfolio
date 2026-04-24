@@ -57,6 +57,10 @@ const nextConfig = {
         protocol: 'https',
         hostname: 'geoly.net',
       },
+      {
+        protocol: 'https',
+        hostname: 'saasfame.com',
+      },
     ],
   },
 }
