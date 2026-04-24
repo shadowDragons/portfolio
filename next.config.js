@@ -61,6 +61,10 @@ const nextConfig = {
         protocol: 'https',
         hostname: 'saasfame.com',
       },
+      {
+        protocol: 'https',
+        hostname: 'aitoolly.org',
+      },
     ],
   },
 }

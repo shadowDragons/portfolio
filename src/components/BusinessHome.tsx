@@ -532,6 +532,18 @@ export default async function BusinessHome({ locale }: BusinessHomeProps) {
             <a href='https://saasfame.com/item/zhchengstudio' target='_blank' rel='noopener noreferrer'>
               <Image src='https://saasfame.com/badge-light.svg' width={220} height={54} alt='Featured on saasfame.com' />
             </a>
+            <a
+              href='https://aitoolly.org?utm_source=badge&utm_medium=embed&utm_campaign=submit'
+              target='_blank'
+              rel='noopener noreferrer'
+              className='inline-flex items-center gap-2 rounded-xl border border-[#e5e7eb] bg-white px-3 py-2 text-left no-underline transition-all duration-200 hover:border-[#d1d5db] hover:shadow-[0_10px_24px_-16px_rgba(17,24,39,0.35)]'
+            >
+              <Image src='https://aitoolly.org/logo.png' width={40} height={40} alt='AIToolly Badge' className='h-10 w-10 object-contain' />
+              <div className='flex flex-col'>
+                <span className='text-xs leading-none text-[#6b7280]'>AIToolly</span>
+                <span className='mt-1 text-sm font-semibold leading-none text-[#111827]'>Featured AI Agent</span>
+              </div>
+            </a>
           </div>
         </div>
       </section>
