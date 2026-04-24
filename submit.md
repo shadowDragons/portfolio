@@ -13,3 +13,24 @@ Zhicheng Studio also develops internal business systems such as ERP, OA, CRM, wo
 In addition, the studio works on practical AI applications and enterprise agents that connect large language models with real business workflows. This includes internal knowledge assistants, AI agents, automated content processes, and workflow tools that improve productivity and make better use of existing business systems and content.
 
 Overall, sphrag.com presents Zhicheng Studio as a focused development partner for businesses that need well-structured websites, maintainable internal systems, and useful AI solutions delivered with direct accountability, realistic scope control, and long-term thinking.
+
+---
+
+Custom corporate website development for company, brand, and service sites
+Multilingual and foreign-trade websites with SEO-friendly structure
+Internal business systems such as ERP, OA, CRM, workflows, and admin platforms
+Practical AI applications and enterprise agents for real business operations
+Full-stack delivery across frontend and backend with direct communication
+Clear information architecture, lead capture, and long-term maintainability
+No subcontracting, staged delivery, and post-launch support
+
+---
+
+Launching a new corporate website for a company or brand
+Rebuilding an outdated website with better structure, SEO, and conversion flow
+Creating multilingual or foreign-trade websites for overseas markets
+Developing internal business systems such as ERP, OA, CRM, and approval workflows
+Replacing legacy tools with maintainable web-based platforms
+Building AI agents or internal knowledge assistants for business teams
+Automating content, operations, or customer support workflows with AI
+Delivering custom web apps that combine public-facing pages with internal management features
