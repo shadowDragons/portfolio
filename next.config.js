@@ -45,6 +45,10 @@ const nextConfig = {
         protocol: 'https',
         hostname: 'idea.sphrag.com',
       },
+      {
+        protocol: 'https',
+        hostname: 'fwfw.app',
+      },
     ],
   },
 }

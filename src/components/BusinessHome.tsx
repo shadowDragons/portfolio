@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import { getTranslations } from 'next-intl/server'
 import { Link } from '@/i18n/routing'
 import { siteConfig, type AppLocale } from '@/lib/site-config'
@@ -516,6 +517,12 @@ export default async function BusinessHome({ locale }: BusinessHomeProps) {
               </div>
               <p className='mt-2 text-sm leading-6 text-[#666]'>{t('contact.briefDescription')}</p>
             </div>
+          </div>
+
+          <div className='mt-8 flex justify-center'>
+            <a href='https://fwfw.app/item/zhchengstudio' target='_blank' rel='noopener'>
+              <Image src='https://fwfw.app/badge-white.svg' width={250} height={54} alt='Featured on FWFW' />
+            </a>
           </div>
         </div>
       </section>
