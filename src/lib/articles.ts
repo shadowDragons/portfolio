@@ -61,6 +61,7 @@ export const articleSlugs = [
   'ai-writeback-risk-boundaries',
   'erp-master-data-vs-report-calibration',
   'oa-mini-program-integration-maintenance-boundary',
+  'ai-project-context-process-boundaries',
 ] as const
 
 export type ArticleSlug = (typeof articleSlugs)[number]
@@ -7038,6 +7039,158 @@ const articleDefinitions: Record<ArticleSlug, ArticleDefinition> = {
         ],
         ctaTitle: 'If you are planning OA and mini-program integration, lock the single rule source and the phase-one workflow first',
         ctaDescription: 'Once it is clear where the workflow engine lives, who owns permissions, and which actions belong in the mini-program, the project becomes much easier to deliver without creating a second system by accident.',
+      },
+    },
+  },
+  'ai-project-context-process-boundaries': {
+    slug: 'ai-project-context-process-boundaries',
+    priority: {
+      zh: 0.66,
+      en: 0.52,
+    },
+    publishedAt: '2026-04-25',
+    readingMinutes: 7,
+    relatedServices: ['web-app-development'],
+    content: {
+      zh: {
+        navLabel: 'AI 项目不稳定，通常不是模型先出问题',
+        categoryLabel: '企业系统',
+        metaTitle: 'AI 项目效果不稳定，先查上下文、流程和责任边界｜致诚工作室',
+        metaDescription:
+          '很多 AI 应用上线后效果忽好忽坏，问题常常不在模型本身，而在上下文来源、流程触发点、人工兜底和责任边界没有先拆清。',
+        keywords: ['AI 应用落地', '企业 AI 系统', '流程自动化', '上下文工程'],
+        eyebrow: 'Article',
+        heroTitle: '很多 AI 项目效果不稳定，问题通常不在模型，而在上下文、流程和责任边界',
+        heroDescription:
+          '企业做 AI 应用时，很容易把注意力放在模型参数、提示词和演示效果上。但真正进入业务系统后，结果不稳定往往来自更朴素的问题：系统给了哪些上下文，什么时候触发 AI，AI 的建议写回哪里，出错时由谁确认。模型能力重要，但项目能不能长期跑住，更多取决于这些边界有没有先定清。',
+        introTitle: 'AI 不是单独运行的功能，而是嵌进流程里的判断环节',
+        introParagraphs: [
+          '我见过不少 AI 应用在 Demo 阶段看起来很顺，接进真实业务后却开始变得忽好忽坏。同一个问题，有时回答准确，有时引用过期资料；同一个流程，有时能省人力，有时反而要人工反复检查。这个时候团队很容易继续换模型、改提示词、加更多规则，但效果并不一定稳定下来。',
+          '原因是企业 AI 项目通常不是“问答框”这么简单。它会碰到资料来源、权限、业务状态、审批节点、异常记录、写回动作和责任归属。如果这些东西没有先被系统化地拆出来，AI 得到的上下文就是漂的，流程触发点也是漂的，最后结果自然很难稳定。',
+        ],
+        sections: [
+          {
+            title: '先看上下文是不是可信，而不是先追求模型更聪明',
+            paragraphs: [
+              '很多 AI 项目的第一反应是调模型，但真实交付里，我会先看它拿到的上下文是否可靠。知识库有没有版本，文件是否有负责人，业务数据是否带状态，客户或订单信息是否过期，权限过滤是否准确，这些都会直接影响输出质量。',
+              '如果上下文来源本身是混乱的，模型越会总结，反而越容易把错误内容包装得很像正确答案。与其一开始就追求复杂推理，不如先把资料入口、更新时间、引用范围和不可用数据的处理方式定清楚。AI 的稳定性，很多时候是数据治理和系统边界的结果。',
+            ],
+            bullets: [
+              '知识、订单、客户、工单等上下文要有明确来源和更新时间',
+              '权限过滤要在取数阶段处理，而不是只靠提示词提醒',
+              '过期、缺失、冲突的信息要允许 AI 明确拒答或转人工',
+            ],
+          },
+          {
+            title: '流程触发点要少而准，不要把 AI 塞进每个页面',
+            paragraphs: [
+              '企业内部系统接 AI 时，很容易出现一种冲动：每个列表页加总结，每个详情页加建议，每个表单加自动填写，每个审批节点加风险判断。这样看起来功能很完整，但维护成本和误用风险会迅速变高。',
+              '更稳的做法是先选一个高频、低歧义、出错可控的流程切口。比如售后工单归类、合同条款初筛、客户跟进摘要、订单异常解释，先把输入、输出、人工确认和日志追踪跑通。等一个闭环稳定了，再扩到更多场景，而不是第一期就铺满系统。',
+            ],
+            bullets: [
+              '优先选择重复性高、判断边界清楚、人工容易复核的场景',
+              '不要让 AI 第一阶段同时承担摘要、决策、写回和通知所有动作',
+              '每个触发点都要能追踪输入、输出、操作者和后续处理结果',
+            ],
+          },
+          {
+            title: '写回边界比生成能力更重要，尤其不要默认让 AI 直接改业务主数据',
+            paragraphs: [
+              'AI 生成内容不难，难的是生成之后怎么进入业务系统。是只作为建议展示，还是自动创建记录；是写入草稿，还是直接改状态；是由员工确认后提交，还是系统自动推进下一步。这些边界如果没有先说清，后面很容易把风险藏进“自动化”三个字里。',
+              '我更倾向于在早期把 AI 放在建议层和草稿层，让关键动作经过人工确认。尤其是客户资料、价格、合同、库存、审批状态这类主数据和关键状态，不应因为一次模型输出就被直接覆盖。等日志、回滚、权限和异常兜底都成熟后，再考虑更深的自动写回。',
+            ],
+            bullets: [
+              '建议、草稿、正式写回要分层设计，不要混成一个按钮',
+              '关键业务状态优先保留人工确认和可回滚机制',
+              'AI 写回必须留下依据、版本和操作日志，方便后续追责和排障',
+            ],
+          },
+          {
+            title: '责任边界要在上线前讲清楚，否则系统越智能，扯皮越多',
+            paragraphs: [
+              'AI 应用最容易被低估的是责任归属。回答错了谁改知识库，分类错了谁调整规则，自动摘要漏掉关键信息谁复核，建议被采纳后造成业务问题谁确认。这些问题如果上线前没有定义，后面就会变成技术、业务和运营之间互相解释。',
+              '一个更可持续的做法，是把 AI 当成流程里的一个可观测节点。它有输入来源，有输出类型，有人工确认点，有失败兜底，有定期复盘指标。这样团队不会把不稳定全怪给模型，也不会把所有风险都压给使用者。项目才有机会从“能演示”走到“能维护”。',
+            ],
+          },
+        ],
+        takeawayTitle: '这篇文章的重点',
+        takeaways: [
+          'AI 项目不稳定时，先查上下文来源、权限过滤和资料版本，而不是只换模型。',
+          '一期应该先跑通一个高频、边界清楚、可复核的流程闭环，不要把 AI 铺满所有页面。',
+          '写回、人工确认、日志、回滚和责任归属要提前设计，否则越自动化越难维护。',
+        ],
+        ctaTitle: '如果你正在把 AI 接进企业系统，先别急着做全功能助手',
+        ctaDescription: '先选一个真实流程，把上下文、触发点、写回边界和人工兜底拆清楚，AI 应用会比单纯追求演示效果更容易稳定落地。',
+      },
+      en: {
+        navLabel: 'When AI Projects Feel Unstable, the Model Is Rarely the First Problem',
+        categoryLabel: 'Internal System',
+        metaTitle: 'Unstable Enterprise AI Projects Usually Start With Context, Workflow, and Ownership | Zhicheng Studio',
+        metaDescription:
+          'Many enterprise AI projects feel unreliable after launch. The root cause is often not the model itself, but weak context sources, unclear workflow triggers, writeback boundaries, and ownership rules.',
+        keywords: ['enterprise AI implementation', 'AI workflow automation', 'context engineering', 'internal system AI'],
+        eyebrow: 'Article',
+        heroTitle: 'When AI projects feel unstable, the issue is usually context, workflow, and ownership before it is the model',
+        heroDescription:
+          'Enterprise AI teams often focus on models, prompts, and impressive demos. But once AI enters real business systems, unstable results usually come from more operational problems: what context the system provides, when AI is triggered, where suggestions are written back, and who takes responsibility when the output is wrong.',
+        introTitle: 'AI is not a standalone feature; it becomes a decision step inside a workflow',
+        introParagraphs: [
+          'Many AI demos look smooth before they touch the real system. After integration, the same assistant may answer well on one day and cite stale material on another. A workflow that was meant to save effort may still require repeated human checking. Teams then keep changing prompts or models, but the instability often remains.',
+          'That happens because enterprise AI rarely lives as a simple chat box. It touches documents, permissions, business states, approval steps, exception records, writeback actions, and human accountability. If those pieces are not separated clearly, the model receives drifting context and the workflow receives drifting behavior.',
+        ],
+        sections: [
+          {
+            title: 'Check whether the context is trustworthy before asking for a smarter model',
+            paragraphs: [
+              'In real delivery, I would usually inspect the context before tuning the model. Does the knowledge base have versions? Does each file have an owner? Does business data include status and timestamp? Are customer and order records current? Is permission filtering enforced before retrieval? These details directly shape output quality.',
+              'If the context itself is messy, a better summarization model may simply make wrong information look more convincing. A steadier starting point is to define source ownership, update rhythm, citation scope, and how the system handles missing or conflicting data. AI stability is often an outcome of data governance and system boundaries.',
+            ],
+            bullets: [
+              'Context from knowledge, orders, customers, and tickets needs clear sources and update time',
+              'Permission filtering should happen during retrieval, not only through prompt warnings',
+              'Expired, missing, or conflicting context should allow the AI to refuse or escalate',
+            ],
+          },
+          {
+            title: 'Use fewer workflow triggers, and make each one easier to verify',
+            paragraphs: [
+              'A common mistake is to place AI everywhere: summaries on every list, suggestions on every detail page, autofill on every form, and risk checks on every approval step. The product may look complete, but maintenance cost and misuse risk grow quickly.',
+              'A safer phase one chooses one workflow with high frequency, lower ambiguity, and controllable failure impact. Ticket classification, contract clause review, customer follow-up summaries, or order exception explanations can all work if the input, output, human confirmation, and logs are clear. One stable loop is more valuable than many fragile entry points.',
+            ],
+            bullets: [
+              'Start with repeated scenarios where the judgment boundary is clear and review is easy',
+              'Avoid asking AI to summarize, decide, write back, and notify all in the first phase',
+              'Every trigger should leave a trace of input, output, operator, and downstream result',
+            ],
+          },
+          {
+            title: 'Writeback boundaries matter more than generation ability',
+            paragraphs: [
+              'Generating content is not the hardest part. The harder question is how the result enters the business system. Is it only a suggestion, or does it create a record? Is it saved as a draft, or does it change a status? Does a person confirm it, or does the system move the workflow forward automatically?',
+              'I usually prefer keeping AI in the suggestion or draft layer at the beginning, with human confirmation around important actions. Customer records, pricing, contracts, inventory, and approval status should not be overwritten by one model output. Deeper writeback can come later, once logs, rollback, permissions, and exception handling are mature.',
+            ],
+            bullets: [
+              'Separate suggestions, drafts, and official writeback instead of hiding them behind one action',
+              'Keep human confirmation and rollback around critical business states',
+              'AI writeback needs evidence, versioning, and operation logs for later troubleshooting',
+            ],
+          },
+          {
+            title: 'Ownership must be clear before launch, or intelligence creates more disputes',
+            paragraphs: [
+              'The most underestimated part of enterprise AI is responsibility. If an answer is wrong, who updates the knowledge base? If a classification is wrong, who adjusts the rule? If a summary misses a key risk, who reviews it? If a recommendation is accepted and causes a business issue, who confirms what happened?',
+              'A more maintainable approach is to treat AI as an observable step in the workflow. It has input sources, output types, human checkpoints, fallback paths, and review metrics. The team then avoids blaming every issue on the model, while also avoiding the opposite problem of pushing all risk onto the end user.',
+            ],
+          },
+        ],
+        takeawayTitle: 'Main takeaways',
+        takeaways: [
+          'When an AI project feels unstable, inspect context sources, permission filters, and content versions before changing models.',
+          'A first phase should prove one frequent, reviewable workflow loop instead of spreading AI across every page.',
+          'Writeback, human confirmation, logs, rollback, and ownership rules need to be designed early, or automation becomes harder to maintain.',
+        ],
+        ctaTitle: 'If you are connecting AI to an internal system, do not start with a full assistant',
+        ctaDescription: 'Start with one real workflow and define the context, trigger point, writeback boundary, and human fallback. That path is usually more stable than optimizing for a polished demo first.',
       },
     },
   },
