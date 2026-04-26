@@ -192,7 +192,8 @@ export default async function BusinessHome({ locale }: BusinessHomeProps) {
         },
       ]
 
-  const projectImages = (folder: string, count: number) => Array.from({ length: count }, (_, index) => `/projects/${folder}/${index + 1}.jpg`)
+  const projectImages = (folder: string, count: number, extension = 'jpg') =>
+    Array.from({ length: count }, (_, index) => `/projects/${folder}/${index + 1}.${extension}`)
 
   const workAssets: Record<WorkKey, { images: string[]; stack: string[]; link?: string }> = {
     asset: {
@@ -206,6 +207,10 @@ export default async function BusinessHome({ locale }: BusinessHomeProps) {
     finance: {
       images: projectImages('finance', 3),
       stack: ['PHP', 'Yii', 'Vue', 'Typescript'],
+    },
+    rag: {
+      images: projectImages('rag', 4, 'png'),
+      stack: ['Vue 3', 'FastAPI', 'LangGraph', 'LlamaIndex', 'Qdrant', 'Docker'],
     },
     attendance: {
       images: projectImages('attendance', 4),
@@ -256,6 +261,7 @@ export default async function BusinessHome({ locale }: BusinessHomeProps) {
     'asset',
     'hr',
     'finance',
+    'rag',
     'attendance',
     'oa',
     'orders',

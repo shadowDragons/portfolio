@@ -190,6 +190,10 @@
           "title": "Enterprise Management System (Finance)",
           "description": "A finance-oriented enterprise system handling reports, reconciliation, and operational data flow."
         },
+        "rag": {
+          "title": "Enterprise RAG Knowledge Base",
+          "description": "An internal AI knowledge system for company documents, policies, and business knowledge, covering document parsing, vector retrieval, permission isolation, and traceable answers."
+        },
         "attendance": {
           "title": "Attendance System",
           "description": "An internal system for scheduling, attendance rules, exception handling, and reporting."

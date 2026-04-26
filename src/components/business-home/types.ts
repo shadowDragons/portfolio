@@ -2,6 +2,7 @@ export type WorkKey =
   | 'asset'
   | 'hr'
   | 'finance'
+  | 'rag'
   | 'attendance'
   | 'oa'
   | 'orders'
