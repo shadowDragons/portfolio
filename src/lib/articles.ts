@@ -63,6 +63,7 @@ export const articleSlugs = [
   'oa-mini-program-integration-maintenance-boundary',
   'ai-project-context-process-boundaries',
   'multilingual-form-crm-notification-stability',
+  'shopify-template-vs-custom-b2b-commerce',
 ] as const
 
 export type ArticleSlug = (typeof articleSlugs)[number]
@@ -7344,6 +7345,158 @@ const articleDefinitions: Record<ArticleSlug, ArticleDefinition> = {
         ],
         ctaTitle: 'If your website has forms but still loses inquiries, inspect the handoffs first',
         ctaDescription: 'Start by reviewing stored submissions, notification routing, CRM fields, failure logs, and ownership boundaries. That usually creates more stability than adding another form page.',
+      },
+    },
+  },
+  'shopify-template-vs-custom-b2b-commerce': {
+    slug: 'shopify-template-vs-custom-b2b-commerce',
+    priority: {
+      zh: 0.65,
+      en: 0.51,
+    },
+    publishedAt: '2026-04-28',
+    readingMinutes: 7,
+    relatedServices: ['foreign-trade-website-development', 'web-app-development'],
+    content: {
+      zh: {
+        navLabel: 'Shopify 模板商城和定制 B2B 商城什么时候该分家',
+        categoryLabel: '对比',
+        metaTitle: 'Shopify 模板商城和定制 B2B 商城什么时候技术上必须分家｜致诚工作室',
+        metaDescription:
+          'Shopify 模板适合快速验证和标准零售，但 B2B 订货、报价、权限、账期和审批链路变复杂后，继续硬塞模板会让维护成本失控。',
+        keywords: ['Shopify 模板商城', 'B2B 商城定制', '外贸订货系统', '商城技术选型'],
+        eyebrow: 'Article',
+        heroTitle: 'Shopify 模板商城和定制 B2B 商城，什么时候技术上必须分家',
+        heroDescription:
+          'Shopify 很适合把标准商品快速卖起来，但不是所有外贸或 B2B 交易都应该继续往模板里塞。只要客户等级、报价规则、采购审批、账期、物流条款和订单后处理开始变成主流程，项目就不再只是“换个主题和插件”的问题，而是交易系统边界的问题。',
+        introTitle: '这个选择不该只看首期上线速度',
+        introParagraphs: [
+          '我遇到过一些项目，早期用 Shopify 跑通了展示、购物车和在线支付，团队自然希望后续所有 B2B 需求也继续加插件解决。短期看很省事，但当价格、权限、库存和订单处理都要按客户或区域变化时，插件之间的缝隙会越来越多。',
+          '所以真正要判断的不是“Shopify 好不好”，而是现阶段的交易规则到底是不是标准零售逻辑。如果业务本质已经变成订货、询价、授信和内部处理协同，继续拿模板商城硬扛，后面维护会比重新拆系统更贵。',
+        ],
+        sections: [
+          {
+            title: '标准零售链路清晰时，模板商城仍然很合适',
+            paragraphs: [
+              '如果商品结构稳定、价格公开、库存规则简单、客户下单后直接支付，Shopify 这类模板商城的价值很明显：上线快、支付和基础订单能力成熟，运营团队也容易接手。',
+              '这类场景不要过早定制。首期先用成熟平台验证商品、内容、支付和履约，比一开始就做一套大而全系统更稳。真正需要控制的是不要为了“未来可能会有”的复杂规则提前把项目做重。',
+            ],
+            bullets: [
+              '面向个人消费者或小批量标准采购，价格和库存规则较固定',
+              '主要目标是快速上线、验证市场和沉淀商品内容',
+              '订单处理可以按平台默认流程完成，不依赖复杂人工审批',
+            ],
+          },
+          {
+            title: 'B2B 规则进入主流程后，插件拼装会开始变脆',
+            paragraphs: [
+              'B2B 商城常见的难点不是页面，而是每个客户看到的价格、起订量、付款条件、币种、物流方式和可购买范围都可能不同。再加上询价转订单、销售审核、财务确认和 ERP 同步，交易链路已经超过标准购物车能自然表达的范围。',
+              '这时如果还全部依赖插件，问题通常出在边界：一个插件管价格，一个插件管会员，一个插件管报价，一个插件管邮件通知，最后数据状态分散在多个地方。业务一调整，技术团队很难判断应该改哪里，也很难保证历史订单解释得清。',
+            ],
+            bullets: [
+              '客户等级、区域、币种和合同价需要进入核心定价逻辑',
+              '询价、审批、账期、部分付款和线下确认是常态流程',
+              '订单后续要和 ERP、仓库、财务或销售跟进系统稳定同步',
+            ],
+          },
+          {
+            title: '分家不是推翻，而是把交易系统边界拆出来',
+            paragraphs: [
+              '更稳的做法往往不是立刻废掉 Shopify，而是先判断哪些能力继续留在模板商城，哪些能力应该独立成 B2B 订货系统。例如官网展示、标准商品零售和轻量支付可以继续保留，客户专属报价、审批、订单状态和内部处理则进入定制系统。',
+              '这样拆的好处是边界清楚。前台展示不用承受全部企业交易规则，内部系统也不用迁就模板平台的插件限制。后续如果要对接 ERP、CRM 或报表，也可以围绕订单主数据和状态流转设计，而不是在多个插件状态之间来回补丁。',
+            ],
+            bullets: [
+              '先区分展示、标准交易和 B2B 订货三个层级',
+              '让客户价、审批、账期和订单状态归到同一个主系统里',
+              '保留 Shopify 擅长的标准能力，不强迫它承担所有内部流程',
+            ],
+          },
+          {
+            title: '最容易踩坑的是在临界点还只按页面报价',
+            paragraphs: [
+              '这类项目如果只按“多做几个页面、加几个插件”报价，很容易低估维护成本。真正需要评估的是规则数量、角色数量、数据来源、异常处理和后续改规则的频率。',
+              '我更倾向于在临界点先做一张交易链路图：客户从看产品到询价、报价、下单、审核、付款、发货、售后，每一步谁负责、系统记录什么、失败怎么处理。图画清楚后，才知道继续用模板是省钱，还是只是把成本推迟到上线后。',
+            ],
+          },
+        ],
+        takeawayTitle: '这篇文章的重点',
+        takeaways: [
+          'Shopify 模板适合标准零售和快速验证，不适合无边界承接复杂 B2B 交易规则。',
+          '当客户价、审批、账期、订单状态和系统同步成为主流程时，应该考虑把 B2B 订货系统独立出来。',
+          '分家不等于推翻原平台，而是让展示、标准交易和企业订货各自承担合适的边界。',
+        ],
+        ctaTitle: '如果商城开始靠插件补交易规则，先停下来画清楚链路',
+        ctaDescription: '把客户、价格、审批、订单和内部系统边界拆清楚，再决定继续用模板、局部扩展，还是单独做 B2B 订货系统。',
+      },
+      en: {
+        navLabel: 'When Shopify Templates and Custom B2B Commerce Should Split',
+        categoryLabel: 'Comparison',
+        metaTitle: 'When Shopify Templates and Custom B2B Commerce Need Separate Technical Boundaries | Zhicheng Studio',
+        metaDescription:
+          'Shopify templates are strong for standard retail and fast validation, but B2B pricing, approvals, credit terms, and order operations often need a separate system boundary.',
+        keywords: ['Shopify template store', 'custom B2B commerce', 'B2B ordering system', 'commerce architecture'],
+        eyebrow: 'Article',
+        heroTitle: 'Shopify templates and custom B2B commerce should split when transaction rules become the product',
+        heroDescription:
+          'Shopify is useful when products, checkout, and payment follow standard retail logic. But once customer-specific pricing, purchase approvals, credit terms, logistics rules, and internal order handling become the main workflow, the project is no longer only about themes and plugins. It becomes a system boundary decision.',
+        introTitle: 'The decision should not be based only on launch speed',
+        introParagraphs: [
+          'Some teams start with Shopify successfully, then try to keep adding every B2B requirement through apps. That can work for a while, but gaps appear when pricing, permission, inventory, and order handling vary by customer, region, or contract.',
+          'The real question is not whether Shopify is good. It is whether the business still follows standard retail logic. If the core workflow has become ordering, quotation, credit, and internal coordination, forcing everything into a template store can make maintenance more expensive than separating the system boundary.',
+        ],
+        sections: [
+          {
+            title: 'Template commerce is still a good fit when the retail flow is standard',
+            paragraphs: [
+              'If products are stable, prices are public, inventory rules are simple, and customers pay directly after checkout, a Shopify-style template store can be the right choice. It launches quickly and gives the operations team a mature base to work with.',
+              'In that situation, custom development too early can be wasteful. A first phase should validate products, content, payment, and fulfillment before the team adds heavy system logic for future scenarios that may not happen.',
+            ],
+            bullets: [
+              'Consumer or small-batch purchasing with mostly fixed prices and inventory rules',
+              'A primary goal of launching quickly and validating product-market demand',
+              'Order handling that can follow the platform default without complex approval work',
+            ],
+          },
+          {
+            title: 'Plugin assembly becomes fragile when B2B rules enter the main workflow',
+            paragraphs: [
+              'The hard part of B2B commerce is usually not page design. Each customer may need different prices, minimum order quantities, payment terms, currencies, logistics options, and purchasable ranges. Add quotation-to-order flow, sales review, finance confirmation, and ERP sync, and the workflow moves beyond a standard cart model.',
+              'If every rule is handled by a separate app, the system state becomes scattered. One app owns pricing, another owns membership, another owns quotation, and another sends email. When the business changes, it is hard to know where to modify logic or how to explain historical orders consistently.',
+            ],
+            bullets: [
+              'Customer tier, region, currency, and contract price become part of core pricing logic',
+              'Quotations, approvals, credit terms, partial payment, and offline confirmation are normal steps',
+              'Orders need stable sync with ERP, warehouse, finance, or sales follow-up systems',
+            ],
+          },
+          {
+            title: 'Splitting does not mean replacing everything',
+            paragraphs: [
+              'A steadier approach is often to keep Shopify where it is strong and move enterprise transaction logic into a custom B2B ordering system. Brand pages, standard product sales, and lightweight checkout can stay on the template platform, while customer-specific quotes, approvals, order state, and internal handling live in a dedicated system.',
+              'This makes the boundary clearer. The website does not need to carry every enterprise workflow, and the internal system is not limited by plugin behavior. Later integrations with ERP, CRM, or reporting can be designed around order master data and state transitions rather than patched across app states.',
+            ],
+            bullets: [
+              'Separate presentation, standard commerce, and B2B ordering as different layers',
+              'Keep customer pricing, approvals, credit terms, and order state in one main system',
+              'Use Shopify for the standard capabilities it handles well instead of every internal process',
+            ],
+          },
+          {
+            title: 'The common mistake is quoting the project as a page-and-plugin job',
+            paragraphs: [
+              'At the boundary point, pricing the work as a few more pages and plugins usually underestimates maintenance. The real assessment should include rule count, role count, data sources, exception handling, and how often the business expects to change rules later.',
+              'I prefer drawing the transaction flow first: from product browsing to inquiry, quote, order, approval, payment, fulfillment, and after-sales. Once ownership, records, and failure handling are visible, the team can decide whether a template is still saving money or only delaying the cost until after launch.',
+            ],
+          },
+        ],
+        takeawayTitle: 'Main takeaways',
+        takeaways: [
+          'Shopify templates are a strong fit for standard retail and quick validation, not for unlimited B2B transaction complexity.',
+          'When customer pricing, approvals, credit terms, order state, and system sync become core, a separate B2B ordering system is worth considering.',
+          'Splitting the boundary can preserve the existing platform while giving enterprise workflows a more maintainable home.',
+        ],
+        ctaTitle: 'If your store depends on plugins for core transaction rules, map the workflow first',
+        ctaDescription: 'Clarify customer, pricing, approval, order, and internal system boundaries before deciding whether to keep extending the template or build a dedicated B2B ordering layer.',
       },
     },
   },
