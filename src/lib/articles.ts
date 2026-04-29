@@ -64,6 +64,7 @@ export const articleSlugs = [
   'ai-project-context-process-boundaries',
   'multilingual-form-crm-notification-stability',
   'shopify-template-vs-custom-b2b-commerce',
+  'manufacturing-key-workflow-before-system-suite',
 ] as const
 
 export type ArticleSlug = (typeof articleSlugs)[number]
@@ -7497,6 +7498,158 @@ const articleDefinitions: Record<ArticleSlug, ArticleDefinition> = {
         ],
         ctaTitle: 'If your store depends on plugins for core transaction rules, map the workflow first',
         ctaDescription: 'Clarify customer, pricing, approval, order, and internal system boundaries before deciding whether to keep extending the template or build a dedicated B2B ordering layer.',
+      },
+    },
+  },
+  'manufacturing-key-workflow-before-system-suite': {
+    slug: 'manufacturing-key-workflow-before-system-suite',
+    priority: {
+      zh: 0.66,
+      en: 0.51,
+    },
+    publishedAt: '2026-04-29',
+    readingMinutes: 7,
+    relatedServices: ['web-app-development'],
+    content: {
+      zh: {
+        navLabel: '制造业系统别急着一次做全套',
+        categoryLabel: '制造与工业',
+        metaTitle: '制造业老板看板、订单系统、ERP 一起做，为什么不如先跑通关键环节｜致诚工作室',
+        metaDescription:
+          '制造业数字化项目里，老板看板、订单系统和 ERP 经常被放进同一个范围。真实交付中，更稳的做法通常是先跑通一个高频、可闭环、可校验的关键环节。',
+        keywords: ['制造业数字化', '订单系统', 'ERP 改造', '企业系统一期范围'],
+        eyebrow: 'Article',
+        heroTitle: '制造业老板看板、订单系统、ERP 一起做，为什么往往不如先跑通一个关键环节',
+        heroDescription:
+          '制造业做系统时，很容易把老板看板、订单流转、库存、生产进度、采购、财务和 ERP 对接一次性放进首期范围。听起来完整，实际交付时却经常因为数据口径、流程责任和旧系统边界没拆清，导致每个模块都能演示，但没有一个环节真正稳定跑起来。',
+        introTitle: '首期范围越像全景图，越要小心它是不是无法落地',
+        introParagraphs: [
+          '我在看制造业系统需求时，最怕的不是客户想做很多功能，而是所有功能都被放在同一个优先级里：老板要看报表，销售要管订单，仓库要看库存，生产要排计划，财务要对账，旧 ERP 还要同步。每个诉求都合理，但合在一起就可能变成一个没有主线的首期项目。',
+          '更稳的做法不是否定完整系统，而是先找出一个真正高频、业务责任清楚、数据能校验、上线后能闭环的关键环节。这个环节跑顺以后，再扩报表、审批、库存、生产和 ERP 对接，系统才会有可靠的骨架。',
+        ],
+        sections: [
+          {
+            title: '老板看板不应该成为第一阶段的“需求入口”',
+            paragraphs: [
+              '老板看板很重要，但它通常不是数据的起点，而是很多业务环节沉淀后的结果。订单状态不准、库存口径不清、生产进度靠人工口头更新时，看板做得再漂亮，也只是把不稳定的数据放大展示。上线后最常见的问题不是图表不好看，而是大家开始争论数字到底从哪里来。',
+              '所以我通常不建议把看板作为制造业数字化首期的核心目标。更好的顺序是先把一个业务闭环跑稳，让系统自然产生可信数据，再用看板做观察和管理。如果一开始就围绕驾驶舱设计，项目很容易变成“报表先行、流程滞后”。',
+            ],
+            bullets: [
+              '看板依赖订单、库存、生产和财务等底层数据先稳定',
+              '指标口径没有统一前，图表越多，争议越多',
+              '首期先解决数据怎么产生，再解决数据怎么展示',
+            ],
+          },
+          {
+            title: '关键环节最好同时满足高频、可控、能验收',
+            paragraphs: [
+              '一个适合作为一期的环节，不一定最大，但一定要足够真实。比如从客户订单确认到内部派单，从采购申请到入库确认，从生产异常上报到责任人处理，从发货申请到物流记录。这些环节每天都发生，参与角色明确，结果也能被业务验证。',
+              '这种切法的好处是，系统上线后不是靠会议判断有没有价值，而是能直接看处理时间、遗漏率、重复录入、异常数量和责任追踪是否改善。相比一次性做全套模块，一个小闭环更容易暴露真实流程问题，也更容易让团队养成使用习惯。',
+            ],
+            bullets: [
+              '业务发生频率高，不能只是低频管理动作',
+              '参与角色和责任边界明确，减少上线后的扯皮',
+              '有清晰的前后状态，方便验收和复盘',
+            ],
+          },
+          {
+            title: 'ERP 对接要晚一点定接口，早一点定边界',
+            paragraphs: [
+              '很多制造企业一上来就问新系统怎么和 ERP 对接。接口当然重要，但更应该先问：哪些数据由 ERP 做主，哪些数据由新系统做主，哪些只是同步副本，哪些状态不能被两边同时修改。如果主数据边界没定，接口做得越快，后面越容易出现互相覆盖和口径不一致。',
+              '我更倾向于首期先把对接降级成有限同步或人工校验，等关键流程跑顺、字段稳定、责任归属清楚后，再把接口自动化。这样不是保守，而是避免把新流程还没验证清楚的变化，直接写进老系统的核心数据里。',
+            ],
+            bullets: [
+              '先定主数据归属，再谈接口形式和同步频率',
+              '不要让新旧系统都能随意修改同一个关键状态',
+              '首期可以先做可追踪的半自动同步，稳定后再加深集成',
+            ],
+          },
+          {
+            title: '小闭环跑通后，再扩模块会更便宜',
+            paragraphs: [
+              '很多人担心先做一个环节会不会重复投入。我的经验正好相反：只要首期把权限、状态、日志、字段和异常处理设计扎实，后续扩展订单、库存、生产、采购或报表时，复用的是同一套业务骨架。真正浪费钱的，往往是首期为了显得完整，把每个模块都做浅了。',
+              '制造业系统最需要的是可靠的流程主线，而不是页面数量。先把一个关键环节做到能日常使用、能追踪责任、能解释数据，再逐步扩展，项目风险会小很多，老板也更容易判断下一阶段的钱该花在哪里。',
+            ],
+          },
+        ],
+        takeawayTitle: '这篇文章的重点',
+        takeaways: [
+          '制造业系统首期不要被老板看板、订单、ERP 和全模块范围同时牵着走。',
+          '更稳的第一步，是选择一个高频、责任清楚、数据能校验的关键业务闭环。',
+          'ERP 对接先定主数据和状态边界，等流程跑稳后再加深自动化集成。',
+        ],
+        ctaTitle: '如果你正在规划制造业系统，先别急着画全套模块图',
+        ctaDescription: '先挑一个能真实上线的关键环节，把角色、状态、字段、日志和异常处理跑顺，再决定下一阶段扩哪些模块，会比一次做全更稳。',
+      },
+      en: {
+        navLabel: 'Do Not Build the Whole Manufacturing System First',
+        categoryLabel: 'Manufacturing',
+        metaTitle: 'Why Manufacturing Systems Should Start from One Key Workflow Instead of a Full Suite | Zhicheng Studio',
+        metaDescription:
+          'Manufacturing digital projects often bundle dashboards, order systems, ERP integration, inventory, and production workflows into one first phase. A safer approach is to make one high-frequency workflow reliable first.',
+        keywords: ['manufacturing digital system', 'order workflow system', 'ERP modernization', 'enterprise system phase one'],
+        eyebrow: 'Article',
+        heroTitle: 'Before building dashboards, order systems, and ERP integration together, run one key manufacturing workflow first',
+        heroDescription:
+          'Manufacturing system projects often begin with an attractive full picture: management dashboards, order tracking, inventory, production progress, purchasing, finance, and ERP integration. The plan looks complete, but delivery can become unstable when data ownership, workflow responsibility, and legacy system boundaries are not clear. A system that demonstrates many modules but runs no workflow reliably is not a good first phase.',
+        introTitle: 'A first phase that looks complete may still be hard to operate',
+        introParagraphs: [
+          'In manufacturing system discussions, the risky pattern is not that the team wants many functions. The risky pattern is that every function receives the same priority: management wants dashboards, sales wants order tracking, warehouse wants inventory, production wants scheduling, finance wants reconciliation, and the old ERP must still be connected. Each request is reasonable, but together they can create a first phase with no operational spine.',
+          'A steadier approach is to identify one key workflow that is frequent, accountable, verifiable, and able to close the loop after launch. Once that workflow works in daily operations, dashboards, approvals, inventory, production planning, and ERP integration can expand from a much more reliable base.',
+        ],
+        sections: [
+          {
+            title: 'A management dashboard should not become the main requirement entry point',
+            paragraphs: [
+              'Dashboards matter, but they are usually not where data begins. They are the visible result of many underlying business steps. If order status is unreliable, inventory definitions are unclear, and production progress is still updated verbally, a polished dashboard only makes unstable data more visible. After launch, the team will not only discuss chart design. They will argue about where each number came from.',
+              'That is why I rarely recommend making a dashboard the core target of a manufacturing system first phase. It is better to stabilize one business loop first and let trustworthy data emerge from actual operations. The dashboard then becomes an observation layer rather than a substitute for process design.',
+            ],
+            bullets: [
+              'Dashboards depend on stable order, inventory, production, and finance data',
+              'When metric definitions are not aligned, more charts create more disputes',
+              'The first phase should solve how data is produced before deciding how it is displayed',
+            ],
+          },
+          {
+            title: 'The first workflow should be frequent, bounded, and testable',
+            paragraphs: [
+              'A good phase-one workflow does not need to be the largest process, but it must be real. Examples include confirmed customer order to internal dispatch, purchase request to warehouse receipt, production exception to owner follow-up, or shipment request to logistics record. These workflows happen often, involve clear roles, and can be verified by the business team.',
+              'This makes value easier to measure. Instead of judging the system by meeting impressions, the team can inspect processing time, missed handoffs, duplicate entry, exception count, and traceability. A small closed loop also exposes real process issues faster than a broad set of shallow modules.',
+            ],
+            bullets: [
+              'Choose work that happens often, not only low-frequency management actions',
+              'Make roles and responsibility boundaries clear before building the screens',
+              'Use clear before-and-after states so acceptance and review are possible',
+            ],
+          },
+          {
+            title: 'ERP integration should define boundaries early and interfaces later',
+            paragraphs: [
+              'Many manufacturing teams ask immediately how the new system will connect to ERP. The interface is important, but the earlier question is ownership: which data is mastered by ERP, which data is mastered by the new system, which records are only synchronized copies, and which states should never be modified by both systems. Without this boundary, fast integration can create overwrites and inconsistent explanations.',
+              'For a first phase, I often prefer limited synchronization or traceable manual verification until the workflow, fields, and responsibility model become stable. This is not reluctance to integrate. It protects the old system from unverified process changes while the new workflow is still being tested.',
+            ],
+            bullets: [
+              'Define master-data ownership before choosing interface details',
+              'Avoid allowing two systems to freely modify the same critical status',
+              'Use traceable semi-automation first, then deepen integration after the workflow stabilizes',
+            ],
+          },
+          {
+            title: 'A stable small loop makes later modules cheaper to build',
+            paragraphs: [
+              'Some teams worry that starting with one workflow creates duplicated investment. In practice, the opposite is often true. If the first phase builds solid permissions, statuses, logs, fields, and exception handling, later modules can reuse the same operating backbone. The expensive mistake is building many modules so shallowly that none of them can support daily work.',
+              'Manufacturing systems need a reliable workflow spine more than a high page count. Once one key loop can run every day, trace responsibility, and explain data, the company can decide the next investment with much better evidence.',
+            ],
+          },
+        ],
+        takeawayTitle: 'Main takeaways',
+        takeaways: [
+          'A manufacturing system first phase should not be pulled equally by dashboards, order tracking, ERP integration, and every module at once.',
+          'The safer starting point is one frequent, accountable, and verifiable business workflow.',
+          'ERP integration should define master-data and status boundaries first, then deepen automation after the process proves stable.',
+        ],
+        ctaTitle: 'If you are planning a manufacturing system, do not start with a full module map',
+        ctaDescription: 'Pick one workflow that can really go live, clarify roles, statuses, fields, logs, and exceptions, then decide which modules deserve the next phase.',
       },
     },
   },
