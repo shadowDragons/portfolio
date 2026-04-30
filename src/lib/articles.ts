@@ -65,6 +65,7 @@ export const articleSlugs = [
   'multilingual-form-crm-notification-stability',
   'shopify-template-vs-custom-b2b-commerce',
   'manufacturing-key-workflow-before-system-suite',
+  'enterprise-system-quote-technical-debt',
 ] as const
 
 export type ArticleSlug = (typeof articleSlugs)[number]
@@ -7650,6 +7651,158 @@ const articleDefinitions: Record<ArticleSlug, ArticleDefinition> = {
         ],
         ctaTitle: 'If you are planning a manufacturing system, do not start with a full module map',
         ctaDescription: 'Pick one workflow that can really go live, clarify roles, statuses, fields, logs, and exceptions, then decide which modules deserve the next phase.',
+      },
+    },
+  },
+  'enterprise-system-quote-technical-debt': {
+    slug: 'enterprise-system-quote-technical-debt',
+    priority: {
+      zh: 0.65,
+      en: 0.51,
+    },
+    publishedAt: '2026-04-30',
+    readingMinutes: 7,
+    relatedServices: ['web-app-development'],
+    content: {
+      zh: {
+        navLabel: '企业系统报价里最容易漏掉的技术债',
+        categoryLabel: '维护',
+        metaTitle: '企业系统报价中容易被低估的技术债与维护成本｜致诚工作室',
+        metaDescription:
+          '企业系统报价不只看页面和功能数量。权限、数据迁移、异常处理、日志、运维和后续迭代边界，都会影响真实交付成本和长期维护成本。',
+        keywords: ['企业系统报价', '技术债', '系统维护成本', 'Web App 开发'],
+        eyebrow: 'Article',
+        heroTitle: '做企业系统时，哪些技术债最容易在报价阶段被低估？',
+        heroDescription:
+          '很多企业系统前期看起来只是“几个页面加一个后台”，真正上线后才发现难点在权限、数据口径、异常流程、历史数据和维护责任。报价阶段如果只按功能清单估算，很容易把后续成本埋进项目里。',
+        introTitle: '报价低不一定省钱，范围不清才最贵',
+        introParagraphs: [
+          '我更愿意在企业系统报价前先问清楚边界：哪些数据来自老系统，哪些状态会被多人修改，哪些操作需要留痕，哪些异常必须能追责。因为这些问题不写进范围，后面也不会自动消失。',
+          '真正危险的不是第一版功能少，而是第一版把权限、数据、日志和维护方式做得很含糊。短期看报价更轻，长期看每次改动都要重新猜业务规则。',
+        ],
+        sections: [
+          {
+            title: '权限不是菜单开关，而是责任边界',
+            paragraphs: [
+              '很多报价单会把权限写成一个普通功能点，好像只是给不同角色显示不同菜单。但企业系统里的权限通常还包含数据范围、审批动作、字段可见性、导出限制和跨部门协作边界。这里拆不清，后面就会出现“能看到但不能改”“能改但不该改”“出了问题不知道谁改的”。',
+              '更稳的做法是在报价和一期范围里先定义最小权限模型：哪些角色必须存在，哪些操作必须留痕，哪些字段和状态不能随便开放。不要一开始就做复杂 RBAC，但也不能把权限当成上线前随手补的配置。',
+            ],
+            bullets: [
+              '先区分页面权限、数据权限和操作权限',
+              '关键状态变更必须保留操作者、时间和前后值',
+              '一期可以简化角色，但不要省掉责任追踪',
+            ],
+          },
+          {
+            title: '历史数据和接口边界经常被低估',
+            paragraphs: [
+              '企业系统很少从一张空表开始。Excel、老 ERP、CRM、财务系统、人工台账里都有历史数据。报价时如果只估新页面，不估字段清洗、编码映射、重复数据、缺失值和导入校验，上线前就会被数据问题拖住。',
+              '接口也一样。真正要提前确认的不是“能不能对接”，而是谁是主数据，谁能修改状态，失败后怎么重试，重复推送怎么处理，出错时由谁排查。接口越早接入业务闭环，边界越要写清楚。',
+            ],
+            bullets: [
+              '数据迁移要单独评估清洗、映射和校验工作',
+              '接口对接要明确主数据归属和失败处理方式',
+              '不要把一次性导入误认为没有维护成本',
+            ],
+          },
+          {
+            title: '异常处理和运维能力决定系统能不能长期跑',
+            paragraphs: [
+              '演示环境里最容易被忽略的是异常：审批被退回、订单状态冲突、文件上传失败、通知没有送达、外部接口超时、用户误操作。没有异常处理的系统看起来流程很顺，但一上线就需要开发人员频繁手工修数据。',
+              '所以报价阶段至少要把必要的日志、告警、备份、权限变更记录和基础运维方式说清楚。不是每个项目都需要很重的运维平台，但关键业务系统一定要能解释问题、恢复数据、定位责任。',
+            ],
+            bullets: [
+              '关键动作要能查日志，而不是只看最终结果',
+              '常见异常要有业务处理路径，不要都交给开发改库',
+              '备份、部署和账号交接也应该进入交付边界',
+            ],
+          },
+          {
+            title: '合理的报价应该把不确定性说出来',
+            paragraphs: [
+              '如果需求还在变化，最负责任的方式不是硬给一个很低的总价，而是把确定范围、不确定风险和二期可能性拆开。比如一期先跑通一个闭环，把复杂报表、深度接口和自动化规则放到验证后再做。',
+              '这不是故意拆项目，而是避免把所有未知都塞进一个报价里。企业系统的长期成本通常来自模糊边界和反复返工，提前承认不确定性，反而更容易控制预算。',
+            ],
+          },
+        ],
+        takeawayTitle: '这篇文章的重点',
+        takeaways: [
+          '企业系统报价不能只按页面和功能数量估算，权限、数据、接口和异常处理都是真实成本。',
+          '技术债最常出现在责任边界不清、历史数据未评估、日志和运维能力缺位的地方。',
+          '范围不稳定时，分阶段报价比低价承诺全部功能更稳，也更利于后续维护。',
+        ],
+        ctaTitle: '如果你正在评估企业系统预算，先把隐藏成本讲清楚',
+        ctaDescription: '我们可以先一起拆一期闭环、权限模型、数据来源、接口边界和维护责任，再判断哪些功能适合现在做，哪些应该等流程跑稳后再投入。',
+      },
+      en: {
+        navLabel: 'Technical Debt Often Missed in System Quotes',
+        categoryLabel: 'Maintenance',
+        metaTitle: 'Technical Debt and Maintenance Costs Often Missed in Enterprise System Quotes | Zhicheng Studio',
+        metaDescription:
+          'Enterprise system quotes should not be estimated only by pages and features. Permissions, data migration, exception handling, logs, operations, and iteration boundaries all affect real delivery cost.',
+        keywords: ['enterprise system quote', 'technical debt', 'system maintenance cost', 'web app development'],
+        eyebrow: 'Article',
+        heroTitle: 'The technical debt most often underestimated when quoting enterprise systems',
+        heroDescription:
+          'An internal system may look like a few screens and an admin panel at first. The real cost often appears later in permissions, data ownership, exception handling, migration, logs, and maintenance responsibility.',
+        introTitle: 'A low quote does not always mean a cheaper system',
+        introParagraphs: [
+          'Before quoting an enterprise system, I prefer to clarify boundaries first: where the data comes from, who can change each status, which actions need audit trails, and which exceptions must be explainable after launch.',
+          'The risky version of a first phase is not a small feature set. It is a first phase where permissions, data rules, logging, and maintenance are vague. That makes every later change depend on guessing business rules again.',
+        ],
+        sections: [
+          {
+            title: 'Permissions are responsibility boundaries, not only menu switches',
+            paragraphs: [
+              'Quotes often describe permissions as a simple feature, as if each role only needs a different menu. In real internal systems, permissions also include data scope, approval actions, field visibility, export limits, and cross-team ownership. If this is unclear, users may see data they should not edit, edit records they should not own, or create changes nobody can trace.',
+              'A safer first phase defines the minimum permission model early: required roles, actions that need audit trails, and fields or statuses that should not be opened casually. The system does not need heavy enterprise RBAC on day one, but responsibility tracking should not be treated as a final-week configuration task.',
+            ],
+            bullets: [
+              'Separate page access, data access, and action permissions',
+              'Keep operator, time, and before-and-after values for critical status changes',
+              'Simplify roles in phase one without removing accountability',
+            ],
+          },
+          {
+            title: 'Legacy data and integration boundaries are easy to underprice',
+            paragraphs: [
+              'Enterprise systems rarely start from empty tables. Historical data may live in Excel files, ERP exports, CRM records, finance tools, and manual trackers. If the quote only covers new screens but ignores data cleaning, code mapping, duplicates, missing values, and import validation, the launch will likely be slowed by data work.',
+              'Integrations have the same problem. The first question is not only whether systems can connect. It is which system owns the master data, who can change status, how failures are retried, how duplicate pushes are handled, and who investigates errors. The closer an integration is to a business loop, the clearer its boundary must be.',
+            ],
+            bullets: [
+              'Estimate cleaning, mapping, and validation work separately from UI development',
+              'Define master-data ownership and failure handling before interface details',
+              'Do not treat one-time import work as if it has no maintenance impact',
+            ],
+          },
+          {
+            title: 'Exception handling and operations decide whether the system can keep running',
+            paragraphs: [
+              'Demo flows usually hide exceptions: rejected approvals, conflicting order statuses, failed uploads, missed notifications, external API timeouts, and user mistakes. A system without exception paths may look smooth in a meeting but require developers to fix data manually after launch.',
+              'That is why quotes should include basic logs, alerts, backups, permission-change records, and deployment or handover responsibilities where they matter. Not every project needs a heavy operations platform, but critical business systems must be able to explain problems, recover data, and locate responsibility.',
+            ],
+            bullets: [
+              'Important actions should be traceable through logs, not only final states',
+              'Common exceptions need business handling paths instead of database fixes',
+              'Backup, deployment, and account handover belong in the delivery boundary',
+            ],
+          },
+          {
+            title: 'A responsible quote should expose uncertainty instead of hiding it',
+            paragraphs: [
+              'When requirements are still moving, the responsible approach is not to promise everything under a low fixed number. It is better to separate confirmed scope, uncertain risk, and possible phase-two work. A first phase can close one operational loop while complex reporting, deeper integrations, and automation rules wait for validation.',
+              'This is not splitting a project for its own sake. It prevents all unknowns from being buried inside one quote. Long-term system cost usually comes from vague boundaries and repeated rework, so naming uncertainty early is often the better way to control budget.',
+            ],
+          },
+        ],
+        takeawayTitle: 'Main takeaways',
+        takeaways: [
+          'Enterprise system quotes should include permissions, data, integrations, exception handling, and operations, not only pages and features.',
+          'Technical debt often appears where responsibility boundaries, legacy data, logging, and maintenance ownership are unclear.',
+          'When scope is unstable, phased quoting is usually safer than a low promise to deliver everything at once.',
+        ],
+        ctaTitle: 'If you are estimating an internal system, make hidden costs visible first',
+        ctaDescription: 'We can start by mapping the phase-one workflow, permission model, data sources, integration boundaries, and maintenance responsibility before deciding what should be built now.',
       },
     },
   },
