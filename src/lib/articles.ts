@@ -66,6 +66,8 @@ export const articleSlugs = [
   'shopify-template-vs-custom-b2b-commerce',
   'manufacturing-key-workflow-before-system-suite',
   'enterprise-system-quote-technical-debt',
+  'b2b-ordering-system-data-pricing-permission',
+  'modern-frontend-internal-system-refactor',
 ] as const
 
 export type ArticleSlug = (typeof articleSlugs)[number]
@@ -7803,6 +7805,323 @@ const articleDefinitions: Record<ArticleSlug, ArticleDefinition> = {
         ],
         ctaTitle: 'If you are estimating an internal system, make hidden costs visible first',
         ctaDescription: 'We can start by mapping the phase-one workflow, permission model, data sources, integration boundaries, and maintenance responsibility before deciding what should be built now.',
+      },
+    },
+  },
+  'b2b-ordering-system-data-pricing-permission': {
+    slug: 'b2b-ordering-system-data-pricing-permission',
+    priority: {
+      zh: 0.65,
+      en: 0.51,
+    },
+    publishedAt: '2026-05-01',
+    readingMinutes: 7,
+    relatedServices: ['foreign-trade-website-development', 'web-app-development'],
+    content: {
+      zh: {
+        navLabel: 'B2B 订货系统先拆资料、报价、权限和下单边界',
+        categoryLabel: '行业场景',
+        metaTitle: 'B2B 订货系统怎么拆资料、报价、权限和下单链路｜致诚工作室',
+        metaDescription:
+          '面向海外大买家的 B2B 订货系统，不该只按商城页面来做。资料、报价、客户权限和下单链路要先拆清边界，后续才更稳定。',
+        keywords: ['B2B 订货系统', '外贸订货系统', '客户报价权限', '企业系统边界'],
+        eyebrow: 'Article',
+        heroTitle: '面向海外大买家的 B2B 订货系统，资料、报价、权限和下单链路怎么拆更稳',
+        heroDescription:
+          '外贸 B2B 订货系统看起来像一个商城，但真实交付里，它更像官网、报价系统、客户权限和内部订单流程的组合。如果第一期只盯着商品列表和购物车，很容易把客户资料、合同价、可见范围、询价确认和后续处理做成一堆补丁。',
+        introTitle: '大买家的订货链路，不是把零售商城换成企业皮肤',
+        introParagraphs: [
+          '很多 B2B 订货项目一开始会被描述成“给老客户一个在线下单入口”。听上去不复杂：登录、看产品、选规格、提交订单。但只要进入真实业务，就会发现每个客户看到的资料、价格、起订量、付款方式和交付条件都可能不同。',
+          '所以我更倾向于先把系统拆成四个边界：资料怎么管理，报价怎么算，权限怎么限制，下单后怎么进入内部处理。先把这四件事讲清楚，再决定页面和功能，项目会比直接照着商城模板开发稳很多。',
+        ],
+        sections: [
+          {
+            title: '资料边界先定清：产品资料不是只给前台展示用',
+            paragraphs: [
+              'B2B 订货系统里的产品资料通常同时服务销售、客户、跟单和后台运营。图片、规格、认证文件、包装参数、交期说明、MOQ、替代型号和停产状态，都可能影响客户是否能下单，也影响内部后续怎么处理。',
+              '如果资料只按官网展示页来整理，后面一旦接订单、报价和权限，就会发现字段缺失、状态不清、版本不可追溯。更稳的做法是第一期先区分展示资料、交易资料和内部处理资料，不要把所有内容都塞进一个商品描述里。',
+            ],
+            bullets: [
+              '展示资料解决客户理解问题，交易资料决定能不能报价和下单',
+              '认证、包装、交期和替代型号要有结构化字段，而不只是长文本',
+              '停产、暂缺、需确认等状态要能影响前台动作和销售提醒',
+            ],
+          },
+          {
+            title: '报价边界要早拆：客户价、合同价和询价不是同一套逻辑',
+            paragraphs: [
+              '面向海外大买家的系统，最容易低估的是报价规则。有些客户有固定合同价，有些客户按区域价，有些产品需要阶梯价，有些订单还要结合币种、交期、物流方式和付款条件重新确认。',
+              '如果第一期为了快，把价格当成商品表里的一个字段，后面会很难维护。更实际的拆法是把公开参考价、客户专属价、需确认报价和销售手工调整分开，让系统知道哪些价格可以直接下单，哪些只能生成询价单或报价草稿。',
+            ],
+            bullets: [
+              '能直接成交的价格和需要销售确认的价格要分开处理',
+              '阶梯价、币种、有效期和客户等级要留出清晰的数据位置',
+              '历史报价要能追溯，避免订单争议时只能翻聊天记录',
+            ],
+          },
+          {
+            title: '权限边界不只是登录，而是谁能看、能改、能提交',
+            paragraphs: [
+              'B2B 客户经常不是一个账号完成所有动作。采购、技术、财务和管理层可能都要进系统，但能看的资料和能做的操作不同。有些客户只能看指定产品线，有些客户能看到库存和合同价，有些客户只能提交询价，不能直接下单。',
+              '因此权限不能只做成“登录后可见全部商品”。第一期可以不做复杂组织架构，但至少要把客户公司、联系人、产品可见范围、价格可见范围和提交权限拆开。否则后续每增加一个大客户，系统都要靠临时规则补洞。',
+            ],
+            bullets: [
+              '客户公司权限和联系人账号权限要分层设计',
+              '产品可见、价格可见、文件下载和订单提交应是不同权限',
+              '关键操作要保留记录，方便销售和客服追踪责任',
+            ],
+          },
+          {
+            title: '下单链路要接内部处理，不要止步于客户提交成功',
+            paragraphs: [
+              '很多系统 Demo 到“提交订单成功”就结束，但真实业务刚刚开始。订单是否需要销售确认，库存是否锁定，付款条件是否通过，是否要拆单，是否同步 ERP，邮件和站内通知失败怎么办，这些都会影响系统能不能长期跑住。',
+              '我通常建议第一期先跑通一个最小闭环：客户提交需求，销售确认价格和交期，系统生成可追踪订单，内部能看到状态变化，客户能收到明确反馈。报表、复杂自动化和深度 ERP 对接可以后置，但状态流转和异常处理不能完全后置。',
+            ],
+            bullets: [
+              '提交成功不等于订单成立，确认、驳回和修改路径要说清',
+              '订单状态要能被客户、销售和内部跟单共同理解',
+              '通知失败、同步失败和人工改价要有日志和兜底责任人',
+            ],
+          },
+        ],
+        takeawayTitle: '关键判断',
+        takeaways: [
+          'B2B 订货系统第一期先拆资料、报价、权限和下单边界，比先堆页面更重要。',
+          '客户专属价、资料可见范围和订单确认流程如果没有结构化，后续维护会越来越依赖人工补丁。',
+          '最稳的一期不是功能最多的一期，而是能让一个客户订货闭环被清楚追踪的一期。',
+        ],
+        ctaTitle: '如果你在规划外贸 B2B 订货系统，可以先从边界表开始',
+        ctaDescription:
+          '我们可以先一起梳理产品资料字段、报价规则、客户权限和订单状态，再判断哪些能力适合第一期上线，哪些应该等真实客户流程验证后再做。',
+      },
+      en: {
+        navLabel: 'B2B ordering systems need clear data, pricing, and permission boundaries',
+        categoryLabel: 'Industry',
+        metaTitle: 'How to split data, pricing, permission, and ordering flows in a B2B ordering system｜ZC Studio',
+        metaDescription:
+          'A B2B ordering system for large overseas buyers should not be planned as a simple storefront. Product data, pricing, customer permissions, and order handling need clear boundaries first.',
+        keywords: ['B2B ordering system', 'foreign trade ordering system', 'customer pricing', 'system boundaries'],
+        eyebrow: 'Article',
+        heroTitle: 'For large overseas buyers, a B2B ordering system starts with data, pricing, permission, and order boundaries',
+        heroDescription:
+          'A B2B ordering system may look like a commerce site, but in delivery it often combines product data management, quotation rules, customer-specific permissions, and internal order handling. If phase one only copies a retail storefront, the real workflow usually becomes a collection of patches.',
+        introTitle: 'Large-buyer ordering is not retail commerce with an enterprise skin',
+        introParagraphs: [
+          'Many B2B ordering projects begin with a simple sentence: existing customers need an online ordering portal. The first version sounds straightforward: sign in, browse products, choose specifications, and submit an order.',
+          'Once the real workflow is discussed, the shape changes. Different buyers may see different documents, prices, minimum quantities, payment terms, delivery options, and approval steps. That is why I prefer to clarify four boundaries first: how product data is managed, how pricing is decided, how permissions work, and how submitted orders enter internal processing.',
+        ],
+        sections: [
+          {
+            title: 'Product data is not only front-end content',
+            paragraphs: [
+              'In a B2B ordering system, product data supports sales, buyers, operations, and follow-up teams at the same time. Images, specifications, certificates, packaging data, lead-time notes, MOQ, replacement models, and discontinued status can all affect whether a buyer should place an order.',
+              'If product data is structured only as website content, missing fields and unclear status rules will appear as soon as pricing and ordering are added. A safer phase one separates display content, transaction data, and internal handling data instead of hiding everything inside one product description.',
+            ],
+            bullets: [
+              'Display content helps buyers understand the product, while transaction data decides whether ordering is possible',
+              'Certificates, packaging, lead time, and replacement models should be structured fields where they matter',
+              'Unavailable, discontinued, and needs-confirmation states should affect buyer actions and sales alerts',
+            ],
+          },
+          {
+            title: 'Pricing needs its own boundary before it becomes a maintenance problem',
+            paragraphs: [
+              'Pricing is often underestimated in large-buyer ordering systems. Some buyers have contract prices, some use regional pricing, some products need tiered pricing, and some orders depend on currency, lead time, logistics method, or payment terms.',
+              'If phase one stores price as a single product field, later maintenance becomes difficult. It is usually better to separate reference prices, customer-specific prices, quotes that require confirmation, and manual sales adjustments. The system should know which prices can become orders directly and which should become quotation drafts.',
+            ],
+            bullets: [
+              'Separate directly orderable prices from prices that require sales confirmation',
+              'Give tiered pricing, currency, validity period, and customer level clear data structures',
+              'Keep quotation history traceable instead of relying on chat records during disputes',
+            ],
+          },
+          {
+            title: 'Permission design is about visibility, actions, and responsibility',
+            paragraphs: [
+              'A B2B buyer is often a company, not one user. Procurement, engineering, finance, and management roles may all enter the system, but they should not necessarily see the same files, prices, or actions. Some buyers can see only selected product lines; some can download documents; some can submit inquiries but not confirmed orders.',
+              'This means permission should not stop at account login. Phase one does not need a heavy enterprise permission engine, but it should separate buyer company, contact account, product visibility, price visibility, file access, and submission actions. Otherwise every large customer will require another temporary exception.',
+            ],
+            bullets: [
+              'Separate company-level permissions from contact-level account permissions',
+              'Treat product visibility, price visibility, file download, and order submission as different actions',
+              'Keep records for important actions so sales and support teams can trace responsibility',
+            ],
+          },
+          {
+            title: 'The order flow must connect to internal handling, not end at submission',
+            paragraphs: [
+              'Many demos stop at successful order submission, but the real business begins after that. Does sales need to confirm the order? Is inventory reserved? Are payment terms approved? Can the order be split? Will it sync with ERP? What happens if notifications or integrations fail?',
+              'A practical first phase should complete one small loop: the buyer submits a request, sales confirms price and lead time, the system creates a traceable order, internal users can follow status changes, and the buyer receives clear feedback. Advanced reports and deep ERP automation can wait, but status flow and exception handling should not be completely postponed.',
+            ],
+            bullets: [
+              'Submitted does not always mean confirmed; confirmation, rejection, and revision paths should be explicit',
+              'Order status should be understandable to buyers, sales, and internal follow-up teams',
+              'Notification failures, sync failures, and manual price changes need logs and clear fallback ownership',
+            ],
+          },
+        ],
+        takeawayTitle: 'Main takeaways',
+        takeaways: [
+          'A B2B ordering system should define product data, pricing, permission, and order boundaries before adding more pages.',
+          'Customer-specific pricing, visibility rules, and confirmation workflows become expensive to maintain if they are not structured early.',
+          'The safest phase one is not the largest feature set, but a traceable buyer ordering loop that the team can operate reliably.',
+        ],
+        ctaTitle: 'If you are planning a B2B ordering system, start with the boundary map',
+        ctaDescription: 'We can first map product data fields, pricing rules, customer permissions, and order statuses, then decide what belongs in phase one and what should wait for real buyer validation.',
+      },
+    },
+  },
+  'modern-frontend-internal-system-refactor': {
+    slug: 'modern-frontend-internal-system-refactor',
+    priority: {
+      zh: 0.64,
+      en: 0.5,
+    },
+    publishedAt: '2026-05-02',
+    readingMinutes: 7,
+    relatedServices: ['web-app-development'],
+    content: {
+      zh: {
+        navLabel: '内部系统重构别只盯后端，前端也是交付风险点',
+        categoryLabel: '企业系统',
+        metaTitle: '内部系统现代前端重构的取舍与边界｜致诚工作室',
+        metaDescription:
+          '大中型企业重构内部系统时，现代前端不是为了炫技术，而是为了解决复杂表单、权限状态、协作流程和后续维护的问题。',
+        keywords: ['内部系统重构', '现代前端', '企业系统维护', 'Web App 开发'],
+        eyebrow: 'Article',
+        heroTitle: '大中型企业重构内部系统，为什么前端不该继续当成“页面外包”',
+        heroDescription:
+          '很多内部系统的痛点表面上是后端老、接口慢、数据库乱，但真正每天折磨用户和维护团队的，经常是前端状态混乱、表单难改、权限提示不清、流程异常没有反馈。现代前端重构的价值，不是换一个更潮的技术栈，而是把复杂业务界面做成可维护的工程。',
+        introTitle: '前端不是最后套页面，而是业务规则的另一半',
+        introParagraphs: [
+          '在企业内部系统里，前端承载的不只是展示。订单状态能不能编辑、审批按钮何时出现、字段校验在哪里触发、异常原因怎么提示、不同角色看到哪些数据，这些都直接影响业务能不能顺畅运行。',
+          '如果重构时只把预算和注意力放在后端，把前端继续当成“接口调好了再套页面”，上线后很容易出现另一个版本的旧系统：数据结构变新了，但用户仍然靠截图、群消息和人工解释来完成工作。',
+        ],
+        sections: [
+          {
+            title: '复杂表单和状态流转，是最容易被低估的前端成本',
+            paragraphs: [
+              '内部系统里最贵的前端工作，往往不是页面数量，而是表单和状态。一个采购单、报价单或工单页面，可能包含草稿、提交、退回、作废、补充资料、再次审批等多种状态，每个状态下可见字段、可编辑字段和操作按钮都不同。',
+              '如果这些规则散落在页面判断里，短期能跑，长期会很难维护。更稳的做法是把状态、权限、校验和提示规则在前端工程里分层管理，让界面行为有来源、有复用，也能跟后端规则对齐。',
+            ],
+            bullets: [
+              '不要只按页面估工作量，要单独评估表单复杂度和状态数量',
+              '同一业务对象的可见、可改、可提交规则要集中梳理',
+              '关键错误提示要面向业务用户，而不是只返回接口失败',
+            ],
+          },
+          {
+            title: '现代前端的价值在工程边界，不在框架名词',
+            paragraphs: [
+              '我不太建议把“用不用 React、Vue 或某个组件库”当成重构决策的核心。真正要看的是：界面状态是否可追踪，组件是否能复用，表格、筛选、权限、弹窗和导入导出是否有一致的实现方式。',
+              '当系统越来越大时，前端如果没有工程边界，新增一个字段都可能牵动多个页面，改一个权限提示又怕影响别的角色。现代前端架构应该帮助团队降低这种恐惧，而不是只把页面做得更像新产品。',
+            ],
+            bullets: [
+              '组件库解决一致性，但不能替代业务规则设计',
+              '页面状态、请求状态和权限状态要有清晰边界',
+              '前端代码要支持后续迭代人员读懂，而不是只追求首版速度',
+            ],
+          },
+          {
+            title: '重构不一定一次推翻，先选高频流程做前端闭环',
+            paragraphs: [
+              '很多老系统不能也不应该一次全部推翻。更可控的方式是先挑一个高频、痛点明确、接口边界相对清楚的流程，把列表、详情、编辑、审批、异常提示和操作日志做成完整闭环。',
+              '这个闭环能暴露真实问题：老接口是否够用，权限规则是否清楚，用户是否接受新的交互，后端是否需要补状态字段。等这一段跑稳，再扩到其他模块，比一开始做一套大而全的新壳更稳。',
+            ],
+            bullets: [
+              '先选一个业务价值高、依赖关系少的流程试点',
+              '保留与旧系统并行或回退的方案，避免切换当天失控',
+              '用试点结果反推组件、权限和接口规范，而不是先写大规范',
+            ],
+          },
+          {
+            title: '适用边界也要说清：不是每个后台都值得重构前端',
+            paragraphs: [
+              '如果系统使用频率低、流程很简单、只是少数管理员偶尔维护数据，重构前端的收益可能并不高。这个时候修几个明显的可用性问题、补日志和权限，可能比完整重构更划算。',
+              '但如果系统每天被多人协作使用，表单复杂、角色多、异常频繁、培训成本高，前端就不再是皮肤问题。它会直接决定业务规则能否被稳定执行，也决定后续维护是不是每次都要重新摸一遍逻辑。',
+            ],
+          },
+        ],
+        takeawayTitle: '关键判断',
+        takeaways: [
+          '内部系统前端重构的核心价值，是把复杂状态、权限和表单规则做成可维护工程。',
+          '是否采用现代前端，不应只看框架，而要看系统规模、协作频率和后续迭代压力。',
+          '更稳的路径通常是先选一个高频流程跑通闭环，再逐步沉淀组件、权限和接口规范。',
+        ],
+        ctaTitle: '如果你在评估内部系统重构，可以先从一个流程闭环开始',
+        ctaDescription:
+          '我们可以先梳理高频流程、角色权限、表单状态和异常处理，再判断哪些前端能力值得重构，哪些旧系统能力可以暂时保留。',
+      },
+      en: {
+        navLabel: 'Frontend refactoring is a delivery risk in internal systems',
+        categoryLabel: 'Internal System',
+        metaTitle: 'Modern Frontend Refactoring for Internal Systems: Trade-offs and Boundaries | Zhicheng Studio',
+        metaDescription:
+          'Modern frontend work in internal system refactoring is not about trendy tooling. It helps manage complex forms, permissions, workflow states, and long-term maintenance.',
+        keywords: ['internal system refactoring', 'modern frontend', 'enterprise system maintenance', 'web app development'],
+        eyebrow: 'Article',
+        heroTitle: 'When large companies refactor internal systems, frontend work should not be treated as page outsourcing',
+        heroDescription:
+          'Many internal system problems look like backend issues: old APIs, slow queries, messy databases. But the pain felt by users and maintenance teams often lives in the frontend: unclear states, fragile forms, confusing permissions, and weak exception feedback. Modern frontend refactoring is valuable when it turns complex business screens into maintainable software.',
+        introTitle: 'Frontend is not the final skin; it carries half of the business rules',
+        introParagraphs: [
+          'In internal systems, the frontend is not only presentation. Whether an order can be edited, when an approval button appears, where validation happens, how errors are explained, and what each role can see all affect whether the workflow actually runs.',
+          'If a refactor focuses only on backend services while the frontend remains a final page layer, the new system can repeat old problems. The database may be cleaner, but users still depend on screenshots, chat messages, and manual explanations to finish daily work.',
+        ],
+        sections: [
+          {
+            title: 'Complex forms and workflow states are often the underestimated cost',
+            paragraphs: [
+              'The expensive frontend work in internal systems is rarely the number of pages alone. A purchase request, quotation, or work order may include draft, submitted, rejected, cancelled, additional-information, and re-approval states. Each state changes visible fields, editable fields, and available actions.',
+              'If these rules are scattered across page-level conditions, the first version may work but maintenance becomes difficult. A safer approach separates state, permission, validation, and feedback rules in the frontend architecture so interface behavior has clear ownership and can stay aligned with backend rules.',
+            ],
+            bullets: [
+              'Estimate form complexity and workflow states, not only screen count',
+              'Centralize visibility, editability, and submission rules for the same business object',
+              'Make critical error messages useful for business users, not only for API debugging',
+            ],
+          },
+          {
+            title: 'The value of modern frontend work is engineering boundaries, not framework names',
+            paragraphs: [
+              'I would not make React, Vue, or a component library the center of the refactor decision. The more important questions are whether interface state is traceable, components are reusable, and tables, filters, permissions, dialogs, imports, and exports follow consistent patterns.',
+              'As the system grows, a frontend without engineering boundaries makes every small change risky. Adding one field may touch several pages; changing one permission hint may affect multiple roles. A modern frontend architecture should reduce that fear instead of only making the screens look newer.',
+            ],
+            bullets: [
+              'A component library improves consistency but does not replace business rule design',
+              'Page state, request state, and permission state need clear boundaries',
+              'Frontend code should remain understandable for later maintainers, not only fast for the first release',
+            ],
+          },
+          {
+            title: 'A refactor does not have to replace everything at once',
+            paragraphs: [
+              'Many legacy systems cannot and should not be replaced in one pass. A more controlled path is to choose one frequent workflow with clear pain and manageable dependencies, then complete the full loop: list, detail, edit, approval, exception feedback, and operation history.',
+              'That loop exposes real constraints: whether old APIs are enough, whether permission rules are clear, whether users accept the new interaction, and whether backend status fields need improvement. Once this section is stable, expansion becomes safer than building a large new shell first.',
+            ],
+            bullets: [
+              'Start with a high-value workflow that has limited dependencies',
+              'Keep a parallel or rollback path so the switch-over day does not become a crisis',
+              'Let the pilot shape component, permission, and API conventions instead of writing a large standard first',
+            ],
+          },
+          {
+            title: 'The boundary matters: not every admin panel deserves a frontend refactor',
+            paragraphs: [
+              'If a system is used rarely, has simple workflows, and is maintained by a few administrators, full frontend refactoring may not be worth the cost. Fixing visible usability problems, logs, and permissions may be a better investment.',
+              'But when a system is used daily by many people, with complex forms, multiple roles, frequent exceptions, and high training cost, the frontend is no longer a cosmetic layer. It directly affects whether business rules are executed reliably and whether future maintenance requires rediscovering the logic every time.',
+            ],
+          },
+        ],
+        takeawayTitle: 'Main takeaways',
+        takeaways: [
+          'Frontend refactoring in internal systems is valuable when it makes complex states, permissions, and form rules maintainable.',
+          'The decision should be based on system scale, collaboration frequency, and iteration pressure, not only on framework choice.',
+          'A safer path is to complete one frequent workflow first, then let it shape component, permission, and API conventions.',
+        ],
+        ctaTitle: 'If you are evaluating an internal system refactor, start with one workflow loop',
+        ctaDescription:
+          'We can first map the frequent workflow, roles, form states, and exception handling, then decide which frontend capabilities should be refactored and which legacy parts can stay for now.',
       },
     },
   },
