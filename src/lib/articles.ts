@@ -68,6 +68,8 @@ export const articleSlugs = [
   'enterprise-system-quote-technical-debt',
   'b2b-ordering-system-data-pricing-permission',
   'modern-frontend-internal-system-refactor',
+  'enterprise-ai-entry-priority',
+  'workflow-automation-fallback-audit-rollback',
 ] as const
 
 export type ArticleSlug = (typeof articleSlugs)[number]
@@ -8122,6 +8124,314 @@ const articleDefinitions: Record<ArticleSlug, ArticleDefinition> = {
         ctaTitle: 'If you are evaluating an internal system refactor, start with one workflow loop',
         ctaDescription:
           'We can first map the frequent workflow, roles, form states, and exception handling, then decide which frontend capabilities should be refactored and which legacy parts can stay for now.',
+      },
+    },
+  },
+  'enterprise-ai-entry-priority': {
+    slug: 'enterprise-ai-entry-priority',
+    priority: {
+      zh: 0.64,
+      en: 0.5,
+    },
+    publishedAt: '2026-05-03',
+    readingMinutes: 7,
+    relatedServices: ['web-app-development'],
+    content: {
+      zh: {
+        navLabel: '企业做 AI，先上知识问答、流程自动化还是业务助手',
+        categoryLabel: '企业系统',
+        metaTitle: '企业做 AI 应用，先做知识问答、流程自动化还是业务助手？｜致诚工作室',
+        metaDescription:
+          '企业想做 AI 时，最容易失控的不是模型选择，而是入口选错。本文从落地难度、数据要求、责任边界和业务价值判断，解释哪类 AI 入口更适合先做。',
+        keywords: ['企业 AI 应用', '流程自动化', '知识问答', '业务助手'],
+        eyebrow: 'Article',
+        heroTitle: '企业做 AI 应用，先上知识问答、流程自动化，还是业务助手更容易落地？',
+        heroDescription:
+          '很多团队一提 AI，就会把知识库问答、审批自动化、销售助手、运营 Copilot 一起摆上桌面，最后讨论很热闹，项目却迟迟起不来。问题往往不在模型够不够强，而在第一步选了一个看起来高级、实际上依赖太多的入口。',
+        introTitle: '先选入口，本质上是在选项目难度和组织阻力',
+        introParagraphs: [
+          '同样叫 AI 项目，不同入口背后的改造成本差异很大。知识问答主要考验资料治理和回答边界，流程自动化更依赖系统接口、责任流转和异常兜底，业务助手则往往同时牵涉上下文组织、写回权限、角色差异和使用习惯。',
+          '如果一开始不区分这些差异，就很容易出现一种常见误判：以为先做“看起来最智能”的东西最有价值，结果做了几周才发现数据没准备好、流程没梳理清、谁为结果负责也说不明白。AI 项目不是不能大做，而是第一步最好先挑组织阻力最小、结果最容易验证的一类。',
+        ],
+        sections: [
+          {
+            title: '知识问答适合先解决“找不到”和“答不稳”，但不要把它当万能入口',
+            paragraphs: [
+              '如果企业内部最大的痛点是资料散、制度多、文档版本乱，新人和跨部门同事总要到处问人，知识问答往往是最容易起步的 AI 入口。它不一定马上改动主业务系统，也比较适合先验证检索质量、权限范围和回答方式。',
+              '但知识问答的边界也要说清。它擅长帮助人理解规则、查资料、定位文档，不等于适合直接替代审批判断、价格承诺或客户回复。只要团队把它当成“什么都能问、什么都能做”的总入口，后面就很容易因为答案不稳定而失去信任。',
+            ],
+            bullets: [
+              '资料分散、培训成本高、常见问题重复出现时，知识问答更值得先试',
+              '先限定文档范围、角色权限和回答场景，比一开始追求全公司覆盖更稳',
+              '问答结果适合作为辅助判断，不适合默认变成业务指令',
+            ],
+          },
+          {
+            title: '流程自动化更容易产生直接 ROI，但前提是规则已经足够稳定',
+            paragraphs: [
+              '如果企业已经有比较清楚的流程节点、输入字段和处理规则，比如合同归类、工单分派、询盘分发、资料初审、报销校验这类动作，AI 流程自动化通常比业务助手更容易看到直接收益。因为它减少的是明确的人工作业，而不是模糊的“智能体验”。',
+              '不过这类项目真正的门槛，不在模型调用，而在异常处理。规则变体多不多，失败后谁接手，自动结果能不能回滚，原系统有没有接口和日志，这些都决定了项目能不能长期跑。流程本身如果还经常靠人临时拍板，过早自动化只会把混乱写进系统里。',
+            ],
+            bullets: [
+              '优先挑高频、低争议、已有系统记录的流程环节',
+              '先设计人工兜底、重试和审计，再谈自动化比例',
+              '流程还没稳定前，不要急着追求“全自动处理”',
+            ],
+          },
+          {
+            title: '业务助手看起来最吸引人，实际上最考验上下文和写回边界',
+            paragraphs: [
+              '销售助手、采购助手、客服助手这类业务助手，很容易成为管理层最感兴趣的方向，因为它直接贴近业务人员，看起来也最像“真正把 AI 用起来了”。但这类项目往往最难在一期做好，因为它既要理解业务上下文，又可能牵涉建议生成、内容改写、系统写回和跨角色协作。',
+              '一旦上下文来源不完整、角色目标不一致，助手就会显得时好时坏。给出的建议可能看上去合理，但没人敢真正依赖；允许它直接改系统数据，又会碰到权限和责任问题。所以业务助手通常更适合放在知识问答和局部自动化之后，当团队已经摸清数据、流程和风险边界，再把它抬到更核心的位置。',
+            ],
+            bullets: [
+              '业务助手不是不能先做，但更适合限定在建议、草稿和检索增强层',
+              '涉及报价、审批、客户承诺或系统写回时，要单独定义责任边界',
+              '如果团队还没建立统一上下文，助手效果通常会比演示时差很多',
+            ],
+          },
+          {
+            title: '一个更稳的排序方法：先看验证难度，再看组织接受度',
+            paragraphs: [
+              '如果让我给大多数企业一个更保守也更可交付的顺序，我通常会建议：先做受限范围的知识问答，或者选一个高频流程做自动化试点；等日志、权限、异常处理和使用反馈积累起来，再考虑把 AI 做成更主动的业务助手。',
+              '这个顺序的好处，不只是技术风险更低，更重要的是组织更容易接受。第一步先交付一个边界明确、效果可解释的能力，团队才有机会建立真实信任。等大家知道 AI 在哪里能帮忙、哪里必须人工把关，再扩到更复杂的助手场景，项目才不容易一开始就背上过高预期。',
+            ],
+          },
+        ],
+        takeawayTitle: '关键判断',
+        takeaways: [
+          '企业 AI 的第一步不该只看想象空间，而要看数据准备度、规则稳定性和责任边界。',
+          '知识问答适合先解决资料获取问题，流程自动化适合先优化高频标准动作，业务助手更适合放在后一步。',
+          '越接近写回系统和替人决策的 AI 场景，越需要先积累上下文、日志和组织信任。',
+        ],
+        ctaTitle: '如果你在评估企业 AI 项目，先别急着做最像“助手”的那一个',
+        ctaDescription:
+          '可以先一起判断资料质量、流程稳定性、系统接口和责任边界，再决定第一步更适合做问答、自动化，还是限定范围的业务助手。',
+      },
+      en: {
+        navLabel: 'Should enterprise AI start with Q&A, automation, or an assistant?',
+        categoryLabel: 'Internal System',
+        metaTitle: 'Should Enterprise AI Start with Knowledge Q&A, Workflow Automation, or a Business Assistant? | Zhicheng Studio',
+        metaDescription:
+          'The hardest part of an enterprise AI project is often not model choice but entry-point choice. This article compares knowledge Q&A, workflow automation, and business assistants from the perspective of delivery risk, data readiness, and ownership.',
+        keywords: ['enterprise AI', 'workflow automation', 'knowledge Q&A', 'business assistant'],
+        eyebrow: 'Article',
+        heroTitle: 'When a company starts using AI, should it begin with knowledge Q&A, workflow automation, or a business assistant?',
+        heroDescription:
+          'Many teams put knowledge search, approval automation, sales copilots, and operations assistants into the same AI discussion, then struggle to launch anything. The real issue is often not model capability. It is choosing a first step that looks ambitious but depends on too many unresolved conditions.',
+        introTitle: 'Choosing the first AI entry point is really choosing project difficulty and organizational friction',
+        introParagraphs: [
+          'Projects that all sound like “enterprise AI” can be very different underneath. Knowledge Q&A depends on document quality and answer boundaries. Workflow automation depends on system interfaces, exception handling, and ownership. A business assistant usually combines context management, role differences, write-back risk, and usage behavior all at once.',
+          'When teams ignore those differences, they often make the same mistake: they start with the most impressive-looking AI idea, then discover that the data is not ready, the workflow is still unclear, and no one can explain who owns the result. A large AI strategy is fine, but the first step should usually be the one that is easiest to validate and hardest to misunderstand.',
+        ],
+        sections: [
+          {
+            title: 'Knowledge Q&A is a good first step when the pain is information access, not decision execution',
+            paragraphs: [
+              'If the biggest internal problem is scattered documentation, inconsistent policy versions, and repeated basic questions across departments, knowledge Q&A is often the easiest AI entry point. It can create value without changing core business systems on day one, and it is a practical way to test retrieval quality, permission scope, and answer style.',
+              'Its boundary still matters. Knowledge Q&A is useful for helping people understand rules, find documents, and reduce interruption. It should not automatically become the system that approves exceptions, promises pricing, or replies to customers without review. Once teams treat it as a universal entry point, trust usually drops when the answers become inconsistent.',
+            ],
+            bullets: [
+              'Start here when documentation is scattered and onboarding or repeated questions consume too much time',
+              'A limited document scope and role boundary is usually safer than company-wide coverage at the start',
+              'Use answers as support for people, not as automatic business commands',
+            ],
+          },
+          {
+            title: 'Workflow automation creates clearer ROI, but only when the process is already stable enough',
+            paragraphs: [
+              'If the company already has defined workflow steps, structured inputs, and repeatable handling rules, AI-powered automation can show direct operational value faster than a broad assistant. Examples include contract tagging, work-order routing, lead triage, first-pass document review, or reimbursement checks.',
+              'The hard part is rarely the model call itself. The real question is what happens when the output is wrong, incomplete, or ambiguous. Who takes over, how the action is rolled back, whether the source system has proper logs, and whether the process still changes every week all matter more than demo quality. Automating an unstable process often means hard-coding confusion into the system.',
+            ],
+            bullets: [
+              'Choose a high-frequency, low-dispute step with existing system records',
+              'Design manual fallback, retry behavior, and audit visibility before raising automation rate',
+              'Do not chase full automation if the process still depends on frequent case-by-case judgment',
+            ],
+          },
+          {
+            title: 'Business assistants are the most attractive idea, but they demand the most context discipline',
+            paragraphs: [
+              'Sales assistants, sourcing assistants, and service copilots often attract the most attention because they look closest to “real AI at work.” In delivery terms, though, they are usually the hardest first-phase project. They need business context, role-aware behavior, suggestion quality, sometimes content generation, and often some level of system interaction.',
+              'If the context is incomplete or different roles want different outcomes, the assistant becomes unreliable in exactly the places where people hoped it would help most. It may produce plausible suggestions that nobody wants to trust. If it is allowed to update system records directly, permission and accountability issues appear quickly. That is why assistants often work better after a team has already learned from Q&A or limited automation pilots.',
+            ],
+            bullets: [
+              'A business assistant is safer when it stays in suggestion, drafting, or retrieval-enhancement mode first',
+              'Anything touching pricing, approvals, customer commitments, or system write-back needs explicit ownership rules',
+              'Without a shared context layer, real usage quality is often much lower than demo quality',
+            ],
+          },
+          {
+            title: 'A steadier sequencing rule is to prioritize validation clarity before ambition',
+            paragraphs: [
+              'If I need to recommend a practical order for most companies, I usually suggest starting with constrained knowledge Q&A or a single high-frequency automation pilot. Once logs, permissions, exception handling, and user feedback become real, it is much safer to move toward a more proactive assistant.',
+              'This order is not only lower risk technically. It is also easier for the organization to accept. Deliver one bounded capability with visible value and explainable behavior first. Once people understand where AI is helpful and where human review still matters, expanding into deeper assistant scenarios becomes much more realistic.',
+            ],
+          },
+        ],
+        takeawayTitle: 'Main takeaways',
+        takeaways: [
+          'The first enterprise AI use case should be chosen by data readiness, rule stability, and ownership clarity, not by how impressive the demo looks.',
+          'Knowledge Q&A is strong for information access, workflow automation is strong for repeatable operational steps, and business assistants usually belong later.',
+          'The closer an AI capability gets to system write-back or decision replacement, the more context, logging, and organizational trust it needs first.',
+        ],
+        ctaTitle: 'If you are evaluating enterprise AI, do not start with the most assistant-like idea by default',
+        ctaDescription:
+          'We can first assess document quality, process stability, system interfaces, and ownership boundaries, then decide whether the right first step is Q&A, automation, or a tightly scoped business assistant.',
+      },
+    },
+  },
+  'workflow-automation-fallback-audit-rollback': {
+    slug: 'workflow-automation-fallback-audit-rollback',
+    priority: {
+      zh: 0.64,
+      en: 0.5,
+    },
+    publishedAt: '2026-05-04',
+    readingMinutes: 7,
+    relatedServices: ['web-app-development'],
+    content: {
+      zh: {
+        navLabel: '流程自动化上线前，为什么要先设计人工兜底、审计和回滚',
+        categoryLabel: '流程',
+        metaTitle: '流程自动化项目上线前，为什么必须先设计人工兜底、审计和回滚｜致诚工作室',
+        metaDescription:
+          '很多流程自动化在演示里很顺，真正上线后却总要靠人盯。问题通常不在接口有没有打通，而在人工兜底、审计链路和回滚机制没有先设计。',
+        keywords: ['流程自动化', '人工兜底', '审计日志', '回滚机制'],
+        eyebrow: 'Article',
+        heroTitle: '流程自动化项目上线前，为什么人工兜底、审计和回滚要先设计，而不是出事后再补？',
+        heroDescription:
+          '很多自动化项目演示时都能跑通一条漂亮的 happy path，真到上线后却还是要人盯着看。不是因为接口接得不够快，而是因为异常怎么接手、操作怎么追溯、错误怎么撤回，这三件事在第一版里根本没被当成正式需求。',
+        introTitle: '自动化能不能长期跑，看的不是演示成功率，而是出错后的处理成本',
+        introParagraphs: [
+          '我见过不少企业流程自动化项目，前期最容易被高估的是“系统已经能自动做事了”，最容易被低估的是“做错以后谁来接、怎么查、能不能撤”。如果这些问题没有先拆清，上线后就会很快变成一个需要人持续盯盘的半自动系统。',
+          '所以我现在更倾向于把人工兜底、审计和回滚当成自动化的一期能力，而不是二期优化。自动化不是只把动作执行出去，更重要的是在异常出现时，团队还能知道发生了什么、谁该接手、系统能回到哪里。',
+        ],
+        sections: [
+          {
+            title: '演示能跑通，不代表真实流程已经适合自动化',
+            paragraphs: [
+              '很多演示只覆盖正常路径：资料完整、状态正确、接口响应稳定、下游系统也正好可用。可真实业务里最常见的，恰恰是字段缺失、规则冲突、重复触发、外部接口超时和人工中途改状态。只要这些异常没有设计进去，自动化上线后就会不断把问题推给人补。',
+              '这也是为什么我不太把“是否已经调通接口”当成自动化 readiness 的主要判断。更关键的是：流程规则是不是足够稳定，异常有没有被分类，失败后系统是停在可理解的中间状态，还是直接留下一个谁都说不清的脏结果。',
+            ],
+            bullets: [
+              '先列清正常路径以外最常见的 5 到 10 类异常',
+              '把重复提交、超时、部分成功和人工改写状态单独看待',
+              '如果异常类型还说不清，自动化比例就不该先拉高',
+            ],
+          },
+          {
+            title: '人工兜底不是“失败后发个通知”，而是明确谁接、按什么规则接',
+            paragraphs: [
+              '很多团队说自己留了人工兜底，实际做法只是任务失败后发一条消息给群里，或者在后台挂一个报错提示。这样的兜底很快就会失效，因为没人知道谁必须处理、多久要处理、处理后要不要补写状态、是否需要重新触发自动化。',
+              '真正可用的人工兜底，应该像流程节点一样被设计出来。谁是默认接手人，什么条件下升级给上一级，人工处理后系统如何继续往下走，是否保留重试按钮，是否允许人工确认后恢复自动执行，这些都要在第一版先说清楚。',
+            ],
+            bullets: [
+              '给异常任务定义默认责任人和升级路径',
+              '区分“人工确认后继续自动执行”和“人工接管后结束自动化”两类处理方式',
+              '把补录、重试、忽略、回退等动作做成清晰的后台操作',
+            ],
+          },
+          {
+            title: '审计和回滚不是运维附属品，而是业务信任的一部分',
+            paragraphs: [
+              '只要自动化会改状态、发通知、生成记录、同步第三方系统，审计就不只是为了排查 bug。业务方需要知道是谁触发的、用了什么输入、系统做了什么判断、写入了哪些结果、什么时候被人工改过。没有这条链路，团队一旦遇到争议，就只能靠猜。',
+              '回滚也是同样的逻辑。不是所有动作都能简单撤销，但至少要明确哪些结果可以自动回退，哪些只能人工补偿，哪些要保留原值和变更前快照。否则每次失败都只能让开发临时查库、补数据，系统会越跑越不敢放开。',
+            ],
+            bullets: [
+              '关键动作至少记录触发来源、输入摘要、执行结果和人工改动痕迹',
+              '高风险写操作要区分可逆、需补偿、不可逆三类',
+              '回滚触发条件和边界要在上线前写进方案，而不是靠临场判断',
+            ],
+          },
+          {
+            title: '更稳的做法，是先交付一个带兜底的闭环，而不是追求全流程自动',
+            paragraphs: [
+              '如果一期就想把整条长流程全部自动掉，往往最先崩的不是模型或接口，而是团队对异常没有共同处理方式。更稳的方案通常是先挑一段高频、规则相对稳定、失败成本可控的环节，把触发、执行、异常、日志和人工接管跑成闭环。',
+              '这个闭环跑稳后，团队会更清楚哪些规则真的稳定，哪些环节值得继续自动，哪些动作必须保留人工确认。自动化真正节省成本，不是因为少写了几个页面，而是因为它能长期稳定地减少人工操作，而不是把人工工作换成了人工救火。',
+            ],
+          },
+        ],
+        takeawayTitle: '关键判断',
+        takeaways: [
+          '流程自动化能不能上线，不该只看 happy path 能不能跑通，还要看异常能不能被接住。',
+          '人工兜底需要责任人、处理规则和后台操作，不是简单发个失败通知。',
+          '审计和回滚越早设计，后续越容易把自动化从演示能力变成可长期运行的业务能力。',
+        ],
+        ctaTitle: '如果你在评估流程自动化，不妨先把异常处理和回滚边界讲清楚',
+        ctaDescription:
+          '可以先一起梳理触发条件、异常类型、责任流转、日志要求和回滚方式，再判断哪些流程适合先自动，哪些应该继续保留人工确认。',
+      },
+      en: {
+        navLabel: 'Workflow automation needs fallback, audit, and rollback before launch',
+        categoryLabel: 'Process',
+        metaTitle: 'Why Workflow Automation Needs Human Fallback, Audit, and Rollback Before Launch | Zhicheng Studio',
+        metaDescription:
+          'Many automation projects look smooth in demos but still require constant manual watching after launch. The usual issue is not integration speed but weak fallback ownership, auditability, and rollback design.',
+        keywords: ['workflow automation', 'human fallback', 'audit trail', 'rollback design'],
+        eyebrow: 'Article',
+        heroTitle: 'Why workflow automation should design human fallback, audit, and rollback before launch instead of after the first failure',
+        heroDescription:
+          'A workflow automation demo can make the happy path look clean and convincing. Production is different. The real question is who takes over on failure, how the action can be traced, and whether the system can recover without turning every mistake into a manual repair project.',
+        introTitle: 'Long-term automation quality is determined less by success demos and more by failure handling cost',
+        introParagraphs: [
+          'In many enterprise automation projects, teams overestimate the value of “the system can now do this automatically” and underestimate the cost of “what happens when it does it wrong.” If takeover, traceability, and recovery are not designed early, the result is usually a semi-automatic workflow that still needs people watching it every day.',
+          'That is why I treat fallback, audit, and rollback as phase-one capabilities instead of later polish. Automation is not only about executing an action. It is about keeping the workflow understandable and recoverable when something goes wrong.',
+        ],
+        sections: [
+          {
+            title: 'A successful demo does not prove that the real workflow is ready for automation',
+            paragraphs: [
+              'Most demos only cover the clean path: complete data, correct state, stable interfaces, and available downstream systems. Real operations are full of missing fields, rule conflicts, repeated triggers, timeouts, and manual status changes in the middle of the process. If those exception classes are not designed into version one, people end up patching around the automation instead of trusting it.',
+              'That is why I do not treat “the API is connected” as the main readiness signal. A better question is whether the workflow rules are stable enough, whether exception types are understood, and whether a failed run leaves the system in a clear intermediate state instead of an unexplained mess.',
+            ],
+            bullets: [
+              'List the most common exception types before increasing automation rate',
+              'Treat duplicate submission, timeout, partial success, and manual state edits as separate cases',
+              'If the team cannot explain the main failures yet, the workflow is not ready for broad automation',
+            ],
+          },
+          {
+            title: 'Human fallback is not just a failure notification. It needs ownership and handling rules',
+            paragraphs: [
+              'Many teams say they have a fallback plan when in reality they only send an alert to a group chat or display an error in the admin panel. That is rarely enough. People still do not know who must act, how fast they must respond, whether the workflow state needs correction, or whether the automation should be retried.',
+              'A usable fallback behaves like a real process node. There should be a default owner, an escalation path, a clear way to continue after manual handling, and an explicit choice between “confirm and resume automation” versus “take over manually and stop the automatic path.” Those rules are part of the product design, not only the support playbook.',
+            ],
+            bullets: [
+              'Define default owners and escalation paths for exception tasks',
+              'Separate “manual confirmation then resume” from “manual takeover and stop automation”',
+              'Give operators clear backend actions such as retry, correct data, ignore, or revert',
+            ],
+          },
+          {
+            title: 'Audit and rollback are not side utilities. They are part of business trust',
+            paragraphs: [
+              'Once automation changes status, sends notifications, creates records, or syncs third-party systems, auditability becomes more than a debugging tool. The business needs to know what triggered the action, what inputs were used, what the system decided, what was written, and whether a person changed it later. Without that chain, every dispute becomes guesswork.',
+              'Rollback follows the same logic. Not every action is reversible in the same way, but the team still needs to define which outcomes can be rolled back automatically, which need compensation steps, and which require keeping the original value plus a before-change snapshot. Without that design, every failure becomes a manual data-repair exercise.',
+            ],
+            bullets: [
+              'Record trigger source, input summary, execution result, and manual edits for key actions',
+              'Classify high-risk writes into reversible, compensating, and non-reversible categories',
+              'Write rollback triggers and limits into the launch plan before go-live',
+            ],
+          },
+          {
+            title: 'A steadier phase one is a closed loop with fallback, not full-process automation',
+            paragraphs: [
+              'Teams that try to automate an entire long workflow in the first release usually discover that the hardest problem is not the model or the interface. It is the absence of a shared exception-handling pattern. A safer phase one picks one frequent step with relatively stable rules and controllable failure cost, then delivers the full loop: trigger, execution, exception path, logs, and manual takeover.',
+              'Once that loop runs steadily, the team learns which rules are genuinely stable, which steps deserve more automation, and which actions should always keep human confirmation. Automation saves money only when it reduces work over time. If it merely turns normal work into manual firefighting, the project has not really become more efficient.',
+            ],
+          },
+        ],
+        takeawayTitle: 'Main takeaways',
+        takeaways: [
+          'Workflow automation should be judged by exception handling quality, not only by happy-path success.',
+          'Human fallback needs ownership, response rules, and explicit operator actions rather than a generic failure alert.',
+          'Early audit and rollback design is what helps automation become a reliable business capability instead of a fragile demo.',
+        ],
+        ctaTitle: 'If you are evaluating workflow automation, clarify exception handling and rollback boundaries first',
+        ctaDescription:
+          'We can map trigger conditions, exception types, ownership flow, logging needs, and rollback options first, then decide which workflows are ready for automation and which should keep human confirmation.',
       },
     },
   },
