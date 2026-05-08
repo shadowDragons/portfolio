@@ -70,6 +70,9 @@ export const articleSlugs = [
   'modern-frontend-internal-system-refactor',
   'enterprise-ai-entry-priority',
   'workflow-automation-fallback-audit-rollback',
+  'approval-workflow-state-machine-boundaries',
+  'internal-system-field-ownership-boundaries',
+  'automation-job-state-retry-handover',
 ] as const
 
 export type ArticleSlug = (typeof articleSlugs)[number]
@@ -8432,6 +8435,468 @@ const articleDefinitions: Record<ArticleSlug, ArticleDefinition> = {
         ctaTitle: 'If you are evaluating workflow automation, clarify exception handling and rollback boundaries first',
         ctaDescription:
           'We can map trigger conditions, exception types, ownership flow, logging needs, and rollback options first, then decide which workflows are ready for automation and which should keep human confirmation.',
+      },
+    },
+  },
+  'approval-workflow-state-machine-boundaries': {
+    slug: 'approval-workflow-state-machine-boundaries',
+    priority: {
+      zh: 0.64,
+      en: 0.5,
+    },
+    publishedAt: '2026-05-05',
+    readingMinutes: 7,
+    relatedServices: ['web-app-development'],
+    content: {
+      zh: {
+        navLabel: '审批系统一期，先把状态机和例外分支定清',
+        categoryLabel: '流程',
+        metaTitle: '审批系统开发时，为什么要先定状态机和例外分支｜致诚工作室',
+        metaDescription:
+          '很多审批或流程系统一期之所以越做越乱，不是页面没画完，而是状态机、例外分支和人工改写边界没有先定。本文从真实交付经验拆解更稳的做法。',
+        keywords: ['审批系统开发', '状态机设计', '流程系统一期', '企业系统开发'],
+        eyebrow: 'Article',
+        heroTitle: '做审批或流程系统时，为什么一期最该先定的是状态机和例外分支，而不是页面数量？',
+        heroDescription:
+          '很多团队做审批系统，一开始讨论得最热闹的是要几个页面、几个列表、几个按钮。可真正把项目做乱的，往往不是界面数量，而是状态到底有几种、哪些动作能改变状态、例外情况如何进入和退出、人工能不能改写，以及改写后谁来负责。只要这些边界没先定，页面做得越快，后面返工就越多。',
+        introTitle: '流程系统最怕的，不是功能少，而是状态真相不统一',
+        introParagraphs: [
+          '审批、工单、售后、采购、报销、订单流转，这类系统表面上看都是表单加节点，真正难的是状态管理。草稿、提交、退回、撤回、作废、补资料、再次审批、人工接管，这些状态一旦定义含糊，前后端、运营和业务方对同一个单据就会出现不同理解。',
+          '我现在做这类项目，一期通常不会先追求页面铺满，而是先把状态机、关键动作、例外分支和操作日志的边界定清。因为系统能不能长期维护，主要取决于这套骨架是否稳定，而不是首页列表是不是已经全部做出来。',
+        ],
+        sections: [
+          {
+            title: '先定状态，不然后面的页面和接口都会各说各话',
+            paragraphs: [
+              '很多项目需求会直接写“做发起页、审批页、待办页、详情页”，但很少先把状态字典写清。结果就是前端以为“退回”和“驳回”差不多，后端把“已取消”和“已关闭”混在一起，业务方又希望“补资料中”还能继续催办。页面都能做，流程却说不清。',
+              '更稳的起点是先把一个业务对象从开始到结束可能出现的状态列出来，再定义每个状态下允许哪些动作、动作后进入什么新状态、谁有权限触发。只要状态图清楚，列表筛选、按钮显示、消息通知、统计报表和审计记录都会顺很多。',
+            ],
+            bullets: [
+              '先定义状态名称、状态含义和进入条件，而不是先讨论页面排版',
+              '把“退回”“驳回”“撤回”“作废”这类容易混淆的词拆成明确业务动作',
+              '同一个状态是否可编辑、可审批、可催办，要和权限一起写清',
+            ],
+          },
+          {
+            title: '例外分支不是补丁，而是一期就该进入模型的正式路径',
+            paragraphs: [
+              '很多系统上线后被迫回到线下，不是因为主流程跑不通，而是例外路径没人接。比如审批人请假了怎么办，资料补交后回到原节点还是重跑，紧急单能不能跳过部分环节，金额超限时是升级审批还是转特殊流程。这些问题只要靠群消息临时拍板，系统很快就会变成“正常单走系统，异常单走人工”的两套流程。',
+              '如果某类例外高频出现，就不应该把它留给实施阶段临场处理，而应该在一期模型里定义成正式分支。不是所有边角情况都要系统化，但高频、可预见、影响责任划分的例外，越晚补越贵。',
+            ],
+            bullets: [
+              '区分低频噪音和高频例外，高频例外应该进流程设计',
+              '升级审批、临时代理、补资料、撤回重提这类分支通常要提前建模',
+              '如果例外路径只能靠备注解释，说明系统边界还没定住',
+            ],
+          },
+          {
+            title: '人工改写边界要单独设计，不要让系统假装自己全自动',
+            paragraphs: [
+              '真实交付里，总会遇到必须人工介入的场景：管理员代提交、主管临时转交、财务纠正状态、客服补录信息、运营撤销误操作。如果系统只允许理想动作，不允许合规的人工改写，团队最后会直接改数据库或回到 Excel；但如果所有人都能随意改状态，审计和责任又会立刻失真。',
+              '所以人工改写不是要不要有的问题，而是要不要被设计成可追踪的正式能力。哪些角色可以改，什么条件下能改，改完是否保留原值和原因，是否需要二次确认，是否触发通知，这些都要在一期说清。',
+            ],
+            bullets: [
+              '把“人工修正”设计成少数受控动作，而不是隐藏后门',
+              '关键改写要保留原状态、操作者、原因和时间',
+              '人工改写后是否继续自动流转，要有明确规则而不是默认猜测',
+            ],
+          },
+          {
+            title: '页面、接口和报表都应该从状态机反推，而不是各自独立长出来',
+            paragraphs: [
+              '很多团队会分别开会讨论前端页面、后端接口、消息通知和管理报表，最后每块都看起来合理，但拼不成一个统一系统。根因通常不是某个模块做错了，而是大家没有共享同一套状态真相，所以每个人都在按自己的理解补功能。',
+              '一旦状态机和例外分支先定住，很多实现判断会简单很多。哪些列表需要分组，哪个按钮在哪个状态出现，哪些通知是状态变化触发，哪些报表按动作统计，哪些接口必须幂等，都会有统一依据。这样一期虽然前期看起来讨论更慢，后期返工通常会少很多。',
+            ],
+          },
+        ],
+        takeawayTitle: '关键判断',
+        takeaways: [
+          '审批和流程系统的一期骨架，不是页面树，而是状态机、动作和例外分支。',
+          '高频例外和人工改写边界如果不先设计，系统很容易只适合跑主路径。',
+          '页面、接口、通知和报表都应从同一套状态真相反推，后续维护才不会各说各话。',
+        ],
+        ctaTitle: '如果你正在做流程系统，一期不妨先把状态图和例外清单定清',
+        ctaDescription:
+          '先一起梳理核心状态、关键动作、例外分支、人工改写规则和日志要求，再决定页面和接口范围，通常比先堆模块更稳。',
+      },
+      en: {
+        navLabel: 'Define workflow states and exception branches before expanding phase one',
+        categoryLabel: 'Process',
+        metaTitle: 'Why Approval Systems Should Define State Machines and Exception Branches First | Zhicheng Studio',
+        metaDescription:
+          'Approval and workflow systems become messy in phase one less because of missing screens and more because state machines, exception branches, and manual override boundaries were never defined clearly.',
+        keywords: ['approval workflow system', 'state machine design', 'exception branch', 'web app development'],
+        eyebrow: 'Article',
+        heroTitle: 'Why phase one of an approval or workflow system should define the state machine and exception branches before counting screens',
+        heroDescription:
+          'Teams often begin workflow projects by discussing lists, detail pages, pending queues, and buttons. The real delivery risk usually sits elsewhere: how many states exist, which actions change them, how exceptions enter and exit the flow, when humans may override the system, and how that override is traced. If those boundaries stay vague, faster UI delivery usually just produces faster rework.',
+        introTitle: 'Workflow systems rarely fail because they have too few features. They fail because the state truth is unclear',
+        introParagraphs: [
+          'Approval, ticketing, purchasing, reimbursement, after-sales, and order-flow systems may look like forms plus steps on the surface, but the hard part is state handling. Draft, submitted, returned, rejected, cancelled, additional-information, re-approval, and manual takeover all need consistent meaning across product, engineering, and operations.',
+          'In projects like these, I usually do not treat full screen coverage as the first milestone. A steadier phase one defines the state machine, key actions, exception branches, and logging rules first, because long-term maintainability depends far more on that structure than on whether every list view is already built.',
+        ],
+        sections: [
+          {
+            title: 'Define states first, or the screens and APIs will each invent their own logic',
+            paragraphs: [
+              'Many requirement documents jump straight into “submission page,” “approval page,” “pending list,” and “detail page” without ever establishing a clear state dictionary. Then the frontend treats “returned” and “rejected” as nearly the same thing, the backend mixes “cancelled” with “closed,” and the business team expects “waiting for additional information” to still behave like an active approval item. Every piece can be built, yet the workflow remains ambiguous.',
+              'A stronger starting point is to list the full set of possible states for one business object, then define which actions are allowed in each state, which new state follows, and which roles can trigger the transition. Once that map is stable, filters, buttons, notifications, reports, and audit records become much easier to align.',
+            ],
+            bullets: [
+              'Name each state, its meaning, and its entry condition before discussing layout details',
+              'Separate confusing business actions such as return, reject, withdraw, and void into explicit definitions',
+              'Document editability, approvability, and reminder behavior per state together with permissions',
+            ],
+          },
+          {
+            title: 'Exception branches are not patches. Frequent ones belong in the first model',
+            paragraphs: [
+              'Systems often fall back to offline handling not because the main path is broken, but because no one designed the exception paths. What happens when an approver is absent, when additional documents are submitted, when an urgent case skips a step, or when a high-value request needs escalation? If those answers live only in chat messages and temporary judgment, the company ends up with one workflow in the system and another one in reality.',
+              'Not every edge case deserves automation on day one, but frequent and predictable exceptions should not be treated as implementation leftovers. If an exception happens often enough to change ownership, timing, or risk, it belongs in the model early.',
+            ],
+            bullets: [
+              'Separate noisy edge cases from recurring exceptions; recurring ones deserve design attention',
+              'Escalation, temporary delegation, additional-information loops, and withdraw-and-resubmit paths usually need explicit modeling',
+              'If an exception can only be explained in remarks, the system boundary is probably still weak',
+            ],
+          },
+          {
+            title: 'Manual overrides need their own rules instead of pretending the workflow is fully automatic',
+            paragraphs: [
+              'Real delivery always includes legitimate human intervention: an administrator submits on behalf of someone else, a manager temporarily reassigns a case, finance corrects a state, service staff backfills data, or operations revert a mistake. If the system allows none of that, people start editing databases or going back to spreadsheets. If everyone can change any status freely, traceability and accountability disappear just as quickly.',
+              'That is why manual override is not a yes-or-no decision. It should be designed as a controlled capability. The team needs to decide who can override what, under which conditions, whether the original value and reason are preserved, whether extra confirmation is needed, and whether the change triggers notifications.',
+            ],
+            bullets: [
+              'Design manual correction as a small set of controlled actions rather than as a hidden backdoor',
+              'Keep the original state, operator, timestamp, and reason for important overrides',
+              'Define whether the workflow resumes automatically after an override or waits for explicit review',
+            ],
+          },
+          {
+            title: 'Screens, APIs, notifications, and reports should all be derived from the same state machine',
+            paragraphs: [
+              'Teams often hold separate discussions for frontend pages, backend APIs, message notifications, and reporting needs. Each area may sound reasonable on its own, yet the combined system still feels inconsistent. The usual reason is not that one module failed. It is that no one shared a single definition of workflow truth.',
+              'Once the state machine and exception branches are agreed on first, many implementation decisions become simpler. Teams can determine which lists need grouping, which buttons appear in which states, which notifications are triggered by transitions, which reports count actions, and which APIs require stronger idempotency guarantees. The upfront discussion may feel slower, but it usually removes a large amount of rework later.',
+            ],
+          },
+        ],
+        takeawayTitle: 'Main takeaways',
+        takeaways: [
+          'The backbone of a workflow system is the state machine, the action set, and the exception branches, not the screen tree alone.',
+          'If frequent exceptions and manual override boundaries are undefined, the system usually supports only the happy path.',
+          'Pages, APIs, notifications, and reports should all be derived from the same workflow truth if the product is expected to remain maintainable.',
+        ],
+        ctaTitle: 'If you are building a workflow system, define the state map and exception list before expanding scope',
+        ctaDescription:
+          'We can first map the core states, key actions, exception branches, manual override rules, and logging requirements, then decide which screens and interfaces belong in phase one.',
+      },
+    },
+  },
+  'internal-system-field-ownership-boundaries': {
+    slug: 'internal-system-field-ownership-boundaries',
+    priority: {
+      zh: 0.64,
+      en: 0.5,
+    },
+    publishedAt: '2026-05-07',
+    readingMinutes: 7,
+    relatedServices: ['web-app-development'],
+    content: {
+      zh: {
+        navLabel: '内部系统越做越乱时，先查字段归属',
+        categoryLabel: '企业系统',
+        metaTitle: '企业系统开发里，为什么字段归属比页面数量更该先定｜致诚工作室',
+        metaDescription:
+          '很多企业系统越做越乱，不是因为页面不够，而是客户、价格、状态、负责人这些关键字段没有先定归属。本文从真实交付经验拆解更稳的做法。',
+        keywords: ['企业系统开发', '字段归属', '主数据治理', 'Web应用开发'],
+        eyebrow: 'Article',
+        heroTitle: '企业系统为什么越做越乱？很多时候不是功能不够，而是字段归属没先定',
+        heroDescription:
+          '很多后台、订单、审批、CRM、ERP 对接项目，前期都把重点放在页面、流程和接口上，等做到中后段才发现真正难缠的是另一件事：同一个客户名称谁能改，价格以哪里为准，负责人变更写回哪边，状态字段谁说了算。字段归属一旦没先定，系统表面上功能越来越多，实际会越来越像几套半成品拼在一起。',
+        introTitle: '系统项目里最容易被低估的，不是字段数量，而是字段责任',
+        introParagraphs: [
+          '我见过不少企业系统项目，原始需求看上去都很正常：做几个列表、几个表单、几个审批节点，再接 ERP、CRM 或财务系统。前半段推进也往往不慢，可一到联调、验收和上线试跑，问题就开始集中爆发。不是因为页面没做完，而是大家突然发现，同一个字段在不同页面、不同角色、不同系统里都有自己的理解。',
+          '客户简称和开票名称是否算一个字段，订单里的价格是实时读取还是下单时快照，项目负责人是销售改、交付改还是管理员改，审批通过后的状态还能不能人工修正，这些看起来像细节，实际上决定了系统后面能不能长期维护。很多项目之所以越做越乱，不是缺功能，而是字段责任从头到尾没有真正统一。',
+        ],
+        sections: [
+          {
+            title: '同一个字段如果有多个“真相”，页面做得再完整也会互相打架',
+            paragraphs: [
+              '企业系统最常见的问题之一，就是同一个字段在不同模块里被赋予了不同意义。销售把“客户名称”当对外展示名，财务把它当开票主体，交付又把它当项目归属单位；运营改了订单状态，仓库却还按照另一套字段判断是否出库。每个人都觉得自己改得有道理，系统也没有报错，但最后所有报表和流程都开始对不上。',
+              '这类问题不是靠多写几条校验规则就能补救的。更稳的做法是先把关键字段列出来，逐一写清它表示什么、在哪个环节产生、谁有权修改、哪些系统只能读取、哪些场景只是展示别名。只要一个字段同时承担了多个业务含义，后面就一定会有人把它当成方便入口随手改掉。',
+            ],
+            bullets: [
+              '先定义字段含义，再定义页面位置和展示方式',
+              '同名字段不等于同义字段，尤其在订单、客户、价格和状态里更容易混淆',
+              '如果谁都能改关键字段，后面几乎一定会出现责任不清和口径不一致',
+            ],
+          },
+          {
+            title: '先区分主数据、流程快照和计算结果，很多争论会立刻少一半',
+            paragraphs: [
+              '我做系统梳理时，经常先把字段分成三类：主数据、流程快照和计算结果。主数据是客户、物料、供应商、组织这类长期要复用的基础信息；流程快照是某一张单据在某一时刻确认下来的信息，比如下单时价格、联系人、交期；计算结果则是金额汇总、状态判断、库存差异、绩效统计这类由规则推导出来的值。',
+              '一旦这三类不分，问题就会很快出现。有人会把流程快照回写成主数据，导致历史单据跟着变；有人会直接手改计算结果，让报表和底层记录失真；还有人希望一套字段同时承担“当前默认值”和“历史真实值”。很多系统之所以后面改起来越来越贵，本质上不是字段多，而是字段类型一直混着用。',
+            ],
+            bullets: [
+              '主数据关注长期唯一性和归属责任',
+              '流程快照关注当时业务事实，不应被后续默认值覆盖',
+              '计算结果原则上应由规则生成，而不是被当作普通输入项随手编辑',
+            ],
+          },
+          {
+            title: '接口和同步不要先问“能不能传”，而要先问“谁是字段主人”',
+            paragraphs: [
+              '很多团队讨论系统对接时，最先问的是 CRM、ERP、官网后台、小程序之间哪些字段要同步。这个问题本身没错，但如果前面没有先定字段归属，后面的同步只会把混乱放大。比如客户联系人在 CRM 改了一次，订单系统也能改一次，财务系统导入时再覆盖一次，最后没人知道哪次才是有效变更。',
+              '我更倾向先把关键字段的主人定下来：哪些字段只允许在一个系统创建和维护，哪些系统只能消费副本，哪些变更必须经过审批或日志确认，哪些同步失败可以重试，哪些失败必须人工介入。接口本身不是难点，难的是没有字段责任就提前做双向同步，最后每个系统都像真相来源。',
+            ],
+            bullets: [
+              '先定字段主人，再定同步方向、频率和失败处理',
+              '不是所有字段都适合双向编辑，很多字段更适合单向分发',
+              '如果同步规则只能靠人记住，后期排查成本会非常高',
+            ],
+          },
+          {
+            title: '权限、页面和日志都应该围绕字段责任来设计',
+            paragraphs: [
+              '字段归属不是只影响数据表设计，它还会直接决定页面怎么画、按钮怎么开、权限怎么拆。一个字段如果只能由财务确认，就不应该在销售页面做成可自由编辑；一个状态如果只允许流程动作触发，就不该在详情页里留一个通用输入框让人直接改。很多“好像方便”的设计，最后都会变成难排查的后门。',
+              '日志也一样。真正需要留痕的，不只是“谁点了提交”，而是哪些关键字段从什么值变成了什么值、是谁改的、为什么改、改完触发了哪些后续动作。只要字段责任清楚，权限和审计设计就会自然收敛；如果字段责任本身模糊，后面做再多操作日志，也很难把责任说清。',
+            ],
+          },
+        ],
+        takeawayTitle: '关键判断',
+        takeaways: [
+          '很多企业系统的混乱，不是功能太少，而是关键字段没有单一事实来源。',
+          '先区分主数据、流程快照和计算结果，能大幅减少后期返工和跨部门扯皮。',
+          '页面、权限、接口同步和日志追踪，都应该从字段责任反推，而不是各自独立设计。',
+        ],
+        ctaTitle: '如果你的系统已经开始出现字段互相覆盖，不妨先停下来梳理归属',
+        ctaDescription:
+          '先把关键字段的含义、主人、修改边界、同步方向和日志要求理顺，再继续扩页面和接口，通常比边做边补稳得多。',
+      },
+      en: {
+        navLabel: 'When internal systems get messy, check field ownership first',
+        categoryLabel: 'Internal System',
+        metaTitle: 'Why Field Ownership Matters More Than Screen Count in Internal System Delivery | Zhicheng Studio',
+        metaDescription:
+          'Many internal systems become harder to maintain not because they lack pages, but because ownership of customer, pricing, status, and operator fields was never defined clearly.',
+        keywords: ['internal system delivery', 'field ownership', 'master data governance', 'web app development'],
+        eyebrow: 'Article',
+        heroTitle: 'Why internal systems become messy: often the real problem is not missing features, but undefined field ownership',
+        heroDescription:
+          'In many admin panels, order systems, approval tools, CRM rebuilds, and ERP integrations, teams focus first on screens, workflows, and APIs. The hidden issue appears later: who can change the customer record, which system owns price, where owner changes are written, and which status field is authoritative. When those boundaries stay vague, the product slowly turns into several half-connected systems pretending to be one.',
+        introTitle: 'In system delivery, the underestimated cost is rarely the number of fields. It is the responsibility behind them',
+        introParagraphs: [
+          'I have seen many internal-system projects begin with reasonable requests: build a few lists, a few forms, several approval nodes, then connect ERP, CRM, or finance tools. Early progress often looks fine. The trouble appears during integration, acceptance, and early production use, when teams realize the same field means different things in different pages, roles, and systems.',
+          'Is the customer short name the same as the billing entity? Is order pricing read live or frozen at submission time? Can the delivery owner be changed by sales, by operations, or only by an administrator? Can a post-approval status ever be corrected manually? These sound like details, but they usually decide whether the system remains maintainable or turns into a long sequence of patches.',
+        ],
+        sections: [
+          {
+            title: 'If one field has multiple versions of truth, complete screens will still conflict with each other',
+            paragraphs: [
+              'One common failure pattern is giving the same field different meanings across modules. Sales treats “customer name” as a display label, finance treats it as the invoicing entity, and delivery treats it as the project owner. Operations updates one order status while the warehouse relies on another field to decide shipment readiness. No one feels wrong, and the system may not throw any error, yet reports and workflows quietly drift apart.',
+              'This is not something a few extra validation rules can repair. A steadier approach is to list the critical fields first and define what each field means, where it is created, who can edit it, which systems may only read it, and which places merely show an alias. Once one field carries several business meanings at the same time, someone will eventually edit it for convenience and break the structure.',
+            ],
+            bullets: [
+              'Define field meaning before deciding where it appears on screen',
+              'Fields with the same label are not always the same business concept',
+              'If everyone can edit a critical field, ownership and reporting usually become unclear fast',
+            ],
+          },
+          {
+            title: 'Separate master data, workflow snapshots, and calculated results early',
+            paragraphs: [
+              'A practical way to reduce confusion is to classify fields into three groups: master data, workflow snapshots, and calculated results. Master data covers durable entities such as customers, materials, suppliers, and organization records. Workflow snapshots capture a business fact at a specific moment, such as the agreed price, contact, or due date on one submitted order. Calculated results are values produced by rules, such as totals, derived statuses, stock gaps, or performance metrics.',
+              'When those categories are mixed together, problems multiply. Teams write snapshot values back into master data, causing historical records to shift unexpectedly. People edit calculated results by hand and make reports diverge from underlying transactions. Others expect one field to behave both as the current default and as historical truth. The long-term cost is not just field count. It is the fact that field types were never separated properly.',
+            ],
+            bullets: [
+              'Master data needs durable ownership and consistent maintenance rules',
+              'Workflow snapshots should preserve business truth at the moment of action',
+              'Calculated results should generally be derived, not treated like ordinary input fields',
+            ],
+          },
+          {
+            title: 'Integration design should begin with ownership, not with transmission convenience',
+            paragraphs: [
+              'When teams discuss integrations, they often start by asking which fields should sync between CRM, ERP, admin tools, websites, and mini programs. That is a reasonable question, but it becomes dangerous if field ownership is still undefined. A contact record gets changed once in CRM, once in the order system, then overridden again by a finance import, and nobody can explain which update should prevail.',
+              'I prefer to identify the owner of each critical field first: which system alone may create or maintain it, which systems only consume a copy, which changes require approval or explicit logging, which failed syncs may retry automatically, and which ones require manual review. APIs are not the hardest part. The real problem is starting bi-directional sync before deciding who actually owns the data.',
+            ],
+            bullets: [
+              'Define the field owner before choosing sync direction, frequency, and retry rules',
+              'Many important fields are safer with one-way distribution than with open bi-directional edits',
+              'If sync rules only live in people’s memory, troubleshooting will become expensive later',
+            ],
+          },
+          {
+            title: 'Permissions, screens, and logs should all be derived from field responsibility',
+            paragraphs: [
+              'Field ownership is not only a database concern. It directly shapes UI, permissions, and operations. If a field should only be confirmed by finance, it should not appear as a freely editable input in a sales-facing screen. If a status may change only through workflow actions, a generic edit box on the detail page is usually a disguised backdoor rather than a convenience feature.',
+              'Logging follows the same rule. What matters is not only who clicked submit, but which critical field changed from what value to what value, who changed it, why it was changed, and which downstream actions were triggered next. Once field responsibility is clear, permission and audit design becomes much easier. If the responsibility itself is vague, large volumes of logs still will not make accountability understandable.',
+            ],
+          },
+        ],
+        takeawayTitle: 'Main takeaways',
+        takeaways: [
+          'Many internal systems become chaotic because critical fields never had a single source of truth.',
+          'Separating master data, workflow snapshots, and calculated results prevents a large amount of later rework.',
+          'Screens, permissions, sync logic, and audit trails should all be derived from field responsibility, not designed in isolation.',
+        ],
+        ctaTitle: 'If your system already suffers from fields overwriting each other, stop and map ownership first',
+        ctaDescription:
+          'Clarifying field meaning, ownership, edit boundaries, sync direction, and logging rules usually creates more stability than continuing to add more screens and integrations.',
+      },
+    },
+  },
+  'automation-job-state-retry-handover': {
+    slug: 'automation-job-state-retry-handover',
+    priority: {
+      zh: 0.64,
+      en: 0.5,
+    },
+    publishedAt: '2026-05-08',
+    readingMinutes: 7,
+    relatedServices: ['web-app-development'],
+    content: {
+      zh: {
+        navLabel: '自动化任务别只分成功和失败',
+        categoryLabel: '流程',
+        metaTitle: '自动化任务设计里，为什么不能只分成功和失败｜致诚工作室',
+        metaDescription:
+          '很多自动化和调度系统后期难维护，不是因为任务太多，而是任务状态、重试边界和人工接管规则一开始就没设计清楚。',
+        keywords: ['自动化任务设计', '任务状态机', '重试机制', '人工接管'],
+        eyebrow: 'Article',
+        heroTitle: '做自动化或调度系统时，为什么任务状态不能只分“成功”和“失败”？',
+        heroDescription:
+          '很多团队做自动化、定时任务、数据同步或 AI 流程编排时，最开始只在数据库里留两个结果：成功和失败。前期看起来简单，任务一多、链路一长、异常一复杂，系统就会越来越难排查。真正影响维护成本的，往往不是任务数量，而是任务状态有没有分层、重试是不是可控、失败后谁来接手。',
+        introTitle: '任务系统最容易偷懒的地方，往往就是后面最贵的地方',
+        introParagraphs: [
+          '我见过不少内部自动化、定时报表、订单同步、消息分发和 AI 工作流项目，第一版都很快。因为大家会先把“能跑起来”当成目标，触发条件通了、脚本能执行、结果能回写，看起来就像已经交付完成。可一到任务量上来、外部依赖不稳定、人工需要介入时，系统就开始暴露出骨架问题。',
+          '其中最常见的一类问题，就是任务状态设计过于粗糙。只要状态只剩成功和失败，很多关键判断都会被藏起来：任务是在排队还是卡住，是部分成功还是整体失败，是值得自动重试还是必须人工处理，是已经接管还是还在等待。状态没拆清，后面的重试、告警、报表和排障都会一起变乱。',
+        ],
+        sections: [
+          {
+            title: '只分成功和失败，等于把真正需要判断的过程全部藏起来',
+            paragraphs: [
+              '自动化任务并不是一个瞬时动作。它通常会经过待触发、已入队、执行中、等待外部回执、部分完成、重试中、人工处理中、终止或完成等多个阶段。如果系统只在最后写一个成功或失败，团队就只能看到结果，却看不到任务是怎么走到这个结果的。',
+              '这会直接影响日常运维和产品判断。一个失败任务到底是因为依赖超时、幂等冲突、输入数据不完整，还是上游已经人工改状态？如果所有异常都被压扁成“失败”，告警会失真，重试会乱打，最后只能靠人翻日志猜。',
+            ],
+            bullets: [
+              '至少区分排队、执行中、待回执、可重试失败、不可重试失败和人工接管',
+              '状态命名要反映处理含义，而不是只反映技术结果',
+              '如果运维看到失败后还要再问开发“这到底算哪种失败”，说明状态设计还不够用',
+            ],
+          },
+          {
+            title: '重试不是默认多跑几次，而是先定义哪些失败值得重试',
+            paragraphs: [
+              '很多系统上线后第一反应是给失败任务加自动重试，但没有先拆失败类型。结果是参数错误、权限错误、业务规则冲突这类本来就不该重试的任务，被系统机械地一遍遍重跑；真正因为网络抖动、限流、短时锁冲突导致的临时失败，反而和其他错误混在一起。',
+              '更稳的做法是把失败先分层：临时失败、业务失败、脏数据失败、外部依赖失败、人工中断失败。然后再定义每一类能不能自动重试、最多几次、间隔多久、重试前要不要刷新上下文、重试后是否需要人工确认。这样任务系统才不会一边自动放大错误，一边制造更多噪音。',
+            ],
+            bullets: [
+              '临时性错误和业务性错误不要共用同一套重试策略',
+              '重试次数、退避间隔和终止条件要写成明确规则',
+              '重试前是否重新取数，决定了你是在修问题还是重复放大旧问题',
+            ],
+          },
+          {
+            title: '人工接管要成为正式状态，而不是群里一句“我来处理”',
+            paragraphs: [
+              '只要自动化任务会影响订单、客户、库存、消息或审批，人工接管就迟早会发生。现实里总会有脚本跑到一半、外部系统半成功、数据需要人工确认、或者业务决定临时停止自动执行的情况。如果人工接管只是口头沟通，系统里没有状态和动作，后续就没人说得清任务到底停在哪、改了什么、还要不要继续跑。',
+              '所以我更倾向把人工接管设计成任务生命周期里的正式节点。谁可以接管，接管后任务显示为什么状态，接管后允许执行哪些动作，恢复自动执行需要什么条件，是否保留原始失败原因和处理备注，这些都应该进模型。这样系统才不是“自动化失败后回到线下”，而是“自动化失败后进入受控人工流程”。',
+            ],
+            bullets: [
+              '人工接管、人工跳过、人工确认后继续执行，最好拆成不同动作',
+              '接管动作要保留责任人、原因、时间和后续决定',
+              '如果人工处理只能靠聊天记录补充，后面复盘几乎一定会失真',
+            ],
+          },
+          {
+            title: '报表、告警和任务面板都应该从状态模型反推，而不是最后再拼出来',
+            paragraphs: [
+              '很多团队会先把任务执行器做出来，等线上问题变多了，再补仪表盘、失败统计和通知规则。这样做通常很被动，因为前面没有统一状态模型，后面只能东拼西凑：这里统计失败次数，那里统计重试次数，另一边再单独记人工处理，结果所有数据都能看，但很难形成一个统一判断。',
+              '如果状态、失败分类、重试边界和人工接管规则一开始就定清，后面的管理界面会简单很多。哪些任务应该红色告警，哪些只要待观察，哪些可以自动消化，哪些必须升级给业务负责人，都会有统一依据。调度系统真正稳定，不是因为页面多漂亮，而是因为每个任务都能被看懂、被接住、被追责。',
+            ],
+          },
+        ],
+        takeawayTitle: '关键判断',
+        takeaways: [
+          '自动化任务的设计重点，不只是执行器能不能跑，而是任务状态是否足够表达真实过程。',
+          '重试策略必须和失败类型绑定，否则系统只会把可修问题和不可修问题一起放大。',
+          '人工接管、告警和报表都应该从同一套状态模型反推，系统后续才容易维护。',
+        ],
+        ctaTitle: '如果你在做自动化或调度系统，先把任务状态和接管规则画清楚',
+        ctaDescription:
+          '先梳理任务生命周期、失败分类、重试边界、人工接管动作和告警规则，再决定执行器和后台怎么落地，通常比先把任务堆起来更稳。',
+      },
+      en: {
+        navLabel: 'Automation jobs should not be modeled as only success or failure',
+        categoryLabel: 'Process',
+        metaTitle: 'Why Automation Jobs Should Not Be Designed as Only Success or Failure | Zhicheng Studio',
+        metaDescription:
+          'Many automation and scheduling systems become difficult to maintain not because there are too many jobs, but because job states, retry boundaries, and human handover rules were never designed clearly.',
+        keywords: ['automation job design', 'job state machine', 'retry policy', 'human handover'],
+        eyebrow: 'Article',
+        heroTitle: 'Why automation and scheduler jobs should not be modeled as only “success” or “failure”',
+        heroDescription:
+          'Many teams begin automation, scheduled tasks, data sync, or AI orchestration projects with only two outcomes in mind: success and failure. It feels simple at first. Once the job volume grows, dependencies become unstable, and people need to step in, that simplicity turns into operational fog. The real maintenance cost is often driven less by the number of jobs and more by whether job states, retry rules, and takeover paths were designed properly.',
+        introTitle: 'The part teams simplify first is often the part that becomes most expensive later',
+        introParagraphs: [
+          'I have seen many internal automation, scheduled reporting, order-sync, message-dispatch, and AI workflow projects ship quickly in version one. The initial goal is usually just to make the run succeed: the trigger works, the script executes, and the result writes back somewhere. That looks like delivery. The structural problems only show up later when load increases, external systems wobble, or a human has to intervene in the middle.',
+          'One of the most common causes is overly coarse job-state design. If every run ends up labeled only as success or failure, many practical distinctions disappear: is the job queued or stuck, partially completed or fully failed, safe to retry or waiting for manual review, already handed over or still pending? Once that meaning is missing, retries, alerts, reporting, and troubleshooting all become noisy at the same time.',
+        ],
+        sections: [
+          {
+            title: 'If every run is only success or failure, the system hides the part that actually needs judgment',
+            paragraphs: [
+              'An automation job is rarely a single instant action. It usually moves through states such as waiting to start, queued, running, waiting for an external callback, partially completed, retrying, under manual handling, terminated, or completed. If the system writes only the final outcome, the team sees the ending but not how the job arrived there.',
+              'That directly affects both operations and product decisions. Did the failed run come from a timeout, an idempotency conflict, incomplete input, or a manual state change upstream? If every exception is flattened into “failure,” alerts become misleading, retries get sprayed in the wrong places, and people end up guessing from raw logs.',
+            ],
+            bullets: [
+              'At minimum, distinguish queued, running, waiting for callback, retryable failure, non-retryable failure, and manual handover',
+              'State names should reflect handling meaning, not just technical result codes',
+              'If operations still need to ask engineering what kind of failure happened, the state model is too weak',
+            ],
+          },
+          {
+            title: 'Retry does not mean “run it a few more times.” It means defining which failures deserve another attempt',
+            paragraphs: [
+              'A common post-launch reaction is to add automatic retries to failed jobs without first splitting failure types. Then parameter errors, permission errors, and business-rule conflicts get rerun again and again even though they were never fixable by repetition. At the same time, temporary failures such as rate limits, short network issues, or brief lock conflicts are mixed in with everything else.',
+              'A steadier design classifies failures first: transient failure, business failure, dirty-data failure, dependency failure, or human-aborted failure. Only then should the team define which class can retry automatically, how many times, how long to back off, whether context should be refreshed before retry, and whether success after retry still needs manual confirmation. That is how an automation platform avoids amplifying the wrong errors.',
+            ],
+            bullets: [
+              'Transient errors and business-rule errors should not share the same retry policy',
+              'Retry count, backoff interval, and stop conditions should be explicit rules',
+              'Refreshing context before retry often decides whether the system fixes the issue or simply replays stale input',
+            ],
+          },
+          {
+            title: 'Manual handover should be a formal state, not a sentence in chat saying “I will handle it”',
+            paragraphs: [
+              'If automation touches orders, customers, stock, notifications, or approvals, manual takeover will eventually happen. Real systems always encounter half-finished runs, partial success in external systems, data that needs human confirmation, or business decisions to stop automatic execution temporarily. If that handover exists only in conversation and not in the system state, nobody can later explain where the job stopped, what was changed, or whether it should resume.',
+              'That is why I prefer modeling manual handover as an official part of the lifecycle. The team should define who may take over, what state the job shows after takeover, which actions are allowed next, what is required to resume automation, and whether the original failure reason and handling notes remain attached. Then the system is not “automation failed and went offline.” It becomes “automation failed and entered a controlled human workflow.”',
+            ],
+            bullets: [
+              'Manual takeover, manual skip, and manual confirm-and-resume are usually different actions',
+              'Keep operator, reason, timestamp, and next decision for every takeover event',
+              'If manual handling exists only in chat history, later reviews will almost always distort the truth',
+            ],
+          },
+          {
+            title: 'Dashboards, alerts, and job consoles should be derived from the state model instead of patched on later',
+            paragraphs: [
+              'Many teams build the executor first and only add dashboards, failure metrics, and notification rules after production problems become frequent. That tends to be reactive. Without a shared state model, the later reporting layer becomes a patchwork: one place counts failures, another counts retries, and a third tracks manual work separately. Everything is visible, yet the system is still hard to reason about.',
+              'If states, failure classes, retry boundaries, and manual handover rules are defined early, the management interface becomes much simpler. The team can decide which jobs deserve a red alert, which only need observation, which may self-heal automatically, and which must escalate to a business owner. A scheduler becomes reliable not because the console looks sophisticated, but because every run can be understood, absorbed, and accounted for.',
+            ],
+          },
+        ],
+        takeawayTitle: 'Main takeaways',
+        takeaways: [
+          'The core of automation-job design is not only whether the executor can run, but whether the state model describes the real lifecycle clearly.',
+          'Retry policy must be tied to failure type, or the platform will amplify both fixable and unfixable problems together.',
+          'Manual handover, alerts, and reporting should all be derived from the same job-state model if the system is expected to remain maintainable.',
+        ],
+        ctaTitle: 'If you are building automation or scheduling systems, map job states and takeover rules first',
+        ctaDescription:
+          'Clarifying lifecycle stages, failure classes, retry boundaries, manual actions, and alert rules before expanding the executor usually creates a much more stable delivery path.',
       },
     },
   },
