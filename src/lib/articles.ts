@@ -73,6 +73,7 @@ export const articleSlugs = [
   'approval-workflow-state-machine-boundaries',
   'internal-system-field-ownership-boundaries',
   'automation-job-state-retry-handover',
+  'website-internal-system-shared-auth',
 ] as const
 
 export type ArticleSlug = (typeof articleSlugs)[number]
@@ -8897,6 +8898,160 @@ const articleDefinitions: Record<ArticleSlug, ArticleDefinition> = {
         ctaTitle: 'If you are building automation or scheduling systems, map job states and takeover rules first',
         ctaDescription:
           'Clarifying lifecycle stages, failure classes, retry boundaries, manual actions, and alert rules before expanding the executor usually creates a much more stable delivery path.',
+      },
+    },
+  },
+  'website-internal-system-shared-auth': {
+    slug: 'website-internal-system-shared-auth',
+    priority: {
+      zh: 0.64,
+      en: 0.5,
+    },
+    publishedAt: '2026-05-11',
+    readingMinutes: 7,
+    relatedServices: ['website-development', 'company-website-development', 'web-app-development'],
+    content: {
+      zh: {
+        navLabel: '官网和内部系统，要不要共用账号体系',
+        categoryLabel: '企业系统',
+        metaTitle: '官网和内部系统要不要共用账号体系？真实项目里怎么判断更稳｜致诚工作室',
+        metaDescription:
+          '很多项目一做官网加后台，就想顺手做统一登录。真正该先判断的，不是技术上能不能打通，而是用户身份、权限责任和业务链路到底有没有必要共用。',
+        keywords: ['统一账号体系', '官网登录系统', '企业系统权限设计', 'SSO 边界'],
+        eyebrow: 'Article',
+        heroTitle: '官网和内部系统要不要共用账号体系？很多项目不是不能做，而是做得太早',
+        heroDescription:
+          '不少团队一旦同时规划官网、客户门户、员工后台或业务系统，就会自然提出一个需求：既然都要登录，不如一次把账号打通。这个想法听起来先进，实际交付里却经常把项目做重。真正要先拆清的，不是单点登录技术，而是哪些人真的会跨端连续使用，哪些身份必须共用，哪些权限绝对不能混。',
+        introTitle: '登录打通看起来像效率问题，实际先是边界问题',
+        introParagraphs: [
+          '我见过不少项目，官网刚开始做，后台需求也刚露头，团队就已经在讨论统一账号中心、单点登录、组织树同步和权限继承。技术上当然能做，但很多时候，项目真正需要的只是官网线索表单加一个内部处理后台，外部访客和内部员工根本不是一类用户。',
+          '如果在这个阶段把“所有入口共用一套账号”当成默认方向，后面很容易把注册、邀请、找回密码、角色切换、审计、禁用、组织归属这些复杂度一起引进来。登录本来只是支撑业务，结果反过来成了项目里最先膨胀的部分。',
+        ],
+        sections: [
+          {
+            title: '只有同一类用户真的跨场景连续操作时，共用账号才有明显价值',
+            paragraphs: [
+              '统一账号最值得做的场景，通常不是“两个系统都需要登录”，而是“同一个人要在多个入口之间延续同一段业务动作”。比如客户先在官网看方案，再进入客户门户下载资料、查看报价、提交订单；或者合作伙伴先在官网了解政策，再登录渠道系统管理权限、资料和进度。这时候身份连续性确实能减少摩擦。',
+              '反过来看，如果官网主要服务陌生访客和线索收集，内部系统主要给销售、运营、交付或财务使用，那两边用户生命周期、验证强度和权限模型往往完全不同。此时强行做统一登录，通常不会让业务更顺，反而会让账户管理和安全责任一起变重。',
+            ],
+            bullets: [
+              '先确认是不是同一批人真的要跨官网和系统连续操作',
+              '如果一边是公开访客，一边是内部员工，往往不该默认共用账号',
+              '统一账号的价值应该来自业务连续性，而不是架构看起来更完整',
+            ],
+          },
+          {
+            title: '共用登录入口，不等于共用同一套用户模型和权限模型',
+            paragraphs: [
+              '很多团队一说统一账号，就默认用户表、角色、组织关系和权限规则都可以一起合并。这里最容易出问题。即使认证入口共用，客户账号、员工账号、合作伙伴账号也未必适合放进同一种身份结构里。客户更关心公司、联系人、资料可见范围和订单动作；员工则更依赖部门、岗位、审批链和操作留痕。',
+              '更稳的做法通常是把认证和业务权限拆成两层。认证层只解决“你是谁、如何登录、基础身份是否有效”；业务层再分别处理客户可见范围、员工操作权限、合作伙伴归属和流程动作。这样即使未来要打通，也是在一个清楚的边界上扩，而不是把所有身份都揉成一个大权限泥团。',
+            ],
+            bullets: [
+              '认证中心解决身份校验，不要顺手吞掉全部业务权限',
+              '客户、员工、合作伙伴常常共享登录能力，但不共享同一种权限语义',
+              '如果角色模型一开始就混在一起，后面每加一种用户都会变成例外补丁',
+            ],
+          },
+          {
+            title: '最常见的失控，不是登录做不出来，而是把客户入口和员工入口一起做成一期',
+            paragraphs: [
+              '真实项目里，很多复杂度不是来自 SSO 协议本身，而是来自“一期什么都想接”。官网想让客户注册，后台想让员工共用账号，管理层又想顺手加供应商或渠道商入口。结果注册流程、邀请机制、账号禁用、密码策略、多端退出、短信或邮箱验证、组织归属切换和审计要求会一起冲进范围里。',
+              '一旦这些能力同时进入首期，测试和运维压力会明显上升。更麻烦的是，客户身份和员工身份的风险等级通常不同。内部系统可能要求更强的权限审计和离职禁用机制，外部客户则更看重自助注册、重置和邀请协作。把两者硬压在同一套首期方案里，往往两边都不够好用。',
+            ],
+            bullets: [
+              '客户注册与员工开通通常是两套完全不同的流程',
+              '密码策略、登录风控、禁用规则和审计要求也未必能用同一标准硬套',
+              '一期先分清主用户群，再决定是否保留后续账号关联能力，通常更稳',
+            ],
+          },
+          {
+            title: '判断要不要统一账号，先画身份边界图，再谈技术方案',
+            paragraphs: [
+              '如果团队确实在评估共用账号，我更建议先画一张很朴素的身份边界图：有哪些用户类型，各自从哪个入口进入，需要完成哪些动作，需要什么强度的验证，谁能邀请谁，谁能禁用谁，什么行为必须审计，哪些系统只需要读取身份，哪些系统需要写入角色和组织关系。',
+              '只要这张图清楚，技术选型反而不难。可能最后结论是官网和客户门户共用一套外部身份，员工后台继续独立接企业登录；也可能是认证源统一，但权限域分开。关键不是追求一个看上去高级的统一登录，而是让身份设计服从真实业务边界和后续维护能力。',
+            ],
+          },
+        ],
+        takeawayTitle: '关键判断',
+        takeaways: [
+          '统一账号只有在同一类用户需要跨多个入口连续完成业务动作时，价值才足够明显。',
+          '共用认证能力不等于要把客户、员工和合作伙伴塞进同一种权限模型里。',
+          '登录方案越早围绕身份边界、风险等级和维护责任设计，后续越不容易失控。',
+        ],
+        ctaTitle: '如果你正在规划官网加后台，不妨先判断“谁真的需要共用身份”',
+        ctaDescription:
+          '先把用户类型、入口、权限边界、邀请方式和审计要求讲清楚，再决定是统一认证、分域权限，还是暂时独立登录，项目通常会稳很多。',
+      },
+      en: {
+        navLabel: 'Should a website and internal system share one account model?',
+        categoryLabel: 'Internal System',
+        metaTitle: 'Should a Public Website and an Internal System Share One Account System? | Zhicheng Studio',
+        metaDescription:
+          'Many teams want unified login as soon as a website and backend are planned together. The better first question is whether user identity, permission boundaries, and business flow actually need to be shared.',
+        keywords: ['shared account system', 'website login architecture', 'internal system permissions', 'SSO boundary'],
+        eyebrow: 'Article',
+        heroTitle: 'Should a website and an internal system share one account system? Many projects do not fail because it is impossible, but because it is introduced too early',
+        heroDescription:
+          'As soon as a team plans a public website together with a customer portal, employee backend, or business system, someone usually suggests unifying login for everything. It sounds modern, but it often makes delivery heavier than it needs to be. The real issue is not whether single sign-on is technically possible. It is which users truly move across surfaces, which identities need continuity, and which permission boundaries must stay separate.',
+        introTitle: 'Unified login looks like an efficiency decision, but it is first a boundary decision',
+        introParagraphs: [
+          'In many projects, the website is still being planned and the internal system is only beginning to take shape, yet the discussion has already moved to identity centers, single sign-on, org-tree sync, and permission inheritance. All of that can be built, but often the real business need is only a public lead form plus an internal handling console. External visitors and internal employees are not the same kind of user.',
+          'Once “one account for every surface” becomes the default too early, the project inherits registration, invitations, password recovery, role switching, audit, deactivation, and organization mapping all at once. Login is supposed to support the business. In these projects it often becomes the first part that grows out of proportion.',
+        ],
+        sections: [
+          {
+            title: 'Shared accounts create real value only when the same user continues one workflow across surfaces',
+            paragraphs: [
+              'The strongest reason to unify accounts is not simply that two systems both have a login screen. It is that the same person needs identity continuity while moving through one business journey. For example, a customer reads a solution page on the website, then enters a portal to download files, review pricing, or submit orders. Or a channel partner learns policy information publicly and then signs in to manage permissions, materials, and progress.',
+              'If the website mainly serves unknown visitors and lead capture while the internal system serves sales, operations, delivery, or finance teams, the two sides usually have very different user lifecycles, verification needs, and permission models. In that case, forcing a single account model rarely improves the business. It usually just increases account-management and security burden.',
+            ],
+            bullets: [
+              'First verify whether the same people truly need to move between the website and the system',
+              'If one side is public visitors and the other is employees, shared accounts should not be the default assumption',
+              'The value of unification should come from workflow continuity, not from architectural neatness',
+            ],
+          },
+          {
+            title: 'A shared login entry does not mean a shared user model or a shared permission model',
+            paragraphs: [
+              'Teams often hear “unified account” and immediately assume the user table, roles, organization hierarchy, and permission rules should all be merged. That is where things usually go wrong. Even if the authentication entry point is shared, customer identities, employee identities, and partner identities may still need different structures. Customers care about company records, contacts, file visibility, and order actions. Employees depend more on departments, positions, approval chains, and operational audit.',
+              'A steadier pattern is to separate authentication from business permissions. The authentication layer answers who the user is, how sign-in works, and whether the identity is valid. The business layer then separately handles customer visibility, employee operations, partner ownership, and workflow actions. If the company later decides to connect more systems, it expands on a clear boundary instead of turning every identity into one oversized permission graph.',
+            ],
+            bullets: [
+              'Let the identity layer handle authentication, not every business rule',
+              'Customers, employees, and partners may share sign-in capability without sharing the same permission semantics',
+              'If the role model starts as one mixed bucket, every new user type becomes another exception later',
+            ],
+          },
+          {
+            title: 'The most common failure is not the SSO protocol. It is trying to launch customer and employee entry points together in phase one',
+            paragraphs: [
+              'In delivery work, complexity rarely comes from the SSO standard itself. It comes from trying to connect everything at once. The public site wants customer signup, the backend wants shared staff accounts, and leadership wants supplier or distributor access added on top. Suddenly the scope includes registration flows, invitation mechanisms, account deactivation, password policy, multi-device logout, email or SMS verification, organization switching, and audit requirements.',
+              'When all of that enters the first phase together, testing and operations become much heavier. The harder issue is that customer identities and employee identities usually carry different risk levels. Internal systems often need stronger audit and offboarding controls, while external users care more about self-service registration, reset flow, and collaboration invites. If both are forced into one early design, neither side is likely to feel right.',
+            ],
+            bullets: [
+              'Customer registration and employee provisioning are usually different workflows',
+              'Password policy, login risk control, deactivation rules, and audit expectations may also differ',
+              'Phase one is usually safer when it identifies the primary user group first and preserves later account-linking options',
+            ],
+          },
+          {
+            title: 'Before discussing implementation, draw the identity boundary map',
+            paragraphs: [
+              'If the team is seriously considering shared accounts, I prefer to start with a simple identity map: what user types exist, which entry point each one uses, what actions each one must complete, how strong authentication must be, who can invite whom, who can disable whom, which behavior needs audit, which systems only read identity, and which systems must write roles or organization membership.',
+              'Once that map is clear, the technical choice becomes much easier. The answer may be that the website and customer portal share an external identity layer while the employee backend stays on enterprise login. Or the authentication source may be unified while permission domains stay separate. The goal is not a fashionable universal login. The goal is identity design that follows real business boundaries and long-term maintenance capacity.',
+            ],
+          },
+        ],
+        takeawayTitle: 'Main takeaways',
+        takeaways: [
+          'Shared accounts are most valuable when the same user needs identity continuity across multiple business surfaces.',
+          'Shared authentication does not require customers, employees, and partners to live inside one permission model.',
+          'The earlier identity design is based on user boundaries, risk level, and maintenance ownership, the less likely the project is to become overbuilt.',
+        ],
+        ctaTitle: 'If you are planning a website together with a backend system, first ask who truly needs a shared identity',
+        ctaDescription:
+          'Clarify user types, entry points, permission boundaries, invitation rules, and audit needs first, then decide whether the project needs unified authentication, separate permission domains, or independent logins for now.',
       },
     },
   },
