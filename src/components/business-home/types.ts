@@ -2,7 +2,7 @@ export type WorkKey =
   | 'asset'
   | 'hr'
   | 'finance'
-  | 'rag'
+  | 'erpQueryAgent'
   | 'attendance'
   | 'oa'
   | 'orders'
