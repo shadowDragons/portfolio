@@ -627,7 +627,7 @@ const articleDefinitions: Record<ArticleSlug, ArticleDefinition> = {
     },
     publishedAt: '2026-03-30',
     readingMinutes: 7,
-    relatedServices: ['web-app-development', 'mini-program-development'],
+    relatedServices: ['enterprise-system-development-company', 'web-app-development', 'mini-program-development'],
     content: {
       zh: {
         navLabel: '企业系统开发前，需求到底该怎么梳理',
@@ -741,7 +741,7 @@ const articleDefinitions: Record<ArticleSlug, ArticleDefinition> = {
     },
     publishedAt: '2026-03-30',
     readingMinutes: 6,
-    relatedServices: ['company-website-development', 'website-development'],
+    relatedServices: ['company-website-redesign', 'website-maintenance-service', 'company-website-development', 'website-development'],
     content: {
       zh: {
         navLabel: '企业官网开发需要哪些页面，才不至于做成空壳官网',
@@ -1213,7 +1213,7 @@ const articleDefinitions: Record<ArticleSlug, ArticleDefinition> = {
     },
     publishedAt: '2026-03-30',
     readingMinutes: 6,
-    relatedServices: ['mini-program-development', 'web-app-development'],
+    relatedServices: ['mini-program-development-company', 'mini-program-development', 'web-app-development'],
     content: {
       zh: {
         navLabel: '小程序开发前要准备什么，项目才不会一开始就乱',
@@ -1321,7 +1321,7 @@ const articleDefinitions: Record<ArticleSlug, ArticleDefinition> = {
     },
     publishedAt: '2026-03-30',
     readingMinutes: 6,
-    relatedServices: ['website-development', 'company-website-development', 'foreign-trade-website-development'],
+    relatedServices: ['website-development', 'company-website-redesign', 'website-maintenance-service', 'company-website-development', 'foreign-trade-website-development'],
     content: {
       zh: {
         navLabel: '网站开发报价前，客户最好先准备哪些信息',
@@ -1799,7 +1799,7 @@ const articleDefinitions: Record<ArticleSlug, ArticleDefinition> = {
     },
     publishedAt: '2026-03-30',
     readingMinutes: 6,
-    relatedServices: ['web-app-development'],
+    relatedServices: ['enterprise-system-development-company', 'web-app-development'],
     content: {
       zh: {
         navLabel: '旧系统该重构还是重做，怎么判断更实际',
@@ -3547,7 +3547,7 @@ const articleDefinitions: Record<ArticleSlug, ArticleDefinition> = {
     },
     publishedAt: '2026-03-30',
     readingMinutes: 6,
-    relatedServices: ['website-development', 'company-website-development', 'web-app-development'],
+    relatedServices: ['website-development', 'website-maintenance-service', 'company-website-development', 'web-app-development'],
     content: {
       zh: {
         navLabel: '网站上线后的维护到底包括什么，不包括什么',
@@ -4327,7 +4327,7 @@ const articleDefinitions: Record<ArticleSlug, ArticleDefinition> = {
     },
     publishedAt: '2026-03-30',
     readingMinutes: 6,
-    relatedServices: ['mini-program-development', 'web-app-development'],
+    relatedServices: ['mini-program-development-company', 'mini-program-development', 'web-app-development'],
     content: {
       zh: {
         navLabel: '小程序后台应该怎么规划，才不会前台上线后后台一团乱',
@@ -5018,7 +5018,7 @@ const articleDefinitions: Record<ArticleSlug, ArticleDefinition> = {
     },
     publishedAt: '2026-04-04',
     readingMinutes: 7,
-    relatedServices: ['web-app-development', 'mini-program-development', 'website-development'],
+    relatedServices: ['mini-program-development-company', 'web-app-development', 'mini-program-development', 'website-development'],
     content: {
       zh: {
         navLabel: '官网、后台、小程序一起做时，技术边界怎么拆',
@@ -5133,7 +5133,7 @@ const articleDefinitions: Record<ArticleSlug, ArticleDefinition> = {
     },
     publishedAt: '2026-04-06',
     readingMinutes: 7,
-    relatedServices: ['web-app-development', 'website-development'],
+    relatedServices: ['ai-agent-development', 'web-app-development', 'website-development'],
     content: {
       zh: {
         navLabel: 'AI 功能先做聊天入口，还是先做内部工作流',
@@ -5487,7 +5487,7 @@ const articleDefinitions: Record<ArticleSlug, ArticleDefinition> = {
     },
     publishedAt: '2026-04-08',
     readingMinutes: 7,
-    relatedServices: ['web-app-development', 'mini-program-development'],
+    relatedServices: ['mini-program-development-company', 'enterprise-system-development-company', 'web-app-development', 'mini-program-development'],
     content: {
       zh: {
         navLabel: '重做 ERP 时，哪些预算本来可以省掉',
@@ -5745,7 +5745,7 @@ const articleDefinitions: Record<ArticleSlug, ArticleDefinition> = {
     },
     publishedAt: '2026-04-10',
     readingMinutes: 7,
-    relatedServices: ['web-app-development'],
+    relatedServices: ['ai-agent-development', 'web-app-development'],
     content: {
       zh: {
         navLabel: 'AI 接内部系统前，先定清写回边界',
@@ -5873,7 +5873,7 @@ const articleDefinitions: Record<ArticleSlug, ArticleDefinition> = {
     },
     publishedAt: '2026-04-11',
     readingMinutes: 7,
-    relatedServices: ['web-app-development'],
+    relatedServices: ['ai-agent-development', 'web-app-development'],
     content: {
       zh: {
         navLabel: '旧系统迁移数据前，最该先确认什么',
@@ -6001,7 +6001,7 @@ const articleDefinitions: Record<ArticleSlug, ArticleDefinition> = {
     },
     publishedAt: '2026-04-12',
     readingMinutes: 7,
-    relatedServices: ['web-app-development'],
+    relatedServices: ['ai-agent-development', 'web-app-development'],
     content: {
       zh: {
         navLabel: '已有内部系统时，AI 第一站该嵌在哪',
@@ -6386,7 +6386,7 @@ const articleDefinitions: Record<ArticleSlug, ArticleDefinition> = {
     },
     publishedAt: '2026-04-16',
     readingMinutes: 7,
-    relatedServices: ['web-app-development'],
+    relatedServices: ['enterprise-system-development-company', 'web-app-development'],
     content: {
       zh: {
         navLabel: '工厂重做 ERP，先定系统边界比先列功能更重要',
@@ -6913,7 +6913,7 @@ const articleDefinitions: Record<ArticleSlug, ArticleDefinition> = {
     },
     publishedAt: '2026-04-24',
     readingMinutes: 7,
-    relatedServices: ['web-app-development', 'mini-program-development'],
+    relatedServices: ['enterprise-system-development-company', 'web-app-development', 'mini-program-development'],
     content: {
       zh: {
         navLabel: '审批 OA 对接微信小程序，怎么接才不把维护做重',
@@ -7065,7 +7065,7 @@ const articleDefinitions: Record<ArticleSlug, ArticleDefinition> = {
     },
     publishedAt: '2026-04-25',
     readingMinutes: 7,
-    relatedServices: ['web-app-development'],
+    relatedServices: ['enterprise-system-development-company', 'web-app-development'],
     content: {
       zh: {
         navLabel: 'AI 项目不稳定，通常不是模型先出问题',

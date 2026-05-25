@@ -2,6 +2,7 @@ import { Link } from '@/i18n/routing'
 import { getArticleSummaries, type LocalizedArticleSummary } from '@/lib/articles'
 import { getLocalizedPath, siteConfig, type AppLocale } from '@/lib/site-config'
 import { getServicePageSummaries } from '@/lib/service-pages'
+import type { LocalizedServicePage } from '@/lib/service-pages'
 import BrandLogo from '@/components/BrandLogo'
 
 type FooterProps = {
@@ -9,7 +10,24 @@ type FooterProps = {
 }
 
 export default function Footer({ locale }: FooterProps) {
-  const serviceLinks = getServicePageSummaries(locale).slice(0, 5)
+  const featuredServiceSlugs = [
+    'website-development',
+    'website-development-company',
+    'company-website-redesign',
+    'website-maintenance-service',
+    'company-website-development',
+    'foreign-trade-website-building',
+    'foreign-trade-website-development',
+    'mini-program-development',
+    'mini-program-development-company',
+    'ai-agent-development',
+    'enterprise-system-development-company',
+    'web-app-development',
+  ] as const
+  const serviceSummaryMap = new Map(getServicePageSummaries(locale).map(service => [service.slug, service]))
+  const serviceLinks = featuredServiceSlugs
+    .map(slug => serviceSummaryMap.get(slug))
+    .filter((service): service is Pick<LocalizedServicePage, 'slug' | 'path' | 'navLabel' | 'heroDescription'> => Boolean(service))
   const featuredArticleSlugs = [
     'website-development-cost',
     'website-development-process',

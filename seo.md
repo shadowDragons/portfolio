@@ -2,6 +2,7 @@
 
 执行日志：`seo-log.md`
 站外执行清单：`offpage-seo-checklist.md`
+内容缺口分析：`seo-content-gap-analysis.md`
 
 ## 当前进度更新（截至 2026-03-31）
 

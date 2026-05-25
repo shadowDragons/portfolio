@@ -298,7 +298,7 @@ export default async function BusinessHome({ locale }: BusinessHomeProps) {
     imageCountLabel: t('projects.imageCount', { count: workAssets[key].images.length }),
     imageAlt: locale === 'zh' ? `${t(`projects.items.${key}.title`)} 项目截图` : `${t(`projects.items.${key}.title`)} project screenshot`,
   }))
-  const featuredServiceSlugs = ['website-development', 'company-website-development', 'web-app-development'] as const
+  const featuredServiceSlugs = ['website-development-company', 'foreign-trade-website-building', 'mini-program-development-company', 'ai-agent-development', 'enterprise-system-development-company'] as const
   const featuredArticleSlugs = ['website-development-cost', 'website-development-process', 'multilingual-website-seo'] as const
   const serviceSummaryMap = new Map(getServicePageSummaries(locale).map(service => [service.slug, service]))
   const articleSummaryMap = new Map(getArticleSummaries(locale).map(article => [article.slug, article]))

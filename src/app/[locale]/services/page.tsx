@@ -6,7 +6,7 @@ import { buttonVariants } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
 import { appLocales, buildPageMetadata, getAppLocale, getLocalizedPath, getLocalizedUrl, isAppLocale, siteConfig, type AppLocale } from '@/lib/site-config'
 import { getServicePageSummaries } from '@/lib/service-pages'
-import { ArrowRight, Building2, Globe, Languages, Layers3, MessageSquare, MonitorSmartphone } from 'lucide-react'
+import { ArrowRight, Bot, Building2, Globe, Languages, Layers3, MessageSquare, MonitorSmartphone, Wrench } from 'lucide-react'
 
 type ServicesPageProps = {
   params: {
@@ -64,9 +64,16 @@ const servicesHubCopy: Record<
 
 const iconMap = {
   'website-development': Globe,
+  'website-development-company': Building2,
   'company-website-development': Building2,
+  'company-website-redesign': Building2,
+  'website-maintenance-service': Wrench,
+  'foreign-trade-website-building': Languages,
   'foreign-trade-website-development': Languages,
   'mini-program-development': MonitorSmartphone,
+  'mini-program-development-company': MonitorSmartphone,
+  'ai-agent-development': Bot,
+  'enterprise-system-development-company': Layers3,
   'web-app-development': Layers3,
 } as const
 
