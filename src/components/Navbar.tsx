@@ -6,7 +6,7 @@ import { useState, useEffect } from 'react'
 import LanguageSwitcher from './LanguageSwitcher'
 import BrandLogo from './BrandLogo'
 import { Link, usePathname } from '@/i18n/routing'
-import type { AppLocale } from '@/lib/site-config'
+import { getLocalizedPath, type AppLocale } from '@/lib/site-config'
 import { Menu, X } from 'lucide-react'
 
 type NavbarProps = {
@@ -29,6 +29,7 @@ const Navbar = ({ locale, labels }: NavbarProps) => {
   const pathname = usePathname()
   const [isOpen, setIsOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
+  const homePath = getLocalizedPath(locale)
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20)
@@ -62,7 +63,7 @@ const Navbar = ({ locale, labels }: NavbarProps) => {
     setIsOpen(!isOpen)
   }
 
-  const getSectionHref = (hash: string) => (isHomePage ? hash : `/${locale}${hash}`)
+  const getSectionHref = (hash: string) => (isHomePage ? hash : `${homePath}${hash}`)
 
   return (
     <nav

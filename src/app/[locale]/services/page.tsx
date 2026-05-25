@@ -4,7 +4,7 @@ import { Link } from '@/i18n/routing'
 import StructuredData from '@/components/StructuredData'
 import { buttonVariants } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
-import { buildPageMetadata, getAppLocale, getLocalizedPath, getLocalizedUrl, isAppLocale, siteConfig, type AppLocale } from '@/lib/site-config'
+import { appLocales, buildPageMetadata, getAppLocale, getLocalizedPath, getLocalizedUrl, isAppLocale, siteConfig, type AppLocale } from '@/lib/site-config'
 import { getServicePageSummaries } from '@/lib/service-pages'
 import { ArrowRight, Building2, Globe, Languages, Layers3, MessageSquare, MonitorSmartphone } from 'lucide-react'
 
@@ -81,6 +81,10 @@ export function generateMetadata({ params }: ServicesPageProps): Metadata {
     description: copy.metaDescription,
     keywords: copy.keywords,
   })
+}
+
+export function generateStaticParams() {
+  return appLocales.map(locale => ({ locale }))
 }
 
 function getServicesHubStructuredData(locale: AppLocale) {

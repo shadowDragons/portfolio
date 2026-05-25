@@ -2,6 +2,9 @@ import { getTranslations } from 'next-intl/server'
 import { Link } from '@/i18n/routing'
 import { siteConfig, type AppLocale } from '@/lib/site-config'
 import { cn } from '@/lib/utils'
+import { getArticleSummaries, type LocalizedArticleSummary } from '@/lib/articles'
+import { getServicePageSummaries } from '@/lib/service-pages'
+import type { LocalizedServicePage } from '@/lib/service-pages'
 import { buttonVariants } from '@/components/ui/button'
 import ContactCards from '@/components/business-home/ContactCards'
 import ProjectsShowcase from '@/components/business-home/ProjectsShowcase'
@@ -116,6 +119,18 @@ type BusinessHomeProps = {
 export default async function BusinessHome({ locale }: BusinessHomeProps) {
   const t = await getTranslations({ locale, namespace: 'Landing' })
   const isEnglish = locale === 'en'
+  const labels =
+    locale === 'zh'
+      ? {
+          featuredServices: '重点服务页',
+          featuredArticles: '先看这几篇',
+          readArticle: '阅读全文',
+        }
+      : {
+          featuredServices: 'Featured Service Pages',
+          featuredArticles: 'Start with these articles',
+          readArticle: 'Read article',
+        }
 
   const heroTitleSuffix = t('hero.titleSuffix')
 
@@ -281,7 +296,18 @@ export default async function BusinessHome({ locale }: BusinessHomeProps) {
     stack: workAssets[key].stack,
     link: workAssets[key].link,
     imageCountLabel: t('projects.imageCount', { count: workAssets[key].images.length }),
+    imageAlt: locale === 'zh' ? `${t(`projects.items.${key}.title`)} 项目截图` : `${t(`projects.items.${key}.title`)} project screenshot`,
   }))
+  const featuredServiceSlugs = ['website-development', 'company-website-development', 'web-app-development'] as const
+  const featuredArticleSlugs = ['website-development-cost', 'website-development-process', 'multilingual-website-seo'] as const
+  const serviceSummaryMap = new Map(getServicePageSummaries(locale).map(service => [service.slug, service]))
+  const articleSummaryMap = new Map(getArticleSummaries(locale).map(article => [article.slug, article]))
+  const featuredServices = featuredServiceSlugs
+    .map(slug => serviceSummaryMap.get(slug))
+    .filter((service): service is Pick<LocalizedServicePage, 'slug' | 'path' | 'navLabel' | 'heroDescription'> => Boolean(service))
+  const featuredArticles = featuredArticleSlugs
+    .map(slug => articleSummaryMap.get(slug))
+    .filter((article): article is LocalizedArticleSummary => Boolean(article))
 
   return (
     <div className='relative mx-auto flex w-full max-w-[1200px] flex-col gap-24 pb-16 lg:gap-32'>
@@ -360,10 +386,28 @@ export default async function BusinessHome({ locale }: BusinessHomeProps) {
         </div>
 
         <div className='mt-6 flex flex-col gap-5 rounded-[28px] border border-[#111] bg-[#111] p-6 text-white shadow-[0_18px_56px_-34px_rgba(0,0,0,0.32)] sm:p-8 lg:flex-row lg:items-center lg:justify-between'>
-          <div className='max-w-3xl space-y-3'>
-            <p className='text-xs font-semibold uppercase tracking-[0.22em] text-[#d4944e]'>{t('services.directoryEyebrow')}</p>
-            <h3 className='font-rubik text-2xl leading-snug text-white sm:text-[32px]'>{t('services.directoryTitle')}</h3>
-            <p className='text-[15px] leading-7 text-white/70'>{t('services.directoryDescription')}</p>
+          <div className='max-w-3xl space-y-4'>
+            <div className='space-y-3'>
+              <p className='text-xs font-semibold uppercase tracking-[0.22em] text-[#d4944e]'>{t('services.directoryEyebrow')}</p>
+              <h3 className='font-rubik text-2xl leading-snug text-white sm:text-[32px]'>{t('services.directoryTitle')}</h3>
+              <p className='text-[15px] leading-7 text-white/70'>{t('services.directoryDescription')}</p>
+            </div>
+            {featuredServices.length > 0 ? (
+              <div>
+                <p className='text-xs font-semibold uppercase tracking-[0.18em] text-white/50'>{labels.featuredServices}</p>
+                <div className='mt-3 flex flex-wrap gap-2'>
+                  {featuredServices.map(service => (
+                    <Link
+                      key={service.slug}
+                      href={service.path}
+                      className='rounded-full border border-white/14 bg-white/[0.06] px-3 py-2 text-sm font-medium text-white/84 transition hover:bg-white/[0.12] hover:text-white'
+                    >
+                      {service.navLabel}
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            ) : null}
           </div>
           <Link
             href='/services'
@@ -428,6 +472,28 @@ export default async function BusinessHome({ locale }: BusinessHomeProps) {
             ))}
           </div>
         </div>
+        {featuredArticles.length > 0 ? (
+          <div className='mt-6 rounded-[28px] border border-[#eadfd2] bg-white/80 p-5 shadow-[0_16px_48px_-34px_rgba(0,0,0,0.16)] sm:p-6'>
+            <p className='text-accent-accessible text-xs font-semibold uppercase tracking-[0.22em]'>{labels.featuredArticles}</p>
+            <div className='mt-4 grid gap-3 md:grid-cols-3'>
+              {featuredArticles.map(article => (
+                <Link
+                  key={article.slug}
+                  href={article.path}
+                  className='group rounded-[22px] border border-[#eadfd2] bg-[#fcfaf7] p-4 transition hover:border-[#d5bea6] hover:bg-white'
+                >
+                  <p className='text-accent-accessible text-xs font-semibold uppercase tracking-[0.18em]'>{article.categoryLabel}</p>
+                  <h3 className='mt-2 font-rubik text-lg leading-snug text-[#111]'>{article.navLabel}</h3>
+                  <p className='mt-3 text-sm leading-6 text-[#645c53]'>{article.heroDescription}</p>
+                  <div className='text-accent-accessible mt-4 inline-flex items-center gap-2 text-sm font-semibold'>
+                    <span>{labels.readArticle}</span>
+                    <ArrowRight className='h-4 w-4 transition-transform duration-300 group-hover:translate-x-1' />
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </div>
+        ) : null}
       </section>
 
       <section id='projects'>

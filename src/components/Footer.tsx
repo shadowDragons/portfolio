@@ -1,5 +1,5 @@
 import { Link } from '@/i18n/routing'
-import { getArticleSummaries } from '@/lib/articles'
+import { getArticleSummaries, type LocalizedArticleSummary } from '@/lib/articles'
 import { getLocalizedPath, siteConfig, type AppLocale } from '@/lib/site-config'
 import { getServicePageSummaries } from '@/lib/service-pages'
 import BrandLogo from '@/components/BrandLogo'
@@ -10,7 +10,18 @@ type FooterProps = {
 
 export default function Footer({ locale }: FooterProps) {
   const serviceLinks = getServicePageSummaries(locale).slice(0, 5)
-  const articleLinks = getArticleSummaries(locale).slice(0, 6)
+  const featuredArticleSlugs = [
+    'website-development-cost',
+    'website-development-process',
+    'multilingual-website-seo',
+    'website-redesign-seo-migration',
+    'company-website-budget-estimation',
+    'enterprise-system-requirements',
+  ] as const
+  const articleSummaryMap = new Map(getArticleSummaries(locale).map(article => [article.slug, article]))
+  const articleLinks = featuredArticleSlugs
+    .map(slug => articleSummaryMap.get(slug))
+    .filter((article): article is LocalizedArticleSummary => Boolean(article))
   const labels =
     locale === 'zh'
       ? {

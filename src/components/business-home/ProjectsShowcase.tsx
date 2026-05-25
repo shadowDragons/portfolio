@@ -38,7 +38,7 @@ function ProjectsShowcaseStatic({ works, labels }: ProjectsShowcaseProps) {
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src={coverImage}
-                    alt={work.title}
+                    alt={work.imageAlt}
                     loading='lazy'
                     decoding='async'
                     className='absolute inset-0 h-full w-full object-cover transition duration-700 group-hover:scale-[1.04]'

@@ -8,7 +8,7 @@ import { GoogleAnalytics } from '@next/third-parties/google'
 import { getTranslations } from 'next-intl/server'
 import { notFound } from 'next/navigation'
 import { routing } from '@/i18n/routing'
-import { getAppLocale, getSiteMetadata } from '@/lib/site-config'
+import { appLocales, getAppLocale, getLocaleSeoConfig, getSiteMetadata } from '@/lib/site-config'
 
 const GA_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA_ID || 'G-40820HPGL6'
 const BAIDU_ANALYTICS_ID = process.env.NEXT_PUBLIC_BAIDU_ANALYTICS_ID || '51729155eab9e49fb67a35eb932da3a5'
@@ -16,12 +16,17 @@ const BAIDU_ANALYTICS_MODE = (process.env.NEXT_PUBLIC_BAIDU_ANALYTICS_MODE || 'i
 
 export const metadata: Metadata = getSiteMetadata()
 
+export function generateStaticParams() {
+  return appLocales.map(locale => ({ locale }))
+}
+
 export default async function RootLayout({ children, params: { locale } }: { children: React.ReactNode; params: { locale: string } }) {
   if (!routing.locales.includes(locale as any)) {
     notFound()
   }
 
   const appLocale = getAppLocale(locale)
+  const localeSeoConfig = getLocaleSeoConfig(appLocale)
   const t = await getTranslations({ locale: appLocale, namespace: 'Navbar' })
 
   const navbarLabels = {
@@ -38,7 +43,7 @@ export default async function RootLayout({ children, params: { locale } }: { chi
   }
 
   return (
-    <html lang={appLocale}>
+    <html lang={localeSeoConfig.languageTag}>
       <body className='font-poppins'>
         <Navbar locale={appLocale} labels={navbarLabels} />
         <main

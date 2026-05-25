@@ -33,6 +33,9 @@ export function generateMetadata({ params }: BlogPostPageProps): Metadata {
     title: article.metaTitle,
     description: article.metaDescription,
     keywords: article.keywords,
+    openGraphType: 'article',
+    publishedTime: article.publishedAt,
+    modifiedTime: article.updatedAt ?? article.publishedAt,
   })
 }
 

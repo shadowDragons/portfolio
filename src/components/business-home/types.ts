@@ -22,6 +22,7 @@ export type ShowcaseWork = {
   stack: string[]
   link?: string
   imageCountLabel: string
+  imageAlt: string
 }
 
 export type ContactIconKey = 'messageSquare' | 'phone' | 'mail' | 'globe'

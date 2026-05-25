@@ -46,7 +46,7 @@ function WorkCard({
           <>
             <Image
               src={coverImage}
-              alt={work.title}
+              alt={work.imageAlt}
               fill
               className='object-cover transition duration-700 group-hover:scale-[1.04]'
               quality={60}
@@ -220,7 +220,7 @@ function WorkLightbox({
 
             <Image
               src={work.images[imageIndex]}
-              alt={`${work.title} ${imageIndex + 1}`}
+              alt={`${work.imageAlt} ${imageIndex + 1}`}
               fill
               className='object-contain'
               quality={76}
@@ -246,7 +246,7 @@ function WorkLightbox({
                 )}
                 aria-label={`Open image ${index + 1}`}
               >
-                <Image src={image} alt={`${work.title} thumbnail ${index + 1}`} fill className='object-cover' quality={40} sizes='96px' />
+                <Image src={image} alt={`${work.imageAlt} thumbnail ${index + 1}`} fill className='object-cover' quality={40} sizes='96px' />
               </button>
             ))}
           </div>

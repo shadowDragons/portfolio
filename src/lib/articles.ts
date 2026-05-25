@@ -1,4 +1,4 @@
-import { getLocalizedUrl, siteConfig, type AppLocale } from '@/lib/site-config'
+import { getAbsoluteAssetUrl, getLocaleSeoConfig, getLocalizedUrl, siteConfig, type AppLocale } from '@/lib/site-config'
 import type { ServicePageSlug } from '@/lib/service-pages'
 
 export const articleSlugs = [
@@ -110,6 +110,7 @@ type ArticleDefinition = {
     en: number
   }
   publishedAt: string
+  updatedAt?: string
   readingMinutes: number
   relatedServices: ServicePageSlug[]
   content: Record<AppLocale, ArticleLocaleContent>
@@ -120,6 +121,7 @@ export type LocalizedArticle = {
   path: string
   priority: number
   publishedAt: string
+  updatedAt?: string
   readingMinutes: number
   relatedServices: ServicePageSlug[]
 } & ArticleLocaleContent
@@ -9233,6 +9235,7 @@ export function getArticle(locale: AppLocale, slug: string): LocalizedArticle | 
     path: getArticlePath(slug),
     priority: definition.priority[locale],
     publishedAt: definition.publishedAt,
+    updatedAt: definition.updatedAt,
     readingMinutes: definition.readingMinutes,
     relatedServices: definition.relatedServices,
     ...content,
@@ -9267,10 +9270,36 @@ export function getArticleStructuredData(locale: AppLocale, slug: ArticleSlug) {
   }
 
   const pageUrl = getLocalizedUrl(locale, article.path)
+  const languageTag = getLocaleSeoConfig(locale).languageTag
+  const organizationId = `${siteConfig.url}#organization`
+  const websiteId = `${siteConfig.url}#website`
+  const imageUrl = getAbsoluteAssetUrl(siteConfig.ogImagePath)
+  const logoUrl = getAbsoluteAssetUrl(siteConfig.logoPath)
 
   return {
     '@context': 'https://schema.org',
     '@graph': [
+      {
+        '@type': 'Organization',
+        '@id': organizationId,
+        name: siteConfig.brandName,
+        alternateName: siteConfig.brandNameEn,
+        url: siteConfig.url,
+        logo: {
+          '@type': 'ImageObject',
+          url: logoUrl,
+        },
+        sameAs: siteConfig.socialLinks,
+      },
+      {
+        '@type': 'WebSite',
+        '@id': websiteId,
+        url: siteConfig.url,
+        name: getLocaleSeoConfig(locale).siteName,
+        publisher: {
+          '@id': organizationId,
+        },
+      },
       {
         '@type': 'BreadcrumbList',
         '@id': `${pageUrl}#breadcrumb`,
@@ -9296,26 +9325,47 @@ export function getArticleStructuredData(locale: AppLocale, slug: ArticleSlug) {
         ],
       },
       {
-        '@type': 'Article',
+        '@type': 'WebPage',
+        '@id': `${pageUrl}#webpage`,
+        url: pageUrl,
+        name: article.metaTitle,
+        description: article.metaDescription,
+        isPartOf: {
+          '@id': websiteId,
+        },
+        about: {
+          '@id': organizationId,
+        },
+        inLanguage: languageTag,
+        primaryImageOfPage: {
+          '@type': 'ImageObject',
+          url: imageUrl,
+        },
+      },
+      {
+        '@type': 'BlogPosting',
         '@id': `${pageUrl}#article`,
+        url: pageUrl,
         headline: article.heroTitle,
         description: article.metaDescription,
+        image: [imageUrl],
         datePublished: article.publishedAt,
-        dateModified: article.publishedAt,
-        inLanguage: locale === 'zh' ? 'zh-CN' : 'en-US',
+        dateModified: article.updatedAt ?? article.publishedAt,
+        inLanguage: languageTag,
         mainEntityOfPage: {
-          '@type': 'WebPage',
           '@id': `${pageUrl}#webpage`,
         },
         author: {
-          '@type': 'Organization',
-          name: siteConfig.brandName,
+          '@id': organizationId,
         },
         publisher: {
-          '@type': 'Organization',
-          name: siteConfig.brandName,
+          '@id': organizationId,
         },
-        keywords: article.keywords.join(', '),
+        isPartOf: {
+          '@id': websiteId,
+        },
+        articleSection: article.categoryLabel,
+        keywords: article.keywords,
       },
     ],
   }

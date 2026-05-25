@@ -1,4 +1,4 @@
-import { getLocalizedUrl, siteConfig, type AppLocale } from '@/lib/site-config'
+import { getAbsoluteAssetUrl, getLocaleSeoConfig, getLocalizedUrl, siteConfig, type AppLocale } from '@/lib/site-config'
 
 export const servicePageSlugs = [
   'website-development',
@@ -1151,11 +1151,36 @@ export function getServicePageStructuredData(locale: AppLocale, slug: ServicePag
 
   const pageUrl = getLocalizedUrl(locale, page.path)
   const organizationId = `${siteConfig.url}#organization`
+  const websiteId = `${siteConfig.url}#website`
   const faqId = `${pageUrl}#faq`
+  const imageUrl = getAbsoluteAssetUrl(siteConfig.ogImagePath)
+  const logoUrl = getAbsoluteAssetUrl(siteConfig.logoPath)
+  const languageTag = getLocaleSeoConfig(locale).languageTag
 
   return {
     '@context': 'https://schema.org',
     '@graph': [
+      {
+        '@type': 'Organization',
+        '@id': organizationId,
+        name: siteConfig.brandName,
+        alternateName: siteConfig.brandNameEn,
+        url: siteConfig.url,
+        logo: {
+          '@type': 'ImageObject',
+          url: logoUrl,
+        },
+        sameAs: siteConfig.socialLinks,
+      },
+      {
+        '@type': 'WebSite',
+        '@id': websiteId,
+        url: siteConfig.url,
+        name: getLocaleSeoConfig(locale).siteName,
+        publisher: {
+          '@id': organizationId,
+        },
+      },
       {
         '@type': 'BreadcrumbList',
         '@id': `${pageUrl}#breadcrumb`,
@@ -1181,12 +1206,31 @@ export function getServicePageStructuredData(locale: AppLocale, slug: ServicePag
         ],
       },
       {
+        '@type': 'WebPage',
+        '@id': `${pageUrl}#webpage`,
+        url: pageUrl,
+        name: page.metaTitle,
+        description: page.metaDescription,
+        isPartOf: {
+          '@id': websiteId,
+        },
+        about: {
+          '@id': organizationId,
+        },
+        inLanguage: languageTag,
+        primaryImageOfPage: {
+          '@type': 'ImageObject',
+          url: imageUrl,
+        },
+      },
+      {
         '@type': 'Service',
         '@id': `${pageUrl}#service`,
         name: page.heroTitle,
         description: page.metaDescription,
         serviceType: page.serviceType,
         url: pageUrl,
+        image: imageUrl,
         provider: {
           '@id': organizationId,
         },

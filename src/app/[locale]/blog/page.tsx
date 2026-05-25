@@ -4,7 +4,7 @@ import { Link } from '@/i18n/routing'
 import StructuredData from '@/components/StructuredData'
 import { buttonVariants } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
-import { buildPageMetadata, getAppLocale, getLocalizedPath, getLocalizedUrl, isAppLocale, siteConfig, type AppLocale } from '@/lib/site-config'
+import { appLocales, buildPageMetadata, getAppLocale, getLocalizedPath, getLocalizedUrl, isAppLocale, siteConfig, type AppLocale } from '@/lib/site-config'
 import { getArticleSummaries } from '@/lib/articles'
 import { ArrowRight, CalendarDays, Clock3, MessageSquare } from 'lucide-react'
 
@@ -27,6 +27,8 @@ const blogHubCopy: Record<
     contactCta: string
     viewWorkCta: string
     servicesCta: string
+    closingTitle: string
+    closingDescription: string
   }
 > = {
   zh: {
@@ -42,6 +44,8 @@ const blogHubCopy: Record<
     contactCta: '联系我聊项目',
     viewWorkCta: '查看作品方向',
     servicesCta: '查看服务页',
+    closingTitle: '如果这些文章已经帮你理清方向，下一步可以直接看服务页',
+    closingDescription: '文章适合先判断预算、流程和方案，服务页更适合继续看交付范围、合作方式和项目匹配度。',
   },
   en: {
     title: 'Website Development Articles on Pricing, Process, and Planning Decisions',
@@ -56,6 +60,8 @@ const blogHubCopy: Record<
     contactCta: 'Contact on X',
     viewWorkCta: 'View Sample Work',
     servicesCta: 'View Services',
+    closingTitle: 'If these articles clarified the direction, the next step is the matching service page',
+    closingDescription: 'The articles help with pricing, process, and planning decisions. The service pages are better for delivery scope, fit, and collaboration details.',
   },
 }
 
@@ -72,9 +78,14 @@ export function generateMetadata({ params }: BlogPageProps): Metadata {
   })
 }
 
+export function generateStaticParams() {
+  return appLocales.map(locale => ({ locale }))
+}
+
 function getBlogHubStructuredData(locale: AppLocale) {
   const copy = blogHubCopy[locale]
   const pageUrl = getLocalizedUrl(locale, '/blog')
+  const articles = getArticleSummaries(locale)
 
   return {
     '@context': 'https://schema.org',
@@ -103,6 +114,16 @@ function getBlogHubStructuredData(locale: AppLocale) {
         url: pageUrl,
         name: copy.metaTitle,
         description: copy.metaDescription,
+      },
+      {
+        '@type': 'ItemList',
+        '@id': `${pageUrl}#itemlist`,
+        itemListElement: articles.map((article, index) => ({
+          '@type': 'ListItem',
+          position: index + 1,
+          name: article.navLabel,
+          url: getLocalizedUrl(locale, article.path),
+        })),
       },
     ],
   }
@@ -196,8 +217,8 @@ export default function BlogPage({ params }: BlogPageProps) {
         <section className='rounded-[32px] border border-[#111] bg-[#111] p-7 text-white shadow-[0_22px_64px_-38px_rgba(0,0,0,0.4)] sm:p-9'>
           <div className='grid gap-6 lg:grid-cols-[1fr_auto] lg:items-center'>
             <div className='max-w-3xl'>
-              <h2 className='font-rubik text-[30px] leading-[1.15] sm:text-[42px]'>{copy.title}</h2>
-              <p className='mt-4 text-[15px] leading-8 text-white/72'>{copy.description}</p>
+              <h2 className='font-rubik text-[30px] leading-[1.15] sm:text-[42px]'>{copy.closingTitle}</h2>
+              <p className='mt-4 text-[15px] leading-8 text-white/72'>{copy.closingDescription}</p>
             </div>
             <Link
               href='/services'

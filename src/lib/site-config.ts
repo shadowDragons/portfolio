@@ -24,6 +24,9 @@ type PageMetadataInput = {
   title: string
   description: string
   keywords?: string[]
+  openGraphType?: 'website' | 'article'
+  publishedTime?: string
+  modifiedTime?: string
 }
 
 export const siteConfig = {
@@ -40,6 +43,13 @@ export const siteConfig = {
   wechat: 'jandan1990',
   founder: 'Junbin Zhong',
   socialLinks: ['https://x.com/Junexus_indie', 'https://github.com/shadowDragons'],
+} as const
+
+export const contentTimestamps = {
+  home: '2026-05-24',
+  servicesHub: '2026-05-24',
+  blogHub: '2026-05-24',
+  servicePages: '2026-05-24',
 } as const
 
 const localeSeoConfig: Record<AppLocale, LocaleSeoConfig> = {
@@ -174,7 +184,16 @@ export function getSiteMetadata(): Metadata {
   }
 }
 
-export function buildPageMetadata({ locale, pathname = '', title, description, keywords = [] }: PageMetadataInput): Metadata {
+export function buildPageMetadata({
+  locale,
+  pathname = '',
+  title,
+  description,
+  keywords = [],
+  openGraphType = 'website',
+  publishedTime,
+  modifiedTime,
+}: PageMetadataInput): Metadata {
   const seoConfig = getLocaleSeoConfig(locale)
   const canonicalUrl = getLocalizedUrl(locale, pathname)
   const ogImageUrl = getAbsoluteAssetUrl(siteConfig.ogImagePath)
@@ -190,7 +209,7 @@ export function buildPageMetadata({ locale, pathname = '', title, description, k
       languages: getLanguageAlternates(pathname),
     },
     openGraph: {
-      type: 'website',
+      type: openGraphType,
       locale: seoConfig.openGraphLocale,
       alternateLocale: locale === 'zh' ? ['en_US'] : ['zh_CN'],
       url: canonicalUrl,
@@ -205,11 +224,19 @@ export function buildPageMetadata({ locale, pathname = '', title, description, k
           alt: title,
         },
       ],
+      ...(openGraphType === 'article'
+        ? {
+            publishedTime,
+            modifiedTime: modifiedTime ?? publishedTime,
+            authors: [siteConfig.brandName],
+          }
+        : {}),
     },
     twitter: {
       card: 'summary_large_image',
       title,
       description,
+      site: siteConfig.xHandle,
       creator: '@Junexus_indie',
       images: [ogImageUrl],
     },
