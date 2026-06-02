@@ -194,6 +194,10 @@
           "title": "ERP Data Analysis Agent",
           "description": "A Text2SQL agent for e-commerce warehouse analytics, covering metadata knowledge-base construction, natural-language querying, multi-stage reasoning, SQL generation and validation, and visual result delivery."
         },
+        "search": {
+          "title": "Enterprise Deep Research Search",
+          "description": "A conversational multi-agent deep research system that routes user tasks across web search, database querying, RAGFlow private knowledge bases, and uploaded attachments, with real-time execution traces, Markdown/PDF report generation, and downloadable deliverables."
+        },
         "attendance": {
           "title": "Attendance System",
           "description": "An internal system for scheduling, attendance rules, exception handling, and reporting."

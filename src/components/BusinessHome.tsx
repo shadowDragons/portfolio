@@ -226,6 +226,10 @@ export default async function BusinessHome({ locale }: BusinessHomeProps) {
       images: projectImages('erpQueryAgent', 2, 'png'),
       stack: ['Python', 'FastAPI', 'LangGraph', 'LangChain', 'Qdrant', 'Elasticsearch'],
     },
+    search: {
+      images: ['/projects/search/示例图片.png'],
+      stack: ['Python', 'FastAPI', 'WebSocket', 'DeepAgents', 'LangGraph', 'LangChain', 'DeepSeek', 'Tavily', 'MySQL', 'RAGFlow', 'ReportLab', 'React', 'Vite', 'TypeScript', 'Ant Design', 'Tailwind CSS', 'Docker', 'pnpm', 'uv'],
+    },
     attendance: {
       images: projectImages('attendance', 4),
       stack: ['Java', 'Springboot', 'Vue', 'Typescript'],
@@ -276,6 +280,7 @@ export default async function BusinessHome({ locale }: BusinessHomeProps) {
     'hr',
     'finance',
     'erpQueryAgent',
+    'search',
     'attendance',
     'oa',
     'orders',

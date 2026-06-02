@@ -3,6 +3,7 @@ export type WorkKey =
   | 'hr'
   | 'finance'
   | 'erpQueryAgent'
+  | 'search'
   | 'attendance'
   | 'oa'
   | 'orders'
