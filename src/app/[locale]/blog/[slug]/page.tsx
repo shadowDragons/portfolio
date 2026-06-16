@@ -1,9 +1,10 @@
 import type { Metadata } from 'next'
+import Image from 'next/image'
 import { notFound } from 'next/navigation'
 import { Link } from '@/i18n/routing'
 import CreativeSubpageNav from '@/components/creative/CreativeSubpageNav'
 import StructuredData from '@/components/StructuredData'
-import { blogPosts, getBlogPostBySlug, getBlogSlugs } from '@/lib/portfolio-content'
+import { getAllBlogPosts, getBlogPostBySlug, getBlogSlugs } from '@/lib/blog'
 import { appLocales, buildPageMetadata, getAppLocale, getLocalizedUrl, isAppLocale } from '@/lib/site-config'
 
 type BlogPostPageProps = {
@@ -17,41 +18,44 @@ export function generateStaticParams() {
   return appLocales.flatMap(locale => getBlogSlugs().map(slug => ({ locale, slug })))
 }
 
-export function generateMetadata({ params }: BlogPostPageProps): Metadata {
+export async function generateMetadata({ params }: BlogPostPageProps): Promise<Metadata> {
   const locale = getAppLocale(params.locale)
-  const post = getBlogPostBySlug(params.slug)
+  const post = await getBlogPostBySlug(params.slug)
 
   if (!post) {
     return buildPageMetadata({
       locale,
       pathname: '/blog',
-      title: '技术博客｜钟俊滨',
-      description: '钟俊滨的技术博客。',
+      title: '技术博客｜仁戈',
+      description: '仁戈的技术博客。',
     })
   }
 
   return buildPageMetadata({
     locale,
     pathname: `/blog/${post.slug}`,
-    title: `${post.title}｜钟俊滨`,
+    title: `${post.title}｜仁戈`,
     description: post.excerpt,
-    keywords: [post.tag, '技术博客', '全栈开发', 'AI Agent', '企业系统'],
+    keywords: post.keywords.length > 0 ? post.keywords : [post.tag, '技术博客', '全栈开发', 'AI Agent', '企业系统'],
     openGraphType: 'article',
-    publishedTime: post.date.replaceAll('.', '-'),
+    publishedTime: post.date,
+    modifiedTime: post.date,
+    ogImagePath: post.cover,
   })
 }
 
-export default function BlogPostPage({ params }: BlogPostPageProps) {
+export default async function BlogPostPage({ params }: BlogPostPageProps) {
   if (!isAppLocale(params.locale)) {
     notFound()
   }
 
-  const post = getBlogPostBySlug(params.slug)
+  const post = await getBlogPostBySlug(params.slug)
   if (!post) {
     notFound()
   }
 
   const pageUrl = getLocalizedUrl('zh', `/blog/${post.slug}`)
+  const blogPosts = getAllBlogPosts()
   const postIndex = blogPosts.findIndex(item => item.slug === post.slug)
   const prevPost = postIndex > 0 ? blogPosts[postIndex - 1] : undefined
   const nextPost = postIndex < blogPosts.length - 1 ? blogPosts[postIndex + 1] : undefined
@@ -64,14 +68,15 @@ export default function BlogPostPage({ params }: BlogPostPageProps) {
           '@type': 'BlogPosting',
           headline: post.title,
           description: post.excerpt,
-          datePublished: post.date.replaceAll('.', '-'),
-          dateModified: post.date.replaceAll('.', '-'),
+          datePublished: post.date,
+          dateModified: post.date,
           author: {
             '@type': 'Person',
-            name: '钟俊滨',
+            name: '仁戈',
           },
           url: pageUrl,
           inLanguage: 'zh-CN',
+          image: post.cover ? [post.cover] : undefined,
         }}
       />
 
@@ -83,31 +88,39 @@ export default function BlogPostPage({ params }: BlogPostPageProps) {
         <div className='relative z-10 max-w-4xl mx-auto text-center'>
           <div className='inline-flex gap-3 mb-6'>
             <span className='px-4 py-1.5 text-xs font-bold rounded-full bg-purple-500/20 text-purple-400 border border-purple-500/30'>{post.tag}</span>
-            <span className='text-sm opacity-40'>{post.date}</span>
+            <span className='text-sm opacity-40'>{post.displayDate}</span>
+            <span className='text-sm opacity-40'>{post.readingTime}</span>
           </div>
           <h1 className='text-4xl md:text-6xl font-black tracking-tighter mb-4'>{post.title}</h1>
+          <p className='text-base md:text-lg opacity-60 max-w-2xl mx-auto'>{post.excerpt}</p>
         </div>
       </section>
 
       <section className='py-10 md:py-16 px-6 md:px-10'>
         <div className='max-w-3xl mx-auto'>
-          <div className='glass rounded-3xl p-8 md:p-12 space-y-8'>
-            {post.content.map(section => (
-              <div key={section.heading}>
-                <h2 className='text-2xl font-bold mb-4 text-purple-400'>{section.heading}</h2>
-                {section.paragraphs.map(paragraph => (
-                  <p key={paragraph} className='text-base md:text-lg opacity-70 leading-relaxed mb-4'>
-                    {paragraph}
-                  </p>
-                ))}
+          <div className='glass rounded-3xl p-8 md:p-12'>
+            {post.cover ? (
+              <div className='mb-10 overflow-hidden rounded-2xl'>
+                <Image src={post.cover} alt={post.title} width={1600} height={900} className='h-full w-full object-cover' />
               </div>
-            ))}
+            ) : null}
+            <article className='creative-prose creative-prose-light md:text-lg'>{post.content}</article>
           </div>
         </div>
       </section>
 
       <section className='py-12 md:py-16 px-6 md:px-10'>
         <div className='max-w-3xl mx-auto flex flex-col sm:flex-row justify-center gap-4'>
+          {prevPost ? (
+            <Link className='inline-flex items-center gap-2 text-purple-400 font-bold hover:gap-4 transition-all' href={`/blog/${prevPost.slug}`}>
+              上一篇：{prevPost.title}
+            </Link>
+          ) : null}
+          {nextPost ? (
+            <Link className='inline-flex items-center gap-2 text-purple-400 font-bold hover:gap-4 transition-all' href={`/blog/${nextPost.slug}`}>
+              下一篇：{nextPost.title}
+            </Link>
+          ) : null}
           <Link className='inline-flex items-center gap-2 text-purple-400 font-bold hover:gap-4 transition-all' href='/blog'>
             返回博客列表
           </Link>

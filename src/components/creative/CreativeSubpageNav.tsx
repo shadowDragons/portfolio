@@ -1,5 +1,6 @@
 'use client'
 
+import Image from 'next/image'
 import { Menu } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import { Link } from '@/i18n/routing'
@@ -20,13 +21,18 @@ export default function CreativeSubpageNav({ active }: CreativeSubpageNavProps) 
   }, [])
 
   const closeMobileMenu = () => setOpen(false)
+  const logo = (
+    <span className='inline-flex h-12 w-12 items-center justify-center overflow-hidden rounded-2xl border border-white/10 bg-white/5 shadow-[0_10px_30px_rgba(0,0,0,0.18)] backdrop-blur-sm'>
+      <Image src='/profile/portrait-clean.png' alt='钟俊滨头像' width={72} height={72} className='h-full w-full object-cover' />
+    </span>
+  )
 
   return (
     <>
       <div id='mobile-overlay' className={open ? 'open' : ''} onClick={closeMobileMenu} />
       <div className={`glass ${open ? 'open' : ''}`} id='mobile-menu'>
-        <Link className='text-2xl font-bold mb-10 text-purple-400' href='/'>
-          JUNBIN.DEV
+        <Link className='mb-10 inline-flex' href='/' aria-label='返回首页'>
+          {logo}
         </Link>
         <Link className='text-lg font-medium py-3 border-b border-white/10 hover:text-purple-400 transition-colors' href='/#hero' onClick={closeMobileMenu}>
           首页
@@ -50,9 +56,9 @@ export default function CreativeSubpageNav({ active }: CreativeSubpageNavProps) 
 
       <nav className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 px-6 md:px-10 ${scrolled ? 'glass py-4' : 'py-6'}`} id='navbar'>
         <div className='max-w-7xl mx-auto flex justify-between items-center'>
-          <div className='text-2xl font-black tracking-tighter'>
-            <Link href='/'>
-              <span className='text-gradient'>JUNBIN.DEV</span>
+          <div>
+            <Link className='inline-flex' href='/' aria-label='返回首页'>
+              {logo}
             </Link>
           </div>
           <div className='hidden md:flex space-x-10 items-center'>

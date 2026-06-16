@@ -14,6 +14,8 @@ type LocaleSeoConfig = {
   homeTitle: string
   homeDescription: string
   homeKeywords: string[]
+  blogKeywords: string[]
+  projectKeywords: string[]
 }
 
 type PageMetadataInput = {
@@ -25,10 +27,11 @@ type PageMetadataInput = {
   openGraphType?: 'website' | 'article'
   publishedTime?: string
   modifiedTime?: string
+  ogImagePath?: string
 }
 
 export const siteConfig = {
-  brandName: '钟俊滨',
+  brandName: '仁戈',
   brandNameEn: 'Junbin Zhong',
   role: '全栈开发工程师',
   url: 'https://sphrag.com',
@@ -53,14 +56,29 @@ const localeSeoConfig: Record<AppLocale, LocaleSeoConfig> = {
   zh: {
     languageTag: 'zh-CN',
     openGraphLocale: 'zh_CN',
-    siteName: '钟俊滨｜全栈开发工程师',
-    defaultTitle: '钟俊滨｜全栈开发工程师',
-    defaultDescription:
-      '钟俊滨的个人作品集，聚焦企业系统开发、AI Agent 工程化、RAG、ERP、OA 与全栈交付。',
-    homeTitle: '钟俊滨｜企业系统与 AI 应用全栈开发者',
+    siteName: '仁戈｜全栈开发工程师',
+    defaultTitle: '仁戈｜全栈开发工程师',
+    defaultDescription: '仁戈的个人网站，聚焦企业系统开发、ERP、OA、AI Agent、RAG、Text2SQL 与个人全栈交付。',
+    homeTitle: '仁戈｜企业系统与 AI 应用全栈开发者',
     homeDescription:
-      '13 年企业数字化系统研发经验，长期负责 ERP、OA、招聘、考勤、RAG、智能问数等复杂系统，从架构到交付独立推进。',
-    homeKeywords: ['全栈开发工程师', '个人开发者作品集', '企业系统开发', 'AI Agent 开发', 'RAG 系统', 'ERP 开发'],
+      '仁戈，13 年经验的全栈开发工程师与个人开发者，长期负责 ERP、OA、招聘、考勤、RAG、Text2SQL、AI Agent 等复杂系统，从架构设计到前后端交付独立推进。',
+    homeKeywords: [
+      '仁戈',
+      '全栈开发工程师',
+      '个人开发者',
+      '企业系统开发',
+      'ERP 开发',
+      'OA 系统开发',
+      'AI Agent 开发',
+      'RAG 系统',
+      'Text2SQL',
+      '企业知识库',
+      'Next.js',
+      'Spring Boot',
+      'FastAPI',
+    ],
+    blogKeywords: ['技术博客', '系统设计', '企业系统重构', 'AI Agent', 'RAG', 'Text2SQL', '全栈开发', '工程实践'],
+    projectKeywords: ['项目作品集', '企业系统项目', 'ERP 项目', 'OA 项目', 'AI Agent 项目', 'RAG 项目', '全栈开发作品'],
   },
 }
 
@@ -145,10 +163,11 @@ export function buildPageMetadata({
   openGraphType = 'website',
   publishedTime,
   modifiedTime,
+  ogImagePath,
 }: PageMetadataInput): Metadata {
   const seoConfig = getLocaleSeoConfig(locale)
   const canonicalUrl = getLocalizedUrl(locale, pathname)
-  const ogImageUrl = getAbsoluteAssetUrl(siteConfig.ogImagePath)
+  const ogImageUrl = getAbsoluteAssetUrl(ogImagePath ?? siteConfig.ogImagePath)
 
   return {
     title: {
@@ -214,6 +233,26 @@ export function getHomePageSeoCopy(locale: AppLocale) {
   }
 }
 
+export function getBlogPageSeoCopy(locale: AppLocale) {
+  const seoConfig = getLocaleSeoConfig(locale)
+
+  return {
+    title: '技术博客｜仁戈｜企业系统、AI Agent 与全栈开发',
+    description: '仁戈的技术博客，持续记录企业系统重构、ERP、OA、AI Agent、RAG、Text2SQL 与个人全栈交付实践。',
+    keywords: seoConfig.blogKeywords,
+  }
+}
+
+export function getProjectsPageSeoCopy(locale: AppLocale) {
+  const seoConfig = getLocaleSeoConfig(locale)
+
+  return {
+    title: '项目归档｜仁戈｜企业系统与 AI 应用项目作品集',
+    description: '仁戈的项目作品集，集中展示 ERP、OA、招聘、考勤、企业知识库 RAG、Text2SQL、AI Agent 与视频自动化项目。',
+    keywords: seoConfig.projectKeywords,
+  }
+}
+
 export function getHomeStructuredData(locale: AppLocale) {
   const seoConfig = getLocaleSeoConfig(locale)
   const homeUrl = getLocalizedUrl(locale)
@@ -266,7 +305,7 @@ export function getHomeStructuredData(locale: AppLocale) {
         '@id': `${homeUrl}#portfolio`,
         url: homeUrl,
         name: '项目精选',
-        description: '钟俊滨的个人开发项目精选，覆盖企业系统、AI Agent、RAG 与内容自动化。',
+        description: '仁戈的个人开发项目精选，覆盖企业系统、AI Agent、RAG 与内容自动化。',
       },
     ],
   }

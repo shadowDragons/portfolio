@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import CreativeHome from '@/components/creative/CreativeHome'
 import StructuredData from '@/components/StructuredData'
+import { getLatestBlogPosts } from '@/lib/blog'
 import { appLocales, buildPageMetadata, getAppLocale, getHomePageSeoCopy, getHomeStructuredData, isAppLocale } from '@/lib/site-config'
 
 type HomePageProps = {
@@ -32,11 +33,12 @@ export default function Home({ params }: HomePageProps) {
   }
 
   const locale = getAppLocale(params.locale)
+  const blogPosts = getLatestBlogPosts(3)
 
   return (
     <>
       <StructuredData data={getHomeStructuredData(locale)} />
-      <CreativeHome />
+      <CreativeHome blogPosts={blogPosts} />
     </>
   )
 }

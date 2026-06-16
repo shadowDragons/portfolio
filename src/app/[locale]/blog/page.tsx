@@ -4,8 +4,8 @@ import { notFound } from 'next/navigation'
 import { Link } from '@/i18n/routing'
 import CreativeSubpageNav from '@/components/creative/CreativeSubpageNav'
 import StructuredData from '@/components/StructuredData'
-import { blogPosts } from '@/lib/portfolio-content'
-import { appLocales, buildPageMetadata, getAppLocale, getLocalizedUrl, isAppLocale, type AppLocale } from '@/lib/site-config'
+import { getAllBlogPosts } from '@/lib/blog'
+import { appLocales, buildPageMetadata, getAppLocale, getBlogPageSeoCopy, getLocalizedUrl, isAppLocale, type AppLocale } from '@/lib/site-config'
 
 type BlogPageProps = {
   params: {
@@ -16,20 +16,18 @@ type BlogPageProps = {
 const blogCopy = {
   title: '最新博客',
   description: '技术思考与工程实践分享',
-  metaTitle: '技术博客｜钟俊滨｜系统架构、AI Agent 与全栈交付',
-  metaDescription: '钟俊滨的技术博客，用来沉淀企业系统重构、AI Agent、RAG、全栈交付和复杂项目实践。',
-  keywords: ['技术博客', '系统设计', 'AI Agent', 'RAG', '全栈开发', '架构实践'],
 }
 
 export function generateMetadata({ params }: BlogPageProps): Metadata {
   const locale = getAppLocale(params.locale)
+  const seoCopy = getBlogPageSeoCopy(locale)
 
   return buildPageMetadata({
     locale,
     pathname: '/blog',
-    title: blogCopy.metaTitle,
-    description: blogCopy.metaDescription,
-    keywords: blogCopy.keywords,
+    title: seoCopy.title,
+    description: seoCopy.description,
+    keywords: seoCopy.keywords,
   })
 }
 
@@ -39,6 +37,8 @@ export function generateStaticParams() {
 
 function getBlogStructuredData(locale: AppLocale) {
   const pageUrl = getLocalizedUrl(locale, '/blog')
+  const blogPosts = getAllBlogPosts()
+  const seoCopy = getBlogPageSeoCopy(locale)
 
   return {
     '@context': 'https://schema.org',
@@ -47,8 +47,8 @@ function getBlogStructuredData(locale: AppLocale) {
         '@type': 'CollectionPage',
         '@id': `${pageUrl}#collection`,
         url: pageUrl,
-        name: blogCopy.metaTitle,
-        description: blogCopy.metaDescription,
+        name: seoCopy.title,
+        description: seoCopy.description,
       },
       {
         '@type': 'ItemList',
@@ -68,6 +68,8 @@ export default function BlogPage({ params }: BlogPageProps) {
   if (!isAppLocale(params.locale)) {
     notFound()
   }
+
+  const blogPosts = getAllBlogPosts()
 
   return (
     <>
@@ -89,7 +91,7 @@ export default function BlogPage({ params }: BlogPageProps) {
             <Link key={post.slug} href={`/blog/${post.slug}`} className='blog-card glass rounded-3xl p-8 md:p-10 hover:shadow-[0_0_40px_rgba(124,58,237,0.15)] group block'>
               <div className='flex items-center gap-3 mb-5 flex-wrap'>
                 <span className='px-4 py-1 text-xs font-bold rounded-full bg-purple-500/20 text-purple-400 border border-purple-500/30'>{post.tag}</span>
-                <span className='text-sm opacity-40'>{post.date}</span>
+                <span className='text-sm opacity-40'>{post.displayDate}</span>
               </div>
               <h2 className='text-2xl md:text-3xl font-bold mb-5 group-hover:text-purple-400 transition-colors'>{post.title}</h2>
               <p className='text-base opacity-60 leading-relaxed mb-6'>{post.excerpt}</p>

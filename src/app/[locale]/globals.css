@@ -211,18 +211,6 @@ html {
     animation: avatar-glow 3s ease-in-out infinite;
   }
 
-  .project-number {
-    position: absolute;
-    top: -0.5rem;
-    right: 1rem;
-    pointer-events: none;
-    user-select: none;
-    font-size: 5rem;
-    font-weight: 900;
-    line-height: 1;
-    opacity: 0.12;
-  }
-
   .blog-card {
     transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
   }
@@ -280,6 +268,14 @@ html {
     line-height: 1.9;
   }
 
+  .creative-prose h3 {
+    margin-top: 1.8rem;
+    margin-bottom: 0.8rem;
+    color: rgb(255 255 255 / 0.92);
+    font-size: 1.2rem;
+    font-weight: 800;
+  }
+
   .creative-prose ul,
   .creative-prose ol {
     margin: 1rem 0 1rem 1.25rem;
@@ -291,13 +287,144 @@ html {
     margin-bottom: 0.45rem;
   }
 
+  .creative-prose a {
+    color: #f97316;
+    text-decoration: underline;
+    text-decoration-color: rgb(249 115 22 / 0.35);
+    text-underline-offset: 0.2rem;
+  }
+
+  .creative-prose strong {
+    color: rgb(255 255 255 / 0.92);
+    font-weight: 800;
+  }
+
+  .creative-prose code {
+    border: 1px solid rgb(255 255 255 / 0.08);
+    border-radius: 0.5rem;
+    background: rgb(255 255 255 / 0.06);
+    padding: 0.1rem 0.35rem;
+    font-size: 0.92em;
+  }
+
+  .creative-prose pre {
+    margin: 1.4rem 0;
+    overflow-x: auto;
+    border: 1px solid rgb(255 255 255 / 0.1);
+    border-radius: 1rem;
+    background: rgb(0 0 0 / 0.28);
+    padding: 1rem 1.1rem;
+  }
+
+  .creative-prose pre code {
+    border: 0;
+    background: transparent;
+    padding: 0;
+  }
+
+  .creative-prose blockquote {
+    margin: 1.2rem 0;
+    border-left: 3px solid rgb(249 115 22 / 0.7);
+    padding-left: 1rem;
+  }
+
+  .creative-prose hr {
+    margin: 2rem 0;
+    border: 0;
+    border-top: 1px solid rgb(255 255 255 / 0.1);
+  }
+
+  .creative-prose table {
+    width: 100%;
+    margin: 1.4rem 0;
+    border-collapse: collapse;
+    overflow: hidden;
+    border-radius: 1rem;
+  }
+
+  .creative-prose th,
+  .creative-prose td {
+    border: 1px solid rgb(255 255 255 / 0.08);
+    padding: 0.8rem 0.9rem;
+    text-align: left;
+  }
+
+  .creative-prose th {
+    color: rgb(255 255 255 / 0.9);
+    background: rgb(255 255 255 / 0.06);
+    font-weight: 800;
+  }
+
+  .creative-prose img {
+    width: 100%;
+    margin: 1.5rem 0;
+    border-radius: 1rem;
+  }
+
+  .creative-prose .heading-anchor {
+    margin-left: 0.5rem;
+    text-decoration: none;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+  }
+
+  .creative-prose h2:hover .heading-anchor,
+  .creative-prose h3:hover .heading-anchor {
+    opacity: 1;
+  }
+
   .light .creative-prose p,
   .light .creative-prose ul,
   .light .creative-prose ol,
+  .light .creative-prose h3,
+  .light .creative-prose strong,
+  .light .creative-prose th,
   .creative-prose-light p,
   .creative-prose-light ul,
-  .creative-prose-light ol {
+  .creative-prose-light ol,
+  .creative-prose-light h3,
+  .creative-prose-light strong,
+  .creative-prose-light th,
+  html:not(.dark) .creative-prose p,
+  html:not(.dark) .creative-prose ul,
+  html:not(.dark) .creative-prose ol,
+  html:not(.dark) .creative-prose h3,
+  html:not(.dark) .creative-prose strong,
+  html:not(.dark) .creative-prose th {
     color: rgb(10 10 35 / 0.68);
+  }
+
+  .light .creative-prose code,
+  .creative-prose-light code,
+  html:not(.dark) .creative-prose code {
+    border-color: rgb(10 10 35 / 0.08);
+    background: rgb(10 10 35 / 0.05);
+  }
+
+  .light .creative-prose pre,
+  .creative-prose-light pre,
+  html:not(.dark) .creative-prose pre {
+    border-color: rgb(10 10 35 / 0.08);
+    background: rgb(10 10 35 / 0.04);
+  }
+
+  .light .creative-prose th,
+  .creative-prose-light th,
+  html:not(.dark) .creative-prose th {
+    background: rgb(10 10 35 / 0.05);
+  }
+
+  .light .creative-prose td,
+  .creative-prose-light td,
+  html:not(.dark) .creative-prose td {
+    border-color: rgb(10 10 35 / 0.08);
+    color: rgb(10 10 35 / 0.7);
+  }
+
+  .light .creative-prose hr,
+  .creative-prose-light hr,
+  html:not(.dark) .creative-prose hr {
+    border-top-color: rgb(10 10 35 / 0.08);
   }
 
   .reveal-on-scroll {
@@ -406,9 +533,6 @@ html {
     cursor: auto;
   }
 
-  .project-number {
-    font-size: 4rem;
-  }
 }
 
 @media (prefers-reduced-motion: reduce) {

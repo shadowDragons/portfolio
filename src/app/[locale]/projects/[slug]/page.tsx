@@ -27,17 +27,17 @@ export function generateMetadata({ params }: ProjectDetailPageProps): Metadata {
     return buildPageMetadata({
       locale,
       pathname: '/projects',
-      title: '项目归档｜钟俊滨',
-      description: '钟俊滨的项目归档。',
+      title: '项目归档｜仁戈',
+      description: '仁戈的项目归档。',
     })
   }
 
   return buildPageMetadata({
     locale,
     pathname: `/projects/${project.slug ?? project.key}`,
-    title: `${project.title}｜钟俊滨项目详情`,
-    description: project.description,
-    keywords: [project.category, ...project.stack.slice(0, 6), '项目详情', '全栈开发'],
+    title: `${project.title}｜仁戈项目详情`,
+    description: `${project.title} 项目详情。${project.description} 涵盖 ${project.stack.slice(0, 4).join('、')} 等技术栈。`,
+    keywords: [project.title, project.category, ...project.stack.slice(0, 6), '企业系统开发', '项目案例', '全栈开发', '个人开发者'],
   })
 }
 
@@ -68,7 +68,7 @@ export default function ProjectDetailPage({ params }: ProjectDetailPageProps) {
           url: pageUrl,
           author: {
             '@type': 'Person',
-            name: '钟俊滨',
+            name: '仁戈',
           },
           inLanguage: 'zh-CN',
         }}
@@ -124,7 +124,11 @@ export default function ProjectDetailPage({ params }: ProjectDetailPageProps) {
           <div className='grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8'>
             {project.highlights.map((highlight, index) => (
               <div key={highlight} className='glass rounded-2xl p-8 text-center hover:border-purple-500/30 transition-all group'>
-                {index === 0 ? <Radio className='mx-auto h-14 w-14 text-purple-400 mb-6 group-hover:scale-110 transition-transform' /> : <CheckCircle2 className='mx-auto h-14 w-14 text-purple-400 mb-6 group-hover:scale-110 transition-transform' />}
+                {index === 0 ? (
+                  <Radio className='mx-auto h-14 w-14 text-purple-400 mb-6 group-hover:scale-110 transition-transform' />
+                ) : (
+                  <CheckCircle2 className='mx-auto h-14 w-14 text-purple-400 mb-6 group-hover:scale-110 transition-transform' />
+                )}
                 <h3 className='text-xl font-bold mb-4'>{highlight}</h3>
                 <p className='text-sm opacity-60 leading-relaxed'>{project.description}</p>
               </div>
@@ -139,7 +143,7 @@ export default function ProjectDetailPage({ params }: ProjectDetailPageProps) {
             <h2 className='text-2xl md:text-3xl font-bold mb-8 text-center text-purple-400'>项目预览图</h2>
             <div className='grid gap-5 md:grid-cols-2'>
               {project.images.map((image, index) => (
-                <div key={image} className='overflow-hidden rounded-2xl bg-gradient-to-br from-purple-700 to-purple-400'>
+                <div key={image} className='overflow-hidden rounded-2xl'>
                   <Image src={image} alt={`${project.imageAlt} ${index + 1}`} width={1200} height={760} className='h-full w-full object-cover' />
                 </div>
               ))}

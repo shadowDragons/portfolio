@@ -1,5 +1,6 @@
 import { contentTimestamps, getLocalizedUrl } from '@/lib/site-config'
-import { blogPosts, getAllProjects } from '@/lib/portfolio-content'
+import { getAllBlogPosts } from '@/lib/blog'
+import { getAllProjects } from '@/lib/portfolio-content'
 
 const staticEntries = [
   { pathname: '', priority: 1, lastModified: contentTimestamps.home },
@@ -14,10 +15,10 @@ const entries = [
     priority: 0.82,
     lastModified: contentTimestamps.projectsHub,
   })),
-  ...blogPosts.map(post => ({
+  ...getAllBlogPosts().map(post => ({
     pathname: `/blog/${post.slug}`,
     priority: 0.72,
-    lastModified: post.date.replaceAll('.', '-'),
+    lastModified: post.date,
   })),
 ]
 

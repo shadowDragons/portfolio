@@ -1,10 +1,13 @@
 'use client'
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faWeixin } from '@fortawesome/free-brands-svg-icons'
 import Image from 'next/image'
-import { ArrowRight, BookOpen, Database, Github, Linkedin, Menu, MessageCircle, Moon, ServerCog, SunMedium, Twitter, Workflow } from 'lucide-react'
+import { ArrowRight, BookOpen, Github, Mail, Menu, Moon, SunMedium, Twitter } from 'lucide-react'
 import { useEffect, useRef, useState } from 'react'
 import { Link } from '@/i18n/routing'
-import { blogPosts, getSelectedProjects, portfolioProfile, skillCards } from '@/lib/portfolio-content'
+import type { BlogPostSummary } from '@/lib/blog'
+import { getSelectedProjects, portfolioProfile, skillCards } from '@/lib/portfolio-content'
 
 function SectionHeading({ eyebrow, title, description, centered = false }: { eyebrow?: string; title: string; description?: string; centered?: boolean }) {
   return (
@@ -12,7 +15,11 @@ function SectionHeading({ eyebrow, title, description, centered = false }: { eye
       {eyebrow ? <p className='mb-4 text-xs font-black uppercase tracking-[0.24em] text-orange-400'>{eyebrow}</p> : null}
       <h2 className='text-4xl font-black tracking-tight md:text-5xl'>{title}</h2>
       {description ? <p className='mt-4 text-base leading-8 opacity-60'>{description}</p> : null}
-      <div className={centered ? 'mx-auto mt-6 h-1 w-20 bg-gradient-to-r from-orange-500 to-pink-500' : 'mt-6 h-1 w-20 bg-gradient-to-r from-orange-500 to-pink-500'} />
+      <div
+        className={
+          centered ? 'mx-auto mt-6 h-1 w-20 bg-gradient-to-r from-orange-500 to-pink-500' : 'mt-6 h-1 w-20 bg-gradient-to-r from-orange-500 to-pink-500'
+        }
+      />
     </div>
   )
 }
@@ -68,13 +75,18 @@ function HomeNav() {
   }, [])
 
   const closeMobileMenu = () => setOpen(false)
+  const logo = (
+    <span className='inline-flex h-12 w-12 items-center justify-center overflow-hidden rounded-2xl border border-white/10 bg-white/5 shadow-[0_10px_30px_rgba(0,0,0,0.18)] backdrop-blur-sm'>
+      <Image src='/profile/portrait-clean.png' alt='钟俊滨头像' width={72} height={72} className='h-full w-full object-cover' />
+    </span>
+  )
 
   return (
     <>
       <div id='mobile-overlay' className={open ? 'open' : ''} onClick={closeMobileMenu} />
       <div className={`glass ${open ? 'open' : ''}`} id='mobile-menu'>
-        <a className='text-2xl font-bold mb-10 text-orange-400' href='#hero' onClick={closeMobileMenu}>
-          JUNBIN.DEV
+        <a className='mb-10 inline-flex' href='#hero' onClick={closeMobileMenu} aria-label='返回首页'>
+          {logo}
         </a>
         <a className='text-lg font-medium py-3 border-b border-white/10 hover:text-orange-400 transition-colors' href='#hero' onClick={closeMobileMenu}>
           首页
@@ -98,9 +110,9 @@ function HomeNav() {
 
       <nav className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 px-6 md:px-10 ${scrolled ? 'glass py-4' : 'py-6'}`} id='navbar'>
         <div className='max-w-7xl mx-auto flex justify-between items-center'>
-          <div className='text-2xl font-black tracking-tighter'>
-            <a href='#hero'>
-              <span className='text-gradient'>JUNBIN.DEV</span>
+          <div>
+            <a className='inline-flex' href='#hero' aria-label='返回首页'>
+              {logo}
             </a>
           </div>
           <div className='hidden md:flex space-x-10 items-center'>
@@ -239,7 +251,11 @@ function HeroParticles() {
   return <canvas ref={canvasRef} className='absolute inset-0 z-0' id='particle-canvas' />
 }
 
-export default function CreativeHome() {
+type CreativeHomeProps = {
+  blogPosts: BlogPostSummary[]
+}
+
+export default function CreativeHome({ blogPosts }: CreativeHomeProps) {
   const selectedProjects = getSelectedProjects()
 
   return (
@@ -250,27 +266,20 @@ export default function CreativeHome() {
         <div className='relative z-10 w-full max-w-7xl mx-auto px-6 md:px-10' id='about'>
           <div className='grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center min-h-[70vh]'>
             <div className='reveal-on-scroll'>
-              <div className='inline-block px-4 py-2 rounded-full glass text-xs md:text-sm font-bold tracking-[0.2em] text-orange-400 mb-6 border border-orange-500/20'>✦ 个人全栈开发者</div>
+              <div className='inline-block px-4 py-2 rounded-full glass text-xs md:text-sm font-bold tracking-[0.2em] text-orange-400 mb-6 border border-orange-500/20'>
+                ✦ 个人全栈开发者
+              </div>
               <h1 className='text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black leading-none tracking-tighter mb-4'>
-                <span className='block text-white'>你好，我是 阿滨</span>
+                <span className='block text-white'>你好，我是 仁戈</span>
                 <span className='text-gradient-warm block mt-2'>
-                  用代码编织
+                  用代码实现
                   <br className='md:hidden' />
-                  数字系统
+                  你的梦想
                 </span>
               </h1>
               <p className='text-sm md:text-base opacity-60 leading-relaxed mb-8 max-w-xl'>
                 13 年企业数字化系统研发经验，长期负责 OA、招聘、考勤、ERP、财务对账、知识库 RAG、智能问数等系统从 0 到 1 建设与持续迭代。
               </p>
-              <div className='mb-8 max-w-xl'>
-                <h2 className='text-2xl md:text-3xl font-black leading-tight mb-3'>
-                  复杂业务驱动
-                  <span className='text-orange-400'> 全栈开发</span>
-                </h2>
-                <p className='text-sm md:text-base opacity-60 leading-relaxed'>
-                  我现在以个人开发者身份展示自己的项目和能力，不再使用工作室包装。核心价值是把复杂业务规则、企业流程和 AI 工程能力做成可维护、可交付的系统。
-                </p>
-              </div>
               <div className='grid grid-cols-3 gap-6 md:gap-8 mb-8 max-w-xl'>
                 <div>
                   <div className='text-3xl md:text-4xl font-black text-orange-400 mb-2'>13</div>
@@ -286,7 +295,10 @@ export default function CreativeHome() {
                 </div>
               </div>
               <div className='flex flex-col sm:flex-row gap-4 mb-8'>
-                <a className='px-8 py-4 bg-gradient-to-r from-orange-500 to-pink-500 text-white rounded-full font-bold hover:shadow-[0_0_30px_rgba(249,115,22,0.5)] transition-all transform hover:-translate-y-1 text-center' href='#projects'>
+                <a
+                  className='px-8 py-4 bg-gradient-to-r from-orange-500 to-pink-500 text-white rounded-full font-bold hover:shadow-[0_0_30px_rgba(249,115,22,0.5)] transition-all transform hover:-translate-y-1 text-center'
+                  href='#projects'
+                >
                   查看作品
                 </a>
                 <a className='px-8 py-4 glass rounded-full font-bold hover:bg-white/10 transition-all border border-white/20 text-center' href='#contact'>
@@ -294,17 +306,37 @@ export default function CreativeHome() {
                 </a>
               </div>
               <div className='flex gap-4'>
-                <a className='w-10 h-10 rounded-full glass flex items-center justify-center hover:bg-orange-500/20 hover:border-orange-500/40 transition-all border border-white/10' href={portfolioProfile.contact.github} target='_blank' rel='noreferrer' title='GitHub'>
+                <a
+                  className='w-10 h-10 rounded-full glass flex items-center justify-center hover:bg-orange-500/20 hover:border-orange-500/40 transition-all border border-white/10'
+                  href={portfolioProfile.contact.github}
+                  target='_blank'
+                  rel='noreferrer'
+                  title='GitHub'
+                >
                   <Github className='h-5 w-5' />
                 </a>
-                <a className='w-10 h-10 rounded-full glass flex items-center justify-center hover:bg-orange-500/20 hover:border-orange-500/40 transition-all border border-white/10' href={portfolioProfile.contact.x} target='_blank' rel='noreferrer' title='X'>
+                <a
+                  className='w-10 h-10 rounded-full glass flex items-center justify-center hover:bg-orange-500/20 hover:border-orange-500/40 transition-all border border-white/10'
+                  href={portfolioProfile.contact.x}
+                  target='_blank'
+                  rel='noreferrer'
+                  title='X'
+                >
                   <Twitter className='h-5 w-5' />
                 </a>
-                <a className='w-10 h-10 rounded-full glass flex items-center justify-center hover:bg-orange-500/20 hover:border-orange-500/40 transition-all border border-white/10' href={`mailto:${portfolioProfile.contact.email}`} title='Email'>
-                  <Linkedin className='h-5 w-5' />
+                <a
+                  className='w-10 h-10 rounded-full glass flex items-center justify-center hover:bg-orange-500/20 hover:border-orange-500/40 transition-all border border-white/10'
+                  href='#contact'
+                  title='微信'
+                >
+                  <FontAwesomeIcon icon={faWeixin} className='h-5 w-5' />
                 </a>
-                <a className='w-10 h-10 rounded-full glass flex items-center justify-center hover:bg-orange-500/20 hover:border-orange-500/40 transition-all border border-white/10' href='#contact' title='Contact'>
-                  <MessageCircle className='h-5 w-5' />
+                <a
+                  className='w-10 h-10 rounded-full glass flex items-center justify-center hover:bg-orange-500/20 hover:border-orange-500/40 transition-all border border-white/10'
+                  href={`mailto:${portfolioProfile.contact.email}`}
+                  title='邮箱'
+                >
+                  <Mail className='h-5 w-5' />
                 </a>
               </div>
             </div>
@@ -312,14 +344,27 @@ export default function CreativeHome() {
             <div className='flex justify-center items-center relative h-full'>
               <div className='relative'>
                 <div className='avatar-ring w-64 h-64 md:w-72 md:h-72 lg:w-80 lg:h-80 flex items-center justify-center'>
-                  <Image src={portfolioProfile.portraitPrimary} alt='钟俊滨头像' width={640} height={640} priority className='h-full w-full rounded-full object-cover' />
+                  <Image
+                    src={portfolioProfile.portraitPrimary}
+                    alt='仁戈头像'
+                    width={640}
+                    height={640}
+                    priority
+                    className='h-full w-full rounded-full object-cover'
+                  />
                 </div>
                 <div className='code-float absolute -top-6 -right-6 text-3xl md:text-4xl font-mono font-bold text-orange-400/30 select-none'>{'{ }'}</div>
                 <div className='code-float-2 absolute -bottom-4 -left-8 text-2xl md:text-3xl font-mono font-bold text-pink-400/30 select-none'>&lt;/&gt;</div>
-                <div className='absolute top-1/3 -left-12 text-lg md:text-xl font-mono text-fuchsia-400/20 select-none code-float' style={{ animationDelay: '2s' }}>
+                <div
+                  className='absolute top-1/3 -left-12 text-lg md:text-xl font-mono text-fuchsia-400/20 select-none code-float'
+                  style={{ animationDelay: '2s' }}
+                >
                   ()
                 </div>
-                <div className='absolute bottom-1/4 -right-10 text-lg md:text-xl font-mono text-orange-400/20 select-none code-float-2' style={{ animationDelay: '0.5s' }}>
+                <div
+                  className='absolute bottom-1/4 -right-10 text-lg md:text-xl font-mono text-orange-400/20 select-none code-float-2'
+                  style={{ animationDelay: '0.5s' }}
+                >
                   [ ]
                 </div>
               </div>
@@ -335,7 +380,10 @@ export default function CreativeHome() {
           <SectionHeading title='技术栈' description='不是罗列关键词，而是围绕企业系统、AI 工作流、数据检索和前后端交付形成的实战栈。' centered />
           <div className='mt-16 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 md:gap-10'>
             {skillCards.map((skill, index) => (
-              <div key={skill.title} className={`flip-card reveal-on-scroll h-64 ${index === 1 ? 'delay-100' : index === 2 ? 'delay-200' : index > 2 ? 'delay-300' : ''}`}>
+              <div
+                key={skill.title}
+                className={`flip-card reveal-on-scroll h-64 ${index === 1 ? 'delay-100' : index === 2 ? 'delay-200' : index > 2 ? 'delay-300' : ''}`}
+              >
                 <div className='flip-card-inner'>
                   <div className='flip-card-front glass shadow-xl'>
                     <SkillIcon icon={skill.icon} />
@@ -344,7 +392,16 @@ export default function CreativeHome() {
                   <div className='flip-card-back bg-gradient-to-br from-orange-600 to-pink-500 p-6 text-white'>
                     <svg className='mb-4 h-24 w-24' viewBox='0 0 100 100'>
                       <circle cx='50' cy='50' r='45' fill='none' stroke='rgba(255,255,255,0.2)' strokeWidth='8' />
-                      <circle cx='50' cy='50' r='45' fill='none' stroke='white' strokeDasharray='283' strokeDashoffset={283 - (283 * skill.score) / 100} strokeWidth='8' />
+                      <circle
+                        cx='50'
+                        cy='50'
+                        r='45'
+                        fill='none'
+                        stroke='white'
+                        strokeDasharray='283'
+                        strokeDashoffset={283 - (283 * skill.score) / 100}
+                        strokeWidth='8'
+                      />
                     </svg>
                     <div className='text-2xl font-black'>{skill.score}%</div>
                     <p className='mt-2 text-sm leading-6 opacity-85'>{skill.summary}</p>
@@ -363,12 +420,14 @@ export default function CreativeHome() {
             {selectedProjects.map((project, index) => (
               <div key={project.key} className={`project-card reveal-on-scroll group ${index % 2 === 1 ? 'md:translate-y-24 delay-200' : ''}`}>
                 <div className='glass relative overflow-hidden rounded-3xl p-4 transition duration-500 group-hover:shadow-[0_30px_60px_rgba(249,115,22,0.25)]'>
-                  <div className='relative aspect-video overflow-hidden rounded-2xl bg-gradient-to-br from-orange-600 to-pink-500'>
-                    <div className='project-number text-orange-100/30'>{String(index + 1).padStart(2, '0')}</div>
-                    <Image src={project.images[0]} alt={project.imageAlt} width={900} height={520} className='h-full w-full object-cover opacity-60 mix-blend-overlay transition duration-500 group-hover:scale-105' />
-                    <div className='absolute inset-0 flex items-center justify-center'>
-                      {index % 3 === 0 ? <Workflow className='h-20 w-20 text-white' /> : index % 3 === 1 ? <Database className='h-20 w-20 text-white' /> : <ServerCog className='h-20 w-20 text-white' />}
-                    </div>
+                  <div className='aspect-video overflow-hidden rounded-2xl'>
+                    <Image
+                      src={project.images[0]}
+                      alt={project.imageAlt}
+                      width={900}
+                      height={520}
+                      className='h-full w-full object-cover transition duration-500 group-hover:scale-105'
+                    />
                   </div>
                   <div className='mt-8 px-4'>
                     <div className='mb-4 flex flex-wrap gap-2'>
@@ -380,7 +439,10 @@ export default function CreativeHome() {
                     </div>
                     <h3 className='mb-2 text-xl font-black md:text-2xl'>{project.title}</h3>
                     <p className='mb-6 text-sm leading-7 opacity-60 md:text-base'>{project.description}</p>
-                    <Link href={`/projects/${project.slug ?? project.key}`} className='inline-flex items-center gap-2 font-black text-orange-400 transition-all group-hover:gap-4'>
+                    <Link
+                      href={`/projects/${project.slug ?? project.key}`}
+                      className='inline-flex items-center gap-2 font-black text-orange-400 transition-all group-hover:gap-4'
+                    >
                       探索详情 <ArrowRight className='h-4 w-4' />
                     </Link>
                   </div>
@@ -389,7 +451,10 @@ export default function CreativeHome() {
             ))}
           </div>
           <div className='mt-20 text-center'>
-            <Link href='/projects' className='inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-orange-500 to-pink-500 px-8 py-4 font-black text-white transition hover:-translate-y-1 hover:shadow-[0_0_30px_rgba(249,115,22,0.4)]'>
+            <Link
+              href='/projects'
+              className='inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-orange-500 to-pink-500 px-8 py-4 font-black text-white transition hover:-translate-y-1 hover:shadow-[0_0_30px_rgba(249,115,22,0.4)]'
+            >
               查看全部项目
               <ArrowRight className='h-4 w-4' />
             </Link>
@@ -402,7 +467,11 @@ export default function CreativeHome() {
           <SectionHeading title='最新博客' description='博客保留，但从宣传型内容切换为技术教程、系统拆解和工程实践。' centered />
           <div className='mt-16 grid grid-cols-1 gap-6 md:grid-cols-3 md:gap-8'>
             {blogPosts.map((post, index) => (
-              <Link key={post.slug} href={`/blog/${post.slug}`} className={`blog-card glass group rounded-2xl p-6 hover:shadow-[0_0_40px_rgba(249,115,22,0.15)] md:p-8 reveal-on-scroll ${index === 1 ? 'delay-100' : index === 2 ? 'delay-200' : ''}`}>
+              <Link
+                key={post.slug}
+                href={`/blog/${post.slug}`}
+                className={`blog-card glass group rounded-2xl p-6 hover:shadow-[0_0_40px_rgba(249,115,22,0.15)] md:p-8 reveal-on-scroll ${index === 1 ? 'delay-100' : index === 2 ? 'delay-200' : ''}`}
+              >
                 <div className='mb-5 flex flex-wrap items-center gap-3'>
                   <span className='tech-tag'>{post.tag}</span>
                   <span className='text-xs opacity-40'>{post.date}</span>
@@ -417,7 +486,10 @@ export default function CreativeHome() {
             ))}
           </div>
           <div className='mt-12 text-center'>
-            <Link href='/blog' className='inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-orange-500 to-pink-500 px-8 py-4 font-black text-white transition hover:-translate-y-1 hover:shadow-[0_0_30px_rgba(249,115,22,0.4)]'>
+            <Link
+              href='/blog'
+              className='inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-orange-500 to-pink-500 px-8 py-4 font-black text-white transition hover:-translate-y-1 hover:shadow-[0_0_30px_rgba(249,115,22,0.4)]'
+            >
               查看全部文章
               <BookOpen className='h-4 w-4' />
             </Link>
@@ -440,7 +512,7 @@ export default function CreativeHome() {
             <div className='p-6 md:p-8 font-mono text-sm md:text-base min-h-[350px] md:min-h-[400px]'>
               <div className='mb-4'>
                 <span className='text-[#27c93f]'>➜</span> <span className='text-orange-400'>~</span> <span className='text-white'>whoami</span>
-                <div className='mt-1 text-gray-400'>钟俊滨 - 全栈开发工程师 / 个人开发者</div>
+                <div className='mt-1 text-gray-400'>仁戈 - 全栈开发工程师 / 个人开发者</div>
               </div>
               <div className='mb-4'>
                 <span className='text-[#27c93f]'>➜</span> <span className='text-orange-400'>~</span> <span className='text-white'>contact --details</span>

@@ -1,4 +1,19 @@
-import type { ShowcaseWork, WorkKey } from '@/components/business-home/types'
+type WorkKey = 'asset' | 'hr' | 'finance' | 'erpQueryAgent' | 'rag' | 'search' | 'attendance' | 'oa' | 'orders' | 'workstation' | 'digitalHuman' | 'recruiting'
+
+type ShowcaseWork = {
+  key: WorkKey
+  slug?: string
+  category: string
+  title: string
+  description: string
+  details: string
+  highlights: string[]
+  images: string[]
+  stack: string[]
+  link?: string
+  imageCountLabel: string
+  imageAlt: string
+}
 
 const projectImages = (folder: string, count: number, extension = 'jpg') =>
   Array.from({ length: count }, (_, index) => `/projects/${folder}/${index + 1}.${extension}`)
@@ -10,8 +25,7 @@ const workMap: Record<WorkKey, ShowcaseWork> = {
     category: 'ERP / 运营管理',
     title: '企业一体化 ERP 运营管理系统',
     description: '围绕客户、订单、出库、物流、对账、开票搭建的一体化业务系统，替代 Excel 与人工流转。',
-    details:
-      '我负责后端架构、业务建模、权限体系、前端交互与部署交付，覆盖订单、采购、物流、财务、营销等核心域。',
+    details: '我负责后端架构、业务建模、权限体系、前端交互与部署交付，覆盖订单、采购、物流、财务、营销等核心域。',
     highlights: ['客户到开票全链路', 'RBAC 权限与单点登录', 'Vue 3 + Spring Boot 全栈交付'],
     images: projectImages('orders', 4),
     stack: ['Java 17', 'Spring Boot 3', 'MySQL', 'Redis', 'Vue 3', 'TypeScript'],
@@ -24,8 +38,7 @@ const workMap: Record<WorkKey, ShowcaseWork> = {
     category: 'AI Agent / Text2SQL',
     title: 'ERP 智能问数 Agent 系统',
     description: '面向 ERP 数据分析场景的问数系统，支持自然语言提问、SQL 生成校验与 SSE 流式返回。',
-    details:
-      '通过 MySQL 元数据、Qdrant 向量检索和 Elasticsearch 字段取值索引，降低大模型直接生成 SQL 的幻觉风险。',
+    details: '通过 MySQL 元数据、Qdrant 向量检索和 Elasticsearch 字段取值索引，降低大模型直接生成 SQL 的幻觉风险。',
     highlights: ['LangGraph 工作流拆解', '字段/指标召回增强', 'SQL 校验修正与流式反馈'],
     images: projectImages('erpQueryAgent', 2, 'png'),
     stack: ['Python', 'FastAPI', 'LangGraph', 'LangChain', 'Qdrant', 'Elasticsearch'],
@@ -38,8 +51,7 @@ const workMap: Record<WorkKey, ShowcaseWork> = {
     category: 'RAG / Knowledge Base',
     title: '企业知识库 RAG 系统',
     description: '企业内部知识库问答系统，支持文档入库、多知识库检索、引用式回答与人工审核恢复。',
-    details:
-      '围绕文档解析、向量检索、审核挂起、会话问答和审计日志建立完整闭环，服务 ERP 场景下的制度与业务资料查询。',
+    details: '围绕文档解析、向量检索、审核挂起、会话问答和审计日志建立完整闭环，服务 ERP 场景下的制度与业务资料查询。',
     highlights: ['多知识库范围过滤', '审核挂起与恢复执行', '引用片段回传与审计日志'],
     images: projectImages('rag', 4, 'png'),
     stack: ['Python', 'FastAPI', 'LlamaIndex', 'LangGraph', 'Qdrant', 'Vue 3'],
@@ -52,8 +64,7 @@ const workMap: Record<WorkKey, ShowcaseWork> = {
     category: 'Multi-Agent / Research',
     title: '深度研搜多智能体研究系统',
     description: '对话式多智能体研究系统，统一编排网络搜索、数据库查询、私有知识库和附件读取能力。',
-    details:
-      '服务 ERP 经营分析与资料检索场景，支持执行轨迹回传、Markdown/PDF 报告生成与文件下载交付。',
+    details: '服务 ERP 经营分析与资料检索场景，支持执行轨迹回传、Markdown/PDF 报告生成与文件下载交付。',
     highlights: ['一主三从多智能体架构', 'WebSocket 实时事件推送', '研究结果导出 PDF'],
     images: ['/projects/search/示例图片.png'],
     stack: ['Python', 'FastAPI', 'DeepAgents', 'LangGraph', 'React', 'TypeScript'],
@@ -66,8 +77,7 @@ const workMap: Record<WorkKey, ShowcaseWork> = {
     category: 'Workflow / OA',
     title: '企业级 OA 自定义工作流系统',
     description: '支持流程配置、表单设计、条件分支、并行审批与金蝶 K3 回写的企业工作流平台。',
-    details:
-      '我长期负责这类内部数字化系统的建设与演进，重点在复杂审批流建模、权限控制和 ERP 深度集成。',
+    details: '我长期负责这类内部数字化系统的建设与演进，重点在复杂审批流建模、权限控制和 ERP 深度集成。',
     highlights: ['可视化流程配置', '表单设计器', '审批完成自动回写 K3'],
     images: projectImages('oa', 4),
     stack: ['PHP', 'Yii', 'MySQL', 'Redis', 'Elasticsearch', 'K3 API'],
@@ -80,8 +90,7 @@ const workMap: Record<WorkKey, ShowcaseWork> = {
     category: 'HR / Recruiting',
     title: '企业招聘管理系统',
     description: '覆盖职位发布、简历投递、笔试、面试、Offer 的招聘全流程系统，支撑校招和社招。',
-    details:
-      '重点解决万人整点考试的高并发问题，通过 Redis 预热、Kafka 削峰和异步处理保障稳定性。',
+    details: '重点解决万人整点考试的高并发问题，通过 Redis 预热、Kafka 削峰和异步处理保障稳定性。',
     highlights: ['招聘全链路闭环', '万人在线笔试高并发', '人才库搜索与流程管理'],
     images: projectImages('recruiting', 4),
     stack: ['PHP', 'Yii', 'Kafka', 'Redis', 'MySQL', 'Elasticsearch'],
@@ -94,8 +103,7 @@ const workMap: Record<WorkKey, ShowcaseWork> = {
     category: 'Attendance / Data',
     title: '企业考勤管理系统',
     description: '支持排班、门禁打卡、补卡、请假、加班与月度汇总的企业考勤系统。',
-    details:
-      '围绕多源数据接入、高峰并发削峰和亿级历史数据查询做了长期优化，覆盖复杂班次与异常识别规则。',
+    details: '围绕多源数据接入、高峰并发削峰和亿级历史数据查询做了长期优化，覆盖复杂班次与异常识别规则。',
     highlights: ['门禁与审批多源接入', 'Kafka + Canal 异步结算', '亿级数据分表查询优化'],
     images: projectImages('attendance', 4),
     stack: ['Java', 'Spring Boot', 'Kafka', 'Redis', 'ShardingSphere', 'XXL-Job'],
@@ -160,8 +168,7 @@ const workMap: Record<WorkKey, ShowcaseWork> = {
     category: 'AI Video / Automation',
     title: '智能视频字幕与模板化渲染系统',
     description: '面向短视频内容生产的 AI 视频自动化平台，打通转写、校正、翻译、渲染与上传回调。',
-    details:
-      '我负责设计 CLI + HTTP API + Worker 架构，并结合 Remotion、FFmpeg、BullMQ 构建完整的视频自动化流水线。',
+    details: '我负责设计 CLI + HTTP API + Worker 架构，并结合 Remotion、FFmpeg、BullMQ 构建完整的视频自动化流水线。',
     highlights: ['字幕校正与智能分句', '模板化渲染引擎', '视频导出与回调闭环'],
     images: projectImages('digitalHuman', 2),
     stack: ['Node.js', 'TypeScript', 'Remotion', 'React', 'FFmpeg', 'BullMQ'],
@@ -188,7 +195,7 @@ const allProjectKeys: WorkKey[] = [
 ]
 
 export const portfolioProfile = {
-  name: '钟俊滨',
+  name: '仁戈',
   title: '全栈开发工程师',
   location: '现居广州，支持远程协作',
   heroTitle: '企业系统、AI 应用与全栈交付',
@@ -237,11 +244,7 @@ export const portfolioProfile = {
     github: 'https://github.com/shadowDragons',
     x: 'https://x.com/Junexus_indie',
   },
-  blogTopics: [
-    '企业系统重构与业务建模',
-    'AI Agent / RAG / Text2SQL 工程实践',
-    '个人全栈交付、架构拆解与性能优化',
-  ],
+  blogTopics: ['企业系统重构与业务建模', 'AI Agent / RAG / Text2SQL 工程实践', '个人全栈交付、架构拆解与性能优化'],
 } as const
 
 export const skillCards = [
@@ -283,102 +286,6 @@ export const skillCards = [
   },
 ] as const
 
-export const blogPosts = [
-  {
-    slug: 'business-modeling-for-enterprise-refactor',
-    title: '企业系统重构中的业务建模',
-    date: '2026.06.15',
-    tag: '系统设计',
-    excerpt: '重构不是换框架，而是把业务对象、状态流转、权限边界和历史数据债务重新建模。',
-    readingTime: '8 分钟',
-    content: [
-      {
-        heading: '先稳定业务语言',
-        paragraphs: [
-          '企业系统最容易失败的地方不是技术选型，而是开发、业务、财务、运营对同一个对象使用不同定义。重构开始前，我会先把客户、订单、采购、出库、对账、发票这些核心对象重新梳理成统一语言。',
-          '统一语言不是文档形式主义，它决定数据库表、接口字段、权限规则和前端页面的边界。如果业务语言不稳定，后面的代码只是在放大混乱。',
-        ],
-      },
-      {
-        heading: '状态机优先于页面优先',
-        paragraphs: [
-          '很多旧系统以页面为中心堆功能，最后每个按钮背后都有一套隐形规则。我的做法是先定义状态流转，再让页面围绕状态展示可执行动作。',
-          '订单能不能退货、财务能不能对账、发票能不能开具，这些都应该从状态机和角色权限推导，而不是散落在多个页面的 if 判断里。',
-        ],
-      },
-      {
-        heading: '重构要保留迁移通道',
-        paragraphs: [
-          '企业系统通常不能停机重来，所以数据迁移、灰度切换、旧字段兼容和异常兜底需要成为架构的一部分。',
-          '真正可交付的重构不是做一套漂亮的新系统，而是让新旧流程能安全交接，并且线上问题可追踪、可回滚、可解释。',
-        ],
-      },
-    ],
-  },
-  {
-    slug: 'rag-from-demo-to-maintainable-delivery',
-    title: 'RAG 系统从 Demo 到可维护交付',
-    date: '2026.06.15',
-    tag: 'RAG',
-    excerpt: 'RAG 的难点不在“能答”，而在文档入库、检索边界、引用证据、人工审核和审计闭环。',
-    readingTime: '10 分钟',
-    content: [
-      {
-        heading: '文档入库决定上限',
-        paragraphs: [
-          '很多 RAG Demo 看起来能跑，是因为测试文档少且干净。真实企业文档会有扫描件、旧制度、重复版本、表格、附件和命名混乱。',
-          '我会把文档解析、切块、向量化、知识库范围、版本状态和失败重试都纳入后台能力，而不是把它们藏在一次性脚本里。',
-        ],
-      },
-      {
-        heading: '回答必须带证据',
-        paragraphs: [
-          '企业知识库问答不能只给一个流畅答案。用户需要知道答案来自哪份文档、哪一段、是否命中高风险规则。',
-          '因此引用片段、检索得分、知识库范围和审计日志都应该显式回传。这样系统才有可解释性，也方便后续优化召回质量。',
-        ],
-      },
-      {
-        heading: '人工审核是工程能力',
-        paragraphs: [
-          '涉及制度、财务、人事、法务等高风险内容时，AI 应该可以中断并交给人工审核。审核通过后，工作流再从中断点恢复。',
-          '这类能力需要任务状态、会话上下文、事件流和审计日志共同支撑。只靠一个聊天接口，很难变成可维护系统。',
-        ],
-      },
-    ],
-  },
-  {
-    slug: 'text2sql-agent-field-hallucination',
-    title: 'Text2SQL Agent 如何降低字段幻觉',
-    date: '2026.06.15',
-    tag: 'AI Agent',
-    excerpt: '降低 SQL 幻觉的关键是元数据、字段取值、指标口径、校验和修正链路，而不是只换更大的模型。',
-    readingTime: '9 分钟',
-    content: [
-      {
-        heading: '不要让模型凭空猜表',
-        paragraphs: [
-          '企业 ERP 的表字段往往有历史命名、缩写和业务黑话。让模型直接从自然语言生成 SQL，最常见的问题就是猜错字段、漏掉关联表或误解指标口径。',
-          '我的做法是先把表、字段、别名、指标、依赖关系写成元数据，再通过向量检索和全文检索召回候选上下文。',
-        ],
-      },
-      {
-        heading: '真实取值能降低条件错误',
-        paragraphs: [
-          '很多查询条件不是字段名问题，而是字段取值问题。例如客户简称、订单状态、业务类型，如果模型不知道真实枚举或历史取值，很容易生成不可执行 SQL。',
-          '把字段真实取值写入 Elasticsearch 这类检索系统，可以在生成 SQL 前补足条件候选，降低 hallucination。',
-        ],
-      },
-      {
-        heading: '生成后必须校验',
-        paragraphs: [
-          'Text2SQL 不应该是单次生成。至少需要 SQL 解析、表字段校验、主外键补齐、指标依赖检查、EXPLAIN 校验和错误修正。',
-          '最终用户看到的是流式执行过程，而系统内部是一条可观察、可回放、可调试的 Agent 工作流。',
-        ],
-      },
-    ],
-  },
-] as const
-
 export function getSelectedProjects() {
   return selectedProjectKeys.map(key => workMap[key])
 }
@@ -393,12 +300,4 @@ export function getProjectBySlug(slug: string) {
 
 export function getProjectSlugs() {
   return getAllProjects().map(project => project.slug ?? project.key)
-}
-
-export function getBlogPostBySlug(slug: string) {
-  return blogPosts.find(post => post.slug === slug)
-}
-
-export function getBlogSlugs() {
-  return blogPosts.map(post => post.slug)
 }

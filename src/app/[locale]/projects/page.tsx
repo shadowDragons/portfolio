@@ -1,12 +1,12 @@
 import type { Metadata } from 'next'
 import Image from 'next/image'
-import { ArrowLeft, ArrowRight, Database, ServerCog, Workflow } from 'lucide-react'
+import { ArrowLeft, ArrowRight } from 'lucide-react'
 import { notFound } from 'next/navigation'
 import { Link } from '@/i18n/routing'
 import CreativeSubpageNav from '@/components/creative/CreativeSubpageNav'
 import StructuredData from '@/components/StructuredData'
 import { getAllProjects } from '@/lib/portfolio-content'
-import { appLocales, buildPageMetadata, getAppLocale, getLocalizedUrl, isAppLocale, type AppLocale } from '@/lib/site-config'
+import { appLocales, buildPageMetadata, getAppLocale, getLocalizedUrl, getProjectsPageSeoCopy, isAppLocale, type AppLocale } from '@/lib/site-config'
 
 type ProjectsPageProps = {
   params: {
@@ -17,20 +17,18 @@ type ProjectsPageProps = {
 const pageCopy = {
   title: '项目归档',
   description: '企业系统、AI Agent、RAG、OA、招聘、考勤与视频自动化项目合集',
-  metaTitle: '项目归档｜钟俊滨｜企业系统与 AI 应用全栈开发者',
-  metaDescription: '钟俊滨的完整项目归档页，集中展示 ERP、OA、招聘、考勤、知识库 RAG、智能问数和视频自动化等项目。',
-  keywords: ['项目作品集', 'ERP 项目', 'AI Agent 项目', 'RAG 项目', '全栈开发作品'],
 }
 
 export function generateMetadata({ params }: ProjectsPageProps): Metadata {
   const locale = getAppLocale(params.locale)
+  const seoCopy = getProjectsPageSeoCopy(locale)
 
   return buildPageMetadata({
     locale,
     pathname: '/projects',
-    title: pageCopy.metaTitle,
-    description: pageCopy.metaDescription,
-    keywords: pageCopy.keywords,
+    title: seoCopy.title,
+    description: seoCopy.description,
+    keywords: seoCopy.keywords,
   })
 }
 
@@ -41,6 +39,7 @@ export function generateStaticParams() {
 function getProjectsStructuredData(locale: AppLocale) {
   const pageUrl = getLocalizedUrl(locale, '/projects')
   const works = getAllProjects()
+  const seoCopy = getProjectsPageSeoCopy(locale)
 
   return {
     '@context': 'https://schema.org',
@@ -49,8 +48,8 @@ function getProjectsStructuredData(locale: AppLocale) {
         '@type': 'CollectionPage',
         '@id': `${pageUrl}#collection`,
         url: pageUrl,
-        name: pageCopy.metaTitle,
-        description: pageCopy.metaDescription,
+        name: seoCopy.title,
+        description: seoCopy.description,
       },
       {
         '@type': 'ItemList',
@@ -94,12 +93,8 @@ export default function ProjectsPage({ params }: ProjectsPageProps) {
             {works.map((project, index) => (
               <div key={project.key} className={`project-card reveal-on-scroll group ${index % 2 === 1 ? 'md:translate-y-24 delay-200' : ''}`}>
                 <div className='relative rounded-3xl overflow-hidden glass p-4 transition-all duration-500 group-hover:shadow-[0_30px_60px_rgba(124,58,237,0.18)]'>
-                  <div className='aspect-video bg-gradient-to-br from-purple-700 to-purple-400 rounded-2xl overflow-hidden relative'>
-                    <div className='project-number text-purple-200/20'>{String(index + 1).padStart(2, '0')}</div>
-                    <Image src={project.images[0]} alt={project.imageAlt} width={900} height={520} className='w-full h-full object-cover mix-blend-overlay opacity-60' />
-                    <div className='absolute inset-0 flex items-center justify-center'>
-                      {index % 3 === 0 ? <Workflow className='h-20 w-20 text-white' /> : index % 3 === 1 ? <Database className='h-20 w-20 text-white' /> : <ServerCog className='h-20 w-20 text-white' />}
-                    </div>
+                  <div className='aspect-video rounded-2xl overflow-hidden'>
+                    <Image src={project.images[0]} alt={project.imageAlt} width={900} height={520} className='w-full h-full object-cover transition duration-500 group-hover:scale-105' />
                   </div>
                   <div className='mt-6 md:mt-8 px-4'>
                     <div className='flex flex-wrap gap-2 mb-4'>
