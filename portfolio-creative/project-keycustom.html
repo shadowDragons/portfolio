@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+
+<html class="scroll-smooth" lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>KeyCustom 客制化商店 | ALEX.DEV</title>
+<script src="https://modao.cc/agent-py/static/source/js/tailwindcss.js"></script>
+<script src="https://modao.cc/agent-py/static/source/js/iconify-icon.min.js"></script>
+<style>
+:root { --primary: #7c3aed; --secondary: #a855f7; --accent: #8b5cf6; --bg-dark: #0a0a0a; --text-dark: #f0f0f0; }
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: #0a0a0a; color: #f0f0f0; overflow-x: hidden; }
+.text-gradient { background: linear-gradient(135deg, #7c3aed, #a855f7, #c084fc); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; background-size: 200% 200%; animation: gradient-shift 5s ease infinite; }
+@keyframes gradient-shift { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+.glass { background: rgba(255,255,255,0.05); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.1); transition: all 0.3s ease; }
+.glass:hover { border-color: rgba(124,58,237,0.3); box-shadow: 0 0 30px rgba(124,58,237,0.1); }
+.nav-link { position: relative; }
+.nav-link::after { content: ''; position: absolute; width: 0; height: 2px; bottom: -4px; left: 50%; background: var(--secondary); transition: all 0.3s ease; transform: translateX(-50%); }
+.nav-link:hover::after { width: 100%; }
+#mobile-menu { position: fixed; top: 0; right: -100%; width: 75%; max-width: 320px; height: 100vh; z-index: 60; transition: right 0.4s cubic-bezier(0.77, 0, 0.175, 1); display: flex; flex-direction: column; padding: 6rem 2rem 2rem; }
+#mobile-menu.open { right: 0; }
+#mobile-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.6); z-index: 55; opacity: 0; pointer-events: none; transition: opacity 0.4s ease; }
+#mobile-overlay.open { opacity: 1; pointer-events: auto; }
+@media (max-width: 768px) { .hero-title { font-size: 3.5rem; } }
+</style>
+</head>
+<body class="bg-[#0a0a0a] text-[#f0f0f0] overflow-x-hidden">
+<div id="mobile-overlay"></div>
+<div class="glass" id="mobile-menu">
+<a class="text-2xl font-bold mb-10 text-purple-400" href="home.html">ALEX.DEV</a>
+<a class="text-lg font-medium py-3 border-b border-white/10 hover:text-purple-400 transition-colors" href="home.html#hero" onclick="closeMobileMenu()">首页</a>
+<a class="text-lg font-medium py-3 border-b border-white/10 hover:text-purple-400 transition-colors" href="home.html#about" onclick="closeMobileMenu()">关于</a>
+<a class="text-lg font-medium py-3 border-b border-white/10 hover:text-purple-400 transition-colors" href="home.html#skills" onclick="closeMobileMenu()">技能</a>
+<a class="text-lg font-medium py-3 border-b border-white/10 hover:text-purple-400 transition-colors" href="home.html#projects" onclick="closeMobileMenu()">作品</a>
+<a class="text-lg font-medium py-3 border-b border-white/10 hover:text-purple-400 transition-colors" href="blog.html" onclick="closeMobileMenu()">博客</a>
+<a class="text-lg font-medium py-3 border-b border-white/10 hover:text-purple-400 transition-colors" href="home.html#contact" onclick="closeMobileMenu()">联系</a>
+</div>
+<nav class="fixed top-0 left-0 w-full z-50 transition-all duration-500 py-6 px-6 md:px-10" id="navbar">
+<div class="max-w-7xl mx-auto flex justify-between items-center">
+<div class="text-2xl font-black tracking-tighter">
+<a href="home.html"><span class="text-gradient">ALEX.DEV</span></a>
+</div>
+<div class="hidden md:flex space-x-10 items-center">
+<a class="nav-link font-medium" href="home.html#hero">首页</a>
+<a class="nav-link font-medium" href="home.html#about">关于</a>
+<a class="nav-link font-medium" href="home.html#skills">技能</a>
+<a class="nav-link font-medium text-purple-400" href="home.html#projects">作品</a>
+<a class="nav-link font-medium" href="blog.html">博客</a>
+<a class="nav-link font-medium" href="home.html#contact">联系</a>
+</div>
+<button class="md:hidden glass p-2 rounded-lg" id="mobile-menu-btn">
+<iconify-icon class="text-2xl" icon="ph:list-bold"></iconify-icon>
+</button>
+</div>
+</nav>
+<section class="relative pt-28 pb-20 md:pt-36 md:pb-28 px-6 md:px-10 overflow-hidden">
+<div class="absolute inset-0 bg-gradient-to-br from-purple-900/60 via-purple-800/30 to-transparent"></div>
+<div class="absolute top-1/4 left-1/3 w-96 h-96 bg-purple-600 rounded-full blur-[150px] opacity-20 animate-pulse"></div>
+<div class="relative z-10 max-w-7xl mx-auto text-center">
+<div class="inline-flex gap-3 mb-6">
+<span class="px-4 py-1.5 text-xs font-bold rounded-full bg-purple-500/20 text-purple-400 border border-purple-500/30">VUE 3</span>
+<span class="px-4 py-1.5 text-xs font-bold rounded-full bg-purple-400/20 text-purple-300 border border-purple-400/30">THREE.JS</span>
+</div>
+<h1 class="text-5xl md:text-7xl font-black tracking-tighter mb-6">KeyCustom 客制化商店</h1>
+<p class="text-lg md:text-xl opacity-60 max-w-2xl mx-auto">全 3D 的机械键盘定制商城，用户可实时预览不同轴体与键帽组合</p>
+</div>
+</section>
+<section class="py-16 md:py-20 px-6 md:px-10">
+<div class="max-w-7xl mx-auto">
+<div class="glass rounded-3xl p-8 md:p-12">
+<h2 class="text-3xl md:text-4xl font-bold mb-8">项目概述</h2>
+<div class="w-20 h-1 bg-gradient-to-r from-purple-600 to-purple-400 mb-8"></div>
+<p class="text-base md:text-lg opacity-70 leading-relaxed">
+KeyCustom 是一个面向机械键盘爱好者的全 3D 客制化电商平台。用户可以在浏览器中通过 Three.js 实时预览键盘组装效果，从外壳、PCB 到轴体和键帽的每一个组件都可以自由选择和搭配。前端采用 Vue 3 配合 Pinia 状态管理，确保复杂的组件配置数据流转清晰；后端使用 Express 和 MongoDB 提供商品管理和订单服务。通过 3D 实时渲染技术，用户在确认购买前即可从任意角度查看自己的定制作品，极大提升了购物体验和转化率。
+</p>
+</div>
+</div>
+</section>
+<section class="py-10 md:py-14 px-6 md:px-10">
+<div class="max-w-7xl mx-auto">
+<h2 class="text-2xl md:text-3xl font-bold mb-8">技术栈</h2>
+<div class="w-20 h-1 bg-gradient-to-r from-purple-600 to-purple-400 mb-8"></div>
+<div class="flex flex-wrap gap-4">
+<div class="glass px-6 py-3 rounded-xl border border-purple-500/30 text-purple-400 font-bold"><iconify-icon class="inline mr-2" icon="logos:vue"></iconify-icon>Vue 3</div>
+<div class="glass px-6 py-3 rounded-xl border border-purple-500/30 text-purple-400 font-bold"><iconify-icon class="inline mr-2 dark:invert" icon="logos:threejs"></iconify-icon>Three.js</div>
+<div class="glass px-6 py-3 rounded-xl border border-purple-500/30 text-purple-400 font-bold"><iconify-icon class="inline mr-2" icon="logos:pinia"></iconify-icon>Pinia</div>
+<div class="glass px-6 py-3 rounded-xl border border-purple-500/30 text-purple-400 font-bold"><iconify-icon class="inline mr-2" icon="logos:tailwindcss-icon"></iconify-icon>Tailwind CSS</div>
+<div class="glass px-6 py-3 rounded-xl border border-purple-500/30 text-purple-400 font-bold"><iconify-icon class="inline mr-2" icon="logos:nodejs-icon"></iconify-icon>Express</div>
+<div class="glass px-6 py-3 rounded-xl border border-purple-500/30 text-purple-400 font-bold"><iconify-icon class="inline mr-2" icon="logos:mongodb-icon"></iconify-icon>MongoDB</div>
+</div>
+</div>
+</section>
+<section class="py-16 md:py-20 px-6 md:px-10">
+<div class="max-w-7xl mx-auto">
+<h2 class="text-2xl md:text-3xl font-bold mb-8">核心功能</h2>
+<div class="w-20 h-1 bg-gradient-to-r from-purple-600 to-purple-400 mb-12"></div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+<div class="glass rounded-2xl p-8 text-center hover:border-purple-500/30 transition-all group">
+<iconify-icon class="text-6xl text-purple-400 mb-6 group-hover:scale-110 transition-transform" icon="ph:cube-duotone"></iconify-icon>
+<h3 class="text-xl font-bold mb-4">3D 实时预览</h3>
+<p class="text-sm opacity-60 leading-relaxed">基于 Three.js 的高精度 3D 渲染，支持 360° 旋转查看，直观感受键盘每一个细节。</p>
+</div>
+<div class="glass rounded-2xl p-8 text-center hover:border-purple-500/30 transition-all group">
+<iconify-icon class="text-6xl text-purple-400 mb-6 group-hover:scale-110 transition-transform" icon="ph:keyboard-duotone"></iconify-icon>
+<h3 class="text-xl font-bold mb-4">轴体组合系统</h3>
+<p class="text-sm opacity-60 leading-relaxed">支持数十种轴体、键帽、外壳的自由搭配，实时更新价格与视觉效果。</p>
+</div>
+<div class="glass rounded-2xl p-8 text-center hover:border-purple-500/30 transition-all group">
+<iconify-icon class="text-6xl text-purple-400 mb-6 group-hover:scale-110 transition-transform" icon="ph:share-network-duotone"></iconify-icon>
+<h3 class="text-xl font-bold mb-4">一键分享配置</h3>
+<p class="text-sm opacity-60 leading-relaxed">生成专属配置链接，方便用户在社区分享自己的键盘设计方案。</p>
+</div>
+</div>
+</div>
+</section>
+<section class="py-16 md:py-20 px-6 md:px-10">
+<div class="max-w-7xl mx-auto">
+<div class="glass rounded-3xl p-12 md:p-20 text-center border-dashed border-2 border-purple-500/20">
+<div class="text-8xl mb-6">⌨️</div>
+<p class="text-2xl font-bold text-purple-400">项目预览图</p>
+<p class="text-sm opacity-40 mt-3">KeyCustom 客制化商店界面截图</p>
+</div>
+</div>
+</section>
+<section class="py-12 md:py-16 px-6 md:px-10">
+<div class="max-w-7xl mx-auto text-center">
+<a class="inline-flex items-center gap-2 text-purple-400 font-bold hover:gap-4 transition-all text-lg" href="home.html#projects">
+<iconify-icon icon="ph:arrow-left-bold"></iconify-icon> 返回全部项目
+</a>
+</div>
+</section>
+<footer class="py-10 md:py-12 px-6 md:px-10 border-t border-white/10 text-center opacity-50 text-sm">
+<p>© 2026 ALEX.DEV - 用代码驱动创意</p>
+<p class="mt-2 italic">Handcrafted with ❤️ and pure JavaScript</p>
+</footer>
+<script>
+const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+const mobileMenu = document.getElementById('mobile-menu');
+const mobileOverlay = document.getElementById('mobile-overlay');
+function openMobileMenu() { mobileMenu.classList.add('open'); mobileOverlay.classList.add('open'); document.body.style.overflow = 'hidden'; }
+function closeMobileMenu() { mobileMenu.classList.remove('open'); mobileOverlay.classList.remove('open'); document.body.style.overflow = ''; }
+if (mobileMenuBtn) { mobileMenuBtn.addEventListener('click', () => { mobileMenu.classList.contains('open') ? closeMobileMenu() : openMobileMenu(); }); }
+if (mobileOverlay) { mobileOverlay.addEventListener('click', closeMobileMenu); }
+window.addEventListener('scroll', () => {
+const nav = document.getElementById('navbar');
+if (window.scrollY > 50) { nav.classList.add('glass', 'py-4'); nav.classList.remove('py-6'); }
+else { nav.classList.remove('glass', 'py-4'); nav.classList.add('py-6'); }
+});
+</script>
+</body>
+</html>

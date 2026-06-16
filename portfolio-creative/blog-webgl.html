@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+
+<html class="scroll-smooth" lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>为什么 WebGL 是前端交互的未来？ | ALEX.DEV</title>
+<script src="https://modao.cc/agent-py/static/source/js/tailwindcss.js"></script>
+<script src="https://modao.cc/agent-py/static/source/js/iconify-icon.min.js"></script>
+<style>
+:root { --primary: #7c3aed; --secondary: #a855f7; --accent: #8b5cf6; --bg-dark: #0a0a0a; --text-dark: #f0f0f0; }
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: #0a0a0a; color: #f0f0f0; overflow-x: hidden; }
+.text-gradient { background: linear-gradient(135deg, #7c3aed, #a855f7, #c084fc); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; background-size: 200% 200%; animation: gradient-shift 5s ease infinite; }
+@keyframes gradient-shift { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+.glass { background: rgba(255,255,255,0.05); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.1); transition: all 0.3s ease; }
+.glass:hover { border-color: rgba(124,58,237,0.3); box-shadow: 0 0 30px rgba(124,58,237,0.1); }
+.nav-link { position: relative; }
+.nav-link::after { content: ''; position: absolute; width: 0; height: 2px; bottom: -4px; left: 50%; background: var(--secondary); transition: all 0.3s ease; transform: translateX(-50%); }
+.nav-link:hover::after { width: 100%; }
+#mobile-menu { position: fixed; top: 0; right: -100%; width: 75%; max-width: 320px; height: 100vh; z-index: 60; transition: right 0.4s cubic-bezier(0.77, 0, 0.175, 1); display: flex; flex-direction: column; padding: 6rem 2rem 2rem; }
+#mobile-menu.open { right: 0; }
+#mobile-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.6); z-index: 55; opacity: 0; pointer-events: none; transition: opacity 0.4s ease; }
+#mobile-overlay.open { opacity: 1; pointer-events: auto; }
+@media (max-width: 768px) { .hero-title { font-size: 3.5rem; } }
+</style>
+</head>
+<body class="bg-[#0a0a0a] text-[#f0f0f0] overflow-x-hidden">
+<div id="mobile-overlay"></div>
+<div class="glass" id="mobile-menu">
+<a class="text-2xl font-bold mb-10 text-purple-400" href="home.html">ALEX.DEV</a>
+<a class="text-lg font-medium py-3 border-b border-white/10 hover:text-purple-400 transition-colors" href="home.html#hero" onclick="closeMobileMenu()">首页</a>
+<a class="text-lg font-medium py-3 border-b border-white/10 hover:text-purple-400 transition-colors" href="home.html#about" onclick="closeMobileMenu()">关于</a>
+<a class="text-lg font-medium py-3 border-b border-white/10 hover:text-purple-400 transition-colors" href="home.html#skills" onclick="closeMobileMenu()">技能</a>
+<a class="text-lg font-medium py-3 border-b border-white/10 hover:text-purple-400 transition-colors" href="home.html#projects" onclick="closeMobileMenu()">作品</a>
+<a class="text-lg font-medium py-3 border-b border-white/10 hover:text-purple-400 transition-colors" href="blog.html" onclick="closeMobileMenu()">博客</a>
+<a class="text-lg font-medium py-3 border-b border-white/10 hover:text-purple-400 transition-colors" href="home.html#contact" onclick="closeMobileMenu()">联系</a>
+</div>
+<nav class="fixed top-0 left-0 w-full z-50 transition-all duration-500 py-6 px-6 md:px-10" id="navbar">
+<div class="max-w-7xl mx-auto flex justify-between items-center">
+<div class="text-2xl font-black tracking-tighter">
+<a href="home.html"><span class="text-gradient">ALEX.DEV</span></a>
+</div>
+<div class="hidden md:flex space-x-10 items-center">
+<a class="nav-link font-medium" href="home.html#hero">首页</a>
+<a class="nav-link font-medium" href="home.html#about">关于</a>
+<a class="nav-link font-medium" href="home.html#skills">技能</a>
+<a class="nav-link font-medium" href="home.html#projects">作品</a>
+<a class="nav-link font-medium text-purple-400" href="blog.html">博客</a>
+<a class="nav-link font-medium" href="home.html#contact">联系</a>
+</div>
+<button class="md:hidden glass p-2 rounded-lg" id="mobile-menu-btn">
+<iconify-icon class="text-2xl" icon="ph:list-bold"></iconify-icon>
+</button>
+</div>
+</nav>
+<!-- 文章 Hero -->
+<section class="relative pt-28 pb-16 md:pt-36 md:pb-20 px-6 md:px-10 overflow-hidden">
+<div class="absolute inset-0 bg-gradient-to-br from-purple-900/60 via-purple-800/30 to-transparent"></div>
+<div class="absolute top-1/4 left-1/3 w-96 h-96 bg-purple-600 rounded-full blur-[150px] opacity-20 animate-pulse"></div>
+<div class="relative z-10 max-w-4xl mx-auto text-center">
+<div class="inline-flex gap-3 mb-6">
+<span class="px-4 py-1.5 text-xs font-bold rounded-full bg-purple-500/20 text-purple-400 border border-purple-500/30">WebGL</span>
+<span class="text-sm opacity-40">2026.05.20</span>
+</div>
+<h1 class="text-4xl md:text-6xl font-black tracking-tighter mb-4">为什么 WebGL 是前端交互的未来？</h1>
+</div>
+</section>
+<!-- 文章正文 -->
+<section class="py-10 md:py-16 px-6 md:px-10">
+<div class="max-w-3xl mx-auto">
+<div class="glass rounded-3xl p-8 md:p-12 space-y-8">
+<div>
+<h2 class="text-2xl font-bold mb-4 text-purple-400">一、引言 — WebGL 的开端与意义</h2>
+<p class="text-base md:text-lg opacity-70 leading-relaxed">
+当我们在浏览器中谈论交互体验时，大多数人的第一反应可能是 CSS 动画、JavaScript 特效或者 SVG 图形。然而，随着 WebGL（Web Graphics Library）的成熟和普及，前端交互的边界正在以前所未有的速度扩展。WebGL 允许开发者在浏览器中直接调用 GPU 进行硬件加速渲染，这意味着无需安装任何插件，用户就能在网页上体验到接近原生应用的 3D 图形效果。从数据可视化到在线游戏，从虚拟展厅到教育模拟，WebGL 正在悄然改变我们与网页交互的方式。
+</p>
+</div>
+<div>
+<h2 class="text-2xl font-bold mb-4 text-purple-400">二、浏览器中的 3D 渲染 — 从原理到实现</h2>
+<p class="text-base md:text-lg opacity-70 leading-relaxed">
+WebGL 基于 OpenGL ES 2.0 规范，通过 JavaScript 绑定将 GPU 的强大计算能力带入浏览器。它的核心工作流程包括：顶点着色器处理 3D 模型的几何数据，片元着色器负责像素级别的颜色计算，而管线中的纹理映射、光照计算和深度测试则共同构建出逼真的三维场景。对于前端开发者来说，虽然有 Three.js、Babylon.js 等高层库极大地降低了 WebGL 的使用门槛，但理解其底层原理对于性能优化至关重要。例如，合理合并 draw call、使用顶点缓冲对象（VBO）和索引缓冲对象（IBO）等技术，可以显著提升渲染效率。
+</p>
+</div>
+<div>
+<h2 class="text-2xl font-bold mb-4 text-purple-400">三、用户体验的革命 — 交互方式的进化</h2>
+<p class="text-base md:text-lg opacity-70 leading-relaxed">
+WebGL 带来的不仅是视觉上的升级，更是交互范式的根本转变。传统的网页交互局限于点击、滚动、悬停等二维操作，而 3D 场景引入了旋转、缩放、拖拽、视角切换等空间交互方式。以数据可视化为例，传统的折线图和柱状图只能展示两到三维的数据关系，而基于 WebGL 的 3D 散点图、曲面图和轨道模型可以直观呈现高维数据的复杂关联。在电商领域，3D 商品展示让消费者可以像在实体店一样从任意角度查看产品细节，显著提升购买信心。在教育领域，3D 交互式模拟让抽象的概念变得触手可及。
+</p>
+</div>
+<div>
+<h2 class="text-2xl font-bold mb-4 text-purple-400">四、未来展望</h2>
+<p class="text-base md:text-lg opacity-70 leading-relaxed">
+随着 WebGPU 标准的推进，WebGL 的后继者已经初现端倪。WebGPU 提供了更底层的 GPU 控制能力和更高效的资源管理，将进一步释放浏览器图形渲染的潜力。同时，AR/VR 技术的融合、实时物理模拟、大规模粒子系统等高级特性也将在前端领域找到更多应用场景。对于前端开发者而言，掌握 WebGL 不仅是一种技术加分项，更是在下一代交互浪潮中保持竞争力的必备技能。未来已来，只是尚未均匀分布 — 而 WebGL 正是通向这个未来的钥匙之一。
+</p>
+</div>
+</div>
+</div>
+</section>
+<!-- 底部导航 -->
+<section class="py-12 md:py-16 px-6 md:px-10">
+<div class="max-w-3xl mx-auto flex flex-col sm:flex-row justify-center gap-4">
+<a class="inline-flex items-center gap-2 text-purple-400 font-bold hover:gap-4 transition-all" href="blog.html">
+<iconify-icon icon="ph:arrow-left-bold"></iconify-icon> 返回博客列表
+</a>
+<a class="inline-flex items-center gap-2 text-purple-400 font-bold hover:gap-4 transition-all" href="home.html">
+<iconify-icon icon="ph:arrow-left-bold"></iconify-icon> 返回首页
+</a>
+</div>
+</section>
+<footer class="py-10 md:py-12 px-6 md:px-10 border-t border-white/10 text-center opacity-50 text-sm">
+<p>© 2026 ALEX.DEV - 用代码驱动创意</p>
+<p class="mt-2 italic">Handcrafted with ❤️ and pure JavaScript</p>
+</footer>
+<script>
+const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+const mobileMenu = document.getElementById('mobile-menu');
+const mobileOverlay = document.getElementById('mobile-overlay');
+function openMobileMenu() { mobileMenu.classList.add('open'); mobileOverlay.classList.add('open'); document.body.style.overflow = 'hidden'; }
+function closeMobileMenu() { mobileMenu.classList.remove('open'); mobileOverlay.classList.remove('open'); document.body.style.overflow = ''; }
+if (mobileMenuBtn) { mobileMenuBtn.addEventListener('click', () => { mobileMenu.classList.contains('open') ? closeMobileMenu() : openMobileMenu(); }); }
+if (mobileOverlay) { mobileOverlay.addEventListener('click', closeMobileMenu); }
+window.addEventListener('scroll', () => {
+const nav = document.getElementById('navbar');
+if (window.scrollY > 50) { nav.classList.add('glass', 'py-4'); nav.classList.remove('py-6'); }
+else { nav.classList.remove('glass', 'py-4'); nav.classList.add('py-6'); }
+});
+</script>
+</body>
+</html>

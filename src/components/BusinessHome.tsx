@@ -1,600 +1,214 @@
-import { getTranslations } from 'next-intl/server'
+import Image from 'next/image'
+import { ArrowRight, Briefcase, Cpu, FileText, Mail, MapPin, MessageCircle, Phone, Workflow } from 'lucide-react'
 import { Link } from '@/i18n/routing'
-import { siteConfig, type AppLocale } from '@/lib/site-config'
-import { cn } from '@/lib/utils'
-import { getArticleSummaries, type LocalizedArticleSummary } from '@/lib/articles'
-import { getServicePageSummaries } from '@/lib/service-pages'
-import type { LocalizedServicePage } from '@/lib/service-pages'
-import { buttonVariants } from '@/components/ui/button'
-import ContactCards from '@/components/business-home/ContactCards'
 import ProjectsShowcase from '@/components/business-home/ProjectsShowcase'
-import type { HomeContactCard, ShowcaseWork, WorkKey } from '@/components/business-home/types'
-import {
-  ArrowRight,
-  Briefcase,
-  CheckCircle2,
-  Clock3,
-  CreditCard,
-  Globe,
-  Layers3,
-  MessageSquare,
-  MonitorSmartphone,
-  Rocket,
-  Scale,
-  ShieldCheck,
-  Sparkles,
-  Wrench,
-  type LucideIcon,
-} from 'lucide-react'
-
-function SectionHeader({ eyebrow, title, description, center = false }: { eyebrow: string; title: string; description: string; center?: boolean }) {
-  return (
-    <div className={cn('max-w-3xl', center && 'mx-auto text-center')}>
-      <div className='space-y-4'>
-        <p className='text-accent-accessible text-xs font-semibold uppercase tracking-[0.22em]'>{eyebrow}</p>
-        <h2 className='font-rubik text-[28px] leading-snug text-[#111] sm:text-4xl'>{title}</h2>
-        {description ? <p className='max-w-3xl text-[15px] leading-8 text-[#666]'>{description}</p> : null}
-      </div>
-    </div>
-  )
-}
-
-function InfoCard({ icon: Icon, title, description }: { icon: LucideIcon; title: string; description: string }) {
-  return (
-    <div className='flex h-full flex-col gap-4 rounded-2xl border border-[#ece3d8] bg-white/70 p-5 text-left shadow-[0_12px_32px_-18px_rgba(0,0,0,0.16)] backdrop-blur-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-[#dfd1c0] hover:bg-white'>
-      <div className='text-accent-accessible flex h-11 w-11 items-center justify-center rounded-xl bg-[#f5ede3]'>
-        <Icon className='h-5 w-5' />
-      </div>
-      <div className='space-y-2'>
-        <p className='font-rubik text-lg text-[#111]'>{title}</p>
-        <p className='text-sm leading-6 text-[#6d6a65]'>{description}</p>
-      </div>
-    </div>
-  )
-}
-
-function FeatureCard({
-  icon: Icon,
-  title,
-  description,
-  bullets,
-}: {
-  icon: LucideIcon
-  title: string
-  description: string
-  bullets: string[]
-}) {
-  return (
-    <div className='group flex h-full flex-col gap-5 rounded-2xl border border-transparent bg-white/60 p-6 transition-all duration-300 hover:border-[#e8ddd0] hover:bg-white hover:shadow-[0_8px_40px_-12px_rgba(0,0,0,0.08)]'>
-      <div className='text-accent-accessible flex h-11 w-11 items-center justify-center rounded-xl bg-[#f5ede3] transition-colors group-hover:bg-[#f0e4d6]'>
-        <Icon className='h-5 w-5' />
-      </div>
-      <div className='space-y-2'>
-        <h3 className='font-rubik text-xl text-[#111]'>{title}</h3>
-        <p className='text-muted-accessible text-sm leading-6'>{description}</p>
-      </div>
-      <div className='mt-auto space-y-2.5 border-t border-dashed border-[#e8e0d6] pt-4 text-sm text-[#555]'>
-        {bullets.map(item => (
-          <div key={item} className='flex items-start gap-2.5'>
-            <CheckCircle2 className='mt-0.5 h-3.5 w-3.5 shrink-0 text-[#c46b2c]' />
-            <p className='leading-6'>{item}</p>
-          </div>
-        ))}
-      </div>
-    </div>
-  )
-}
-
-function ProcessCard({ step, title, description }: { step: string; title: string; description: string }) {
-  return (
-    <div className='flex h-full flex-col gap-4 rounded-2xl border border-[#eee] bg-white p-6 transition-all duration-300 hover:border-[#ddd] hover:shadow-[0_8px_28px_-14px_rgba(0,0,0,0.12)]'>
-      <span className='inline-flex h-10 w-10 items-center justify-center rounded-full bg-[#111] font-rubik text-sm font-semibold text-white'>{step}</span>
-      <div className='space-y-2'>
-        <h3 className='font-rubik text-lg text-[#111]'>{title}</h3>
-        <p className='text-muted-accessible text-sm leading-6'>{description}</p>
-      </div>
-    </div>
-  )
-}
-
-function StackPanel({ label, items }: { label: string; items: string[] }) {
-  return (
-    <div className='rounded-2xl border border-[#ece4da] bg-[#fcfaf7] p-5'>
-      <p className='text-accent-accessible text-xs font-semibold uppercase tracking-[0.18em]'>{label}</p>
-      <div className='mt-4 flex flex-wrap gap-2'>
-        {items.map(item => (
-          <span key={item} className='rounded-full border border-[#e6dbcf] bg-white px-3 py-1.5 text-sm font-medium text-[#544c43]'>
-            {item}
-          </span>
-        ))}
-      </div>
-    </div>
-  )
-}
+import { getSelectedProjects, portfolioProfile } from '@/lib/portfolio-content'
 
 type BusinessHomeProps = {
-  locale: AppLocale
+  locale: string
 }
 
-export default async function BusinessHome({ locale }: BusinessHomeProps) {
-  const t = await getTranslations({ locale, namespace: 'Landing' })
-  const isEnglish = locale === 'en'
-  const labels =
-    locale === 'zh'
-      ? {
-          featuredServices: '重点服务页',
-          featuredArticles: '先看这几篇',
-          readArticle: '阅读全文',
-        }
-      : {
-          featuredServices: 'Featured Service Pages',
-          featuredArticles: 'Start with these articles',
-          readArticle: 'Read article',
-        }
+function SectionTitle({ eyebrow, title, description }: { eyebrow: string; title: string; description: string }) {
+  return (
+    <div className='max-w-3xl space-y-4'>
+      <p className='text-xs font-semibold uppercase tracking-[0.24em] text-[#9a6236] dark:text-[#f1a15b]'>{eyebrow}</p>
+      <h2 className='font-rubik text-[32px] leading-[1.06] text-[#111] sm:text-[48px] dark:text-white'>{title}</h2>
+      <p className='text-[15px] leading-8 text-[#665a4e] dark:text-white/64'>{description}</p>
+    </div>
+  )
+}
 
-  const heroTitleSuffix = t('hero.titleSuffix')
-
-  const highlights = [
-    { key: 'background', icon: Briefcase },
-    { key: 'availability', icon: Clock3 },
-    { key: 'direct', icon: MessageSquare },
-    { key: 'delivery', icon: ShieldCheck },
-  ] as const
-
-  const services = [
-    { key: 'brandSites', icon: Globe },
-    { key: 'webApps', icon: Layers3 },
-    { key: 'mvpDelivery', icon: MonitorSmartphone },
-    { key: 'aiAutomation', icon: Sparkles },
-  ] as const
-
-  const principles = [
-    { key: 'support', icon: Wrench },
-    { key: 'direct', icon: MessageSquare },
-    { key: 'focus', icon: Rocket },
-    { key: 'standard', icon: Scale },
-  ] as const
-
-  const processSteps = ['payment', 'analysis', 'timeline', 'sync', 'delivery', 'maintenance'] as const
-  const noGoKeys = ['thesis', 'illegal', 'onsite', 'bidding', 'price', 'crowd'] as const
-  const expectationKeys = ['budget', 'requirements', 'communication'] as const
-
-  const frontendStack = ['Vue', 'React', 'Next.js', 'TypeScript']
-  const backendStack = ['Java', 'PHP', 'Python', 'Node.js']
-
-  const primaryContactHref = isEnglish ? siteConfig.xUrl : '#contact'
-  const contactCards: HomeContactCard[] = isEnglish
-    ? [
-        {
-          type: 'link',
-          icon: 'globe',
-          label: t('contact.xLabel'),
-          value: siteConfig.xHandle,
-          href: siteConfig.xUrl,
-        },
-      ]
-    : [
-        {
-          type: 'copy',
-          icon: 'messageSquare',
-          label: t('contact.wechatLabel'),
-          value: siteConfig.wechat,
-        },
-        ...(siteConfig.displayPhone
-          ? [
-              {
-                type: 'copy' as const,
-                icon: 'phone' as const,
-                label: t('contact.phoneLabel'),
-                value: siteConfig.displayPhone,
-              },
-            ]
-          : []),
-        {
-          type: 'link',
-          icon: 'mail',
-          label: t('contact.emailLabel'),
-          value: siteConfig.email,
-          href: `mailto:${siteConfig.email}`,
-        },
-        {
-          type: 'link',
-          icon: 'globe',
-          label: t('contact.xLabel'),
-          value: siteConfig.xHandle,
-          href: siteConfig.xUrl,
-        },
-      ]
-
-  const projectImages = (folder: string, count: number, extension = 'jpg') =>
-    Array.from({ length: count }, (_, index) => `/projects/${folder}/${index + 1}.${extension}`)
-
-  const workAssets: Record<WorkKey, { images: string[]; stack: string[]; link?: string }> = {
-    asset: {
-      images: projectImages('asset', 5),
-      stack: ['PHP', 'Yii', 'Vue', 'Typescript'],
-    },
-    hr: {
-      images: projectImages('hr', 4),
-      stack: ['PHP', 'Yii', 'Vue', 'Typescript'],
-    },
-    finance: {
-      images: projectImages('finance', 3),
-      stack: ['PHP', 'Yii', 'Vue', 'Typescript'],
-    },
-    erpQueryAgent: {
-      images: projectImages('erpQueryAgent', 2, 'png'),
-      stack: ['Python', 'FastAPI', 'LangGraph', 'LangChain', 'Qdrant', 'Elasticsearch'],
-    },
-    search: {
-      images: ['/projects/search/示例图片.png'],
-      stack: ['Python', 'FastAPI', 'WebSocket', 'DeepAgents', 'LangGraph', 'LangChain', 'DeepSeek', 'Tavily', 'MySQL', 'RAGFlow', 'ReportLab', 'React', 'Vite', 'TypeScript', 'Ant Design', 'Tailwind CSS', 'Docker', 'pnpm', 'uv'],
-    },
-    attendance: {
-      images: projectImages('attendance', 4),
-      stack: ['Java', 'Springboot', 'Vue', 'Typescript'],
-    },
-    oa: {
-      images: projectImages('oa', 4),
-      stack: ['PHP', 'Yii', 'Vue', 'Typescript'],
-    },
-    orders: {
-      images: projectImages('orders', 4),
-      stack: ['Java', 'Springboot', 'Vue', 'Element', 'Typescript'],
-    },
-    workstation: {
-      images: projectImages('workstation', 3),
-      stack: ['Java', 'Springboot', 'Vue', 'Element', 'Typescript'],
-    },
-    digitalHuman: {
-      images: projectImages('digitalHuman', 2),
-      stack: ['Node.js', 'TypeScript', 'Remotion', 'React'],
-    },
-    course: {
-      images: projectImages('course', 3),
-      stack: ['Laravel', 'React', 'PHP', 'TanStack', 'Typescript'],
-      link: 'https://course.sphrag.com',
-    },
-    recruiting: {
-      images: projectImages('recruiting', 4),
-      stack: ['PHP', 'Yii', 'Vue', 'Typescript'],
-    },
-    idea: {
-      images: projectImages('idea', 3),
-      stack: ['Next.js', 'React', 'TypeScript', 'n8n'],
-      link: 'https://idea.sphrag.com',
-    },
-    foreignTradeA: {
-      images: projectImages('foreignTradeA', 2),
-      stack: ['Next.js', 'React', 'TypeScript'],
-    },
-    formart: {
-      images: projectImages('fromart', 2),
-      stack: ['Wordpress', 'PHP'],
-      link: 'https://fromart.com/',
-    },
-  }
-
-  const workKeys: WorkKey[] = [
-    'asset',
-    'hr',
-    'finance',
-    'erpQueryAgent',
-    'search',
-    'attendance',
-    'oa',
-    'orders',
-    'workstation',
-    'digitalHuman',
-    'course',
-    'recruiting',
-    'idea',
-    'foreignTradeA',
-    'formart',
-  ]
-
-  const showcaseWorks: ShowcaseWork[] = workKeys.map(key => ({
-    key,
-    title: t(`projects.items.${key}.title`),
-    description: t(`projects.items.${key}.description`),
-    images: workAssets[key].images,
-    stack: workAssets[key].stack,
-    link: workAssets[key].link,
-    imageCountLabel: t('projects.imageCount', { count: workAssets[key].images.length }),
-    imageAlt: locale === 'zh' ? `${t(`projects.items.${key}.title`)} 项目截图` : `${t(`projects.items.${key}.title`)} project screenshot`,
-  }))
-  const featuredServiceSlugs = ['website-development-company', 'foreign-trade-website-building', 'mini-program-development-company', 'ai-agent-development', 'enterprise-system-development-company'] as const
-  const featuredArticleSlugs = ['website-development-cost', 'website-development-process', 'multilingual-website-seo'] as const
-  const serviceSummaryMap = new Map(getServicePageSummaries(locale).map(service => [service.slug, service]))
-  const articleSummaryMap = new Map(getArticleSummaries(locale).map(article => [article.slug, article]))
-  const featuredServices = featuredServiceSlugs
-    .map(slug => serviceSummaryMap.get(slug))
-    .filter((service): service is Pick<LocalizedServicePage, 'slug' | 'path' | 'navLabel' | 'heroDescription'> => Boolean(service))
-  const featuredArticles = featuredArticleSlugs
-    .map(slug => articleSummaryMap.get(slug))
-    .filter((article): article is LocalizedArticleSummary => Boolean(article))
+export default function BusinessHome({ locale }: BusinessHomeProps) {
+  const portraitAlt = locale === 'zh' ? '钟俊滨头像' : 'Junbin Zhong portrait'
+  const selectedProjects = getSelectedProjects()
+  const { stats, focusAreas, capabilities, contact, blogTopics } = portfolioProfile
 
   return (
-    <div className='relative mx-auto flex w-full max-w-[1200px] flex-col gap-24 pb-16 lg:gap-32'>
-      <div className='pointer-events-none absolute inset-x-0 top-[-8rem] -z-10 h-[40rem] bg-[radial-gradient(ellipse_60%_50%_at_50%_0%,rgba(196,107,44,0.10),transparent_60%)]' />
+    <div className='mx-auto flex w-full max-w-[1260px] flex-col gap-24 pb-16 pt-4 lg:gap-28'>
+      <section className='relative overflow-hidden rounded-[40px] border border-black/8 bg-[linear-gradient(135deg,rgba(255,255,255,0.92),rgba(247,234,219,0.94)_46%,rgba(255,255,255,0.9))] px-6 py-10 shadow-[0_30px_100px_-70px_rgba(0,0,0,0.5)] dark:border-white/8 dark:bg-[linear-gradient(135deg,rgba(19,19,19,0.96),rgba(31,23,18,0.96)_48%,rgba(12,12,12,0.96))] sm:px-8 sm:py-12 lg:px-12 lg:py-14'>
+        <div className='absolute left-0 top-0 h-52 w-52 rounded-full bg-[#f0a05a]/22 blur-[100px] dark:bg-[#f0a05a]/24' />
+        <div className='absolute bottom-0 right-0 h-64 w-64 rounded-full bg-black/10 blur-[120px] dark:bg-white/8' />
 
-      <section className='flex flex-col items-center pt-8 text-center lg:pt-16'>
-        <h1 className='mx-auto max-w-5xl break-keep font-rubik text-[42px] leading-[1.15] text-[#111] sm:text-6xl lg:text-7xl'>
-          {t('hero.titlePrefix')}{' '}
-          <span className='bg-gradient-to-r from-[#c46b2c] to-[#d4944e] bg-clip-text text-transparent'>{t('hero.titleHighlight')}</span>
-          {heroTitleSuffix ? ` ${heroTitleSuffix}` : null}
-        </h1>
-
-        <p className='mx-auto mt-6 max-w-3xl text-[15px] leading-8 text-[#666] sm:text-base'>{t('hero.description')}</p>
-
-        <div className='mt-10 flex flex-col gap-3 sm:flex-row'>
-          <a
-            href={primaryContactHref}
-            target={isEnglish ? '_blank' : undefined}
-            rel={isEnglish ? 'noreferrer' : undefined}
-            className={cn(
-              buttonVariants({ size: 'lg' }),
-              'h-12 rounded-full border-0 bg-[#111] px-7 text-sm font-semibold text-white shadow-[0_8px_24px_-8px_rgba(0,0,0,0.3)] transition-all hover:bg-[#222] hover:shadow-[0_12px_32px_-8px_rgba(0,0,0,0.35)]',
-            )}
-          >
-            <MessageSquare className='mr-2 h-4 w-4' />
-            {t('hero.primaryCta')}
-          </a>
-          <a
-            href='#projects'
-            className={cn(
-              buttonVariants({ variant: 'outline', size: 'lg' }),
-              'h-12 rounded-full border-[#ddd] bg-white px-7 text-sm font-semibold text-[#333] hover:border-[#ccc] hover:bg-[#fafafa]',
-            )}
-          >
-            {t('hero.secondaryCta')}
-            <ArrowRight className='ml-2 h-4 w-4' />
-          </a>
-        </div>
-
-        <div className='mt-14 grid w-full gap-4 md:grid-cols-2 xl:grid-cols-4'>
-          {highlights.map(item => (
-            <InfoCard
-              key={item.key}
-              icon={item.icon}
-              title={t(`hero.highlights.${item.key}.title`)}
-              description={t(`hero.highlights.${item.key}.description`)}
-            />
-          ))}
-        </div>
-      </section>
-
-      <section id='services'>
-        <SectionHeader eyebrow={t('services.eyebrow')} title={t('services.title')} description={t('services.description')} />
-        <div className='mt-8 grid gap-4 md:grid-cols-2 xl:grid-cols-4'>
-          {services.map(item => (
-            <FeatureCard
-              key={item.key}
-              icon={item.icon}
-              title={t(`services.items.${item.key}.title`)}
-              description={t(`services.items.${item.key}.description`)}
-              bullets={[t(`services.items.${item.key}.bullet1`), t(`services.items.${item.key}.bullet2`)]}
-            />
-          ))}
-        </div>
-
-        <div className='mt-8 grid gap-5 rounded-[28px] border border-[#ebdfd2] bg-white/70 p-6 shadow-[0_16px_48px_-32px_rgba(0,0,0,0.16)] sm:p-8 lg:grid-cols-[0.92fr_1.08fr]'>
-          <div className='space-y-4'>
-            <p className='text-accent-accessible text-xs font-semibold uppercase tracking-[0.22em]'>{t('services.stackEyebrow')}</p>
-            <h3 className='font-rubik text-2xl text-[#111]'>{t('services.stackTitle')}</h3>
-            <p className='text-[15px] leading-7 text-[#666]'>{t('services.stackDescription')}</p>
-          </div>
-          <div className='grid gap-4 sm:grid-cols-2'>
-            <StackPanel label={t('services.frontendLabel')} items={frontendStack} />
-            <StackPanel label={t('services.backendLabel')} items={backendStack} />
-          </div>
-        </div>
-
-        <div className='mt-6 flex flex-col gap-5 rounded-[28px] border border-[#111] bg-[#111] p-6 text-white shadow-[0_18px_56px_-34px_rgba(0,0,0,0.32)] sm:p-8 lg:flex-row lg:items-center lg:justify-between'>
-          <div className='max-w-3xl space-y-4'>
-            <div className='space-y-3'>
-              <p className='text-xs font-semibold uppercase tracking-[0.22em] text-[#d4944e]'>{t('services.directoryEyebrow')}</p>
-              <h3 className='font-rubik text-2xl leading-snug text-white sm:text-[32px]'>{t('services.directoryTitle')}</h3>
-              <p className='text-[15px] leading-7 text-white/70'>{t('services.directoryDescription')}</p>
+        <div className='relative grid gap-12 lg:grid-cols-[1.08fr_0.92fr] lg:items-center'>
+          <div className='space-y-7'>
+            <div className='inline-flex items-center gap-2 rounded-full border border-black/8 bg-white/72 px-4 py-2 text-xs font-semibold uppercase tracking-[0.24em] text-[#7f5435] shadow-[0_10px_30px_-20px_rgba(0,0,0,0.4)] dark:border-white/10 dark:bg-white/6 dark:text-[#f1a15b]'>
+              <Workflow className='h-3.5 w-3.5' />
+              Personal Full-Stack Portfolio
             </div>
-            {featuredServices.length > 0 ? (
-              <div>
-                <p className='text-xs font-semibold uppercase tracking-[0.18em] text-white/50'>{labels.featuredServices}</p>
-                <div className='mt-3 flex flex-wrap gap-2'>
-                  {featuredServices.map(service => (
-                    <Link
-                      key={service.slug}
-                      href={service.path}
-                      className='rounded-full border border-white/14 bg-white/[0.06] px-3 py-2 text-sm font-medium text-white/84 transition hover:bg-white/[0.12] hover:text-white'
-                    >
-                      {service.navLabel}
-                    </Link>
-                  ))}
+
+            <div className='space-y-4'>
+              <p className='text-sm uppercase tracking-[0.3em] text-[#7b6858] dark:text-white/48'>{portfolioProfile.title}</p>
+              <h1 className='font-rubik text-[42px] leading-[0.96] text-[#111] sm:text-[64px] lg:text-[76px] dark:text-white'>{portfolioProfile.name}</h1>
+              <h2 className='max-w-4xl font-rubik text-[28px] leading-[1.08] text-[#a25d27] sm:text-[40px] dark:text-[#f3a35d]'>{portfolioProfile.heroTitle}</h2>
+              <p className='max-w-3xl text-[16px] leading-8 text-[#5f554b] dark:text-white/66'>{portfolioProfile.heroDescription}</p>
+            </div>
+
+            <div className='flex flex-wrap gap-3'>
+              <Link href='/projects' className='inline-flex items-center gap-2 rounded-full bg-[#111] px-6 py-3 text-sm font-semibold text-white transition hover:bg-[#262626] dark:bg-[#f1a15b] dark:text-[#111] dark:hover:bg-[#f4b06f]'>
+                查看全部项目
+                <ArrowRight className='h-4 w-4' />
+              </Link>
+              <Link href='/blog' className='inline-flex items-center gap-2 rounded-full border border-black/10 bg-white/76 px-6 py-3 text-sm font-semibold text-[#382c22] transition hover:border-[#d49b6b] hover:bg-white dark:border-white/10 dark:bg-white/6 dark:text-white dark:hover:border-[#f0a15a] dark:hover:bg-white/8'>
+                技术博客
+                <FileText className='h-4 w-4' />
+              </Link>
+            </div>
+
+            <div className='grid gap-3 sm:grid-cols-2 xl:grid-cols-4'>
+              {stats.map(item => (
+                <div key={item.label} className='rounded-[24px] border border-black/8 bg-white/74 p-4 shadow-[0_18px_40px_-28px_rgba(0,0,0,0.35)] dark:border-white/8 dark:bg-white/6 dark:shadow-none'>
+                  <p className='font-rubik text-[24px] text-[#111] dark:text-white'>{item.value}</p>
+                  <p className='mt-2 text-sm leading-6 text-[#665a4e] dark:text-white/58'>{item.label}</p>
                 </div>
+              ))}
+            </div>
+          </div>
+
+          <div className='relative mx-auto w-full max-w-[520px]'>
+            <div className='absolute -left-4 top-8 hidden rounded-3xl border border-black/8 bg-white/88 px-4 py-3 text-sm font-medium text-[#4f3d2f] shadow-[0_24px_40px_-30px_rgba(0,0,0,0.35)] dark:border-white/10 dark:bg-white/6 dark:text-white/72 lg:block'>
+              Java / PHP / Python
+            </div>
+            <div className='absolute -right-2 top-24 hidden rounded-3xl border border-black/8 bg-white/88 px-4 py-3 text-sm font-medium text-[#4f3d2f] shadow-[0_24px_40px_-30px_rgba(0,0,0,0.35)] dark:border-white/10 dark:bg-white/6 dark:text-white/72 lg:block'>
+              ERP / OA / RAG / Agent
+            </div>
+            <div className='absolute bottom-10 left-0 hidden rounded-3xl border border-black/8 bg-white/88 px-4 py-3 text-sm font-medium text-[#4f3d2f] shadow-[0_24px_40px_-30px_rgba(0,0,0,0.35)] dark:border-white/10 dark:bg-white/6 dark:text-white/72 lg:block'>
+              React / Vue / Next.js
+            </div>
+
+            <div className='relative overflow-hidden rounded-[36px] border border-black/8 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.82),rgba(233,214,195,0.94))] p-4 shadow-[0_32px_80px_-40px_rgba(0,0,0,0.45)] dark:border-white/10 dark:bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.08),rgba(31,24,20,0.94))]'>
+              <div className='absolute inset-x-10 bottom-6 h-12 rounded-full bg-black/16 blur-2xl dark:bg-black/40' />
+              <div className='relative rounded-[28px] bg-[linear-gradient(180deg,rgba(255,255,255,0.74),rgba(255,255,255,0.24))] p-4 dark:bg-[linear-gradient(180deg,rgba(255,255,255,0.06),rgba(255,255,255,0.02))]'>
+                <div className='absolute inset-x-8 top-4 h-24 rounded-full bg-[#f0a05a]/16 blur-3xl dark:bg-[#f0a05a]/18' />
+                <Image src={portfolioProfile.portraitPrimary} alt={portraitAlt} width={900} height={1350} priority className='relative mx-auto h-auto w-full max-w-[420px] object-contain' />
               </div>
-            ) : null}
+            </div>
           </div>
-          <Link
-            href='/services'
-            className='inline-flex items-center justify-center rounded-full bg-white px-6 py-3 text-sm font-semibold text-[#111] transition hover:bg-[#f3ece2]'
-          >
-            {t('services.directoryCta')}
-            <ArrowRight className='ml-2 h-4 w-4' />
-          </Link>
         </div>
       </section>
 
-      <section>
-        <SectionHeader eyebrow={t('advantages.eyebrow')} title={t('advantages.title')} description={t('advantages.description')} />
-        <div className='mt-8 grid gap-4 sm:grid-cols-2 xl:grid-cols-4'>
-          {principles.map(item => (
-            <FeatureCard
-              key={item.key}
-              icon={item.icon}
-              title={t(`advantages.items.${item.key}.title`)}
-              description={t(`advantages.items.${item.key}.description`)}
-              bullets={[t(`advantages.items.${item.key}.bullet1`), t(`advantages.items.${item.key}.bullet2`)]}
-            />
-          ))}
-        </div>
-      </section>
-
-      <section id='process'>
-        <SectionHeader eyebrow={t('process.eyebrow')} title={t('process.title')} description={t('process.description')} />
-        <div className='mt-10 grid gap-4 md:grid-cols-2 xl:grid-cols-3'>
-          {processSteps.map((key, index) => (
-            <ProcessCard
-              key={key}
-              step={`0${index + 1}`}
-              title={t(`process.items.${key}.title`)}
-              description={t(`process.items.${key}.description`)}
-            />
-          ))}
-        </div>
-      </section>
-
-      <section id='articles'>
-        <div className='grid gap-5 rounded-[30px] border border-[#eadfd2] bg-[linear-gradient(180deg,rgba(255,255,255,0.92),rgba(250,245,238,0.95))] p-7 shadow-[0_16px_48px_-34px_rgba(0,0,0,0.16)] sm:p-8 lg:grid-cols-[0.94fr_1.06fr] lg:items-center'>
-          <div className='space-y-4'>
-            <p className='text-accent-accessible text-xs font-semibold uppercase tracking-[0.22em]'>{t('articles.eyebrow')}</p>
-            <h2 className='font-rubik text-[30px] leading-[1.15] text-[#111] sm:text-[42px]'>{t('articles.title')}</h2>
-            <p className='text-[15px] leading-8 text-[#645c53]'>{t('articles.description')}</p>
-            <Link
-              href='/blog'
-              className='inline-flex items-center justify-center rounded-full bg-[#111] px-6 py-3 text-sm font-semibold text-white transition hover:bg-[#222]'
-            >
-              {t('articles.cta')}
-              <ArrowRight className='ml-2 h-4 w-4' />
-            </Link>
-          </div>
-
-          <div className='grid gap-3 sm:grid-cols-3 lg:grid-cols-1'>
-            {['price', 'process', 'seo'].map(key => (
-              <div key={key} className='rounded-[22px] border border-[#eadfd2] bg-white/80 px-4 py-4'>
-                <p className='text-accent-accessible text-xs font-semibold uppercase tracking-[0.18em]'>{t(`articles.cards.${key}.label`)}</p>
-                <p className='mt-3 text-sm leading-7 text-[#5f564d]'>{t(`articles.cards.${key}.description`)}</p>
+      <section className='grid gap-6 lg:grid-cols-[0.95fr_1.05fr]'>
+        <div className='rounded-[32px] border border-black/8 bg-white/76 p-7 shadow-[0_28px_70px_-50px_rgba(0,0,0,0.35)] dark:border-white/8 dark:bg-white/[0.04] dark:shadow-none sm:p-8'>
+          <SectionTitle eyebrow='About' title='个人开发，不是缩小版工作室。' description='我不再用“工作室能力清单”讲自己，而是把重心放在真实可交付的经验上：复杂业务系统、AI 工程落地、前后端一体交付。' />
+          <div className='mt-8 space-y-4'>
+            {focusAreas.map(item => (
+              <div key={item.title} className='rounded-[24px] border border-black/8 bg-[#f9f2eb] p-5 dark:border-white/8 dark:bg-white/5'>
+                <p className='font-rubik text-[21px] text-[#111] dark:text-white'>{item.title}</p>
+                <p className='mt-2 text-sm leading-7 text-[#665a4e] dark:text-white/62'>{item.description}</p>
               </div>
             ))}
           </div>
         </div>
-        {featuredArticles.length > 0 ? (
-          <div className='mt-6 rounded-[28px] border border-[#eadfd2] bg-white/80 p-5 shadow-[0_16px_48px_-34px_rgba(0,0,0,0.16)] sm:p-6'>
-            <p className='text-accent-accessible text-xs font-semibold uppercase tracking-[0.22em]'>{labels.featuredArticles}</p>
-            <div className='mt-4 grid gap-3 md:grid-cols-3'>
-              {featuredArticles.map(article => (
-                <Link
-                  key={article.slug}
-                  href={article.path}
-                  className='group rounded-[22px] border border-[#eadfd2] bg-[#fcfaf7] p-4 transition hover:border-[#d5bea6] hover:bg-white'
-                >
-                  <p className='text-accent-accessible text-xs font-semibold uppercase tracking-[0.18em]'>{article.categoryLabel}</p>
-                  <h3 className='mt-2 font-rubik text-lg leading-snug text-[#111]'>{article.navLabel}</h3>
-                  <p className='mt-3 text-sm leading-6 text-[#645c53]'>{article.heroDescription}</p>
-                  <div className='text-accent-accessible mt-4 inline-flex items-center gap-2 text-sm font-semibold'>
-                    <span>{labels.readArticle}</span>
-                    <ArrowRight className='h-4 w-4 transition-transform duration-300 group-hover:translate-x-1' />
-                  </div>
-                </Link>
-              ))}
-            </div>
-          </div>
-        ) : null}
-      </section>
 
-      <section id='projects'>
-        <SectionHeader eyebrow={t('projects.eyebrow')} title={t('projects.title')} description={t('projects.description')} />
-        <div className='mt-8'>
-          <ProjectsShowcase
-            works={showcaseWorks}
-            labels={{
-              viewImages: t('projects.viewImages'),
-              openLink: t('projects.openLink'),
-              stackLabel: t('projects.stackLabel'),
-              lightboxHint: t('projects.lightboxHint'),
-              loadingImage: t('projects.loadingImage'),
-            }}
-          />
+        <div className='grid gap-4'>
+          {capabilities.map((item, index) => {
+            const Icon = index === 0 ? Briefcase : index === 1 ? Cpu : Workflow
+
+            return (
+              <div key={item.title} className='rounded-[30px] border border-black/8 bg-[linear-gradient(135deg,rgba(255,255,255,0.86),rgba(247,234,219,0.86))] p-6 shadow-[0_28px_70px_-54px_rgba(0,0,0,0.34)] dark:border-white/8 dark:bg-[linear-gradient(135deg,rgba(255,255,255,0.05),rgba(255,255,255,0.02))] dark:shadow-none sm:p-7'>
+                <div className='flex items-start gap-4'>
+                  <div className='flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-[#111] text-white dark:bg-[#f1a15b] dark:text-[#111]'>
+                    <Icon className='h-5 w-5' />
+                  </div>
+                  <div>
+                    <h3 className='font-rubik text-[24px] text-[#111] dark:text-white'>{item.title}</h3>
+                    <p className='mt-3 text-sm leading-7 text-[#665a4e] dark:text-white/62'>{item.body}</p>
+                  </div>
+                </div>
+              </div>
+            )
+          })}
         </div>
       </section>
 
-      <section id='notice' className='overflow-hidden rounded-[30px] bg-[#111] p-7 text-white sm:p-10'>
-        <div className='grid gap-6'>
-          <div className='max-w-3xl'>
-            <p className='text-xs font-semibold uppercase tracking-[0.22em] text-[#d4944e]'>{t('notice.eyebrow')}</p>
-            <h2 className='mt-4 max-w-2xl font-rubik text-[30px] leading-[1.15] sm:text-[42px]'>{t('notice.title')}</h2>
-            {t('notice.description') ? <p className='mt-3 max-w-3xl text-[15px] leading-8 text-white/55'>{t('notice.description')}</p> : null}
-          </div>
-
-          <div className='grid gap-4 xl:grid-cols-[0.88fr_1.12fr] xl:items-start'>
-            <div className='grid gap-4'>
-              <div className='rounded-[26px] border border-white/[0.08] bg-white/[0.04] p-6'>
-                <p className='text-xs font-semibold uppercase tracking-[0.2em] text-[#d4944e]'>{t('notice.reminderTitle')}</p>
-                <div className='mt-4 space-y-3'>
-                  {['direct', 'quality', 'timeline'].map(key => (
-                    <div key={key} className='flex items-start gap-3 rounded-2xl border border-white/[0.06] bg-black/10 px-4 py-3'>
-                      <CheckCircle2 className='mt-0.5 h-4 w-4 shrink-0 text-[#d4944e]' />
-                      <p className='text-sm leading-6 text-white/78'>{t(`notice.reminders.${key}`)}</p>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              <div className='rounded-[26px] border border-white/[0.08] bg-white/[0.04] p-6'>
-                <p className='text-xs font-semibold uppercase tracking-[0.2em] text-[#d4944e]'>{t('notice.expectationsTitle')}</p>
-                <div className='mt-4 grid gap-3 md:grid-cols-3 xl:grid-cols-1'>
-                  {expectationKeys.map(key => (
-                    <div key={key} className='rounded-2xl border border-white/[0.06] bg-black/10 p-4'>
-                      <p className='font-rubik text-lg text-white/92'>{t(`notice.expectations.${key}.title`)}</p>
-                      <p className='mt-2 text-sm leading-6 text-white/68'>{t(`notice.expectations.${key}.description`)}</p>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-
-            <div className='rounded-2xl border border-white/[0.08] bg-white/[0.04] p-6'>
-              <p className='text-xs font-semibold uppercase tracking-[0.2em] text-[#d4944e]'>{t('notice.noGoTitle')}</p>
-              <div className='mt-4 space-y-3'>
-                {noGoKeys.map(key => (
-                  <div key={key} className='rounded-2xl border border-white/[0.06] bg-black/10 px-4 py-3'>
-                    <p className='text-sm leading-6 text-white/80'>{t(`notice.noGo.${key}`)}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
+      <section id='projects' className='space-y-8'>
+        <div className='flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between'>
+          <SectionTitle eyebrow='Selected Work' title='首页只放精选项目。' description='这里先展示最能代表我当前能力边界的一组项目。完整归档放到项目页，避免首页变成截图仓库。' />
+          <Link href='/projects' className='inline-flex items-center gap-2 text-sm font-semibold text-[#8e5d36] transition hover:text-[#b96d2b] dark:text-[#f1a15b] dark:hover:text-[#f5b576]'>
+            打开完整项目归档
+            <ArrowRight className='h-4 w-4' />
+          </Link>
         </div>
+
+        <ProjectsShowcase
+          works={selectedProjects}
+          layout='marquee'
+          labels={{
+            viewImages: '查看截图',
+            openLink: '打开链接',
+            stackLabel: '技术栈',
+            highlightsLabel: '关键亮点',
+            lightboxHint: 'Esc 关闭，方向键切换图片',
+            loadingImage: '图片加载中...',
+          }}
+        />
       </section>
 
-      <section id='contact' className='mx-auto w-full max-w-4xl'>
-        <div className='flex flex-col items-center rounded-[30px] border border-[#eee] bg-[#faf7f3] p-8 text-center sm:p-12'>
-          <div>
-            <p className='text-accent-accessible text-xs font-semibold uppercase tracking-[0.22em]'>{t('contact.eyebrow')}</p>
-            <h2 className='mx-auto mt-4 max-w-2xl font-rubik text-[28px] leading-snug text-[#111] sm:text-4xl'>{t('contact.title')}</h2>
-            {t('contact.description') ? <p className='mx-auto mt-4 max-w-2xl text-[15px] leading-8 text-[#666]'>{t('contact.description')}</p> : null}
-          </div>
-
-          <div className={cn('mx-auto mt-10 grid w-full gap-4', isEnglish ? 'max-w-xl' : 'max-w-2xl sm:grid-cols-2')}>
-            <ContactCards cards={contactCards} />
-          </div>
-
-          <div className='mx-auto mt-8 grid w-full max-w-2xl gap-3 text-left sm:grid-cols-2'>
-            <div className='rounded-2xl border border-[#eadfd2] bg-white/80 p-5'>
-              <div className='text-accent-accessible flex items-center gap-2'>
-                <Clock3 className='h-4 w-4' />
-                <p className='text-sm font-semibold text-[#6a4a2d]'>{t('contact.availabilityTitle')}</p>
+      <section className='grid gap-6 lg:grid-cols-[1.05fr_0.95fr]'>
+        <div className='rounded-[34px] border border-black/8 bg-[#111] p-7 text-white shadow-[0_30px_80px_-58px_rgba(0,0,0,0.65)] dark:border-white/8 sm:p-8'>
+          <p className='text-xs font-semibold uppercase tracking-[0.24em] text-white/46'>Blog</p>
+          <h2 className='mt-4 font-rubik text-[32px] leading-[1.06] sm:text-[46px]'>博客保留，但只写技术文章。</h2>
+          <p className='mt-4 max-w-3xl text-[15px] leading-8 text-white/68'>
+            旧站那些偏宣传、偏获客的内容已经不再适合这个站点定位。博客会保留，用来沉淀真正有价值的技术文章、系统拆解和工程实践。
+          </p>
+          <div className='mt-8 grid gap-3 sm:grid-cols-3'>
+            {blogTopics.map(topic => (
+              <div key={topic} className='rounded-[22px] border border-white/10 bg-white/6 p-4 text-sm leading-6 text-white/78'>
+                {topic}
               </div>
-              <p className='mt-2 text-sm leading-6 text-[#666]'>{t('contact.availabilityDescription')}</p>
+            ))}
+          </div>
+          <Link href='/blog' className='mt-8 inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-semibold text-[#111] transition hover:bg-[#f1f1f1]'>
+            进入博客页
+            <ArrowRight className='h-4 w-4' />
+          </Link>
+        </div>
+
+        <div id='contact' className='rounded-[34px] border border-black/8 bg-white/76 p-7 shadow-[0_28px_70px_-50px_rgba(0,0,0,0.35)] dark:border-white/8 dark:bg-white/[0.04] dark:shadow-none sm:p-8'>
+          <p className='text-xs font-semibold uppercase tracking-[0.24em] text-[#9a6236] dark:text-[#f1a15b]'>Contact</p>
+          <h2 className='mt-4 font-rubik text-[32px] leading-[1.06] text-[#111] sm:text-[44px] dark:text-white'>联系方式</h2>
+          <p className='mt-4 text-[15px] leading-8 text-[#665a4e] dark:text-white/64'>
+            如果你要聊的是企业系统、AI 应用或复杂后台项目，直接发我微信或邮件会更高效。这个站现在服务于个人开发者定位，所以沟通路径也尽量直接。
+          </p>
+
+          <div className='mt-8 grid gap-3'>
+            <a href={`mailto:${contact.email}`} className='flex items-center justify-between rounded-[22px] border border-black/8 bg-[#f9f2eb] px-5 py-4 text-sm text-[#3e3227] transition hover:border-[#d49b6b] dark:border-white/8 dark:bg-white/5 dark:text-white/76'>
+              <span className='inline-flex items-center gap-3'>
+                <Mail className='h-4 w-4' />
+                邮箱
+              </span>
+              <span>{contact.email}</span>
+            </a>
+            <div className='flex items-center justify-between rounded-[22px] border border-black/8 bg-[#f9f2eb] px-5 py-4 text-sm text-[#3e3227] dark:border-white/8 dark:bg-white/5 dark:text-white/76'>
+              <span className='inline-flex items-center gap-3'>
+                <MessageCircle className='h-4 w-4' />
+                微信
+              </span>
+              <span>{contact.wechat}</span>
             </div>
-            <div className='rounded-2xl border border-[#eadfd2] bg-white/80 p-5'>
-              <div className='text-accent-accessible flex items-center gap-2'>
-                <CreditCard className='h-4 w-4' />
-                <p className='text-sm font-semibold text-[#6a4a2d]'>{t('contact.briefTitle')}</p>
-              </div>
-              <p className='mt-2 text-sm leading-6 text-[#666]'>{t('contact.briefDescription')}</p>
+            <div className='flex items-center justify-between rounded-[22px] border border-black/8 bg-[#f9f2eb] px-5 py-4 text-sm text-[#3e3227] dark:border-white/8 dark:bg-white/5 dark:text-white/76'>
+              <span className='inline-flex items-center gap-3'>
+                <Phone className='h-4 w-4' />
+                手机
+              </span>
+              <span>{contact.phone}</span>
+            </div>
+            <div className='flex items-center justify-between rounded-[22px] border border-black/8 bg-[#f9f2eb] px-5 py-4 text-sm text-[#3e3227] dark:border-white/8 dark:bg-white/5 dark:text-white/76'>
+              <span className='inline-flex items-center gap-3'>
+                <MapPin className='h-4 w-4' />
+                所在地
+              </span>
+              <span>{portfolioProfile.location}</span>
             </div>
           </div>
 
+          <div className='mt-6 flex flex-wrap gap-3 text-sm font-medium'>
+            <a href={contact.github} target='_blank' rel='noreferrer' className='rounded-full border border-black/8 px-4 py-2 text-[#3e3227] transition hover:border-[#d49b6b] dark:border-white/8 dark:text-white/76 dark:hover:border-[#f0a15a]'>
+              GitHub
+            </a>
+            <a href={contact.x} target='_blank' rel='noreferrer' className='rounded-full border border-black/8 px-4 py-2 text-[#3e3227] transition hover:border-[#d49b6b] dark:border-white/8 dark:text-white/76 dark:hover:border-[#f0a15a]'>
+              X / Twitter
+            </a>
+          </div>
         </div>
       </section>
     </div>

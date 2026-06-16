@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
-import BusinessHome from '@/components/BusinessHome'
+import CreativeHome from '@/components/creative/CreativeHome'
 import StructuredData from '@/components/StructuredData'
 import { appLocales, buildPageMetadata, getAppLocale, getHomePageSeoCopy, getHomeStructuredData, isAppLocale } from '@/lib/site-config'
 
@@ -36,7 +36,7 @@ export default function Home({ params }: HomePageProps) {
   return (
     <>
       <StructuredData data={getHomeStructuredData(locale)} />
-      <BusinessHome locale={locale} />
+      <CreativeHome />
     </>
   )
 }

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+
+<html class="scroll-smooth" lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>全栈开发的艺术：从数据库到 UI | ALEX.DEV</title>
+<script src="https://modao.cc/agent-py/static/source/js/tailwindcss.js"></script>
+<script src="https://modao.cc/agent-py/static/source/js/iconify-icon.min.js"></script>
+<style>
+:root { --primary: #7c3aed; --secondary: #a855f7; --accent: #8b5cf6; --bg-dark: #0a0a0a; --text-dark: #f0f0f0; }
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: #0a0a0a; color: #f0f0f0; overflow-x: hidden; }
+.text-gradient { background: linear-gradient(135deg, #7c3aed, #a855f7, #c084fc); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; background-size: 200% 200%; animation: gradient-shift 5s ease infinite; }
+@keyframes gradient-shift { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+.glass { background: rgba(255,255,255,0.05); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.1); transition: all 0.3s ease; }
+.glass:hover { border-color: rgba(124,58,237,0.3); box-shadow: 0 0 30px rgba(124,58,237,0.1); }
+.nav-link { position: relative; }
+.nav-link::after { content: ''; position: absolute; width: 0; height: 2px; bottom: -4px; left: 50%; background: var(--secondary); transition: all 0.3s ease; transform: translateX(-50%); }
+.nav-link:hover::after { width: 100%; }
+#mobile-menu { position: fixed; top: 0; right: -100%; width: 75%; max-width: 320px; height: 100vh; z-index: 60; transition: right 0.4s cubic-bezier(0.77, 0, 0.175, 1); display: flex; flex-direction: column; padding: 6rem 2rem 2rem; }
+#mobile-menu.open { right: 0; }
+#mobile-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.6); z-index: 55; opacity: 0; pointer-events: none; transition: opacity 0.4s ease; }
+#mobile-overlay.open { opacity: 1; pointer-events: auto; }
+@media (max-width: 768px) { .hero-title { font-size: 3.5rem; } }
+</style>
+</head>
+<body class="bg-[#0a0a0a] text-[#f0f0f0] overflow-x-hidden">
+<div id="mobile-overlay"></div>
+<div class="glass" id="mobile-menu">
+<a class="text-2xl font-bold mb-10 text-purple-400" href="home.html">ALEX.DEV</a>
+<a class="text-lg font-medium py-3 border-b border-white/10 hover:text-purple-400 transition-colors" href="home.html#hero" onclick="closeMobileMenu()">首页</a>
+<a class="text-lg font-medium py-3 border-b border-white/10 hover:text-purple-400 transition-colors" href="home.html#about" onclick="closeMobileMenu()">关于</a>
+<a class="text-lg font-medium py-3 border-b border-white/10 hover:text-purple-400 transition-colors" href="home.html#skills" onclick="closeMobileMenu()">技能</a>
+<a class="text-lg font-medium py-3 border-b border-white/10 hover:text-purple-400 transition-colors" href="home.html#projects" onclick="closeMobileMenu()">作品</a>
+<a class="text-lg font-medium py-3 border-b border-white/10 hover:text-purple-400 transition-colors" href="blog.html" onclick="closeMobileMenu()">博客</a>
+<a class="text-lg font-medium py-3 border-b border-white/10 hover:text-purple-400 transition-colors" href="home.html#contact" onclick="closeMobileMenu()">联系</a>
+</div>
+<nav class="fixed top-0 left-0 w-full z-50 transition-all duration-500 py-6 px-6 md:px-10" id="navbar">
+<div class="max-w-7xl mx-auto flex justify-between items-center">
+<div class="text-2xl font-black tracking-tighter">
+<a href="home.html"><span class="text-gradient">ALEX.DEV</span></a>
+</div>
+<div class="hidden md:flex space-x-10 items-center">
+<a class="nav-link font-medium" href="home.html#hero">首页</a>
+<a class="nav-link font-medium" href="home.html#about">关于</a>
+<a class="nav-link font-medium" href="home.html#skills">技能</a>
+<a class="nav-link font-medium" href="home.html#projects">作品</a>
+<a class="nav-link font-medium text-purple-400" href="blog.html">博客</a>
+<a class="nav-link font-medium" href="home.html#contact">联系</a>
+</div>
+<button class="md:hidden glass p-2 rounded-lg" id="mobile-menu-btn">
+<iconify-icon class="text-2xl" icon="ph:list-bold"></iconify-icon>
+</button>
+</div>
+</nav>
+<section class="relative pt-28 pb-16 md:pt-36 md:pb-20 px-6 md:px-10 overflow-hidden">
+<div class="absolute inset-0 bg-gradient-to-br from-purple-900/60 via-purple-800/30 to-transparent"></div>
+<div class="absolute top-1/4 left-1/3 w-96 h-96 bg-purple-600 rounded-full blur-[150px] opacity-20 animate-pulse"></div>
+<div class="relative z-10 max-w-4xl mx-auto text-center">
+<div class="inline-flex gap-3 mb-6">
+<span class="px-4 py-1.5 text-xs font-bold rounded-full bg-purple-500/20 text-purple-400 border border-purple-500/30">全栈开发</span>
+<span class="text-sm opacity-40">2026.03.05</span>
+</div>
+<h1 class="text-4xl md:text-6xl font-black tracking-tighter mb-4">全栈开发的艺术：从数据库到 UI</h1>
+</div>
+</section>
+<section class="py-10 md:py-16 px-6 md:px-10">
+<div class="max-w-3xl mx-auto">
+<div class="glass rounded-3xl p-8 md:p-12 space-y-8">
+<div>
+<h2 class="text-2xl font-bold mb-4 text-purple-400">一、引言 — 全栈开发的挑战与魅力</h2>
+<p class="text-base md:text-lg opacity-70 leading-relaxed">
+全栈开发者的独特之处在于：我们不仅是代码的书写者，更是技术架构的统筹者。从前端 UI 的像素级还原到后端 API 的设计，从数据库的 schema 规划到 DevOps 的部署策略，全栈开发者需要有跨越多个技术层级的全局视野。然而，这种广度也带来了独特的挑战：如何在不同技术栈之间保持代码风格的一致性？如何在各个层级之间建立清晰的数据契约？如何确保系统的整体可维护性和可扩展性？这些问题的答案，正是全栈开发的艺术所在。
+</p>
+</div>
+<div>
+<h2 class="text-2xl font-bold mb-4 text-purple-400">二、保持代码一致性 — 类型安全的实践</h2>
+<p class="text-base md:text-lg opacity-70 leading-relaxed">
+在全栈项目中，代码一致性最大的威胁来自于前后端数据模型的脱节。当后端的 API 响应结构发生变化而前端未同步更新时，bug 就会悄然滋生。解决这个问题的最佳实践是引入端到端的类型安全体系。使用 TypeScript 覆盖前后端是基础，更重要的是通过工具链实现类型的自动同步。例如，使用 tRPC 或 GraphQL 可以确保前端调用的 API 接口在编译时就被类型检查。对于 RESTful 架构，可以使用 OpenAPI/Swagger 规范作为类型契约的源头，并通过 codegen 工具自动生成客户端类型定义。这样，当数据库 schema 发生变化时，类型错误会在编译阶段而不是运行时被捕获。
+</p>
+</div>
+<div>
+<h2 class="text-2xl font-bold mb-4 text-purple-400">三、技术层级的平衡 — 架构设计的智慧</h2>
+<p class="text-base md:text-lg opacity-70 leading-relaxed">
+优秀的全栈架构需要在多个维度之间取得平衡。在数据层，选择关系型数据库还是文档型数据库取决于数据之间的关系复杂度；在业务逻辑层，是采用传统的 MVC 模式还是演进到领域驱动设计（DDD），取决于项目的规模和团队的熟练度；在 API 层，REST、GraphQL 和 gRPC 各有适用的场景。我的经验法则是：不要为了追求技术时髦而引入不必要的复杂度。对于一个中等规模的项目，TypeScript + Next.js + Prisma + PostgreSQL 的组合已经能覆盖绝大多数需求。关键在于建立清晰的层间隔离，让每一层只关心自己的职责，通过定义良好的接口进行通信。
+</p>
+</div>
+<div>
+<h2 class="text-2xl font-bold mb-4 text-purple-400">四、项目实战经验</h2>
+<p class="text-base md:text-lg opacity-70 leading-relaxed">
+在实际项目中，我总结了几条重要的经验教训。第一，尽早建立数据库索引策略，避免在生产环境中因为慢查询而紧急上线。第二，API 设计遵循一致性原则，统一的错误格式、分页规范和命名风格能显著降低前端的适配成本。第三，前端状态管理不要过度设计，对于大部分场景，React Query/SWR 配合 Context 已经足够，Redux 只在多模块共享复杂状态时才值得引入。第四，自动化测试覆盖关键路径，特别是数据库迁移、API 接口和用户核心流程。第五，重视日志和监控体系，ELK 或 Sentry 等工具是定位线上问题的生命线。全栈开发是一条需要持续学习和积累的道路，希望这些经验能帮助你少走一些弯路。
+</p>
+</div>
+</div>
+</div>
+</section>
+<section class="py-12 md:py-16 px-6 md:px-10">
+<div class="max-w-3xl mx-auto flex flex-col sm:flex-row justify-center gap-4">
+<a class="inline-flex items-center gap-2 text-purple-400 font-bold hover:gap-4 transition-all" href="blog.html">
+<iconify-icon icon="ph:arrow-left-bold"></iconify-icon> 返回博客列表
+</a>
+<a class="inline-flex items-center gap-2 text-purple-400 font-bold hover:gap-4 transition-all" href="home.html">
+<iconify-icon icon="ph:arrow-left-bold"></iconify-icon> 返回首页
+</a>
+</div>
+</section>
+<footer class="py-10 md:py-12 px-6 md:px-10 border-t border-white/10 text-center opacity-50 text-sm">
+<p>© 2026 ALEX.DEV - 用代码驱动创意</p>
+<p class="mt-2 italic">Handcrafted with ❤️ and pure JavaScript</p>
+</footer>
+<script>
+const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+const mobileMenu = document.getElementById('mobile-menu');
+const mobileOverlay = document.getElementById('mobile-overlay');
+function openMobileMenu() { mobileMenu.classList.add('open'); mobileOverlay.classList.add('open'); document.body.style.overflow = 'hidden'; }
+function closeMobileMenu() { mobileMenu.classList.remove('open'); mobileOverlay.classList.remove('open'); document.body.style.overflow = ''; }
+if (mobileMenuBtn) { mobileMenuBtn.addEventListener('click', () => { mobileMenu.classList.contains('open') ? closeMobileMenu() : openMobileMenu(); }); }
+if (mobileOverlay) { mobileOverlay.addEventListener('click', closeMobileMenu); }
+window.addEventListener('scroll', () => {
+const nav = document.getElementById('navbar');
+if (window.scrollY > 50) { nav.classList.add('glass', 'py-4'); nav.classList.remove('py-6'); }
+else { nav.classList.remove('glass', 'py-4'); nav.classList.add('py-6'); }
+});
+</script>
+</body>
+</html>

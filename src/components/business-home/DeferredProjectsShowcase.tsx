@@ -13,15 +13,17 @@ type ProjectsShowcaseLabels = {
   stackLabel: string
   lightboxHint: string
   loadingImage: string
+  highlightsLabel: string
 }
 
 type DeferredProjectsShowcaseProps = {
   works: ShowcaseWork[]
   labels: ProjectsShowcaseLabels
   fallback: ReactNode
+  layout: 'grid' | 'marquee'
 }
 
-export default function DeferredProjectsShowcase({ works, labels, fallback }: DeferredProjectsShowcaseProps) {
+export default function DeferredProjectsShowcase({ works, labels, fallback, layout }: DeferredProjectsShowcaseProps) {
   const containerRef = useRef<HTMLDivElement | null>(null)
   const [shouldEnhance, setShouldEnhance] = useState(false)
 
@@ -58,5 +60,5 @@ export default function DeferredProjectsShowcase({ works, labels, fallback }: De
     return () => observer.disconnect()
   }, [shouldEnhance])
 
-  return <div ref={containerRef}>{shouldEnhance ? <ProjectsShowcaseClient works={works} labels={labels} /> : fallback}</div>
+  return <div ref={containerRef}>{shouldEnhance ? <ProjectsShowcaseClient works={works} labels={labels} layout={layout} /> : fallback}</div>
 }

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+
+<html class="scroll-smooth" lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>最新博客 | ALEX.DEV</title>
+<script src="https://modao.cc/agent-py/static/source/js/tailwindcss.js"></script>
+<script src="https://modao.cc/agent-py/static/source/js/iconify-icon.min.js"></script>
+<style>
+:root { --primary: #7c3aed; --secondary: #a855f7; --accent: #8b5cf6; --bg-dark: #0a0a0a; --text-dark: #f0f0f0; }
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: #0a0a0a; color: #f0f0f0; overflow-x: hidden; }
+.text-gradient { background: linear-gradient(135deg, #7c3aed, #a855f7, #c084fc); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; background-size: 200% 200%; animation: gradient-shift 5s ease infinite; }
+@keyframes gradient-shift { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+.glass { background: rgba(255,255,255,0.05); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.1); transition: all 0.3s ease; }
+.glass:hover { border-color: rgba(124,58,237,0.3); box-shadow: 0 0 30px rgba(124,58,237,0.1); }
+.nav-link { position: relative; }
+.nav-link::after { content: ''; position: absolute; width: 0; height: 2px; bottom: -4px; left: 50%; background: var(--secondary); transition: all 0.3s ease; transform: translateX(-50%); }
+.nav-link:hover::after { width: 100%; }
+#mobile-menu { position: fixed; top: 0; right: -100%; width: 75%; max-width: 320px; height: 100vh; z-index: 60; transition: right 0.4s cubic-bezier(0.77, 0, 0.175, 1); display: flex; flex-direction: column; padding: 6rem 2rem 2rem; }
+#mobile-menu.open { right: 0; }
+#mobile-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.6); z-index: 55; opacity: 0; pointer-events: none; transition: opacity 0.4s ease; }
+#mobile-overlay.open { opacity: 1; pointer-events: auto; }
+.blog-card { transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1); }
+.blog-card:hover { transform: translateY(-6px); }
+@media (max-width: 768px) { .hero-title { font-size: 3.5rem; } }
+</style>
+</head>
+<body class="bg-[#0a0a0a] text-[#f0f0f0] overflow-x-hidden">
+<div id="mobile-overlay"></div>
+<div class="glass" id="mobile-menu">
+<a class="text-2xl font-bold mb-10 text-purple-400" href="home.html">ALEX.DEV</a>
+<a class="text-lg font-medium py-3 border-b border-white/10 hover:text-purple-400 transition-colors" href="home.html#hero" onclick="closeMobileMenu()">首页</a>
+<a class="text-lg font-medium py-3 border-b border-white/10 hover:text-purple-400 transition-colors" href="home.html#about" onclick="closeMobileMenu()">关于</a>
+<a class="text-lg font-medium py-3 border-b border-white/10 hover:text-purple-400 transition-colors" href="home.html#skills" onclick="closeMobileMenu()">技能</a>
+<a class="text-lg font-medium py-3 border-b border-white/10 hover:text-purple-400 transition-colors" href="home.html#projects" onclick="closeMobileMenu()">作品</a>
+<a class="text-lg font-medium py-3 border-b border-white/10 hover:text-purple-400 transition-colors" href="blog.html" onclick="closeMobileMenu()">博客</a>
+<a class="text-lg font-medium py-3 border-b border-white/10 hover:text-purple-400 transition-colors" href="home.html#contact" onclick="closeMobileMenu()">联系</a>
+</div>
+<nav class="fixed top-0 left-0 w-full z-50 transition-all duration-500 py-6 px-6 md:px-10" id="navbar">
+<div class="max-w-7xl mx-auto flex justify-between items-center">
+<div class="text-2xl font-black tracking-tighter">
+<a href="home.html"><span class="text-gradient">ALEX.DEV</span></a>
+</div>
+<div class="hidden md:flex space-x-10 items-center">
+<a class="nav-link font-medium" href="home.html#hero">首页</a>
+<a class="nav-link font-medium" href="home.html#about">关于</a>
+<a class="nav-link font-medium" href="home.html#skills">技能</a>
+<a class="nav-link font-medium" href="home.html#projects">作品</a>
+<a class="nav-link font-medium text-purple-400" href="blog.html">博客</a>
+<a class="nav-link font-medium" href="home.html#contact">联系</a>
+</div>
+<button class="md:hidden glass p-2 rounded-lg" id="mobile-menu-btn">
+<iconify-icon class="text-2xl" icon="ph:list-bold"></iconify-icon>
+</button>
+</div>
+</nav>
+<!-- Page Hero -->
+<section class="relative pt-28 pb-16 md:pt-36 md:pb-20 px-6 md:px-10 overflow-hidden">
+<div class="absolute inset-0 bg-gradient-to-br from-purple-900/60 via-purple-800/30 to-transparent"></div>
+<div class="absolute top-1/4 left-1/3 w-96 h-96 bg-purple-600 rounded-full blur-[150px] opacity-20 animate-pulse"></div>
+<div class="relative z-10 max-w-7xl mx-auto text-center">
+<h1 class="text-5xl md:text-7xl font-black tracking-tighter mb-6">最新博客</h1>
+<p class="text-lg md:text-xl opacity-60 max-w-2xl mx-auto">技术思考与最佳实践分享</p>
+</div>
+</section>
+<!-- 文章列表 -->
+<section class="py-10 md:py-14 px-6 md:px-10">
+<div class="max-w-4xl mx-auto space-y-8 md:space-y-10">
+<!-- 文章 1: WebGL -->
+<div class="blog-card glass rounded-3xl p-8 md:p-10 hover:shadow-[0_0_40px_rgba(124,58,237,0.15)] group">
+<div class="flex items-center gap-3 mb-5 flex-wrap">
+<span class="px-4 py-1 text-xs font-bold rounded-full bg-purple-500/20 text-purple-400 border border-purple-500/30">WebGL</span>
+<span class="text-sm opacity-40">2026.05.20</span>
+</div>
+<h2 class="text-2xl md:text-3xl font-bold mb-5 group-hover:text-purple-400 transition-colors">为什么 WebGL 是前端交互的未来？</h2>
+<p class="text-base opacity-60 leading-relaxed mb-6">
+探讨如何在浏览器中实现高性能的 3D 渲染，以及这对用户体验的革命性提升。从基础概念到实战案例，全面解析 WebGL 在前端领域的应用前景。
+</p>
+<a class="inline-flex items-center gap-2 text-purple-400 font-bold group-hover:gap-4 transition-all" href="blog-webgl.html">
+阅读更多 <iconify-icon icon="ph:arrow-right-bold"></iconify-icon>
+</a>
+</div>
+<!-- 文章 2: React 动画 -->
+<div class="blog-card glass rounded-3xl p-8 md:p-10 hover:shadow-[0_0_40px_rgba(124,58,237,0.15)] group">
+<div class="flex items-center gap-3 mb-5 flex-wrap">
+<span class="px-4 py-1 text-xs font-bold rounded-full bg-purple-500/20 text-purple-400 border border-purple-500/30">React</span>
+<span class="text-sm opacity-40">2026.04.12</span>
+</div>
+<h2 class="text-2xl md:text-3xl font-bold mb-5 group-hover:text-purple-400 transition-colors">构建极致流畅的 React 动画系统</h2>
+<p class="text-base opacity-60 leading-relaxed mb-6">
+分享我在项目中使用的 Framer Motion 与 GSAP 结合的最佳实践方案，从动画编排到性能优化，帮助你在 React 应用中打造丝滑的交互体验。
+</p>
+<a class="inline-flex items-center gap-2 text-purple-400 font-bold group-hover:gap-4 transition-all" href="blog-react-animation.html">
+阅读更多 <iconify-icon icon="ph:arrow-right-bold"></iconify-icon>
+</a>
+</div>
+<!-- 文章 3: 全栈开发 -->
+<div class="blog-card glass rounded-3xl p-8 md:p-10 hover:shadow-[0_0_40px_rgba(124,58,237,0.15)] group">
+<div class="flex items-center gap-3 mb-5 flex-wrap">
+<span class="px-4 py-1 text-xs font-bold rounded-full bg-purple-500/20 text-purple-400 border border-purple-500/30">全栈开发</span>
+<span class="text-sm opacity-40">2026.03.05</span>
+</div>
+<h2 class="text-2xl md:text-3xl font-bold mb-5 group-hover:text-purple-400 transition-colors">全栈开发的艺术：从数据库到 UI</h2>
+<p class="text-base opacity-60 leading-relaxed mb-6">
+如何保持代码的一致性，并在不同技术层级之间寻找完美的平衡点。探索现代全栈开发中的架构模式、数据流设计和最佳实践。
+</p>
+<a class="inline-flex items-center gap-2 text-purple-400 font-bold group-hover:gap-4 transition-all" href="blog-fullstack.html">
+阅读更多 <iconify-icon icon="ph:arrow-right-bold"></iconify-icon>
+</a>
+</div>
+</div>
+</section>
+<!-- 底部 -->
+<section class="py-12 md:py-16 px-6 md:px-10">
+<div class="max-w-7xl mx-auto text-center">
+<a class="inline-flex items-center gap-2 text-purple-400 font-bold hover:gap-4 transition-all text-lg" href="home.html">
+<iconify-icon icon="ph:arrow-left-bold"></iconify-icon> 返回首页
+</a>
+</div>
+</section>
+<footer class="py-10 md:py-12 px-6 md:px-10 border-t border-white/10 text-center opacity-50 text-sm">
+<p>© 2026 ALEX.DEV - 用代码驱动创意</p>
+<p class="mt-2 italic">Handcrafted with ❤️ and pure JavaScript</p>
+</footer>
+<script>
+const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+const mobileMenu = document.getElementById('mobile-menu');
+const mobileOverlay = document.getElementById('mobile-overlay');
+function openMobileMenu() { mobileMenu.classList.add('open'); mobileOverlay.classList.add('open'); document.body.style.overflow = 'hidden'; }
+function closeMobileMenu() { mobileMenu.classList.remove('open'); mobileOverlay.classList.remove('open'); document.body.style.overflow = ''; }
+if (mobileMenuBtn) { mobileMenuBtn.addEventListener('click', () => { mobileMenu.classList.contains('open') ? closeMobileMenu() : openMobileMenu(); }); }
+if (mobileOverlay) { mobileOverlay.addEventListener('click', closeMobileMenu); }
+window.addEventListener('scroll', () => {
+const nav = document.getElementById('navbar');
+if (window.scrollY > 50) { nav.classList.add('glass', 'py-4'); nav.classList.remove('py-6'); }
+else { nav.classList.remove('glass', 'py-4'); nav.classList.add('py-6'); }
+});
+</script>
+</body>
+</html>

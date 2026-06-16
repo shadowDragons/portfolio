@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 
-export const appLocales = ['zh', 'en'] as const
+export const appLocales = ['zh'] as const
 export type AppLocale = (typeof appLocales)[number]
 
 export const defaultAppLocale: AppLocale = 'zh'
@@ -14,8 +14,6 @@ type LocaleSeoConfig = {
   homeTitle: string
   homeDescription: string
   homeKeywords: string[]
-  serviceName: string
-  serviceDescription: string
 }
 
 type PageMetadataInput = {
@@ -30,87 +28,41 @@ type PageMetadataInput = {
 }
 
 export const siteConfig = {
-  brandName: '致诚工作室',
-  brandNameEn: 'Zhicheng Studio',
+  brandName: '钟俊滨',
+  brandNameEn: 'Junbin Zhong',
+  role: '全栈开发工程师',
   url: 'https://sphrag.com',
-  logoPath: '/logo.png',
-  logoMarkPath: '/logo-mark.svg',
   ogImagePath: '/og-image.png',
-  email: 'contact@sphrag.com',
-  displayPhone: '',
+  email: 'shadow_dragon@126.com',
+  displayPhone: '13430279389',
   xUrl: 'https://x.com/Junexus_indie',
   xHandle: '@Junexus_indie',
+  githubUrl: 'https://github.com/shadowDragons',
   wechat: 'jandan1990',
   founder: 'Junbin Zhong',
   socialLinks: ['https://x.com/Junexus_indie', 'https://github.com/shadowDragons'],
 } as const
 
 export const contentTimestamps = {
-  home: '2026-05-24',
-  servicesHub: '2026-05-24',
-  blogHub: '2026-05-24',
-  servicePages: '2026-05-24',
+  home: '2026-06-15',
+  blogHub: '2026-06-15',
+  projectsHub: '2026-06-15',
 } as const
 
 const localeSeoConfig: Record<AppLocale, LocaleSeoConfig> = {
   zh: {
     languageTag: 'zh-CN',
     openGraphLocale: 'zh_CN',
-    siteName: '致诚工作室',
-    defaultTitle: '致诚工作室｜企业系统与 AI 智能体定制开发',
-    defaultDescription: '致诚工作室专注企业管理系统(ERP/OA/EMS)、企业官网开发、网站外包，以及前沿的 AI 应用与企业智能体定制开发服务，助力企业数字化与智能化转型。',
-    homeTitle: '企业软件与官网开发｜AI 应用与智能体定制｜致诚工作室',
-    homeDescription:
-      '提供专业的企业管理系统（ERP、OA等）、企业官网外包定制，以及 AI 应用和企业智能体开发服务。直属工作室亲自交付，高品质无分包，打造现代化企业数字生态。',
-    homeKeywords: [
-      '外贸建站',
-      '跨境电商独立站制作',
-      '制造企业ERP定制',
-      '工厂OA系统开发',
-      '传统工厂数字化转型',
-      '老系统重构升级',
-      'Next.js高端建站',
-      'AI企业智能体定制开发',
-      '企业级管理系统开发'
-    ],
-    serviceName: '企业数字化与智能化定制服务',
-    serviceDescription: '覆盖企业核心业务系统(ERP/OA)、多语言企业官网建设，以及新兴的 AI 应用和专属企业智能体(AI Agents)开发落地方案。',
-  },
-  en: {
-    languageTag: 'en-US',
-    openGraphLocale: 'en_US',
-    siteName: 'Zhicheng Studio',
-    defaultTitle: 'Zhicheng Studio | Enterprise Systems & AI Agent Development',
+    siteName: '钟俊滨｜全栈开发工程师',
+    defaultTitle: '钟俊滨｜全栈开发工程师',
     defaultDescription:
-      'Zhicheng Studio specializes in enterprise management systems, corporate websites, outsourced web development, and custom AI applications/agents for business automation.',
-    homeTitle: 'Web Development & Enterprise AI Agents | Zhicheng Studio',
+      '钟俊滨的个人作品集，聚焦企业系统开发、AI Agent 工程化、RAG、ERP、OA 与全栈交付。',
+    homeTitle: '钟俊滨｜企业系统与 AI 应用全栈开发者',
     homeDescription:
-      'Expert custom development for enterprise management systems (ERP/OA), corporate websites, and cutting-edge AI applications and enterprise AI agents. Direct delivery, no subcontracting.',
-    homeKeywords: [
-      'cross-border ecommerce web development',
-      'manufacturing ERP custom development',
-      'factory OA system',
-      'legacy system modernization',
-      'Next.js web development agency',
-      'enterprise AI agents developer',
-      'B2B independent site building',
-      'corporate website redesign'
-    ],
-    serviceName: 'Enterprise Digital & AI Solution Development',
-    serviceDescription: 'End-to-end development for corporate websites, enterprise management systems, and custom AI agents to empower business intelligence.',
+      '13 年企业数字化系统研发经验，长期负责 ERP、OA、招聘、考勤、RAG、智能问数等复杂系统，从架构到交付独立推进。',
+    homeKeywords: ['全栈开发工程师', '个人开发者作品集', '企业系统开发', 'AI Agent 开发', 'RAG 系统', 'ERP 开发'],
   },
 }
-
-export const indexablePages = [
-  {
-    pathname: '',
-    changeFrequency: 'weekly' as const,
-    priorities: {
-      zh: 1,
-      en: 0.7,
-    },
-  },
-] as const
 
 export function isAppLocale(locale: string): locale is AppLocale {
   return appLocales.includes(locale as AppLocale)
@@ -129,12 +81,9 @@ function normalizePathname(pathname = ''): string {
   return trimmed ? `/${trimmed}` : ''
 }
 
-export function getLocalizedPath(locale: AppLocale, pathname = ''): string {
+export function getLocalizedPath(_locale: AppLocale, pathname = ''): string {
   const normalized = normalizePathname(pathname)
-  if (locale === defaultAppLocale) {
-    return normalized || '/'
-  }
-  return `/${locale}${normalized}`
+  return normalized || '/'
 }
 
 export function getLocalizedUrl(locale: AppLocale, pathname = ''): string {
@@ -149,7 +98,6 @@ export function getAbsoluteAssetUrl(pathname: string): string {
 export function getLanguageAlternates(pathname = '') {
   return {
     'zh-CN': getLocalizedUrl('zh', pathname),
-    'en-US': getLocalizedUrl('en', pathname),
     'x-default': getLocalizedUrl(defaultAppLocale, pathname),
   } as const
 }
@@ -161,7 +109,7 @@ export function getLocaleSeoConfig(locale: AppLocale): LocaleSeoConfig {
 export function getSiteMetadata(): Metadata {
   return {
     metadataBase: new URL(siteConfig.url),
-    applicationName: siteConfig.brandName,
+    applicationName: `${siteConfig.brandName}｜${siteConfig.role}`,
     title: {
       default: localeSeoConfig.zh.defaultTitle,
       template: '%s',
@@ -170,16 +118,20 @@ export function getSiteMetadata(): Metadata {
     authors: [
       {
         name: siteConfig.brandName,
-        url: 'https://github.com/shadowDragons',
+        url: siteConfig.githubUrl,
       },
     ],
     creator: siteConfig.brandName,
     publisher: siteConfig.brandName,
     referrer: 'origin-when-cross-origin',
-    icons: {
-      icon: siteConfig.logoMarkPath,
-      shortcut: siteConfig.logoMarkPath,
-      apple: siteConfig.logoMarkPath,
+    openGraph: {
+      siteName: localeSeoConfig.zh.siteName,
+      locale: localeSeoConfig.zh.openGraphLocale,
+      type: 'website',
+    },
+    twitter: {
+      card: 'summary_large_image',
+      creator: siteConfig.xHandle,
     },
   }
 }
@@ -211,7 +163,6 @@ export function buildPageMetadata({
     openGraph: {
       type: openGraphType,
       locale: seoConfig.openGraphLocale,
-      alternateLocale: locale === 'zh' ? ['en_US'] : ['zh_CN'],
       url: canonicalUrl,
       title,
       description,
@@ -236,8 +187,7 @@ export function buildPageMetadata({
       card: 'summary_large_image',
       title,
       description,
-      site: siteConfig.xHandle,
-      creator: '@Junexus_indie',
+      creator: siteConfig.xHandle,
       images: [ogImageUrl],
     },
     robots: {
@@ -268,32 +218,23 @@ export function getHomeStructuredData(locale: AppLocale) {
   const seoConfig = getLocaleSeoConfig(locale)
   const homeUrl = getLocalizedUrl(locale)
   const imageUrl = getAbsoluteAssetUrl(siteConfig.ogImagePath)
-  const logoUrl = getAbsoluteAssetUrl(siteConfig.logoPath)
-  const organizationId = `${siteConfig.url}#organization`
+  const personId = `${siteConfig.url}#person`
   const websiteId = `${siteConfig.url}#website`
 
   return {
     '@context': 'https://schema.org',
     '@graph': [
       {
-        '@type': 'Organization',
-        '@id': organizationId,
+        '@type': 'Person',
+        '@id': personId,
         name: siteConfig.brandName,
         alternateName: siteConfig.brandNameEn,
+        jobTitle: siteConfig.role,
         url: siteConfig.url,
-        logo: logoUrl,
         email: siteConfig.email,
-        founder: siteConfig.founder,
+        telephone: siteConfig.displayPhone,
         sameAs: siteConfig.socialLinks,
-        contactPoint: [
-          {
-            '@type': 'ContactPoint',
-            contactType: locale === 'zh' ? '商务咨询' : 'Business inquiry',
-            email: siteConfig.email,
-            availableLanguage: ['Chinese', 'English'],
-            areaServed: 'Worldwide',
-          },
-        ],
+        knowsAbout: ['ERP', 'OA', 'RAG', 'AI Agent', 'Text2SQL', '全栈开发'],
       },
       {
         '@type': 'WebSite',
@@ -301,9 +242,6 @@ export function getHomeStructuredData(locale: AppLocale) {
         url: siteConfig.url,
         name: seoConfig.siteName,
         inLanguage: seoConfig.languageTag,
-        publisher: {
-          '@id': organizationId,
-        },
       },
       {
         '@type': 'WebPage',
@@ -315,7 +253,7 @@ export function getHomeStructuredData(locale: AppLocale) {
           '@id': websiteId,
         },
         about: {
-          '@id': organizationId,
+          '@id': personId,
         },
         inLanguage: seoConfig.languageTag,
         primaryImageOfPage: {
@@ -324,17 +262,11 @@ export function getHomeStructuredData(locale: AppLocale) {
         },
       },
       {
-        '@type': 'Service',
-        '@id': `${homeUrl}#service`,
+        '@type': 'CollectionPage',
+        '@id': `${homeUrl}#portfolio`,
         url: homeUrl,
-        name: seoConfig.serviceName,
-        description: seoConfig.serviceDescription,
-        serviceType: locale === 'zh' ? '网站开发、企业官网开发与 Web 应用定制开发' : 'Website development, company sites, and custom web application development',
-        provider: {
-          '@id': organizationId,
-        },
-        areaServed: 'Worldwide',
-        availableLanguage: ['Chinese', 'English'],
+        name: '项目精选',
+        description: '钟俊滨的个人开发项目精选，覆盖企业系统、AI Agent、RAG 与内容自动化。',
       },
     ],
   }

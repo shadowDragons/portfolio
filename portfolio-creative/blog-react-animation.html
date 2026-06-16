@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+
+<html class="scroll-smooth" lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>构建极致流畅的 React 动画系统 | ALEX.DEV</title>
+<script src="https://modao.cc/agent-py/static/source/js/tailwindcss.js"></script>
+<script src="https://modao.cc/agent-py/static/source/js/iconify-icon.min.js"></script>
+<style>
+:root { --primary: #7c3aed; --secondary: #a855f7; --accent: #8b5cf6; --bg-dark: #0a0a0a; --text-dark: #f0f0f0; }
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: #0a0a0a; color: #f0f0f0; overflow-x: hidden; }
+.text-gradient { background: linear-gradient(135deg, #7c3aed, #a855f7, #c084fc); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; background-size: 200% 200%; animation: gradient-shift 5s ease infinite; }
+@keyframes gradient-shift { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+.glass { background: rgba(255,255,255,0.05); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.1); transition: all 0.3s ease; }
+.glass:hover { border-color: rgba(124,58,237,0.3); box-shadow: 0 0 30px rgba(124,58,237,0.1); }
+.nav-link { position: relative; }
+.nav-link::after { content: ''; position: absolute; width: 0; height: 2px; bottom: -4px; left: 50%; background: var(--secondary); transition: all 0.3s ease; transform: translateX(-50%); }
+.nav-link:hover::after { width: 100%; }
+#mobile-menu { position: fixed; top: 0; right: -100%; width: 75%; max-width: 320px; height: 100vh; z-index: 60; transition: right 0.4s cubic-bezier(0.77, 0, 0.175, 1); display: flex; flex-direction: column; padding: 6rem 2rem 2rem; }
+#mobile-menu.open { right: 0; }
+#mobile-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.6); z-index: 55; opacity: 0; pointer-events: none; transition: opacity 0.4s ease; }
+#mobile-overlay.open { opacity: 1; pointer-events: auto; }
+@media (max-width: 768px) { .hero-title { font-size: 3.5rem; } }
+</style>
+</head>
+<body class="bg-[#0a0a0a] text-[#f0f0f0] overflow-x-hidden">
+<div id="mobile-overlay"></div>
+<div class="glass" id="mobile-menu">
+<a class="text-2xl font-bold mb-10 text-purple-400" href="home.html">ALEX.DEV</a>
+<a class="text-lg font-medium py-3 border-b border-white/10 hover:text-purple-400 transition-colors" href="home.html#hero" onclick="closeMobileMenu()">首页</a>
+<a class="text-lg font-medium py-3 border-b border-white/10 hover:text-purple-400 transition-colors" href="home.html#about" onclick="closeMobileMenu()">关于</a>
+<a class="text-lg font-medium py-3 border-b border-white/10 hover:text-purple-400 transition-colors" href="home.html#skills" onclick="closeMobileMenu()">技能</a>
+<a class="text-lg font-medium py-3 border-b border-white/10 hover:text-purple-400 transition-colors" href="home.html#projects" onclick="closeMobileMenu()">作品</a>
+<a class="text-lg font-medium py-3 border-b border-white/10 hover:text-purple-400 transition-colors" href="blog.html" onclick="closeMobileMenu()">博客</a>
+<a class="text-lg font-medium py-3 border-b border-white/10 hover:text-purple-400 transition-colors" href="home.html#contact" onclick="closeMobileMenu()">联系</a>
+</div>
+<nav class="fixed top-0 left-0 w-full z-50 transition-all duration-500 py-6 px-6 md:px-10" id="navbar">
+<div class="max-w-7xl mx-auto flex justify-between items-center">
+<div class="text-2xl font-black tracking-tighter">
+<a href="home.html"><span class="text-gradient">ALEX.DEV</span></a>
+</div>
+<div class="hidden md:flex space-x-10 items-center">
+<a class="nav-link font-medium" href="home.html#hero">首页</a>
+<a class="nav-link font-medium" href="home.html#about">关于</a>
+<a class="nav-link font-medium" href="home.html#skills">技能</a>
+<a class="nav-link font-medium" href="home.html#projects">作品</a>
+<a class="nav-link font-medium text-purple-400" href="blog.html">博客</a>
+<a class="nav-link font-medium" href="home.html#contact">联系</a>
+</div>
+<button class="md:hidden glass p-2 rounded-lg" id="mobile-menu-btn">
+<iconify-icon class="text-2xl" icon="ph:list-bold"></iconify-icon>
+</button>
+</div>
+</nav>
+<section class="relative pt-28 pb-16 md:pt-36 md:pb-20 px-6 md:px-10 overflow-hidden">
+<div class="absolute inset-0 bg-gradient-to-br from-purple-900/60 via-purple-800/30 to-transparent"></div>
+<div class="absolute top-1/4 left-1/3 w-96 h-96 bg-purple-600 rounded-full blur-[150px] opacity-20 animate-pulse"></div>
+<div class="relative z-10 max-w-4xl mx-auto text-center">
+<div class="inline-flex gap-3 mb-6">
+<span class="px-4 py-1.5 text-xs font-bold rounded-full bg-purple-500/20 text-purple-400 border border-purple-500/30">React</span>
+<span class="text-sm opacity-40">2026.04.12</span>
+</div>
+<h1 class="text-4xl md:text-6xl font-black tracking-tighter mb-4">构建极致流畅的 React 动画系统</h1>
+</div>
+</section>
+<section class="py-10 md:py-16 px-6 md:px-10">
+<div class="max-w-3xl mx-auto">
+<div class="glass rounded-3xl p-8 md:p-12 space-y-8">
+<div>
+<h2 class="text-2xl font-bold mb-4 text-purple-400">一、引言 — 为什么动画如此重要</h2>
+<p class="text-base md:text-lg opacity-70 leading-relaxed">
+在用户体验设计中，动画早已不再只是点缀。优秀的动画系统能够引导用户的注意力、提供即时反馈、传达品牌个性，甚至在复杂的交互流程中充当导航角色。在 React 应用中实现流畅动画的挑战在于：React 的声明式渲染模型与动画的逐帧驱动本质之间存在天然的张力。如何在不牺牲性能的前提下，让动画既可控又顺滑？答案在于选择合适的工具并理解其底层原理。
+</p>
+</div>
+<div>
+<h2 class="text-2xl font-bold mb-4 text-purple-400">二、Framer Motion 实战技巧</h2>
+<p class="text-base md:text-lg opacity-70 leading-relaxed">
+Framer Motion 是目前 React 生态中最受欢迎的动画库之一。它的核心优势在于声明式 API 与 React 组件模型的完美融合。通过 <code class="text-purple-400">motion.div</code> 组件和 <code class="text-purple-400">animate</code>、<code class="text-purple-400">initial</code>、<code class="text-purple-400">exit</code> 属性，你可以轻松定义元素的进入、退出和状态切换动画。更高级的用法包括使用 <code class="text-purple-400">AnimatePresence</code> 处理列表的增删动画、利用 <code class="text-purple-400">layout</code> 属性实现自动布局过渡、以及通过 <code class="text-purple-400">useMotionValue</code> 和 <code class="text-purple-400">useSpring</code> 创建高精度的物理驱动动画。在实际项目中，我通常将 Framer Motion 作为动画层的基础框架，因为它提供了开箱即用的声明式体验和优秀的性能表现。
+</p>
+</div>
+<div>
+<h2 class="text-2xl font-bold mb-4 text-purple-400">三、GSAP 与 React 的完美结合</h2>
+<p class="text-base md:text-lg opacity-70 leading-relaxed">
+GSAP（GreenSock Animation Platform）是业界领先的专业动画引擎，它在时间线控制、缓动函数和复杂序列动画方面具有无可比拟的优势。虽然在 React 中使用 GSAP 需要更显式的 DOM 引用管理，但通过 <code class="text-purple-400">useRef</code> 和 <code class="text-purple-400">useEffect</code> 的配合，可以充分发挥 GSAP 的强大能力。我的最佳实践是：将 Framer Motion 用于组件级别的声明式动画（如悬停、点击反馈、页面切换），将 GSAP 用于需要精细时序控制的复杂序列动画（如品牌开场、数据驱动的图表动画、滚动触发的视差效果）。两者互补而非替代，在同一项目中可以并行使用。
+</p>
+</div>
+<div>
+<h2 class="text-2xl font-bold mb-4 text-purple-400">四、性能优化关键点</h2>
+<p class="text-base md:text-lg opacity-70 leading-relaxed">
+无论使用哪种动画方案，性能始终是首要考量。首先，优先使用 <code class="text-purple-400">transform</code> 和 <code class="text-purple-400">opacity</code> 属性进行动画，因为它们由 GPU 合成层处理，不会触发回流和重绘。其次，使用 <code class="text-purple-400">will-change</code> 属性提前告知浏览器哪些元素将发生变换。第三，避免在动画过程中修改组件的 state，尽量使用动画库内部的本地状态管理。第四，对于列表动画，确保每个子元素拥有稳定的 <code class="text-purple-400">key</code> 值以避免不必要的卸载和重建。最后，利用 React 的 <code class="text-purple-400">useMemo</code> 和 <code class="text-purple-400">useCallback</code> 减少动画组件的不必要渲染。通过遵循这些原则，你可以在 React 应用中构建出既流畅又可靠的动画系统。
+</p>
+</div>
+</div>
+</div>
+</section>
+<section class="py-12 md:py-16 px-6 md:px-10">
+<div class="max-w-3xl mx-auto flex flex-col sm:flex-row justify-center gap-4">
+<a class="inline-flex items-center gap-2 text-purple-400 font-bold hover:gap-4 transition-all" href="blog.html">
+<iconify-icon icon="ph:arrow-left-bold"></iconify-icon> 返回博客列表
+</a>
+<a class="inline-flex items-center gap-2 text-purple-400 font-bold hover:gap-4 transition-all" href="home.html">
+<iconify-icon icon="ph:arrow-left-bold"></iconify-icon> 返回首页
+</a>
+</div>
+</section>
+<footer class="py-10 md:py-12 px-6 md:px-10 border-t border-white/10 text-center opacity-50 text-sm">
+<p>© 2026 ALEX.DEV - 用代码驱动创意</p>
+<p class="mt-2 italic">Handcrafted with ❤️ and pure JavaScript</p>
+</footer>
+<script>
+const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+const mobileMenu = document.getElementById('mobile-menu');
+const mobileOverlay = document.getElementById('mobile-overlay');
+function openMobileMenu() { mobileMenu.classList.add('open'); mobileOverlay.classList.add('open'); document.body.style.overflow = 'hidden'; }
+function closeMobileMenu() { mobileMenu.classList.remove('open'); mobileOverlay.classList.remove('open'); document.body.style.overflow = ''; }
+if (mobileMenuBtn) { mobileMenuBtn.addEventListener('click', () => { mobileMenu.classList.contains('open') ? closeMobileMenu() : openMobileMenu(); }); }
+if (mobileOverlay) { mobileOverlay.addEventListener('click', closeMobileMenu); }
+window.addEventListener('scroll', () => {
+const nav = document.getElementById('navbar');
+if (window.scrollY > 50) { nav.classList.add('glass', 'py-4'); nav.classList.remove('py-6'); }
+else { nav.classList.remove('glass', 'py-4'); nav.classList.add('py-6'); }
+});
+</script>
+</body>
+</html>

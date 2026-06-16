@@ -83,6 +83,27 @@
         }
       }
     },
+    "aiAgent": {
+      "eyebrow": "AI Agent Development",
+      "title": "Place AI inside a real workflow, not just another chat box",
+      "description": "Enterprise AI succeeds less by model choice and more by context, write-back boundaries, ownership, and fallback. The first phase should usually start from one closed-loop use case across knowledge Q&A, workflow automation, or a business assistant.",
+      "primaryCta": "View AI Agent Service",
+      "secondaryCta": "Discuss an AI Project",
+      "items": {
+        "workflow": {
+          "title": "Start with one frequent workflow",
+          "description": "Lead triage, ticket classification, approval support, and document intake are easier to validate when the loop is narrow, replayable, and reviewable."
+        },
+        "knowledge": {
+          "title": "Separate knowledge Q&A from business action",
+          "description": "Source ownership, permission filtering, citation scope, and human confirmation are designed before unstable answers become operational changes."
+        },
+        "integration": {
+          "title": "Connect with OA, CRM, ERP, and internal systems",
+          "description": "The work covers APIs, logs, rollback, notifications, and write-back boundaries so AI becomes a maintainable business capability."
+        }
+      }
+    },
     "process": {
       "eyebrow": "Process",
       "title": "Process",

@@ -1,154 +1,39 @@
 import { Link } from '@/i18n/routing'
-import { getArticleSummaries, type LocalizedArticleSummary } from '@/lib/articles'
-import { getLocalizedPath, siteConfig, type AppLocale } from '@/lib/site-config'
-import { getServicePageSummaries } from '@/lib/service-pages'
-import type { LocalizedServicePage } from '@/lib/service-pages'
-import BrandLogo from '@/components/BrandLogo'
+import { portfolioProfile } from '@/lib/portfolio-content'
 
-type FooterProps = {
-  locale: AppLocale
-}
-
-export default function Footer({ locale }: FooterProps) {
-  const featuredServiceSlugs = [
-    'website-development',
-    'website-development-company',
-    'company-website-redesign',
-    'website-maintenance-service',
-    'company-website-development',
-    'foreign-trade-website-building',
-    'foreign-trade-website-development',
-    'mini-program-development',
-    'mini-program-development-company',
-    'ai-agent-development',
-    'enterprise-system-development-company',
-    'web-app-development',
-  ] as const
-  const serviceSummaryMap = new Map(getServicePageSummaries(locale).map(service => [service.slug, service]))
-  const serviceLinks = featuredServiceSlugs
-    .map(slug => serviceSummaryMap.get(slug))
-    .filter((service): service is Pick<LocalizedServicePage, 'slug' | 'path' | 'navLabel' | 'heroDescription'> => Boolean(service))
-  const featuredArticleSlugs = [
-    'website-development-cost',
-    'website-development-process',
-    'multilingual-website-seo',
-    'website-redesign-seo-migration',
-    'company-website-budget-estimation',
-    'enterprise-system-requirements',
-  ] as const
-  const articleSummaryMap = new Map(getArticleSummaries(locale).map(article => [article.slug, article]))
-  const articleLinks = featuredArticleSlugs
-    .map(slug => articleSummaryMap.get(slug))
-    .filter((article): article is LocalizedArticleSummary => Boolean(article))
-  const labels =
-    locale === 'zh'
-      ? {
-          summary: '如果你已经明确项目方向，可以直接从服务页或文章目录继续看。',
-          quick: '快速入口',
-          services: '服务页',
-          articles: '文章',
-          contact: '联系',
-          email: '邮箱',
-          x: 'X / Twitter',
-          wechat: '微信',
-          home: '首页',
-          blog: '文章目录',
-          servicesHub: '全部服务页',
-          contactLink: '联系我',
-          copyright: '网站开发 / 企业官网 / 外贸网站 / 小程序 / 企业系统',
-        }
-      : {
-          summary: 'If you already know the direction, the service pages and article hub are the fastest places to continue.',
-          quick: 'Quick Links',
-          services: 'Services',
-          articles: 'Articles',
-          contact: 'Contact',
-          email: 'Email',
-          x: 'X / Twitter',
-          wechat: 'WeChat',
-          home: 'Home',
-          blog: 'Article Hub',
-          servicesHub: 'All Services',
-          contactLink: 'Contact on X',
-          copyright: 'Website development / company sites / foreign trade / mini-programs / internal systems',
-        }
-
-  const homePath = getLocalizedPath(locale)
-  const contactQuickHref = locale === 'en' ? siteConfig.xUrl : `${homePath}#contact`
-  const contactItems =
-    locale === 'en'
-      ? [{ label: labels.email, value: siteConfig.email, href: `mailto:${siteConfig.email}`, external: false }, 
-         { label: labels.x, value: siteConfig.xHandle, href: siteConfig.xUrl, external: true }]
-      : [
-          { label: labels.wechat, value: siteConfig.wechat, href: `${homePath}#contact`, external: false },
-          { label: labels.email, value: siteConfig.email, href: `mailto:${siteConfig.email}`, external: false },
-          { label: labels.x, value: siteConfig.xHandle, href: siteConfig.xUrl, external: true },
-        ]
+export default function Footer() {
+  const { contact } = portfolioProfile
 
   return (
-    <footer className='border-t border-black/[0.06] bg-[#faf7f3]'>
-      <div className='mx-auto grid w-full max-w-[1280px] gap-10 px-5 py-10 sm:px-8 lg:grid-cols-[1.1fr_0.9fr_0.9fr_0.8fr] lg:px-12'>
+    <footer className='border-t border-black/8 bg-[rgba(248,244,239,0.9)] dark:border-white/8 dark:bg-[rgba(10,10,10,0.88)]'>
+      <div className='mx-auto grid w-full max-w-[1260px] gap-10 px-4 py-12 sm:px-6 lg:grid-cols-[1.2fr_0.8fr_0.9fr] lg:px-10'>
         <div className='space-y-4'>
-          <Link href='/' aria-label={siteConfig.brandName} className='inline-flex items-center'>
-            <BrandLogo label={siteConfig.brandName} className='h-[56px] w-auto sm:h-[64px]' />
-          </Link>
-          <p className='max-w-md text-sm leading-7 text-[#655d54]'>{labels.summary}</p>
-          <div className='space-y-2'>
-            <p className='text-accent-accessible text-xs font-semibold uppercase tracking-[0.18em]'>{labels.contact}</p>
-            <div className='grid gap-2 text-sm text-[#4f463d]'>
-              {contactItems.map(item => (
-                <a
-                  key={`${item.label}-${item.value}`}
-                  href={item.href}
-                  target={item.external ? '_blank' : undefined}
-                  rel={item.external ? 'noreferrer' : undefined}
-                  className='break-all transition hover:text-accent-accessible'
-                >
-                  {item.label}: {item.value}
-                </a>
-              ))}
-            </div>
-          </div>
-          <p className='text-muted-accessible text-sm'>{labels.copyright}</p>
+          <p className='font-rubik text-2xl text-[#111] dark:text-white'>钟俊滨</p>
+          <p className='max-w-xl text-sm leading-7 text-[#665a4e] dark:text-white/64'>
+            聚焦企业系统开发、AI Agent 工程化、知识库 RAG 与全栈交付。现在的网站不再承载工作室营销文案，只展示个人能力、项目归档和技术写作。
+          </p>
         </div>
 
         <div className='space-y-4'>
-          <p className='text-accent-accessible text-xs font-semibold uppercase tracking-[0.18em]'>{labels.quick}</p>
-          <div className='grid gap-2 text-sm text-[#4f463d]'>
-            <Link href='/' className='transition hover:text-accent-accessible'>
-              {labels.home}
-            </Link>
-            <Link href='/services' className='transition hover:text-accent-accessible'>
-              {labels.servicesHub}
-            </Link>
-            <Link href='/blog' className='transition hover:text-accent-accessible'>
-              {labels.blog}
-            </Link>
-            <a href={contactQuickHref} target={locale === 'en' ? '_blank' : undefined} rel={locale === 'en' ? 'noreferrer' : undefined} className='transition hover:text-accent-accessible'>
-              {labels.contactLink}
+          <p className='text-xs font-semibold uppercase tracking-[0.24em] text-[#8e5d36] dark:text-[#f1a15b]'>站点</p>
+          <div className='grid gap-2 text-sm text-[#3f352c] dark:text-white/76'>
+            <Link href='/'>首页</Link>
+            <Link href='/projects'>项目归档</Link>
+            <Link href='/blog'>技术博客</Link>
+          </div>
+        </div>
+
+        <div className='space-y-4'>
+          <p className='text-xs font-semibold uppercase tracking-[0.24em] text-[#8e5d36] dark:text-[#f1a15b]'>联系</p>
+          <div className='grid gap-2 text-sm text-[#3f352c] dark:text-white/76'>
+            <a href={`mailto:${contact.email}`}>邮箱：{contact.email}</a>
+            <a href={contact.github} target='_blank' rel='noreferrer'>
+              GitHub：shadowDragons
             </a>
-          </div>
-        </div>
-
-        <div className='space-y-4'>
-          <p className='text-accent-accessible text-xs font-semibold uppercase tracking-[0.18em]'>{labels.services}</p>
-          <div className='grid gap-2 text-sm text-[#4f463d]'>
-            {serviceLinks.map(service => (
-              <Link key={service.slug} href={service.path} className='transition hover:text-accent-accessible'>
-                {service.navLabel}
-              </Link>
-            ))}
-          </div>
-        </div>
-
-        <div className='space-y-4'>
-          <p className='text-accent-accessible text-xs font-semibold uppercase tracking-[0.18em]'>{labels.articles}</p>
-          <div className='grid gap-2 text-sm text-[#4f463d]'>
-            {articleLinks.map(article => (
-              <Link key={article.slug} href={article.path} className='transition hover:text-accent-accessible'>
-                {article.navLabel}
-              </Link>
-            ))}
+            <a href={contact.x} target='_blank' rel='noreferrer'>
+              X：@Junexus_indie
+            </a>
+            <p>微信：{contact.wechat}</p>
           </div>
         </div>
       </div>

@@ -3,22 +3,23 @@ export type WorkKey =
   | 'hr'
   | 'finance'
   | 'erpQueryAgent'
+  | 'rag'
   | 'search'
   | 'attendance'
   | 'oa'
   | 'orders'
   | 'workstation'
   | 'digitalHuman'
-  | 'course'
   | 'recruiting'
-  | 'idea'
-  | 'foreignTradeA'
-  | 'formart'
 
 export type ShowcaseWork = {
   key: WorkKey
+  slug?: string
+  category: string
   title: string
   description: string
+  details: string
+  highlights: string[]
   images: string[]
   stack: string[]
   link?: string

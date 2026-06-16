@@ -1,0 +1,1316 @@
+<!DOCTYPE html>
+
+<html class="scroll-smooth" lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>创意程序员 | 数字游乐场作品集</title>
+<!-- Tailwind CSS (本地) -->
+<script src="https://modao.cc/agent-py/static/source/js/tailwindcss.js"></script>
+<!-- Iconify 图标 -->
+<script src="https://modao.cc/agent-py/static/source/js/iconify-icon.min.js"></script>
+<style>
+        :root {
+            --primary: #f97316;
+            --secondary: #ec4899;
+            --accent: #d946ef;
+            --bg-light: #f8f9fa;
+            --text-light: #0a0a23;
+            --bg-dark: #0a0a0a;
+            --text-dark: #f0f0f0;
+        }
+
+        /* 基础样式与变量 */
+        body {
+            cursor: none;
+            transition: background-color 0.5s ease, color 0.5s ease;
+        }
+
+        /* 自定义光标 */
+        #custom-cursor {
+            position: fixed;
+            width: 8px;
+            height: 8px;
+            background: var(--secondary);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            transition: transform 0.1s ease;
+        }
+        #cursor-follower {
+            position: fixed;
+            width: 32px;
+            height: 32px;
+            border: 2px solid var(--primary);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9998;
+            transition: transform 0.2s ease, width 0.3s ease, height 0.3s ease;
+        }
+
+        /* 噪声纹理背景 */
+        .noise-bg::before {
+            content: "";
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: url('https://grainy-gradients.vercel.app/noise.svg');
+            opacity: 0.05;
+            pointer-events: none;
+            z-index: 100;
+        }
+
+        /* 揭幕动画 */
+        #reveal-curtain {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: var(--bg-dark);
+            z-index: 10000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* 渐变文字 - 暖橙/粉紫 */
+        .text-gradient {
+            background: linear-gradient(135deg, #f97316, #ec4899, #d946ef);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-size: 200% 200%;
+            animation: gradient-shift 5s ease infinite;
+        }
+        .text-gradient-warm {
+            background: linear-gradient(135deg, #fb923c, #f97316, #ec4899);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-size: 200% 200%;
+            animation: gradient-shift 5s ease infinite;
+        }
+        @keyframes gradient-shift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* 3D 翻转卡片 */
+        .flip-card {
+            background-color: transparent;
+            perspective: 1000px;
+        }
+        .flip-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transition: transform 0.8s;
+            transform-style: preserve-3d;
+        }
+        .flip-card:hover .flip-card-inner {
+            transform: rotateY(180deg);
+        }
+        .flip-card-front, .flip-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border-radius: 1rem;
+        }
+        .flip-card-back {
+            transform: rotateY(180deg);
+        }
+
+        /* 导航下划线动画 */
+        .nav-link {
+            position: relative;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 50%;
+            background: var(--secondary);
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        /* 玻璃拟态 */
+        .glass {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .dark .glass {
+            background: rgba(10, 10, 10, 0.7);
+        }
+
+        /* 进度条动画 */
+        .circle-progress {
+            transition: stroke-dashoffset 1s ease-out;
+        }
+
+        /* 浮动装饰 */
+        .floating {
+            animation: float 6s ease-in-out infinite;
+        }
+        @keyframes float {
+            0% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
+            100% { transform: translateY(0px) rotate(0deg); }
+        }
+
+        /* 移动端菜单面板 */
+        #mobile-menu {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 75%;
+            max-width: 320px;
+            height: 100vh;
+            z-index: 60;
+            transition: right 0.4s cubic-bezier(0.77, 0, 0.175, 1);
+            display: flex;
+            flex-direction: column;
+            padding: 6rem 2rem 2rem;
+        }
+        #mobile-menu.open {
+            right: 0;
+        }
+        #mobile-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.6);
+            z-index: 55;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.4s ease;
+        }
+        #mobile-overlay.open {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        /* Modal 通用样式 */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 200;
+            background: rgba(0,0,0,0.7);
+            backdrop-filter: blur(8px);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .modal-overlay.active {
+            display: flex;
+            opacity: 1;
+        }
+        .modal-content {
+            background: #141414;
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 1.5rem;
+            max-width: 720px;
+            width: 100%;
+            max-height: 85vh;
+            overflow-y: auto;
+            padding: 2rem;
+            position: relative;
+            transform: scale(0.9) translateY(20px);
+            transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        .modal-overlay.active .modal-content {
+            transform: scale(1) translateY(0);
+        }
+        .modal-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.08);
+            border: none;
+            color: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+        }
+        .modal-close:hover {
+            background: rgba(239, 68, 68, 0.6);
+            transform: rotate(90deg);
+        }
+        .modal-content::-webkit-scrollbar {
+            width: 6px;
+        }
+        .modal-content::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .modal-content::-webkit-scrollbar-thumb {
+            background: #f97316;
+            border-radius: 3px;
+        }
+
+        /* 标签样式 */
+        .tech-tag {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            font-size: 0.75rem;
+            font-weight: 700;
+            border-radius: 9999px;
+            background: rgba(249, 115, 22, 0.15);
+            color: #fb923c;
+            border: 1px solid rgba(249, 115, 22, 0.3);
+        }
+
+        /* 博客卡片悬浮效果 */
+        .blog-card {
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .blog-card:hover {
+            transform: translateY(-6px);
+        }
+
+        /* 项目编号 */
+        .project-number {
+            font-size: 5rem;
+            font-weight: 900;
+            line-height: 1;
+            opacity: 0.08;
+            position: absolute;
+            top: -0.5rem;
+            right: 1rem;
+            user-select: none;
+            pointer-events: none;
+        }
+
+        /* 头像渐变边框 */
+        .avatar-ring {
+            position: relative;
+            border-radius: 50%;
+            padding: 4px;
+            background: linear-gradient(135deg, #f97316, #ec4899, #d946ef);
+        }
+        .avatar-ring::before {
+            content: '';
+            position: absolute;
+            inset: -2px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #f97316, #ec4899, #a855f7);
+            z-index: -1;
+            animation: avatar-glow 3s ease-in-out infinite;
+        }
+        @keyframes avatar-glow {
+            0%, 100% { opacity: 0.6; }
+            50% { opacity: 1; }
+        }
+
+        /* 代码符号浮动装饰 */
+        .code-float {
+            animation: code-float 5s ease-in-out infinite;
+        }
+        @keyframes code-float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            33% { transform: translateY(-12px) rotate(3deg); }
+            66% { transform: translateY(-6px) rotate(-2deg); }
+        }
+        .code-float-2 {
+            animation: code-float-2 6s ease-in-out infinite 1s;
+        }
+        @keyframes code-float-2 {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-16px) rotate(-4deg); }
+        }
+
+        /* 响应式 */
+        @media (max-width: 768px) {
+            .hero-title { font-size: 3rem; }
+            .modal-content { max-height: 90vh; padding: 1.5rem; }
+        }
+    </style>
+</head>
+<body class="bg-[#0a0a0a] text-[#f0f0f0] overflow-x-hidden noise-bg">
+<!-- 揭幕动画 -->
+<div id="reveal-curtain">
+<div class="text-white text-4xl font-bold tracking-widest animate-pulse">LOADING...</div>
+</div>
+<!-- 自定义光标 -->
+<div id="custom-cursor"></div>
+<div id="cursor-follower"></div>
+<!-- 移动端遮罩 -->
+<div id="mobile-overlay"></div>
+<!-- 移动端菜单面板 -->
+<div class="glass" id="mobile-menu">
+<a class="text-2xl font-bold mb-10 text-orange-400" href="#">ALEX.DEV</a>
+<a class="text-lg font-medium py-3 border-b border-white/10 hover:text-orange-400 transition-colors" href="#hero" onclick="closeMobileMenu()">首页</a>
+<a class="text-lg font-medium py-3 border-b border-white/10 hover:text-orange-400 transition-colors" href="#about" onclick="closeMobileMenu()">关于</a>
+<a class="text-lg font-medium py-3 border-b border-white/10 hover:text-orange-400 transition-colors" href="#skills" onclick="closeMobileMenu()">技能</a>
+<a class="text-lg font-medium py-3 border-b border-white/10 hover:text-orange-400 transition-colors" href="#projects" onclick="closeMobileMenu()">作品</a>
+<a class="text-lg font-medium py-3 border-b border-white/10 hover:text-orange-400 transition-colors" href="#blog" onclick="closeMobileMenu()">博客</a>
+<a class="text-lg font-medium py-3 border-b border-white/10 hover:text-orange-400 transition-colors" href="#contact" onclick="closeMobileMenu()">联系</a>
+</div>
+<!-- 导航栏 -->
+<nav class="fixed top-0 left-0 w-full z-50 transition-all duration-500 py-6 px-6 md:px-10" id="navbar">
+<div class="max-w-7xl mx-auto flex justify-between items-center">
+<div class="text-2xl font-black tracking-tighter">
+<span class="text-gradient">ALEX.DEV</span>
+</div>
+<div class="hidden md:flex space-x-10 items-center">
+<a class="nav-link font-medium" href="#hero">首页</a>
+<a class="nav-link font-medium" href="#about">关于</a>
+<a class="nav-link font-medium" href="#skills">技能</a>
+<a class="nav-link font-medium" href="#projects">作品</a>
+<a class="nav-link font-medium" href="#blog">博客</a>
+<a class="nav-link font-medium" href="#contact">联系</a>
+<button class="p-2 rounded-full glass hover:scale-110 transition-transform" id="theme-toggle">
+<iconify-icon class="text-xl block dark:hidden" icon="ph:moon-stars-bold"></iconify-icon>
+<iconify-icon class="text-xl hidden dark:block" icon="ph:sun-bold"></iconify-icon>
+</button>
+</div>
+<!-- 移动端菜单按钮 -->
+<button class="md:hidden glass p-2 rounded-lg" id="mobile-menu-btn">
+<iconify-icon class="text-2xl" icon="ph:list-bold"></iconify-icon>
+</button>
+</div>
+</nav>
+<!-- Hero 区域：左文右图（参考 image.png 布局） -->
+<section class="relative min-h-screen flex items-center pt-20 overflow-hidden" id="hero">
+<canvas class="absolute inset-0 z-0" id="particle-canvas"></canvas>
+<div class="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-10">
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center min-h-[70vh]">
+<!-- 左侧文字 -->
+<div class="reveal-on-scroll">
+<div class="inline-block px-4 py-2 rounded-full glass text-xs md:text-sm font-bold tracking-[0.2em] text-orange-400 mb-6 border border-orange-500/20">
+✦ 创意全栈开发者
+</div>
+<h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black leading-none tracking-tighter mb-4">
+<span class="block text-white">你好，我是 Alex</span>
+<span class="text-gradient-warm block mt-2">用代码编织<br class="md:hidden"/>数字艺术</span>
+</h1>
+<p class="text-sm md:text-base opacity-60 leading-relaxed mb-8 max-w-xl">
+我是一名热衷于创造极致交互体验的全栈开发者。我不只是在写代码，我是在为用户打造一个充满惊喜的数字游乐场。通过对细节的偏执和对新技术的热爱，我将复杂的逻辑转化为直观且优雅的界面。
+</p>
+<div class="flex flex-col sm:flex-row gap-4 mb-8">
+<a class="px-8 py-4 bg-gradient-to-r from-orange-500 to-pink-500 text-white rounded-full font-bold hover:shadow-[0_0_30px_rgba(249,115,22,0.5)] transition-all transform hover:-translate-y-1 text-center" href="#projects">
+查看作品
+</a>
+<a class="px-8 py-4 glass rounded-full font-bold hover:bg-white/10 transition-all border border-white/20 text-center" href="#contact">
+联系我
+</a>
+</div>
+<!-- 社交图标 -->
+<div class="flex gap-4">
+<a class="w-10 h-10 rounded-full glass flex items-center justify-center hover:bg-orange-500/20 hover:border-orange-500/40 transition-all border border-white/10" href="#" title="GitHub">
+<iconify-icon class="text-lg" icon="ph:github-logo-bold"></iconify-icon>
+</a>
+<a class="w-10 h-10 rounded-full glass flex items-center justify-center hover:bg-orange-500/20 hover:border-orange-500/40 transition-all border border-white/10" href="#" title="Twitter">
+<iconify-icon class="text-lg" icon="ph:twitter-logo-bold"></iconify-icon>
+</a>
+<a class="w-10 h-10 rounded-full glass flex items-center justify-center hover:bg-orange-500/20 hover:border-orange-500/40 transition-all border border-white/10" href="#" title="LinkedIn">
+<iconify-icon class="text-lg" icon="ph:linkedin-logo-bold"></iconify-icon>
+</a>
+<a class="w-10 h-10 rounded-full glass flex items-center justify-center hover:bg-orange-500/20 hover:border-orange-500/40 transition-all border border-white/10" href="#" title="Medium">
+<iconify-icon class="text-lg" icon="ph:medium-logo-bold"></iconify-icon>
+</a>
+</div>
+</div>
+<!-- 右侧头像区 -->
+<div class="flex justify-center items-center relative h-full">
+<div class="relative">
+<!-- 头像 + 渐变边框 -->
+<div class="avatar-ring w-64 h-64 md:w-72 md:h-72 lg:w-80 lg:h-80 flex items-center justify-center">
+<img alt="Alex portrait - creative full-stack developer wearing sunglasses" class="w-full h-full rounded-full object-cover" src="https://modao.cc/agent-py/static/source/images/placeholder.svg"/>
+</div>
+<!-- 浮动代码符号装饰 -->
+<div class="code-float absolute -top-6 -right-6 text-3xl md:text-4xl font-mono font-bold text-orange-400/30 select-none">{ }</div>
+<div class="code-float-2 absolute -bottom-4 -left-8 text-2xl md:text-3xl font-mono font-bold text-pink-400/30 select-none">&lt;/&gt;</div>
+<div class="absolute top-1/3 -left-12 text-lg md:text-xl font-mono text-fuchsia-400/20 select-none code-float" style="animation-delay: 2s;">()</div>
+<div class="absolute bottom-1/4 -right-10 text-lg md:text-xl font-mono text-orange-400/20 select-none code-float-2" style="animation-delay: 0.5s;">[ ]</div>
+</div>
+</div>
+</div>
+</div>
+<div class="absolute top-1/4 right-1/4 w-96 h-96 bg-orange-500 rounded-full blur-[150px] opacity-15 animate-pulse"></div>
+<div class="absolute bottom-1/3 left-1/4 w-80 h-80 bg-pink-500 rounded-full blur-[150px] opacity-10 animate-pulse"></div>
+</section>
+<!-- 关于我 / 统计区 -->
+<section class="py-24 md:py-32 px-6 md:px-10 relative" id="about">
+<div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-20 items-center">
+<div class="reveal-on-scroll">
+<h2 class="text-4xl md:text-5xl font-bold mb-8">创意驱动<br/><span class="text-orange-400">全栈开发</span></h2>
+<p class="text-base md:text-lg opacity-70 leading-relaxed mb-10">
+我是一名热衷于创造极致交互体验的全栈开发者。我不只是在写代码，我是在为用户打造一个充满惊喜的数字游乐场。通过对细节的偏执和对新技术的热爱，我将复杂的逻辑转化为直观且优雅的界面。
+</p>
+<div class="grid grid-cols-3 gap-6 md:gap-8">
+<div>
+<div class="text-3xl md:text-4xl font-black text-orange-400 mb-2 counter" data-target="5">0</div>
+<div class="text-xs md:text-sm uppercase tracking-widest opacity-50">年开发经验</div>
+</div>
+<div>
+<div class="text-3xl md:text-4xl font-black text-pink-500 mb-2 counter" data-target="32">0</div>
+<div class="text-xs md:text-sm uppercase tracking-widest opacity-50">落地项目</div>
+</div>
+<div>
+<div class="text-3xl md:text-4xl font-black text-orange-400 mb-2 counter" data-target="15">0</div>
+<div class="text-xs md:text-sm uppercase tracking-widest opacity-50">获奖荣誉</div>
+</div>
+</div>
+</div>
+<!-- 右侧：小头像 + 装饰 -->
+<div class="relative reveal-on-scroll delay-200 flex justify-center">
+<div class="avatar-ring w-48 h-48 md:w-56 md:h-56 flex items-center justify-center">
+<img alt="Alex portrait - creative full-stack developer" class="w-full h-full rounded-full object-cover" src="https://modao.cc/agent-py/static/source/images/placeholder.svg"/>
+</div>
+<div class="absolute -top-10 -right-10 w-40 h-40 bg-orange-500 rounded-full z-0 opacity-30 blur-2xl"></div>
+<div class="absolute -bottom-10 -left-10 w-40 h-40 bg-pink-500 rounded-full z-0 opacity-30 blur-2xl"></div>
+</div>
+</div>
+</section>
+<!-- 技能展示：3D 翻转卡片 -->
+<section class="py-24 md:py-32 px-6 md:px-10 bg-white/5" id="skills">
+<div class="max-w-7xl mx-auto">
+<div class="text-center mb-16 md:mb-20">
+<h2 class="text-4xl font-bold mb-4">技术栈</h2>
+<div class="w-20 h-1 bg-gradient-to-r from-orange-500 to-pink-500 mx-auto"></div>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-10">
+<!-- 技能卡片 1 -->
+<div class="flip-card h-64 reveal-on-scroll">
+<div class="flip-card-inner">
+<div class="flip-card-front glass shadow-xl">
+<iconify-icon class="text-6xl mb-4" icon="logos:javascript"></iconify-icon>
+<h3 class="text-xl font-bold">JavaScript / TS</h3>
+</div>
+<div class="flip-card-back bg-gradient-to-br from-orange-600 to-orange-500 text-white">
+<svg class="w-24 h-24 mb-4" viewbox="0 0 100 100">
+<circle cx="50" cy="50" fill="none" r="45" stroke="rgba(255,255,255,0.2)" stroke-width="8"></circle>
+<circle class="circle-progress" cx="50" cy="50" fill="none" r="45" stroke="white" stroke-dasharray="283" stroke-dashoffset="28" stroke-width="8"></circle>
+</svg>
+<div class="text-2xl font-bold">90%</div>
+<p class="text-sm opacity-80 mt-2">精通异步编程与框架底层</p>
+</div>
+</div>
+</div>
+<!-- 技能卡片 2 -->
+<div class="flip-card h-64 reveal-on-scroll delay-100">
+<div class="flip-card-inner">
+<div class="flip-card-front glass shadow-xl">
+<iconify-icon class="text-6xl mb-4" icon="logos:react"></iconify-icon>
+<h3 class="text-xl font-bold">React / Next.js</h3>
+</div>
+<div class="flip-card-back bg-gradient-to-br from-pink-600 to-pink-500 text-white">
+<svg class="w-24 h-24 mb-4" viewbox="0 0 100 100">
+<circle cx="50" cy="50" fill="none" r="45" stroke="rgba(255,255,255,0.2)" stroke-width="8"></circle>
+<circle class="circle-progress" cx="50" cy="50" fill="none" r="45" stroke="white" stroke-dasharray="283" stroke-dashoffset="42" stroke-width="8"></circle>
+</svg>
+<div class="text-2xl font-bold">85%</div>
+<p class="text-sm opacity-80 mt-2">组件化开发与性能优化</p>
+</div>
+</div>
+</div>
+<!-- 技能卡片 3 -->
+<div class="flip-card h-64 reveal-on-scroll delay-200">
+<div class="flip-card-inner">
+<div class="flip-card-front glass shadow-xl">
+<iconify-icon class="text-6xl mb-4" icon="logos:tailwindcss-icon"></iconify-icon>
+<h3 class="text-xl font-bold">Tailwind CSS</h3>
+</div>
+<div class="flip-card-back bg-gradient-to-br from-orange-500 to-amber-500 text-white">
+<svg class="w-24 h-24 mb-4" viewbox="0 0 100 100">
+<circle cx="50" cy="50" fill="none" r="45" stroke="rgba(255,255,255,0.2)" stroke-width="8"></circle>
+<circle class="circle-progress" cx="50" cy="50" fill="none" r="45" stroke="white" stroke-dasharray="283" stroke-dashoffset="14" stroke-width="8"></circle>
+</svg>
+<div class="text-2xl font-bold">95%</div>
+<p class="text-sm opacity-80 mt-2">极速构建响应式艺术界面</p>
+</div>
+</div>
+</div>
+<!-- 技能卡片 4 -->
+<div class="flip-card h-64 reveal-on-scroll delay-300">
+<div class="flip-card-inner">
+<div class="flip-card-front glass shadow-xl">
+<iconify-icon class="text-6xl mb-4" icon="logos:nodejs-icon"></iconify-icon>
+<h3 class="text-xl font-bold">Node.js</h3>
+</div>
+<div class="flip-card-back bg-gradient-to-br from-orange-600 to-orange-500 text-white">
+<svg class="w-24 h-24 mb-4" viewbox="0 0 100 100">
+<circle cx="50" cy="50" fill="none" r="45" stroke="rgba(255,255,255,0.2)" stroke-width="8"></circle>
+<circle class="circle-progress" cx="50" cy="50" fill="none" r="45" stroke="white" stroke-dasharray="283" stroke-dashoffset="56" stroke-width="8"></circle>
+</svg>
+<div class="text-2xl font-bold">80%</div>
+<p class="text-sm opacity-80 mt-2">高并发服务端架构设计</p>
+</div>
+</div>
+</div>
+<!-- 技能卡片 5 -->
+<div class="flip-card h-64 reveal-on-scroll delay-400">
+<div class="flip-card-inner">
+<div class="flip-card-front glass shadow-xl">
+<iconify-icon class="text-6xl mb-4 dark:invert" icon="logos:threejs"></iconify-icon>
+<h3 class="text-xl font-bold">Three.js / WebGL</h3>
+</div>
+<div class="flip-card-back bg-gradient-to-br from-gray-900 to-pink-800 text-white">
+<svg class="w-24 h-24 mb-4" viewbox="0 0 100 100">
+<circle cx="50" cy="50" fill="none" r="45" stroke="rgba(255,255,255,0.2)" stroke-width="8"></circle>
+<circle class="circle-progress" cx="50" cy="50" fill="none" r="45" stroke="white" stroke-dasharray="283" stroke-dashoffset="84" stroke-width="8"></circle>
+</svg>
+<div class="text-2xl font-bold">70%</div>
+<p class="text-sm opacity-80 mt-2">3D 视觉交互与着色器编程</p>
+</div>
+</div>
+</div>
+<!-- 技能卡片 6 -->
+<div class="flip-card h-64 reveal-on-scroll delay-500">
+<div class="flip-card-inner">
+<div class="flip-card-front glass shadow-xl">
+<iconify-icon class="text-6xl mb-4" icon="logos:figma"></iconify-icon>
+<h3 class="text-xl font-bold">UI/UX Design</h3>
+</div>
+<div class="flip-card-back bg-gradient-to-br from-orange-500 to-pink-500 text-white">
+<svg class="w-24 h-24 mb-4" viewbox="0 0 100 100">
+<circle cx="50" cy="50" fill="none" r="45" stroke="rgba(255,255,255,0.2)" stroke-width="8"></circle>
+<circle class="circle-progress" cx="50" cy="50" fill="none" r="45" stroke="white" stroke-dasharray="283" stroke-dashoffset="70" stroke-width="8"></circle>
+</svg>
+<div class="text-2xl font-bold">75%</div>
+<p class="text-sm opacity-80 mt-2">从原型到成品的视觉把控</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- 项目展示：3D 倾斜卡片 + 错落布局 -->
+<section class="py-24 md:py-32 px-6 md:px-10" id="projects">
+<div class="max-w-7xl mx-auto">
+<h2 class="text-4xl md:text-5xl font-bold mb-16 md:mb-20 text-center">精选案例</h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-x-12 lg:gap-x-20 gap-y-24 md:gap-y-32">
+<!-- 项目 1：星际数据可视化平台 -->
+<div class="project-card reveal-on-scroll group" data-tilt="">
+<div class="relative rounded-3xl overflow-hidden glass p-4 transition-all duration-500 group-hover:shadow-[0_30px_60px_rgba(249,115,22,0.25)]">
+<div class="aspect-video bg-gradient-to-br from-orange-600 to-orange-400 rounded-2xl overflow-hidden relative">
+<div class="project-number text-orange-300/20">01</div>
+<img alt="A futuristic dashboard interface with holographic charts and 3D orbit visualization" class="w-full h-full object-cover mix-blend-overlay opacity-60" src="https://modao.cc/agent-py/media/generated_images/2026-06-11/82d228e22c6e424494b48eb8f81f6a24.jpg"/>
+<div class="absolute inset-0 flex items-center justify-center">
+<iconify-icon class="text-8xl text-white" icon="ph:rocket-launch-duotone"></iconify-icon>
+</div>
+</div>
+<div class="mt-6 md:mt-8 px-4">
+<div class="flex flex-wrap gap-2 mb-4">
+<span class="tech-tag">REACT</span>
+<span class="tech-tag">WEBGL</span>
+</div>
+<h3 class="text-xl md:text-2xl font-bold mb-2">星际数据可视化平台</h3>
+<p class="text-sm md:text-base opacity-60 mb-6">为太空探索公司打造的实时遥测数据监控系统，支持 3D 轨道模型交互。</p>
+<a class="inline-flex items-center gap-2 text-orange-400 font-bold group-hover:gap-4 transition-all cursor-pointer" onclick="openProjectModal(0)">
+探索详情 <iconify-icon icon="ph:arrow-right-bold"></iconify-icon>
+</a>
+</div>
+</div>
+</div>
+<!-- 项目 2：ZenMind 冥想应用 -->
+<div class="project-card reveal-on-scroll delay-200 md:translate-y-24 group" data-tilt="">
+<div class="relative rounded-3xl overflow-hidden glass p-4 transition-all duration-500 group-hover:shadow-[0_30px_60px_rgba(249,115,22,0.25)]">
+<div class="aspect-video bg-gradient-to-br from-pink-500 to-pink-300 rounded-2xl overflow-hidden relative">
+<div class="project-number text-pink-300/20">02</div>
+<img alt="A minimalist mobile app interface for meditation with calming purple gradients and AI features" class="w-full h-full object-cover mix-blend-overlay opacity-60" src="https://modao.cc/agent-py/media/generated_images/2026-06-11/8b095198be394e25a059ff4f29302954.jpg"/>
+<div class="absolute inset-0 flex items-center justify-center">
+<iconify-icon class="text-8xl text-white" icon="ph:brain-duotone"></iconify-icon>
+</div>
+</div>
+<div class="mt-6 md:mt-8 px-4">
+<div class="flex flex-wrap gap-2 mb-4">
+<span class="tech-tag">NEXT.JS</span>
+<span class="tech-tag">AI</span>
+</div>
+<h3 class="text-xl md:text-2xl font-bold mb-2">ZenMind 冥想应用</h3>
+<p class="text-sm md:text-base opacity-60 mb-6">集成 AI 生成音频技术的冥想辅助工具，极简主义设计风格。</p>
+<a class="inline-flex items-center gap-2 text-orange-400 font-bold group-hover:gap-4 transition-all cursor-pointer" onclick="openProjectModal(1)">
+探索详情 <iconify-icon icon="ph:arrow-right-bold"></iconify-icon>
+</a>
+</div>
+</div>
+</div>
+<!-- 项目 3：KeyCustom 客制化商店 -->
+<div class="project-card reveal-on-scroll group" data-tilt="">
+<div class="relative rounded-3xl overflow-hidden glass p-4 transition-all duration-500 group-hover:shadow-[0_30px_60px_rgba(249,115,22,0.25)]">
+<div class="aspect-video bg-gradient-to-br from-orange-700 to-pink-500 rounded-2xl overflow-hidden relative">
+<div class="project-number text-orange-300/20">03</div>
+<img alt="A sleek e-commerce website for high-end mechanical keyboards with 3D product preview" class="w-full h-full object-cover mix-blend-overlay opacity-60" src="https://modao.cc/agent-py/media/generated_images/2026-06-11/661090e1622a49819da5ba33ae7529db.jpg"/>
+<div class="absolute inset-0 flex items-center justify-center">
+<iconify-icon class="text-8xl text-white" icon="ph:keyboard-duotone"></iconify-icon>
+</div>
+</div>
+<div class="mt-6 md:mt-8 px-4">
+<div class="flex flex-wrap gap-2 mb-4">
+<span class="tech-tag">VUE 3</span>
+<span class="tech-tag">THREE.JS</span>
+</div>
+<h3 class="text-xl md:text-2xl font-bold mb-2">KeyCustom 客制化商店</h3>
+<p class="text-sm md:text-base opacity-60 mb-6">全 3D 的机械键盘定制商城，用户可实时预览不同轴体与键帽组合。</p>
+<a class="inline-flex items-center gap-2 text-orange-400 font-bold group-hover:gap-4 transition-all cursor-pointer" onclick="openProjectModal(2)">
+探索详情 <iconify-icon icon="ph:arrow-right-bold"></iconify-icon>
+</a>
+</div>
+</div>
+</div>
+<!-- 项目 4：CodeSync 协同编辑器 -->
+<div class="project-card reveal-on-scroll delay-200 md:translate-y-24 group" data-tilt="">
+<div class="relative rounded-3xl overflow-hidden glass p-4 transition-all duration-500 group-hover:shadow-[0_30px_60px_rgba(249,115,22,0.25)]">
+<div class="aspect-video bg-gradient-to-br from-pink-500 to-fuchsia-500 rounded-2xl overflow-hidden relative">
+<div class="project-number text-pink-300/20">04</div>
+<img alt="A modern collaborative code editor interface showing multiple users editing in real-time" class="w-full h-full object-cover mix-blend-overlay opacity-60" src="https://modao.cc/agent-py/media/generated_images/2026-06-11/b431d95495af48ba8c47f31c1c34f50e.jpg"/>
+<div class="absolute inset-0 flex items-center justify-center">
+<iconify-icon class="text-8xl text-white" icon="ph:code-block-duotone"></iconify-icon>
+</div>
+</div>
+<div class="mt-6 md:mt-8 px-4">
+<div class="flex flex-wrap gap-2 mb-4">
+<span class="tech-tag">TYPESCRIPT</span>
+<span class="tech-tag">SOCKET.IO</span>
+</div>
+<h3 class="text-xl md:text-2xl font-bold mb-2">CodeSync 协同编辑器</h3>
+<p class="text-sm md:text-base opacity-60 mb-6">支持多人实时在线协作的轻量级代码编辑器，内置实时预览功能。</p>
+<a class="inline-flex items-center gap-2 text-orange-400 font-bold group-hover:gap-4 transition-all cursor-pointer" onclick="openProjectModal(3)">
+探索详情 <iconify-icon icon="ph:arrow-right-bold"></iconify-icon>
+</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- ✅ 项目详情 Modal 容器（共4个项目） -->
+<div class="modal-overlay" id="project-modal" onclick="closeProjectModal(event)">
+<div class="modal-content" id="project-modal-content" onclick="event.stopPropagation()">
+<button class="modal-close" onclick="closeProjectModal()">✕</button>
+<div id="project-modal-body"></div>
+</div>
+</div>
+<!-- 最新博客：卡片式布局 -->
+<section class="py-24 md:py-32 px-6 md:px-10 bg-white/5" id="blog">
+<div class="max-w-7xl mx-auto">
+<div class="text-center mb-16 md:mb-20">
+<h2 class="text-4xl font-bold mb-4">最新博客</h2>
+<div class="w-20 h-1 bg-gradient-to-r from-orange-500 to-pink-500 mx-auto"></div>
+<p class="text-base opacity-50 mt-4">技术思考与分享</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+<!-- 博客卡片 1 -->
+<div class="blog-card glass rounded-2xl p-6 md:p-8 hover:shadow-[0_0_40px_rgba(249,115,22,0.15)] group reveal-on-scroll">
+<div class="flex items-center gap-3 mb-5 flex-wrap">
+<span class="tech-tag">WebGL</span>
+<span class="text-xs opacity-40">2026.05.20</span>
+</div>
+<h3 class="text-lg md:text-xl font-bold mb-4 group-hover:text-orange-400 transition-colors">为什么 WebGL 是前端交互的未来？</h3>
+<p class="text-sm opacity-60 leading-relaxed">探讨如何在浏览器中实现高性能的 3D 渲染，以及这对用户体验的革命性提升...</p>
+<div class="mt-6 flex items-center gap-2 text-orange-400 opacity-0 group-hover:opacity-100 transition-all duration-300 cursor-pointer" onclick="openBlogModal(0)">
+<span class="text-sm font-bold">阅读更多</span>
+<iconify-icon icon="ph:arrow-right-bold"></iconify-icon>
+</div>
+</div>
+<!-- 博客卡片 2 -->
+<div class="blog-card glass rounded-2xl p-6 md:p-8 hover:shadow-[0_0_40px_rgba(249,115,22,0.15)] group reveal-on-scroll delay-100">
+<div class="flex items-center gap-3 mb-5 flex-wrap">
+<span class="tech-tag">React</span>
+<span class="text-xs opacity-40">2026.04.12</span>
+</div>
+<h3 class="text-lg md:text-xl font-bold mb-4 group-hover:text-orange-400 transition-colors">构建极致流畅的 React 动画系统</h3>
+<p class="text-sm opacity-60 leading-relaxed">分享我在项目中使用的 Framer Motion 与 GSAP 结合的最佳实践方案...</p>
+<div class="mt-6 flex items-center gap-2 text-orange-400 opacity-0 group-hover:opacity-100 transition-all duration-300 cursor-pointer" onclick="openBlogModal(1)">
+<span class="text-sm font-bold">阅读更多</span>
+<iconify-icon icon="ph:arrow-right-bold"></iconify-icon>
+</div>
+</div>
+<!-- 博客卡片 3 -->
+<div class="blog-card glass rounded-2xl p-6 md:p-8 hover:shadow-[0_0_40px_rgba(249,115,22,0.15)] group reveal-on-scroll delay-200">
+<div class="flex items-center gap-3 mb-5 flex-wrap">
+<span class="tech-tag">全栈</span>
+<span class="text-xs opacity-40">2026.03.05</span>
+</div>
+<h3 class="text-lg md:text-xl font-bold mb-4 group-hover:text-orange-400 transition-colors">全栈开发的艺术：从数据库到 UI</h3>
+<p class="text-sm opacity-60 leading-relaxed">如何保持代码的一致性，并在不同技术层级之间寻找完美的平衡点...</p>
+<div class="mt-6 flex items-center gap-2 text-orange-400 opacity-0 group-hover:opacity-100 transition-all duration-300 cursor-pointer" onclick="openBlogModal(2)">
+<span class="text-sm font-bold">阅读更多</span>
+<iconify-icon icon="ph:arrow-right-bold"></iconify-icon>
+</div>
+</div>
+</div>
+<!-- 查看全部文章入口 -->
+<div class="text-center mt-12">
+<a class="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-orange-500 to-pink-500 text-white rounded-full font-bold hover:shadow-[0_0_30px_rgba(249,115,22,0.4)] transition-all transform hover:-translate-y-1" href="#">
+查看全部文章
+<iconify-icon icon="ph:arrow-right-bold"></iconify-icon>
+</a>
+</div>
+</div>
+</section>
+<!-- ✅ 博客文章 Modal 容器（共3篇文章） -->
+<div class="modal-overlay" id="blog-modal" onclick="closeBlogModal(event)">
+<div class="modal-content" id="blog-modal-content" onclick="event.stopPropagation()">
+<button class="modal-close" onclick="closeBlogModal()">✕</button>
+<div id="blog-modal-body"></div>
+</div>
+</div>
+<!-- 联系方式：终端模拟器 -->
+<section class="py-24 md:py-32 px-6 md:px-10" id="contact">
+<div class="max-w-4xl mx-auto">
+<h2 class="text-4xl font-bold mb-16 text-center">联系我</h2>
+<div class="terminal glass rounded-2xl overflow-hidden shadow-2xl border border-white/10">
+<!-- 终端头部 -->
+<div class="bg-black/20 dark:bg-white/10 px-6 py-3 flex items-center justify-between">
+<div class="flex gap-2">
+<div class="w-3 h-3 bg-[#ff5f56] rounded-full"></div>
+<div class="w-3 h-3 bg-[#ffbd2e] rounded-full"></div>
+<div class="w-3 h-3 bg-[#27c93f] rounded-full"></div>
+</div>
+<div class="text-xs font-mono opacity-50">alex — zsh — 80x24</div>
+</div>
+<!-- 终端内容 -->
+<div class="p-6 md:p-8 font-mono text-sm md:text-base min-h-[350px] md:min-h-[400px]">
+<div class="mb-4">
+<span class="text-[#27c93f]">➜</span> <span class="text-orange-400">~</span> <span class="text-white">whoami</span>
+<div class="mt-1 text-gray-400">Alex - 创意全栈开发者 / 技术艺术家</div>
+</div>
+<div class="mb-4">
+<span class="text-[#27c93f]">➜</span> <span class="text-orange-400">~</span> <span class="text-white">contact --details</span>
+<div class="mt-2 space-y-2">
+<div class="flex gap-4">
+<span class="text-orange-400 w-20">Email:</span>
+<a class="hover:underline" href="mailto:hello@alex.dev">hello@alex.dev</a>
+</div>
+<div class="flex gap-4">
+<span class="text-orange-400 w-20">Github:</span>
+<a class="hover:underline" href="#">github.com/alex-playground</a>
+</div>
+<div class="flex gap-4">
+<span class="text-orange-400 w-20">Twitter:</span>
+<a class="hover:underline" href="#">@alex_creative</a>
+</div>
+</div>
+</div>
+<div class="mb-4">
+<span class="text-[#27c93f]">➜</span> <span class="text-orange-400">~</span> <span class="text-white">send-message</span>
+<div class="mt-4">
+<form class="space-y-4">
+<div class="flex flex-col md:flex-row gap-4">
+<input class="bg-transparent border-b border-white/20 py-2 focus:border-orange-500 outline-none w-full text-sm" placeholder="Your Name" type="text"/>
+<input class="bg-transparent border-b border-white/20 py-2 focus:border-orange-500 outline-none w-full text-sm" placeholder="Your Email" type="email"/>
+</div>
+<textarea class="bg-transparent border-b border-white/20 py-2 focus:border-orange-500 outline-none w-full resize-none text-sm" placeholder="Say something creative..." rows="4"></textarea>
+<button class="w-full md:w-auto bg-gradient-to-r from-orange-500 to-pink-500 text-white px-8 py-3 rounded-lg font-bold hover:shadow-[0_0_20px_rgba(249,115,22,0.4)] transition-all" type="submit">
+EXECUTE();
+</button>
+</form>
+</div>
+</div>
+<div class="flex items-center">
+<span class="text-[#27c93f]">➜</span> <span class="text-orange-400">~</span> <span class="animate-pulse ml-2 w-2 h-5 bg-white"></span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- 页脚 -->
+<footer class="py-10 md:py-12 px-6 md:px-10 border-t border-white/10 text-center opacity-50 text-sm">
+<p>© 2026 ALEX.DEV - 用代码驱动创意</p>
+<p class="mt-2 italic">Handcrafted with ❤️ and pure JavaScript</p>
+</footer>
+<script>
+        // ===== 项目详情数据 =====
+        const projectData = [
+            {
+                title: '星际数据可视化平台',
+                description: '一套为航天机构打造的实时遥测数据监控系统，采用 WebGL 3D 渲染引擎，支持卫星轨道实时追踪、多维度数据仪表盘、告警预测分析等功能。',
+                tags: ['React 18', 'WebGL / Three.js', 'D3.js', 'Node.js', 'WebSocket'],
+                features: [
+                    '3D 轨道模型实时交互',
+                    '实时数据流推送与展示',
+                    '自定义仪表盘拖拽配置',
+                    '历史数据回放分析'
+                ],
+                demoUrl: '#',
+                githubUrl: '#'
+            },
+            {
+                title: 'ZenMind 冥想应用',
+                description: '集成 AI 语音合成技术的冥想辅助应用，提供个性化冥想引导、环境白噪音混音、专注力趋势分析等功能，设计风格追求极简宁静。',
+                tags: ['Next.js 14', 'AI / OpenAI', 'Tailwind CSS', 'Framer Motion', 'Supabase'],
+                features: [
+                    'AI 生成个性化引导音频',
+                    '个性化冥想计划定制',
+                    '专注力统计与趋势图表',
+                    '社区冥想挑战活动'
+                ],
+                demoUrl: '#',
+                githubUrl: '#'
+            },
+            {
+                title: 'KeyCustom 客制化商店',
+                description: '全 3D 交互的机械键盘定制电商平台，用户可在三维空间中实时预览轴体、键帽、外壳的搭配组合效果，支持一键下单定制。',
+                tags: ['Vue 3', 'Three.js', 'Pinia', 'Stripe', 'MongoDB'],
+                features: [
+                    '3D 实时预览搭配效果',
+                    '轴体手感模拟与测试',
+                    '配色方案一键分享',
+                    '定制订单全程追踪'
+                ],
+                demoUrl: '#',
+                githubUrl: '#'
+            },
+            {
+                title: 'CodeSync 协同编辑器',
+                description: '轻量级多人实时协同代码编辑器，支持语法高亮、光标同步、实时预览、版本回溯，适合远程编程面试和结对编程场景。',
+                tags: ['TypeScript', 'Socket.IO', 'Monaco Editor', 'Redis', 'Docker'],
+                features: [
+                    '实时光标同步与冲突处理',
+                    '内置 Web 终端',
+                    '代码片段一键分享',
+                    'Pair Programming 双人模式'
+                ],
+                demoUrl: '#',
+                githubUrl: '#'
+            }
+        ];
+
+        // ===== 博客文章数据 =====
+        const blogData = [
+            {
+                title: '为什么 WebGL 是前端交互的未来？',
+                date: '2026.05.20',
+                tag: 'WebGL',
+                content: `
+                    <p>WebGL 技术正在彻底改变前端开发的边界。本文从性能、体验和创造力三个维度探讨 WebGL 为什么成为下一代交互的核心技术。</p>
+                    <h3 style="color:#f97316;margin-top:1.5rem;margin-bottom:0.5rem;font-size:1.25rem;font-weight:700;">性能突破</h3>
+                    <p>WebGL 通过 GPU 加速，实现了浏览器中的硬件级 3D 渲染。相比传统的 Canvas 2D，性能提升可达 10 倍以上。这意味着我们可以在网页上运行接近原生应用质量的视觉效果。</p>
+                    <h3 style="color:#f97316;margin-top:1.5rem;margin-bottom:0.5rem;font-size:1.25rem;font-weight:700;">体验革新</h3>
+                    <p>从数据可视化到产品展示，WebGL 让用户不再是 passive viewer，而是可以主动探索、旋转、缩放 3D 场景。这种沉浸式交互正在重新定义"浏览体验"。</p>
+                    <h3 style="color:#f97316;margin-top:1.5rem;margin-bottom:0.5rem;font-size:1.25rem;font-weight:700;">创造力释放</h3>
+                    <p>对于前端开发者而言，WebGL 打开了全新的创作维度——着色器编程、粒子系统、物理引擎……这些曾经属于游戏开发的工具，现在成为了 Web 设计师的日常。</p>
+                    <h3 style="color:#f97316;margin-top:1.5rem;margin-bottom:0.5rem;font-size:1.25rem;font-weight:700;">未来展望</h3>
+                    <p>随着 WebGPU 标准的推进，浏览器 3D 渲染将迎来又一次质的飞跃。我预测在未来的 2-3 年内，WebGL/WebGPU 将成为前端工程师的基础技能，就像现在的 CSS 动画一样普及。</p>
+                `
+            },
+            {
+                title: '构建极致流畅的 React 动画系统',
+                date: '2026.04.12',
+                tag: 'React',
+                content: `
+                    <p>在多年的 React 项目实践中，我总结了一套兼顾性能与开发效率的动画方案。</p>
+                    <h3 style="color:#f97316;margin-top:1.5rem;margin-bottom:0.5rem;font-size:1.25rem;font-weight:700;">核心原则</h3>
+                    <ol style="list-style:decimal;padding-left:1.5rem;margin-bottom:1rem;opacity:0.8;">
+                        <li style="margin-bottom:0.25rem;">优先使用 CSS transforms 和 opacity，避免触发重排</li>
+                        <li style="margin-bottom:0.25rem;">复杂交互动画使用 Framer Motion 的 layout animations</li>
+                        <li style="margin-bottom:0.25rem;">高性能粒子/路径动画使用 GSAP + canvas</li>
+                    </ol>
+                    <h3 style="color:#f97316;margin-top:1.5rem;margin-bottom:0.5rem;font-size:1.25rem;font-weight:700;">Framer Motion 实战</h3>
+                    <p>利用 AnimatePresence 实现流畅的页面过渡，使用 motion.div 的 layoutId 实现共享元素动画。最关键的是——善用 variants 来组织复杂的动画序列。</p>
+                    <h3 style="color:#f97316;margin-top:1.5rem;margin-bottom:0.5rem;font-size:1.25rem;font-weight:700;">GSAP 的杀手锏</h3>
+                    <p>当需要精确时间线控制或复杂路径动画时，GSAP 仍然是不可替代的。配合 ScrollTrigger 插件，可以实现惊艳的滚动驱动动画。</p>
+                    <h3 style="color:#f97316;margin-top:1.5rem;margin-bottom:0.5rem;font-size:1.25rem;font-weight:700;">性能优化清单</h3>
+                    <ul style="list-style:disc;padding-left:1.5rem;margin-bottom:1rem;opacity:0.8;">
+                        <li style="margin-bottom:0.25rem;">使用 will-change 提前告知浏览器</li>
+                        <li style="margin-bottom:0.25rem;">避免在动画中修改几何属性</li>
+                        <li style="margin-bottom:0.25rem;">利用 requestAnimationFrame 做节流</li>
+                        <li style="margin-bottom:0.25rem;">复杂场景使用硬件加速</li>
+                    </ul>
+                `
+            },
+            {
+                title: '全栈开发的艺术：从数据库到 UI',
+                date: '2026.03.05',
+                tag: '全栈',
+                content: `
+                    <p>真正的全栈开发不是在各个技术栈之间来回切换，而是找到一种统一的心智模型来贯穿整个系统。</p>
+                    <h3 style="color:#f97316;margin-top:1.5rem;margin-bottom:0.5rem;font-size:1.25rem;font-weight:700;">数据流的一致性</h3>
+                    <p>从数据库 Schema 设计到 API 路由，再到前端状态管理，我始终追求"数据形状的一致性"。一个设计良好的数据模型，可以减少 50% 以上的前后端联调工作。</p>
+                    <h3 style="color:#f97316;margin-top:1.5rem;margin-bottom:0.5rem;font-size:1.25rem;font-weight:700;">类型安全的力量</h3>
+                    <p>TypeScript 的全栈应用让类型定义成为"唯一的真相来源"。通过共享类型包（monorepo），前端调用 API 时可以获得完整的类型提示和编译时检查。</p>
+                    <h3 style="color:#f97316;margin-top:1.5rem;margin-bottom:0.5rem;font-size:1.25rem;font-weight:700;">自动化工作流</h3>
+                    <p>CI/CD 流水线不仅仅是部署工具，更是质量守门人。测试、lint、类型检查、构建，每一步都在自动化验证"代码的一致性"。</p>
+                    <h3 style="color:#f97316;margin-top:1.5rem;margin-bottom:0.5rem;font-size:1.25rem;font-weight:700;">最佳实践</h3>
+                    <ul style="list-style:disc;padding-left:1.5rem;margin-bottom:1rem;opacity:0.8;">
+                        <li style="margin-bottom:0.25rem;">API 优先的开发流程</li>
+                        <li style="margin-bottom:0.25rem;">数据库迁移即文档</li>
+                        <li style="margin-bottom:0.25rem;">前端组件与后端服务的对称设计</li>
+                        <li style="margin-bottom:0.25rem;">性能监控贯穿全链路</li>
+                    </ul>
+                `
+            }
+        ];
+
+        // ===== Modal 项目函数 =====
+        function openProjectModal(index) {
+            const p = projectData[index];
+            const body = document.getElementById('project-modal-body');
+            const featuresHtml = p.features.map(f =>
+                `<div class="flex items-start gap-3"><iconify-icon class="text-orange-400 text-xl flex-shrink-0 mt-0.5" icon="ph:check-circle-duotone"></iconify-icon><span>${f}</span></div>`
+            ).join('');
+            const tagsHtml = p.tags.map(t =>
+                `<span class="tech-tag">${t}</span>`
+            ).join('');
+            body.innerHTML = `
+                <div class="mb-6">
+                    <h3 class="text-2xl md:text-3xl font-bold mb-2">${p.title}</h3>
+                    <div class="flex flex-wrap gap-2 mt-4">${tagsHtml}</div>
+                </div>
+                <p class="text-sm md:text-base opacity-70 leading-relaxed mb-8">${p.description}</p>
+                <div class="mb-8">
+                    <h4 class="text-lg font-bold mb-4 text-orange-400">关键功能</h4>
+                    <div class="space-y-3">${featuresHtml}</div>
+                </div>
+                <div class="flex flex-wrap gap-4">
+                    <a class="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-orange-500 to-pink-500 text-white rounded-full font-bold text-sm hover:shadow-[0_0_20px_rgba(249,115,22,0.4)] transition-all" href="${p.demoUrl}">
+                        <iconify-icon icon="ph:eye-bold"></iconify-icon> 查看演示
+                    </a>
+                    <a class="inline-flex items-center gap-2 px-6 py-3 glass rounded-full font-bold text-sm hover:bg-white/10 transition-all border border-white/20" href="${p.githubUrl}">
+                        <iconify-icon icon="ph:github-logo-bold"></iconify-icon> 查看源码
+                    </a>
+                </div>
+            `;
+            document.getElementById('project-modal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeProjectModal(e) {
+            if (e && e.target !== e.currentTarget) return;
+            document.getElementById('project-modal').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        // ===== Modal 博客函数 =====
+        function openBlogModal(index) {
+            const b = blogData[index];
+            const body = document.getElementById('blog-modal-body');
+            const prevIndex = index > 0 ? index - 1 : blogData.length - 1;
+            const nextIndex = index < blogData.length - 1 ? index + 1 : 0;
+            body.innerHTML = `
+                <div class="mb-6">
+                    <div class="flex items-center gap-3 mb-3 flex-wrap">
+                        <span class="tech-tag">${b.tag}</span>
+                        <span class="text-xs opacity-40">${b.date}</span>
+                    </div>
+                    <h3 class="text-2xl md:text-3xl font-bold">${b.title}</h3>
+                </div>
+                <div class="prose prose-invert max-w-none leading-relaxed opacity-80 text-sm md:text-base" style="line-height:1.8;">
+                    ${b.content}
+                </div>
+                <div class="mt-10 pt-6 border-t border-white/10 flex justify-between items-center">
+                    <a class="inline-flex items-center gap-2 text-orange-400 text-sm font-bold cursor-pointer hover:gap-3 transition-all" onclick="openBlogModal(${prevIndex})">
+                        <iconify-icon icon="ph:arrow-left-bold"></iconify-icon> 上一篇
+                    </a>
+                    <a class="inline-flex items-center gap-2 text-orange-400 text-sm font-bold cursor-pointer hover:gap-3 transition-all" onclick="closeBlogModal();">
+                        返回博客列表 <iconify-icon icon="ph:list-bold"></iconify-icon>
+                    </a>
+                    <a class="inline-flex items-center gap-2 text-orange-400 text-sm font-bold cursor-pointer hover:gap-3 transition-all" onclick="openBlogModal(${nextIndex})">
+                        下一篇 <iconify-icon icon="ph:arrow-right-bold"></iconify-icon>
+                    </a>
+                </div>
+            `;
+            document.getElementById('blog-modal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeBlogModal(e) {
+            if (e && e.target !== e.currentTarget) return;
+            document.getElementById('blog-modal').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        // 键盘 ESC 关闭 Modal
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                document.getElementById('project-modal').classList.remove('active');
+                document.getElementById('blog-modal').classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        });
+
+        // ===== 原有交互功能 =====
+
+        // 1. 揭幕动画
+        window.addEventListener('load', () => {
+            const curtain = document.getElementById('reveal-curtain');
+            setTimeout(() => {
+                curtain.style.transform = 'translateY(-100%)';
+                curtain.style.transition = 'transform 1s cubic-bezier(0.77, 0, 0.175, 1)';
+                document.body.classList.remove('overflow-hidden');
+            }, 1500);
+        });
+
+        // 2. Canvas 粒子背景
+        const canvas = document.getElementById('particle-canvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+        const particleCount = 100;
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+
+        class Particle {
+            constructor() {
+                this.init();
+            }
+            init() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 2 + 1;
+                this.speedX = Math.random() * 1 - 0.5;
+                this.speedY = Math.random() * 1 - 0.5;
+                // 暖色粒子
+                const colors = ['#f97316', '#fb923c', '#ec4899', '#d946ef', '#a855f7'];
+                this.color = colors[Math.floor(Math.random() * colors.length)];
+            }
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+                if (this.x > canvas.width) this.x = 0;
+                else if (this.x < 0) this.x = canvas.width;
+                if (this.y > canvas.height) this.y = 0;
+                else if (this.y < 0) this.y = canvas.height;
+
+                const dx = mouse.x - this.x;
+                const dy = mouse.y - this.y;
+                const distance = Math.sqrt(dx * dx + dy * dy);
+                if (distance < 150) {
+                    this.x -= dx * 0.02;
+                    this.y -= dy * 0.02;
+                }
+            }
+            draw() {
+                ctx.fillStyle = this.color;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        const mouse = { x: null, y: null };
+        window.addEventListener('mousemove', (e) => {
+            mouse.x = e.x;
+            mouse.y = e.y;
+        });
+
+        function initParticles() {
+            particles = [];
+            for (let i = 0; i < particleCount; i++) {
+                particles.push(new Particle());
+            }
+        }
+
+        function animateParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            for (let i = 0; i < particles.length; i++) {
+                particles[i].update();
+                particles[i].draw();
+                
+                for (let j = i; j < particles.length; j++) {
+                    const dx = particles[i].x - particles[j].x;
+                    const dy = particles[i].y - particles[j].y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+                    if (distance < 100) {
+                        const alpha = 1 - distance / 100;
+                        ctx.strokeStyle = `rgba(249, 115, 22, ${alpha * 0.5})`;
+                        ctx.lineWidth = 0.5;
+                        ctx.beginPath();
+                        ctx.moveTo(particles[i].x, particles[i].y);
+                        ctx.lineTo(particles[j].x, particles[j].y);
+                        ctx.stroke();
+                    }
+                }
+            }
+            requestAnimationFrame(animateParticles);
+        }
+
+        resizeCanvas();
+        initParticles();
+        animateParticles();
+        window.addEventListener('resize', resizeCanvas);
+
+        // 3. 打字机效果
+        const phrases = ["全栈开发者", "交互设计师", "代码诗人", "问题解决者"];
+        let i = 0;
+        let j = 0;
+        let currentPhrase = [];
+        let isDeleting = false;
+        let isEnd = false;
+
+        function loop() {
+            isEnd = false;
+            const typewriter = document.getElementById('typewriter');
+            if (!typewriter) { setTimeout(loop, 500); return; }
+            if (i < phrases.length) {
+                if (!isDeleting && j <= phrases[i].length) {
+                    currentPhrase.push(phrases[i][j]);
+                    j++;
+                }
+                if (isDeleting && j <= phrases[i].length) {
+                    currentPhrase.pop(phrases[i][j]);
+                    j--;
+                }
+                if (j == phrases[i].length) {
+                    isEnd = true;
+                    isDeleting = true;
+                }
+                if (isDeleting && j == 0) {
+                    currentPhrase = [];
+                    isDeleting = false;
+                    i++;
+                    if (i == phrases.length) i = 0;
+                }
+            }
+            typewriter.innerHTML = currentPhrase.join('');
+            const speed = isEnd ? 2000 : isDeleting ? 100 : 150;
+            setTimeout(loop, speed);
+        }
+        loop();
+
+        // 4. 自定义光标
+        const cursor = document.getElementById('custom-cursor');
+        const follower = document.getElementById('cursor-follower');
+        window.addEventListener('mousemove', (e) => {
+            cursor.style.transform = `translate3d(${e.clientX - 4}px, ${e.clientY - 4}px, 0)`;
+            follower.style.transform = `translate3d(${e.clientX - 16}px, ${e.clientY - 16}px, 0)`;
+        });
+
+        document.querySelectorAll('a, button, [data-tilt]').forEach(el => {
+            el.addEventListener('mouseenter', () => {
+                follower.style.width = '64px';
+                follower.style.height = '64px';
+                follower.style.borderColor = '#f97316';
+            });
+            el.addEventListener('mouseleave', () => {
+                follower.style.width = '32px';
+                follower.style.height = '32px';
+                follower.style.borderColor = 'var(--primary)';
+            });
+        });
+
+        // 5. 主题切换
+        const themeToggle = document.getElementById('theme-toggle');
+        if (themeToggle) {
+            themeToggle.addEventListener('click', () => {
+                document.documentElement.classList.toggle('dark');
+                particles.forEach(p => p.init());
+            });
+        }
+
+        // 6. 移动端菜单
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileOverlay = document.getElementById('mobile-overlay');
+
+        function openMobileMenu() {
+            mobileMenu.classList.add('open');
+            mobileOverlay.classList.add('open');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeMobileMenu() {
+            mobileMenu.classList.remove('open');
+            mobileOverlay.classList.remove('open');
+            document.body.style.overflow = '';
+        }
+
+        if (mobileMenuBtn) {
+            mobileMenuBtn.addEventListener('click', () => {
+                if (mobileMenu.classList.contains('open')) {
+                    closeMobileMenu();
+                } else {
+                    openMobileMenu();
+                }
+            });
+        }
+
+        if (mobileOverlay) {
+            mobileOverlay.addEventListener('click', closeMobileMenu);
+        }
+
+        // 7. 滚动揭幕与计数动画
+        const observerOptions = { threshold: 0.1 };
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('opacity-100', 'translate-y-0');
+                    entry.target.classList.remove('opacity-0', 'translate-y-10');
+                    
+                    if (entry.target.classList.contains('counter')) {
+                        const target = parseInt(entry.target.getAttribute('data-target'));
+                        let count = 0;
+                        const duration = 2000;
+                        const increment = target / (duration / 16);
+                        const updateCount = () => {
+                            count += increment;
+                            if (count < target) {
+                                entry.target.innerText = Math.ceil(count);
+                                requestAnimationFrame(updateCount);
+                            } else {
+                                entry.target.innerText = target;
+                            }
+                        };
+                        updateCount();
+                    }
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal-on-scroll, .counter').forEach(el => {
+            if (!el.classList.contains('counter')) {
+                el.classList.add('opacity-0', 'translate-y-10', 'transition-all', 'duration-1000');
+            }
+            observer.observe(el);
+        });
+
+        // 8. 3D 倾斜效果 (Tilt)
+        document.querySelectorAll('[data-tilt]').forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                const rotateX = (y - centerY) / 20;
+                const rotateY = (centerX - x) / 20;
+                
+                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg)`;
+                card.style.transition = 'transform 0.5s ease';
+            });
+            
+            card.addEventListener('mouseenter', () => {
+                card.style.transition = 'none';
+            });
+        });
+
+        // 9. 导航栏滚动效果
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                nav.classList.add('glass', 'py-4');
+                nav.classList.remove('py-6');
+            } else {
+                nav.classList.remove('glass', 'py-4');
+                nav.classList.add('py-6');
+            }
+        });
+    </script>
+</body>
+</html>

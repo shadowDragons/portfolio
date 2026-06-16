@@ -1,72 +1,24 @@
-import { articleSlugs, getArticle } from '@/lib/articles'
-import {
-  appLocales,
-  contentTimestamps,
-  defaultAppLocale,
-  getLocaleSeoConfig,
-  getLocalizedUrl,
-  type AppLocale,
-} from '@/lib/site-config'
-import { getServicePage, servicePageSlugs } from '@/lib/service-pages'
+import { contentTimestamps, getLocalizedUrl } from '@/lib/site-config'
+import { blogPosts, getAllProjects } from '@/lib/portfolio-content'
 
-type SitemapEntry = {
-  pathname: string
-  changeFrequency: 'weekly' | 'monthly'
-  priorities: Record<AppLocale, number>
-  lastModified: string
-}
+const staticEntries = [
+  { pathname: '', priority: 1, lastModified: contentTimestamps.home },
+  { pathname: '/projects', priority: 0.92, lastModified: contentTimestamps.projectsHub },
+  { pathname: '/blog', priority: 0.78, lastModified: contentTimestamps.blogHub },
+] as const
 
-const sitemapEntries: SitemapEntry[] = [
-  {
-    pathname: '',
-    changeFrequency: 'weekly',
-    priorities: {
-      zh: 1,
-      en: 0.7,
-    },
-    lastModified: contentTimestamps.home,
-  },
-  {
-    pathname: '/services',
-    changeFrequency: 'weekly',
-    priorities: {
-      zh: 0.86,
-      en: 0.62,
-    },
-    lastModified: contentTimestamps.servicesHub,
-  },
-  {
-    pathname: '/blog',
-    changeFrequency: 'weekly',
-    priorities: {
-      zh: 0.8,
-      en: 0.58,
-    },
-    lastModified: contentTimestamps.blogHub,
-  },
-  ...servicePageSlugs.map(slug => ({
-    pathname: `/services/${slug}`,
-    changeFrequency: 'monthly' as const,
-    priorities: {
-      zh: getServicePage('zh', slug)?.priority ?? 0.84,
-      en: getServicePage('en', slug)?.priority ?? 0.6,
-    },
-    lastModified: contentTimestamps.servicePages,
+const entries = [
+  ...staticEntries,
+  ...getAllProjects().map(project => ({
+    pathname: `/projects/${project.slug ?? project.key}`,
+    priority: 0.82,
+    lastModified: contentTimestamps.projectsHub,
   })),
-  ...articleSlugs.map(slug => {
-    const zhArticle = getArticle('zh', slug)
-    const enArticle = getArticle('en', slug)
-
-    return {
-      pathname: `/blog/${slug}`,
-      changeFrequency: 'monthly' as const,
-      priorities: {
-        zh: zhArticle?.priority ?? 0.76,
-        en: enArticle?.priority ?? 0.56,
-      },
-      lastModified: zhArticle?.updatedAt ?? zhArticle?.publishedAt ?? enArticle?.updatedAt ?? enArticle?.publishedAt ?? contentTimestamps.blogHub,
-    }
-  }),
+  ...blogPosts.map(post => ({
+    pathname: `/blog/${post.slug}`,
+    priority: 0.72,
+    lastModified: post.date.replaceAll('.', '-'),
+  })),
 ]
 
 function escapeXml(value: string) {
@@ -82,40 +34,25 @@ function formatLastModified(value: string) {
   return new Date(value).toISOString()
 }
 
-function renderAlternateLinks(pathname: string) {
-  const localeLinks = appLocales
-    .map(locale => {
-      const languageTag = getLocaleSeoConfig(locale).languageTag
-      const href = getLocalizedUrl(locale, pathname)
-      return `<xhtml:link rel="alternate" hreflang="${escapeXml(languageTag)}" href="${escapeXml(href)}" />`
+function buildSitemapXml() {
+  const body = entries
+    .map(entry => {
+      const loc = getLocalizedUrl('zh', entry.pathname)
+
+      return [
+        '<url>',
+        `<loc>${escapeXml(loc)}</loc>`,
+        `<lastmod>${formatLastModified(entry.lastModified)}</lastmod>`,
+        '<changefreq>weekly</changefreq>',
+        `<priority>${entry.priority}</priority>`,
+        '</url>',
+      ].join('')
     })
     .join('')
 
-  const defaultHref = getLocalizedUrl(defaultAppLocale, pathname)
-  return `${localeLinks}<xhtml:link rel="alternate" hreflang="x-default" href="${escapeXml(defaultHref)}" />`
-}
-
-function renderUrl(pathname: string, locale: AppLocale, entry: SitemapEntry) {
-  const loc = getLocalizedUrl(locale, pathname)
-  const lastModified = formatLastModified(entry.lastModified)
-
-  return [
-    '<url>',
-    `<loc>${escapeXml(loc)}</loc>`,
-    renderAlternateLinks(pathname),
-    `<lastmod>${lastModified}</lastmod>`,
-    `<changefreq>${entry.changeFrequency}</changefreq>`,
-    `<priority>${entry.priorities[locale]}</priority>`,
-    '</url>',
-  ].join('')
-}
-
-function buildSitemapXml() {
-  const body = sitemapEntries.flatMap(entry => appLocales.map(locale => renderUrl(entry.pathname, locale, entry))).join('')
-
   return [
     '<?xml version="1.0" encoding="UTF-8"?>',
-    '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">',
+    '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',
     body,
     '</urlset>',
   ].join('')
