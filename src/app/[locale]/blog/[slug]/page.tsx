@@ -97,20 +97,20 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
       </section>
 
       <section className='py-10 md:py-16 px-6 md:px-10'>
-        <div className='max-w-3xl mx-auto'>
+        <div className='max-w-5xl mx-auto'>
           <div className='glass rounded-3xl p-8 md:p-12'>
             {post.cover ? (
               <div className='mb-10 overflow-hidden rounded-2xl'>
                 <Image src={post.cover} alt={post.title} width={1600} height={900} className='h-full w-full object-cover' />
               </div>
             ) : null}
-            <article className='creative-prose creative-prose-light md:text-lg'>{post.content}</article>
+            <article className='creative-prose mx-auto max-w-4xl md:text-lg'>{post.content}</article>
           </div>
         </div>
       </section>
 
       <section className='py-12 md:py-16 px-6 md:px-10'>
-        <div className='max-w-3xl mx-auto flex flex-col sm:flex-row justify-center gap-4'>
+        <div className='max-w-5xl mx-auto flex flex-col sm:flex-row justify-center gap-4'>
           {prevPost ? (
             <Link className='inline-flex items-center gap-2 text-purple-400 font-bold hover:gap-4 transition-all' href={`/blog/${prevPost.slug}`}>
               上一篇：{prevPost.title}

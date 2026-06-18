@@ -373,6 +373,25 @@ html {
     opacity: 1;
   }
 
+  .dark .creative-prose p,
+  .dark .creative-prose ul,
+  .dark .creative-prose ol,
+  .dark .creative-prose td {
+    color: rgb(255 255 255 / 0.74);
+  }
+
+  .dark .creative-prose h3,
+  .dark .creative-prose strong,
+  .dark .creative-prose th {
+    color: rgb(255 255 255 / 0.92);
+  }
+
+  .dark .creative-prose code {
+    border-color: rgb(255 255 255 / 0.1);
+    background: rgb(255 255 255 / 0.07);
+    color: rgb(255 255 255 / 0.88);
+  }
+
   .light .creative-prose p,
   .light .creative-prose ul,
   .light .creative-prose ol,
