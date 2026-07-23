@@ -1,0 +1,297 @@
+---
+title: FastAPI：Python 写 API 为什么首选它？异步与自动文档是关键
+date: 2026-07-23
+tag: Python Backend
+excerpt: FastAPI 是一个基于 ASGI、Python 类型注解和 OpenAPI 的现代 API 框架，它用异步 I/O 提升并发处理能力，并自动完成数据校验与交互式文档生成。
+readingTime: 11 分钟
+cover: /blog/what-is-fastapi/scene-1.png
+keywords:
+  - FastAPI
+  - FastAPI 是什么
+  - FastAPI 教程
+  - Python API 框架
+  - Python 后端开发
+  - Python Web 框架
+  - FastAPI 异步
+  - async def
+  - ASGI
+  - Starlette
+  - Pydantic
+  - OpenAPI
+  - Swagger UI
+  - FastAPI 自动文档
+  - FastAPI 和 Flask 对比
+  - 机器学习模型部署
+---
+
+## 什么是 FastAPI？
+
+FastAPI 是一个用于构建 Python API 的现代 Web 框架。它以 ASGI 为运行基础，通过 Python 类型注解声明接口契约，并自动完成请求校验、数据序列化和 OpenAPI 文档生成。
+
+![FastAPI 的执行速度、开发效率与生态定位](/blog/what-is-fastapi/scene-1.png)
+
+“Fast”有两层含义：一是异步 I/O 和轻量请求处理带来的运行性能，二是类型驱动开发、自动校验和自动文档带来的开发效率。它尤其适合前后端分离 API、微服务、数据服务和机器学习模型接口。
+
+如果只记住一个结论：FastAPI 的优势不是某个孤立功能，而是把异步、类型校验和 API 规范连接成了同一套开发流程。
+
+## 传统 Python API 开发有哪些隐性成本？
+
+传统 Python Web 框架通常提供很高的自由度，但自由度也意味着团队需要自行选择并维护参数校验、序列化、接口文档和异步部署方案。
+
+![传统 Python Web 框架在请求校验、接口文档和并发处理上的额外工作](/blog/what-is-fastapi/scene-2.png)
+
+以一个用户注册接口为例，开发者至少要处理这些问题：
+
+- 请求体是不是合法 JSON，必填字段是否存在。
+- 邮箱、年龄和字符串长度是否符合规则。
+- 错误响应是否统一，前端能否定位到具体字段。
+- 接口变更后，文档是否同步更新。
+- 数据库或第三方 API 响应较慢时，如何避免阻塞其他请求。
+
+Flask 并非不能解决这些问题，Django 及其生态也提供了成熟方案。差别在于 FastAPI 把类型模型、校验结果和 OpenAPI 契约设为默认路径，减少了团队拼装多个扩展以及同步维护代码和文档的工作。
+
+## FastAPI 的底层机制是什么？
+
+FastAPI 的核心由 Starlette、Pydantic 和 Python 类型注解共同组成：Starlette 负责 Web 与 ASGI 能力，Pydantic 负责数据模型，类型注解则把二者连接成接口契约。
+
+![FastAPI 由 Starlette、Pydantic 和 Python 类型注解共同支撑](/blog/what-is-fastapi/scene-3.png)
+
+| 组成部分 | 主要职责 | 在接口中的表现 |
+| --- | --- | --- |
+| Starlette | ASGI 请求处理、路由、中间件、WebSocket、后台任务 | 接收请求并调度同步或异步端点 |
+| Pydantic | 数据解析、校验、序列化和 JSON Schema | 把请求体转换为类型明确的 Python 对象 |
+| Python 类型注解 | 描述参数、返回值和依赖关系 | 同时服务于编辑器、运行时校验和文档生成 |
+| OpenAPI | 描述路径、参数、请求体、响应和安全方案 | 为 Swagger UI、ReDoc 和客户端生成器提供标准契约 |
+
+例如，`age: int` 不再只是给编辑器看的提示。FastAPI 会读取它，Pydantic 会在运行时验证输入，生成的 OpenAPI 也会把该字段声明为整数。这就是“类型注解变成活规范”的含义。
+
+## FastAPI 的异步为什么能提高并发能力？
+
+FastAPI 的异步优势主要出现在 I/O 密集型任务中。当代码等待数据库、缓存、文件或外部 HTTP 服务时，事件循环可以先处理其他请求，数据就绪后再恢复原任务。
+
+![同步服务员与异步服务员处理等待任务的差异](/blog/what-is-fastapi/scene-4.png)
+
+同步处理像服务员下单后一直站在后厨门口等待，当前请求没有结束就无法腾出执行位置。异步处理则允许服务员在等待出餐时继续接待其他桌，等后厨通知后再回来取餐。
+
+在 FastAPI 中，端点可以这样声明：
+
+```python
+import httpx
+from fastapi import FastAPI
+
+app = FastAPI()
+
+
+@app.get("/weather/{city}")
+async def get_weather(city: str):
+    async with httpx.AsyncClient() as client:
+        response = await client.get(
+            "https://example.com/weather",
+            params={"city": city},
+        )
+    return response.json()
+```
+
+`await` 表示当前协程需要等待，但线程不必原地空转。这个模型能以较少线程维持大量正在等待 I/O 的连接，因此很适合 API 网关、聊天服务和需要调用多个外部服务的应用。
+
+不过，`async def` 并不会让所有代码自动变快：
+
+- 异步端点内部调用同步数据库驱动或 `requests`，仍会阻塞事件循环。
+- 图像处理、模型推理和复杂计算属于 CPU 或计算密集任务，应交给进程池、任务队列、GPU 服务或独立工作进程。
+- FastAPI 也支持普通 `def` 端点，并会在线程池中执行它们；应根据所用依赖是同步还是异步来选择。
+
+因此，FastAPI 的并发优势来自“异步框架 + 非阻塞依赖 + 正确部署”的组合，而不是只把函数前缀改成 `async`。
+
+## FastAPI 如何自动生成 API 文档？
+
+FastAPI 会根据路由、参数类型、Pydantic 模型和响应声明生成 OpenAPI Schema，再默认提供 Swagger UI 和 ReDoc 两套文档页面。
+
+![FastAPI 从接口代码和 Pydantic 模型自动生成交互式文档](/blog/what-is-fastapi/scene-5.png)
+
+服务启动后，常用入口是：
+
+- `/openapi.json`：机器可读的 OpenAPI Schema。
+- `/docs`：可直接填写参数并发起请求的 Swagger UI。
+- `/redoc`：适合浏览接口结构的 ReDoc 页面。
+
+这套机制让代码、校验规则与基础接口文档共享同一个来源。字段新增、类型修改或路径调整后，文档会随应用重新生成，也可用于生成 TypeScript、Python 等语言的客户端代码。
+
+自动生成并不等于“不需要写文档”。业务含义、权限边界、错误处理、幂等规则和调用示例仍需要通过 `summary`、`description`、响应模型及补充说明表达。OpenAPI 能消除重复抄写，但不能代替接口设计。
+
+## Pydantic 如何把类型变成运行时防线？
+
+Pydantic 模型会在业务函数运行前解析和验证请求数据。输入不符合字段类型或约束时，FastAPI 默认返回结构化的 `422 Unprocessable Entity` 响应，并指出错误位置和原因。
+
+![Pydantic 定义模型、校验请求并返回字段级错误的过程](/blog/what-is-fastapi/scene-6.png)
+
+下面是一个用户注册模型：
+
+```python
+from typing import Annotated
+
+from fastapi import FastAPI
+from pydantic import BaseModel, EmailStr, Field
+
+app = FastAPI()
+
+
+class UserRegister(BaseModel):
+    username: Annotated[str, Field(min_length=2, max_length=30)]
+    email: EmailStr
+    age: Annotated[int, Field(gt=0, le=150)]
+
+
+@app.post("/users", status_code=201)
+async def create_user(user: UserRegister):
+    return {"username": user.username, "email": user.email}
+```
+
+如果请求中的邮箱格式错误，或 `age` 为负数，请求不会进入 `create_user`。前端会收到字段路径、错误类型和说明，避免每个接口重复编写一组 `if-else`。
+
+类型校验也有边界。`EmailStr` 能检查格式，却不能证明邮箱真实存在；`age > 0` 也不能判断用户是否满足某项业务资格。跨字段规则、数据库唯一性、权限和业务状态仍然要由应用显式处理。
+
+## 如何用几行代码创建第一个 FastAPI 接口？
+
+一个可运行的问候接口只需要创建应用、声明路由和标注参数类型。FastAPI 会把 `name` 识别为查询参数，并把它写入自动文档。
+
+![从几行 FastAPI 代码到交互式文档和客户端调用的完整流程](/blog/what-is-fastapi/scene-7.png)
+
+先安装 FastAPI CLI 与服务端：
+
+```bash
+python -m pip install "fastapi[standard]"
+```
+
+创建 `main.py`：
+
+```python
+from typing import Annotated
+
+from fastapi import FastAPI, Query
+
+app = FastAPI(title="Greeting API", version="1.0.0")
+
+
+@app.get("/hello", summary="返回问候语")
+async def hello(
+    name: Annotated[str, Query(min_length=1, max_length=30)],
+):
+    return {"message": f"你好，{name}！"}
+```
+
+在开发环境启动服务：
+
+```bash
+fastapi dev main.py
+```
+
+然后访问 `http://127.0.0.1:8000/docs`，输入 `name` 并点击执行即可看到响应。这个例子同时得到了查询参数校验、JSON 序列化、OpenAPI Schema 和交互式测试页面。
+
+## FastAPI 的性能真的能媲美 Node.js 和 Go 吗？
+
+FastAPI 在 Python Web 框架中通常有较低的框架开销，但不能脱离具体业务直接断言它与 Node.js 或 Go 性能相同。公开基准测试往往只测简单 JSON、固定硬件和特定服务器配置，不代表真实服务的数据库、网络、鉴权和序列化负载。
+
+更准确的性能链路是：FastAPI 基于 Starlette 和 ASGI，通常由 Uvicorn 等 ASGI 服务器运行；Uvicorn 在受支持的平台安装并启用 `uvloop` 时，可以使用它作为事件循环实现。FastAPI 或 Starlette 本身并不保证所有环境都会使用 `uvloop`。
+
+生产选型应重点测量：
+
+1. 真实请求的 P50、P95 和 P99 延迟。
+2. 目标并发下的吞吐量、错误率和内存占用。
+3. 数据库连接池、外部 API 和缓存是否成为瓶颈。
+4. 多工作进程、容器资源限制和反向代理配置。
+5. 请求模型大小以及校验、序列化带来的 CPU 成本。
+
+对多数 Python 团队而言，FastAPI 的现实价值不是“保证追平 Go”，而是在保留 Python 数据与 AI 生态的同时，提供足够高效的 I/O 并发和清晰的接口工程体验。
+
+## FastAPI 适合哪些应用场景？
+
+FastAPI 适合以 HTTP API 为核心、依赖类型契约，并需要与前端或其他服务协作的项目。
+
+![FastAPI 在前后端分离、微服务、模型部署和团队协作中的应用](/blog/what-is-fastapi/scene-9.png)
+
+| 场景 | FastAPI 提供的直接价值 | 需要额外关注 |
+| --- | --- | --- |
+| 前后端分离项目 | OpenAPI 契约、请求校验、客户端生成 | 鉴权、版本管理、跨域策略 |
+| 微服务与内部 API | 轻量路由、依赖注入、异步调用 | 链路追踪、重试、超时和服务治理 |
+| 机器学习模型服务 | 与 NumPy、Pandas、PyTorch 等 Python 生态衔接自然 | 推理通常是计算密集任务，需独立扩缩容 |
+| 数据查询服务 | 适合等待数据库和外部 API 的 I/O 场景 | 异步驱动、连接池和查询上限 |
+| WebSocket 或流式接口 | Starlette 提供对应的 ASGI 能力 | 断线恢复、背压、连接生命周期 |
+
+例如，图像识别模型可以通过 `/predict` 接口接收上传文件或对象存储地址，再返回类别和置信度。对于大图片，不建议把 Base64 直接塞进 JSON：它会增加约三分之一的编码体积，还会提高内存与解析成本；文件上传或对象存储 URL 通常更合适。
+
+## FastAPI、Flask 和 Django REST Framework 怎么选？
+
+FastAPI 不是所有 Python Web 项目的唯一答案。选择框架时，应比较项目目标、团队经验和已有系统，而不是只看“异步”或基准测试排名。
+
+| 维度 | FastAPI | Flask | Django REST Framework |
+| --- | --- | --- | --- |
+| 默认定位 | 类型驱动的现代 API | 轻量、自由组合的 Web 框架 | 基于 Django 的完整 REST API 工具集 |
+| 数据校验与序列化 | Pydantic 深度集成 | 通常自行选择扩展 | Serializer 体系成熟 |
+| OpenAPI 文档 | 默认自动生成 | 通常依赖扩展或自行维护 | 可通过内置能力与生态工具生成 |
+| 异步路径 | ASGI 原生设计 | 支持异步视图，但整体取决于扩展与部署方式 | 受 Django 与第三方组件异步支持程度影响 |
+| 内置后台能力 | 相对精简，按需集成 | 相对精简，按需集成 | ORM、认证、管理后台和权限生态完整 |
+| 更适合 | 新 API、微服务、AI/数据服务 | 小型服务、原型、需要高度自由的项目 | 数据库驱动、后台管理和权限复杂的业务系统 |
+
+新建纯 API 服务时，FastAPI 通常值得优先评估。已有 Flask 或 Django 系统如果运行稳定，则不应为了“更现代”而重写；迁移收益必须覆盖回归风险、培训成本和生态替换成本。
+
+## FastAPI 有哪些限制和常见误区？
+
+FastAPI 主要解决 Web 接口层的效率问题，不会自动解决数据库性能、业务建模、分布式可靠性或安全治理。
+
+| 限制或误区 | 实际问题 | 应对方式 |
+| --- | --- | --- |
+| `async` 等于高性能 | 阻塞库会卡住事件循环，计算任务也不会因协程变快 | 使用异步驱动；把重计算移出请求进程 |
+| 类型正确等于业务正确 | 格式校验无法验证权限、库存和状态转换 | 单独实现领域规则与事务校验 |
+| 自动文档永远准确 | 动态响应、未声明错误和业务语义可能缺失 | 声明响应模型、错误结构和接口说明，并做契约测试 |
+| 单进程能撑住任意并发 | 文件描述符、连接池、内存和下游服务都有上限 | 基于压测配置工作进程、限流、超时和容量告警 |
+| 后台任务适合所有耗时工作 | 进程退出会影响进程内任务，缺少持久重试与独立扩缩容 | 重要长任务使用 Celery、Dramatiq 等任务系统 |
+| 框架会自动保证安全 | 认证、授权、密钥管理和输入边界仍需设计 | 使用成熟安全方案并做最小权限、审计与测试 |
+
+如果项目依赖大量只支持同步调用的库，或主要工作是 CPU 密集计算，FastAPI 的异步优势会明显缩小。框架能提供良好起点，但生产可靠性仍来自完整的工程设计。
+
+## 常见问题
+
+### FastAPI 为什么比 Flask 更适合写 API？
+
+FastAPI 默认集成了类型驱动的数据校验、序列化和 OpenAPI 文档，并以 ASGI 为基础设计异步请求处理。Flask 更自由、生态成熟，但同等能力通常需要开发者额外选型和组合扩展。
+
+### FastAPI 一定比 Flask 快吗？
+
+不一定。简单异步 I/O 基准中 FastAPI 通常表现很好，但真实性能取决于数据库、外部服务、业务代码、服务器配置和并发模型。小型同步接口的框架差异可能不是主要瓶颈。
+
+### FastAPI 中应该使用 `async def` 还是 `def`？
+
+调用支持 `await` 的数据库或 HTTP 客户端时使用 `async def`；依赖同步阻塞库时可以使用普通 `def`，让 FastAPI 在线程池中执行。不要在 `async def` 内直接运行长时间阻塞代码。
+
+### FastAPI 的 `/docs` 可以替代 Postman 吗？
+
+`/docs` 足以完成接口发现和常规手动测试，但不能完全替代 Postman、Bruno 或自动化测试工具提供的环境变量、复杂请求集合、脚本和持续集成能力。
+
+### FastAPI 适合机器学习模型部署吗？
+
+适合把 Python 模型封装成 HTTP API，但模型推理的并发、显存、批处理和扩缩容要单独设计。大型模型通常更适合由专用推理服务承载，FastAPI 负责鉴权、校验和业务编排。
+
+### FastAPI 可以直接用于生产环境吗？
+
+可以，但需要使用合适的 ASGI 服务器和部署方式，并补齐反向代理、TLS、日志、监控、超时、限流、进程管理和安全配置。开发命令 `fastapi dev` 不应直接作为生产启动方式。
+
+## 总结
+
+FastAPI 是一个基于 ASGI、Python 类型注解、Pydantic 和 OpenAPI 构建的 Python API 框架。异步 I/O 帮助服务在等待数据库或网络时处理其他请求；类型模型同时驱动校验、序列化与交互式文档，从而减少重复代码和契约维护成本。
+
+![FastAPI 将异步处理、类型校验和自动文档整合为一套 API 开发流程](/blog/what-is-fastapi/scene-10.png)
+
+对于新的 Python API、微服务和 AI 数据服务，FastAPI 通常是值得优先评估的选择。但“首选”不等于“无条件最好”：已有系统、同步依赖、计算密集负载和完整后台需求，都可能让 Flask、Django REST Framework 或专用推理服务更合适。
+
+FastAPI 真正改变的不是某一项语法，而是让接口代码本身成为可执行、可校验、可生成文档的契约。
+
+## 参考资料
+
+- [FastAPI 官方文档](https://fastapi.tiangolo.com/)
+- [FastAPI：并发与 async/await](https://fastapi.tiangolo.com/async/)
+- [FastAPI：基于标准的主要特性](https://fastapi.tiangolo.com/features/)
+- [FastAPI：请求体与 Pydantic 模型](https://fastapi.tiangolo.com/tutorial/body/)
+- [FastAPI：部署概念](https://fastapi.tiangolo.com/deployment/concepts/)
+- [Starlette 官方文档](https://www.starlette.io/)
+- [Pydantic 官方文档](https://docs.pydantic.dev/latest/)
+- [Uvicorn Event Loop 文档](https://www.uvicorn.org/concepts/event-loop/)
