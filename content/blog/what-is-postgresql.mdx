@@ -1,0 +1,336 @@
+---
+title: PostgreSQL 为什么这么强？一文看懂它的核心能力与底层原理
+date: 2026-07-28
+tag: 数据库
+excerpt: PostgreSQL 是一个开源的对象关系型数据库，它以可靠事务、MVCC、丰富索引、JSONB 和可扩展架构同时处理结构化、半结构化及复杂查询场景。
+readingTime: 16 分钟
+cover: /blog/what-is-postgresql/scene-1.png
+keywords:
+  - PostgreSQL
+  - PostgreSQL 是什么
+  - PostgreSQL 为什么强
+  - PostgreSQL 教程
+  - Postgres
+  - 关系型数据库
+  - 对象关系型数据库
+  - PostgreSQL 和 MySQL 的区别
+  - PostgreSQL 核心原理
+  - ACID 事务
+  - WAL 预写日志
+  - MVCC 多版本并发控制
+  - PostgreSQL 索引
+  - JSONB
+  - PostGIS
+  - PostgreSQL 高可用
+  - PostgreSQL 扩展
+---
+
+## 什么是 PostgreSQL？
+
+PostgreSQL 是一个开源的对象关系型数据库管理系统（ORDBMS）。它以关系模型和 SQL 为基础，同时提供可靠事务、复杂查询、丰富数据类型、JSONB、全文检索、地理空间能力以及可扩展接口。
+
+![PostgreSQL 的定义、核心特点以及与 MySQL 的定位对比](/blog/what-is-postgresql/scene-1.png)
+
+简单说，PostgreSQL 不只是“把数据放进表格”的工具。它更像一个可扩展的数据处理平台：既能管理订单、账户等强结构化数据，也能处理 JSON 文档、地理位置、时间序列和向量等数据。
+
+PostgreSQL 强的原因可以归纳为五点：
+
+1. **数据可靠**：用 ACID 事务、WAL 和约束保证数据一致性与可恢复性。
+2. **并发能力成熟**：通过 MVCC 减少读写互相阻塞。
+3. **查询能力完整**：支持复杂 JOIN、窗口函数、CTE、递归查询和多种索引。
+4. **数据类型丰富**：除常见关系字段外，还支持数组、范围、网络地址、JSONB 和自定义类型。
+5. **扩展边界很高**：可以增加函数、操作符、索引方法、过程语言和扩展插件。
+
+因此，PostgreSQL 的“强”不是某一项跑分领先，而是它能把可靠事务、复杂查询和持续扩展放在同一个数据库内完成。
+
+## PostgreSQL 这个名字是怎么来的？
+
+PostgreSQL 起源于加州大学伯克利分校的 POSTGRES 研究项目。该项目由 Michael Stonebraker 教授领导，名称中的 “Postgres” 表示它是早期 Ingres 数据库之后的新探索。
+
+![PostgreSQL 从伯克利 POSTGRES 项目到支持 SQL 并延续至今的名称演变](/blog/what-is-postgresql/scene-2.png)
+
+项目后来加入 SQL 支持，曾使用 Postgres95 这个名称，并在 1996 年更名为 PostgreSQL。社区日常交流中仍常把 PostgreSQL 简称为 Postgres。
+
+这段历史也解释了它的设计取向：PostgreSQL 从一开始就不满足于实现基础关系表，而是希望数据库能够理解更复杂的数据类型和关系，并允许用户扩展数据库本身。
+
+## 先理解关系型数据库的基础
+
+关系型数据库用表组织数据，用行表示记录，用列表示字段，再通过主键和外键建立表之间的关系。SQL 是定义、查询和修改这些数据的标准语言。
+
+![关系型数据库中的表、行、列、主键、外键和关联查询](/blog/what-is-postgresql/scene-3.png)
+
+以用户和订单为例：
+
+- `users.id` 是用户表主键，唯一标识一个用户。
+- `orders.user_id` 是外键，指向下单用户。
+- 一个用户可以对应多笔订单，形成一对多关系。
+- 数据库可以用 JOIN 一次查询用户及其订单。
+
+```sql
+SELECT u.name, o.product, o.amount
+FROM users AS u
+JOIN orders AS o ON o.user_id = u.id
+WHERE u.id = 1;
+```
+
+PostgreSQL 对关系模型的支持很严格。主键、外键、唯一约束、检查约束和非空约束都可以由数据库统一执行，而不是只依赖应用代码自觉维护。
+
+## 为什么 PostgreSQL 被称为对象关系型数据库？
+
+PostgreSQL 被称为对象关系型数据库，是因为它在关系表与 SQL 之上加入了自定义类型、复合类型、域、函数重载和表继承等能力。开发者可以扩展数据库能理解的数据与操作，而不只是增加普通字段。
+
+![PostgreSQL 在关系模型之上提供自定义类型、函数、继承和扩展能力](/blog/what-is-postgresql/scene-4.png)
+
+例如，可以把地址定义为一个复合类型：
+
+```sql
+CREATE TYPE address AS (
+  country text,
+  city text,
+  street text
+);
+```
+
+此后，表可以直接使用 `address` 类型。还可以为自定义类型编写函数、操作符，甚至提供配套索引行为。
+
+这里的“对象关系”不等于把 Java 或 Python 对象原样塞进数据库。它指的是数据库本身允许用户定义更复杂的类型、行为和继承关系，同时保留关系模型、SQL 与事务能力。
+
+## PostgreSQL 的表继承有什么用？
+
+PostgreSQL 支持让一张子表继承父表的列和检查约束。查询父表时，默认也可以读取子表数据，这种能力适合表达少量明确的类型层级。
+
+![PostgreSQL 表继承用父表保存通用字段并让子表扩展专属字段](/blog/what-is-postgresql/scene-5.png)
+
+例如，`cars` 和 `motorcycles` 可以继承 `vehicles` 的通用字段，再分别增加车门数或排量等属性。
+
+不过，表继承不是 PostgreSQL 强大的主要原因，也不是所有业务建模的首选：
+
+- 唯一约束和外键不会自动覆盖整个继承层级。
+- 部分 ORM 对表继承支持有限。
+- 用于大表拆分时，声明式分区通常比传统继承更清晰。
+- 多态业务模型也可以用普通关联表或类型字段表达。
+
+因此，表继承体现了 PostgreSQL 的对象关系能力，但实际项目应先比较声明式分区、普通关系建模和应用层多态。
+
+## PostgreSQL 如何保证事务可靠？
+
+PostgreSQL 通过 ACID 事务、WAL 预写日志和并发控制共同保证数据可靠。一次事务要么完整提交，要么完整回滚，不应停留在只执行一半的中间状态。
+
+![以银行转账说明 PostgreSQL 的 ACID 事务与 WAL 预写日志](/blog/what-is-postgresql/scene-6.png)
+
+ACID 包含四个要求：
+
+| 属性 | 含义 | 转账场景中的作用 |
+| --- | --- | --- |
+| 原子性 Atomicity | 一组操作全部成功或全部失败 | A 扣款和 B 入账不能只完成一个 |
+| 一致性 Consistency | 事务前后都满足约束与业务规则 | 账户、流水和约束保持合法 |
+| 隔离性 Isolation | 并发事务按隔离级别控制相互影响 | 避免读到不应可见的中间结果 |
+| 持久性 Durability | 已提交结果在故障后仍可恢复 | 提交成功后不能因进程重启而消失 |
+
+WAL（Write-Ahead Logging，预写日志）的关键规则是：数据页写入磁盘之前，描述这次修改的日志必须先持久化。数据库异常重启后，可以重放 WAL，把数据恢复到一致状态。
+
+```sql
+BEGIN;
+
+UPDATE accounts SET balance = balance - 1000 WHERE id = 1;
+UPDATE accounts SET balance = balance + 1000 WHERE id = 2;
+INSERT INTO transfers (from_id, to_id, amount) VALUES (1, 2, 1000);
+
+COMMIT;
+```
+
+WAL 不是备份的替代品。误删数据、存储介质损坏、错误配置或日志与数据一起丢失时，仍需要基础备份、WAL 归档和经过验证的恢复流程。
+
+## MVCC 为什么能提高并发能力？
+
+MVCC 是 Multi-Version Concurrency Control，即多版本并发控制。PostgreSQL 更新数据时会创建新版本并保留旧版本，让不同事务根据自己的快照读取合适的数据版本。
+
+![PostgreSQL MVCC 通过数据快照让普通读写尽量互不阻塞](/blog/what-is-postgresql/scene-7.png)
+
+它带来的直接效果是：普通 `SELECT` 通常不会阻塞普通 `UPDATE`，普通 `UPDATE` 也不会阻塞符合可见性规则的读取。读事务看到的是一致快照，写事务可以继续生成新版本。
+
+一次简化的 MVCC 流程如下：
+
+1. 事务开始时获得一个数据可见性快照。
+2. 其他事务更新某行时，数据库创建该行的新版本。
+3. 旧事务仍可读取对其快照可见的旧版本。
+4. 新事务在提交后可读取新版本。
+5. 不再被任何事务需要的旧版本由 VACUUM 后续清理。
+
+MVCC 不是“完全没有锁”。更新同一行仍会竞争，DDL、显式锁和部分约束检查也可能阻塞。长期事务还会阻止旧版本回收，造成表膨胀，因此 autovacuum、事务时长和死元组监控都是 PostgreSQL 运维的核心。
+
+## PostgreSQL 为什么有这么多索引？
+
+不同查询的数据结构和匹配方式不同，不存在一种索引能够高效处理所有问题。PostgreSQL 提供多种索引方法，让查询可以按等值、范围、全文、数组、空间和相似度等条件选择合适路径。
+
+![PostgreSQL 的 B-tree、Hash、GIN、GiST 与地理空间索引](/blog/what-is-postgresql/scene-8.png)
+
+| 索引类型 | 擅长什么 | 常见场景 |
+| --- | --- | --- |
+| B-tree | 等值、范围、排序 | 主键、时间、价格、分页排序 |
+| Hash | 等值比较 | 只使用 `=` 的特定查询 |
+| GIN | 一个值中包含多个元素 | JSONB、数组、全文检索 |
+| GiST | 可扩展的搜索树 | 几何、范围、最近邻、PostGIS |
+| BRIN | 按物理顺序概括大块数据 | 超大时间序列表、追加写日志 |
+
+下面的 GIN 索引可以加速 JSONB 包含查询：
+
+```sql
+CREATE INDEX idx_products_attributes
+ON products USING GIN (attributes);
+
+SELECT *
+FROM products
+WHERE attributes @> '{"color": "black"}';
+```
+
+索引不是越多越好。每个索引都会占用空间，并增加插入、更新、删除和维护成本。正确做法是结合真实查询、数据分布与 `EXPLAIN (ANALYZE, BUFFERS)` 验证执行计划。
+
+## PostgreSQL 的扩展能力强在哪里？
+
+PostgreSQL 的扩展能力不是简单安装插件，而是允许用户扩展类型、函数、操作符、聚合、过程语言和索引访问方法。很多功能可以在不修改 PostgreSQL 核心代码的情况下接入数据库。
+
+![PostgreSQL 可通过过程语言、函数、触发器和扩展插件承载近数据逻辑](/blog/what-is-postgresql/scene-9.png)
+
+常见扩展包括：
+
+- **PostGIS**：增加地理空间类型、函数与空间索引。
+- **pgvector**：存储向量并执行相似度检索。
+- **TimescaleDB**：面向时间序列工作负载提供分区与分析能力。
+- **pg_trgm**：提供三元组相似度匹配和模糊搜索。
+- **pgaudit**：补充数据库审计能力。
+
+数据库函数可以使用 SQL、PL/pgSQL，也可以在安装相应过程语言后使用其他受支持语言。触发器则可以在数据变更前后执行规则。
+
+但“能放进数据库”不等于“都应该放进数据库”。高计算量、长时间运行、频繁访问外部网络或需要独立扩缩容的逻辑，通常更适合放在应用服务中。数据库内逻辑应优先用于靠近数据、要求事务一致性且边界清晰的操作。
+
+## JSONB 为什么让 PostgreSQL 更灵活？
+
+JSONB 是 PostgreSQL 的二进制 JSON 类型。它允许在关系表中保存结构可变的数据，同时继续使用事务、JOIN、约束和索引，因此适合“稳定核心字段 + 灵活扩展字段”的混合模型。
+
+![PostgreSQL JSONB 兼顾文档数据灵活性与关系型事务保障](/blog/what-is-postgresql/scene-10.png)
+
+例如，商品的 ID、价格和库存适合使用固定列，颜色、尺寸或设备参数可以放在 JSONB 属性中：
+
+```sql
+CREATE TABLE products (
+  id bigint GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+  name text NOT NULL,
+  price numeric(12, 2) NOT NULL CHECK (price >= 0),
+  attributes jsonb NOT NULL DEFAULT '{}'
+);
+```
+
+JSONB 支持字段访问、包含判断、路径查询和 GIN 索引，但它不是让表结构消失的理由。经常用于 JOIN、排序、约束和统计的稳定字段，通常应保留为普通列；否则类型约束、查询可读性和统计信息都会变差。
+
+PostgreSQL 也不是文档数据库的完全替代品。如果业务主要处理整份文档、需要专用分片模型或依赖特定文档数据库生态，仍应按访问模式选择系统。
+
+## PostgreSQL 如何实现复制与高可用？
+
+PostgreSQL 可以通过流复制把主库产生的 WAL 发送给备用库。备用库持续重放日志以保持接近主库的状态，并可承担只读查询或在故障时被提升为新主库。
+
+![PostgreSQL 通过流复制、逻辑复制和故障切换支持高可用架构](/blog/what-is-postgresql/scene-11.png)
+
+常见复制方式包括：
+
+| 方式 | 复制内容 | 典型用途 | 主要限制 |
+| --- | --- | --- | --- |
+| 物理流复制 | WAL 对数据集的底层修改 | 同版本主备、只读副本、故障切换 | 目标库通常复制整个实例，跨大版本限制更多 |
+| 同步复制 | 提交时等待指定备用库确认 | 降低主库故障时的数据丢失风险 | 网络或备用库异常会增加延迟甚至影响写入可用性 |
+| 逻辑复制 | 按发布与订阅复制表级变更 | 选择性同步、迁移、部分跨版本场景 | DDL、序列和冲突处理需要额外设计 |
+
+需要区分“复制”和“高可用”：复制负责产生数据副本，高可用还需要健康检查、主库选举、故障切换、客户端重连、脑裂防护和切换后的副本重建。生产环境常配合 Patroni、repmgr、云托管服务或其他控制系统完成自动化。
+
+副本也不是备份。误删除和错误更新可能同样被复制到备用库，因此仍要保留独立备份并定期演练恢复。
+
+## PostgreSQL 适合哪些应用场景？
+
+PostgreSQL 适合数据关系复杂、事务可靠性要求高、查询形式多样，或希望在一个系统内兼顾多种数据类型的业务。
+
+![PostgreSQL 在金融、医疗、物流和电商中的应用及查询优化器作用](/blog/what-is-postgresql/scene-12.png)
+
+| 场景 | 为什么适合 | 典型能力 |
+| --- | --- | --- |
+| 金融与账务系统 | 事务、约束和审计要求高 | ACID、隔离级别、精确数值、WAL |
+| SaaS 与企业应用 | 关系复杂、查询变化多 | JOIN、窗口函数、行级安全、丰富类型 |
+| 电商与内容平台 | 同时需要订单关系和灵活属性 | 关系表、JSONB、全文检索、GIN |
+| GIS 与位置服务 | 需要空间关系和距离查询 | PostGIS、GiST、空间函数 |
+| AI 与语义检索 | 业务数据与向量需要联合过滤 | pgvector、SQL、事务与元数据过滤 |
+| 时间序列与物联网 | 数据持续追加并按时间分析 | 分区、BRIN、TimescaleDB 扩展 |
+
+PostgreSQL 的查询优化器会根据表统计信息、过滤条件、连接顺序和索引成本选择执行计划。复杂 SQL 并不意味着一定慢，但统计信息、索引设计和数据分布必须与真实查询匹配。
+
+## PostgreSQL 和 MySQL 应该怎么选？
+
+PostgreSQL 与 MySQL 都是成熟的开源关系型数据库。大多数常规 Web 应用两者都能完成，选择应基于团队经验、云服务条件、数据模型和实际查询，而不是只比较功能清单。
+
+| 维度 | PostgreSQL | MySQL | 决策提示 |
+| --- | --- | --- | --- |
+| SQL 与复杂查询 | 功能完整，复杂类型和查询能力突出 | 常见 CRUD 与 Web 生态成熟 | 复杂分析、约束和 SQL 表达优先评估 PostgreSQL |
+| 扩展体系 | 类型、函数、索引、操作符和扩展接口丰富 | 插件与存储引擎体系成熟 | 需要 PostGIS、pgvector 等扩展时 PostgreSQL 更直接 |
+| JSON | JSONB 可索引并与关系查询深度结合 | 支持原生 JSON 与相关索引方案 | 用真实 JSON 查询做基准测试 |
+| 复制与高可用 | 流复制、逻辑复制，工具组合灵活 | 主从、组复制与相关生态成熟 | 优先看托管平台与团队运维经验 |
+| 学习与维护 | 功能和调优选项较多 | 常规场景上手直接 | 已有稳定技术栈通常比理论差异更重要 |
+
+如果系统依赖复杂 JOIN、地理空间、JSONB、向量检索、自定义类型或严格数据约束，PostgreSQL 往往更合适。如果团队已有成熟的 MySQL 运维体系，业务主要是常规事务与简单查询，迁移到 PostgreSQL 未必能自动获得收益。
+
+## PostgreSQL 有哪些限制和常见误区？
+
+PostgreSQL 功能丰富，但它不是无需设计和维护的万能数据库。
+
+| 限制或误区 | 真实情况 | 应对方式 |
+| --- | --- | --- |
+| MVCC 会自动解决全部并发问题 | 热点行更新仍会锁冲突，长事务会阻碍清理 | 缩短事务，拆分热点，监控锁和死元组 |
+| 索引越多查询越快 | 索引增加写放大、存储和 VACUUM 成本 | 基于慢查询与执行计划建立索引 |
+| JSONB 可以代替表设计 | 过度 JSON 化会削弱约束、统计和可读性 | 稳定字段用列，变化字段再用 JSONB |
+| 有副本就不会丢数据 | 异步复制可能有延迟，误操作也会被复制 | 明确 RPO/RTO，配置备份与恢复演练 |
+| 扩展都可以直接上生产 | 扩展有版本、权限、升级和托管兼容问题 | 评估维护状态并测试升级路径 |
+| PostgreSQL 天然水平扩展 | 单实例写入仍受单机资源限制 | 先做查询优化、读副本和分区，再评估分片或分布式方案 |
+
+PostgreSQL 的功能越多，越需要明确边界。连接数、内存、自动清理、慢查询、备份恢复和版本升级仍然需要持续治理。高并发应用通常还会使用 PgBouncer 等连接池，避免大量短连接直接消耗数据库进程资源。
+
+## 常见问题
+
+### PostgreSQL 是免费的吗？
+
+是。PostgreSQL 使用宽松的 PostgreSQL License，可以免费用于个人、商业和闭源项目。自建数据库仍会产生服务器、备份、监控和运维成本，托管服务则按云资源与服务能力收费。
+
+### PostgreSQL 适合初学者吗？
+
+适合。初学者可以先掌握表、主键、外键、CRUD、JOIN、事务和索引，再逐步学习执行计划、MVCC、VACUUM、复制和扩展。无需一开始就使用所有高级功能。
+
+### PostgreSQL 能存 JSON 吗？
+
+能。PostgreSQL 提供 `json` 和 `jsonb` 两种类型，实际业务更常使用支持高效处理与索引的 JSONB。稳定且需要约束的字段仍应优先使用普通关系列。
+
+### PostgreSQL 适合高并发吗？
+
+适合大量读写并发场景，但性能取决于查询、索引、事务长度、连接管理、硬件和数据分布。MVCC 能减少普通读写冲突，却不能消除热点更新、锁竞争和单机资源上限。
+
+### PostgreSQL 能做向量数据库吗？
+
+安装 pgvector 扩展后，PostgreSQL 可以保存向量、建立近似索引并执行相似度查询。它适合需要把向量检索与业务表、权限和事务结合的系统；超大规模或高度专用的向量检索仍应通过实际压测与专用方案比较。
+
+### PostgreSQL 的复制等于备份吗？
+
+不等于。复制主要服务于可用性和读扩展，错误删除、逻辑损坏也可能同步到副本。备份需要独立保留历史恢复点，并验证能否在目标时间内恢复。
+
+## 总结：PostgreSQL 为什么这么强？
+
+PostgreSQL 强在它以可靠关系型事务为底座，再向上提供 MVCC、多种索引、JSONB、过程语言、自定义类型和扩展插件。它不是把每类数据库简单拼在一起，而是让不同数据能力仍能共享 SQL、事务、权限和查询优化器。
+
+![PostgreSQL 以 ACID 为底座并通过索引、类型、过程语言和扩展支持多类数据](/blog/what-is-postgresql/scene-13.png)
+
+理解 PostgreSQL，可以记住三层结构：
+
+1. **底层是可靠性**：ACID、WAL、约束和备份恢复保护数据。
+2. **中层是查询与并发**：MVCC、优化器和多种索引支撑复杂工作负载。
+3. **上层是扩展性**：JSONB、PostGIS、pgvector、自定义类型和函数拓宽使用场景。
+
+最终结论是：PostgreSQL 不只是一款功能很多的关系型数据库，而是一套以事务一致性为核心、能够随业务持续扩展的数据平台。它真正强大的地方，是在保持数据可靠的前提下，仍然给开发者足够大的建模和查询空间。
+
+## 延伸阅读
+
+- [PostgreSQL 官方文档](https://www.postgresql.org/docs/)
+- [PostgreSQL 官方功能介绍](https://www.postgresql.org/about/featurematrix/)
+- [PostgreSQL 官方 Wiki：高可用、负载均衡与复制](https://wiki.postgresql.org/wiki/Replication,_Clustering,_and_Connection_Pooling)
