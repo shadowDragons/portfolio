@@ -1,0 +1,365 @@
+---
+title: 什么是 WebSocket？从握手到实时通信的完整过程
+date: 2026-08-01
+tag: Web 开发
+excerpt: WebSocket 是一种在客户端与服务器之间建立持久、全双工通信通道的协议，本文从 HTTP 升级握手、数据帧传输到重连与扩展讲清它的完整工作过程。
+readingTime: 16 分钟
+cover: /blog/what-is-websocket/scene-1.png
+keywords:
+  - WebSocket
+  - WebSocket 是什么
+  - 什么是 WebSocket
+  - WebSocket 教程
+  - WebSocket 原理
+  - WebSocket 握手
+  - WebSocket 连接过程
+  - WebSocket 数据帧
+  - WebSocket 心跳
+  - WebSocket 断线重连
+  - WebSocket 和 HTTP 的区别
+  - WebSocket 和 SSE 的区别
+  - WebSocket 和 HTTP/2 的区别
+  - WebSocket 实时通信
+  - 双向通信
+  - 全双工通信
+  - 长连接
+  - 实时消息推送
+---
+
+## 什么是 WebSocket？
+
+WebSocket 是一种建立在 TCP 之上的网络通信协议。它先通过 HTTP 完成握手，再把同一条连接升级为持久的全双工通道，使客户端和服务器都能随时主动发送消息。
+
+![WebSocket 通过持久连接实现浏览器与服务器之间的双向实时通信](/blog/what-is-websocket/scene-1.png)
+
+简单说，普通 HTTP 交互通常由客户端发起请求、服务器返回响应；WebSocket 连接建立后，双方不必为每条消息重新发送完整的 HTTP 请求头，也不必等对方先开口。
+
+WebSocket 的核心特点可以概括为四点：
+
+1. **持久连接**：握手成功后复用同一条底层连接，直到一方关闭或网络中断。
+2. **全双工通信**：客户端与服务器可以同时、独立地发送数据。
+3. **轻量帧传输**：消息使用 WebSocket 帧封装，不再重复携带完整 HTTP 头。
+4. **应用层实时推送**：适合聊天、协作编辑、行情、游戏状态和设备告警等持续变化的数据。
+
+WebSocket 的价值不是“让 HTTP 更快”，而是提供一种不同的通信模型：从客户端反复拉取，变成连接双方随时收发。
+
+## 已经有 HTTP，为什么还需要 WebSocket？
+
+HTTP 的语义是请求与响应：客户端先发起请求，服务器再针对这个请求返回结果。即使 HTTP/1.1 Keep-Alive、HTTP/2 和 HTTP/3 可以复用连接，常规 HTTP 应用交互仍然由请求驱动。
+
+![HTTP 请求响应模式需要客户端主动发起查询才能获得新数据](/blog/what-is-websocket/scene-2.png)
+
+假设一个股票页面每秒查询一次价格：
+
+```http
+GET /api/quotes/600519 HTTP/1.1
+Host: example.com
+Authorization: Bearer <token>
+```
+
+如果价格没有变化，这次查询仍然消耗请求解析、鉴权、路由和响应资源。一个客户端按每秒一次轮询，一天就是 `86,400` 次请求；轮询间隔调长会降低成本，却会增加发现变化的延迟。
+
+需要注意的是，“一次 HTTP 请求完成后 TCP 连接一定关闭”并不准确。现代 HTTP 通常会复用底层连接，但每次查询依然要遵守请求—响应语义。WebSocket 改变的是应用层通信方式，而不只是省去 TCP 建连。
+
+常见实时通信方案的差异如下：
+
+| 方案 | 数据方向 | 连接方式 | 适合场景 | 主要限制 |
+| --- | --- | --- | --- | --- |
+| 短轮询 | 客户端主动查询 | 周期性 HTTP 请求 | 低频状态查询、兼容性优先 | 空请求多，延迟取决于间隔 |
+| 长轮询 | 服务器延迟响应 | 每次消息后重新请求 | 简单通知、旧环境兼容 | 请求管理复杂，仍有重复开销 |
+| SSE | 服务器到浏览器 | 持久 HTTP 响应 | 通知流、日志流、文本事件 | 原生通道主要是单向，传输文本事件 |
+| WebSocket | 双向 | 持久全双工连接 | 聊天、协作、游戏状态 | 要自行处理重连、状态和扩展 |
+| WebRTC DataChannel | 端到端双向 | 常见为 UDP 上的 SCTP/DTLS | 浏览器间低延迟数据传输 | 信令、NAT 穿透和网络拓扑更复杂 |
+
+如果业务只需要服务器持续向浏览器发送文本事件，SSE 往往更简单；只有真正需要高频双向交互时，WebSocket 的优势才最明显。
+
+## WebSocket 为什么是全双工通道？
+
+全双工表示连接两端可以同时发送和接收数据，不需要遵循“一次请求对应一次响应”的节奏。服务器发现新消息后可以立即推送，客户端也可以在接收数据的同时上报操作。
+
+![WebSocket 建立全双工持久通道后客户端和服务器可以主动发送数据](/blog/what-is-websocket/scene-3.png)
+
+这条通道建立后，客户端不必不断询问“有新消息吗”。只要连接仍然可用，服务端就能直接发送新消息。连接会持续到以下任一情况发生：
+
+- 客户端或服务器发送关闭帧并结束连接。
+- 网络中断、设备休眠或进程退出。
+- 代理、负载均衡器或防火墙因空闲超时关闭连接。
+- 协议错误导致任一方强制断开。
+
+“长连接”不等于“永不掉线”。生产系统必须把连接中断视为正常事件，并设计心跳、重连和状态恢复。
+
+## WebSocket 连接建立要经历哪些步骤？
+
+一次经典的 WebSocket 连接要经过 TCP/TLS 建连、HTTP 升级请求、`101` 响应和数据帧传输。浏览器中的 `new WebSocket(url)` 会替应用完成这些协议细节。
+
+### 第零步：先建立 TCP 或 TLS 连接
+
+使用 `ws://` 时，客户端先建立 TCP 连接；使用 `wss://` 时，还要先完成 TLS 握手。生产环境通常使用 `wss://`，因为它能加密传输内容，并避免 HTTPS 页面加载不安全的 `ws://` 连接。
+
+经典 WebSocket 默认沿用 HTTP 端口：`ws://` 通常使用 80，`wss://` 通常使用 443。这让它更容易经过现有网络设施，但不代表任何代理都会自动正确转发升级请求。
+
+### 第一步：客户端发送 HTTP 升级请求
+
+客户端先发出一个 HTTP/1.1 请求，并用 `Upgrade` 相关请求头表示希望切换协议。
+
+![WebSocket 握手第一步由客户端发送包含 Upgrade 和 Sec-WebSocket-Key 的请求](/blog/what-is-websocket/scene-4.png)
+
+```http
+GET /chat HTTP/1.1
+Host: example.com
+Upgrade: websocket
+Connection: Upgrade
+Sec-WebSocket-Key: dGhlIHNhbXBsZSBub25jZQ==
+Sec-WebSocket-Version: 13
+Origin: https://example.com
+```
+
+关键字段的作用如下：
+
+- `Upgrade: websocket`：请求把当前连接切换为 WebSocket 协议。
+- `Connection: Upgrade`：声明 `Upgrade` 是当前连接的逐跳控制字段。
+- `Sec-WebSocket-Key`：客户端每次握手生成的 16 字节随机值，经 Base64 编码后发送。
+- `Sec-WebSocket-Version: 13`：RFC 6455 定义并广泛使用的协议版本。
+- `Origin`：浏览器发送页面来源，服务端应按允许列表检查它。
+
+`Sec-WebSocket-Key` 不是密码，也不负责身份认证。它的用途是让客户端确认服务端确实按 WebSocket 规则处理了这次升级。
+
+### 第二步：服务器返回 101 Switching Protocols
+
+服务端接受升级后，会返回 `101 Switching Protocols`。它把客户端的 Key 与固定 GUID `258EAFA5-E914-47DA-95CA-C5AB0DC85B11` 拼接，计算 SHA-1，再对结果进行 Base64 编码，得到 `Sec-WebSocket-Accept`。
+
+![WebSocket 握手第二步由服务器计算 Sec-WebSocket-Accept 并返回 101 响应](/blog/what-is-websocket/scene-5.png)
+
+对上面示例中的 Key，响应是：
+
+```http
+HTTP/1.1 101 Switching Protocols
+Upgrade: websocket
+Connection: Upgrade
+Sec-WebSocket-Accept: s3pPLMBiTxaQ9kYGzzhZRbK+xOo=
+```
+
+客户端用同一算法验证 `Sec-WebSocket-Accept`。匹配后，HTTP 升级握手完成，双方开始按 WebSocket 协议解析后续字节。
+
+这项 SHA-1 计算不是登录认证，也不是消息加密。认证应使用 Cookie、短期票据或应用层消息完成；加密应依靠 TLS，也就是 `wss://`。
+
+### 第三步：在原连接上传输 WebSocket 帧
+
+握手后，底层连接继续保持，但数据格式已经从 HTTP 消息切换为 WebSocket 帧。一个应用消息可以放在一个帧中，也可以拆成多个连续帧。
+
+![WebSocket 完成协议升级后在原有 TCP 连接上传输轻量数据帧](/blog/what-is-websocket/scene-6.png)
+
+WebSocket 帧头包含结束标志、操作码、掩码标志和负载长度等字段：
+
+| 字段 | 作用 |
+| --- | --- |
+| `FIN` | 标记这是不是一条消息的最后一个分片 |
+| `Opcode` | 标识继续帧、文本帧、二进制帧、关闭、Ping 或 Pong |
+| `MASK` | 标记负载是否经过掩码处理 |
+| Payload length | 表示负载长度，短消息只需很少的长度字段 |
+| Masking key | 客户端到服务器的帧必须携带 4 字节掩码键 |
+| Payload data | 实际的文本、二进制数据或控制信息 |
+
+浏览器发往服务器的帧必须掩码，服务器发往客户端的帧通常不掩码。掩码是协议对中间网络设备的防护机制，不是加密；窃听防护仍然依赖 TLS。
+
+WebSocket 帧可以分为数据帧和控制帧：
+
+- **Text / Binary 数据帧**：分别承载 UTF-8 文本和二进制数据。
+- **Ping / Pong 控制帧**：检测连接是否仍然可用，也可维持代理侧的活跃状态。
+- **Close 控制帧**：携带关闭码和可选原因，完成有序关闭。
+
+因此，WebSocket 的低开销来自握手后使用紧凑帧，而不是完全“没有封装”。
+
+## WebSocket 握手还有哪些关键细节？
+
+WebSocket 借用了 HTTP 的入口和端口，但升级后的数据已经不再是普通 HTTP 请求与响应。排查连接问题时，必须同时检查应用、代理和连接生命周期。
+
+![WebSocket 握手依赖 HTTP 或 HTTPS 端口并要求代理和负载均衡器支持协议升级](/blog/what-is-websocket/scene-7.png)
+
+部署时尤其要关注以下细节：
+
+1. **反向代理配置**：代理需要转发 `Upgrade` 和 `Connection`，并允许足够长的读取超时。
+2. **空闲连接超时**：负载均衡器可能主动关闭长时间无数据的连接，应用需要合理的心跳周期。
+3. **来源检查**：浏览器会发送 `Origin`，服务端应拒绝未授权站点，防止跨站 WebSocket 劫持。
+4. **子协议协商**：可用 `Sec-WebSocket-Protocol` 协商 STOMP、GraphQL WebSocket 或自定义版本，服务端只能选择客户端提议的值。
+5. **压缩扩展**：`permessage-deflate` 能减少文本消息体积，但会增加 CPU、内存和安全配置成本。
+6. **HTTP/2 与 HTTP/3**：经典握手使用 HTTP/1.1 Upgrade；RFC 8441 和 RFC 9220 分别定义了在 HTTP/2、HTTP/3 上引导 WebSocket 的方式，实际是否使用取决于客户端、代理和服务端支持。
+
+握手成功只说明通道建立。登录身份、房间权限、消息格式、确认机制和业务错误都仍然属于应用层设计。
+
+## 浏览器如何建立和使用 WebSocket？
+
+浏览器原生提供 `WebSocket` API。应用需要监听连接、消息、错误和关闭事件，并在发送前检查连接状态。
+
+```js
+const socket = new WebSocket('wss://example.com/realtime')
+
+socket.addEventListener('open', () => {
+  socket.send(JSON.stringify({ type: 'join', roomId: 'room-42' }))
+})
+
+socket.addEventListener('message', event => {
+  const message = JSON.parse(event.data)
+  console.log('收到消息：', message)
+})
+
+socket.addEventListener('error', () => {
+  console.error('WebSocket 连接发生错误')
+})
+
+socket.addEventListener('close', event => {
+  console.log('连接关闭：', event.code, event.reason)
+})
+```
+
+不要把长期访问令牌直接放在 URL 查询参数里，因为 URL 可能进入代理日志和监控系统。浏览器不能随意给 WebSocket 握手添加自定义请求头，常见做法是复用同源安全 Cookie，或先通过 HTTPS 获取一次性短期票据，再在建连后完成应用层认证。
+
+## 聊天室为什么适合使用 WebSocket？
+
+聊天室需要低延迟地接收和发送消息。每个在线用户保持一条连接，服务器收到消息后，可以立即把它分发给房间内的其他连接。
+
+![WebSocket 让聊天室服务器把新消息实时推送给房间中的所有在线用户](/blog/what-is-websocket/scene-8.png)
+
+一次群聊消息通常经历以下步骤：
+
+1. 用户 A 发送包含 `messageId`、`roomId` 和内容的消息。
+2. 网关验证用户身份、房间权限和消息大小。
+3. 服务端持久化消息，或先写入消息系统再处理。
+4. 推送服务找到房间内在线连接并广播。
+5. 客户端收到消息后去重、排序并更新界面。
+
+WebSocket 只负责持续传输，并不天然保证消息已经落库、只投递一次或离线可达。已读回执、离线消息、重试、顺序和撤回仍需应用协议与存储系统实现。
+
+## 在线文档如何通过 WebSocket 协同编辑？
+
+在线文档会把用户操作持续发送给协作服务，再把合并后的变化广播给其他编辑者。WebSocket 为这些高频双向操作提供通道，OT 或 CRDT 负责解决并发修改的一致性问题。
+
+![在线文档通过 WebSocket 广播编辑操作并结合 OT 或 CRDT 保持多人协作一致性](/blog/what-is-websocket/scene-9.png)
+
+例如，小美把单元格 B2 从 `30%` 改成 `50%`：
+
+1. 客户端生成带文档 ID、操作 ID 和版本信息的编辑操作。
+2. 协作服务检查权限并处理并发冲突。
+3. 服务端确认或转换该操作，更新权威状态。
+4. 其他在线客户端收到操作并更新本地视图。
+5. 断线用户重连后按版本补拉缺失操作或最新快照。
+
+WebSocket 解决“操作怎么快速往返”，OT、CRDT 和版本快照解决“多人同时改动后如何得到一致结果”。两者不能互相替代。
+
+## 实时游戏如何使用 WebSocket 同步状态？
+
+WebSocket 适合传输网页版游戏中的房间事件、聊天、回合指令和可容忍可靠有序传输延迟的状态数据。服务器收到玩家操作后，计算权威状态并广播给相关玩家。
+
+![WebSocket 为实时游戏传输玩家操作和状态更新并降低轮询带来的延迟](/blog/what-is-websocket/scene-10.png)
+
+但“实时游戏都适合 WebSocket”并不准确。WebSocket 基于可靠、有序的字节流；一旦某个 TCP 包丢失，后续数据可能等待重传，这会产生队头阻塞。对极度敏感且允许丢包的位置、音视频或动作数据，WebRTC DataChannel 或专用 UDP 协议可能更合适。
+
+常见组合是：
+
+- WebSocket 负责登录、匹配、房间事件、聊天和关键状态。
+- WebRTC 负责浏览器间音视频或需要不同可靠性策略的数据。
+- 客户端预测、插值和服务端校正负责掩盖网络抖动，而不是只依赖传输协议。
+
+选择协议的关键不是“哪个理论延迟最低”，而是数据是否必须可靠、有序，以及客户端和网络环境是否支持所需方案。
+
+## WebSocket 还适合哪些应用场景？
+
+凡是需要服务器主动推送，或客户端与服务端频繁双向交换状态的场景，都可能适合 WebSocket。
+
+![WebSocket 用于金融行情、直播弹幕、物联网状态、在线游戏和即时通讯](/blog/what-is-websocket/scene-11.png)
+
+典型场景包括：
+
+- **金融行情**：持续推送股票、期货和外汇报价；客户端还要处理快照、增量序号和丢失补偿。
+- **直播弹幕**：观众发出评论，服务器审核、分发并控制房间广播速率。
+- **物联网状态**：设备或网关上报状态，控制台实时接收告警；受限设备也常使用 MQTT 等专用协议。
+- **即时通知**：推送任务进度、订单状态、监控告警和在线状态。
+- **运营控制台**：持续展示日志、指标、作业状态和后台事件。
+
+WebSocket 不是服务器推送的唯一选择。低频通知可以用 Webhook，浏览器单向事件流可以用 SSE，移动端离线通知通常要依赖 APNs 或 FCM 等系统推送服务。
+
+## WebSocket 有哪些限制和工程挑战？
+
+WebSocket 把一次次独立请求变成大量长期有状态连接，因此连接管理、容量规划和故障恢复比普通无状态 HTTP 接口更复杂。
+
+![WebSocket 面临并发连接、内存压力、状态管理、断线重连和架构解耦挑战](/blog/what-is-websocket/scene-12.png)
+
+生产系统通常需要处理以下问题：
+
+1. **连接容量**：每条连接都会占用文件描述符、内存和运行时调度资源，要按在线连接数和峰值消息速率压测。
+2. **水平扩展**：用户可能连接到不同网关，广播和定向推送通常要借助 Redis、NATS、Kafka 或专用消息服务在节点间传递事件。
+3. **断线重连**：客户端应使用指数退避和随机抖动，避免服务恢复时所有客户端同时重连。
+4. **状态恢复**：重连成功不代表数据自动补齐，需要序号、游标、事件 ID 或快照恢复断线期间的变化。
+5. **心跳检测**：协议级 Ping/Pong 或应用心跳可以发现半开连接，但频率过高会浪费带宽和电量。
+6. **背压控制**：生产速度超过消费速度时，应限制队列、合并状态、暂停读取或主动断开慢客户端。浏览器经典 `WebSocket` API 本身没有自动背压机制。
+7. **安全边界**：使用 `wss://`、检查 `Origin`、验证身份与权限、限制消息大小和速率，并对输入做严格校验。
+8. **可观测性**：监控在线数、建连成功率、异常关闭码、消息延迟、积压字节和重连次数，而不只看 HTTP 状态码。
+
+一个常见架构是让 WebSocket 网关只负责连接、认证和消息路由，业务服务负责规则与存储，消息系统负责跨节点分发。这样可以减少连接状态与业务逻辑之间的耦合。
+
+## WebSocket 和 HTTP/2、HTTP/3 有什么区别？
+
+HTTP/2 和 HTTP/3 优化的是 HTTP 请求—响应传输；WebSocket 提供的是持续双向应用消息通道。它们解决的问题不同，并不是简单的替代关系。
+
+![WebSocket 与 HTTP/2 Server Push 和基于 QUIC 的 HTTP/3 在通信模型上的区别](/blog/what-is-websocket/scene-13.png)
+
+| 维度 | WebSocket | HTTP/2 | HTTP/3 |
+| --- | --- | --- | --- |
+| 主要模型 | 持续双向消息 | 多路复用请求—响应 | 基于 QUIC 的多路复用请求—响应 |
+| 底层传输 | 经典方式基于 TCP | TCP | QUIC（通常基于 UDP） |
+| 服务器主动发送应用消息 | 可以 | 不能脱离请求语义随意发送 | 不能脱离请求语义随意发送 |
+| 典型用途 | 聊天、协作、实时状态 | 网页资源和 API | 网页资源和 API，改善弱网连接表现 |
+| WebSocket 引导方式 | HTTP/1.1 Upgrade | RFC 8441 扩展 CONNECT | RFC 9220 扩展 CONNECT |
+
+HTTP/2 Server Push 曾允许服务端提前推送与页面请求相关的资源，但它不是任意应用消息通道，而且主流浏览器的实际支持已经退潮。HTTP/3 降低连接建立成本并避免不同 QUIC 流之间的 TCP 队头阻塞，但 HTTP 语义依旧以请求和响应为核心。
+
+因此，升级到 HTTP/2 或 HTTP/3 不会自动获得聊天室式双向通信；需要持续收发应用消息时，仍要选择 WebSocket、SSE、WebTransport 或 WebRTC 等具体机制。
+
+## 常见问题
+
+### WebSocket 是长连接吗？
+
+是。WebSocket 握手成功后会持续复用同一条逻辑连接，直到客户端、服务器或网络将其关闭。但它不是永久连接，应用仍要处理超时、断网、设备休眠和重连。
+
+### `ws://` 和 `wss://` 有什么区别？
+
+`ws://` 是未加密的 WebSocket，默认端口通常为 80；`wss://` 通过 TLS 加密，默认端口通常为 443。生产环境和 HTTPS 页面应使用 `wss://`。
+
+### WebSocket 能保证消息不丢失吗？
+
+不能完整保证应用消息不丢失。TCP 能为一条存活连接提供可靠、有序的字节传输，但连接可能在确认前中断。需要业务级可靠性时，应增加消息 ID、确认、重试、幂等、持久化和断线补拉。
+
+### WebSocket 会自动重连吗？
+
+浏览器原生 `WebSocket` API 不会自动重连。应用需要监听 `close` 事件，并使用带上限的指数退避、随机抖动和网络状态检查重新连接。
+
+### WebSocket 和 Socket.IO 是一回事吗？
+
+不是。WebSocket 是标准协议；Socket.IO 是应用库与协议体系，提供自动重连、事件、房间、确认和降级传输等能力。Socket.IO 客户端不能直接当作原生 WebSocket 客户端连接任意 WebSocket 服务。
+
+### WebSocket 和 Webhook 有什么区别？
+
+WebSocket 是客户端与服务器之间持续保持的双向连接，适合高频实时通信；Webhook 是事件发生时由一个服务向另一个服务发出的一次 HTTP 回调，适合低频系统通知。
+
+### WebSocket 适合传输音视频吗？
+
+技术上可以传输二进制数据，但实时音视频通常更适合 WebRTC，因为它提供媒体协商、抖动处理、拥塞控制和适合实时媒体的传输能力。WebSocket 更常用于信令、聊天和状态同步。
+
+## 总结：WebSocket 是实时互动的通信基石
+
+WebSocket 是一种通过 HTTP 握手建立、在持久连接上以帧传输数据的全双工协议。它让客户端和服务器都能主动发送消息，避免用高频轮询模拟实时通信。
+
+![WebSocket 通过握手升级、双向通信和帧传输支撑实时互动应用](/blog/what-is-websocket/scene-14.png)
+
+它的完整过程可以归纳为四步：建立 TCP/TLS 连接、发送 HTTP 升级请求、验证 `101 Switching Protocols` 响应、持续交换文本帧、二进制帧和控制帧。
+
+聊天室、在线文档、实时游戏和金融行情依赖的不只是“连接一直开着”，还包括应用层的认证、消息确认、顺序、心跳、重连、背压和跨节点分发。理解这一点，才算真正理解 WebSocket：协议解决实时双向传输，可靠的实时系统则需要围绕这条通道继续设计。
+
+## 参考资料
+
+- [RFC 6455：The WebSocket Protocol](https://www.rfc-editor.org/rfc/rfc6455)
+- [RFC 8441：Bootstrapping WebSockets with HTTP/2](https://www.rfc-editor.org/rfc/rfc8441)
+- [RFC 9220：Bootstrapping WebSockets with HTTP/3](https://www.rfc-editor.org/rfc/rfc9220)
+- [MDN：WebSocket API](https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API)
+- [MDN：Writing WebSocket client applications](https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API/Writing_WebSocket_client_applications)
+- [WHATWG WebSockets Standard](https://websockets.spec.whatwg.org/)
