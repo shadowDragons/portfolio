@@ -1,0 +1,297 @@
+---
+title: 什么是 Kubernetes？用奶茶店比喻一次讲透 K8s
+date: 2026-08-09
+tag: 云原生
+excerpt: Kubernetes 是一个容器编排平台，它通过声明期望状态，自动完成容器的调度、自愈、服务发现、滚动更新和弹性伸缩。
+readingTime: 14 分钟
+cover: /blog/what-is-kubernetes/scene-1.png
+keywords:
+  - Kubernetes
+  - Kubernetes 是什么
+  - 什么是 Kubernetes
+  - K8s
+  - K8s 是什么
+  - Kubernetes 入门
+  - Kubernetes 教程
+  - 容器编排
+  - 云原生
+  - Pod
+  - Service
+  - Deployment
+  - Kubernetes 集群架构
+  - Kubernetes 控制循环
+  - Kubernetes 滚动更新
+  - Kubernetes 自动扩容
+  - HPA
+  - Docker 和 Kubernetes 的区别
+---
+
+## 什么是 Kubernetes？
+
+Kubernetes 是一个开源的**容器编排平台**。它接收你声明的期望状态，再自动完成容器的调度、运行、故障恢复、服务发现、滚动更新和弹性伸缩，让应用持续接近这个状态。
+
+Kubernetes 常缩写为 **K8s**：单词首尾保留 K 和 s，中间省略 8 个字母。它不负责把代码打包成镜像，也不是容器运行时；它解决的是大量容器跨多台机器运行后，应该“由谁安排、如何保持稳定”的问题。
+
+![没有 Kubernetes 时，爆款奶茶店因员工各自操作而陷入订单混乱](/blog/what-is-kubernetes/scene-1.png)
+
+可以把它理解成爆款奶茶店的自动化店长：你规定“任何时候都要有 3 个制作小组正常接单”，它负责排班、补位、分流和换班。至于某一杯奶茶究竟由哪个小组完成，顾客和老板都不必手工指定。
+
+一句话记住：**Kubernetes 不要求你逐步描述怎么操作，而是让你声明最终想要什么，然后持续把现实拉回目标。**
+
+## 没有 Kubernetes 时，容器管理为什么会失控？
+
+单台服务器上运行几个容器时，手工管理尚且可行；当应用拆成几十个服务、每个服务又有多个副本，并分散在多台服务器上时，运维问题会迅速增长。
+
+奶茶店突然爆单后，如果没有统一调度，常见混乱包括：
+
+- 有的员工同时接了太多订单，有的员工却闲着，对应服务器资源分配不均。
+- 员工请假后没人补位，对应容器退出后服务持续不可用。
+- 新配方一次性替换，做坏后无法及时恢复，对应应用发布中断或回滚困难。
+- 顾客必须知道某位员工的位置，对应调用方依赖随时变化的容器 IP。
+- 促销开始后临时招人来不及，对应流量高峰时无法快速扩容。
+
+手工脚本可以解决局部问题，但当机器、服务、版本和配置不断变化时，脚本之间也需要协调。Kubernetes 把这些重复决策收敛到统一的 API 和控制系统中。
+
+## Kubernetes 的核心能力是什么？
+
+Kubernetes 的核心不是“启动容器”，而是**自动化调度并维持期望状态**。
+
+![Kubernetes 通过智能调度、持续监控、资源优化、自愈和弹性伸缩维持期望状态](/blog/what-is-kubernetes/scene-2.png)
+
+| 能力 | 奶茶店比喻 | Kubernetes 的实际动作 |
+| --- | --- | --- |
+| 调度 | 把新员工安排到不拥挤的操作台 | 根据 CPU、内存、标签和约束为 Pod 选择节点 |
+| 自愈 | 员工离岗后立刻安排替班 | 重启失败容器、重建 Pod、把工作迁移到健康节点 |
+| 稳定访问 | 顾客永远拨打总店热线 | Service 用稳定地址把请求转发给健康 Pod |
+| 滚动更新 | 新员工学会新配方后再替换旧班次 | 逐步创建新版本 Pod，再回收旧版本 Pod |
+| 弹性伸缩 | 高峰加人，低谷减班 | HPA 等组件按指标调整 Pod 副本数 |
+
+这里有一个重要限制：Kubernetes 只会执行已经声明并且具备数据来源的策略。它不会凭空知道业务要扩容，也不会自动保证应用正确；健康检查、资源请求、伸缩规则和发布策略仍需要工程师配置。
+
+## 什么是“期望状态”和控制循环？
+
+期望状态是你希望集群最终保持的结果，例如“镜像版本为 v2，持续运行 3 个副本，并通过固定服务名提供访问”。控制循环则持续比较期望状态与实际状态，在发现差异后采取行动。
+
+![Kubernetes 控制循环持续观察实际状态、发现偏差、执行调整并重新对齐期望状态](/blog/what-is-kubernetes/scene-3.png)
+
+这个闭环可以拆成 6 步：
+
+1. **声明目标**：提交 Deployment 等资源对象，例如指定镜像和 3 个副本。
+2. **保存状态**：API Server 校验请求，并把集群状态持久化到 etcd。
+3. **持续观察**：控制器和节点组件不断读取当前运行情况。
+4. **发现偏差**：系统发现只剩 2 个 Pod、节点失联或新版本尚未完成部署。
+5. **执行调整**：创建 Pod、重新调度、终止旧副本或更新关联资源。
+6. **再次对比**：实际状态达到目标后继续观察，而不是结束工作。
+
+例如，一个 Pod 因进程崩溃而消失时，Deployment 控制器关心的不是“把原 Pod 救回来”，而是“3 个可用副本还在不在”。如果只剩 2 个，它就创建一个新 Pod 补齐。这就是 Kubernetes 自愈能力的基本来源。
+
+## Kubernetes 集群由哪些组件组成？
+
+Kubernetes 集群分为**控制平面（control plane）**和**工作节点（worker node）**。控制平面负责接收请求、保存状态和做出决策；工作节点负责真正运行 Pod。
+
+![Kubernetes 控制平面通过 API Server 和调度器管理工作节点上的 kubelet 与容器](/blog/what-is-kubernetes/scene-4.png)
+
+可以把控制平面看成奶茶总部，把工作节点看成各家门店：
+
+| 组件 | 所在位置 | 职责 | 奶茶店比喻 |
+| --- | --- | --- | --- |
+| kube-apiserver | 控制平面 | 所有集群操作的统一入口，负责认证、校验和 API 处理 | 总店接单台 |
+| etcd | 控制平面 | 保存集群配置和状态的分布式键值存储 | 总账本 |
+| kube-scheduler | 控制平面 | 为尚未分配节点的 Pod 选择合适节点 | 排班员 |
+| kube-controller-manager | 控制平面 | 运行多种控制器，持续让实际状态接近期望状态 | 店长团队 |
+| kubelet | 每个工作节点 | 确保分配到本节点的 Pod 按声明运行 | 分店执行主管 |
+| 容器运行时 | 每个工作节点 | 拉取镜像并创建、停止容器，例如 containerd 或 CRI-O | 真正操作设备的人 |
+
+旧资料常把控制平面节点称为 Master 或主节点。现代官方文档更推荐“控制平面”这一术语，因为控制平面也可以由多个节点组成，以减少单点故障。
+
+调度器只负责“选择哪个节点”，真正拉取镜像和启动容器的是节点上的 kubelet 与容器运行时。把决策和执行分开，集群才能统一管理大量机器。
+
+## Pod 和 Service 分别解决什么问题？
+
+Pod 解决“容器如何作为一个整体运行”，Service 解决“调用方如何稳定访问一组会变化的 Pod”。两者分别对应运行单元和访问入口。
+
+![Pod 封装紧密协作的容器，Service 为一组会重建换 IP 的 Pod 提供稳定访问入口](/blog/what-is-kubernetes/scene-5.png)
+
+### Pod 为什么是最小调度单元？
+
+Pod 是 Kubernetes 可创建和调度的最小计算单元。一个 Pod 通常运行一个主容器，也可以包含与它紧密协作的 sidecar 容器；同一 Pod 内的容器共享网络命名空间，并可共享挂载的存储卷。
+
+在奶茶店里，一个 Pod 就像一个制作工位。调配员和封口员必须一起工作、共享同一张订单和操作台，因此可以放进同一个 Pod。Kubernetes 调度的是整个工位，而不是把两人随意拆到不同门店。
+
+Pod 是短暂的。它可能因发布、扩容、节点故障或配置变化被销毁重建，新 Pod 的 IP 通常会变化。因此，不应让外部系统长期依赖单个 Pod IP。
+
+### Service 为什么能提供稳定访问？
+
+Service 通过标签选择器找到一组 Pod，并提供稳定的虚拟地址与 DNS 名称。请求到达 Service 后，会被转发到后端可用的 Pod。
+
+这就像顾客只拨打奶茶总店热线，不需要知道哪个分店、哪位员工接单。后端 Pod 即使不断更换，只要标签仍符合选择规则，服务入口就保持稳定。
+
+要让公网用户访问应用，通常还需要 `LoadBalancer` 类型 Service、Ingress 或 Gateway API，以及相应的云负载均衡器或入口控制器。普通 `ClusterIP` Service 默认只在集群内部可达。
+
+## Deployment 如何实现滚动更新和回滚？
+
+Deployment 管理一组无状态 Pod，并通过 ReplicaSet 维持副本数量。当镜像从 v1 改为 v2 时，它可以逐步增加新版本副本、确认 Pod 就绪，再逐步减少旧版本副本。
+
+![Kubernetes 逐步创建并检查 v2 Pod，再替换 v1 Pod，实现服务不中断的滚动更新](/blog/what-is-kubernetes/scene-6.png)
+
+一次典型滚动更新包含这些动作：
+
+1. 当前有 3 个 v1 Pod 对外服务。
+2. Deployment 创建一个 v2 Pod。
+3. v2 Pod 通过 readiness probe 后才进入 Service 后端。
+4. 一个 v1 Pod 被优雅终止。
+5. 重复以上过程，直到 3 个副本都变成 v2。
+
+下面是一个最小 Deployment 声明：
+
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: milk-tea-api
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: milk-tea-api
+  template:
+    metadata:
+      labels:
+        app: milk-tea-api
+    spec:
+      containers:
+        - name: api
+          image: example.com/milk-tea-api:v2
+          ports:
+            - containerPort: 8080
+          readinessProbe:
+            httpGet:
+              path: /ready
+              port: 8080
+```
+
+“滚动更新”不等于绝对零停机。如果就绪探针错误、应用无法兼容新旧版本并存、数据库变更不可向后兼容，或者资源不足以启动新 Pod，发布仍可能失败。回滚也只能恢复 Kubernetes 记录的工作负载版本，不能自动撤销已经执行的数据迁移或外部系统变更。
+
+## Kubernetes 如何实现弹性伸缩？
+
+Kubernetes 可以在配置伸缩控制器后，根据 CPU、内存或业务指标自动调整 Pod 副本数。最常见的是 Horizontal Pod Autoscaler（HPA），即水平 Pod 自动伸缩器。
+
+![Kubernetes HPA 在 CPU 超过阈值时增加 Pod，并在负载回落后缩减副本](/blog/what-is-kubernetes/scene-7.png)
+
+例如，可以声明“副本数保持在 3 到 10 之间，平均 CPU 利用率目标为 60%”。当监控指标持续偏离目标时，HPA 会计算新副本数并修改 Deployment；负载回落后，再按稳定窗口和策略逐步缩容。
+
+弹性伸缩通常涉及三个层次：
+
+- **HPA**：横向增加或减少 Pod 数量，适合可复制的无状态服务。
+- **VPA**：根据使用情况建议或调整单个 Pod 的 CPU、内存请求，部分模式会重建 Pod。
+- **节点自动扩缩容**：当现有节点放不下新 Pod 时，配合云平台增加节点；空闲后再回收节点。
+
+HPA 依赖 Metrics Server 或其他指标适配器，也依赖合理的资源请求。新 Pod 启动、拉取镜像、连接依赖和预热缓存都需要时间，因此突发流量不能只靠扩容解决，还要结合容量冗余、限流、队列和缓存。
+
+## Kubernetes 的完整请求链路是什么？
+
+从用户提交配置到流量进入应用，Kubernetes 把多个独立组件连成了一个持续运转的系统。
+
+![Kubernetes 全局架构连接控制平面、工作节点、Pod、Service、外部访问和滚动更新流程](/blog/what-is-kubernetes/scene-8.png)
+
+一次完整流程可以概括为：
+
+1. 开发者把 Deployment 和 Service 等 YAML 提交给 API Server。
+2. API Server 完成认证、授权和校验，把状态保存到 etcd。
+3. 控制器发现期望副本尚未满足，于是创建 Pod 对象。
+4. 调度器根据资源和约束为每个 Pod 选择工作节点。
+5. 节点上的 kubelet 调用容器运行时拉取镜像并启动容器。
+6. 网络组件和 Service 把请求转发到已就绪的 Pod。
+7. 控制器持续观察；故障、更新或扩缩容发生时，循环再次执行。
+
+图中的连线是概念化视图。实际集群还包括容器网络接口（CNI）插件、CoreDNS、存储驱动、证书、权限控制和可观测性组件，它们共同决定网络、服务发现、持久化与安全能力。
+
+## Kubernetes 适合哪些真实场景？
+
+Kubernetes 更适合服务数量多、发布频繁、需要跨节点调度或负载波动明显的系统。它的价值来自标准化控制面，而不是某一个行业专属功能。
+
+![Kubernetes 用于视频转码、电商峰值、机器学习训练和多种云端服务](/blog/what-is-kubernetes/scene-9.png)
+
+| 场景 | Kubernetes 负责什么 | 需要额外解决什么 |
+| --- | --- | --- |
+| 视频转码 | 按队列任务创建处理 Pod，隔离并行工作负载 | 对象存储、任务幂等、失败重试与成本控制 |
+| 电商大促 | 扩展 API 副本，滚动发布，隔离故障 | 数据库容量、缓存、限流、消息队列和压测 |
+| 机器学习训练 | 调度带 GPU 请求的任务，封装驱动与框架环境 | 数据集、GPU 插件、任务排队和模型产物管理 |
+| SaaS 与微服务 | 统一部署、服务发现、配置和权限边界 | 链路追踪、超时重试、数据一致性和团队治理 |
+| 混合云或多环境 | 使用相同资源模型管理不同基础设施 | 各云网络、存储、身份和运维能力仍有差异 |
+
+把 Kubernetes 称为“云时代的操作系统”是一种比喻：操作系统把单机资源抽象给进程，Kubernetes 把集群中的计算、网络和存储能力抽象给工作负载。但它不能完全屏蔽底层差异，也不会让应用自动获得高可用。
+
+## Kubernetes、Docker Compose 和托管容器服务怎么选？
+
+Kubernetes 并非所有容器项目的默认答案。选择标准应是调度和治理需求是否足以抵消平台复杂度。
+
+| 维度 | Docker Compose | 托管容器服务 | Kubernetes |
+| --- | --- | --- | --- |
+| 典型规模 | 本地开发、单机或少量服务 | 希望减少基础设施管理的中小型服务 | 多服务、多团队、多节点集群 |
+| 调度能力 | 主要面向单机组合 | 由平台提供，能力因产品而异 | 支持资源、亲和性、污点、拓扑等复杂约束 |
+| 运维成本 | 低 | 中等，厂商代管较多组件 | 高，需要网络、存储、安全和升级能力 |
+| 可移植性 | Compose 文件适合开发与简单部署 | 通常依赖云厂商产品模型 | API 相对标准化，但基础设施仍有差异 |
+| 适合判断 | 几个服务且单机足够 | 团队想专注应用、不需要深度控制 | 规模与治理需求已成为真实痛点 |
+
+如果只有一个低流量网站或几个内部服务，Compose、Serverless 或云厂商托管容器平台通常更省事。Kubernetes 的能力越多，升级、安全、监控和故障排查的责任也越多。
+
+## Kubernetes 有哪些限制和常见误区？
+
+Kubernetes 解决的是容器编排问题，不是应用架构、数据安全和可靠性的万能答案。
+
+常见限制与误区包括：
+
+1. **有 Kubernetes 就自动高可用**：如果所有副本位于同一故障域，数据库仍是单点，或探针配置错误，集群无法兑现高可用。
+2. **Pod 重建等于数据恢复**：Pod 可重建，但写在临时文件系统中的数据可能丢失；有状态应用需要 PersistentVolume、备份和恢复演练。
+3. **设置 CPU 阈值就能扛住所有峰值**：扩容有延迟，数据库、第三方 API 和队列也可能先成为瓶颈。
+4. **Service 会自动暴露公网**：默认的 ClusterIP 只提供集群内访问，公网入口需要额外组件和网络配置。
+5. **回滚可以撤销所有改动**：Deployment 回滚不会逆转数据库迁移、消息格式或外部 API 变更。
+6. **上了 Kubernetes 就是云原生**：云原生还包括可观测性、自动化交付、弹性设计、安全治理和故障恢复能力。
+7. **平台会自动选择正确资源值**：requests、limits、探针、拓扑约束和伸缩策略都需要基于真实指标持续调整。
+
+安全上还要重点管理 RBAC 权限、Secret、镜像来源、网络策略和特权容器。Kubernetes Secret 默认只是以 Base64 形式保存数据，不等于已加密；生产环境应启用静态加密并接入合适的密钥管理方案。
+
+## 常见问题
+
+### Kubernetes 和 Docker 有什么区别？
+
+Docker 常用于构建镜像并在单机上运行容器，Kubernetes 用于在多台机器上编排大量容器。两者关注层次不同：Docker 解决“容器如何构建和运行”，Kubernetes 解决“容器集群如何持续处于期望状态”。现代 Kubernetes 节点通常直接使用 containerd 或 CRI-O 等符合 CRI 的容器运行时。
+
+### Kubernetes 为什么简称 K8s？
+
+因为 Kubernetes 的首字母 K 与末字母 s 之间有 8 个字母，所以写成 K8s。两者指的是同一个项目。
+
+### Kubernetes 中 Pod 和容器有什么区别？
+
+容器是应用进程的隔离运行单元，Pod 是 Kubernetes 的最小调度单元。一个 Pod 可以包含一个或多个共享网络与存储的容器，但常见模式是一个 Pod 运行一个主容器。
+
+### Kubernetes 会自动重启失败的容器吗？
+
+会在声明和重启策略允许时尝试恢复。kubelet 可以重启 Pod 内失败的容器，Deployment 等控制器也可以在 Pod 消失时创建新 Pod。但配置错误、依赖不可用或容量不足会让它反复失败，因此仍需监控和告警。
+
+### 学 Kubernetes 前必须先学 Docker 吗？
+
+不必精通 Docker，但应先理解镜像、容器、端口、卷、环境变量和容器运行时。缺少这些基础时，很容易把镜像构建问题、应用问题和 Kubernetes 调度问题混在一起。
+
+### 小项目需要 Kubernetes 吗？
+
+通常不需要。如果应用可以在单机、Docker Compose、Serverless 或托管容器平台上稳定运行，引入 Kubernetes 可能只会增加成本。只有多节点调度、复杂发布、弹性、隔离或平台标准化成为真实需求时，它才更合适。
+
+## 总结：如何用三点理解 Kubernetes？
+
+![理解 Kubernetes 的三个关键：期望状态、Pod 与 Service、声明式自动运维](/blog/what-is-kubernetes/scene-10.png)
+
+1. **Kubernetes 是期望状态系统**：你声明副本、版本和访问方式，控制循环持续修正实际状态，不要求容器固定在某台机器上。
+2. **Pod、Service 和控制器各司其职**：Pod 是最小调度单元，Service 提供稳定访问，Deployment 等控制器负责副本、自愈和滚动更新。
+3. **它把手工运维变成声明式自动运维**：工程师管理资源声明和策略，平台负责调度与执行，但应用设计、数据、安全和观测仍需单独负责。
+
+继续用奶茶店来记：**容器是员工，Pod 是制作工位，Service 是总店热线，控制平面是运营总部，而 Kubernetes 是让整套门店持续按目标营业的自动化管理系统。**
+
+## 参考资料
+
+- [Kubernetes 官方文档：概念概览](https://kubernetes.io/docs/concepts/overview/)
+- [Kubernetes 官方文档：集群架构](https://kubernetes.io/docs/concepts/architecture/)
+- [Kubernetes 官方文档：Pod](https://kubernetes.io/docs/concepts/workloads/pods/)
+- [Kubernetes 官方文档：Service](https://kubernetes.io/docs/concepts/services-networking/service/)
+- [Kubernetes 官方文档：Horizontal Pod Autoscaling](https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/)

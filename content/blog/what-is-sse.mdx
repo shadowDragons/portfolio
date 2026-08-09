@@ -1,0 +1,317 @@
+---
+title: 单向推送也能这么强？SSE比WebSocket的聪明之处
+date: 2026-08-04
+tag: Web 开发
+excerpt: SSE（服务器推送事件）基于标准 HTTP 建立持久的单向事件流，让服务器可以持续向浏览器推送文本数据，并自带自动重连与事件续传能力。
+readingTime: 14 分钟
+cover: /blog/what-is-sse/scene-1.png
+keywords:
+  - SSE
+  - Server-Sent Events
+  - 服务器推送事件
+  - SSE 是什么
+  - 什么是 SSE
+  - SSE 教程
+  - SSE 原理
+  - SSE 和 WebSocket 的区别
+  - SSE 自动重连
+  - EventSource
+  - text/event-stream
+  - Last-Event-ID
+  - HTTP/2 SSE
+  - 实时推送
+  - AI 流式输出
+  - 实时日志
+---
+
+## 什么是 SSE？
+
+SSE（Server-Sent Events，服务器推送事件）是一种基于 HTTP 的浏览器事件流技术：浏览器发起一个 GET 请求，服务器保持响应连接，并以 text/event-stream 格式持续向浏览器发送文本事件。
+
+![SSE 的定义、服务器主动推送、单向数据流和与传统请求响应方向的区别](/blog/what-is-sse/scene-1.png)
+
+普通 HTTP 通常是“浏览器请求，服务器响应”。SSE 把持续通信的方向改成了“浏览器订阅，服务器主动推送”，但它只负责服务器到浏览器这一条方向。浏览器如果要提交问题、发送指令或确认操作，仍然可以使用普通 POST、PUT 或 DELETE 请求。
+
+SSE 主要解决三个问题：减少高频轮询造成的无效请求、降低服务器发现变化后的通知延迟，以及用浏览器原生 API 简化实时文本流的接收。AI 对话的流式回答、实时股价、比赛比分、部署日志和监控告警，都是典型场景。
+
+一句话总结：**SSE 是一条由浏览器订阅、由服务器持续写入的 HTTP 事件流。**
+
+## 为什么轮询和长轮询不够理想？
+
+股价每秒变化时，最直观的办法是短轮询：浏览器每隔一秒请求一次“价格变了吗”。如果价格没有变化，请求仍然会经历 DNS、连接复用、鉴权、路由和响应处理，最后只得到一个“没有变化”。
+
+![短轮询不断发出无效请求，服务器和客户端都在重复确认状态](/blog/what-is-sse/scene-2.png)
+
+短轮询的取舍很明确：间隔越短，延迟越低，但请求数量越多；间隔越长，资源消耗越低，但用户看到的状态越旧。按每秒一次计算，一个客户端一天会发起 86,400 次查询，即使绝大多数查询都没有新数据。
+
+长轮询把请求挂在服务器上，直到有新数据才响应。它能消除大部分空响应，但一条消息结束后连接就结束，浏览器还得立即发起下一次请求。
+
+![长轮询通过挂起请求等待数据，但每次响应后仍要断开并重新请求](/blog/what-is-sse/scene-3.png)
+
+长轮询仍然是“一问一答”的 HTTP 交互，主要开销包括：
+
+1. **重复建立请求上下文**：每条消息都要经历一次新的请求生命周期。
+2. **断线窗口更明显**：上一请求结束到下一请求建立之间，可能错过状态变化。
+3. **服务端管理更复杂**：需要管理大量挂起请求、超时和重试。
+
+长轮询适合低频通知、旧浏览器兼容或服务端无法提供流式响应的环境。但对于持续的服务器到浏览器事件流，SSE 更贴合问题本身。
+
+## SSE 是如何工作的？
+
+SSE 的工作流程只有三步：浏览器声明接受事件流，服务器返回一个不会立即结束的 HTTP 响应，然后持续写入事件。
+
+![SSE 从浏览器 GET 请求、服务器设置事件流响应头到持续推送事件的完整流程](/blog/what-is-sse/scene-4.png)
+
+### 第一步：浏览器发起 GET 订阅
+
+浏览器可以直接使用原生 EventSource：
+
+~~~js
+const source = new EventSource('/api/events');
+
+source.onmessage = (event) => {
+  const payload = JSON.parse(event.data);
+  console.log('收到事件：', payload);
+};
+
+source.onerror = () => {
+  console.log('连接暂时不可用，浏览器会按协议尝试重连');
+};
+~~~
+
+这会发起一个 GET 请求，并带上类似下面的请求头：
+
+~~~http
+GET /api/events HTTP/1.1
+Host: example.com
+Accept: text/event-stream
+Cache-Control: no-cache
+~~~
+
+原生 EventSource 只能订阅 URL，不能像 fetch 一样自由设置 Authorization 请求头。实际项目通常使用同源 Cookie 会话认证；跨域时则要明确配置 CORS 和 withCredentials。不要把长期有效的访问令牌直接放进 URL，因为 URL 可能进入日志、历史记录和监控系统。
+
+### 第二步：服务器返回事件流响应
+
+服务器应返回流式响应，并明确告诉中间件不要缓存或缓冲：
+
+~~~http
+HTTP/1.1 200 OK
+Content-Type: text/event-stream
+Cache-Control: no-cache, no-transform
+Connection: keep-alive
+~~~
+
+服务端不能等到“所有数据都准备好”再一次性返回，而应该在有事件时立即刷新输出。不同语言的写法不同，但本质都是向响应流追加文本并 flush。
+
+以 Node.js 为例：
+
+~~~js
+import express from 'express';
+
+const app = express();
+
+app.get('/api/events', (req, res) => {
+  res.set({
+    'Content-Type': 'text/event-stream',
+    'Cache-Control': 'no-cache, no-transform',
+    Connection: 'keep-alive',
+  });
+  res.flushHeaders();
+
+  res.write('retry: 3000\n\n');
+  res.write('event: ready\n');
+  res.write('data: {"status":"connected"}\n\n');
+
+  const timer = setInterval(() => {
+    const data = JSON.stringify({ now: Date.now() });
+    res.write('data: ' + data + '\n\n');
+  }, 5000);
+
+  req.on('close', () => clearInterval(timer));
+});
+~~~
+
+真实部署中还要检查 Nginx、网关、CDN 和压缩层是否会缓冲响应。SSE 流通常不应被当作普通静态资源缓存；中间件的职责是透传连接、及时刷新数据，并在需要时关闭响应缓冲。
+
+### 第三步：用空行结束一条事件
+
+SSE 是纯文本协议。一条事件由若干字段组成，两个换行符（空行）表示事件结束：
+
+~~~text
+event: message
+id: 12345
+retry: 3000
+data: {"text":"你好，世界"}
+
+~~~
+
+常用字段如下：
+
+| 字段 | 是否必需 | 作用 |
+| --- | --- | --- |
+| data | 否 | 事件数据；多行 data 会合并成一条消息 |
+| event | 否 | 自定义事件名；省略时触发 message |
+| id | 否 | 事件游标，用于断线续传 |
+| retry | 否 | 建议浏览器下次重连前等待的毫秒数 |
+| 冒号注释行 | 否 | 常用于发送保活心跳 |
+
+服务器可以发送自定义事件，浏览器按事件名监听：
+
+~~~text
+event: progress
+id: job-42-18
+data: {"percent":72}
+
+~~~
+
+~~~js
+source.addEventListener('progress', (event) => {
+  const progress = JSON.parse(event.data);
+  renderProgress(progress.percent);
+});
+~~~
+
+![SSE 使用可读的文本字段组成事件，WebSocket 则使用不透明的二进制帧](/blog/what-is-sse/scene-10.png)
+
+## SSE 和 WebSocket 有什么区别？
+
+WebSocket 更像一通电话：连接建立后，浏览器和服务器都能随时讲话。SSE 更像收听广播：服务器持续发送，浏览器负责接收；浏览器的操作可以通过普通 HTTP 请求另行提交。
+
+![WebSocket 的全双工电话模型与 SSE 的单向广播模型对比](/blog/what-is-sse/scene-5.png)
+
+| 维度 | SSE | WebSocket | 如何选择 |
+| --- | --- | --- | --- |
+| 数据方向 | 服务器 → 浏览器 | 浏览器 ↔ 服务器 | 只有服务端推送时优先看 SSE |
+| 建立方式 | 普通 HTTP GET | HTTP 握手后升级协议 | 现有 HTTP 链路越重要，SSE 越省事 |
+| 浏览器 API | 原生 EventSource | 原生 WebSocket | 文本事件订阅用 SSE 更直接 |
+| 数据格式 | 文本事件流 | 文本或二进制帧 | 需要二进制和自定义协议时选 WebSocket |
+| 自动重连 | 浏览器内置 | 应用自行实现 | 需要事件续传时 SSE 有明确入口 |
+| 客户端发消息 | 原生通道不支持，另用 HTTP | 同一通道直接发送 | 高频双向交互选 WebSocket |
+| 代理与认证 | 复用 HTTP、Cookie 和 CORS 机制 | 需正确转发升级和连接状态 | 复杂企业网络中 SSE 通常更易部署 |
+| 典型场景 | AI 输出、日志、告警、比分 | 聊天、协同编辑、游戏、设备控制 | 以主要数据流向为判断起点 |
+
+两者不存在绝对的“谁更先进”。WebSocket 提供更完整的双向能力，SSE 则用更少的协议复杂度完成服务器推送。选型的关键不是追求功能最多，而是匹配数据流向。
+
+## SSE 的三个实际优势是什么？
+
+### 优势一：标准 HTTP，接入成本低
+
+![SSE 基于标准 HTTP、几乎零额外依赖、持续响应和原生 EventSource 带来的低复杂度](/blog/what-is-sse/scene-6.png)
+
+SSE 不需要额外的升级协议、帧解析器或客户端 SDK。后端只要能返回持久 HTTP 响应，就能逐条写入事件；浏览器则用 EventSource 接收消息。
+
+这会直接降低四类工程成本：
+
+1. **实现成本**：不需要自己处理 WebSocket 帧、掩码和关闭码。
+2. **调试成本**：网络面板中可以直接阅读 event、id 和 data。
+3. **部署成本**：已有的 HTTPS、Cookie、CORS、反向代理和监控链路更容易复用。
+4. **维护成本**：事件模型和错误边界比自定义双向协议更小。
+
+### 优势二：自动重连与事件续传
+
+![SSE 连接断开后浏览器自动重连，并通过 Last-Event-ID 请求补发错过的事件](/blog/what-is-sse/scene-7.png)
+
+浏览器原生 EventSource 在连接异常结束后会自动尝试重连，服务端可以用 retry 建议等待时间。更关键的是，服务器发送 id 后，浏览器重连时会带上 Last-Event-ID，服务端可以据此补发断线期间的事件。
+
+这个能力不是“消息永不丢失”的保证。要实现可靠恢复，服务端仍需要保存一段时间的事件、定义 ID 的顺序，并处理 ID 过期或客户端从未连接的情况。SSE 提供的是协议入口，可靠性需要业务存储和补偿策略完成。
+
+### 优势三：天然融入 HTTP 生态
+
+![SSE 复用 HTTP 的 Cookie 会话、代理穿透和防火墙兼容能力](/blog/what-is-sse/scene-8.png)
+
+SSE 可以复用 HTTPS、Cookie 会话和现有反向代理规则。企业网络通常对 HTTP/HTTPS 的放行和审计更成熟，因此在需要穿越代理、防火墙或统一网关时，SSE 少了一层协议升级的排障工作。
+
+“基于 HTTP”不代表所有中间件无需配置。负载均衡器的空闲超时、响应压缩、代理缓冲、连接数和跨域策略都会影响 SSE。上线前要用真实链路验证事件是否能及时到达浏览器。
+
+## HTTP/2 为什么让 SSE 更好用？
+
+HTTP/1.1 下，浏览器通常会限制同一域名的并发连接数，常见实现约为 6 条。一个持续的 SSE 连接可能占用其中一条，页面同时加载资源、调用接口或打开多个实时订阅时，连接名额会变得紧张。
+
+![HTTP/2 多路复用解决 HTTP/1.1 同域连接数限制，让 SSE 与其他请求共享连接](/blog/what-is-sse/scene-9.png)
+
+HTTP/2 的多路复用把多个请求和响应拆成独立的流，并共享一条 TCP 连接。SSE 只占用其中一个逻辑流，不再单独霸占一个 HTTP/1.1 连接槽位。HTTP/3 也能提供多路复用，但实际是否使用取决于浏览器、服务器和部署链路。
+
+这并不意味着 SSE 没有容量成本。每个订阅仍然会消耗服务端文件描述符、内存、连接状态和消息分发资源；HTTP/2 解决的是浏览器连接复用问题，不是无限扩容方案。
+
+## SSE 适合哪些真实场景？
+
+如果数据主要从服务器流向浏览器，且浏览器很少需要通过同一通道发消息，SSE 通常是优先候选。
+
+![AI 流式输出、实时股价、比分更新和监控日志等适合 SSE 的典型场景](/blog/what-is-sse/scene-11.png)
+
+- **AI 对话流式输出**：服务器逐字或逐段发送模型生成结果，浏览器即时渲染，用户不必等待完整回答。
+- **实时股价和汇率**：服务端推送最新报价；用户的下单动作通过普通 API 提交。
+- **比赛比分与状态**：服务器发布进球、暂停和比赛状态，浏览器只负责展示。
+- **系统监控日志**：任务运行期间持续推送日志行、进度和告警。
+- **后台任务进度**：浏览器创建任务后用 POST 返回任务 ID，再通过 SSE 订阅进度事件。
+- **低频通知**：订单状态、审核结果或部署状态发生变化时即时通知页面。
+
+| 业务问题 | 更合适的方案 |
+| --- | --- |
+| 页面只需要持续接收文本事件 | SSE |
+| 客户端和服务器都要高频发送消息 | WebSocket |
+| 只有低频状态变化，允许几秒延迟 | 普通 API 或短轮询 |
+| 服务与服务之间的事件回调 | Webhook |
+| 浏览器间音视频或低延迟数据 | WebRTC |
+
+## SSE 有哪些限制和常见错误？
+
+SSE 的优势来自它的单向和简单，因此也有明确边界：
+
+1. **不能在原生通道上双向发送**：聊天输入、协同编辑操作和游戏指令仍需要额外的 HTTP 请求，或直接改用 WebSocket。
+2. **传输模型以文本为主**：二进制文件、复杂的自定义帧协议和极高频数据交换并不是它的强项。
+3. **连接仍会断开**：网络切换、设备休眠、代理超时和服务发布都会触发重连，必须设计心跳、重放和幂等处理。
+4. **代理可能缓冲响应**：如果网关攒够一批数据才转发，用户就会看到“消息成批出现”，需要关闭缓冲并测试 flush 行为。
+5. **连接数与广播成本真实存在**：HTTP/2 只改善复用，不能消除每个订阅者带来的服务端资源消耗。
+6. **认证方式有限制**：原生 EventSource 不支持自定义请求头；敏感凭证优先使用 Cookie 或短期、一次性订阅凭证，并配置严格的来源校验。
+
+心跳可以用注释行维持中间链路活跃，例如每 15 到 30 秒发送一次：
+
+~~~text
+: keep-alive
+
+~~~
+
+心跳不是业务消息，浏览器不会触发 message 事件，但它可以帮助代理发现连接仍在使用。间隔应小于负载均衡器和代理的空闲超时时间。
+
+## 常见问题
+
+### SSE 和 WebSocket 的核心区别是什么？
+
+SSE 是基于 HTTP 的服务器到浏览器单向事件流，浏览器原生支持自动重连；WebSocket 是持久的全双工通道，双方都能在同一连接上主动发送消息，但重连和状态恢复通常需要应用自行实现。
+
+### SSE 会自动重连吗？
+
+会。浏览器的 EventSource 在连接异常关闭后会按 retry 或默认策略尝试重连。若事件包含 id，重连请求还会带上 Last-Event-ID，服务端可以从对应位置继续发送。
+
+### SSE 能保证消息不丢失吗？
+
+不能单独保证。服务端必须持久化或缓存可重放事件、使用单调或可比较的事件 ID，并处理重连、重复投递和过期游标。客户端也应让事件处理具备幂等性。
+
+### SSE 能发送 JSON 吗？
+
+能。SSE 的协议外壳是文本，通常把 JSON 字符串放进 data 字段，浏览器收到后再调用 JSON.parse。它不是 JSON 专用协议，也不会替你定义字段校验和版本兼容规则。
+
+### SSE 适合聊天应用吗？
+
+如果聊天主要是服务器推送回复，且用户消息可以通过 POST 提交，SSE 很合适。若需要输入状态、已读回执、在线状态和大量双向事件在同一通道实时交互，WebSocket 更自然。
+
+### SSE 和 HTTP/2 是什么关系？
+
+SSE 是应用层事件流格式，HTTP/2 是传输 HTTP 请求的协议版本。SSE 可以运行在 HTTP/1.1 或 HTTP/2 上；HTTP/2 的多路复用能缓解同域连接数限制，但不会把 SSE 变成双向协议。
+
+## 总结：单向不是退而求其次，而是准确匹配需求
+
+SSE 用一个普通 HTTP GET 请求建立持久响应，再以 text/event-stream 格式持续推送文本事件。它的价值集中在三个方面：实现简单、原生自动重连与事件续传、能够复用 HTTP 的认证和部署生态。
+
+当数据流向主要是“服务器 → 浏览器”，浏览器很少需要向服务器发消息，或者可以通过传统 API 完成交互时，SSE 往往比 WebSocket 更容易实现、调试和维护。只有当业务真正需要高频双向通信、二进制帧或同一通道内的互动状态时，WebSocket 的复杂度才值得付出。
+
+**选择实时通信技术时，先问数据往哪儿流，再问协议能做什么。单向推送做到足够简单，本身就是一种工程上的聪明。**
+
+## 参考资料
+
+- [WHATWG HTML Standard：Server-sent events](https://html.spec.whatwg.org/multipage/server-sent-events.html)
+- [MDN：Using server-sent events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events)
+- [MDN：EventSource](https://developer.mozilla.org/en-US/docs/Web/API/EventSource)
+- [RFC 9113：HTTP/2](https://www.rfc-editor.org/rfc/rfc9113)
+- [RFC 6455：The WebSocket Protocol](https://www.rfc-editor.org/rfc/rfc6455)
