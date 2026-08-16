@@ -1,0 +1,11 @@
+{
+  "name": "sphrag-product-intro",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "npx --yes hyperframes@0.7.108 preview",
+    "check": "npx --yes hyperframes@0.7.108 check",
+    "render": "npx --yes hyperframes@0.7.108 render",
+    "publish": "npx --yes hyperframes@0.7.108 publish"
+  }
+}

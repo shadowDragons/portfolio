@@ -1,0 +1,101 @@
+[div] ✦ 个人全栈开发者
+[span] 你好，我是 仁戈
+[span] 用代码实现
+[span] 你的梦想
+[p] 13 年企业数字化系统研发经验，长期负责 OA、招聘、考勤、ERP、财务对账、知识库 RAG、智能问数等系统从 0 到 1 建设与持续迭代。
+[div] 年开发经验
+[div] 12+
+[div] 项目系统
+[div] Agent 落地
+[a] 查看作品
+[a] 联系我
+[div] { }
+[div] </>
+[div] [ ]
+[h2] 技术栈
+[p] 不是罗列关键词，而是围绕企业系统、AI 工作流、数据检索和前后端交付形成的实战栈。
+[h3] Java / Spring Boot
+[p] 多模块后端、权限体系、状态流转、任务调度与企业集成。
+[h3] PHP / Yii / Laravel
+[p] 长期建设 OA、招聘、资产、财务等企业后台系统。
+[h3] Python / FastAPI
+[p] RAG、Text2SQL、LangGraph、多智能体工作流工程化。
+[h3] Vue / React / Next.js
+[p] 管理后台、数据交互、SSE/WebSocket 实时体验与作品站。
+[h3] MySQL / Redis / Kafka
+[p] 复杂业务建模、高并发削峰、缓存预热和历史数据查询优化。
+[h3] Qdrant / Elasticsearch
+[p] 向量检索、字段召回、全文索引与 AI 上下文增强。
+[h2] 精选案例
+[p] 首页只展示最能代表当前能力边界的项目，项目页展示全部。
+[span] Java 17
+[span] Spring Boot 3
+[span] MySQL
+[h3] 企业一体化 ERP 运营管理系统
+[p] 围绕客户、订单、出库、物流、对账、开票搭建的一体化业务系统，替代 Excel 与人工流转。
+[a] 探索详情
+[span] Python
+[span] FastAPI
+[span] LangGraph
+[h3] ERP 智能问数 Agent 系统
+[p] 面向 ERP 数据分析场景的问数系统，支持自然语言提问、SQL 生成校验与 SSE 流式返回。
+[a] 探索详情
+[span] Python
+[span] FastAPI
+[span] LlamaIndex
+[h3] 企业知识库 RAG 系统
+[p] 企业内部知识库问答系统，支持文档入库、多知识库检索、引用式回答与人工审核恢复。
+[a] 探索详情
+[span] Python
+[span] FastAPI
+[span] DeepAgents
+[h3] 深度研搜多智能体研究系统
+[p] 对话式多智能体研究系统，统一编排网络搜索、数据库查询、私有知识库和附件读取能力。
+[a] 探索详情
+[span] PHP
+[span] Yii
+[span] MySQL
+[h3] 企业级 OA 自定义工作流系统
+[p] 支持流程配置、表单设计、条件分支、并行审批与金蝶 K3 回写的企业工作流平台。
+[a] 探索详情
+[span] PHP
+[span] Yii
+[span] Kafka
+[h3] 企业招聘管理系统
+[p] 覆盖职位发布、简历投递、笔试、面试、Offer 的招聘全流程系统，支撑校招和社招。
+[a] 探索详情
+[a] 查看全部项目
+[h2] 最新博客
+[p] 博客保留，但从宣传型内容切换为技术教程、系统拆解和工程实践。
+[span] AI Evaluation
+[span] 2026-08-13
+[h3] 为什么不能拿训练集当评测集？一次讲清 Eval（评测集）
+[p] Eval（评测集）是一套用独立样本、期望输出和评分规则衡量 AI 泛化能力的标准试卷；训练集可用于学习，评测集只能用于检验，混用会让分数虚高并误导上线决策。
+[span] 阅读更多
+[span] AI Engineering
+[span] 2026-08-12
+[h3] Trace 是什么？拆解 AI 回答黑盒的全程执法记录仪
+[p] Trace 是记录一次 AI 请求从输入到输出完整执行路径的可观测性数据，它用 Span 串联模型调用、检索、工具调用、耗时、Token 与错误，让开发者能够回放和诊断 AI 应用。
+[span] 阅读更多
+[span] AI 工具
+[span] 2026-08-11
+[h3] Ollama 是什么？一行命令在本地运行大模型
+[p] Ollama 是一个用于下载、运行和管理大语言模型的工具，它把模型、推理引擎和本地 API 封装起来，让开发者用一行命令在自己的电脑上启动大模型。
+[span] 阅读更多
+[a] 查看全部文章
+[h2] 联系我
+[div] junbin — zsh — 80x24
+[span] whoami
+[div] 仁戈 - 全栈开发工程师 / 个人开发者
+[span] contact --details
+[span] Email:
+[a] shadow_dragon@126.com
+[span] Github:
+[a] github.com/shadowDragons
+[a] @Junexus_indie
+[span] WeChat:
+[span] jandan1990
+[span] cat focus.txt
+[div] 企业系统、AI Agent、RAG、Text2SQL、复杂后台、全栈交付。
+[p] © 2026 JUNBIN.DEV - 用代码驱动系统
+[p] Handcrafted with Next.js and TypeScript

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1080, height=1920">
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js" integrity="sha384-sG0Hv1tP1lZCk9KQmrIbY/XNwi+OY84GQqhMscbnsoBFqAz8KNCil1kvfL3Hbbk2" crossorigin="anonymous"></script>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        width: 1080px;
+        height: 1920px;
+        overflow: hidden;
+        background: #000;
+      }
+      #root {
+        position: relative;
+        width: 1080px;
+        height: 1920px;
+        overflow: hidden;
+        background: #F0F0F0;
+      }
+      .scene {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <div data-hf-id="hf-txxr" id="root" data-composition-id="main" data-start="0" data-duration="10" data-width="1080" data-height="1920">
+      <div data-hf-id="hf-6nye" id="el-01-deliver" class="scene" data-composition-id="01-deliver" data-composition-src="compositions/frames/01-deliver.html" data-start="0" data-duration="2.2" data-track-index="0"></div>
+
+      <div data-hf-id="hf-3a5h" id="el-02-proof" class="scene" data-composition-id="02-proof" data-composition-src="compositions/frames/02-proof.html" data-start="1.8" data-duration="2.5" data-track-index="1"></div>
+
+      <div data-hf-id="hf-lwm6" id="el-03-systems" class="scene" data-composition-id="03-systems" data-composition-src="compositions/frames/03-systems.html" data-start="3.8" data-duration="4.2" data-track-index="0"></div>
+
+      <div data-hf-id="hf-4okw" id="el-04-cta" class="scene" data-composition-id="04-cta" data-composition-src="compositions/frames/04-cta.html" data-start="7.6" data-duration="2.4" data-track-index="1"></div>
+
+      <!-- BGM -->
+      <audio data-hf-id="hf-a7tb" id="el-bgm" src="assets/bgm/track.mp3" data-start="0" data-duration="10" data-track-index="11" data-volume="0.9"></audio>
+
+      <!-- SFX -->
+      <audio data-hf-id="hf-39mb" id="el-sfx-0" src="assets/sfx/tight-impact.mp3" data-start="0" data-duration="0.816" data-track-index="20" data-volume="0.35"></audio>
+      <audio data-hf-id="hf-qbwd" id="el-sfx-1" src="assets/sfx/short-reverse-whoosh.mp3" data-start="0" data-duration="1.056" data-track-index="21" data-volume="0.35"></audio>
+      <audio data-hf-id="hf-nrk3" id="el-sfx-2" src="assets/sfx/rising-tick-sequence.mp3" data-start="1.8" data-duration="7.778" data-track-index="22" data-volume="0.35"></audio>
+      <audio data-hf-id="hf-jseu" id="el-sfx-3" src="assets/sfx/soft-impact.mp3" data-start="1.8" data-duration="0.816" data-track-index="23" data-volume="0.35"></audio>
+      <audio data-hf-id="hf-stim" id="el-sfx-4" src="assets/sfx/three-soft-surface-impacts.mp3" data-start="3.8" data-duration="0.816" data-track-index="24" data-volume="0.35"></audio>
+      <audio data-hf-id="hf-mqsi" id="el-sfx-5" src="assets/sfx/forward-whoosh.mp3" data-start="3.8" data-duration="1.58" data-track-index="25" data-volume="0.35"></audio>
+      <audio data-hf-id="hf-njix" id="el-sfx-6" src="assets/sfx/final-lock-click.mp3" data-start="3.8" data-duration="0.264" data-track-index="26" data-volume="0.35"></audio>
+      <audio data-hf-id="hf-fnj0" id="el-sfx-7" src="assets/sfx/orange-sweep.mp3" data-start="7.6" data-duration="1.79" data-track-index="27" data-volume="0.35"></audio>
+      <audio data-hf-id="hf-khud" id="el-sfx-8" src="assets/sfx/resolved-impact.mp3" data-start="7.6" data-duration="3.603" data-track-index="28" data-volume="0.35"></audio>
+      <audio data-hf-id="hf-58if" id="el-sfx-9" src="assets/sfx/clean-end-sting.mp3" data-start="7.6" data-duration="7.315" data-track-index="29" data-volume="0.35"></audio>
+    </div>
+
+    <script>
+      window.__timelines = window.__timelines || {};
+      window.__timelines["main"] = gsap.timeline({ paused: true });
+      // ── frame transitions (injected by transitions.mjs) ──
+      (function () { var tl = window.__timelines["main"];
+        tl.to("#el-01-deliver", { scale: 2.5, opacity: 0, filter: "blur(8px)", duration: 0.4, ease: "power3.in" }, 1.8);
+        tl.fromTo("#el-02-proof", { scale: 0.5, opacity: 0, filter: "blur(8px)" }, { scale: 1, opacity: 1, filter: "blur(0px)", duration: 0.4, ease: "power3.out" }, 1.8);
+        tl.to("#el-02-proof", { y: -1920, duration: 0.5, ease: "power3.inOut" }, 3.8);
+        tl.fromTo("#el-03-systems", { y: 1920, opacity: 1 }, { y: 0, duration: 0.5, ease: "power3.inOut" }, 3.8);
+        tl.to("#el-03-systems", { scaleX: 0, transformOrigin: "left center", duration: 0.4, ease: "power3.inOut" }, 7.6);
+        tl.fromTo("#el-04-cta", { scaleX: 0, transformOrigin: "right center", opacity: 1 }, { scaleX: 1, transformOrigin: "right center", duration: 0.4, ease: "power3.inOut" }, 7.6);
+        tl.to({}, { duration: 10 }, 0); // full-span anchor — main.duration() == composition total (Studio master duration)
+      })();
+    </script>
+  </body>
+</html>

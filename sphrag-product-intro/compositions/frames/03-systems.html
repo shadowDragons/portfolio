@@ -1,0 +1,314 @@
+<template>
+      <style>
+        @font-face { font-family: "PingFang SC"; src: local("PingFang SC"); }
+        @font-face { font-family: "SFMono-Regular"; src: local("SF Mono"); }
+
+        #root {
+          position: absolute;
+          inset: 0;
+          overflow: hidden;
+          color: #f0f0f0;
+          font-family: "Avenir Next", "PingFang SC", sans-serif;
+          container-type: size;
+        }
+
+        .ground {
+          position: absolute;
+          inset: 0;
+          background: #0a0a0a;
+        }
+
+        .scene {
+          position: absolute;
+          inset: 0;
+          overflow: hidden;
+        }
+
+        .grain {
+          position: absolute;
+          inset: 0;
+          opacity: 0.42;
+          background-image: linear-gradient(rgba(249, 115, 22, 0.035) 1px, transparent 1px), linear-gradient(90deg, rgba(249, 115, 22, 0.035) 1px, transparent 1px);
+          background-size: 72px 72px;
+        }
+
+        .chrome {
+          position: absolute;
+          top: 108px;
+          left: 80px;
+          right: 80px;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          border-top: 1px solid #302d2a;
+          padding-top: 24px;
+          color: #f97316;
+          font-family: "IBM Plex Mono", "SFMono-Regular", monospace;
+          font-size: 21px;
+          font-weight: 700;
+          letter-spacing: 0.12em;
+          line-height: 1.2;
+        }
+
+        .heading {
+          position: absolute;
+          top: 190px;
+          left: 80px;
+          right: 80px;
+          color: #f0f0f0;
+          font-size: 90px;
+          font-weight: 900;
+          letter-spacing: 0;
+          line-height: 0.94;
+        }
+
+        .heading-accent { color: #f97316; }
+
+        .subhead {
+          position: absolute;
+          top: 382px;
+          left: 84px;
+          color: #aaa5a0;
+          font-family: "IBM Plex Mono", "SFMono-Regular", monospace;
+          font-size: 20px;
+          font-weight: 700;
+          letter-spacing: 0.12em;
+          line-height: 1.25;
+        }
+
+        .surface-field {
+          position: absolute;
+          top: 480px;
+          left: 0;
+          width: 1080px;
+          height: 1050px;
+          perspective: 1600px;
+        }
+
+        .surface {
+          position: absolute;
+          left: 90px;
+          top: 120px;
+          width: 900px;
+          height: 610px;
+          transform-origin: 50% 50%;
+          will-change: transform, opacity;
+        }
+
+        .screen {
+          position: absolute;
+          inset: 0;
+          overflow: hidden;
+          border: 1px solid rgba(249, 115, 22, 0.82);
+          background: #151413;
+          box-shadow: 30px 36px 80px rgba(0, 0, 0, 0.58);
+        }
+
+        .screen::after {
+          position: absolute;
+          inset: 0;
+          content: "";
+          border: 14px solid rgba(10, 10, 10, 0.13);
+          pointer-events: none;
+        }
+
+        .screen img {
+          display: block;
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          object-position: 50% 30%;
+        }
+
+        .orders .screen img { object-position: 49% 18%; }
+        .agent .screen img { object-position: 50% 30%; }
+        .workflow .screen img { object-position: 50% 18%; }
+
+        .surface-meta {
+          position: absolute;
+          left: 0;
+          bottom: -84px;
+          display: flex;
+          align-items: baseline;
+          gap: 20px;
+          color: #f0f0f0;
+          white-space: nowrap;
+        }
+
+        .surface-index {
+          color: #f97316;
+          font-family: "IBM Plex Mono", "SFMono-Regular", monospace;
+          font-size: 23px;
+          font-weight: 800;
+          letter-spacing: 0.08em;
+        }
+
+        .surface-label {
+          font-size: 42px;
+          font-weight: 900;
+          letter-spacing: 0;
+          line-height: 1;
+        }
+
+        .agent .surface-label { color: #f97316; }
+
+        .surface-detail {
+          position: absolute;
+          right: 0;
+          bottom: -81px;
+          color: #d946ef;
+          font-family: "IBM Plex Mono", "SFMono-Regular", monospace;
+          font-size: 18px;
+          font-weight: 700;
+          letter-spacing: 0.09em;
+          line-height: 1.2;
+        }
+
+        .focus-line {
+          position: absolute;
+          left: 80px;
+          right: 80px;
+          bottom: 284px;
+          height: 1px;
+          background: #302d2a;
+          transform-origin: 0 50%;
+          will-change: transform, opacity;
+        }
+
+        .proof-footer {
+          position: absolute;
+          left: 80px;
+          right: 80px;
+          bottom: 193px;
+          display: flex;
+          justify-content: space-between;
+          align-items: flex-end;
+        }
+
+        .proof-copy {
+          color: #f0f0f0;
+          font-size: 36px;
+          font-weight: 800;
+          letter-spacing: 0;
+          line-height: 1.05;
+        }
+
+        .proof-copy strong { color: #f97316; }
+
+        .proof-count {
+          color: #aaa5a0;
+          font-family: "IBM Plex Mono", "SFMono-Regular", monospace;
+          font-size: 19px;
+          font-weight: 700;
+          letter-spacing: 0.12em;
+          line-height: 1.25;
+          text-align: right;
+        }
+
+        .connector {
+          position: absolute;
+          inset: 0;
+          width: 1080px;
+          height: 1920px;
+          overflow: visible;
+          pointer-events: none;
+        }
+
+        .connector-path {
+          fill: none;
+          stroke: #f97316;
+          stroke-width: 3;
+          stroke-linecap: square;
+          opacity: 0.9;
+        }
+
+        .connector-node {
+          fill: #0a0a0a;
+          stroke: #f97316;
+          stroke-width: 3;
+        }
+      </style>
+
+      <div data-hf-id="hf-p2oc" id="root" data-composition-id="03-systems" data-start="0" data-duration="4.2" data-width="1080" data-height="1920">
+        <div data-hf-id="hf-2w49" id="systems03-ground" class="ground clip" data-start="0" data-duration="4.2" data-track-index="1"></div>
+        <div data-hf-id="hf-wua0" class="scene">
+          <div data-hf-id="hf-mosj" class="grain" id="systems03-grain"></div>
+          <div data-hf-id="hf-qysd" class="chrome" id="systems03-chrome"><span data-hf-id="hf-rada">03 / PRODUCTION SYSTEMS</span><span data-hf-id="hf-eh3a">REAL WORK</span></div>
+          <div data-hf-id="hf-ckky" class="heading" id="systems03-heading">系统正在<span data-hf-id="hf-zhb4" class="heading-accent">运行</span></div>
+          <div data-hf-id="hf-c2ul" class="subhead" id="systems03-subhead">BUSINESS LOGIC / AI ORCHESTRATION / WORKFLOW</div>
+
+          <div data-hf-id="hf-vxnh" class="surface-field" id="systems03-field">
+            <div data-hf-id="hf-m966" class="surface orders" id="systems03-orders">
+              <div data-hf-id="hf-cdmk" class="screen"><img data-hf-id="hf-a2ap" src="assets/enterprise-orders.png" alt="企业订单管理系统"></div>
+              <div data-hf-id="hf-3ngd" class="surface-meta"><span data-hf-id="hf-3lx2" class="surface-index">01</span><span data-hf-id="hf-wx2y" class="surface-label">企业系统</span></div>
+              <div data-hf-id="hf-4vvw" class="surface-detail" data-layout-allow-overlap>ORDERS / ERP</div>
+            </div>
+            <div data-hf-id="hf-8fom" class="surface agent" id="systems03-agent">
+              <div data-hf-id="hf-0hv8" class="screen"><img data-hf-id="hf-jodf" src="assets/deep-research-agent.png" alt="深度研搜 AI Agent"></div>
+              <div data-hf-id="hf-tpqp" class="surface-meta"><span data-hf-id="hf-4083" class="surface-index">02</span><span data-hf-id="hf-ivso" class="surface-label">AI Agent</span></div>
+              <div data-hf-id="hf-rl30" class="surface-detail" data-layout-allow-overlap>RESEARCH / AGENT</div>
+            </div>
+            <div data-hf-id="hf-2lle" class="surface workflow" id="systems03-workflow">
+              <div data-hf-id="hf-zay5" class="screen"><img data-hf-id="hf-wrg2" src="assets/workflow-platform.png" alt="企业工作流平台"></div>
+              <div data-hf-id="hf-uwns" class="surface-meta"><span data-hf-id="hf-4ej4" class="surface-index">03</span><span data-hf-id="hf-69pi" class="surface-label">工作流平台</span></div>
+              <div data-hf-id="hf-7asu" class="surface-detail" data-layout-allow-overlap>APPROVAL / AUTOMATION</div>
+            </div>
+          </div>
+
+          <svg data-hf-id="hf-2opv" class="connector" viewBox="0 0 1080 1920" aria-hidden="true">
+            <path data-hf-id="hf-7nex" class="connector-path" id="systems03-connector" d="M 184 1430 L 540 1518 L 896 1430" />
+            <circle data-hf-id="hf-zs0g" class="connector-node" cx="184" cy="1430" r="8" />
+            <circle data-hf-id="hf-k5ln" class="connector-node" cx="540" cy="1518" r="8" />
+            <circle data-hf-id="hf-duxg" class="connector-node" cx="896" cy="1430" r="8" />
+          </svg>
+
+          <div data-hf-id="hf-me2z" class="focus-line" id="systems03-focus-line"></div>
+          <div data-hf-id="hf-j91q" class="proof-footer" id="systems03-footer">
+            <div data-hf-id="hf-4vd9" class="proof-copy">从业务流程到 <strong data-hf-id="hf-umy0">AI 编排</strong></div>
+            <div data-hf-id="hf-h8si" class="proof-count"><span data-hf-id="hf-8g22">03 REAL SYSTEMS</span><span data-hf-id="hf-smi6">BUILT TO SHIP</span></div>
+          </div>
+        </div>
+      </div>
+
+      <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+      <script>
+        window.__timelines = window.__timelines || {};
+        const tl = gsap.timeline({ paused: true });
+        const orders = document.getElementById("systems03-orders");
+        const agent = document.getElementById("systems03-agent");
+        const workflow = document.getElementById("systems03-workflow");
+        const chrome = document.getElementById("systems03-chrome");
+        const heading = document.getElementById("systems03-heading");
+        const subhead = document.getElementById("systems03-subhead");
+        const footer = document.getElementById("systems03-footer");
+        const focusLine = document.getElementById("systems03-focus-line");
+        const connector = document.getElementById("systems03-connector");
+
+        const connectorLength = connector.getTotalLength();
+        connector.style.strokeDasharray = String(connectorLength);
+        connector.style.strokeDashoffset = String(connectorLength);
+
+        tl.fromTo(chrome, { y: -18, opacity: 0 }, { y: 0, opacity: 1, duration: 0.34, ease: "power3.out" }, 0);
+        tl.fromTo(heading, { y: 34, opacity: 0 }, { y: 0, opacity: 1, duration: 0.42, ease: "power3.out" }, 0.06);
+        tl.fromTo(subhead, { y: 14, opacity: 0 }, { y: 0, opacity: 1, duration: 0.3, ease: "power2.out" }, 0.24);
+        tl.fromTo(orders, { x: -760, y: 260, rotation: -8, scale: 0.74, opacity: 0 }, { x: 0, y: 0, rotation: -3.5, scale: 1, opacity: 1, duration: 0.72, ease: "power4.out" }, 0.16);
+        tl.fromTo(focusLine, { scaleX: 0, opacity: 0 }, { scaleX: 1, opacity: 1, duration: 0.45, ease: "power2.out" }, 0.56);
+
+        tl.to(orders, { x: -450, y: 210, rotation: -8, scale: 0.67, opacity: 0.36, duration: 0.52, ease: "power3.inOut" }, 0.92);
+        tl.fromTo(agent, { x: 650, y: 175, rotation: 7, scale: 0.72, opacity: 0 }, { x: 0, y: -12, rotation: 0, scale: 1.03, opacity: 1, duration: 0.68, ease: "power4.out" }, 0.94);
+        tl.to(agent, { scale: 1.07, duration: 0.22, ease: "power2.out" }, 1.62);
+        tl.to(agent, { scale: 1.01, duration: 0.24, ease: "power2.inOut" }, 1.84);
+
+        tl.to(orders, { x: -505, y: 355, rotation: -11, scale: 0.57, opacity: 0.3, duration: 0.46, ease: "power3.inOut" }, 2.02);
+        tl.to(agent, { x: -155, y: 278, rotation: -4.5, scale: 0.71, opacity: 0.58, duration: 0.5, ease: "power3.inOut" }, 2.1);
+        tl.fromTo(workflow, { x: 720, y: 230, rotation: 9, scale: 0.7, opacity: 0 }, { x: 285, y: 165, rotation: 5, scale: 0.77, opacity: 1, duration: 0.68, ease: "power4.out" }, 2.08);
+
+        tl.to(orders, { x: -405, y: 400, rotation: -8, scale: 0.55, opacity: 0.55, duration: 0.54, ease: "power3.out" }, 3.04);
+        tl.to(agent, { x: 0, y: 330, rotation: 0, scale: 0.66, opacity: 1, duration: 0.54, ease: "power3.out" }, 3.04);
+        tl.to(workflow, { x: 405, y: 400, rotation: 8, scale: 0.55, opacity: 0.55, duration: 0.54, ease: "power3.out" }, 3.04);
+        tl.to(connector, { strokeDashoffset: 0, duration: 0.45, ease: "power2.out" }, 3.2);
+        tl.fromTo(footer, { y: 18, opacity: 0 }, { y: 0, opacity: 1, duration: 0.34, ease: "power2.out" }, 3.36);
+
+        window.__timelines["03-systems"] = tl;
+      </script>
+</template>

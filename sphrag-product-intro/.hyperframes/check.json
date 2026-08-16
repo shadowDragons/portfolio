@@ -1,0 +1,1704 @@
+{
+  "ok": true,
+  "strict": false,
+  "lint": {
+    "ok": true,
+    "errorCount": 0,
+    "warningCount": 23,
+    "infoCount": 3,
+    "findings": [
+      {
+        "code": "id_requires_css_escape",
+        "severity": "warning",
+        "message": "id=\"01-deliver-label\" starts with a digit, so the common selector `#01-deliver-label` throws a SyntaxError in querySelector().",
+        "selector": "#01-deliver-label",
+        "dataAttributes": {},
+        "sourceFile": "/Users/junbinzhong/Workspace/portfolio/sphrag-product-intro/compositions/frames/01-deliver.html",
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        "time": 0,
+        "fixHint": "Rename the id to start with a letter (recommended), or build selectors with `#${CSS.escape(id)}` at runtime."
+      },
+      {
+        "code": "id_requires_css_escape",
+        "severity": "warning",
+        "message": "id=\"01-deliver-beatbar\" starts with a digit, so the common selector `#01-deliver-beatbar` throws a SyntaxError in querySelector().",
+        "selector": "#01-deliver-beatbar",
+        "dataAttributes": {},
+        "sourceFile": "/Users/junbinzhong/Workspace/portfolio/sphrag-product-intro/compositions/frames/01-deliver.html",
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        "time": 0,
+        "fixHint": "Rename the id to start with a letter (recommended), or build selectors with `#${CSS.escape(id)}` at runtime."
+      },
+      {
+        "code": "id_requires_css_escape",
+        "severity": "warning",
+        "message": "id=\"01-deliver-stage\" starts with a digit, so the common selector `#01-deliver-stage` throws a SyntaxError in querySelector().",
+        "selector": "#01-deliver-stage",
+        "dataAttributes": {},
+        "sourceFile": "/Users/junbinzhong/Workspace/portfolio/sphrag-product-intro/compositions/frames/01-deliver.html",
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        "time": 0,
+        "fixHint": "Rename the id to start with a letter (recommended), or build selectors with `#${CSS.escape(id)}` at runtime."
+      },
+      {
+        "code": "id_requires_css_escape",
+        "severity": "warning",
+        "message": "id=\"01-deliver-line-one\" starts with a digit, so the common selector `#01-deliver-line-one` throws a SyntaxError in querySelector().",
+        "selector": "#01-deliver-line-one",
+        "dataAttributes": {},
+        "sourceFile": "/Users/junbinzhong/Workspace/portfolio/sphrag-product-intro/compositions/frames/01-deliver.html",
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        "time": 0,
+        "fixHint": "Rename the id to start with a letter (recommended), or build selectors with `#${CSS.escape(id)}` at runtime."
+      },
+      {
+        "code": "id_requires_css_escape",
+        "severity": "warning",
+        "message": "id=\"01-deliver-lock-project\" starts with a digit, so the common selector `#01-deliver-lock-project` throws a SyntaxError in querySelector().",
+        "selector": "#01-deliver-lock-project",
+        "dataAttributes": {},
+        "sourceFile": "/Users/junbinzhong/Workspace/portfolio/sphrag-product-intro/compositions/frames/01-deliver.html",
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        "time": 0,
+        "fixHint": "Rename the id to start with a letter (recommended), or build selectors with `#${CSS.escape(id)}` at runtime."
+      },
+      {
+        "code": "id_requires_css_escape",
+        "severity": "warning",
+        "message": "id=\"01-deliver-line-two\" starts with a digit, so the common selector `#01-deliver-line-two` throws a SyntaxError in querySelector().",
+        "selector": "#01-deliver-line-two",
+        "dataAttributes": {},
+        "sourceFile": "/Users/junbinzhong/Workspace/portfolio/sphrag-product-intro/compositions/frames/01-deliver.html",
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        "time": 0,
+        "fixHint": "Rename the id to start with a letter (recommended), or build selectors with `#${CSS.escape(id)}` at runtime."
+      },
+      {
+        "code": "id_requires_css_escape",
+        "severity": "warning",
+        "message": "id=\"01-deliver-line-three\" starts with a digit, so the common selector `#01-deliver-line-three` throws a SyntaxError in querySelector().",
+        "selector": "#01-deliver-line-three",
+        "dataAttributes": {},
+        "sourceFile": "/Users/junbinzhong/Workspace/portfolio/sphrag-product-intro/compositions/frames/01-deliver.html",
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        "time": 0,
+        "fixHint": "Rename the id to start with a letter (recommended), or build selectors with `#${CSS.escape(id)}` at runtime."
+      },
+      {
+        "code": "id_requires_css_escape",
+        "severity": "warning",
+        "message": "id=\"01-deliver-draw\" starts with a digit, so the common selector `#01-deliver-draw` throws a SyntaxError in querySelector().",
+        "selector": "#01-deliver-draw",
+        "dataAttributes": {},
+        "sourceFile": "/Users/junbinzhong/Workspace/portfolio/sphrag-product-intro/compositions/frames/01-deliver.html",
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        "time": 0,
+        "fixHint": "Rename the id to start with a letter (recommended), or build selectors with `#${CSS.escape(id)}` at runtime."
+      },
+      {
+        "code": "id_requires_css_escape",
+        "severity": "warning",
+        "message": "id=\"01-deliver-draw-path\" starts with a digit, so the common selector `#01-deliver-draw-path` throws a SyntaxError in querySelector().",
+        "selector": "#01-deliver-draw-path",
+        "dataAttributes": {},
+        "sourceFile": "/Users/junbinzhong/Workspace/portfolio/sphrag-product-intro/compositions/frames/01-deliver.html",
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        "time": 0,
+        "fixHint": "Rename the id to start with a letter (recommended), or build selectors with `#${CSS.escape(id)}` at runtime."
+      },
+      {
+        "code": "studio_missing_editable_id",
+        "severity": "warning",
+        "message": "<div class=\"01-deliver-ground\" data-start=\"0\" data-track-index=\"0\"> has no id, so Studio cannot use a stable edit target for its timeline and canvas controls.",
+        "selector": "[data-composition-id]",
+        "dataAttributes": {},
+        "sourceFile": "/Users/junbinzhong/Workspace/portfolio/sphrag-product-intro/compositions/frames/01-deliver.html",
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        "time": 0,
+        "fixHint": "Add a stable, human-readable id such as id=\"hero-title\" or id=\"scene-1-card\" to every timeline-visible element you want agents or Studio to edit."
+      },
+      {
+        "code": "id_requires_css_escape",
+        "severity": "warning",
+        "message": "id=\"02-proof-camera\" starts with a digit, so the common selector `#02-proof-camera` throws a SyntaxError in querySelector().",
+        "selector": "#02-proof-camera",
+        "dataAttributes": {},
+        "sourceFile": "/Users/junbinzhong/Workspace/portfolio/sphrag-product-intro/compositions/frames/02-proof.html",
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        "time": 0,
+        "fixHint": "Rename the id to start with a letter (recommended), or build selectors with `#${CSS.escape(id)}` at runtime."
+      },
+      {
+        "code": "id_requires_css_escape",
+        "severity": "warning",
+        "message": "id=\"02-proof-ring\" starts with a digit, so the common selector `#02-proof-ring` throws a SyntaxError in querySelector().",
+        "selector": "#02-proof-ring",
+        "dataAttributes": {},
+        "sourceFile": "/Users/junbinzhong/Workspace/portfolio/sphrag-product-intro/compositions/frames/02-proof.html",
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        "time": 0,
+        "fixHint": "Rename the id to start with a letter (recommended), or build selectors with `#${CSS.escape(id)}` at runtime."
+      },
+      {
+        "code": "id_requires_css_escape",
+        "severity": "warning",
+        "message": "id=\"02-proof-counter\" starts with a digit, so the common selector `#02-proof-counter` throws a SyntaxError in querySelector().",
+        "selector": "#02-proof-counter",
+        "dataAttributes": {},
+        "sourceFile": "/Users/junbinzhong/Workspace/portfolio/sphrag-product-intro/compositions/frames/02-proof.html",
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        "time": 0,
+        "fixHint": "Rename the id to start with a letter (recommended), or build selectors with `#${CSS.escape(id)}` at runtime."
+      },
+      {
+        "code": "id_requires_css_escape",
+        "severity": "warning",
+        "message": "id=\"02-proof-years\" starts with a digit, so the common selector `#02-proof-years` throws a SyntaxError in querySelector().",
+        "selector": "#02-proof-years",
+        "dataAttributes": {},
+        "sourceFile": "/Users/junbinzhong/Workspace/portfolio/sphrag-product-intro/compositions/frames/02-proof.html",
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        "time": 0,
+        "fixHint": "Rename the id to start with a letter (recommended), or build selectors with `#${CSS.escape(id)}` at runtime."
+      },
+      {
+        "code": "id_requires_css_escape",
+        "severity": "warning",
+        "message": "id=\"02-proof-word-1\" starts with a digit, so the common selector `#02-proof-word-1` throws a SyntaxError in querySelector().",
+        "selector": "#02-proof-word-1",
+        "dataAttributes": {},
+        "sourceFile": "/Users/junbinzhong/Workspace/portfolio/sphrag-product-intro/compositions/frames/02-proof.html",
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        "time": 0,
+        "fixHint": "Rename the id to start with a letter (recommended), or build selectors with `#${CSS.escape(id)}` at runtime."
+      },
+      {
+        "code": "id_requires_css_escape",
+        "severity": "warning",
+        "message": "id=\"02-proof-word-2\" starts with a digit, so the common selector `#02-proof-word-2` throws a SyntaxError in querySelector().",
+        "selector": "#02-proof-word-2",
+        "dataAttributes": {},
+        "sourceFile": "/Users/junbinzhong/Workspace/portfolio/sphrag-product-intro/compositions/frames/02-proof.html",
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        "time": 0,
+        "fixHint": "Rename the id to start with a letter (recommended), or build selectors with `#${CSS.escape(id)}` at runtime."
+      },
+      {
+        "code": "id_requires_css_escape",
+        "severity": "warning",
+        "message": "id=\"02-proof-word-3\" starts with a digit, so the common selector `#02-proof-word-3` throws a SyntaxError in querySelector().",
+        "selector": "#02-proof-word-3",
+        "dataAttributes": {},
+        "sourceFile": "/Users/junbinzhong/Workspace/portfolio/sphrag-product-intro/compositions/frames/02-proof.html",
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        "time": 0,
+        "fixHint": "Rename the id to start with a letter (recommended), or build selectors with `#${CSS.escape(id)}` at runtime."
+      },
+      {
+        "code": "id_requires_css_escape",
+        "severity": "warning",
+        "message": "id=\"02-proof-word-4\" starts with a digit, so the common selector `#02-proof-word-4` throws a SyntaxError in querySelector().",
+        "selector": "#02-proof-word-4",
+        "dataAttributes": {},
+        "sourceFile": "/Users/junbinzhong/Workspace/portfolio/sphrag-product-intro/compositions/frames/02-proof.html",
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        "time": 0,
+        "fixHint": "Rename the id to start with a letter (recommended), or build selectors with `#${CSS.escape(id)}` at runtime."
+      },
+      {
+        "code": "id_requires_css_escape",
+        "severity": "warning",
+        "message": "id=\"02-proof-line-left\" starts with a digit, so the common selector `#02-proof-line-left` throws a SyntaxError in querySelector().",
+        "selector": "#02-proof-line-left",
+        "dataAttributes": {},
+        "sourceFile": "/Users/junbinzhong/Workspace/portfolio/sphrag-product-intro/compositions/frames/02-proof.html",
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        "time": 0,
+        "fixHint": "Rename the id to start with a letter (recommended), or build selectors with `#${CSS.escape(id)}` at runtime."
+      },
+      {
+        "code": "id_requires_css_escape",
+        "severity": "warning",
+        "message": "id=\"02-proof-line-right\" starts with a digit, so the common selector `#02-proof-line-right` throws a SyntaxError in querySelector().",
+        "selector": "#02-proof-line-right",
+        "dataAttributes": {},
+        "sourceFile": "/Users/junbinzhong/Workspace/portfolio/sphrag-product-intro/compositions/frames/02-proof.html",
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        "time": 0,
+        "fixHint": "Rename the id to start with a letter (recommended), or build selectors with `#${CSS.escape(id)}` at runtime."
+      },
+      {
+        "code": "id_requires_css_escape",
+        "severity": "warning",
+        "message": "id=\"02-proof-systems\" starts with a digit, so the common selector `#02-proof-systems` throws a SyntaxError in querySelector().",
+        "selector": "#02-proof-systems",
+        "dataAttributes": {},
+        "sourceFile": "/Users/junbinzhong/Workspace/portfolio/sphrag-product-intro/compositions/frames/02-proof.html",
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        "time": 0,
+        "fixHint": "Rename the id to start with a letter (recommended), or build selectors with `#${CSS.escape(id)}` at runtime."
+      },
+      {
+        "code": "id_requires_css_escape",
+        "severity": "warning",
+        "message": "id=\"02-proof-delivery\" starts with a digit, so the common selector `#02-proof-delivery` throws a SyntaxError in querySelector().",
+        "selector": "#02-proof-delivery",
+        "dataAttributes": {},
+        "sourceFile": "/Users/junbinzhong/Workspace/portfolio/sphrag-product-intro/compositions/frames/02-proof.html",
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        "time": 0,
+        "fixHint": "Rename the id to start with a letter (recommended), or build selectors with `#${CSS.escape(id)}` at runtime."
+      },
+      {
+        "code": "studio_missing_editable_id",
+        "severity": "warning",
+        "message": "<div class=\"proof02-ground\" data-start=\"0\" data-track-index=\"1\"> has no id, so Studio cannot use a stable edit target for its timeline and canvas controls.",
+        "selector": "[data-composition-id]",
+        "dataAttributes": {},
+        "sourceFile": "/Users/junbinzhong/Workspace/portfolio/sphrag-product-intro/compositions/frames/02-proof.html",
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        "time": 0,
+        "fixHint": "Add a stable, human-readable id such as id=\"hero-title\" or id=\"scene-1-card\" to every timeline-visible element you want agents or Studio to edit."
+      },
+      {
+        "code": "pointer_events_none",
+        "severity": "info",
+        "message": "`.screen::after` sets `pointer-events: none`. Elements matching this selector are harder to select in the Studio preview.",
+        "selector": ".screen::after",
+        "dataAttributes": {},
+        "sourceFile": "/Users/junbinzhong/Workspace/portfolio/sphrag-product-intro/compositions/frames/03-systems.html",
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        "time": 0,
+        "fixHint": "If these elements should be selectable in the Studio, remove `pointer-events: none` or move it to a wrapper that doesn't contain editable content."
+      },
+      {
+        "code": "pointer_events_none",
+        "severity": "info",
+        "message": "`.connector` sets `pointer-events: none`. Elements matching this selector are harder to select in the Studio preview.",
+        "selector": ".connector",
+        "dataAttributes": {},
+        "sourceFile": "/Users/junbinzhong/Workspace/portfolio/sphrag-product-intro/compositions/frames/03-systems.html",
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        "time": 0,
+        "fixHint": "If these elements should be selectable in the Studio, remove `pointer-events: none` or move it to a wrapper that doesn't contain editable content."
+      },
+      {
+        "code": "system_font_will_alias",
+        "severity": "info",
+        "message": "Font family will be substituted at render time: 'avenir next' → Inter. The renderer maps these to bundled fonts for cross-platform consistency. Use the target font name directly for consistent preview and render results.",
+        "selector": "[data-composition-id]",
+        "dataAttributes": {},
+        "sourceFile": "/Users/junbinzhong/Workspace/portfolio/sphrag-product-intro/compositions/frames/03-systems.html",
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        "time": 0
+      }
+    ],
+    "filesScanned": 5
+  },
+  "runtime": {
+    "ok": true,
+    "errorCount": 0,
+    "warningCount": 0,
+    "infoCount": 0,
+    "findings": []
+  },
+  "layout": {
+    "ok": true,
+    "errorCount": 0,
+    "warningCount": 2,
+    "infoCount": 27,
+    "findings": [
+      {
+        "code": "content_overlap",
+        "severity": "warning",
+        "time": 1.875,
+        "selector": "#\\30 1-deliver-lock-project",
+        "message": "Two text blocks overlap and may render unreadable.",
+        "rect": {
+          "left": 82.21,
+          "top": 526.63,
+          "right": 888.78,
+          "bottom": 707.28,
+          "width": 806.56,
+          "height": 180.65
+        },
+        "containerSelector": "#\\30 2-proof-counter",
+        "text": "复杂项目，",
+        "fixHint": "Give each block its own zone, or mark intentional layering with data-layout-allow-overlap.",
+        "dataAttributes": {
+          "data-hf-id": "hf-9c30"
+        },
+        "sourceFile": "compositions/frames/01-deliver.html",
+        "bbox": {
+          "x": 82.21,
+          "y": 526.63,
+          "width": 806.56,
+          "height": 180.65
+        },
+        "firstSeen": 1.875,
+        "lastSeen": 2.125,
+        "occurrences": 3
+      },
+      {
+        "code": "content_overlap",
+        "severity": "warning",
+        "time": 1.875,
+        "selector": "#\\30 1-deliver-line-two > span:nth-of-type(3)",
+        "message": "Two text blocks overlap and may render unreadable.",
+        "rect": {
+          "left": 404.84,
+          "top": 772.7,
+          "right": 566.16,
+          "bottom": 953.35,
+          "width": 161.32,
+          "height": 180.65
+        },
+        "containerSelector": "#\\30 2-proof-counter",
+        "text": "落",
+        "fixHint": "Give each block its own zone, or mark intentional layering with data-layout-allow-overlap.",
+        "dataAttributes": {
+          "data-hf-id": "hf-hous"
+        },
+        "sourceFile": "compositions/frames/01-deliver.html",
+        "bbox": {
+          "x": 404.84,
+          "y": 772.7,
+          "width": 161.32,
+          "height": 180.65
+        },
+        "firstSeen": 1.875,
+        "lastSeen": 2.125,
+        "occurrences": 3
+      },
+      {
+        "code": "content_overlap",
+        "severity": "info",
+        "time": 2.125,
+        "selector": "#\\30 1-deliver-line-two > span:nth-of-type(2)",
+        "message": "Two text blocks overlap and may render unreadable.",
+        "rect": {
+          "left": 103.35,
+          "top": 684.15,
+          "right": 340.94,
+          "bottom": 950.21,
+          "width": 237.59,
+          "height": 266.07
+        },
+        "containerSelector": "#\\30 2-proof-counter",
+        "text": "能",
+        "fixHint": "Give each block its own zone, or mark intentional layering with data-layout-allow-overlap.",
+        "dataAttributes": {
+          "data-hf-id": "hf-0hn8"
+        },
+        "sourceFile": "compositions/frames/01-deliver.html",
+        "bbox": {
+          "x": 103.35,
+          "y": 684.15,
+          "width": 237.59,
+          "height": 266.07
+        },
+        "firstSeen": 2.125,
+        "lastSeen": 2.125,
+        "occurrences": 1
+      },
+      {
+        "code": "content_overlap",
+        "severity": "info",
+        "time": 2.125,
+        "selector": "#\\30 1-deliver-line-two > span:nth-of-type(4)",
+        "message": "Two text blocks overlap and may render unreadable.",
+        "rect": {
+          "left": 578.53,
+          "top": 684.15,
+          "right": 816.12,
+          "bottom": 950.21,
+          "width": 237.59,
+          "height": 266.07
+        },
+        "containerSelector": "#\\30 2-proof-counter",
+        "text": "地",
+        "fixHint": "Give each block its own zone, or mark intentional layering with data-layout-allow-overlap.",
+        "dataAttributes": {
+          "data-hf-id": "hf-zikj"
+        },
+        "sourceFile": "compositions/frames/01-deliver.html",
+        "bbox": {
+          "x": 578.53,
+          "y": 684.15,
+          "width": 237.59,
+          "height": 266.07
+        },
+        "firstSeen": 2.125,
+        "lastSeen": 2.125,
+        "occurrences": 1
+      },
+      {
+        "code": "content_overlap",
+        "severity": "info",
+        "time": 2.125,
+        "selector": "#\\30 1-deliver-line-three",
+        "message": "Two text blocks overlap and may render unreadable.",
+        "rect": {
+          "left": -134.24,
+          "top": 1046.59,
+          "right": 340.94,
+          "bottom": 1312.66,
+          "width": 475.18,
+          "height": 266.07
+        },
+        "containerSelector": "div.proof02-support-value",
+        "text": "人。",
+        "fixHint": "Give each block its own zone, or mark intentional layering with data-layout-allow-overlap.",
+        "dataAttributes": {
+          "data-hf-id": "hf-alj0"
+        },
+        "sourceFile": "compositions/frames/01-deliver.html",
+        "bbox": {
+          "x": -134.24,
+          "y": 1046.59,
+          "width": 475.18,
+          "height": 266.07
+        },
+        "firstSeen": 2.125,
+        "lastSeen": 2.125,
+        "occurrences": 1
+      },
+      {
+        "code": "canvas_overflow",
+        "severity": "info",
+        "time": 2.778,
+        "selector": "div.proof02-support-value",
+        "message": "Text extends outside the composition canvas.",
+        "rect": {
+          "left": 1032.5,
+          "top": 1262.2,
+          "right": 1178.42,
+          "bottom": 1347.2,
+          "width": 145.92,
+          "height": 85
+        },
+        "containerSelector": "#root",
+        "text": "持续",
+        "fixHint": "Move the text inward, reduce its size, or mark intentional off-canvas animation with data-layout-allow-overflow.",
+        "containerRect": {
+          "left": 0,
+          "top": 0,
+          "right": 1080,
+          "bottom": 1920,
+          "width": 1080,
+          "height": 1920
+        },
+        "overflow": {
+          "right": 98.42
+        },
+        "dataAttributes": {
+          "data-hf-id": "hf-lsyj"
+        },
+        "sourceFile": "compositions/frames/02-proof.html",
+        "bbox": {
+          "x": 1032.5,
+          "y": 1262.2,
+          "width": 145.92,
+          "height": 85
+        },
+        "firstSeen": 2.778,
+        "lastSeen": 2.778,
+        "occurrences": 1
+      },
+      {
+        "code": "canvas_overflow",
+        "severity": "info",
+        "time": 2.778,
+        "selector": "div.proof02-support-label",
+        "message": "Text extends outside the composition canvas.",
+        "rect": {
+          "left": 1110.42,
+          "top": 1356.38,
+          "right": 1178.42,
+          "bottom": 1394.38,
+          "width": 68,
+          "height": 38
+        },
+        "containerSelector": "#root",
+        "text": "交付",
+        "fixHint": "Move the text inward, reduce its size, or mark intentional off-canvas animation with data-layout-allow-overflow.",
+        "containerRect": {
+          "left": 0,
+          "top": 0,
+          "right": 1080,
+          "bottom": 1920,
+          "width": 1080,
+          "height": 1920
+        },
+        "overflow": {
+          "right": 98.42
+        },
+        "dataAttributes": {
+          "data-hf-id": "hf-8jba"
+        },
+        "sourceFile": "compositions/frames/02-proof.html",
+        "bbox": {
+          "x": 1110.42,
+          "y": 1356.38,
+          "width": 68,
+          "height": 38
+        },
+        "firstSeen": 2.778,
+        "lastSeen": 2.778,
+        "occurrences": 1
+      },
+      {
+        "code": "container_overflow",
+        "severity": "info",
+        "time": 2.778,
+        "selector": "#\\30 2-proof-camera",
+        "message": "Element extends outside a clipping layout container.",
+        "rect": {
+          "left": -27.58,
+          "top": -29.8,
+          "right": 1108.42,
+          "bottom": 1946.2,
+          "width": 1136,
+          "height": 1976
+        },
+        "containerSelector": "div.proof02-scene",
+        "fixHint": "Resize/reposition the child or container, or mark intentional overflow with data-layout-allow-overflow.",
+        "containerRect": {
+          "left": 0,
+          "top": 0,
+          "right": 1080,
+          "bottom": 1920,
+          "width": 1080,
+          "height": 1920
+        },
+        "overflow": {
+          "left": 27.58,
+          "right": 28.42,
+          "top": 29.8,
+          "bottom": 26.2
+        },
+        "dataAttributes": {
+          "data-hf-id": "hf-kiq0"
+        },
+        "sourceFile": "compositions/frames/02-proof.html",
+        "bbox": {
+          "x": -27.58,
+          "y": -29.8,
+          "width": 1136,
+          "height": 1976
+        },
+        "firstSeen": 2.778,
+        "lastSeen": 2.778,
+        "occurrences": 1
+      },
+      {
+        "code": "panel_out_of_canvas",
+        "severity": "info",
+        "time": 2.778,
+        "selector": "#\\30 2-proof-delivery",
+        "message": "Painted panel extends outside the composition canvas.",
+        "rect": {
+          "left": 711.42,
+          "top": 1240.2,
+          "right": 1178.42,
+          "bottom": 1394.77,
+          "width": 467,
+          "height": 154.58
+        },
+        "containerSelector": "#root",
+        "text": "持续 交付",
+        "fixHint": "Move the panel inward, or mark intentional off-canvas animation with data-layout-allow-overflow.",
+        "containerRect": {
+          "left": 0,
+          "top": 0,
+          "right": 1080,
+          "bottom": 1920,
+          "width": 1080,
+          "height": 1920
+        },
+        "overflow": {
+          "right": 98.42
+        },
+        "dataAttributes": {
+          "data-hf-id": "hf-pzlm"
+        },
+        "sourceFile": "compositions/frames/02-proof.html",
+        "bbox": {
+          "x": 711.42,
+          "y": 1240.2,
+          "width": 467,
+          "height": 154.58
+        },
+        "firstSeen": 2.778,
+        "lastSeen": 2.778,
+        "occurrences": 1
+      },
+      {
+        "code": "canvas_overflow",
+        "severity": "info",
+        "time": 3.889,
+        "selector": "#systems03-chrome > span:nth-of-type(1)",
+        "message": "Text extends outside the composition canvas.",
+        "rect": {
+          "left": 80,
+          "top": 2038.63,
+          "right": 427.77,
+          "bottom": 2066.63,
+          "width": 347.77,
+          "height": 28
+        },
+        "containerSelector": "#root",
+        "text": "03 / PRODUCTION SYSTEMS",
+        "fixHint": "Move the text inward, reduce its size, or mark intentional off-canvas animation with data-layout-allow-overflow.",
+        "containerRect": {
+          "left": 0,
+          "top": 0,
+          "right": 1080,
+          "bottom": 1920,
+          "width": 1080,
+          "height": 1920
+        },
+        "overflow": {
+          "bottom": 146.63
+        },
+        "dataAttributes": {
+          "data-hf-id": "hf-rada"
+        },
+        "sourceFile": "compositions/frames/03-systems.html",
+        "bbox": {
+          "x": 80,
+          "y": 2038.63,
+          "width": 347.77,
+          "height": 28
+        },
+        "firstSeen": 3.889,
+        "lastSeen": 3.889,
+        "occurrences": 1
+      },
+      {
+        "code": "canvas_overflow",
+        "severity": "info",
+        "time": 3.889,
+        "selector": "#systems03-chrome > span:nth-of-type(2)",
+        "message": "Text extends outside the composition canvas.",
+        "rect": {
+          "left": 863.91,
+          "top": 2038.63,
+          "right": 1000,
+          "bottom": 2066.63,
+          "width": 136.09,
+          "height": 28
+        },
+        "containerSelector": "#root",
+        "text": "REAL WORK",
+        "fixHint": "Move the text inward, reduce its size, or mark intentional off-canvas animation with data-layout-allow-overflow.",
+        "containerRect": {
+          "left": 0,
+          "top": 0,
+          "right": 1080,
+          "bottom": 1920,
+          "width": 1080,
+          "height": 1920
+        },
+        "overflow": {
+          "bottom": 146.63
+        },
+        "dataAttributes": {
+          "data-hf-id": "hf-eh3a"
+        },
+        "sourceFile": "compositions/frames/03-systems.html",
+        "bbox": {
+          "x": 863.91,
+          "y": 2038.63,
+          "width": 136.09,
+          "height": 28
+        },
+        "firstSeen": 3.889,
+        "lastSeen": 3.889,
+        "occurrences": 1
+      },
+      {
+        "code": "canvas_overflow",
+        "severity": "info",
+        "time": 3.889,
+        "selector": "#systems03-heading",
+        "message": "Text extends outside the composition canvas.",
+        "rect": {
+          "left": 80,
+          "top": 2124.04,
+          "right": 440,
+          "bottom": 2233.04,
+          "width": 360,
+          "height": 109
+        },
+        "containerSelector": "#root",
+        "text": "系统正在",
+        "fixHint": "Move the text inward, reduce its size, or mark intentional off-canvas animation with data-layout-allow-overflow.",
+        "containerRect": {
+          "left": 0,
+          "top": 0,
+          "right": 1080,
+          "bottom": 1920,
+          "width": 1080,
+          "height": 1920
+        },
+        "overflow": {
+          "bottom": 313.04
+        },
+        "dataAttributes": {
+          "data-hf-id": "hf-ckky"
+        },
+        "sourceFile": "compositions/frames/03-systems.html",
+        "bbox": {
+          "x": 80,
+          "y": 2124.04,
+          "width": 360,
+          "height": 109
+        },
+        "firstSeen": 3.889,
+        "lastSeen": 3.889,
+        "occurrences": 1
+      },
+      {
+        "code": "canvas_overflow",
+        "severity": "info",
+        "time": 3.889,
+        "selector": "span.heading-accent",
+        "message": "Text extends outside the composition canvas.",
+        "rect": {
+          "left": 440,
+          "top": 2124.04,
+          "right": 620,
+          "bottom": 2233.04,
+          "width": 180,
+          "height": 109
+        },
+        "containerSelector": "#root",
+        "text": "运行",
+        "fixHint": "Move the text inward, reduce its size, or mark intentional off-canvas animation with data-layout-allow-overflow.",
+        "containerRect": {
+          "left": 0,
+          "top": 0,
+          "right": 1080,
+          "bottom": 1920,
+          "width": 1080,
+          "height": 1920
+        },
+        "overflow": {
+          "bottom": 313.04
+        },
+        "dataAttributes": {
+          "data-hf-id": "hf-zhb4"
+        },
+        "sourceFile": "compositions/frames/03-systems.html",
+        "bbox": {
+          "x": 440,
+          "y": 2124.04,
+          "width": 180,
+          "height": 109
+        },
+        "firstSeen": 3.889,
+        "lastSeen": 3.889,
+        "occurrences": 1
+      },
+      {
+        "code": "container_overflow",
+        "severity": "info",
+        "time": 3.889,
+        "selector": "#\\30 2-proof-camera",
+        "message": "Element extends outside a clipping layout container.",
+        "rect": {
+          "left": -32,
+          "top": -37.41,
+          "right": 1112,
+          "bottom": 1952.49,
+          "width": 1143.99,
+          "height": 1989.91
+        },
+        "containerSelector": "div.proof02-scene",
+        "fixHint": "Resize/reposition the child or container, or mark intentional overflow with data-layout-allow-overflow.",
+        "containerRect": {
+          "left": 0,
+          "top": -4.85,
+          "right": 1080,
+          "bottom": 1915.15,
+          "width": 1080,
+          "height": 1920
+        },
+        "overflow": {
+          "left": 32,
+          "right": 32,
+          "top": 32.56,
+          "bottom": 37.34
+        },
+        "dataAttributes": {
+          "data-hf-id": "hf-kiq0"
+        },
+        "sourceFile": "compositions/frames/02-proof.html",
+        "bbox": {
+          "x": -32,
+          "y": -37.41,
+          "width": 1143.99,
+          "height": 1989.91
+        },
+        "firstSeen": 3.889,
+        "lastSeen": 3.889,
+        "occurrences": 1
+      },
+      {
+        "code": "canvas_overflow",
+        "severity": "info",
+        "time": 5,
+        "selector": "span.surface-index",
+        "message": "Text extends outside the composition canvas.",
+        "rect": {
+          "left": -68.42,
+          "top": 1357.23,
+          "right": -41.24,
+          "bottom": 1383.51,
+          "width": 27.18,
+          "height": 26.29
+        },
+        "containerSelector": "#root",
+        "text": "01",
+        "fixHint": "Move the text inward, reduce its size, or mark intentional off-canvas animation with data-layout-allow-overflow.",
+        "containerRect": {
+          "left": 0,
+          "top": 0,
+          "right": 1080,
+          "bottom": 1920,
+          "width": 1080,
+          "height": 1920
+        },
+        "overflow": {
+          "left": 68.42
+        },
+        "dataAttributes": {
+          "data-hf-id": "hf-3lx2"
+        },
+        "sourceFile": "compositions/frames/03-systems.html",
+        "bbox": {
+          "x": -68.42,
+          "y": 1357.23,
+          "width": 27.18,
+          "height": 26.29
+        },
+        "firstSeen": 5,
+        "lastSeen": 5,
+        "occurrences": 1
+      },
+      {
+        "code": "canvas_overflow",
+        "severity": "info",
+        "time": 5,
+        "selector": "span.surface-label",
+        "message": "Text extends outside the composition canvas.",
+        "rect": {
+          "left": -29.66,
+          "top": 1327.42,
+          "right": 106.68,
+          "bottom": 1382.16,
+          "width": 136.33,
+          "height": 54.74
+        },
+        "containerSelector": "#root",
+        "text": "企业系统",
+        "fixHint": "Move the text inward, reduce its size, or mark intentional off-canvas animation with data-layout-allow-overflow.",
+        "containerRect": {
+          "left": 0,
+          "top": 0,
+          "right": 1080,
+          "bottom": 1920,
+          "width": 1080,
+          "height": 1920
+        },
+        "overflow": {
+          "left": 29.66
+        },
+        "dataAttributes": {
+          "data-hf-id": "hf-wx2y"
+        },
+        "sourceFile": "compositions/frames/03-systems.html",
+        "bbox": {
+          "x": -29.66,
+          "y": 1327.42,
+          "width": 136.33,
+          "height": 54.74
+        },
+        "firstSeen": 5,
+        "lastSeen": 5,
+        "occurrences": 1
+      },
+      {
+        "code": "escaped_container",
+        "severity": "info",
+        "time": 5,
+        "selector": "div.surface-detail",
+        "message": "Positioned element renders far outside its offset parent — its coordinates were likely computed in a different frame (canvas/viewport pixels).",
+        "rect": {
+          "left": 845.96,
+          "top": 1277.72,
+          "right": 1045.33,
+          "bottom": 1301.55,
+          "width": 199.38,
+          "height": 23.82
+        },
+        "containerSelector": "#systems03-agent",
+        "text": "RESEARCH / AGENT",
+        "fixHint": "Compute left/top in the offset parent's frame (subtract its rect), or mark intentional placement with data-layout-allow-overflow.",
+        "containerRect": {
+          "left": 144.15,
+          "top": 599.24,
+          "right": 1052.7,
+          "bottom": 1220.38,
+          "width": 908.55,
+          "height": 621.15
+        },
+        "dataAttributes": {
+          "data-hf-id": "hf-4vvw",
+          "data-layout-allow-overlap": ""
+        },
+        "sourceFile": "compositions/frames/03-systems.html",
+        "bbox": {
+          "x": 845.96,
+          "y": 1277.72,
+          "width": 199.38,
+          "height": 23.82
+        },
+        "firstSeen": 5,
+        "lastSeen": 5,
+        "occurrences": 1
+      },
+      {
+        "code": "panel_out_of_canvas",
+        "severity": "info",
+        "time": 5,
+        "selector": "div.screen",
+        "message": "Painted panel extends outside the composition canvas.",
+        "rect": {
+          "left": -126.57,
+          "top": 759.95,
+          "right": 633.29,
+          "bottom": 1317.58,
+          "width": 759.86,
+          "height": 557.63
+        },
+        "containerSelector": "#root",
+        "text": "",
+        "fixHint": "Move the panel inward, or mark intentional off-canvas animation with data-layout-allow-overflow.",
+        "containerRect": {
+          "left": 0,
+          "top": 0,
+          "right": 1080,
+          "bottom": 1920,
+          "width": 1080,
+          "height": 1920
+        },
+        "overflow": {
+          "left": 126.57
+        },
+        "dataAttributes": {
+          "data-hf-id": "hf-cdmk"
+        },
+        "sourceFile": "compositions/frames/03-systems.html",
+        "bbox": {
+          "x": -126.57,
+          "y": 759.95,
+          "width": 759.86,
+          "height": 557.63
+        },
+        "firstSeen": 5,
+        "lastSeen": 5,
+        "occurrences": 1
+      },
+      {
+        "code": "canvas_overflow",
+        "severity": "info",
+        "time": 6.111,
+        "selector": "span.surface-index",
+        "message": "Text extends outside the composition canvas.",
+        "rect": {
+          "left": -176.97,
+          "top": 1485.35,
+          "right": -155.65,
+          "bottom": 1506.06,
+          "width": 21.31,
+          "height": 20.71
+        },
+        "containerSelector": "#root",
+        "text": "01",
+        "fixHint": "Move the text inward, reduce its size, or mark intentional off-canvas animation with data-layout-allow-overflow.",
+        "containerRect": {
+          "left": 0,
+          "top": 0,
+          "right": 1080,
+          "bottom": 1920,
+          "width": 1080,
+          "height": 1920
+        },
+        "overflow": {
+          "left": 176.97
+        },
+        "dataAttributes": {
+          "data-hf-id": "hf-3lx2"
+        },
+        "sourceFile": "compositions/frames/03-systems.html",
+        "bbox": {
+          "x": -176.97,
+          "y": 1485.35,
+          "width": 21.31,
+          "height": 20.71
+        },
+        "firstSeen": 6.111,
+        "lastSeen": 6.111,
+        "occurrences": 1
+      },
+      {
+        "code": "canvas_overflow",
+        "severity": "info",
+        "time": 6.111,
+        "selector": "span.surface-label",
+        "message": "Text extends outside the composition canvas.",
+        "rect": {
+          "left": -149.09,
+          "top": 1455.45,
+          "right": -46.36,
+          "bottom": 1502.9,
+          "width": 102.72,
+          "height": 47.45
+        },
+        "containerSelector": "#root",
+        "text": "企业系统",
+        "fixHint": "Move the text inward, reduce its size, or mark intentional off-canvas animation with data-layout-allow-overflow.",
+        "containerRect": {
+          "left": 0,
+          "top": 0,
+          "right": 1080,
+          "bottom": 1920,
+          "width": 1080,
+          "height": 1920
+        },
+        "overflow": {
+          "left": 149.09
+        },
+        "dataAttributes": {
+          "data-hf-id": "hf-wx2y"
+        },
+        "sourceFile": "compositions/frames/03-systems.html",
+        "bbox": {
+          "x": -149.09,
+          "y": 1455.45,
+          "width": 102.72,
+          "height": 47.45
+        },
+        "firstSeen": 6.111,
+        "lastSeen": 6.111,
+        "occurrences": 1
+      },
+      {
+        "code": "text_occluded",
+        "severity": "info",
+        "time": 6.111,
+        "selector": "div.surface-detail",
+        "message": "Text is hidden beneath an opaque element.",
+        "rect": {
+          "left": 752.12,
+          "top": 1290.21,
+          "right": 940.97,
+          "bottom": 1315.06,
+          "width": 188.85,
+          "height": 24.85
+        },
+        "containerSelector": "div.screen > img:nth-of-type(1)",
+        "text": "RESEARCH / AGENT",
+        "fixHint": "Give the text its own zone, raise its stacking order above the covering element, or mark intentional layering with data-layout-allow-occlusion.",
+        "coveredFraction": 0.74,
+        "dataAttributes": {
+          "data-hf-id": "hf-4vvw",
+          "data-layout-allow-overlap": ""
+        },
+        "sourceFile": "compositions/frames/03-systems.html",
+        "bbox": {
+          "x": 752.12,
+          "y": 1290.21,
+          "width": 188.85,
+          "height": 24.85
+        },
+        "firstSeen": 6.111,
+        "lastSeen": 6.111,
+        "occurrences": 1
+      },
+      {
+        "code": "canvas_overflow",
+        "severity": "info",
+        "time": 6.111,
+        "selector": "div.surface-detail",
+        "message": "Text extends outside the composition canvas.",
+        "rect": {
+          "left": 1001.24,
+          "top": 1368.08,
+          "right": 1200.26,
+          "bottom": 1404.71,
+          "width": 199.02,
+          "height": 36.63
+        },
+        "containerSelector": "#root",
+        "text": "APPROVAL / AUTOMATION",
+        "fixHint": "Move the text inward, reduce its size, or mark intentional off-canvas animation with data-layout-allow-overflow.",
+        "containerRect": {
+          "left": 0,
+          "top": 0,
+          "right": 1080,
+          "bottom": 1920,
+          "width": 1080,
+          "height": 1920
+        },
+        "overflow": {
+          "right": 120.26
+        },
+        "dataAttributes": {
+          "data-hf-id": "hf-4vvw",
+          "data-layout-allow-overlap": ""
+        },
+        "sourceFile": "compositions/frames/03-systems.html",
+        "bbox": {
+          "x": 1001.24,
+          "y": 1368.08,
+          "width": 199.02,
+          "height": 36.63
+        },
+        "firstSeen": 6.111,
+        "lastSeen": 6.111,
+        "occurrences": 1
+      },
+      {
+        "code": "panel_out_of_canvas",
+        "severity": "info",
+        "time": 6.111,
+        "selector": "div.screen",
+        "message": "Painted panel extends outside the composition canvas.",
+        "rect": {
+          "left": -247.79,
+          "top": 1008.19,
+          "right": 338.43,
+          "bottom": 1457.42,
+          "width": 586.22,
+          "height": 449.23
+        },
+        "containerSelector": "#root",
+        "text": "",
+        "fixHint": "Move the panel inward, or mark intentional off-canvas animation with data-layout-allow-overflow.",
+        "containerRect": {
+          "left": 0,
+          "top": 0,
+          "right": 1080,
+          "bottom": 1920,
+          "width": 1080,
+          "height": 1920
+        },
+        "overflow": {
+          "left": 247.79
+        },
+        "dataAttributes": {
+          "data-hf-id": "hf-cdmk"
+        },
+        "sourceFile": "compositions/frames/03-systems.html",
+        "bbox": {
+          "x": -247.79,
+          "y": 1008.19,
+          "width": 586.22,
+          "height": 449.23
+        },
+        "firstSeen": 6.111,
+        "lastSeen": 6.111,
+        "occurrences": 1
+      },
+      {
+        "code": "panel_out_of_canvas",
+        "severity": "info",
+        "time": 6.111,
+        "selector": "div.screen",
+        "message": "Painted panel extends outside the composition canvas.",
+        "rect": {
+          "left": 523.7,
+          "top": 815.29,
+          "right": 1249.54,
+          "bottom": 1343.12,
+          "width": 725.84,
+          "height": 527.83
+        },
+        "containerSelector": "#root",
+        "text": "",
+        "fixHint": "Move the panel inward, or mark intentional off-canvas animation with data-layout-allow-overflow.",
+        "containerRect": {
+          "left": 0,
+          "top": 0,
+          "right": 1080,
+          "bottom": 1920,
+          "width": 1080,
+          "height": 1920
+        },
+        "overflow": {
+          "right": 169.54
+        },
+        "dataAttributes": {
+          "data-hf-id": "hf-cdmk"
+        },
+        "sourceFile": "compositions/frames/03-systems.html",
+        "bbox": {
+          "x": 523.7,
+          "y": 815.29,
+          "width": 725.84,
+          "height": 527.83
+        },
+        "firstSeen": 6.111,
+        "lastSeen": 6.111,
+        "occurrences": 1
+      },
+      {
+        "code": "canvas_overflow",
+        "severity": "info",
+        "time": 7.222,
+        "selector": "span.surface-index",
+        "message": "Text extends outside the composition canvas.",
+        "rect": {
+          "left": -83.78,
+          "top": 1532.24,
+          "right": -64.43,
+          "bottom": 1550.99,
+          "width": 19.35,
+          "height": 18.75
+        },
+        "containerSelector": "#root",
+        "text": "01",
+        "fixHint": "Move the text inward, reduce its size, or mark intentional off-canvas animation with data-layout-allow-overflow.",
+        "containerRect": {
+          "left": 0,
+          "top": 0,
+          "right": 1080,
+          "bottom": 1920,
+          "width": 1080,
+          "height": 1920
+        },
+        "overflow": {
+          "left": 83.78
+        },
+        "dataAttributes": {
+          "data-hf-id": "hf-3lx2"
+        },
+        "sourceFile": "compositions/frames/03-systems.html",
+        "bbox": {
+          "x": -83.78,
+          "y": 1532.24,
+          "width": 19.35,
+          "height": 18.75
+        },
+        "firstSeen": 7.222,
+        "lastSeen": 7.222,
+        "occurrences": 1
+      },
+      {
+        "code": "canvas_overflow",
+        "severity": "info",
+        "time": 7.222,
+        "selector": "span.surface-label",
+        "message": "Text extends outside the composition canvas.",
+        "rect": {
+          "left": -57.15,
+          "top": 1508.51,
+          "right": 38.3,
+          "bottom": 1549.22,
+          "width": 95.45,
+          "height": 40.71
+        },
+        "containerSelector": "#root",
+        "text": "企业系统",
+        "fixHint": "Move the text inward, reduce its size, or mark intentional off-canvas animation with data-layout-allow-overflow.",
+        "containerRect": {
+          "left": 0,
+          "top": 0,
+          "right": 1080,
+          "bottom": 1920,
+          "width": 1080,
+          "height": 1920
+        },
+        "overflow": {
+          "left": 57.15
+        },
+        "dataAttributes": {
+          "data-hf-id": "hf-wx2y"
+        },
+        "sourceFile": "compositions/frames/03-systems.html",
+        "bbox": {
+          "x": -57.15,
+          "y": 1508.51,
+          "width": 95.45,
+          "height": 40.71
+        },
+        "firstSeen": 7.222,
+        "lastSeen": 7.222,
+        "occurrences": 1
+      },
+      {
+        "code": "canvas_overflow",
+        "severity": "info",
+        "time": 7.222,
+        "selector": "div.surface-detail",
+        "message": "Text extends outside the composition canvas.",
+        "rect": {
+          "left": 1017.48,
+          "top": 1515.5,
+          "right": 1162.01,
+          "bottom": 1548.06,
+          "width": 144.53,
+          "height": 32.56
+        },
+        "containerSelector": "#root",
+        "text": "APPROVAL / AUTOMATION",
+        "fixHint": "Move the text inward, reduce its size, or mark intentional off-canvas animation with data-layout-allow-overflow.",
+        "containerRect": {
+          "left": 0,
+          "top": 0,
+          "right": 1080,
+          "bottom": 1920,
+          "width": 1080,
+          "height": 1920
+        },
+        "overflow": {
+          "right": 82.01
+        },
+        "dataAttributes": {
+          "data-hf-id": "hf-4vvw",
+          "data-layout-allow-overlap": ""
+        },
+        "sourceFile": "compositions/frames/03-systems.html",
+        "bbox": {
+          "x": 1017.48,
+          "y": 1515.5,
+          "width": 144.53,
+          "height": 32.56
+        },
+        "firstSeen": 7.222,
+        "lastSeen": 7.222,
+        "occurrences": 1
+      },
+      {
+        "code": "panel_out_of_canvas",
+        "severity": "info",
+        "time": 7.222,
+        "selector": "div.screen",
+        "message": "Painted panel extends outside the composition canvas.",
+        "rect": {
+          "left": -134.85,
+          "top": 1103.67,
+          "right": 402.39,
+          "bottom": 1505.22,
+          "width": 537.24,
+          "height": 401.56
+        },
+        "containerSelector": "#root",
+        "text": "",
+        "fixHint": "Move the panel inward, or mark intentional off-canvas animation with data-layout-allow-overflow.",
+        "containerRect": {
+          "left": 0,
+          "top": 0,
+          "right": 1080,
+          "bottom": 1920,
+          "width": 1080,
+          "height": 1920
+        },
+        "overflow": {
+          "left": 134.85
+        },
+        "dataAttributes": {
+          "data-hf-id": "hf-cdmk"
+        },
+        "sourceFile": "compositions/frames/03-systems.html",
+        "bbox": {
+          "x": -134.85,
+          "y": 1103.67,
+          "width": 537.24,
+          "height": 401.56
+        },
+        "firstSeen": 7.222,
+        "lastSeen": 7.222,
+        "occurrences": 1
+      },
+      {
+        "code": "panel_out_of_canvas",
+        "severity": "info",
+        "time": 7.222,
+        "selector": "div.screen",
+        "message": "Painted panel extends outside the composition canvas.",
+        "rect": {
+          "left": 673.85,
+          "top": 1100.7,
+          "right": 1213.19,
+          "bottom": 1503.5,
+          "width": 539.34,
+          "height": 402.81
+        },
+        "containerSelector": "#root",
+        "text": "",
+        "fixHint": "Move the panel inward, or mark intentional off-canvas animation with data-layout-allow-overflow.",
+        "containerRect": {
+          "left": 0,
+          "top": 0,
+          "right": 1080,
+          "bottom": 1920,
+          "width": 1080,
+          "height": 1920
+        },
+        "overflow": {
+          "right": 133.19
+        },
+        "dataAttributes": {
+          "data-hf-id": "hf-cdmk"
+        },
+        "sourceFile": "compositions/frames/03-systems.html",
+        "bbox": {
+          "x": 673.85,
+          "y": 1100.7,
+          "width": 539.34,
+          "height": 402.81
+        },
+        "firstSeen": 7.222,
+        "lastSeen": 7.222,
+        "occurrences": 1
+      }
+    ],
+    "duration": 10,
+    "samples": [
+      0.556,
+      1.667,
+      2.778,
+      3.889,
+      5,
+      6.111,
+      7.222,
+      8.333,
+      9.444
+    ],
+    "transitionSamples": [],
+    "transitionSamplesDropped": 0,
+    "tolerance": 2,
+    "totalIssueCount": 29,
+    "truncated": false
+  },
+  "motion": {
+    "ok": true,
+    "errorCount": 0,
+    "warningCount": 0,
+    "infoCount": 0,
+    "findings": [],
+    "enabled": false,
+    "samples": 0
+  },
+  "contrast": {
+    "ok": true,
+    "errorCount": 0,
+    "warningCount": 2,
+    "infoCount": 0,
+    "findings": [
+      {
+        "code": "contrast_aa_failure",
+        "severity": "warning",
+        "message": "Contrast is 1.34:1; WCAG AA requires 3:1.",
+        "text": "02",
+        "fg": "rgb(249,115,22)",
+        "bg": "rgb(131,132,132)",
+        "ratio": 1.34,
+        "requiredRatio": 3,
+        "suggestedColor": "rgb(96,44,8)",
+        "large": true,
+        "selector": "div > div:nth-of-type(3) > div > div:nth-of-type(2) > div:nth-of-type(5) > div:nth-of-type(2) > div:nth-of-type(2) > span:nth-of-type(1)",
+        "dataAttributes": {
+          "data-hf-id": "hf-4083"
+        },
+        "sourceFile": "compositions/frames/03-systems.html",
+        "bbox": {
+          "x": 143.22865295410156,
+          "y": 1264.58935546875,
+          "width": 31.675186157226562,
+          "height": 30.4053955078125
+        },
+        "time": 5
+      },
+      {
+        "code": "contrast_aa_failure",
+        "severity": "warning",
+        "message": "Contrast is 1.91:1; WCAG AA requires 3:1.",
+        "text": "AI Agent",
+        "fg": "rgb(249,115,22)",
+        "bg": "rgb(105,107,107)",
+        "ratio": 1.91,
+        "requiredRatio": 3,
+        "suggestedColor": "rgb(252,178,126)",
+        "large": true,
+        "selector": "div > div:nth-of-type(3) > div > div:nth-of-type(2) > div:nth-of-type(5) > div:nth-of-type(2) > div:nth-of-type(2) > span:nth-of-type(2)",
+        "dataAttributes": {
+          "data-hf-id": "hf-ivso"
+        },
+        "sourceFile": "compositions/frames/03-systems.html",
+        "bbox": {
+          "x": 194.61448669433594,
+          "y": 1253.129150390625,
+          "width": 183.13087463378906,
+          "height": 44.091796875
+        },
+        "time": 5
+      }
+    ],
+    "enabled": true,
+    "samples": [
+      0.556,
+      2.778,
+      5,
+      7.222,
+      9.444
+    ],
+    "checked": 52,
+    "passed": 50
+  },
+  "snapshots": {
+    "enabled": false,
+    "files": [],
+    "times": [],
+    "findingFiles": []
+  },
+  "_meta": {
+    "version": "0.7.108",
+    "latestVersion": "0.7.108",
+    "updateAvailable": false
+  }
+}

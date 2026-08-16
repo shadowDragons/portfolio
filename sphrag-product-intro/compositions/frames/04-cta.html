@@ -1,0 +1,65 @@
+<template>
+  <style>
+    #root { position:absolute; inset:0; overflow:hidden; color:#0A0A0A; container-type:size; font-family:sans-serif; }
+    .clip.cta-ground { position:absolute; inset:0; background:#F97316; }
+    .cta-residual { position:absolute; inset:0; opacity:0.16; filter:grayscale(1) contrast(1.2); }
+    .cta-residual img { position:absolute; width:72cqw; height:28cqh; object-fit:cover; border:1px solid rgba(10,10,10,.55); }
+    .cta-residual img:nth-child(1) { left:-16cqw; top:19cqh; transform:rotate(-7deg); }
+    .cta-residual img:nth-child(2) { left:25cqw; top:32cqh; transform:rotate(3deg); }
+    .cta-residual img:nth-child(3) { left:48cqw; top:13cqh; transform:rotate(9deg); }
+    .cta-topline { position:absolute; top:7.3cqh; left:8.5cqw; right:8.5cqw; display:flex; justify-content:space-between; font-family:monospace; font-size:2.05cqw; font-weight:700; letter-spacing:.12em; }
+    .cta-stage { position:absolute; top:28cqh; left:8cqw; width:84cqw; height:47cqh; }
+    .cta-line { position:absolute; left:0; font-size:13.4cqw; font-weight:900; letter-spacing:0; line-height:.94; white-space:nowrap; }
+    #cta-think { top:0; }
+    #cta-system { top:14cqh; }
+    .cta-rule { position:absolute; top:30.5cqh; left:0; width:76cqw; height:4px; background:#0A0A0A; transform-origin:left center; }
+    .cta-end { position:absolute; top:62cqh; left:8cqw; width:84cqw; }
+    .cta-invite { font-size:3.5cqw; font-weight:800; letter-spacing:0; line-height:1; }
+    .cta-url { margin-top:2.8cqh; display:flex; gap:0.1em; font-family:monospace; font-size:8.6cqw; font-weight:800; letter-spacing:-.06em; line-height:1; white-space:nowrap; }
+    .cta-url span { display:inline-block; }
+    .cta-bottom { position:absolute; top:78cqh; left:8.5cqw; right:8.5cqw; border-top:1px solid rgba(10,10,10,.28); padding-top:1.8cqh; display:flex; justify-content:space-between; font-family:monospace; font-size:1.8cqw; font-weight:700; letter-spacing:.1em; }
+  </style>
+  <div data-hf-id="hf-kzfa" id="root" data-composition-id="04-cta" data-start="0" data-duration="2.4" data-width="1080" data-height="1920">
+    <div data-hf-id="hf-t6ok" id="cta-ground" class="clip cta-ground" data-start="0" data-duration="2.4" data-track-index="0"></div>
+    <div data-hf-id="hf-r01" id="cta-residual" class="cta-residual" aria-hidden="true">
+      <img data-hf-id="hf-r02" src="assets/enterprise-orders.png" alt="">
+      <img data-hf-id="hf-r03" src="assets/deep-research-agent.png" alt="">
+      <img data-hf-id="hf-r04" src="assets/workflow-platform.png" alt="">
+    </div>
+    <div data-hf-id="hf-2ltd" id="cta-topline" class="cta-topline"><span data-hf-id="hf-a11">04 / START A PROJECT</span><span data-hf-id="hf-a12">SPHRAG</span></div>
+    <div data-hf-id="hf-b6xo" id="cta-stage" class="cta-stage">
+      <div data-hf-id="hf-a13" id="cta-think" class="cta-line">把复杂想法</div>
+      <div data-hf-id="hf-a14" id="cta-system" class="cta-line">做成系统。</div>
+      <div data-hf-id="hf-a15" id="cta-rule" class="cta-rule"></div>
+    </div>
+    <div data-hf-id="hf-uqpx" id="cta-end" class="cta-end">
+      <div data-hf-id="hf-a16" id="cta-invite" class="cta-invite">找我合作</div>
+      <div data-hf-id="hf-a17" id="cta-url" class="cta-url" aria-label="sphrag.com"><span data-hf-id="hf-a18">s</span><span data-hf-id="hf-a19">p</span><span data-hf-id="hf-a20">h</span><span data-hf-id="hf-a21">r</span><span data-hf-id="hf-a22">a</span><span data-hf-id="hf-a23">g</span><span data-hf-id="hf-a24">.</span><span data-hf-id="hf-a25">c</span><span data-hf-id="hf-a26">o</span><span data-hf-id="hf-a27">m</span></div>
+    </div>
+    <div data-hf-id="hf-9x9b" id="cta-bottom" class="cta-bottom"><span data-hf-id="hf-a28">COMPLEX TO SHIPPED</span><span data-hf-id="hf-a29">END / 10S</span></div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+  <script>
+    (() => {
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused:true });
+      window.__timelines["04-cta"] = tl;
+      const residual = document.getElementById("cta-residual");
+      const top = document.getElementById("cta-topline");
+      const think = document.getElementById("cta-think");
+      const system = document.getElementById("cta-system");
+      const rule = document.getElementById("cta-rule");
+      const invite = document.getElementById("cta-invite");
+      const url = Array.from(document.getElementById("cta-url").children);
+      const bottom = document.getElementById("cta-bottom");
+      tl.fromTo(residual, { opacity:0.16, scale:1.04 }, { opacity:0, scale:1, duration:0.52, ease:"power3.out" }, 0);
+      tl.fromTo(top, { y:-22, opacity:0 }, { y:0, opacity:1, duration:0.28, ease:"power3.out" }, 0.04);
+      tl.fromTo(think, { y:74, opacity:0, filter:"blur(12px)" }, { y:0, opacity:1, filter:"blur(0px)", duration:0.38, ease:"power4.out" }, 0.12);
+      tl.fromTo(system, { scale:1.19, opacity:0, filter:"blur(16px)" }, { scale:1, opacity:1, filter:"blur(0px)", duration:0.36, ease:"power4.out" }, 0.62);
+      tl.fromTo(rule, { scaleX:0, opacity:0 }, { scaleX:1, opacity:1, duration:0.32, ease:"power2.out" }, 0.94);
+      tl.fromTo(invite, { y:28, opacity:0 }, { y:0, opacity:1, duration:0.28, ease:"power3.out" }, 1.20);
+      url.forEach((letter, index) => tl.fromTo(letter, { y:30, opacity:0 }, { y:0, opacity:1, duration:0.12, ease:"power3.out" }, 1.38 + index * 0.065));
+      tl.fromTo(bottom, { y:16, opacity:0 }, { y:0, opacity:1, duration:0.22, ease:"power2.out" }, 2.06);
+    })();
+  </script>
+</template>

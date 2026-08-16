@@ -1,0 +1,203 @@
+<template>
+  <style>
+    #root {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      color: #0A0A0A;
+      container-type: size;
+      font-family: sans-serif;
+    }
+
+    .clip[class~="01-deliver-ground"] {
+      position: absolute;
+      inset: 0;
+      background: #F97316;
+    }
+
+    [id="01-deliver-label"] {
+      position: absolute;
+      top: 7.4cqh;
+      left: 8.5cqw;
+      font-family: monospace;
+      font-size: 2.15cqw;
+      font-weight: 700;
+      line-height: 1;
+      letter-spacing: 0;
+    }
+
+    [id="01-deliver-beatbar"] {
+      position: absolute;
+      top: 11.4cqh;
+      left: 8.5cqw;
+      display: flex;
+      gap: 1.1cqw;
+      height: 0.85cqh;
+    }
+
+    [id="01-deliver-beatbar"] i {
+      display: block;
+      width: 2.1cqw;
+      height: 100%;
+      background: #0A0A0A;
+      opacity: 0.25;
+    }
+
+    [id="01-deliver-stage"] {
+      position: absolute;
+      top: 28.4cqh;
+      left: 8cqw;
+      width: 84cqw;
+      height: 39cqh;
+    }
+
+    [id="01-deliver-line-one"],
+    [id="01-deliver-lock-project"],
+    [id="01-deliver-line-two"],
+    [id="01-deliver-line-three"] {
+      position: absolute;
+      left: 0;
+      width: 100%;
+      font-size: 14.8cqw;
+      font-weight: 900;
+      line-height: 0.94;
+      letter-spacing: 0;
+      white-space: nowrap;
+    }
+
+    [id="01-deliver-line-one"],
+    [id="01-deliver-lock-project"] {
+      top: 0;
+    }
+
+    [id="01-deliver-line-two"] {
+      top: 12.7cqh;
+    }
+
+    [id="01-deliver-line-two"] span {
+      display: inline-block;
+    }
+
+    [id="01-deliver-line-three"] {
+      top: 25.4cqh;
+    }
+
+    [id="01-deliver-draw"] {
+      position: absolute;
+      top: 69.2cqh;
+      left: 8.5cqw;
+      width: 73cqw;
+      height: 1.2cqh;
+      overflow: visible;
+    }
+
+    [id="01-deliver-draw"] path {
+      fill: none;
+      stroke: #0A0A0A;
+      stroke-width: 5;
+      stroke-linecap: square;
+    }
+
+  </style>
+
+  <div data-hf-id="hf-tnpx" id="root" data-composition-id="01-deliver" data-start="0" data-duration="2.2" data-width="1080" data-height="1920">
+    <div data-hf-id="hf-hj3i" class="clip 01-deliver-ground" data-start="0" data-duration="2.2" data-track-index="0"></div>
+
+    <div data-hf-id="hf-0m5c" id="01-deliver-label">SPHRAG / 01</div>
+    <div data-hf-id="hf-wvpn" id="01-deliver-beatbar" aria-hidden="true"><i data-hf-id="hf-wt6k"></i><i data-hf-id="hf-zeb8"></i><i data-hf-id="hf-y7e5"></i></div>
+
+    <div data-hf-id="hf-9mrt" id="01-deliver-stage">
+      <div data-hf-id="hf-17u0" id="01-deliver-line-one">复杂项目</div>
+      <div data-hf-id="hf-9c30" id="01-deliver-lock-project">复杂项目，</div>
+      <div data-hf-id="hf-t35a" id="01-deliver-line-two"><span data-hf-id="hf-8usg">要</span><span data-hf-id="hf-0hn8">能</span><span data-hf-id="hf-hous">落</span><span data-hf-id="hf-zikj">地</span><span data-hf-id="hf-7oan">的</span></div>
+      <div data-hf-id="hf-alj0" id="01-deliver-line-three">人。</div>
+    </div>
+
+    <svg data-hf-id="hf-fc41" id="01-deliver-draw" viewBox="0 0 788 22" aria-hidden="true">
+      <path data-hf-id="hf-fqp8" id="01-deliver-draw-path" d="M 0 11 L 788 11" />
+    </svg>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+  <script>
+    (() => {
+    window.__timelines = window.__timelines || {};
+
+    const tl = gsap.timeline({ paused: true });
+    window.__timelines["01-deliver"] = tl;
+
+    const PULSE = 0.1;
+    const BEATS = [PULSE, PULSE * 6, PULSE * 12];
+    const stage = document.getElementById("01-deliver-stage");
+    const label = document.getElementById("01-deliver-label");
+    const lineOne = document.getElementById("01-deliver-line-one");
+    const lockedProject = document.getElementById("01-deliver-lock-project");
+    const lineThree = document.getElementById("01-deliver-line-three");
+    const wordSpans = Array.from(document.getElementById("01-deliver-line-two").querySelectorAll("span"));
+    const ticks = Array.from(document.getElementById("01-deliver-beatbar").querySelectorAll("i"));
+    const drawPath = document.getElementById("01-deliver-draw-path");
+    const pathLength = drawPath.getTotalLength();
+
+    drawPath.style.strokeDasharray = String(pathLength);
+    drawPath.style.strokeDashoffset = String(pathLength);
+
+    tl.fromTo(label, { opacity: 0, y: -22 }, { opacity: 1, y: 0, duration: 0.2, ease: "power2.out" }, 0.04);
+    tl.fromTo(
+      lineOne,
+      { scale: 1.34, filter: "blur(18px)", opacity: 0 },
+      { scale: 1, filter: "blur(0px)", opacity: 1, duration: 0.38, ease: "power4.out" },
+      BEATS[0],
+    );
+
+    ticks.forEach((tick, index) => {
+      tl.to(tick, { opacity: 1, duration: 0.06, ease: "none" }, BEATS[index]);
+      tl.to(tick, { opacity: 0.25, duration: 0.06, ease: "none" }, BEATS[index] + 0.06);
+    });
+
+    tl.to(
+      lineOne,
+      { scale: 1.16, filter: "blur(12px)", opacity: 0, duration: 0.18, ease: "power2.in" },
+      BEATS[1] - 0.08,
+    );
+
+    const WORDS = ["要", "能", "落", "地", "的"];
+    const WORD_START = BEATS[1];
+    const WORD_WINDOW = 0.44;
+    const wordTimeline = WORDS.reduce(
+      (timeline, word) => {
+        const start = timeline.cursor;
+        const duration = 0.035 + word.length * 0.045;
+        timeline.items.push({ start, duration });
+        timeline.cursor += duration;
+        return timeline;
+      },
+      { cursor: WORD_START, items: [] },
+    );
+    const wordScale = WORD_WINDOW / (wordTimeline.cursor - WORD_START);
+
+    wordTimeline.items.forEach((item, index) => {
+      tl.fromTo(
+        wordSpans[index],
+        { x: -48, opacity: 0 },
+        { x: 0, opacity: 1, duration: item.duration * wordScale, ease: "expo.out" },
+        WORD_START + (item.start - WORD_START) * wordScale,
+      );
+    });
+
+    tl.fromTo(
+      lockedProject,
+      { scale: 0.88, opacity: 0 },
+      { scale: 1, opacity: 1, duration: 0.28, ease: "power4.out" },
+      BEATS[2],
+    );
+    tl.fromTo(
+      lineThree,
+      { y: 88, rotation: 6, opacity: 0 },
+      { y: 0, rotation: 0, opacity: 1, duration: 0.38, ease: "circ.out" },
+      BEATS[2],
+    );
+    tl.to(drawPath, { strokeDashoffset: 0, duration: 0.36, ease: "power2.out" }, 1.34);
+    tl.to(stage, { scale: 1.008, duration: 0.18, ease: "sine.inOut" }, 1.62);
+    })();
+  </script>
+</template>

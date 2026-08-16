@@ -1,0 +1,113 @@
+{
+  "tts_provider": null,
+  "voice_id": null,
+  "bgm": {
+    "path": "assets/bgm/track.mp3",
+    "volume": 0.9,
+    "query": "confident minimal tech underscore",
+    "mode": "retrieve",
+    "duration_s": 30
+  },
+  "bgm_pending": false,
+  "bgm_provider": "heygen",
+  "bgm_pid": null,
+  "bgm_log": null,
+  "bgm_mode": "retrieve",
+  "bgm_target_duration_s": null,
+  "bgm_seed_duration_s": null,
+  "bgm_loop_count": null,
+  "voices": [],
+  "sfx": [
+    {
+      "id": "01",
+      "name": "tight impact",
+      "file": "assets/sfx/tight-impact.mp3",
+      "source": "heygen",
+      "offset_s": 0,
+      "duration_s": 0.816,
+      "volume": 0.35
+    },
+    {
+      "id": "01",
+      "name": "short reverse whoosh",
+      "file": "assets/sfx/short-reverse-whoosh.mp3",
+      "source": "heygen",
+      "offset_s": 0,
+      "duration_s": 1.056,
+      "volume": 0.35
+    },
+    {
+      "id": "02",
+      "name": "rising tick sequence",
+      "file": "assets/sfx/rising-tick-sequence.mp3",
+      "source": "heygen",
+      "offset_s": 0,
+      "duration_s": 7.778,
+      "volume": 0.35
+    },
+    {
+      "id": "02",
+      "name": "soft impact",
+      "file": "assets/sfx/soft-impact.mp3",
+      "source": "heygen",
+      "offset_s": 0,
+      "duration_s": 0.816,
+      "volume": 0.35
+    },
+    {
+      "id": "03",
+      "name": "three soft surface impacts",
+      "file": "assets/sfx/three-soft-surface-impacts.mp3",
+      "source": "heygen",
+      "offset_s": 0,
+      "duration_s": 0.816,
+      "volume": 0.35
+    },
+    {
+      "id": "03",
+      "name": "forward whoosh",
+      "file": "assets/sfx/forward-whoosh.mp3",
+      "source": "heygen",
+      "offset_s": 0,
+      "duration_s": 1.58,
+      "volume": 0.35
+    },
+    {
+      "id": "03",
+      "name": "final lock click",
+      "file": "assets/sfx/final-lock-click.mp3",
+      "source": "heygen",
+      "offset_s": 0,
+      "duration_s": 0.264,
+      "volume": 0.35
+    },
+    {
+      "id": "04",
+      "name": "orange sweep",
+      "file": "assets/sfx/orange-sweep.mp3",
+      "source": "heygen",
+      "offset_s": 0,
+      "duration_s": 1.79,
+      "volume": 0.35
+    },
+    {
+      "id": "04",
+      "name": "resolved impact",
+      "file": "assets/sfx/resolved-impact.mp3",
+      "source": "heygen",
+      "offset_s": 0,
+      "duration_s": 3.603,
+      "volume": 0.35
+    },
+    {
+      "id": "04",
+      "name": "clean end sting",
+      "file": "assets/sfx/clean-end-sting.mp3",
+      "source": "heygen",
+      "offset_s": 0,
+      "duration_s": 7.315,
+      "volume": 0.35
+    }
+  ],
+  "total_duration_s": 0
+}

@@ -1,0 +1,331 @@
+<template>
+  <style>
+    #root {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      color: #F0F0F0;
+      font-family: sans-serif;
+      container-type: size;
+    }
+
+    .proof02-ground {
+      position: absolute;
+      inset: 0;
+      background: #0A0A0A;
+    }
+
+    .proof02-scene {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+    }
+
+    .proof02-camera {
+      position: absolute;
+      inset: -28px;
+      transform-origin: 50% 50%;
+      will-change: transform;
+    }
+
+    .proof02-chrome {
+      position: absolute;
+      top: 110px;
+      left: 80px;
+      right: 80px;
+      display: flex;
+      justify-content: space-between;
+      border-top: 1px solid #282726;
+      padding-top: 24px;
+      color: #F97316;
+      font-family: monospace;
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      line-height: 1.2;
+    }
+
+    .proof02-counter-stage {
+      position: absolute;
+      top: 360px;
+      left: 0;
+      width: 1080px;
+      height: 650px;
+      display: grid;
+      place-items: center;
+    }
+
+    .proof02-ring-svg {
+      position: absolute;
+      width: 700px;
+      height: 700px;
+      overflow: visible;
+    }
+
+    .proof02-ring-base {
+      fill: none;
+      stroke: #282726;
+      stroke-width: 7;
+    }
+
+    .proof02-ring-progress {
+      fill: none;
+      stroke: #F97316;
+      stroke-width: 8;
+      stroke-linecap: square;
+      transform-origin: 350px 350px;
+      transform: rotate(-90deg);
+    }
+
+    .proof02-counter-wrap {
+      position: relative;
+      width: 640px;
+      display: flex;
+      align-items: baseline;
+      justify-content: center;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .proof02-counter {
+      display: inline-block;
+      color: #F97316;
+      font-size: 430px;
+      font-weight: 900;
+      letter-spacing: -0.09em;
+      line-height: 0.8;
+      transform-origin: center center;
+    }
+
+    .proof02-years {
+      margin-left: 28px;
+      color: #F0F0F0;
+      font-size: 78px;
+      font-weight: 900;
+      letter-spacing: 0;
+      line-height: 1;
+    }
+
+    .proof02-phrase {
+      position: absolute;
+      top: 1030px;
+      left: 80px;
+      right: 80px;
+      display: flex;
+      justify-content: center;
+      gap: 18px;
+      color: #F0F0F0;
+      font-size: 54px;
+      font-weight: 800;
+      letter-spacing: 0;
+      line-height: 1.04;
+      white-space: nowrap;
+    }
+
+    .proof02-phrase-word {
+      display: inline-block;
+      will-change: transform, opacity;
+    }
+
+    .proof02-evidence-line {
+      position: absolute;
+      top: 1200px;
+      height: 1px;
+      width: 405px;
+      background: #282726;
+      transform-origin: center center;
+    }
+
+    .proof02-evidence-line.left { left: 80px; }
+    .proof02-evidence-line.right { right: 80px; }
+
+    .proof02-supporting {
+      position: absolute;
+      top: 1270px;
+      left: 80px;
+      right: 80px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 42px;
+    }
+
+    .proof02-support-stat {
+      border-top: 1px solid #282726;
+      padding-top: 28px;
+      will-change: transform, opacity;
+    }
+
+    .proof02-support-stat:last-child { text-align: right; }
+
+    .proof02-support-value {
+      color: #F97316;
+      font-size: 76px;
+      font-weight: 900;
+      letter-spacing: -0.04em;
+      line-height: 0.95;
+    }
+
+    .proof02-support-label {
+      margin-top: 16px;
+      color: #F0F0F0;
+      font-size: 34px;
+      font-weight: 800;
+      letter-spacing: 0;
+      line-height: 1.1;
+    }
+
+    .proof02-note {
+      position: absolute;
+      top: 1502px;
+      left: 84px;
+      color: #F0F0F0;
+      font-size: 24px;
+      font-weight: 500;
+      letter-spacing: 0;
+      line-height: 1.2;
+    }
+
+    .proof02-side {
+      position: absolute;
+      top: 1500px;
+      right: 80px;
+      color: #F97316;
+      font-family: monospace;
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      line-height: 1.2;
+      text-align: right;
+    }
+  </style>
+
+  <div data-hf-id="hf-omaa" id="root" data-composition-id="02-proof" data-start="0" data-duration="2.5" data-width="1080" data-height="1920">
+    <div data-hf-id="hf-luiy" class="proof02-ground clip" data-start="0" data-duration="2.5" data-track-index="1"></div>
+    <div data-hf-id="hf-wua0" class="proof02-scene">
+      <div data-hf-id="hf-kiq0" class="proof02-camera" id="02-proof-camera">
+        <div data-hf-id="hf-6ex2" class="proof02-chrome">
+          <span data-hf-id="hf-wq4u">02 / EXPERIENCE</span>
+          <span data-hf-id="hf-emgw">2013 - NOW</span>
+        </div>
+
+        <div data-hf-id="hf-emh9" class="proof02-counter-stage">
+          <svg data-hf-id="hf-b3xw" class="proof02-ring-svg" viewBox="0 0 700 700" aria-hidden="true">
+            <circle data-hf-id="hf-1iua" class="proof02-ring-base" cx="350" cy="350" r="294" />
+            <circle data-hf-id="hf-1psk" class="proof02-ring-progress" id="02-proof-ring" cx="350" cy="350" r="294" />
+          </svg>
+          <div data-hf-id="hf-n1k9" class="proof02-counter-wrap">
+            <span data-hf-id="hf-jm3b" class="proof02-counter" id="02-proof-counter">0</span>
+            <span data-hf-id="hf-3663" class="proof02-years" id="02-proof-years">年</span>
+          </div>
+        </div>
+
+        <div data-hf-id="hf-7imn" class="proof02-phrase" aria-label="企业系统与 AI 交付">
+          <span data-hf-id="hf-l36w" class="proof02-phrase-word" id="02-proof-word-1">企业系统</span>
+          <span data-hf-id="hf-a9jw" class="proof02-phrase-word" id="02-proof-word-2">与</span>
+          <span data-hf-id="hf-l3qt" class="proof02-phrase-word" id="02-proof-word-3">AI</span>
+          <span data-hf-id="hf-2h54" class="proof02-phrase-word" id="02-proof-word-4">交付</span>
+        </div>
+
+        <div data-hf-id="hf-a3rr" class="proof02-evidence-line left" id="02-proof-line-left"></div>
+        <div data-hf-id="hf-kyh1" class="proof02-evidence-line right" id="02-proof-line-right"></div>
+
+        <div data-hf-id="hf-rhbv" class="proof02-supporting">
+          <div data-hf-id="hf-ybp0" class="proof02-support-stat" id="02-proof-systems">
+            <div data-hf-id="hf-lsyj" class="proof02-support-value">12+</div>
+            <div data-hf-id="hf-8jba" class="proof02-support-label">系统</div>
+          </div>
+          <div data-hf-id="hf-pzlm" class="proof02-support-stat" id="02-proof-delivery">
+            <div data-hf-id="hf-i017" class="proof02-support-value">持续</div>
+            <div data-hf-id="hf-hjvc" class="proof02-support-label">交付</div>
+          </div>
+        </div>
+
+        <div data-hf-id="hf-pfx9" class="proof02-note">企业系统 / AI 应用 / 全栈交付</div>
+        <div data-hf-id="hf-a6bh" class="proof02-side">REAL SYSTEMS<br data-hf-id="hf-x5px">REAL DELIVERY</div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+  <script>
+    window.__timelines = window.__timelines || {};
+
+    const tl = gsap.timeline({ paused: true });
+    window.__timelines["02-proof"] = tl;
+
+    const counter = document.getElementById("02-proof-counter");
+    const ring = document.getElementById("02-proof-ring");
+    const camera = document.getElementById("02-proof-camera");
+    const years = document.getElementById("02-proof-years");
+    const leftLine = document.getElementById("02-proof-line-left");
+    const rightLine = document.getElementById("02-proof-line-right");
+    const systems = document.getElementById("02-proof-systems");
+    const delivery = document.getElementById("02-proof-delivery");
+    const ringLength = ring.getTotalLength();
+    ring.style.strokeDasharray = ringLength;
+    ring.style.strokeDashoffset = ringLength;
+
+    const counterState = { value: 0 };
+    const phase = { scale: 0.93 };
+    const drift = { progress: 0 };
+
+    function renderCamera() {
+      const dx = Math.sin(drift.progress) * 4;
+      const dy = Math.sin(drift.progress * 1.3) * 2.5;
+      camera.style.transform = `scale(${phase.scale}) translate(${dx}px, ${dy}px)`;
+    }
+
+    renderCamera();
+
+    tl.to(
+      counterState,
+      {
+        value: 13,
+        duration: 0.56,
+        ease: "power3.out",
+        onUpdate: () => {
+          counter.textContent = Math.round(counterState.value).toLocaleString();
+        }
+      },
+      0.06
+    );
+    tl.fromTo(counter, { scale: 0.48, opacity: 0.72 }, { scale: 1, opacity: 1, duration: 0.56, ease: "power3.out" }, 0.06);
+    tl.to(ring, { strokeDashoffset: 0, duration: 0.59, ease: "power3.out" }, 0.03);
+    tl.to(phase, { scale: 1, duration: 0.58, ease: "power2.out" }, 0);
+    tl.to(
+      drift,
+      {
+        progress: Math.PI * 2,
+        duration: 2,
+        ease: "none",
+        onUpdate: renderCamera
+      },
+      0
+    );
+
+    tl.fromTo(years, { opacity: 0, y: 28 }, { opacity: 1, y: 0, duration: 0.26, ease: "power3.out" }, 0.60);
+    tl.to(phase, { scale: 1.035, duration: 0.56, ease: "power2.inOut" }, 0.76);
+    tl.fromTo(
+      ".proof02-phrase-word",
+      { opacity: 0, y: 34 },
+      { opacity: 1, y: 0, duration: 0.31, ease: "power4.out", stagger: 0.1 },
+      0.76
+    );
+
+    tl.fromTo(leftLine, { scaleX: 0, opacity: 0 }, { scaleX: 1, opacity: 1, duration: 0.28, ease: "power3.out" }, 1.35);
+    tl.fromTo(rightLine, { scaleX: 0, opacity: 0 }, { scaleX: 1, opacity: 1, duration: 0.28, ease: "power3.out" }, 1.35);
+    tl.fromTo(
+      systems,
+      { x: 150, opacity: 0.35 },
+      { x: 0, opacity: 1, duration: 0.34, ease: "power4.out" },
+      1.43
+    );
+    tl.fromTo(
+      delivery,
+      { x: 150, opacity: 0.35 },
+      { x: 0, opacity: 1, duration: 0.34, ease: "power4.out" },
+      1.61
+    );
+    tl.fromTo(".proof02-note", { opacity: 0, y: 18 }, { opacity: 1, y: 0, duration: 0.25, ease: "power2.out" }, 1.67);
+    tl.fromTo(".proof02-side", { opacity: 0, y: 18 }, { opacity: 1, y: 0, duration: 0.25, ease: "power2.out" }, 1.72);
+  </script>
+</template>

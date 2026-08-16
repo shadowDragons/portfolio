@@ -1,0 +1,37 @@
+{
+  "lines": [
+    {
+      "id": "01",
+      "sfx": [
+        "tight impact",
+        "short reverse whoosh"
+      ]
+    },
+    {
+      "id": "02",
+      "sfx": [
+        "rising tick sequence",
+        "soft impact"
+      ]
+    },
+    {
+      "id": "03",
+      "sfx": [
+        "three soft surface impacts",
+        "forward whoosh",
+        "final lock click"
+      ]
+    },
+    {
+      "id": "04",
+      "sfx": [
+        "orange sweep",
+        "resolved impact",
+        "clean end sting"
+      ]
+    }
+  ],
+  "bgm": {
+    "mode": "none"
+  }
+}

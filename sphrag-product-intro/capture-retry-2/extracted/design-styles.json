@@ -1,0 +1,255 @@
+{
+  "typography": [
+    {
+      "role": "display",
+      "fontFamily": "Avenir Next",
+      "fontSize": "72px",
+      "fontWeight": "900",
+      "lineHeight": "72px",
+      "letterSpacing": "-3.6px",
+      "color": "#F0F0F0",
+      "sampleText": "你好，我是 仁戈用代码实现你的梦想"
+    },
+    {
+      "role": "heading",
+      "fontFamily": "Avenir Next",
+      "fontSize": "48px",
+      "fontWeight": "900",
+      "lineHeight": "48px",
+      "letterSpacing": "-1.2px",
+      "color": "#F0F0F0",
+      "sampleText": "技术栈"
+    },
+    {
+      "role": "heading-2",
+      "fontFamily": "Avenir Next",
+      "fontSize": "36px",
+      "fontWeight": "700",
+      "lineHeight": "40px",
+      "letterSpacing": "normal",
+      "color": "#F0F0F0",
+      "sampleText": "联系我"
+    },
+    {
+      "role": "code",
+      "fontFamily": "ui-monospace",
+      "fontSize": "36px",
+      "fontWeight": "700",
+      "lineHeight": "40px",
+      "letterSpacing": "normal",
+      "color": "#FB923C",
+      "sampleText": "{ }"
+    },
+    {
+      "role": "heading-3",
+      "fontFamily": "Avenir Next",
+      "fontSize": "20px",
+      "fontWeight": "900",
+      "lineHeight": "28px",
+      "letterSpacing": "normal",
+      "color": "#F0F0F0",
+      "sampleText": "Java / Spring Boot"
+    },
+    {
+      "role": "link",
+      "fontFamily": "Avenir Next",
+      "fontSize": "18px",
+      "fontWeight": "500",
+      "lineHeight": "28px",
+      "letterSpacing": "normal",
+      "color": "#F0F0F0",
+      "sampleText": "首页"
+    },
+    {
+      "role": "body",
+      "fontFamily": "Avenir Next",
+      "fontSize": "16px",
+      "fontWeight": "400",
+      "lineHeight": "24px",
+      "letterSpacing": "normal",
+      "color": "#F0F0F0",
+      "sampleText": "13 年企业数字化系统研发经验，长期负责 OA、招聘、考勤、ERP、财务对账、知识库 RAG、智能问数等系统从 0 到 "
+    },
+    {
+      "role": "label",
+      "fontFamily": "Avenir Next",
+      "fontSize": "12px",
+      "fontWeight": "800",
+      "lineHeight": "18px",
+      "letterSpacing": "0.48px",
+      "color": "#FB923C",
+      "sampleText": "Java 17"
+    }
+  ],
+  "spacing": {
+    "observed": [
+      4,
+      8,
+      12,
+      16,
+      20,
+      24,
+      32,
+      40,
+      64,
+      80,
+      128
+    ],
+    "baseUnit": 8
+  },
+  "radius": [
+    "16px",
+    "9999px"
+  ],
+  "shadows": [],
+  "buttons": [
+    {
+      "label": "button",
+      "background": "#0A0A0A",
+      "backgroundImage": "",
+      "backdropFilter": "blur(16px)",
+      "color": "#F0F0F0",
+      "padding": "8px",
+      "borderRadius": "9999px",
+      "border": "1px solid rgba(255, 255, 255, 0.1)",
+      "boxShadow": "none",
+      "fontSize": "16px",
+      "fontWeight": "400",
+      "height": "38px"
+    }
+  ],
+  "cards": [
+    {
+      "label": "card",
+      "background": "transparent",
+      "backgroundImage": "",
+      "backdropFilter": "",
+      "color": "#F0F0F0",
+      "padding": "0px",
+      "borderRadius": "0px",
+      "border": "0px solid rgb(46, 46, 46)",
+      "boxShadow": "none",
+      "fontSize": "16px",
+      "fontWeight": "400",
+      "height": "256px"
+    },
+    {
+      "label": "card",
+      "background": "#0A0A0A",
+      "backgroundImage": "",
+      "backdropFilter": "blur(16px)",
+      "color": "#F0F0F0",
+      "padding": "0px",
+      "borderRadius": "16px",
+      "border": "1px solid rgba(255, 255, 255, 0.1)",
+      "boxShadow": "none",
+      "fontSize": "16px",
+      "fontWeight": "400",
+      "height": "256px"
+    },
+    {
+      "label": "card",
+      "background": "transparent",
+      "backgroundImage": "linear-gradient(to right bottom, rgb(234, 88, 12), rgb(236, 72, 153))",
+      "backdropFilter": "",
+      "color": "#FFFFFF",
+      "padding": "24px",
+      "borderRadius": "16px",
+      "border": "0px solid rgb(46, 46, 46)",
+      "boxShadow": "none",
+      "fontSize": "16px",
+      "fontWeight": "400",
+      "height": "256px"
+    }
+  ],
+  "nav": {
+    "label": "navigation",
+    "background": "#0A0A0A",
+    "backgroundImage": "",
+    "backdropFilter": "blur(16px)",
+    "color": "#F0F0F0",
+    "padding": "16px 40px",
+    "borderRadius": "0px",
+    "border": "1px solid rgba(255, 255, 255, 0.1)",
+    "boxShadow": "none",
+    "fontSize": "16px",
+    "fontWeight": "400",
+    "height": "88px"
+  },
+  "chips": [
+    {
+      "label": "Java 17",
+      "background": "#F97316",
+      "color": "#FB923C",
+      "padding": "4px 12px",
+      "borderRadius": "9999px",
+      "border": "1px solid rgba(249, 115, 22, 0.3)",
+      "boxShadow": "none",
+      "fontSize": "12px",
+      "fontWeight": "800",
+      "height": "28px"
+    },
+    {
+      "label": "✦ 个人全栈开发者",
+      "background": "#0A0A0A",
+      "color": "#FB923C",
+      "padding": "8px 16px",
+      "borderRadius": "9999px",
+      "border": "1px solid rgba(255, 255, 255, 0.1)",
+      "boxShadow": "none",
+      "fontSize": "14px",
+      "fontWeight": "700",
+      "height": "38px"
+    }
+  ],
+  "statCells": [],
+  "tabs": [],
+  "backgrounds": [
+    {
+      "value": "linear-gradient(rgba(255, 255, 255, 0.035) 1px, rgba(0, 0, 0, 0) 0px), linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, rgba(0, 0, 0, 0) 0px)",
+      "area": 12376560
+    },
+    {
+      "value": "linear-gradient(to right bottom, rgb(234, 88, 12), rgb(236, 72, 153))",
+      "area": 614400
+    },
+    {
+      "value": "linear-gradient(135deg, rgb(249, 115, 22), rgb(236, 72, 153), rgb(217, 70, 239))",
+      "area": 102400
+    },
+    {
+      "value": "linear-gradient(135deg, rgb(249, 115, 22), rgb(236, 72, 153), rgb(168, 85, 247))",
+      "area": 102400
+    },
+    {
+      "value": "linear-gradient(135deg, rgb(251, 146, 60), rgb(249, 115, 22), rgb(236, 72, 153))",
+      "area": 81792
+    }
+  ],
+  "glass": [
+    {
+      "backdropFilter": "blur(16px)",
+      "background": "rgba(10, 10, 10, 0.7)",
+      "border": "1px solid rgba(255, 255, 255, 0.1)",
+      "borderRadius": "24px",
+      "boxShadow": "",
+      "area": 2031750
+    },
+    {
+      "backdropFilter": "blur(16px)",
+      "background": "rgba(10, 10, 10, 0.7)",
+      "border": "1px solid rgba(255, 255, 255, 0.1)",
+      "borderRadius": "16px",
+      "boxShadow": "",
+      "area": 1429888
+    },
+    {
+      "backdropFilter": "blur(16px)",
+      "background": "rgba(10, 10, 10, 0.7)",
+      "border": "1px solid rgba(255, 255, 255, 0.1)",
+      "borderRadius": "0px",
+      "boxShadow": "",
+      "area": 514560
+    }
+  ]
+}

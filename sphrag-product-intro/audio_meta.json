@@ -1,0 +1,82 @@
+{
+  "bgm": {
+    "path": "assets/bgm/track.mp3",
+    "volume": 0.9,
+    "query": "confident minimal tech underscore",
+    "duration_s": 30
+  },
+  "bgm_pending": false,
+  "voices": [],
+  "sfx": [
+    {
+      "frame": 1,
+      "file": "assets/sfx/tight-impact.mp3",
+      "offset_s": 0,
+      "duration_s": 0.816,
+      "volume": 0.35
+    },
+    {
+      "frame": 1,
+      "file": "assets/sfx/short-reverse-whoosh.mp3",
+      "offset_s": 0,
+      "duration_s": 1.056,
+      "volume": 0.35
+    },
+    {
+      "frame": 2,
+      "file": "assets/sfx/rising-tick-sequence.mp3",
+      "offset_s": 0,
+      "duration_s": 7.778,
+      "volume": 0.35
+    },
+    {
+      "frame": 2,
+      "file": "assets/sfx/soft-impact.mp3",
+      "offset_s": 0,
+      "duration_s": 0.816,
+      "volume": 0.35
+    },
+    {
+      "frame": 3,
+      "file": "assets/sfx/three-soft-surface-impacts.mp3",
+      "offset_s": 0,
+      "duration_s": 0.816,
+      "volume": 0.35
+    },
+    {
+      "frame": 3,
+      "file": "assets/sfx/forward-whoosh.mp3",
+      "offset_s": 0,
+      "duration_s": 1.58,
+      "volume": 0.35
+    },
+    {
+      "frame": 3,
+      "file": "assets/sfx/final-lock-click.mp3",
+      "offset_s": 0,
+      "duration_s": 0.264,
+      "volume": 0.35
+    },
+    {
+      "frame": 4,
+      "file": "assets/sfx/orange-sweep.mp3",
+      "offset_s": 0,
+      "duration_s": 1.79,
+      "volume": 0.35
+    },
+    {
+      "frame": 4,
+      "file": "assets/sfx/resolved-impact.mp3",
+      "offset_s": 0,
+      "duration_s": 3.603,
+      "volume": 0.35
+    },
+    {
+      "frame": 4,
+      "file": "assets/sfx/clean-end-sting.mp3",
+      "offset_s": 0,
+      "duration_s": 7.315,
+      "volume": 0.35
+    }
+  ]
+}
