@@ -1,0 +1,378 @@
+---
+title: Node.js 运行原理：单线程为何能扛高并发？
+date: 2026-08-20
+tag: Web 开发
+excerpt: Node.js 是基于 V8 的 JavaScript 运行时，它通过事件循环、非阻塞 I/O 和 libuv 并发处理大量连接，但 CPU 密集型任务仍可能阻塞主线程。
+readingTime: 16 分钟
+cover: /blog/what-is-nodejs/scene-1.png
+keywords:
+  - Node.js
+  - Node.js 是什么
+  - Node.js 运行原理
+  - Node.js 单线程
+  - Node.js 高并发
+  - Node.js 事件循环
+  - Event Loop
+  - 非阻塞 I/O
+  - libuv
+  - V8 引擎
+  - npm
+  - Node.js 线程池
+  - I/O 密集型
+  - CPU 密集型
+  - Node.js 应用场景
+  - Node.js 和浏览器的区别
+---
+
+## 什么是 Node.js？
+
+Node.js 是一个开源、跨平台的 JavaScript 运行时环境。它使用 V8 执行 JavaScript，并提供文件系统、网络、进程、流和加密等服务器端 API，让 JavaScript 可以离开浏览器，直接在电脑或服务器上运行。
+
+![Node.js 的定义、核心组成、解决的问题与主要应用场景](/blog/what-is-nodejs/scene-1.png)
+
+Node.js 不是一门新语言，也不是 Express、Koa 这样的 Web 框架。JavaScript 是语言，V8 是执行引擎，Node.js 是把 V8、系统能力和异步 I/O 机制组合起来的运行时，Express 等框架则运行在 Node.js 之上。
+
+Node.js 主要解决两类问题：
+
+1. **让 JavaScript 运行在浏览器之外**：脚本可以访问文件、监听端口、连接数据库和启动子进程。
+2. **用少量线程处理大量 I/O 连接**：请求等待网络、磁盘或数据库时，JavaScript 主线程可以继续处理其他事件。
+
+一句话总结：**Node.js 是以 V8 为执行核心、以事件循环和非阻塞 I/O 为并发基础的 JavaScript 运行时。**
+
+## Node.js 是怎样从浏览器走向服务器的？
+
+Node.js 诞生前，JavaScript 主要运行在浏览器沙箱中，用来处理点击、表单和页面更新。浏览器提供 DOM、`window` 和 Web API，但不会让网页任意读取服务器文件或监听网络端口。
+
+![Node.js 从浏览器 JavaScript、V8 引擎到服务器运行时的诞生过程](/blog/what-is-nodejs/scene-2.png)
+
+2009 年，Ryan Dahl 创建了 Node.js。它采用 Chrome 项目中的 V8 引擎执行 JavaScript，并在其周围增加服务器程序需要的能力，例如：
+
+- `node:fs`：读写文件和目录。
+- `node:http`：创建 HTTP 客户端与服务器。
+- `node:net`：建立 TCP 连接。
+- `node:process`：读取环境变量、参数并管理进程。
+- `node:stream`：分块处理网络、文件等连续数据。
+
+因此，同一段 JavaScript 在不同运行时中可用的全局对象并不相同。浏览器常用 `document` 和 `localStorage`，Node.js 常用 `process`、`Buffer` 和服务器端模块。现代 Node.js 也实现了 `fetch` 等部分 Web 标准 API，但它依然不会提供 DOM。
+
+## 为什么前后端统一使用 JavaScript 很重要？
+
+Node.js 让团队可以用 JavaScript 或 TypeScript 同时开发浏览器界面、服务端接口、构建工具和自动化脚本。统一语言能减少上下文切换，并让类型、校验规则和工具配置在合理边界内复用。
+
+![Node.js 出现前后，前端与后端语言体系和协作方式的变化](/blog/what-is-nodejs/scene-3.png)
+
+例如，一个 TypeScript 项目可以让前端和 API 服务共享订单状态枚举、接口数据类型和纯校验函数。它减少了两端约定不一致的问题，但不代表前端可以直接复用后端的数据库代码或机密逻辑。
+
+语言统一的实际收益包括：
+
+- **协作成本更低**：前后端使用相同的语法、包管理和代码质量工具。
+- **全栈开发更顺畅**：开发者可以在页面、API 与脚本之间切换。
+- **模型更容易共享**：类型定义、协议字段和部分纯函数可以放进公共包。
+- **工具链更一致**：测试、格式化、静态检查和构建可使用同一套生态。
+
+它也有明确边界：服务端必须独立完成鉴权和输入校验，不能因为前后端共享代码就信任浏览器传来的数据；共享过多实现细节还会让两端产生不必要的耦合。
+
+## Node.js 为什么用单线程也能处理高并发？
+
+Node.js 能处理高并发的关键不是“单线程计算更快”，而是**JavaScript 主线程不会在大多数 I/O 等待期间被占住**。它把等待交给操作系统或 libuv，主线程只在任务可继续时执行相应回调。
+
+![传统阻塞模型与 Node.js 事件驱动、非阻塞 I/O 模型的流程对比](/blog/what-is-nodejs/scene-4.png)
+
+一次简化的 HTTP 请求会经历以下过程：
+
+1. 客户端连接到 Node.js 服务器，操作系统通知进程有事件到达。
+2. 事件循环执行对应的 JavaScript 请求处理函数。
+3. 代码发起数据库查询、网络请求或文件读取。
+4. Node.js 注册后续处理逻辑，把具体 I/O 交给操作系统异步接口或 libuv 工作线程。
+5. JavaScript 主线程不等待结果，转而处理下一个连接或事件。
+6. I/O 完成后，完成通知进入相应队列。
+7. 事件循环在合适的时机执行回调、Promise 后续逻辑，并返回响应。
+
+餐厅服务员是一个便于理解的类比：服务员把订单交给厨房后，不会站在灶台旁等待，而是继续给其他桌点单；菜做好后，厨房通知服务员上菜。一个服务员能协调许多桌，但服务员自己不能同时执行两个需要持续占用他的任务。
+
+### 并发和并行有什么区别？
+
+**并发**是多个任务在同一时间段内共同推进，**并行**是多个任务在同一时刻真正同时执行。Node.js 主线程通过事件循环组织并发；操作系统、libuv 线程池、Worker Threads 或多个进程则可以在底层提供并行。
+
+假设 10,000 个连接大部分时间都在等待数据库或客户端数据，Node.js 不需要为每个连接创建一个 JavaScript 线程。它可以维护连接状态，只在某个连接真正有工作可做时运行代码。这正是 I/O 密集型服务能够获得高连接密度的原因。
+
+但“能维持大量连接”不等于“每秒一定处理更多请求”。真实吞吐还受数据库容量、下游延迟、内存、套接字、序列化成本、日志量和代码实现影响，必须通过压测验证。
+
+## 事件循环到底在循环什么？
+
+事件循环是 libuv 驱动的调度机制。它不断检查定时器、I/O 完成通知、待关闭句柄等工作，并在 JavaScript 调用栈空闲时执行对应回调。
+
+Node.js 事件循环常被概括为以下阶段：
+
+| 阶段 | 主要工作 | 常见来源 |
+| --- | --- | --- |
+| timers | 执行达到阈值的定时器回调 | `setTimeout`、`setInterval` |
+| pending callbacks | 执行部分延迟到下一轮的系统回调 | 某些 TCP 错误等 |
+| poll | 获取新的 I/O 事件并执行 I/O 回调 | 网络、文件完成通知 |
+| check | 执行 check 阶段回调 | `setImmediate` |
+| close callbacks | 执行关闭事件回调 | socket 的 `close` 事件 |
+
+阶段表是理解模型，不应被当成所有 Node.js 版本都完全相同的逐行时序。Node.js 20 所采用的 libuv 1.45 起，定时器只在 poll 阶段之后运行，这会影响部分 `setImmediate()` 与定时器的先后关系。
+
+Promise 回调和 `process.nextTick()` 也不等同于表中的普通阶段。当前 JavaScript 操作完成后，Node.js 会先处理 `process.nextTick()` 队列，再处理 Promise 等微任务，然后才继续事件循环。递归塞满这些队列同样可能让 I/O 长时间得不到执行。
+
+```js
+import { readFile } from 'node:fs';
+
+console.log('1. 同步代码');
+
+readFile('./config.json', 'utf8', (error, text) => {
+  if (error) throw error;
+  console.log('4. 文件读取完成', text.length);
+});
+
+Promise.resolve().then(() => {
+  console.log('3. Promise 微任务');
+});
+
+console.log('2. 同步代码结束');
+```
+
+前两条同步日志会先出现，Promise 回调会在当前操作结束后的微任务检查点执行，文件回调则要等待 I/O 完成。示例中的 `4` 表示这一次常见执行结果，不代表异步任务之间可以仅靠源码位置推导先后顺序。
+
+## “单线程”是否意味着 Node.js 只有一个线程？
+
+不是。Node.js 的“单线程”主要指一个 Node.js 实例默认在一个主线程上执行 JavaScript。V8、libuv、操作系统以及应用创建的 Worker Threads 都可能使用其他线程。
+
+![Node.js 单线程 JavaScript 与操作系统、libuv 线程池和后台线程的分工](/blog/what-is-nodejs/scene-5.png)
+
+底层任务大致有两条路径：
+
+| 任务类型 | 通常由谁等待或执行 | 是否占用 JavaScript 主线程 |
+| --- | --- | --- |
+| TCP/UDP 网络 I/O | 操作系统的事件通知机制 | 等待时不占用 |
+| 文件系统异步操作 | libuv 线程池 | 等待时不占用 |
+| `dns.lookup()` | libuv 线程池 | 等待时不占用 |
+| 部分加密、压缩操作 | libuv 线程池 | 等待时不占用 |
+| JSON 解析、普通循环、同步 API | JavaScript 主线程 | 会占用 |
+| Worker Threads 中的计算 | 独立 JavaScript 线程 | 不直接占用主线程 |
+
+libuv 工作线程池的默认大小通常是 4，可以通过 `UV_THREADPOOL_SIZE` 在进程启动前调整。增大线程池并不会自动提升所有请求性能：网络套接字通常依赖操作系统事件接口，线程数过多还会增加调度和内存成本。
+
+所以更准确的表述是：**Node.js 用单个 JavaScript 主线程协调异步工作，而不是整个进程从始至终只有一条线程。**
+
+## 阻塞事件循环会发生什么？
+
+如果一个回调连续占用主线程，事件循环就无法及时处理其他连接。所有共享该线程的请求会一起增加延迟，即使阻塞来自某一个用户的任务。
+
+下面的同步计算会在循环结束前占住主线程：
+
+```js
+import http from 'node:http';
+
+http.createServer((request, response) => {
+  if (request.url === '/slow') {
+    let total = 0;
+    for (let index = 0; index < 5_000_000_000; index += 1) {
+      total += index;
+    }
+    response.end(String(total));
+    return;
+  }
+
+  response.end('ok');
+}).listen(3000);
+```
+
+当 `/slow` 正在计算时，同一主线程甚至无法及时返回简单的 `/` 请求。常见阻塞来源包括：
+
+- 超大数组遍历、复杂正则和大量 JSON 解析或序列化。
+- `readFileSync`、`writeFileSync` 等同步 I/O API。
+- 密码哈希、图像处理、压缩和科学计算。
+- 没有让出执行权的死循环或超长循环。
+- 回调中执行大量同步日志和模板渲染。
+
+应对方式取决于任务性质：缩小单次输入、采用异步 API、把计算拆分为可中断的小批次、使用 Worker Threads，或把任务发送到独立进程、队列和专用服务。多进程或容器可以利用多个 CPU 核心，但不能修复单个请求内部的阻塞代码。
+
+## npm 和模块化为什么推动了 Node.js 普及？
+
+npm 是 Node.js 生态中常用的包管理器和软件仓库客户端。它根据 `package.json` 与锁文件安装依赖、执行脚本，并帮助项目固定可复现的依赖版本。
+
+![npm 包管理、package.json、模块复用与 CommonJS 和 ES Modules](/blog/what-is-nodejs/scene-6.png)
+
+```json
+{
+  "name": "example-api",
+  "type": "module",
+  "scripts": {
+    "dev": "node --watch server.js",
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "5.1.0"
+  }
+}
+```
+
+Node.js 中常见两套模块系统：
+
+- **CommonJS**：使用 `require()` 和 `module.exports`，常见于较早的 Node.js 项目。
+- **ES Modules（ESM）**：使用 `import` 和 `export`，与 JavaScript 标准模块语法一致。
+
+模块生态显著降低了开发成本，但依赖并非越多越好。安装包前应检查维护状态、许可证、发布来源、依赖树和已知漏洞，并提交锁文件。生产环境还应使用可重复安装流程，例如 `npm ci`，避免未审查的版本漂移。
+
+## Node.js 适合哪些真实场景？
+
+Node.js 最适合“连接多、等待多、单次计算短”的 I/O 密集型任务，尤其适合以 JSON、HTTP 和实时消息为中心的 Web 服务。
+
+![Node.js 在 API 服务、WebSocket 实时应用和 I/O 密集型业务中的应用](/blog/what-is-nodejs/scene-7.png)
+
+### API 与 BFF 服务
+
+Node.js 可以使用内置 `node:http`，也可以配合 Express、Fastify、Koa 或 NestJS 构建 REST API、GraphQL API 和 BFF（Backend for Frontend）。BFF 经常需要并发调用多个下游服务再组合 JSON 响应，这类等待网络的工作与非阻塞模型匹配。
+
+```js
+import express from 'express';
+
+const app = express();
+
+app.get('/api/users/:id', async (request, response) => {
+  const user = await findUser(request.params.id);
+
+  if (!user) {
+    response.status(404).json({ message: 'User not found' });
+    return;
+  }
+
+  response.json(user);
+});
+
+app.listen(3000);
+```
+
+`await` 让异步代码更易读，但不会把同步计算自动变成非阻塞操作。只有被等待的 API 本身真正异步时，主线程才能在等待期间处理其他工作。
+
+### 实时应用与长连接
+
+聊天室、在线协作、实时通知、状态面板和游戏网关通常维护大量长连接。Node.js 可以通过 WebSocket 或 SSE 处理持续事件流，并使用 Stream 与背压机制避免生产数据的速度长期超过接收方。
+
+### 命令行与自动化工具
+
+Node.js 也适合编写跨平台 CLI、代码生成器、构建脚本和开发服务器。对 JavaScript 团队来说，这些工具可以直接复用现有语言和 npm 生态。
+
+## 为什么前端工具链离不开 Node.js？
+
+现代前端项目虽然最终运行在浏览器里，但依赖安装、源码转换、打包、静态检查、格式化和测试通常发生在 Node.js 中。
+
+![Webpack、Vite、ESLint、Prettier 和 npm 等前端工具对 Node.js 的依赖](/blog/what-is-nodejs/scene-8.png)
+
+常见工具包括：
+
+- **Vite、Webpack、Rollup、esbuild**：启动开发服务器并打包模块与资源。
+- **TypeScript、Babel**：检查类型或转换代码语法。
+- **ESLint、Prettier**：检查代码问题并统一格式。
+- **Vitest、Jest、Playwright**：运行单元、集成或端到端测试。
+- **npm、pnpm、Yarn**：管理依赖、工作区与项目脚本。
+
+因此，即使开发者只写浏览器前端，也需要理解 Node.js 版本、`package.json`、模块系统、环境变量和进程退出码。Node.js 已经是现代前端工程化的执行底座。
+
+## Node.js 不适合哪些任务？
+
+Node.js 不适合直接在主线程中执行长时间 CPU 密集型计算，例如视频转码、批量图像处理、机器学习训练、大规模科学计算和复杂密码学运算。这些任务会持续占用事件循环，放大所有请求的尾延迟。
+
+![Node.js 在 I/O 密集型任务中的优势与 CPU 密集型任务中的局限](/blog/what-is-nodejs/scene-9.png)
+
+| 场景 | 任务特征 | Node.js 适配度 | 更稳妥的处理方式 |
+| --- | --- | --- | --- |
+| API 聚合 | 大量网络等待，少量 JSON 处理 | 高 | 直接使用异步 I/O，并设置超时与并发限制 |
+| 聊天与通知 | 大量长连接，小消息频繁到达 | 高 | WebSocket/SSE + 横向扩展 |
+| 文件上传代理 | I/O 为主，数据可流式传输 | 高 | 使用 Stream、背压和大小限制 |
+| 大型 JSON 同步转换 | 单次主线程计算时间长 | 中低 | 流式解析、分片或 Worker Threads |
+| 图片与视频转码 | 长时间占用 CPU/GPU | 低 | 任务队列 + 专用工作进程或服务 |
+| 机器学习训练 | 大规模数值计算和加速器调度 | 低 | 使用 Python/C++ 生态或专用平台 |
+
+Node.js 并非完全不能做 CPU 密集型任务。Worker Threads 可以在同一进程中运行独立 JavaScript 线程，子进程和任务队列可以实现故障隔离，原生模块也能调用高性能代码。关键是不让重计算占用处理网络请求的主线程。
+
+## Node.js 与传统多线程服务器有什么区别？
+
+两种模型都能构建高并发服务，区别在于默认的调度方式和开发约束。Node.js 倾向于用事件循环协调大量连接；传统线程式服务器通常让每个请求由一个线程或虚拟线程执行，并允许代码以阻塞风格书写。
+
+| 维度 | Node.js 事件循环模型 | 传统线程/请求模型 |
+| --- | --- | --- |
+| JavaScript/业务代码执行 | 默认单主线程 | 多个请求线程并行执行 |
+| I/O 等待 | 异步注册，完成后继续 | 线程可能阻塞，或由框架使用异步 I/O |
+| 每连接资源 | 通常较低 | 取决于线程、虚拟线程和服务器实现 |
+| CPU 计算 | 易阻塞当前事件循环 | 可由多个线程分摊，但仍受核心数限制 |
+| 共享状态 | 单线程内相对简单 | 需重点处理锁、竞态和线程安全 |
+| 编程要求 | 回调必须短，重视背压和异步边界 | 阻塞式流程更直观，需管理并发访问 |
+
+这不是“单线程一定优于多线程”的比较。Java、Go、.NET 和其他平台也提供成熟的异步 I/O、协程或轻量线程模型；Node.js 的优势在于 JavaScript 生态、事件驱动默认值和 Web 开发效率，而不是独占了高并发能力。
+
+## 使用 Node.js 时有哪些常见误区？
+
+### 误区一：异步函数一定不会阻塞
+
+`async` 只会让函数返回 Promise，不能把其中的大循环、JSON 解析或同步文件读取移出主线程。判断是否阻塞要看实际调用的 API 和计算量。
+
+### 误区二：所有 I/O 都在线程池里执行
+
+网络 I/O 通常由操作系统的事件通知机制处理；文件系统、`dns.lookup()` 以及部分加密和压缩任务才常使用 libuv 线程池。错误地增大线程池可能没有收益。
+
+### 误区三：单线程不会发生并发问题
+
+一次 JavaScript 回调不会被另一个回调从中间抢占，但异步操作仍会交错。两个请求先读取同一余额、分别计算再写回，仍可能发生业务竞态，需要数据库事务、锁、幂等键或原子操作。
+
+### 误区四：用了 Node.js 就自动获得高并发
+
+同步代码、无上限并发、慢数据库、缺失超时、内存泄漏和不正确的背压都能拖垮服务。高并发是架构、代码、依赖和容量规划共同作用的结果。
+
+## 常见问题
+
+### Node.js 真的是单线程吗？
+
+Node.js 默认使用一个主线程执行 JavaScript，但整个进程并非只有一个线程。V8 和 libuv 会使用后台线程，部分异步任务由 libuv 线程池处理，应用也可以创建 Worker Threads 或多个进程。
+
+### Node.js 单线程为什么不会被一个 I/O 请求卡住？
+
+因为异步 I/O 的等待由操作系统或 libuv 承担。Node.js 注册完成通知后继续运行事件循环，等 I/O 完成再执行回调；如果使用同步 I/O API，主线程仍然会被卡住。
+
+### Node.js 能处理多少并发连接？
+
+没有适用于所有应用的固定数字。上限取决于内存、文件描述符、消息大小、TLS、业务计算、数据库容量、下游延迟和部署配置。应使用接近生产流量与数据规模的压测确定容量，并关注 P95/P99 延迟、错误率和事件循环延迟。
+
+### Node.js 适合 CPU 密集型任务吗？
+
+不适合直接在请求主线程中执行长时间 CPU 计算。可以使用 Worker Threads、子进程、任务队列、原生模块或独立计算服务隔离这些工作。
+
+### Node.js 和 JavaScript 有什么区别？
+
+JavaScript 是编程语言，Node.js 是执行 JavaScript 的运行时环境。浏览器也是 JavaScript 运行时，但浏览器提供 DOM 等页面 API，Node.js 提供文件、网络和进程等服务器端 API。
+
+### npm 是 Node.js 的一部分吗？
+
+npm 是 Node.js 生态的包管理工具，通常随 Node.js 安装包一起提供，但它不是 JavaScript 执行引擎。Node.js 也可以配合 pnpm、Yarn 等其他包管理器使用。
+
+## 如何判断项目是否应该选择 Node.js？
+
+如果项目符合以下大多数条件，Node.js 通常值得优先评估：
+
+- 请求主要等待数据库、缓存、对象存储或第三方 API。
+- 服务需要维护大量 HTTP、SSE 或 WebSocket 连接。
+- 团队熟悉 JavaScript/TypeScript，并重视前后端工具统一。
+- 产品需要快速迭代 API、BFF、实时功能或开发工具。
+- CPU 重任务可以通过 Worker、队列或独立服务隔离。
+
+如果核心工作是长时间数值计算、视频处理或机器学习训练，或者团队已有更成熟的其他语言基础设施，Node.js 未必是主服务的最佳选择。选型应基于工作负载、团队能力、生态依赖和压测结果，而不是只看“单线程高并发”这句口号。
+
+## 总结：Node.js 的运行原理是什么？
+
+Node.js 的核心可以归纳为五个部分：V8 执行 JavaScript；Node.js 提供服务器端 API；libuv 驱动事件循环；操作系统与线程池承担异步等待或后台工作；npm 和模块系统提供工程生态。
+
+![Node.js 的 V8、服务器能力、事件循环、npm 生态与前后端统一总结](/blog/what-is-nodejs/scene-10.png)
+
+Node.js 单线程能扛高并发，是因为 I/O 密集型服务的大部分时间都在等待，而事件循环让主线程在等待期间继续处理其他连接。它节省的是“为等待分配线程”的成本，并没有消除 CPU、内存、数据库和下游服务的容量限制。
+
+最终结论是：**Node.js 的强项不是让单线程同时执行很多计算，而是让单线程高效协调大量正在等待 I/O 的任务。** 理解这一区别，才能正确设计 Node.js 服务、判断它适合什么场景，并避开阻塞事件循环的性能问题。
+
+## 参考资料
+
+- [Node.js 官方文档：About Node.js](https://nodejs.org/en/about)
+- [Node.js 官方指南：The Node.js Event Loop](https://nodejs.org/en/learn/asynchronous-work/event-loop-timers-and-nexttick)
+- [Node.js 官方指南：Don't Block the Event Loop](https://nodejs.org/en/learn/asynchronous-work/dont-block-the-event-loop)
+- [Node.js API：Worker Threads](https://nodejs.org/api/worker_threads.html)
+- [libuv 官方文档：Design overview](https://docs.libuv.org/en/stable/design.html)
