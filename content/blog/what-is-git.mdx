@@ -67,7 +67,7 @@ Git 也不是自动保存工具。只有你主动执行 `git add` 和 `git commi
 
 Git 的提交模型由工作区、暂存区和本地仓库三个区域组成。文件从工作区经过 `add` 进入暂存区，再经过 `commit` 进入仓库。
 
-![工作区、暂存区和本地仓库组成 Git 的提交路径](/blog/what-is-git/scene-5.png)
+![Git 不是自动保存，改动需要经过 git add 暂存，再由 git commit 正式记录](/blog/what-is-git/scene-4.png)
 
 可以用“草稿、待拍内容和照片”来理解：
 
@@ -75,7 +75,7 @@ Git 的提交模型由工作区、暂存区和本地仓库三个区域组成。�
 2. **暂存区（Staging area / Index）**：你已经挑选、准备放进下一次提交的改动清单。
 3. **本地仓库（Local repository）**：已经提交的快照、提交信息和历史关系，保存在项目的 `.git` 目录中。
 
-![Git 不是自动保存，改动需要经过 git add 暂存，再由 git commit 正式记录](/blog/what-is-git/scene-4.png)
+![工作区、暂存区和本地仓库组成 Git 的提交路径](/blog/what-is-git/scene-5.png)
 
 典型流程如下：
 
@@ -118,7 +118,7 @@ git add src/auth/login.ts
 git commit -m "fix: validate login token expiry"
 ```
 
-`git switch -c fix-login` 会创建并切换到新分支。分支上的提交只会移动 `fix-login` 指针，不会改变 `main`；测试通过后，再通过合并请求或本地 `merge` 把成果汇回主线。
+`git switch -c fix-login` 会创建并切换到新分支；旧版本教程里常见的等价写法是 `git checkout -b fix-login`。分支上的提交只会移动 `fix-login` 指针，不会改变 `main`；测试通过后，再通过合并请求或本地 `merge` 把成果汇回主线。
 
 ## 一个真实项目里的 Git 分支流程是怎样的？
 
@@ -225,6 +225,8 @@ git reset --mixed HEAD~1
 ```
 
 `git reset` 会移动当前分支指针，使用前要确认目标提交和是否有未备份改动；在已经共享的公共分支上，通常优先用 `git revert` 创建一个反向提交，而不是改写公共历史。
+
+旧版 Git 中也常用 `git checkout <commit> -- path/to/file` 从指定提交取回文件。现在的命令行文档更推荐用职责更明确的 `git restore --source=<commit> -- path/to/file`，但理解两者的恢复意图即可。
 
 恢复能力有边界：提交越多、引用保留越完整，定位越容易；如果文件从未提交、对象已被清理，或者密钥曾经提交后又删除，不能把 Git 当成绝对备份或安全擦除工具。密钥泄露时必须立即轮换凭证，并清理历史中的敏感内容。
 
