@@ -1,4 +1,4 @@
-type WorkKey = 'asset' | 'hr' | 'finance' | 'erpQueryAgent' | 'rag' | 'search' | 'attendance' | 'oa' | 'orders' | 'workstation' | 'digitalHuman' | 'recruiting'
+type WorkKey = 'asset' | 'hr' | 'finance' | 'erpQueryAgent' | 'rag' | 'search' | 'attendance' | 'oa' | 'orders' | 'workstation' | 'digitalHuman' | 'recruiting' | 'inklo'
 
 type ShowcaseWork = {
   key: WorkKey
@@ -11,6 +11,7 @@ type ShowcaseWork = {
   images: string[]
   stack: string[]
   link?: string
+  sourceLink?: string
   imageCountLabel: string
   imageAlt: string
 }
@@ -19,6 +20,21 @@ const projectImages = (folder: string, count: number, extension = 'jpg') =>
   Array.from({ length: count }, (_, index) => `/projects/${folder}/${index + 1}.${extension}`)
 
 const workMap: Record<WorkKey, ShowcaseWork> = {
+  inklo: {
+    key: 'inklo',
+    slug: 'inklo',
+    category: 'Marketplace / Art Commission',
+    title: 'Inklo 艺术委托交易平台',
+    description: '连接全球委托方与插画师、Live2D 艺术家的艺术委托市场，支持发现、沟通、支付与交付协作。',
+    details: '我负责 Inklo 从产品落地到线上交付的全栈开发，围绕艺术家入驻、作品展示、委托发布、申请报价、托管支付、订单履约和多语言体验，搭建一套可持续运营的交易平台。',
+    highlights: ['艺术家与作品发现', '托管支付与订单履约', '内置翻译与跨语言协作'],
+    images: ['/projects/inklo-homepage.png'],
+    stack: ['React', 'TypeScript', 'TanStack Start', 'PostgreSQL', 'Drizzle ORM', 'Cloudflare R2'],
+    link: 'https://inklo.net/',
+    sourceLink: 'https://github.com/shadowDragons/inklo',
+    imageCountLabel: '1 张项目截图',
+    imageAlt: 'Inklo 艺术委托交易平台首页',
+  },
   orders: {
     key: 'orders',
     slug: 'enterprise-erp',
@@ -177,9 +193,10 @@ const workMap: Record<WorkKey, ShowcaseWork> = {
   },
 }
 
-const selectedProjectKeys: WorkKey[] = ['orders', 'erpQueryAgent', 'rag', 'search', 'oa', 'recruiting']
+const selectedProjectKeys: WorkKey[] = ['inklo', 'orders', 'erpQueryAgent', 'rag', 'search', 'oa', 'recruiting']
 
 const allProjectKeys: WorkKey[] = [
+  'inklo',
   'orders',
   'erpQueryAgent',
   'rag',

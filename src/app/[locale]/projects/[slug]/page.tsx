@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import Image from 'next/image'
-import { ArrowLeft, CheckCircle2, Layers3, Radio } from 'lucide-react'
+import { ArrowLeft, CheckCircle2, ExternalLink, Github, Layers3, Radio } from 'lucide-react'
 import { notFound } from 'next/navigation'
 import { Link } from '@/i18n/routing'
 import CreativeSubpageNav from '@/components/creative/CreativeSubpageNav'
@@ -89,6 +89,30 @@ export default function ProjectDetailPage({ params }: ProjectDetailPageProps) {
           </div>
           <h1 className='text-5xl md:text-7xl font-black tracking-tighter mb-6'>{project.title}</h1>
           <p className='text-lg md:text-xl opacity-60 max-w-2xl mx-auto'>{project.description}</p>
+          {project.link || project.sourceLink ? (
+            <div className='mt-8 flex flex-wrap justify-center gap-3'>
+              {project.link ? (
+                <a
+                  href={project.link}
+                  target='_blank'
+                  rel='noreferrer'
+                  className='inline-flex items-center gap-2 rounded-full bg-purple-500 px-5 py-2.5 text-sm font-bold text-white transition hover:-translate-y-0.5 hover:bg-purple-400'
+                >
+                  在线体验 <ExternalLink className='h-4 w-4' />
+                </a>
+              ) : null}
+              {project.sourceLink ? (
+                <a
+                  href={project.sourceLink}
+                  target='_blank'
+                  rel='noreferrer'
+                  className='inline-flex items-center gap-2 rounded-full border border-white/20 px-5 py-2.5 text-sm font-bold transition hover:-translate-y-0.5 hover:border-purple-400 hover:text-purple-300'
+                >
+                  GitHub 源码 <Github className='h-4 w-4' />
+                </a>
+              ) : null}
+            </div>
+          ) : null}
         </div>
       </section>
 
