@@ -1,4 +1,4 @@
-type WorkKey = 'asset' | 'hr' | 'finance' | 'erpQueryAgent' | 'rag' | 'search' | 'attendance' | 'oa' | 'orders' | 'workstation' | 'digitalHuman' | 'recruiting' | 'inklo'
+type WorkKey = 'asset' | 'hr' | 'finance' | 'erpQueryAgent' | 'rag' | 'search' | 'attendance' | 'oa' | 'orders' | 'workstation' | 'digitalHuman' | 'recruiting' | 'inklo' | 'fromart'
 
 type ShowcaseWork = {
   key: WorkKey
@@ -20,6 +20,20 @@ const projectImages = (folder: string, count: number, extension = 'jpg') =>
   Array.from({ length: count }, (_, index) => `/projects/${folder}/${index + 1}.${extension}`)
 
 const workMap: Record<WorkKey, ShowcaseWork> = {
+  fromart: {
+    key: 'fromart',
+    slug: 'fromart',
+    category: 'B2B / Brand Website',
+    title: 'Fromart 卫浴品牌官网',
+    description: '面向海外市场的卫浴品牌官网，集中展示产品系列、品牌信息与商务咨询入口。',
+    details: '围绕卫浴产品的视觉呈现与海外客户的采购路径搭建品牌网站，覆盖产品目录、品牌介绍、常见问题、博客内容和询盘联系入口，帮助品牌将产品实力转化为清晰的线上展示与商机承接。',
+    highlights: ['产品系列与场景化展示', '品牌内容与专业知识沉淀', '海外客户询盘与联系入口'],
+    images: ['/projects/fromart-homepage.png'],
+    stack: ['WordPress', 'WooCommerce', 'PHP', 'MySQL'],
+    link: 'https://fromart.com/',
+    imageCountLabel: '1 张项目截图',
+    imageAlt: 'Fromart 卫浴品牌官网首页',
+  },
   inklo: {
     key: 'inklo',
     slug: 'inklo',
@@ -193,10 +207,11 @@ const workMap: Record<WorkKey, ShowcaseWork> = {
   },
 }
 
-const selectedProjectKeys: WorkKey[] = ['inklo', 'orders', 'erpQueryAgent', 'rag', 'search', 'oa', 'recruiting']
+const selectedProjectKeys: WorkKey[] = ['inklo', 'fromart', 'orders', 'erpQueryAgent', 'rag', 'search', 'oa', 'recruiting']
 
 const allProjectKeys: WorkKey[] = [
   'inklo',
+  'fromart',
   'orders',
   'erpQueryAgent',
   'rag',

@@ -1,0 +1,188 @@
+- generic [ref=e1]:
+  - generic [ref=e2]:
+    - generic:
+      - generic:
+        - heading "要查看键盘快捷键，按下问号 查看键盘快捷键" [level=2] [ref=e3]:
+          - generic [ref=e4]: 要查看键盘快捷键，按下问号
+          - link "查看键盘快捷键" [ref=e5] [cursor=pointer]:
+            - /url: /i/keyboard_shortcuts
+        - generic [ref=e6]:
+          - banner [ref=e7]:
+            - generic [ref=e9]:
+              - generic [ref=e10]:
+                - heading [level=1] [ref=e12] [cursor=pointer]:
+                  - link "X" [ref=e13]:
+                    - /url: /home
+                - navigation "主要" [ref=e19]:
+                  - link "主页" [ref=e20] [cursor=pointer]:
+                    - /url: /home
+                  - link "搜索和发现" [ref=e27] [cursor=pointer]:
+                    - /url: /explore
+                    - generic [ref=e28]: 探索
+                  - link "通知" [ref=e34] [cursor=pointer]:
+                    - /url: /notifications
+                  - link "私信" [ref=e41] [cursor=pointer]:
+                    - /url: /i/chat
+                    - generic [ref=e42]: 聊天
+                  - link "Grok" [ref=e48] [cursor=pointer]:
+                    - /url: /i/grok
+                    - generic [ref=e49]:
+                      - generic "undefined 条未读项目" [ref=e54]
+                      - generic [ref=e55]: Grok
+                  - link "Premium" [ref=e56] [cursor=pointer]:
+                    - /url: /i/premium
+                  - link "历史" [ref=e63] [cursor=pointer]:
+                    - /url: /i/history
+                  - link "创作者工作室" [ref=e70] [cursor=pointer]:
+                    - /url: /i/jf/creators/studio
+                  - link "文章" [ref=e78] [cursor=pointer]:
+                    - /url: /compose/articles
+                  - link "个人资料" [ref=e86] [cursor=pointer]:
+                    - /url: /Junexus_indie
+                  - button "更多菜单项" [ref=e93] [cursor=pointer]:
+                    - generic [ref=e94]: 更多
+                - link "发帖" [ref=e101] [cursor=pointer]:
+                  - /url: /compose/post
+              - button "账号菜单" [ref=e110] [cursor=pointer]:
+                - generic [ref=e118]:
+                  - generic:
+                    - generic:
+                      - generic:
+                        - generic "仁戈":
+                          - img "仁戈"
+                - generic [ref=e122]:
+                  - generic [ref=e124]:
+                    - generic [ref=e125]: 仁戈
+                    - img "认证账号" [ref=e129]
+                  - generic [ref=e132]: "@Junexus_indie"
+          - main [ref=e140]:
+            - generic [ref=e143]:
+              - region [ref=e144]:
+                - generic [ref=e146]:
+                  - generic [ref=e151]:
+                    - heading "文章" [level=2] [ref=e154]
+                    - button "create" [ref=e156] [cursor=pointer]
+                  - navigation [ref=e162]:
+                    - generic [ref=e163]:
+                      - generic:
+                        - button "上一个" [disabled]
+                      - tablist [ref=e165]:
+                        - tab "草稿" [selected] [ref=e166] [cursor=pointer]
+                        - tab "已发布" [ref=e171] [cursor=pointer]
+                      - generic:
+                        - button "下一步" [disabled]
+                  - generic [ref=e176]:
+                    - link "草稿 上一次保存 44分钟 前 更多 内网穿透是什么？没公网 IP 怎么让外网访问本地服务？" [ref=e487] [cursor=pointer]:
+                      - /url: /compose/articles/edit/2096246883207573505
+                      - generic [ref=e180]:
+                        - generic [ref=e181]:
+                          - generic [ref=e182]:
+                            - generic [ref=e183]: 草稿
+                            - generic [aria-hidden] [ref=e184]: ·
+                            - generic [ref=e185]:
+                              - text: 上一次保存
+                              - generic "44分钟 前" [ref=e488]:
+                                - time [ref=e187]: 44分钟 前
+                          - button "更多" [ref=e189]
+                        - generic [ref=e196]: 内网穿透是什么？没公网 IP 怎么让外网访问本地服务？
+                    - link "草稿 上一次保存 1小时 前 更多 （需要标题）(Needs title) 什么是内网穿透？ 内网穿透是一种网络连接技术：**它让外网设备能够访问家里、公司或本地电脑中运行的服务，即使这台设备没有可被互联网直接访问的公网 IP。**" [ref=e201] [cursor=pointer]:
+                      - /url: /compose/articles/edit/2096240375812001792
+                      - generic [ref=e202]:
+                        - generic [ref=e203]:
+                          - generic [ref=e204]:
+                            - generic [ref=e205]: 草稿
+                            - generic [aria-hidden] [ref=e206]: ·
+                            - generic [ref=e207]:
+                              - text: 上一次保存
+                              - generic "1小时 前" [ref=e208]:
+                                - time [ref=e209]: 1小时 前
+                          - button "更多" [ref=e211]
+                        - generic [ref=e218]: （需要标题）(Needs title)
+                        - generic [ref=e221]: 什么是内网穿透？ 内网穿透是一种网络连接技术：**它让外网设备能够访问家里、公司或本地电脑中运行的服务，即使这台设备没有可被互联网直接访问的公网 IP。**
+                    - link "草稿 上一次保存 5月9日 更多 （需要标题）(Needs title)" [ref=e224] [cursor=pointer]:
+                      - /url: /compose/articles/edit/2053005731524472832
+                      - generic [ref=e225]:
+                        - generic [ref=e226]:
+                          - generic [ref=e227]:
+                            - generic [ref=e228]: 草稿
+                            - generic [aria-hidden] [ref=e229]: ·
+                            - generic [ref=e230]:
+                              - text: 上一次保存
+                              - generic "5月9日" [ref=e231]:
+                                - time [ref=e232]: 5月9日
+                          - button "更多" [ref=e234]
+                        - generic [ref=e241]: （需要标题）(Needs title)
+              - region [ref=e489]:
+                - generic [ref=e248]:
+                  - generic [ref=e253]:
+                    - heading "草稿 上一次保存 44分钟 前" [level=2] [ref=e490]:
+                      - generic [ref=e258]:
+                        - generic [ref=e259]: 草稿
+                        - generic [aria-hidden] [ref=e260]: ·
+                        - generic [ref=e261]:
+                          - text: 上一次保存
+                          - generic "44分钟 前" [ref=e491]:
+                            - time [ref=e263]: 44分钟 前
+                    - generic [ref=e265]:
+                      - link "预览" [ref=e266] [cursor=pointer]:
+                        - /url: /compose/articles/edit/2096246883207573505/preview
+                      - button "发布" [disabled] [ref=e271]
+                      - link "专注模式" [ref=e276] [cursor=pointer]:
+                        - /url: /compose/articles/edit/2096246883207573505/focus
+                      - button "更多" [ref=e282] [cursor=pointer]
+                  - generic [ref=e289]:
+                    - generic [ref=e292]:
+                      - generic [ref=e294]:
+                        - generic [ref=e295]:
+                          - generic [ref=e296]:
+                            - button [ref=e297] [cursor=pointer]
+                            - button [ref=e302] [cursor=pointer]
+                            - button [ref=e307] [cursor=pointer]
+                          - button "正文" [ref=e312] [cursor=pointer]
+                          - button [ref=e321] [cursor=pointer]
+                          - generic [ref=e326]:
+                            - button [ref=e328] [cursor=pointer]
+                            - button [ref=e333] [cursor=pointer]
+                          - button [ref=e340] [cursor=pointer]
+                          - button "添加表情符号" [ref=e346] [cursor=pointer]
+                          - generic [ref=e352]:
+                            - button "添加媒体内容" [ref=e354] [cursor=pointer]:
+                              - generic [ref=e355]: 插入
+                            - button "键盘快捷键" [ref=e361] [cursor=pointer]
+                        - generic [ref=e366]: 0 个字
+                      - generic [ref=e369]:
+                        - generic [ref=e378]:
+                          - generic [ref=e379]:
+                            - button "添加照片或视频" [ref=e380] [cursor=pointer]
+                            - button "Choose File" [ref=e389]
+                          - generic [ref=e390]: 为获得最佳效果，建议使用宽高比为 5:2 的图片。
+                        - textbox "添加标题" [ref=e398]: 内网穿透是什么？没公网 IP 怎么让外网访问本地服务？
+                        - generic [ref=e400]:
+                          - link [ref=e401] [cursor=pointer]:
+                            - /url: /Junexus_indie
+                            - generic [ref=e402]:
+                              - generic [ref=e413]: 仁戈
+                              - img "认证账号" [ref=e417]
+                          - link "@Junexus_indie" [ref=e421] [cursor=pointer]:
+                            - /url: /Junexus_indie
+                        - generic [ref=e433]:
+                          - generic [ref=e500]: 开始撰写
+                          - textbox [ref=e435]
+                    - generic [ref=e440]:
+                      - separator [ref=e441]
+                      - listitem [ref=e442] [cursor=pointer]:
+                        - generic [ref=e443]:
+                          - link [aria-hidden] [ref=e453]:
+                            - /url: /Junexus_indie
+                          - generic [ref=e456]:
+                            - generic [ref=e459]:
+                              - link [ref=e461]:
+                                - /url: /Junexus_indie
+                                - generic [ref=e462]:
+                                  - generic [ref=e463]: 仁戈
+                                  - img "认证账号" [ref=e467]
+                              - link "@Junexus_indie" [ref=e472]:
+                                - /url: /Junexus_indie
+                            - generic [ref=e475]: 独立开发者，专做企业官网、外贸网站、Web 应用、小程序和 AI 工具定制开发。
+  - generic:
+    - region "Notifications alt+T"
