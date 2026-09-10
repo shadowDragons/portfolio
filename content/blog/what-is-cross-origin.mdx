@@ -1,0 +1,415 @@
+---
+title: 什么是跨域？同源策略和 CORS 一次讲清
+date: 2026-09-10
+tag: Web 开发
+excerpt: 跨域是浏览器同源策略对不同来源脚本读取资源施加的安全边界，本文用协议、域名、端口三个标准讲清跨域的判断方式，并比较 CORS、代理和 JSONP 的适用场景。
+readingTime: 12 分钟
+cover: /blog/what-is-cross-origin/scene-1.png
+keywords:
+  - 跨域
+  - 跨域是什么
+  - 什么是跨域
+  - 同源策略
+  - Same-Origin Policy
+  - SOP
+  - CORS
+  - 跨域资源共享
+  - Access-Control-Allow-Origin
+  - CORS 预检请求
+  - OPTIONS 请求
+  - 前后端分离跨域
+  - localhost 跨域
+  - 代理跨域
+  - JSONP
+  - postMessage
+  - WebSocket 跨域
+---
+
+## 什么是跨域？
+
+跨域是指：**浏览器中的网页脚本访问了不同来源的资源，并且浏览器限制脚本读取这次响应。** “来源”（origin）由协议、域名和端口三部分共同决定；只要其中任意一项不同，两个网址就不是同源。
+
+![跨域的定义、同源策略、常见触发场景和三种解决方式总览](/blog/what-is-cross-origin/scene-1.png)
+
+例如，下面这些地址与 `http://example.com` 的来源关系不同：
+
+| 地址 | 哪一项不同 | 是否同源 |
+| --- | --- | --- |
+| `http://example.com/user` | 路径不同，但协议、域名、端口相同 | 是 |
+| `https://example.com` | 协议不同 | 否 |
+| `http://api.example.com` | 域名不同（子域名也算域名的一部分） | 否 |
+| `http://example.com:8080` | 端口不同 | 否 |
+
+因此，`http://localhost:3000` 和 `http://localhost:8080` 虽然都指向本机，仍然属于跨域。端口是来源的一部分，不能因为主机名相同就忽略它。
+
+一句话记忆：**跨域不是“服务器找不到”，而是浏览器不把不同来源的响应交给网页脚本读取。**
+
+## 同源策略如何判断两个网址是否同源？
+
+同源策略（Same-Origin Policy，SOP）要求两个来源的协议、域名、端口完全一致。浏览器会按下面三个字段逐项比较：
+
+![同源策略通过协议、域名、端口三个字段判断两个网址是否同源](/blog/what-is-cross-origin/scene-2.png)
+
+1. **协议（scheme）**：`http` 和 `https` 不同。HTTPS 页面请求 HTTP 资源还可能额外触发混合内容拦截。
+2. **域名（host）**：`example.com`、`api.example.com` 和 `192.0.2.10` 不是同一个域名。
+3. **端口（port）**：`80`、`443`、`3000` 和 `8080` 不同。`http` 的默认端口是 `80`，`https` 的默认端口是 `443`；显式端口仍按实际来源判断。
+
+路径、查询参数和片段不参与同源判断。也就是说，`https://example.com/a` 和 `https://example.com/b?x=1` 仍然同源。
+
+浏览器把来源序列化后放在请求的 `Origin` 请求头中，例如：
+
+```http
+Origin: http://localhost:3000
+```
+
+服务器可以读取这个来源并决定是否允许它，但 `Origin` 是浏览器提供的上下文信息，不能代替登录认证。服务端仍然要检查 Cookie、令牌、权限和请求数据。
+
+## 为什么浏览器需要同源策略？
+
+同源策略的目的，是阻止一个网站在用户不知情的情况下读取另一个网站的私密数据。它保护的是“网页脚本读取数据”的边界，而不是让网络请求完全无法发出。
+
+![同源策略阻止恶意网站读取银行页面中的余额和交易记录](/blog/what-is-cross-origin/scene-3.png)
+
+假设用户已经登录网上银行，浏览器中保存了银行域名的 Cookie。如果任意网站都能用脚本读取银行接口响应，那么恶意页面就可能在后台获取账户余额、收件地址或交易记录。同源策略让银行页面的数据默认只对银行自己的脚本可读。
+
+需要区分两个概念：
+
+- **发送请求**：浏览器可能仍会发送跨域请求，尤其是表单提交、图片加载或某些“简单请求”。
+- **读取响应**：脚本要读取响应正文、响应头或通过 `fetch` 得到可用结果时，浏览器会检查跨域许可。
+
+这也是为什么“后端明明返回了 200，前端却报 CORS 错误”并不矛盾：服务器已经处理请求并生成响应，但浏览器没有把响应数据交给前端 JavaScript。
+
+## 哪些开发场景会触发跨域？
+
+最常见的场景是前后端分离：前端开发服务器运行在 `localhost:3000`，API 运行在 `localhost:8080`。页面脚本从前者调用后者时，端口不同，浏览器就会按跨域请求处理。
+
+![前后端分离项目中请求已到达后端，但浏览器因端口不同拦截响应并报告 CORS 错误](/blog/what-is-cross-origin/scene-4.png)
+
+典型代码如下：
+
+```js
+fetch('http://localhost:8080/api/user')
+  .then(response => response.json())
+  .then(user => console.log(user));
+```
+
+当页面来源是 `http://localhost:3000` 时，浏览器会在请求中加入 `Origin: http://localhost:3000`。如果后端响应没有明确允许这个来源，控制台可能出现类似错误：
+
+```text
+Access to fetch at 'http://localhost:8080/api/user'
+from origin 'http://localhost:3000' has been blocked by CORS policy
+```
+
+触发跨域的不只是端口不同，还包括：
+
+- 页面从 `https://app.example.com` 请求 `https://api.example.com`；
+- HTTPS 页面请求 HTTP 接口；
+- 页面请求第三方地图、支付、对象存储或分析服务；
+- iframe、Worker、字体、模块脚本或媒体资源来自另一个来源；
+- 同一主域名下的不同子域名互相访问。
+
+跨域限制只存在于浏览器安全模型中。服务器到服务器的 HTTP 调用不经过浏览器的同源策略，因此不会因为“跨域”被拦截。
+
+![服务器之间可以直接调用接口，只有浏览器脚本访问不同来源资源时才需要跨域许可](/blog/what-is-cross-origin/scene-5.png)
+
+## CORS 是如何解决跨域的？
+
+CORS（Cross-Origin Resource Sharing，跨域资源共享）是浏览器认可的标准机制。它要求服务器在响应中声明允许的来源、方法、请求头和凭据规则；浏览器验证这些声明后，才把响应交给前端脚本。
+
+![CORS 通过 Access-Control-Allow-Origin 响应头告诉浏览器哪些来源可以读取响应](/blog/what-is-cross-origin/scene-6.png)
+
+最小配置示例：
+
+```http
+HTTP/1.1 200 OK
+Access-Control-Allow-Origin: http://localhost:3000
+Content-Type: application/json
+
+{"id":42,"name":"Ada"}
+```
+
+这里的 `Access-Control-Allow-Origin` 必须与请求来源匹配。生产环境应使用明确的允许列表，例如 `https://app.example.com`；只有确实提供公开、无需凭据的数据时，才考虑使用 `*`。
+
+服务器通常需要根据请求的 `Origin` 动态返回允许值，但动态返回时必须同时发送：
+
+```http
+Vary: Origin
+```
+
+这样缓存代理不会把“允许站点 A”的响应错误复用给站点 B。
+
+### CORS 需要配置哪些响应头？
+
+常用响应头及其用途如下：
+
+| 响应头 | 作用 | 使用时的注意点 |
+| --- | --- | --- |
+| `Access-Control-Allow-Origin` | 允许哪个来源读取响应 | 不能在允许凭据时使用 `*` |
+| `Access-Control-Allow-Methods` | 允许跨域使用哪些方法 | 预检响应中声明，例如 `GET, POST, PUT` |
+| `Access-Control-Allow-Headers` | 允许前端发送哪些非简单请求头 | 例如 `Authorization, Content-Type, X-Request-ID` |
+| `Access-Control-Allow-Credentials` | 是否允许携带 Cookie 或其他凭据 | 值为 `true`，且来源必须明确指定 |
+| `Access-Control-Expose-Headers` | 哪些响应头可被脚本读取 | 默认只有 CORS safelisted response headers 可读 |
+| `Access-Control-Max-Age` | 预检结果可缓存多久 | 秒数；浏览器可能设置上限 |
+
+`Content-Type: application/json` 并不属于简单请求允许的三种媒体类型（`text/plain`、`application/x-www-form-urlencoded`、`multipart/form-data`），所以带 JSON 请求体的 POST 往往会触发预检。
+
+## 什么是 CORS 预检请求？
+
+当请求不是“简单请求”时，浏览器会先用 `OPTIONS` 方法发送一个预检请求（preflight），询问服务器是否允许即将发送的真实请求。只有预检通过，浏览器才会继续发出真实请求。
+
+![CORS 预检请求先用 OPTIONS 询问服务器，获准后才发送真正的跨域请求](/blog/what-is-cross-origin/scene-7.png)
+
+下面这个请求通常需要预检，因为它使用了 `POST`、JSON 请求体和自定义请求头：
+
+```http
+POST /api/orders HTTP/1.1
+Origin: https://app.example.com
+Content-Type: application/json
+Authorization: Bearer <token>
+X-Request-ID: req-123
+```
+
+浏览器可能先发送：
+
+```http
+OPTIONS /api/orders HTTP/1.1
+Origin: https://app.example.com
+Access-Control-Request-Method: POST
+Access-Control-Request-Headers: authorization, content-type, x-request-id
+```
+
+服务器应返回类似：
+
+```http
+HTTP/1.1 204 No Content
+Access-Control-Allow-Origin: https://app.example.com
+Access-Control-Allow-Methods: POST, OPTIONS
+Access-Control-Allow-Headers: Authorization, Content-Type, X-Request-ID
+Access-Control-Max-Age: 600
+```
+
+预检失败时，真实的 `POST` 通常不会发送；开发者看到的错误可能只显示“预检请求没有通过”。因此后端路由、认证中间件、网关和 Nginx 都要确保 `OPTIONS` 请求能得到正确响应，不能在预检阶段强制要求业务登录或返回 404。
+
+## 携带 Cookie 时，CORS 有什么特殊规则？
+
+跨域请求默认不会随意携带 Cookie。前端要显式开启凭据模式：
+
+```js
+fetch('https://api.example.com/profile', {
+  credentials: 'include',
+});
+```
+
+服务端则需要同时返回：
+
+```http
+Access-Control-Allow-Origin: https://app.example.com
+Access-Control-Allow-Credentials: true
+```
+
+这时有三条硬规则：
+
+1. `Access-Control-Allow-Origin` 不能写 `*`，必须是具体来源。
+2. Cookie 还要满足 `SameSite`、`Secure`、域名和路径等 Cookie 规则；CORS 许可本身不会强制浏览器发送 Cookie。
+3. 跨站 Cookie 场景可能受到浏览器第三方 Cookie 限制，不能只依赖“本地能用”的表现判断线上行为。
+
+CORS 解决的是“响应能否被脚本读取”，不会自动解决 CSRF。使用 Cookie 认证的接口仍应配合 CSRF Token、`SameSite` 策略、来源校验和合理的状态变更设计。
+
+## 前端暂时不能修改后端，为什么代理可以解决跨域？
+
+开发代理的核心是：浏览器只请求自己的开发服务器，再由开发服务器在服务器端转发到真正的 API。浏览器看到的请求始终是同源，因此不会触发浏览器的跨域读取限制。
+
+![代理服务器把前端请求转发到后端，让浏览器始终访问同源的开发服务器](/blog/what-is-cross-origin/scene-8.png)
+
+例如，Vite 可以这样配置：
+
+```js
+// vite.config.js
+import { defineConfig } from 'vite';
+
+export default defineConfig({
+  server: {
+    proxy: {
+      '/api': {
+        target: 'http://localhost:8080',
+        changeOrigin: true,
+      },
+    },
+  },
+});
+```
+
+前端代码改为请求相对路径：
+
+```js
+fetch('/api/user');
+```
+
+生产环境的 Nginx、Ingress 或 API Gateway 也可以做同样的反向代理。代理并没有取消安全问题：它只是改变了浏览器看到的来源，后端的鉴权、权限校验、限流和日志仍然必须存在。
+
+## JSONP 是什么？为什么现在很少使用？
+
+JSONP（JSON with Padding）利用了 `<script src="...">` 可以加载跨来源脚本的历史行为。前端把回调函数名放进 URL，后端返回一段函数调用，浏览器执行这段脚本后把数据交给回调。
+
+![JSONP 动态创建 script 标签，通过 GET 请求加载回调函数调用](/blog/what-is-cross-origin/scene-9.png)
+
+前端示例：
+
+```js
+function handleData(data) {
+  console.log(data);
+}
+
+const script = document.createElement('script');
+script.src = 'https://api.example.com/data?callback=handleData';
+document.head.appendChild(script);
+```
+
+后端返回的不是普通 JSON，而是：
+
+```js
+handleData({ "code": 0, "data": { "name": "Ada" } });
+```
+
+JSONP 的限制很明确：
+
+- 只能使用 GET，不能安全地表达 POST、PUT 或 DELETE；
+- 返回内容会被当作 JavaScript 执行，接口一旦被污染就可能造成脚本注入；
+- 错误处理、超时、取消和响应头控制不如 `fetch` 直接；
+- 现代浏览器和服务端都支持 CORS，新项目通常没有采用 JSONP 的理由。
+
+JSONP 适合维护老系统或兼容无法配置 CORS 的旧接口，不应作为现代 API 的默认方案。
+
+## CORS、代理和 JSONP 应该怎么选？
+
+三种方案解决的是不同层面的问题：CORS 修改服务器的浏览器许可，代理改变浏览器看到的请求路径，JSONP 利用脚本加载规则传递数据。
+
+| 方案 | 核心做法 | 支持方法 | 适合场景 | 主要限制 |
+| --- | --- | --- | --- | --- |
+| CORS | 服务端返回跨域许可响应头 | GET、POST、PUT、DELETE 等 | 生产环境 API、前后端分离、第三方开放接口 | 需要服务端配合，凭据和预检配置较细 |
+| 代理 / 反向代理 | 同源服务器代浏览器转发请求 | 取决于代理和后端 | 本地开发、统一 API 入口、网关治理 | 多一层转发，需处理超时、路径和认证 |
+| JSONP | `<script>` 加载回调脚本 | 仅 GET | 老接口、历史兼容 | 安全性和错误处理较弱，不能传输任意方法 |
+
+通常可以按下面的决策顺序选择：
+
+1. 能修改 API 服务端时，优先正确配置 CORS，并限制允许来源、方法、请求头和凭据。
+2. 只是本地开发或希望统一前端 API 路径时，使用 Vite、Webpack、Next.js 或 Nginx 代理。
+3. 只有在维护旧接口且无法增加 CORS 时，才考虑 JSONP，并严格限制回调名和数据内容。
+
+## postMessage 和 WebSocket 也属于跨域解决方案吗？
+
+它们可以在特定通信模型中绕过“脚本直接读取另一个来源文档”的限制，但用途与 CORS 不同。
+
+![postMessage 适合 iframe 通信，WebSocket 适合实时双向通信，CORS 仍是一般 API 交互的首选](/blog/what-is-cross-origin/scene-10.png)
+
+### `postMessage`：用于窗口和 iframe 之间传递消息
+
+发送方可以向另一个窗口发送结构化数据，接收方监听 `message` 事件：
+
+```js
+otherWindow.postMessage(
+  { type: 'AUTH_RESULT', ok: true },
+  'https://child.example.com',
+);
+```
+
+接收方必须校验 `event.origin` 和必要的 `event.source`，不能无条件接受所有来源的消息：
+
+```js
+window.addEventListener('message', event => {
+  if (event.origin !== 'https://parent.example.com') return;
+  console.log(event.data);
+});
+```
+
+### WebSocket：建立独立的实时连接
+
+WebSocket 握手会携带 `Origin`，服务端应检查它并执行自己的认证与授权。它不使用 CORS 响应头来决定消息是否可读，因此不能把“WebSocket 不受 CORS 影响”理解成“WebSocket 不需要安全校验”。
+
+对普通 REST、GraphQL 或文件 API，CORS 仍然是最直接的标准方案；对 iframe 通信使用 `postMessage`，对需要双向实时推送的场景再考虑 WebSocket。
+
+## 遇到 CORS 错误，应该如何排查？
+
+先判断请求是否到达服务端，再看浏览器拒绝读取的是哪一层响应。可以按以下顺序检查：
+
+1. **确认页面来源**：在开发者工具中查看页面的完整协议、域名和端口，记录准确的 `Origin`。
+2. **查看 Network 面板**：判断失败的是 `OPTIONS` 预检还是真实请求，检查请求和响应头。
+3. **检查允许来源**：`Access-Control-Allow-Origin` 是否精确匹配来源，是否错误地返回了多个值。
+4. **检查方法和请求头**：预检中的 `Access-Control-Request-Method` 与 `Access-Control-Request-Headers` 是否都被服务端允许。
+5. **检查凭据配置**：前端是否设置 `credentials: 'include'`，服务端是否返回 `Access-Control-Allow-Credentials: true`，Cookie 是否符合 `SameSite` 与 `Secure` 条件。
+6. **检查代理与缓存**：Nginx、CDN、网关是否覆盖或缓存了 CORS 头；动态来源响应是否带 `Vary: Origin`。
+7. **区分 CORS 与其他错误**：DNS、TLS 证书、混合内容、认证失败、接口 500 和 CSP 报错，处理方式都不同。
+
+可以用 `curl` 模拟带来源的请求，快速确认服务器有没有返回 CORS 头：
+
+```bash
+curl -i https://api.example.com/user \
+  -H 'Origin: https://app.example.com'
+```
+
+但 `curl` 不会像浏览器一样执行同源策略，所以它只能验证服务器响应，不能证明浏览器一定会放行。要验证预检，还应模拟 `OPTIONS`：
+
+```bash
+curl -i -X OPTIONS https://api.example.com/orders \
+  -H 'Origin: https://app.example.com' \
+  -H 'Access-Control-Request-Method: POST' \
+  -H 'Access-Control-Request-Headers: authorization, content-type'
+```
+
+## 跨域有哪些常见误区？
+
+### “加上 `mode: 'no-cors'` 就解决了跨域”
+
+`no-cors` 不会让脚本获得可读的跨域响应，返回的通常是 opaque response，前端不能读取正文和大多数响应头。它适合少数只需要触发请求、不需要读取结果的场景，不适合 API 数据获取。
+
+### “后端返回 200，就说明前端应该能拿到数据”
+
+HTTP 状态码只说明服务器处理了请求。浏览器是否把响应交给脚本，还要看 CORS 许可；后端日志里的 200 与前端的 CORS 错误可以同时成立。
+
+### “把 `Access-Control-Allow-Origin` 写成 `*` 最省事”
+
+通配符适合公开且不携带凭据的资源。使用 Cookie 或其他凭据时必须返回具体来源；把所有来源都放行还会扩大数据暴露面。
+
+### “跨域等于 CSRF”
+
+跨域是浏览器的来源隔离机制，CSRF 是利用用户已有身份发起非预期状态变更的攻击。CORS 不能替代 CSRF 防护，Cookie 登录的写操作仍需校验来源或 CSRF Token。
+
+## 常见问题
+
+### localhost 的不同端口为什么算跨域？
+
+因为端口属于来源的一部分。`http://localhost:3000` 与 `http://localhost:8080` 的协议和域名相同，但端口不同，所以不是同源。开发时可以配置代理，或者让后端通过 CORS 允许前端来源。
+
+### 跨域请求一定不会发出去吗？
+
+不一定。某些请求会被浏览器发送，但脚本不能读取响应；复杂请求通常会先发送 `OPTIONS` 预检，预检失败后真实请求不会发送。是否发送取决于请求类型和浏览器安全规则。
+
+### CORS 应该配置在前端还是后端？
+
+真正决定浏览器是否放行的是服务端响应头，因此生产环境的 CORS 规则应配置在 API 服务、网关或反向代理上。前端只能设置请求模式和凭据选项，不能用 JavaScript 强行关闭浏览器的同源策略。
+
+### 为什么预检请求会返回 401 或 404？
+
+常见原因是认证中间件或路由没有处理 `OPTIONS`。预检只是询问跨域权限，服务端应在适当位置处理它，并返回允许的方法、请求头和来源；不要把它当作普通业务请求强制执行登录流程。
+
+### JSONP 和 CORS 的核心区别是什么？
+
+JSONP 把响应当作 JavaScript 脚本执行，只能使用 GET；CORS 是浏览器与服务器共同遵守的响应头协议，可以支持多种 HTTP 方法并让脚本读取结构化响应。现代 API 通常优先使用 CORS。
+
+### WebSocket 需要配置 `Access-Control-Allow-Origin` 吗？
+
+WebSocket 不依赖 CORS 响应头来建立消息通道，但浏览器会发送 `Origin`，服务端应该检查允许来源，并完成独立的身份认证、授权、限流和消息校验。
+
+## 总结：跨域的核心是什么？
+
+跨域不是网络连接失败，而是浏览器同源策略对不同来源数据设置的读取边界。协议、域名、端口三者只要有一项不同，网页脚本就需要额外的跨域机制。
+
+![跨域判断标准、错误排查路径和 CORS、代理、JSONP 方案选择总结](/blog/what-is-cross-origin/scene-11.png)
+
+记住三条结论即可：
+
+1. **同源判断看协议、域名、端口；路径不同不算跨域。**
+2. **服务器之间调用没有浏览器跨域限制，前端报错通常发生在浏览器读取响应的阶段。**
+3. **生产 API 优先使用 CORS，本地开发常用代理，JSONP 只适合历史兼容；带 Cookie 时还要单独处理凭据、SameSite 和 CSRF。**
+
+理解这条边界后，看到控制台的 CORS 错误，就能先判断是来源不一致、预检未通过、凭据配置冲突，还是代理和缓存链路的问题，再决定应该修改前端、后端还是网关配置。
