@@ -1,0 +1,444 @@
+---
+title: 什么是 React？一次讲清组件、状态和界面更新逻辑
+date: 2026-09-29
+tag: Web 开发
+excerpt: React 是用来构建用户界面的 JavaScript 库，它用组件、状态、单向数据流和声明式渲染，让复杂页面的变化更容易预测和维护。
+readingTime: 18 分钟
+cover: /blog/what-is-react/scene-1.png
+keywords:
+  - React
+  - React 是什么
+  - 什么是 React
+  - React.js
+  - JavaScript UI 库
+  - React 组件
+  - React JSX
+  - React props
+  - React state
+  - useState
+  - useEffect
+  - useMemo
+  - 单向数据流
+  - 声明式渲染
+  - 虚拟 DOM
+  - Fiber 架构
+  - 并发渲染
+  - React Router
+  - Redux
+  - Zustand
+  - Next.js
+  - React Native
+  - React 和 Vue 的区别
+---
+
+## 什么是 React？
+
+**React 是一个用来构建用户界面的 JavaScript 库。** 它把页面拆成可复用的组件，用状态描述会变化的数据，再根据状态声明界面应该长什么样。数据发生变化时，React 负责计算并提交必要的界面更新。
+
+![React 是构建用户界面的 JavaScript 库，2013 年由 Facebook 开源并由全球开发者共同维护](/blog/what-is-react/scene-1.png)
+
+React 最初由 Facebook（现在的 Meta）内部团队开发，2013 年开源。今天的 React 由 Meta 和全球开源社区共同维护，广泛用于网站、后台系统、设计工具、内容平台和跨平台移动应用。
+
+React 的核心目标可以概括成一句话：**把页面里会变化的部分，用可预测的方式拼装出来。** 它不负责数据库、服务器部署或所有业务流程，因此官方更准确的称呼是“库”，而不是包办一切的完整框架。
+
+这篇文章会按一条完整链路解释 React：它解决什么问题，声明式渲染和命令式操作有什么区别，组件、JSX、props、state、虚拟 DOM 和 Fiber 如何协作，以及真实项目里如何选择路由、状态管理和服务端渲染方案。
+
+![这篇文章从 React 要解决的问题出发，依次讲清组件、JSX、状态、虚拟 DOM 和真实项目实践](/blog/what-is-react/scene-2.png)
+
+## React 解决了什么问题？
+
+React 出现之前，前端开发经常采用命令式 DOM 操作：数据变化后，开发者先找到对应元素，再手动修改文字、属性、样式和事件。页面越复杂，数据和 DOM 操作越容易分散在不同文件里，最终出现“数据已经变了，但界面没同步”的问题。
+
+![React 出现之前，开发者要手动寻找 DOM；React 让开发者只描述界面最终样子](/blog/what-is-react/scene-3.png)
+
+例如，购物车数量从 1 变成 2，命令式代码可能需要这样写：
+
+```js
+const count = 2;
+document.querySelector('#cart-count').textContent = count;
+document.querySelector('#cart-button').disabled = count === 0;
+```
+
+这段代码只处理了两个节点。页面再增加库存提示、优惠券状态和结算按钮，开发者还要继续维护更多“数据变了以后应该改哪些节点”的指令。漏掉一个节点，页面就会进入不一致状态。
+
+React 把顺序倒过来：开发者维护状态，并描述状态对应的界面；框架负责把描述同步到浏览器。于是问题从“我应该按什么步骤修改 DOM”变成“当状态是这个值时，界面应该是什么样”。
+
+一句话总结：**React 解决的不是浏览器能不能改 DOM，而是把分散的手动更新，变成可追踪的状态到界面的映射。**
+
+## 命令式和声明式渲染有什么区别？
+
+命令式渲染描述“怎么一步步改页面”，声明式渲染描述“页面在当前数据下应该是什么样”。React 采用声明式渲染，开发者通常只写后一种描述。
+
+![命令式渲染需要一步步指挥浏览器，声明式渲染只描述界面结果并把更新交给 React](/blog/what-is-react/scene-4.png)
+
+两种思路可以这样对比：
+
+| 维度 | 命令式 DOM 操作 | React 声明式渲染 |
+| --- | --- | --- |
+| 代码关注点 | 查找节点、修改属性、绑定事件 | 描述状态对应的界面 |
+| 数据变化后 | 开发者手动执行更新步骤 | 更新 state，React 重新计算界面 |
+| 复杂度增长 | 更新指令容易散落和互相覆盖 | 变化集中在状态和组件边界 |
+| 调试路径 | 追踪哪一步 DOM 操作漏了 | 追踪哪个状态和组件产生了结果 |
+| 适用场景 | 少量、一次性的 DOM 操作 | 有大量交互和状态的应用界面 |
+
+声明式并不意味着 React 完全不接触真实 DOM。浏览器最终仍需要真实 DOM 来显示页面，只是开发者把“修改过程”的控制权交给了 React 的渲染器。
+
+## React 的组件是什么？
+
+**组件是一个可复用的界面单元。** 它可以是一个按钮、一张卡片、一个待办事项，也可以是包含多个页面区域的完整应用。组件通过组合形成组件树，每个组件都可以有自己的输入、状态和渲染逻辑。
+
+![React 把按钮、卡片和整页拆成可复用、可组合、可独立测试的组件](/blog/what-is-react/scene-5.png)
+
+最小的函数组件可以这样写：
+
+```jsx
+function Greeting({ name }) {
+  return <h1>你好，{name}！</h1>;
+}
+
+export default function App() {
+  return <Greeting name="React" />;
+}
+```
+
+这里的 `Greeting` 是一个组件：它接收 `name`，返回一段界面。`App` 组合并使用它。组件通常有三个特征：
+
+1. **可复用**：同一个组件可以在列表、弹窗或不同页面中重复使用。
+2. **可组合**：小组件可以嵌套成大组件，大组件再组合成页面。
+3. **可隔离**：组件的渲染逻辑、事件和状态边界更清楚，便于测试和定位问题。
+
+组件不是越小越好。把每一行文字都拆成组件会增加跳转和理解成本；更合理的边界通常来自独立的视觉单元、交互单元或业务职责。
+
+## JSX 是什么？为什么像 HTML？
+
+**JSX 是一种把界面结构写进 JavaScript 的语法扩展。** 它看起来像 HTML，但可以直接插入变量、表达式和组件。JSX 不是浏览器原生语言，构建工具会先把它编译成普通 JavaScript 函数调用。
+
+![JSX 像 HTML 一样描述结构，构建工具会把它编译成 JavaScript 函数调用](/blog/what-is-react/scene-6.png)
+
+下面这段 JSX：
+
+```jsx
+function CounterLabel({ count, visible }) {
+  return (
+    <div className="counter">
+      <h2>点击次数：{count}</h2>
+      {visible && <span>已显示</span>}
+    </div>
+  );
+}
+```
+
+在概念上会被编译成类似这样的调用：
+
+```js
+function CounterLabel({ count, visible }) {
+  return createElement(
+    'div',
+    { className: 'counter' },
+    createElement('h2', null, '点击次数：', count),
+    visible && createElement('span', null, '已显示')
+  );
+}
+```
+
+不同版本和工具链的输出细节可能不同，但核心含义一致：JSX 只是描述界面的开发写法，运行时仍然是 JavaScript。
+
+写 JSX 时最常见的规则包括：
+
+- 返回多个同级节点时，需要用一个父节点或 `<>...</>` Fragment 包住。
+- HTML 的 `class` 在 JSX 中写成 `className`，事件通常写成 `onClick`、`onChange`。
+- 花括号 `{}` 里可以放 JavaScript 表达式，但不能直接放 `if` 语句。
+- 列表渲染要给稳定的 `key`，让 React 识别每一项的身份。
+
+## props 和 state 有什么区别？
+
+React 组件之间主要通过 **props** 和 **state** 传递、管理数据。props 是父组件传给子组件的输入；state 是组件自己拥有、可以随交互变化的数据。
+
+![props 从父组件传给子组件，state 由组件自己管理并在变化时触发重新渲染](/blog/what-is-react/scene-7.png)
+
+| 概念 | 数据来源 | 组件能否直接修改 | 变化后的结果 | 常见例子 |
+| --- | --- | --- | --- | --- |
+| props | 父组件或调用方 | 不能，子组件应视为只读 | 父组件更新后，接收方可能重新渲染 | `title`、`items`、`onSave` |
+| state | 当前组件或 Hook | 通过 setter 更新 | React 调度一次新的渲染 | 输入框内容、展开状态、计数器 |
+
+一个有状态的计数器如下：
+
+```jsx
+import { useState } from 'react';
+
+function Counter() {
+  const [count, setCount] = useState(0);
+
+  return (
+    <button onClick={() => setCount(value => value + 1)}>
+      点击次数：{count}
+    </button>
+  );
+}
+```
+
+`useState(0)` 返回当前值 `count` 和更新函数 `setCount`。调用 setter 不会直接修改当前渲染中的变量，而是请求 React 在后续渲染中使用新值。连续更新时使用 `value => value + 1` 这种函数形式，可以基于最新状态计算结果。
+
+有一条必须记住的规则：**不要直接修改 state 或 props。** 例如 `items.push(newItem)` 只改了原数组，React 不一定能据此得到正确的更新；应该创建新数组并交给 setter：
+
+```jsx
+setItems(currentItems => [...currentItems, newItem]);
+```
+
+## React 为什么强调单向数据流？
+
+React 的数据默认从父组件向子组件流动，子组件需要通过回调函数通知父组件发生了什么。这个方向约束让数据来源和变化路径更容易追踪。
+
+![React 的单向数据流让父组件拥有数据来源，子组件接收 props 并通过回调上报事件](/blog/what-is-react/scene-8.png)
+
+```jsx
+function Parent() {
+  const [count, setCount] = useState(0);
+
+  return (
+    <Child
+      count={count}
+      onAdd={() => setCount(value => value + 1)}
+    />
+  );
+}
+
+function Child({ count, onAdd }) {
+  return (
+    <div>
+      <p>数量：{count}</p>
+      <button onClick={onAdd}>增加</button>
+    </div>
+  );
+}
+```
+
+这个例子里，`Parent` 是 `count` 的拥有者；`Child` 只负责显示和触发 `onAdd`。如果子组件可以随意改父组件的数据，数据就会出现多个隐藏来源，调试时很难回答“这个值到底是谁改的”。
+
+单向数据流不等于所有状态都必须放在最顶层。更实用的规则是：**把状态放到所有需要读取或修改它的组件的最近公共父组件**。如果多个页面都需要用户信息、主题或购物车，再考虑 Context 或专门的状态管理库。
+
+## 待办列表里，组件和状态怎样协作？
+
+待办列表能同时展示 props、state、事件和列表渲染，是理解 React 更新逻辑的好例子。父组件持有待办文本数组，每个 `TodoItem` 管理自己的完成状态。
+
+![待办列表示例：文本通过 props 传递，勾选状态由每个项目自己的 state 管理](/blog/what-is-react/scene-9.png)
+
+```jsx
+import { useState } from 'react';
+
+function TodoItem({ text }) {
+  const [done, setDone] = useState(false);
+
+  return (
+    <label>
+      <input
+        type="checkbox"
+        checked={done}
+        onChange={event => setDone(event.target.checked)}
+      />
+      <span style={{ textDecoration: done ? 'line-through' : 'none' }}>
+        {text}
+      </span>
+    </label>
+  );
+}
+
+function TodoList({ items }) {
+  return (
+    <ul>
+      {items.map(item => (
+        <li key={item.id}>
+          <TodoItem text={item.text} />
+        </li>
+      ))}
+    </ul>
+  );
+}
+```
+
+这个例子有三个要点：
+
+1. `items` 是父组件传来的 props，决定列表中有哪些任务。
+2. `done` 是每个 `TodoItem` 自己的 state，决定这一项是否完成。
+3. 修改某一项的 `done` 会让该组件进入新的渲染流程；如果父组件的 `items` 改变，列表也会根据新数组重新计算。
+
+“只有它重新渲染”需要更准确地理解：state 更新会让拥有它的组件重新渲染；父组件更新时，默认也可能重新执行子组件。若要跳过没有变化的子树，可以使用稳定的 props、`React.memo` 和合适的性能分析，而不是先假设每次都只更新一个 DOM 节点。
+
+## 虚拟 DOM 是什么？React 如何更新真实界面？
+
+**虚拟 DOM 是 React 用 JavaScript 对象描述界面结构的一种中间表示。** 当组件重新渲染时，React 会得到一棵新的元素树，再与上一次的结果进行协调（reconciliation），最后把需要提交的变化应用到真实 DOM。
+
+![虚拟 DOM 用 JavaScript 对象描述界面，React 对比前后结果后只提交必要变化](/blog/what-is-react/scene-10.png)
+
+概念上的元素对象可能是这样：
+
+```js
+{
+  type: 'div',
+  props: {
+    className: 'message',
+    children: '你好，React'
+  }
+}
+```
+
+一次状态更新大致经历四步：
+
+1. 用户点击按钮，事件处理函数调用 `setState`。
+2. React 把更新加入调度队列，并重新执行受影响的组件函数。
+3. React 比较这次返回的元素树和之前的结果，判断哪些节点、属性或文本发生了变化。
+4. React 在 commit 阶段把必要变更写入真实 DOM，并让浏览器绘制新画面。
+
+虚拟 DOM 的重点不是“每次都比整棵树所以一定更快”。创建元素描述和协调本身也有成本；React 的价值在于提供统一、可预测的更新模型，并把 DOM 写入集中在框架控制的提交阶段。真正的性能还取决于组件拆分、列表 key、网络请求、浏览器布局和业务算法。
+
+## Fiber 和并发渲染解决了什么问题？
+
+Fiber 是 React 16 引入的内部协调架构。它把渲染工作拆成可管理的单元，让 React 能够暂停、恢复或丢弃尚未提交的工作；React 18 在此基础上提供了更完整的并发渲染能力。
+
+![Fiber 架构和并发渲染让 React 可以打断、排序更新，优先处理更紧急的交互](/blog/what-is-react/scene-11.png)
+
+这意味着 React 可以区分更新优先级：输入框输入、点击反馈等紧急交互应尽快响应；搜索结果、图表或大列表等非紧急内容可以在浏览器空闲时继续准备。`startTransition` 和 `useDeferredValue` 就是开发者可以使用的并发 API。
+
+需要准确区分两件事：
+
+- **可中断的是渲染工作**：React 可以在还没有提交到 DOM 前暂停或重做计算。
+- **提交阶段要保持一致**：一旦 React 把一批变更提交到 DOM，用户应看到一个完整、不会撕裂的界面状态。
+
+因此，Fiber 不是另一套组件写法，也不是保证所有页面自动变快的开关。它给 React 提供了更灵活的调度基础，实际收益仍依赖组件结构和更新优先级是否设计合理。
+
+## Hooks 是什么？`useState`、`useEffect` 和 `useMemo` 怎么分工？
+
+**Hooks 是一组以 `use` 开头的函数，让函数组件使用状态、处理副作用和复用逻辑。** 它们取代了很多早期类组件中的生命周期和实例方法写法，但每个 Hook 都有明确边界。
+
+![Hooks 让函数组件获得状态、副作用和性能缓存能力，常见函数包括 useState、useEffect 和 useMemo](/blog/what-is-react/scene-12.png)
+
+| Hook | 主要用途 | 不应该拿来做什么 |
+| --- | --- | --- |
+| `useState` | 保存会影响界面的局部状态 | 直接修改返回的状态变量 |
+| `useEffect` | 在渲染提交后同步外部系统，例如请求、订阅、计时器 | 代替所有计算逻辑或修复错误的状态设计 |
+| `useMemo` | 缓存昂贵计算的结果 | 把所有普通表达式都包起来 |
+| `useCallback` | 缓存函数引用，配合子组件优化 | 在没有性能证据时到处使用 |
+| `useContext` | 读取共享上下文 | 代替所有局部 props 传递 |
+
+例如，组件需要订阅窗口宽度时，可以把订阅和清理放进 `useEffect`：
+
+```jsx
+import { useEffect, useState } from 'react';
+
+function WindowWidth() {
+  const [width, setWidth] = useState(() => window.innerWidth);
+
+  useEffect(() => {
+    const handleResize = () => setWidth(window.innerWidth);
+    window.addEventListener('resize', handleResize);
+
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  return <p>窗口宽度：{width}px</p>;
+}
+```
+
+Hooks 有两条基本规则：只能在组件或自定义 Hook 的顶层调用，不能放进条件、循环或普通函数里；Hook 的调用顺序必须在每次渲染中保持一致。自定义 Hook 则可以把“请求数据”“监听键盘”“同步表单”等逻辑抽成可复用函数。
+
+## React 真实项目通常搭配哪些工具？
+
+React 只负责界面层。真实项目通常会根据页面规模和部署方式选择路由、状态管理、数据请求、构建和服务端渲染工具。
+
+![React 项目通常搭配 React Router、Redux 或 Zustand、Next.js 和 React Native 等生态工具](/blog/what-is-react/scene-13.png)
+
+| 需求 | 常见方案 | 解决的问题 |
+| --- | --- | --- |
+| 页面路由 | React Router、Next.js App Router | URL、嵌套路由、导航和页面加载 |
+| 共享状态 | Redux Toolkit、Zustand、Jotai、Context | 多个组件或页面共享业务状态 |
+| 服务端渲染 | Next.js、Remix 等框架 | 首屏性能、SEO、服务端数据加载 |
+| 数据请求缓存 | TanStack Query、SWR | 请求缓存、重试、加载和失效管理 |
+| 构建开发 | Vite、Webpack、Rspack | 模块打包、热更新和生产构建 |
+| 移动端 | React Native、Expo | 用 React 思路构建 iOS 和 Android 应用 |
+
+选择工具时，先问项目需要什么：只有一个交互组件时不必引入完整路由和全局状态；需要多页面、服务端数据和权限控制时，再选择与团队部署方式匹配的框架。
+
+## React 和 Vue 有什么区别？
+
+React 和 Vue 都能构建组件化用户界面，核心差别在默认表达方式和生态组织方式，而不是“谁能做、谁不能做”。
+
+| 维度 | React | Vue |
+| --- | --- | --- |
+| 界面写法 | JSX，把结构和 JavaScript 表达式放在一起 | 模板，接近 HTML，并配合指令 |
+| 状态更新 | 通过 `useState` 等 setter 触发更新 | 通过响应式对象、`ref` 等自动追踪 |
+| 条件与列表 | `&&`、三元表达式、`map()` | `v-if`、`v-for` |
+| 表单绑定 | 通常显式连接 `value` 与 `onChange` | 常用 `v-model` |
+| 官方定位 | UI 库，路由和状态方案更依赖生态选择 | 渐进式框架，官方配套更集中 |
+| 适合谁 | 偏好 JavaScript 表达式、组件生态和自由组合的团队 | 偏好模板语法、约定和开箱即用能力的团队 |
+
+两者都能做中后台、营销页和大型应用。真正的选择通常取决于团队已有经验、组件库、招聘和部署基础，而不是单个性能宣传数字。
+
+## React 有哪些边界和常见误解？
+
+React 的价值很明确，但它不会自动替你解决所有工程问题。
+
+![React 只负责界面层，请求、数据库、部署和路由方案需要项目自行选择](/blog/what-is-react/scene-14.png)
+
+需要特别注意以下边界：
+
+- **React 不是后端框架**：数据库、鉴权、业务 API、队列和部署需要其他服务或框架。
+- **虚拟 DOM 不是性能魔法**：大量无意义的 state 更新、过大的组件和低效列表仍会拖慢页面。
+- **state 不等于服务器数据缓存**：接口请求的缓存、重试和失效策略通常交给 TanStack Query、SWR 或自建数据层。
+- **`useEffect` 不是“组件生命周期万能替代”**：能在渲染期间计算出的值，不必通过 effect 再同步一份 state。
+- **props 只读是约定和设计边界**：对象引用内部仍可能被意外修改，团队应保持不可变更新习惯。
+- **并发渲染不是自动并行执行 JavaScript**：它主要调整 React 渲染工作的可中断性和优先级，不会让单个阻塞函数自动变成多线程。
+
+项目做大后，React 的灵活性意味着更高的选择成本：团队需要确定路由、状态、数据请求、样式、测试和构建规范。灵活不是缺点，但要用文档和约定把选择固定下来。
+
+## 学 React 时应该先掌握哪四个思维？
+
+理解 React 不需要先背完整 API。更有效的顺序，是先建立四个稳定的思考模型。
+
+![React 的核心思考方式：用组件拆分界面，用状态描述变化，用单向数据流控制方向，用声明式渲染交给框架更新](/blog/what-is-react/scene-15.png)
+
+1. **用组件拆分界面**：找到可复用、可组合、职责清楚的 UI 单元。
+2. **用状态描述变化**：把会影响界面的事实放进 state，而不是到处直接改 DOM。
+3. **用单向数据流控制方向**：明确谁拥有数据，子组件通过事件或回调表达意图。
+4. **用声明式渲染交给框架更新**：描述当前状态下的结果，让 React 负责协调和提交。
+
+掌握这四点后，再学习 Context、Reducer、路由、服务端组件或状态库，会更容易判断它们到底在解决哪个边界问题。
+
+## 常见问题
+
+### React 是框架还是库？
+
+React 通常被称为 JavaScript UI 库，因为它主要负责组件和界面渲染。路由、数据请求、状态管理和服务端渲染需要额外库，或由 Next.js 等上层框架统一提供。
+
+### React 必须使用 JSX 吗？
+
+不必须。React 也可以直接调用 `createElement` 或使用其他编译语法，但 JSX 更接近组件的视觉结构，是绝大多数 React 项目的主流写法。
+
+### props 可以在子组件里修改吗？
+
+不应该。props 是父组件传入的只读输入；子组件需要改变数据时，应调用父组件传来的回调，让拥有该数据的组件执行更新。
+
+### 修改 state 后，React 会立刻修改 DOM 吗？
+
+不一定。调用 setter 会安排一次更新，React 可能批量处理多个更新，先完成新的渲染和协调，再在 commit 阶段写入真实 DOM。因此不要依赖“调用 setter 后当前代码立刻读到新 DOM”这一假设。
+
+### 虚拟 DOM 一定比直接操作 DOM 快吗？
+
+不一定。虚拟 DOM 带来协调和对象创建成本，它的主要价值是统一声明式更新模型并控制 DOM 提交范围。性能要结合组件结构、数据量、列表 key、浏览器布局和实际测量判断。
+
+### `useEffect` 什么时候应该使用？
+
+当组件需要和 React 之外的系统同步时使用，例如网络请求、浏览器事件、计时器、订阅或第三方 DOM 库。纯粹从现有 props 和 state 计算出的值，应直接在渲染中计算或使用 `useMemo`，不必额外存一份 state。
+
+### React 适合做移动端应用吗？
+
+可以。React Native 和 Expo 使用组件、props、state 和 Hooks 等相似思路构建 iOS 与 Android 应用，但最终渲染的是原生控件，不是把网页 DOM 原封不动搬到手机上。
+
+## 总结：React 的核心价值是什么？
+
+React 是用来构建用户界面的 JavaScript 库。它用组件组织页面，用 JSX 描述结构，用 props 和 state 传递、保存数据，用单向数据流控制变化方向，再通过声明式渲染、协调机制和 Fiber 调度，把状态变化提交为真实界面的更新。
+
+React 的价值不在某一个 API，也不只是“用了虚拟 DOM”。它提供了一套稳定的思考方式：**把界面拆成组件，把变化放进状态，把数据来源保持单向，把更新过程交给框架。**
+
+理解这四点，再去选择 React Router、Zustand、Next.js 或 React Native，就会发现它们都在围绕同一个问题工作：如何让不断变化的界面保持可预测、可组合、可维护。
+
+**记住这一句：React 不要求你手动描述页面如何变化，而是让你描述页面在当前状态下应该是什么样。**
