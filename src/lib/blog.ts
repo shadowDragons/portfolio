@@ -36,6 +36,29 @@ export type BlogPostSummary = {
 
 export type BlogPost = BlogPostSummary & {
   content: ReactNode
+  images: string[]
+}
+
+type ImageTreeNode = {
+  tagName?: string
+  name?: string
+  properties?: { src?: unknown }
+  attributes?: { type: string; name?: string; value?: unknown }[]
+  children?: ImageTreeNode[]
+}
+
+function collectImageSources(node: ImageTreeNode, images: Set<string>) {
+  const source = node.tagName === 'img'
+    ? node.properties?.src
+    : node.name === 'img' || node.name === 'Image'
+      ? node.attributes?.find(attribute => attribute.type === 'mdxJsxAttribute' && attribute.name === 'src')?.value
+      : undefined
+
+  if (typeof source === 'string' && source) {
+    images.add(source)
+  }
+
+  node.children?.forEach(child => collectImageSources(child, images))
 }
 
 function ensureBlogContentDir() {
@@ -98,24 +121,41 @@ export const getLatestBlogPosts = cache((limit: number) => getAllBlogPosts().sli
 
 export const getBlogSlugs = cache(() => getAllBlogPosts().map(post => post.slug))
 
-export const getBlogSummaryBySlug = cache((slug: string) => getAllBlogPosts().find(post => post.slug === slug))
+export const getBlogSummaryBySlug = cache((slug: string) => {
+  const posts = getAllBlogPosts()
+  const exactMatch = posts.find(post => post.slug === slug)
+
+  if (exactMatch) {
+    return exactMatch
+  }
+
+  // Rewritten routes can retain percent-encoded segments for Chinese filenames.
+  try {
+    const decodedSlug = decodeURIComponent(slug)
+    return posts.find(post => post.slug === decodedSlug)
+  } catch {
+    return undefined
+  }
+})
 
 export const getBlogPostBySlug = cache(async (slug: string): Promise<BlogPost | undefined> => {
-  const filePath = path.join(blogContentDir, `${slug}.mdx`)
+  const summary = getBlogSummaryBySlug(slug)
 
-  if (!fs.existsSync(filePath)) {
+  if (!summary) {
     return undefined
   }
 
+  const filePath = path.join(blogContentDir, `${summary.slug}.mdx`)
   const source = fs.readFileSync(filePath, 'utf8')
-  const { data, content } = matter(source)
-  const summary = normalizeFrontmatter(slug, data)
+  const { content } = matter(source)
+  const images = new Set<string>()
   const compiled = await compileMDX({
     source: content,
     options: {
       mdxOptions: {
         remarkPlugins: [remarkGfm],
         rehypePlugins: [
+          () => (tree: ImageTreeNode) => collectImageSources(tree, images),
           rehypeSlug,
           [
             rehypeAutolinkHeadings,
@@ -135,5 +175,6 @@ export const getBlogPostBySlug = cache(async (slug: string): Promise<BlogPost | 
   return {
     ...summary,
     content: compiled.content,
+    images: Array.from(images).filter(image => image !== summary.cover),
   }
 })

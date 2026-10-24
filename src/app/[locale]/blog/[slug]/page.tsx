@@ -4,6 +4,7 @@ import { notFound } from 'next/navigation'
 import { Link } from '@/i18n/routing'
 import CreativeSubpageNav from '@/components/creative/CreativeSubpageNav'
 import StructuredData from '@/components/StructuredData'
+import BlogImageDownload from '@/components/BlogImageDownload'
 import { getAllBlogPosts, getBlogPostBySlug, getBlogSlugs } from '@/lib/blog'
 import { appLocales, buildPageMetadata, getAppLocale, getLocalizedUrl, isAppLocale } from '@/lib/site-config'
 
@@ -105,6 +106,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
               </div>
             ) : null}
             <article className='creative-prose mx-auto max-w-4xl md:text-lg'>{post.content}</article>
+            <BlogImageDownload title={post.title} images={post.images} />
           </div>
         </div>
       </section>

@@ -21,6 +21,7 @@
     "@vercel/og": "^0.5.20",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.0.0",
+    "fflate": "^0.8.3",
     "framer-motion": "^11.2.13",
     "gray-matter": "^4.0.3",
     "install": "^0.13.0",
